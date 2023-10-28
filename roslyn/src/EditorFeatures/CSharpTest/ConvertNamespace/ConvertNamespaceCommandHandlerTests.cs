@@ -41,12 +41,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 XElement.Parse(
                     string.Format(
                         """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document>{0}</Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                            <Workspace>
+                                <Project Language="C#" CommonReferences="true">
+                                    <Document>{0}</Document>
+                                </Project>
+                            </Workspace>
+                            """,
                         markup
                     )
                 );
@@ -71,24 +71,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace N$$
-                {
-                    class C
+                    namespace N$$
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace N;$$
+                    namespace N;$$
 
-                class C
-                {
-                }
-                """
+                    class C
+                    {
+                    }
+                    """
             );
         }
 
@@ -97,13 +97,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace N$$
-                {
-                    class C
+                    namespace N$$
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState
@@ -117,13 +117,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace N;$$
-                {
-                    class C
+                    namespace N;$$
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -132,24 +132,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace A.B$$
-                {
-                    class C
+                    namespace A.B$$
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace A.B;$$
+                    namespace A.B;$$
 
-                class C
-                {
-                }
-                """
+                    class C
+                    {
+                    }
+                    """
             );
         }
 
@@ -158,25 +158,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace A.$$B
-                {
-                    class C
+                    namespace A.$$B
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace A.;$$B
-                {
-                    class C
+                    namespace A.;$$B
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -185,25 +185,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace A$$.B
-                {
-                    class C
+                    namespace A$$.B
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace A;$$.B
-                {
-                    class C
+                    namespace A;$$.B
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -212,25 +212,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace $$A.B
-                {
-                    class C
+                    namespace $$A.B
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace ;$$A.B
-                {
-                    class C
+                    namespace ;$$A.B
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -239,24 +239,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace A.B  $$
-                {
-                    class C
+                    namespace A.B  $$
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace A.B;$$  
+                    namespace A.B;$$
 
-                class C
-                {
-                }
-                """
+                    class C
+                    {
+                    }
+                    """
             );
         }
 
@@ -265,25 +265,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace $$N
-                {
-                    class C
+                    namespace $$N
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace ;$$N
-                {
-                    class C
+                    namespace ;$$N
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -292,31 +292,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace N$$
-                {
-                    namespace N2
+                    namespace N$$
                     {
-                        class C
+                        namespace N2
                         {
+                            class C
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace N;$$
-                {
-                    namespace N2
+                    namespace N;$$
                     {
-                        class C
+                        namespace N2
                         {
+                            class C
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -325,33 +325,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace N$$
-                {
-                }
-
-                namespace N2
-                {
-                    class C
+                    namespace N$$
                     {
                     }
-                }
-                """
+
+                    namespace N2
+                    {
+                        class C
+                        {
+                        }
+                    }
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace N;$$
-                {
-                }
-
-                namespace N2
-                {
-                    class C
+                    namespace N;$$
                     {
                     }
-                }
-                """
+
+                    namespace N2
+                    {
+                        class C
+                        {
+                        }
+                    }
+                    """
             );
         }
 
@@ -360,30 +360,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                using A;
-                using B;
+                    using A;
+                    using B;
 
-                namespace N$$
-                {
-                    class C
+                    namespace N$$
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                using A;
-                using B;
+                    using A;
+                    using B;
 
-                namespace N;$$
+                    namespace N;$$
 
-                class C
-                {
-                }
-                """
+                    class C
+                    {
+                    }
+                    """
             );
         }
 
@@ -392,30 +392,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace N$$
-                {
+                    namespace N$$
+                    {
+                        using A;
+                        using B;
+
+                        class C
+                        {
+                        }
+                    }
+                    """
+            );
+
+            testState.SendTypeChar(';');
+            testState.AssertCodeIs(
+                """
+                    namespace N;$$
+
                     using A;
                     using B;
 
                     class C
                     {
                     }
-                }
-                """
-            );
-
-            testState.SendTypeChar(';');
-            testState.AssertCodeIs(
-                """
-                namespace N;$$
-
-                using A;
-                using B;
-
-                class C
-                {
-                }
-                """
+                    """
             );
         }
 
@@ -424,24 +424,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
                 """
-                namespace N$$ // Goo
-                {
-                    class C
+                    namespace N$$ // Goo
                     {
+                        class C
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace N;$$ // Goo
+                    namespace N;$$ // Goo
 
-                class C
-                {
-                }
-                """
+                    class C
+                    {
+                    }
+                    """
             );
         }
     }

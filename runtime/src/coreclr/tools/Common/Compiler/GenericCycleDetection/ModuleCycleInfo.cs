@@ -10,7 +10,6 @@ using Internal.TypeSystem.Ecma;
 using ILLink.Shared;
 #endif
 
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler

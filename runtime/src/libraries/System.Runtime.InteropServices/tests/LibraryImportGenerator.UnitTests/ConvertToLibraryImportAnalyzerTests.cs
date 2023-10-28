@@ -249,14 +249,14 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_True_NoDiagnostic()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [DllImport("DoesNotExist", BestFitMapping = true)]
-                    public static extern void Method2();
-                }
+                 using System.Runtime.InteropServices;
+                 partial class Test
+                 {
+                     [DllImport("DoesNotExist", BestFitMapping = true)]
+                     public static extern void Method2();
+                 }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -264,14 +264,14 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ThrowOnUnmappableChar_True_NoDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               partial class Test
-               {
-                   [DllImport("DoesNotExist", ThrowOnUnmappableChar = true)]
-                   public static extern void Method2();
-               }
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [DllImport("DoesNotExist", ThrowOnUnmappableChar = true)]
+                    public static extern void Method2();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -279,15 +279,15 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_Assembly_True_NoDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               [assembly:BestFitMapping(true)]
-               partial class Test
-               {
-                   [DllImport("DoesNotExist")]
-                   public static extern void Method2();
-               }
+                using System.Runtime.InteropServices;
+                [assembly:BestFitMapping(true)]
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void Method2();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -295,15 +295,15 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_Type_True_NoDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               [BestFitMapping(true)]
-               partial class Test
-               {
-                   [DllImport("DoesNotExist")]
-                   public static extern void Method2();
-               }
+                using System.Runtime.InteropServices;
+                [BestFitMapping(true)]
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void Method2();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -311,15 +311,15 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_Assembly_False_Diagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               [assembly:BestFitMapping(false)]
-               partial class Test
-               {
-                   [DllImport("DoesNotExist")]
-                   public static extern void [|Method2|]();
-               }
+                using System.Runtime.InteropServices;
+                [assembly:BestFitMapping(false)]
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void [|Method2|]();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -327,15 +327,15 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_Type_False_Diagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               [BestFitMapping(false)]
-               partial class Test
-               {
-                   [DllImport("DoesNotExist")]
-                   public static extern void [|Method2|]();
-               }
+                using System.Runtime.InteropServices;
+                [BestFitMapping(false)]
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void [|Method2|]();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -343,14 +343,14 @@ namespace LibraryImportGenerator.UnitTests
         public async Task Varargs_NoDiagnostic()
         {
             string source = """
-              using System.Runtime.InteropServices;
-              partial class Test
-              {
-                  [DllImport("DoesNotExist")]
-                  public static extern void Method2(__arglist);
-              }
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void Method2(__arglist);
+                }
 
-              """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
     }

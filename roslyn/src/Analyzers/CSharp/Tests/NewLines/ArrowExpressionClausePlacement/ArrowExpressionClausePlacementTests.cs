@@ -527,7 +527,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ArrowExpressio
             var code = """
                 class C
                 {
-                    public int Add() [|=>|] 
+                    public int Add() [|=>|]
                         1 + 2;
                 }
                 """;
@@ -626,7 +626,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ArrowExpressio
             var code = """
                 class C
                 {
-                    public int Add() /* comment */ [|=>|] 
+                    public int Add() /* comment */ [|=>|]
                         1 + 2;
                 }
                 """;

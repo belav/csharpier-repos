@@ -21,10 +21,10 @@ public class DelegateDeclarationStructureTests
     public async Task TestDelegateWithComments()
     {
         var code = """
-                {|span:// Goo
-                // Bar|}
-                $$public delegate void C();
-                """;
+            {|span:// Goo
+            // Bar|}
+            $$public delegate void C();
+            """;
 
         await VerifyBlockSpansAsync(code, Region("span", "// Goo ...", autoCollapse: true));
     }

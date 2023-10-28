@@ -22,16 +22,16 @@ public class ParenthesizedLambdaStructureTests
     public async Task TestLambda()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        {|hint:$$() => {|textspan:{
-                            x();
-                        };|}|}
-                    }
+                    {|hint:$$() => {|textspan:{
+                        x();
+                    };|}|}
                 }
-                """;
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -43,14 +43,14 @@ public class ParenthesizedLambdaStructureTests
     public async Task TestLambdaInForLoop()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        for (Action a = $$() => { }; true; a()) { }
-                    }
+                    for (Action a = $$() => { }; true; a()) { }
                 }
-                """;
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -59,16 +59,16 @@ public class ParenthesizedLambdaStructureTests
     public async Task TestLambdaInMethodCall1()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        someMethod(42, "test", false, {|hint:$$(x, y, z) => {|textspan:{
-                            return x + y + z;
-                        }|}|}, "other arguments");
-                    }
+                    someMethod(42, "test", false, {|hint:$$(x, y, z) => {|textspan:{
+                        return x + y + z;
+                    }|}|}, "other arguments");
                 }
-                """;
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -80,16 +80,16 @@ public class ParenthesizedLambdaStructureTests
     public async Task TestLambdaInMethodCall2()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        someMethod(42, "test", false, {|hint:$$(x, y, z) => {|textspan:{
-                            return x + y + z;
-                        }|}|});
-                    }
+                    someMethod(42, "test", false, {|hint:$$(x, y, z) => {|textspan:{
+                        return x + y + z;
+                    }|}|});
                 }
-                """;
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,

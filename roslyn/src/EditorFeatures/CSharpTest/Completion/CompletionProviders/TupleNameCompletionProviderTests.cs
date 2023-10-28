@@ -23,14 +23,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        (int word, int zword) t = ($$
+                        static void Main(string[] args)
+                        {
+                            (int word, int zword) t = ($$
+                        }
                     }
-                }
-                """,
+                    """,
                 "word",
                 displayTextSuffix: ":"
             );
@@ -41,14 +41,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        (int word, int zword) t = ($$)
+                        static void Main(string[] args)
+                        {
+                            (int word, int zword) t = ($$)
+                        }
                     }
-                }
-                """,
+                    """,
                 "word",
                 displayTextSuffix: ":"
             );
@@ -59,14 +59,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        (int word, int zword) t = ($$, zword: 2
+                        static void Main(string[] args)
+                        {
+                            (int word, int zword) t = ($$, zword: 2
+                        }
                     }
-                }
-                """,
+                    """,
                 "word",
                 displayTextSuffix: ":"
             );
@@ -77,14 +77,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        (int word, int zword) t = ($$, zword: 2
+                        static void Main(string[] args)
+                        {
+                            (int word, int zword) t = ($$, zword: 2
+                        }
                     }
-                }
-                """,
+                    """,
                 "word",
                 displayTextSuffix: ":"
             );
@@ -95,14 +95,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        (int word, int zword) t = (1, $$
+                        static void Main(string[] args)
+                        {
+                            (int word, int zword) t = (1, $$
+                        }
                     }
-                }
-                """,
+                    """,
                 "zword",
                 displayTextSuffix: ":"
             );
@@ -113,14 +113,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        (int word, int zword) t = (1, $$)
+                        static void Main(string[] args)
+                        {
+                            (int word, int zword) t = (1, $$)
+                        }
                     }
-                }
-                """,
+                    """,
                 "zword",
                 displayTextSuffix: ":"
             );
@@ -131,14 +131,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                class Program
-                {
-                    static void Main((int word, int zword) args)
+                    class Program
                     {
-                         Main(($$))
+                        static void Main((int word, int zword) args)
+                        {
+                             Main(($$))
+                        }
                     }
-                }
-                """,
+                    """,
                 "word",
                 displayTextSuffix: ":"
             );
@@ -184,7 +184,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 {
                     static void Main(string[] args)
                     {
-                        (int word, int zword) t = (1, 2, 3, 4, $$ 
+                        (int word, int zword) t = (1, 2, 3, 4, $$
                     }
                 }
                 """;

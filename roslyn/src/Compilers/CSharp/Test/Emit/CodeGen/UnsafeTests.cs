@@ -12463,9 +12463,9 @@ public class Test
                     verify: Verification.FailsPEVerify with
                     {
                         PEVerifyMessage = """
-                    [ : ChannelServices::.cctor][offset 0x0000000C][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
-                    [ : ChannelServices::GetPrivateContextsPerfCounters][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
-                    """,
+                            [ : ChannelServices::.cctor][offset 0x0000000C][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
+                            [ : ChannelServices::GetPrivateContextsPerfCounters][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
+                            """,
                     }
                 )
                 .VerifyDiagnostics();

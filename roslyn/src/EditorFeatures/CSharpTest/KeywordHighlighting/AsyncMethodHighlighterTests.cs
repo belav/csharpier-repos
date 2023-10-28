@@ -22,30 +22,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class AsyncExample
-                {
-                    {|Cursor:[|async|]|} Task<int> AsyncMethod()
+                    class AsyncExample
                     {
-                        int hours = 24;
-                        return hours;
-                    }
-
-                    async Task UseAsync()
-                    {
-                        Func<Task<int>> lambda = async () =>
+                        {|Cursor:[|async|]|} Task<int> AsyncMethod()
                         {
-                            return await AsyncMethod();
-                        };
-                        int result = await AsyncMethod();
-                        Task<int> resultTask = AsyncMethod();
-                        result = await resultTask;
-                        result = await lambda();
+                            int hours = 24;
+                            return hours;
+                        }
+
+                        async Task UseAsync()
+                        {
+                            Func<Task<int>> lambda = async () =>
+                            {
+                                return await AsyncMethod();
+                            };
+                            int result = await AsyncMethod();
+                            Task<int> resultTask = AsyncMethod();
+                            result = await resultTask;
+                            result = await lambda();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -54,30 +54,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class AsyncExample
-                {
-                    async Task<int> AsyncMethod()
+                    class AsyncExample
                     {
-                        int hours = 24;
-                        return hours;
-                    }
-
-                    {|Cursor:[|async|]|} Task UseAsync()
-                    {
-                        Func<Task<int>> lambda = async () =>
+                        async Task<int> AsyncMethod()
                         {
-                            return await AsyncMethod();
-                        };
-                        int result = [|await|] AsyncMethod();
-                        Task<int> resultTask = AsyncMethod();
-                        result = [|await|] resultTask;
-                        result = [|await|] lambda();
+                            int hours = 24;
+                            return hours;
+                        }
+
+                        {|Cursor:[|async|]|} Task UseAsync()
+                        {
+                            Func<Task<int>> lambda = async () =>
+                            {
+                                return await AsyncMethod();
+                            };
+                            int result = [|await|] AsyncMethod();
+                            Task<int> resultTask = AsyncMethod();
+                            result = [|await|] resultTask;
+                            result = [|await|] lambda();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

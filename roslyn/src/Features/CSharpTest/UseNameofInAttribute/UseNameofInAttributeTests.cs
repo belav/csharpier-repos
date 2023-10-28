@@ -307,7 +307,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNameofInAttribute
                     class C
                     {
                         string? Prop { get; set; }
-                    
+
                         [MemberNotNullWhen(true, nameof(Prop))]
                         bool IsInitialized
                         {
@@ -356,7 +356,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNameofInAttribute
                     {
                         string? Prop1 { get; set; }
                         string? Prop2 { get; set; }
-                    
+
                         [MemberNotNull(nameof(Prop1), nameof(Prop2))]
                         bool IsInitialized
                         {

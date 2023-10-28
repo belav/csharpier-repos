@@ -48640,89 +48640,89 @@ public class C5 : I1<C5>
         {
             CreateCompilation(
                     """
-                interface I1<T> where T : I1<T>
-                {
-                    static abstract T operator +(T a, T b);
-                    static abstract T operator +(T a);
-                }
+                        interface I1<T> where T : I1<T>
+                        {
+                            static abstract T operator +(T a, T b);
+                            static abstract T operator +(T a);
+                        }
 
-                interface I2<T> where T : I2<T>
-                {
-                    static abstract implicit operator int(T t);
-                }
+                        interface I2<T> where T : I2<T>
+                        {
+                            static abstract implicit operator int(T t);
+                        }
 
-                interface I3<T> where T : I3<T>
-                {
-                    static abstract explicit operator int(T t);
-                    static abstract explicit operator checked int(T t);
-                }
+                        interface I3<T> where T : I3<T>
+                        {
+                            static abstract explicit operator int(T t);
+                            static abstract explicit operator checked int(T t);
+                        }
 
-                class C12_1 : I1<C12_1>, I2<C12_1>
-                {
-                    static C12_1 I1<C12_1>.operator +(C12_1 a, C12_1 b) => a + b;
-                    public static C12_1 operator +(C12_1 a, C12_1 b) => a;
+                        class C12_1 : I1<C12_1>, I2<C12_1>
+                        {
+                            static C12_1 I1<C12_1>.operator +(C12_1 a, C12_1 b) => a + b;
+                            public static C12_1 operator +(C12_1 a, C12_1 b) => a;
 
-                    static C12_1 I1<C12_1>.operator +(C12_1 a) => a;
-                    public static C12_1 operator +(C12_1 a) => a;
+                            static C12_1 I1<C12_1>.operator +(C12_1 a) => a;
+                            public static C12_1 operator +(C12_1 a) => a;
 
-                    static implicit I2<C12_1>.operator int(C12_1 t) => 1;
-                    public static implicit operator int(C12_1 t) => 42;
-                }
+                            static implicit I2<C12_1>.operator int(C12_1 t) => 1;
+                            public static implicit operator int(C12_1 t) => 42;
+                        }
 
-                class C12_2 : I1<C12_2>, I2<C12_2>
-                {
-                    public static C12_2 operator +(C12_2 a, C12_2 b) => a;
-                    static C12_2 I1<C12_2>.operator +(C12_2 a, C12_2 b) => a + b;
+                        class C12_2 : I1<C12_2>, I2<C12_2>
+                        {
+                            public static C12_2 operator +(C12_2 a, C12_2 b) => a;
+                            static C12_2 I1<C12_2>.operator +(C12_2 a, C12_2 b) => a + b;
 
-                    public static C12_2 operator +(C12_2 a) => a;
-                    static C12_2 I1<C12_2>.operator +(C12_2 a) => a;
+                            public static C12_2 operator +(C12_2 a) => a;
+                            static C12_2 I1<C12_2>.operator +(C12_2 a) => a;
 
-                    public static implicit operator int(C12_2 t) => 42;
-                    static implicit I2<C12_2>.operator int(C12_2 t) => 1;
-                }
+                            public static implicit operator int(C12_2 t) => 42;
+                            static implicit I2<C12_2>.operator int(C12_2 t) => 1;
+                        }
 
-                class C3_1 : I3<C3_1>
-                {
-                    static explicit I3<C3_1>.operator int(C3_1 t) => 1;
-                    public static explicit operator int(C3_1 t) => 1;
+                        class C3_1 : I3<C3_1>
+                        {
+                            static explicit I3<C3_1>.operator int(C3_1 t) => 1;
+                            public static explicit operator int(C3_1 t) => 1;
 
-                    static explicit I3<C3_1>.operator checked int(C3_1 t) => 1;
-                    public static explicit operator checked int(C3_1 t) => 1;
-                }
+                            static explicit I3<C3_1>.operator checked int(C3_1 t) => 1;
+                            public static explicit operator checked int(C3_1 t) => 1;
+                        }
 
-                class C3_2 : I3<C3_2>
-                {
-                    public static explicit operator int(C3_2 t) => 1;
-                    static explicit I3<C3_2>.operator int(C3_2 t) => 1;
+                        class C3_2 : I3<C3_2>
+                        {
+                            public static explicit operator int(C3_2 t) => 1;
+                            static explicit I3<C3_2>.operator int(C3_2 t) => 1;
 
-                    public static explicit operator checked int(C3_2 t) => 1;
-                    static explicit I3<C3_2>.operator checked int(C3_2 t) => 1;
-                }
+                            public static explicit operator checked int(C3_2 t) => 1;
+                            static explicit I3<C3_2>.operator checked int(C3_2 t) => 1;
+                        }
 
-                class C23_1 : I2<C23_1>, I3<C23_1>
-                {
-                    static implicit I2<C23_1>.operator int(C23_1 t) => 1;
-                    public static implicit operator int(C23_1 t) => 42;
+                        class C23_1 : I2<C23_1>, I3<C23_1>
+                        {
+                            static implicit I2<C23_1>.operator int(C23_1 t) => 1;
+                            public static implicit operator int(C23_1 t) => 42;
 
-                    static explicit I3<C23_1>.operator int(C23_1 t) => 1;
-                    public static explicit operator int(C23_1 t) => 1;
+                            static explicit I3<C23_1>.operator int(C23_1 t) => 1;
+                            public static explicit operator int(C23_1 t) => 1;
 
-                    static explicit I3<C23_1>.operator checked int(C23_1 t) => 1;
-                    public static explicit operator checked int(C23_1 t) => 1;
-                }
+                            static explicit I3<C23_1>.operator checked int(C23_1 t) => 1;
+                            public static explicit operator checked int(C23_1 t) => 1;
+                        }
 
-                class C23_2 : I2<C23_2>, I3<C23_2>
-                {
-                    public static implicit operator int(C23_2 t) => 42;
-                    static implicit I2<C23_2>.operator int(C23_2 t) => 1;
+                        class C23_2 : I2<C23_2>, I3<C23_2>
+                        {
+                            public static implicit operator int(C23_2 t) => 42;
+                            static implicit I2<C23_2>.operator int(C23_2 t) => 1;
 
-                    public static explicit operator int(C23_2 t) => 1;
-                    static explicit I3<C23_2>.operator int(C23_2 t) => 1;
+                            public static explicit operator int(C23_2 t) => 1;
+                            static explicit I3<C23_2>.operator int(C23_2 t) => 1;
 
-                    public static explicit operator checked int(C23_2 t) => 1;
-                    static explicit I3<C23_2>.operator checked int(C23_2 t) => 1;
-                }
-                """,
+                            public static explicit operator checked int(C23_2 t) => 1;
+                            static explicit I3<C23_2>.operator checked int(C23_2 t) => 1;
+                        }
+                        """,
                     options: TestOptions.DebugDll,
                     parseOptions: TestOptions.RegularPreview,
                     targetFramework: _supportingFramework
@@ -48757,11 +48757,11 @@ public class C5 : I1<C5>
         {
             CreateCompilation(
                     """
-                interface IProgram
-                {
-                    static abstract void Main();
-                }
-                """,
+                        interface IProgram
+                        {
+                            static abstract void Main();
+                        }
+                        """,
                     options: TestOptions.DebugExe,
                     parseOptions: TestOptions.RegularPreview,
                     targetFramework: _supportingFramework
@@ -48778,13 +48778,13 @@ public class C5 : I1<C5>
         {
             CreateCompilation(
                     """
-                using System;
+                        using System;
 
-                interface IProgram
-                {
-                    static virtual void Main() => Console.WriteLine("Hello World!, from IProgram");
-                }
-                """,
+                        interface IProgram
+                        {
+                            static virtual void Main() => Console.WriteLine("Hello World!, from IProgram");
+                        }
+                        """,
                     options: TestOptions.DebugExe,
                     parseOptions: TestOptions.RegularPreview,
                     targetFramework: _supportingFramework
@@ -48801,18 +48801,18 @@ public class C5 : I1<C5>
         {
             CompileAndVerify(
                 """
-                using System;
+                    using System;
 
-                interface IProgram
-                {
-                    static abstract void Main();
-                }
+                    interface IProgram
+                    {
+                        static abstract void Main();
+                    }
 
-                class Program : IProgram
-                {
-                    public static void Main() => Console.WriteLine("Hello World!");
-                }
-                """,
+                    class Program : IProgram
+                    {
+                        public static void Main() => Console.WriteLine("Hello World!");
+                    }
+                    """,
                 expectedOutput: Execute(false) ? "Hello World!" : null,
                 options: TestOptions.DebugExe,
                 parseOptions: TestOptions.RegularPreview,
@@ -48827,18 +48827,18 @@ public class C5 : I1<C5>
         {
             CreateCompilation(
                     """
-                using System;
+                        using System;
 
-                interface IProgram
-                {
-                    static abstract void Main();
-                }
+                        interface IProgram
+                        {
+                            static abstract void Main();
+                        }
 
-                class Program : IProgram
-                {
-                    static void IProgram.Main() => Console.WriteLine("Hello World!");
-                }
-                """,
+                        class Program : IProgram
+                        {
+                            static void IProgram.Main() => Console.WriteLine("Hello World!");
+                        }
+                        """,
                     options: TestOptions.DebugExe,
                     parseOptions: TestOptions.RegularPreview,
                     targetFramework: _supportingFramework
@@ -48855,18 +48855,18 @@ public class C5 : I1<C5>
         {
             CompileAndVerify(
                 """
-                using System;
+                    using System;
 
-                interface IProgram
-                {
-                    static virtual void Main() => Console.WriteLine("Hello World!, from IProgram");
-                }
+                    interface IProgram
+                    {
+                        static virtual void Main() => Console.WriteLine("Hello World!, from IProgram");
+                    }
 
-                class Program : IProgram
-                {
-                    public static void Main() => Console.WriteLine("Hello World!");
-                }
-                """,
+                    class Program : IProgram
+                    {
+                        public static void Main() => Console.WriteLine("Hello World!");
+                    }
+                    """,
                 expectedOutput: Execute(false) ? "Hello World!" : null,
                 options: TestOptions.DebugExe,
                 parseOptions: TestOptions.RegularPreview,
@@ -48881,18 +48881,18 @@ public class C5 : I1<C5>
         {
             CreateCompilation(
                     """
-                using System;
+                        using System;
 
-                interface IProgram
-                {
-                    static virtual void Main() => Console.WriteLine("Hello World!, from IProgram");
-                }
+                        interface IProgram
+                        {
+                            static virtual void Main() => Console.WriteLine("Hello World!, from IProgram");
+                        }
 
-                class Program : IProgram
-                {
-                    static void IProgram.Main() => Console.WriteLine("Hello World!");
-                }
-                """,
+                        class Program : IProgram
+                        {
+                            static void IProgram.Main() => Console.WriteLine("Hello World!");
+                        }
+                        """,
                     options: TestOptions.DebugExe,
                     parseOptions: TestOptions.RegularPreview,
                     targetFramework: _supportingFramework

@@ -43,7 +43,6 @@ using System.Threading;
 using System.Reflection.Emit;
 #endif
 
-
 using InteropServicesCallingConvention = System.Runtime.InteropServices.CallingConvention;
 
 namespace System.Reflection

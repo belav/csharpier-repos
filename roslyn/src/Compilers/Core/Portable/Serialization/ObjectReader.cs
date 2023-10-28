@@ -26,7 +26,6 @@ namespace Roslyn.Utilities
     using Resources = WorkspacesResources;
 #endif
 
-
     using TypeCode = ObjectWriter.TypeCode;
 
     /// <summary>

@@ -177,7 +177,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConstructorIni
             var fixedCode = """
                 class C
                 {
-                    public C() /*comment*/ 
+                    public C() /*comment*/
                         : base()
                     {
                     }
@@ -217,7 +217,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConstructorIni
                 {
                     public C()
                         // comment
-                        
+
                         : base()
                     {
                     }

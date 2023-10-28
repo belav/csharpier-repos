@@ -45,7 +45,7 @@ public class CSharpTestMethodFinderTests
             {
                 [Fact]
                 public void TestMethod1() { }
-            
+
                 public class InnerClass
                 {
                     [Fact]
@@ -65,7 +65,7 @@ public class CSharpTestMethodFinderTests
             {
                 [Fact]
                 public void Test$$Method1() { }
-            
+
                 public class InnerClass
                 {
                     [Fact]

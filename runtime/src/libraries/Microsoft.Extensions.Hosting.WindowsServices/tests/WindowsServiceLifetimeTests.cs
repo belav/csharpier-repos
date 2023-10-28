@@ -221,18 +221,18 @@ namespace Microsoft.Extensions.Hosting
             var logText = FileLogger.ReadLog(nameof(ServiceCanStopItself));
             Assert.Equal(
                 """
-                host.Start()
-                WindowsServiceLifetime.OnStart
-                BackgroundService.StartAsync
-                lifetime started
-                host.Stop()
-                lifetime stopping
-                BackgroundService.StopAsync
-                lifetime stopped
-                WindowsServiceLifetime.OnStop
-                host.Stop() complete
+                    host.Start()
+                    WindowsServiceLifetime.OnStart
+                    BackgroundService.StartAsync
+                    lifetime started
+                    host.Stop()
+                    lifetime stopping
+                    BackgroundService.StopAsync
+                    lifetime stopped
+                    WindowsServiceLifetime.OnStop
+                    host.Stop() complete
 
-                """,
+                    """,
                 logText
             );
         }
@@ -291,17 +291,17 @@ namespace Microsoft.Extensions.Hosting
             var logText = FileLogger.ReadLog(nameof(ServiceSequenceIsCorrect));
             Assert.Equal(
                 """
-                host.Run()
-                WindowsServiceLifetime.OnStart
-                BackgroundService.StartAsync
-                lifetime started
-                WindowsServiceLifetime.OnStop
-                lifetime stopping
-                BackgroundService.StopAsync
-                lifetime stopped
-                host.Run() complete
+                    host.Run()
+                    WindowsServiceLifetime.OnStart
+                    BackgroundService.StartAsync
+                    lifetime started
+                    WindowsServiceLifetime.OnStop
+                    lifetime stopping
+                    BackgroundService.StopAsync
+                    lifetime stopped
+                    host.Run() complete
 
-                """,
+                    """,
                 logText
             );
         }

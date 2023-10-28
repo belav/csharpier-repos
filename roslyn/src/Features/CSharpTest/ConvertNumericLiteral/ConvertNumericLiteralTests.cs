@@ -97,27 +97,27 @@ public sealed class ConvertNumericLiteralTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-            class Program
-            {
-                void M()
+                class Program
                 {
-                    var numbers = new int[] {
-                        [||]0x1, 0x2
-                    };
+                    void M()
+                    {
+                        var numbers = new int[] {
+                            [||]0x1, 0x2
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            class Program
-            {
-                void M()
+                class Program
                 {
-                    var numbers = new int[] {
-                        0b1, 0x2
-                    };
+                    void M()
+                    {
+                        var numbers = new int[] {
+                            0b1, 0x2
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             index: (int)Refactoring.ChangeBase2
         );
     }
@@ -127,17 +127,17 @@ public sealed class ConvertNumericLiteralTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-            class C
-            {
-                int a = 42[||];
-            }
-            """,
+                class C
+                {
+                    int a = 42[||];
+                }
+                """,
             """
-            class C
-            {
-                int a = 0b101010;
-            }
-            """,
+                class C
+                {
+                    int a = 0b101010;
+                }
+                """,
             index: (int)Refactoring.ChangeBase1
         );
     }
@@ -147,17 +147,17 @@ public sealed class ConvertNumericLiteralTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-            class C
-            {
-                int a = [|42|];
-            }
-            """,
+                class C
+                {
+                    int a = [|42|];
+                }
+                """,
             """
-            class C
-            {
-                int a = 0b101010;
-            }
-            """,
+                class C
+                {
+                    int a = 0b101010;
+                }
+                """,
             index: (int)Refactoring.ChangeBase1
         );
     }
@@ -167,11 +167,11 @@ public sealed class ConvertNumericLiteralTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            class C
-            {
-                int a = [|42 * 2|];
-            }
-            """
+                class C
+                {
+                    int a = [|42 * 2|];
+                }
+                """
         );
     }
 }

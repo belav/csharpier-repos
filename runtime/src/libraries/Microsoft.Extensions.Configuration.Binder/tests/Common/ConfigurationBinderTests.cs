@@ -2095,11 +2095,11 @@ namespace Microsoft.Extensions
         {
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
-                {
-                    "Int32": 9,
-                    "Boolean": true,
-                }
-                """
+                    {
+                        "Int32": 9,
+                        "Boolean": true,
+                    }
+                    """
             );
 
 #pragma warning disable SYSLIB1103
@@ -2120,10 +2120,10 @@ namespace Microsoft.Extensions
         {
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
-                {
-                    "vaLue": "MyString",
-                }
-                """
+                    {
+                        "vaLue": "MyString",
+                    }
+                    """
             );
 
             GenericOptions<string> obj = new();
@@ -2144,14 +2144,14 @@ namespace Microsoft.Extensions
         {
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
-                {
-                    "Location":
                     {
-                        "Latitude": 3,
-                        "Longitude": 4,
+                        "Location":
+                        {
+                            "Latitude": 3,
+                            "Longitude": 4,
+                        }
                     }
-                }
-                """
+                    """
             );
 
             // TypeConverter impl is not honored (https://github.com/dotnet/runtime/issues/83599).
@@ -2171,14 +2171,14 @@ namespace Microsoft.Extensions
         {
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
-                {
-                    "First":
                     {
-                        "Latitude": 3,
-                        "Longitude": 4,
+                        "First":
+                        {
+                            "Latitude": 3,
+                            "Longitude": 4,
+                        }
                     }
-                }
-                """
+                    """
             );
 
             Geolocation obj = configuration.Get<IDictionary<string, Geolocation>>()["First"];
@@ -2546,10 +2546,10 @@ namespace Microsoft.Extensions
         {
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
-                {
-                    "vaLue": "MyString",
-                }
-                """
+                    {
+                        "vaLue": "MyString",
+                    }
+                    """
             );
 
             var obj = configuration.GetSection("value").Get<IConfigurationSection>();
@@ -2557,10 +2557,10 @@ namespace Microsoft.Extensions
 
             configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
-                {
-                    "vaLue": [ "MyString", { "nested": "value" } ],
-                }
-                """
+                    {
+                        "vaLue": [ "MyString", { "nested": "value" } ],
+                    }
+                    """
             );
 
             var list = configuration.GetSection("value").Get<List<IConfigurationSection>>();
@@ -2599,12 +2599,12 @@ namespace Microsoft.Extensions
         {
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
-                {
-                    "MySection": "MySection",
-                    "MyObject": "MyObject",
-                    "MyString": "MyString",
-                }
-                """
+                    {
+                        "MySection": "MySection",
+                        "MyObject": "MyObject",
+                        "MyString": "MyString",
+                    }
+                    """
             );
 
             var obj = configuration.Get<ClassWith_DirectlyAssignable_CtorParams>();

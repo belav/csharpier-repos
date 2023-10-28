@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """
+                    class C { }
+                    $$
+                    """
             );
         }
 
@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """
+                    System.Console.WriteLine();
+                    $$
+                    """
             );
         }
 
@@ -47,9 +47,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """
+                    int i = 0;
+                    $$
+                    """
             );
         }
 
@@ -93,9 +93,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          join a in e on o1 equals o2 $$
-                """
+                        var q = from x in y
+                                  join a in e on o1 equals o2 $$
+                        """
                 )
             );
         }
@@ -106,9 +106,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          join a.b c in o1 equals o2 into $$
-                """
+                        var q = from x in y
+                                  join a.b c in o1 equals o2 into $$
+                        """
                 )
             );
         }
@@ -119,9 +119,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          join a.b c in o1 equals $$
-                """
+                        var q = from x in y
+                                  join a.b c in o1 equals $$
+                        """
                 )
             );
         }
@@ -132,10 +132,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          select z
-                          $$
-                """
+                        var q = from x in y
+                                  select z
+                                  $$
+                        """
                 )
             );
         }
@@ -146,10 +146,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          select z.i
-                          $$
-                """
+                        var q = from x in y
+                                  select z.i
+                                  $$
+                        """
                 )
             );
         }
@@ -160,10 +160,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          select z
-                          into $$
-                """
+                        var q = from x in y
+                                  select z
+                                  into $$
+                        """
                 )
             );
         }
@@ -174,10 +174,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          group z by w
-                          $$
-                """
+                        var q = from x in y
+                                  group z by w
+                                  $$
+                        """
                 )
             );
         }
@@ -188,10 +188,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          group z by w
-                          into $$
-                """
+                        var q = from x in y
+                                  group z by w
+                                  into $$
+                        """
                 )
             );
         }
@@ -202,9 +202,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          select $$
-                """
+                        var q = from x in y
+                                  select $$
+                        """
                 )
             );
         }
@@ -215,9 +215,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          group $$
-                """
+                        var q = from x in y
+                                  group $$
+                        """
                 )
             );
         }
@@ -228,9 +228,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          group x $$
-                """
+                        var q = from x in y
+                                  group x $$
+                        """
                 )
             );
         }
@@ -241,9 +241,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          group x by $$
-                """
+                        var q = from x in y
+                                  group x by $$
+                        """
                 )
             );
         }

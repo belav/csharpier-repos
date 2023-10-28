@@ -32,7 +32,8 @@ extern alias MonoSecurity;
 
 #endif
 
-using System.IO;using System.Net;
+using System.IO;
+using System.Net;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography;
@@ -46,7 +47,6 @@ using MonoSecurity::Mono.Security.Interface;
 #else
 using Mono.Security.Interface;
 #endif
-
 
 using CipherAlgorithmType = System.Security.Authentication.CipherAlgorithmType;
 using ExchangeAlgorithmType = System.Security.Authentication.ExchangeAlgorithmType;

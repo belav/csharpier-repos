@@ -24,11 +24,11 @@ namespace Wasm.Build.Tests
         private void UpdateProgramCS()
         {
             string programText = """
-            Console.WriteLine("Hello, Console!");
+                Console.WriteLine("Hello, Console!");
 
-            for (int i = 0; i < args.Length; i ++)
-                Console.WriteLine ($"args[{i}] = {args[i]}");
-            """;
+                for (int i = 0; i < args.Length; i ++)
+                    Console.WriteLine ($"args[{i}] = {args[i]}");
+                """;
             var path = Path.Combine(_projectDir!, "Program.cs");
             string text = File.ReadAllText(path);
             text = text.Replace(@"Console.WriteLine(""Hello, Console!"");", programText);

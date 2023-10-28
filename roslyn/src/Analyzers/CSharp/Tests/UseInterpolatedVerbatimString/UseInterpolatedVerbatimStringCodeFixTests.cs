@@ -30,23 +30,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var s = @[||]$"hello";
+                        void M()
+                        {
+                            var s = @[||]$"hello";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var s = $@"hello";
+                        void M()
+                        {
+                            var s = $@"hello";
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters().WithParseOptions(
                     new CSharpParseOptions(LanguageVersion.CSharp7_3)
                 )
@@ -58,14 +58,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var s = @$"hello"[||];
+                        void M()
+                        {
+                            var s = @$"hello"[||];
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters().WithParseOptions(
                     new CSharpParseOptions(LanguageVersion.CSharp7_3)
                 )
@@ -77,23 +77,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M(string x)
+                    class C
                     {
-                        var s = M(@[||]$"hello");
+                        void M(string x)
+                        {
+                            var s = M(@[||]$"hello");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string x)
+                    class C
                     {
-                        var s = M($@"hello");
+                        void M(string x)
+                        {
+                            var s = M($@"hello");
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters().WithParseOptions(
                     new CSharpParseOptions(LanguageVersion.CSharp7_3)
                 )
@@ -105,25 +105,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var s = {|FixAllInDocument:@$"|}hello";
-                        var s2 = @$"hello";
+                        void M()
+                        {
+                            var s = {|FixAllInDocument:@$"|}hello";
+                            var s2 = @$"hello";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var s = $@"hello";
-                        var s2 = $@"hello";
+                        void M()
+                        {
+                            var s = $@"hello";
+                            var s2 = $@"hello";
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters().WithParseOptions(
                     new CSharpParseOptions(LanguageVersion.CSharp7_3)
                 )
@@ -135,14 +135,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var s = $[||]@"hello";
+                        void M()
+                        {
+                            var s = $[||]@"hello";
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters().WithParseOptions(
                     new CSharpParseOptions(LanguageVersion.CSharp7_3)
                 )
@@ -154,14 +154,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var s = @[||]$"hello";
+                        void M()
+                        {
+                            var s = @[||]$"hello";
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters().WithParseOptions(
                     new CSharpParseOptions(LanguageVersion.CSharp8)
                 )

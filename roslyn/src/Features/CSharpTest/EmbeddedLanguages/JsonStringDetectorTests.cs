@@ -26,23 +26,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var j = [|"{ \"a\": 0 }"|];
+                        void Goo()
+                        {
+                            var j = [|"{ \"a\": 0 }"|];
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var j = /*lang=json,strict*/ "{ \"a\": 0 }";
+                        void Goo()
+                        {
+                            var j = /*lang=json,strict*/ "{ \"a\": 0 }";
+                        }
                     }
-                }
-                """,
+                    """,
             }.RunAsync();
         }
 
@@ -52,23 +52,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var j = [|"{ 'a': 00 }"|];
+                        void Goo()
+                        {
+                            var j = [|"{ 'a': 00 }"|];
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var j = /*lang=json*/ "{ 'a': 00 }";
+                        void Goo()
+                        {
+                            var j = /*lang=json*/ "{ 'a': 00 }";
+                        }
                     }
-                }
-                """,
+                    """,
             }.RunAsync();
         }
 
@@ -78,23 +78,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
             await new VerifyCS.Test
             {
                 TestCode = """"
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var j = [|"""{ 'a': 00 }"""|];
+                        void Goo()
+                        {
+                            var j = [|"""{ 'a': 00 }"""|];
+                        }
                     }
-                }
-                """",
+                    """",
                 FixedCode = """"
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        var j = /*lang=json*/ """{ 'a': 00 }""";
+                        void Goo()
+                        {
+                            var j = /*lang=json*/ """{ 'a': 00 }""";
+                        }
                     }
-                }
-                """",
+                    """",
                 LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }

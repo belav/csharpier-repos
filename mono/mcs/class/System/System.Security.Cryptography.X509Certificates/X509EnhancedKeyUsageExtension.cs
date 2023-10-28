@@ -34,7 +34,8 @@ extern alias MonoSecurity;
 using Mono.Security;
 #endif
 
-using System.Text;using MonoSecurity::Mono.Security;
+using System.Text;
+using MonoSecurity::Mono.Security;
 
 namespace System.Security.Cryptography.X509Certificates
 {

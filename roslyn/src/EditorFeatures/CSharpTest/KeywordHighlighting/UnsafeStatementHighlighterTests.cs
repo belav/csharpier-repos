@@ -21,21 +21,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int var1 = 5;
-                        {|Cursor:[|unsafe|]|}
+                        void M()
                         {
-                            int* ptr1, ptr2;
-                            ptr1 = &var1;
-                            ptr2 = ptr1;
-                            *ptr2 = 20;
+                            int var1 = 5;
+                            {|Cursor:[|unsafe|]|}
+                            {
+                                int* ptr1, ptr2;
+                                ptr1 = &var1;
+                                ptr2 = ptr1;
+                                *ptr2 = 20;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
     }

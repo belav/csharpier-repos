@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """
+                    class C { }
+                    $$
+                    """
             );
         }
 
@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """
+                    System.Console.WriteLine();
+                    $$
+                    """
             );
         }
 
@@ -47,9 +47,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """
+                    int i = 0;
+                    $$
+                    """
             );
         }
 
@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          orderby x $$
-                """
+                        var q = from x in y
+                                  orderby x $$
+                        """
                 )
             );
         }
@@ -90,9 +90,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          orderby x, y $$
-                """
+                        var q = from x in y
+                                  orderby x, y $$
+                        """
                 )
             );
         }
@@ -103,9 +103,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          orderby x, y $$, z
-                """
+                        var q = from x in y
+                                  orderby x, y $$, z
+                        """
                 )
             );
         }
@@ -116,9 +116,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          orderby x.$$
-                """
+                        var q = from x in y
+                                  orderby x.$$
+                        """
                 )
             );
         }
@@ -129,9 +129,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          orderby x, $$
-                """
+                        var q = from x in y
+                                  orderby x, $$
+                        """
                 )
             );
         }
@@ -142,9 +142,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          orderby x.ToString() $$
-                """
+                        var q = from x in y
+                                  orderby x.ToString() $$
+                        """
                 )
             );
         }
@@ -155,9 +155,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          orderby x.ToString()[0] $$
-                """
+                        var q = from x in y
+                                  orderby x.ToString()[0] $$
+                        """
                 )
             );
         }

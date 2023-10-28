@@ -56,12 +56,12 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
 
              .field public static literal string RefStructs = "RefStructs"
              .field public static literal string RequiredMembers = "RequiredMembers"
-         
+
              // Methods
-             .method public hidebysig specialname rtspecialname 
+             .method public hidebysig specialname rtspecialname
                  instance void .ctor (
                      string featureName
-                 ) cil managed 
+                 ) cil managed
              {
                  ldarg.0
                  call instance void [mscorlib]System.Attribute::.ctor()
@@ -70,34 +70,34 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                  stfld string System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::'<FeatureName>k__BackingField'
                  ret
              } // end of method CompilerFeatureRequiredAttribute::.ctor
-         
-             .method public hidebysig specialname 
-                 instance string get_FeatureName () cil managed 
+
+             .method public hidebysig specialname
+                 instance string get_FeatureName () cil managed
              {
                  ldarg.0
                  ldfld string System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::'<FeatureName>k__BackingField'
                  ret
              } // end of method CompilerFeatureRequiredAttribute::get_FeatureName
-         
-             .method public hidebysig specialname 
-                 instance bool get_IsOptional () cil managed 
+
+             .method public hidebysig specialname
+                 instance bool get_IsOptional () cil managed
              {
                  ldarg.0
                  ldfld bool System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::'<IsOptional>k__BackingField'
                  ret
              } // end of method CompilerFeatureRequiredAttribute::get_IsOptional
-         
-             .method public hidebysig specialname 
+
+             .method public hidebysig specialname
                  instance void modreq([mscorlib]System.Runtime.CompilerServices.IsExternalInit) set_IsOptional (
                      bool 'value'
-                 ) cil managed 
+                 ) cil managed
              {
                  ldarg.0
                  ldarg.1
                  stfld bool System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::'<IsOptional>k__BackingField'
                  ret
              } // end of method CompilerFeatureRequiredAttribute::set_IsOptional
-         
+
              // Properties
              .property instance string FeatureName()
              {
@@ -108,7 +108,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                  .get instance bool System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::get_IsOptional()
                  .set instance void modreq([mscorlib]System.Runtime.CompilerServices.IsExternalInit) System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::set_IsOptional(bool)
              }
-         
+
          } // end of class System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute
         """;
 

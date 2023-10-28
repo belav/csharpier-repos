@@ -37,29 +37,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private int x = 0;
-                    public void z()
+                    class C
                     {
-                        var a = [|this.x|];
+                        private int x = 0;
+                        public void z()
+                        {
+                            var a = [|this.x|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private int x = 0;
-                    public void z()
+                    class C
                     {
-                        var a = x;
+                        private int x = 0;
+                        public void z()
+                        {
+                            var a = x;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -69,27 +69,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    dynamic x = 7;
-
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|this|].x = default(dynamic);
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    dynamic x = 7;
+                        dynamic x = 7;
 
-                    static void Main(string[] args)
-                    {
-                        x = default(dynamic);
+                        static void Main(string[] args)
+                        {
+                            [|this|].x = default(dynamic);
+                        }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        dynamic x = 7;
+
+                        static void Main(string[] args)
+                        {
+                            x = default(dynamic);
+                        }
+                    }
+                    """
             );
         }
 
@@ -98,16 +98,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
         {
             await TestDiagnosticInfoAsync(
                 """
-                class C
-                {
-                    int SomeProperty { get; set; }
-
-                    void M()
+                    class C
                     {
-                        [|this|].SomeProperty = 1;
+                        int SomeProperty { get; set; }
+
+                        void M()
+                        {
+                            [|this|].SomeProperty = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 options: Option(
                     CodeStyleOptions2.QualifyPropertyAccess,
                     false,

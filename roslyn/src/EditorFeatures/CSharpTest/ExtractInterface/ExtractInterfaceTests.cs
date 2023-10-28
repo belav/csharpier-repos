@@ -596,13 +596,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             Assert.Equal(
                 """
-                namespace OuterNamespace.InnerNamespace;
+                    namespace OuterNamespace.InnerNamespace;
 
-                internal interface IMyClass
-                {
-                    void Goo();
-                }
-                """,
+                    internal interface IMyClass
+                    {
+                        void Goo();
+                    }
+                    """,
                 interfaceCode
             );
         }
@@ -649,14 +649,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             Assert.Equal(
                 """
-                namespace OuterNamespace.InnerNamespace
-                {
-                    internal interface IMyClass
+                    namespace OuterNamespace.InnerNamespace
                     {
-                        void Goo();
+                        internal interface IMyClass
+                        {
+                            void Goo();
+                        }
                     }
-                }
-                """,
+                    """,
                 interfaceCode
             );
         }
@@ -703,14 +703,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             Assert.Equal(
                 """
-                namespace OuterNamespace.InnerNamespace
-                {
-                    internal interface IMyClass
+                    namespace OuterNamespace.InnerNamespace
                     {
-                        void Goo();
+                        internal interface IMyClass
+                        {
+                            void Goo();
+                        }
                     }
-                }
-                """,
+                    """,
                 interfaceCode
             );
         }
@@ -1069,16 +1069,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
             var markup = """
                 public class Class<A, B, C, D, E, F, G, H, NO1> where E : F
                 {
-                	$$public void Goo1(A a) { }
-                	public B Goo2() { return default(B); }
-                	public void Goo3(List<C> list) { }
+                    $$public void Goo1(A a) { }
+                    public B Goo2() { return default(B); }
+                    public void Goo3(List<C> list) { }
 
-                	public event Func<D> Goo4;
+                    public event Func<D> Goo4;
 
-                	public List<E> Prop { set { } }
-                	public List<G> this[List<List<H>> list] { set { } }
+                    public List<E> Prop { set { } }
+                    public List<G> this[List<List<H>> list] { set { } }
 
-                	public void Bar1() { var x = default(NO1); }
+                    public void Bar1() { var x = default(NO1); }
                 }
                 """;
 
@@ -1243,11 +1243,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             Assert.Equal(
                 """
-                internal interface IMyClass
-                {
-                    void Goo();
-                }
-                """,
+                    internal interface IMyClass
+                    {
+                        void Goo();
+                    }
+                    """,
                 interfaceCode
             );
         }
@@ -1717,15 +1717,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
             using var workspace = TestWorkspace.Create(
                 XElement.Parse(
                     """
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">  
-                        public class $$C
-                        {
-                            public void M() { }
-                        }
-                    </Submission>
-                </Workspace>
-                """
+                        <Workspace>
+                            <Submission Language="C#" CommonReferences="true">
+                                public class $$C
+                                {
+                                    public void M() { }
+                                }
+                            </Submission>
+                        </Workspace>
+                        """
                 ),
                 workspaceKind: WorkspaceKind.Interactive,
                 composition: EditorTestCompositions.EditorFeaturesWpf
@@ -1768,11 +1768,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass
-                {
-                    void Method(in int p1);
-                }
-                """
+                    interface ITestClass
+                    {
+                        void Method(in int p1);
+                    }
+                    """
             );
         }
 
@@ -1791,11 +1791,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass
-                {
-                    ref readonly int Method();
-                }
-                """
+                    interface ITestClass
+                    {
+                        ref readonly int Method();
+                    }
+                    """
             );
         }
 
@@ -1814,11 +1814,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass
-                {
-                    ref readonly int Property { get; }
-                }
-                """
+                    interface ITestClass
+                    {
+                        ref readonly int Property { get; }
+                    }
+                    """
             );
         }
 
@@ -1837,11 +1837,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass
-                {
-                    int this[in int p1] { set; }
-                }
-                """
+                    interface ITestClass
+                    {
+                        int this[in int p1] { set; }
+                    }
+                    """
             );
         }
 
@@ -1860,11 +1860,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass
-                {
-                    ref readonly int this[int p1] { get; }
-                }
-                """
+                    interface ITestClass
+                    {
+                        ref readonly int this[int p1] { get; }
+                    }
+                    """
             );
         }
 
@@ -1882,11 +1882,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass<T> where T : unmanaged
-                {
-                    void M(T arg);
-                }
-                """
+                    interface ITestClass<T> where T : unmanaged
+                    {
+                        void M(T arg);
+                    }
+                    """
             );
         }
 
@@ -1904,11 +1904,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass
-                {
-                    void M<T>() where T : unmanaged;
-                }
-                """
+                    interface ITestClass
+                    {
+                        void M<T>() where T : unmanaged;
+                    }
+                    """
             );
         }
 
@@ -1926,11 +1926,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass<T> where T : notnull
-                {
-                    void M(T arg);
-                }
-                """
+                    interface ITestClass<T> where T : notnull
+                    {
+                        void M(T arg);
+                    }
+                    """
             );
         }
 
@@ -1948,11 +1948,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
                 markup,
                 expectedSuccess: true,
                 expectedInterfaceCode: """
-                interface ITestClass
-                {
-                    void M<T>() where T : notnull;
-                }
-                """
+                    interface ITestClass
+                    {
+                        void M<T>() where T : notnull;
+                    }
+                    """
             );
         }
 

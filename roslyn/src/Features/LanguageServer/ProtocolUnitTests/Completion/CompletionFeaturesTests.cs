@@ -1296,16 +1296,16 @@ public class C
     public async Task TestOverrideCompletionWithOutCommonReferences(bool mutatingLspWorkspace)
     {
         var markup = """
-                     public abstract class BaseClass
-                     {
-                         public abstract bool AbstractMethod(int x);
-                     }
-                     
-                     public class MyClass : BaseClass
-                     {
-                         override {|caret:|}
-                     }
-                     """;
+            public abstract class BaseClass
+            {
+                public abstract bool AbstractMethod(int x);
+            }
+
+            public class MyClass : BaseClass
+            {
+                override {|caret:|}
+            }
+            """;
         await using var testLspServer = await CreateTestLspServerAsync(
             new[] { markup },
             LanguageNames.CSharp,

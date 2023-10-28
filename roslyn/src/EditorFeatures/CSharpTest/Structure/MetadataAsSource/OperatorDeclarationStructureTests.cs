@@ -23,11 +23,11 @@ public class OperatorDeclarationStructureTests
     public async Task NoCommentsOrAttributes()
     {
         var code = """
-                class Goo
-                {
-                    public static bool operator $$==(Goo a, Goo b);
-                }
-                """;
+            class Goo
+            {
+                public static bool operator $$==(Goo a, Goo b);
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -36,12 +36,12 @@ public class OperatorDeclarationStructureTests
     public async Task WithAttributes()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:[Blah]
-                    |}public static bool operator $$==(Goo a, Goo b);|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:[Blah]
+                |}public static bool operator $$==(Goo a, Goo b);|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -53,14 +53,14 @@ public class OperatorDeclarationStructureTests
     public async Task WithCommentsAndAttributes()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Blah]
-                    |}bool operator $$==(Goo a, Goo b);|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Blah]
+                |}bool operator $$==(Goo a, Goo b);|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -72,14 +72,14 @@ public class OperatorDeclarationStructureTests
     public async Task WithCommentsAttributesAndModifiers()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Blah]
-                    |}public static bool operator $$==(Goo a, Goo b);|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Blah]
+                |}public static bool operator $$==(Goo a, Goo b);|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -91,17 +91,17 @@ public class OperatorDeclarationStructureTests
     public async Task TestOperator3()
     {
         var code = """
-                class C
+            class C
+            {
+                $${|#0:public static int operator +(int i){|textspan:
                 {
-                    $${|#0:public static int operator +(int i){|textspan:
-                    {
-                    }|#0}
-                |}
-                    public static int operator -(int i)
-                    {
-                    }
+                }|#0}
+            |}
+                public static int operator -(int i)
+                {
                 }
-                """;
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,

@@ -2482,9 +2482,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             UsingTree(
                 """
-                bool required;
-                required = true;
-                """,
+                    bool required;
+                    required = true;
+                    """,
                 options: parseOptions
             );
             N(SyntaxKind.CompilationUnit);

@@ -3870,12 +3870,12 @@ class C
             // second ======= is part of disabled text
             var token = Lex(
                     """
-                ======= Trailing
-                disabled text 2
-                ======= 
-                more disabled text
-                >>>>>>> Actually the end
-                """
+                        ======= Trailing
+                        disabled text 2
+                        =======
+                        more disabled text
+                        >>>>>>> Actually the end
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -3898,11 +3898,11 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(
                 """
-                disabled text 2
-                ======= 
-                more disabled text
+                    disabled text 2
+                    =======
+                    more disabled text
 
-                """,
+                    """,
                 trivia.ToFullString()
             );
 
@@ -3922,12 +3922,12 @@ class C
             // ||||||| is part of disabled text
             var token = Lex(
                     """
-                ======= Trailing
-                disabled text 2
-                ||||||| 
-                more disabled text
-                >>>>>>> Actually the end
-                """
+                        ======= Trailing
+                        disabled text 2
+                        |||||||
+                        more disabled text
+                        >>>>>>> Actually the end
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -3950,11 +3950,11 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(
                 """
-                disabled text 2
-                ||||||| 
-                more disabled text
+                    disabled text 2
+                    |||||||
+                    more disabled text
 
-                """,
+                    """,
                 trivia.ToFullString()
             );
 
@@ -4001,9 +4001,9 @@ class C
 
             token = Lex(
                     """
-                ||||||| Trailing
-                disabled text
-                """
+                        ||||||| Trailing
+                        disabled text
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -4025,10 +4025,10 @@ class C
 
             token = Lex(
                     """
-                ||||||| Trailing
-                disabled text
-                >>>> still disabled
-                """
+                        ||||||| Trailing
+                        disabled text
+                        >>>> still disabled
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -4051,10 +4051,10 @@ class C
 
             token = Lex(
                     """
-                ||||||| Trailing
-                disabled text
-                >>>>>>> Actually the end
-                """
+                        ||||||| Trailing
+                        disabled text
+                        >>>>>>> Actually the end
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -4084,9 +4084,9 @@ class C
 
             token = Lex(
                     """
-                ||||||| Trailing
-                >>>>>>> Actually the end
-                """
+                        ||||||| Trailing
+                        >>>>>>> Actually the end
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -4117,10 +4117,10 @@ class C
         {
             var token = Lex(
                     """
-                ||||||| Mid
-                ======= Trailing
-                >>>>>>> Actually the end
-                """
+                        ||||||| Mid
+                        ======= Trailing
+                        >>>>>>> Actually the end
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -4166,12 +4166,12 @@ class C
         {
             var token = Lex(
                     """
-                ||||||| Mid
-                disabled text 1
-                ======= Trailing
-                disabled text 2
-                >>>>>>> Actually the end
-                """
+                        ||||||| Mid
+                        disabled text 1
+                        ======= Trailing
+                        disabled text 2
+                        >>>>>>> Actually the end
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -4194,9 +4194,9 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(
                 """
-                disabled text 1
+                    disabled text 1
 
-                """,
+                    """,
                 trivia.ToFullString()
             );
 
@@ -4216,9 +4216,9 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(
                 """
-                disabled text 2
+                    disabled text 2
 
-                """,
+                    """,
                 trivia.ToFullString()
             );
 
@@ -4238,14 +4238,14 @@ class C
             // second ======= is pat of disabled text
             var token = Lex(
                     """
-                ||||||| Mid
-                disabled text 1
-                ======= Trailing
-                disabled text 2
-                ======= 
-                more disabled text
-                >>>>>>> Actually the end
-                """
+                        ||||||| Mid
+                        disabled text 1
+                        ======= Trailing
+                        disabled text 2
+                        =======
+                        more disabled text
+                        >>>>>>> Actually the end
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -4268,9 +4268,9 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(
                 """
-                disabled text 1
+                    disabled text 1
 
-                """,
+                    """,
                 trivia.ToFullString()
             );
 
@@ -4290,11 +4290,11 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(
                 """
-                disabled text 2
-                ======= 
-                more disabled text
+                    disabled text 2
+                    =======
+                    more disabled text
 
-                """,
+                    """,
                 trivia.ToFullString()
             );
 
@@ -4314,14 +4314,14 @@ class C
             // second ||||||| is pat of disabled text
             var token = Lex(
                     """
-                ||||||| Mid
-                disabled text 1
-                ||||||| 
-                more disabled text
-                ======= Trailing
-                disabled text 2
-                >>>>>>> Actually the end
-                """
+                        ||||||| Mid
+                        disabled text 1
+                        |||||||
+                        more disabled text
+                        ======= Trailing
+                        disabled text 2
+                        >>>>>>> Actually the end
+                        """
                 )
                 .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
@@ -4344,11 +4344,11 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(
                 """
-                disabled text 1
-                ||||||| 
-                more disabled text
+                    disabled text 1
+                    |||||||
+                    more disabled text
 
-                """,
+                    """,
                 trivia.ToFullString()
             );
 
@@ -4368,9 +4368,9 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(
                 """
-                disabled text 2
+                    disabled text 2
 
-                """,
+                    """,
                 trivia.ToFullString()
             );
 

@@ -39,28 +39,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (string)x;
+                            if (x is string)
+                            {
+                                [|var|] v = (string)x;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string v)
+                        void M()
                         {
+                            if (x is string v)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -69,17 +69,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (string)x;
+                            if (x is string)
+                            {
+                                [|var|] v = (string)x;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     parseOptions: CSharpParseOptions
                         .Default
@@ -93,17 +93,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (string)y;
+                            if (x is string)
+                            {
+                                [|var|] v = (string)y;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -112,17 +112,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (bool)x;
+                            if (x is string)
+                            {
+                                [|var|] v = (bool)x;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -131,17 +131,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            var [|v|] = (string)x, v1 = ";
+                            if (x is string)
+                            {
+                                var [|v|] = (string)x, v1 = ";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -150,17 +150,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|v|] = (string)x;
+                            if (x is string)
+                            {
+                                [|v|] = (string)x;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -169,17 +169,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x as string)
+                        void M()
                         {
-                            [|var|] v = (string)x;
+                            if (x as string)
+                            {
+                                [|var|] v = (string)x;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -188,28 +188,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if ((x ? y : z) is string)
+                        void M()
                         {
-                            [|var|] v = (string)(x ? y : z);
+                            if ((x ? y : z) is string)
+                            {
+                                [|var|] v = (string)(x ? y : z);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if ((x ? y : z) is string v)
+                        void M()
                         {
+                            if ((x ? y : z) is string v)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -218,34 +218,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (string)x;
-                        }
-                        else
-                        {
+                            if (x is string)
+                            {
+                                [|var|] v = (string)x;
+                            }
+                            else
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string v)
+                        void M()
                         {
-                        }
-                        else
-                        {
+                            if (x is string v)
+                            {
+                            }
+                            else
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -254,30 +254,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            // prefix comment
-                            [|var|] v = (string)x;
-                        } 
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M()
-                    {
-                        // prefix comment
-                        if (x is string v)
-                        {
+                            if (x is string)
+                            {
+                                // prefix comment
+                                [|var|] v = (string)x;
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M()
+                        {
+                            // prefix comment
+                            if (x is string v)
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -286,29 +286,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (string)x; // suffix comment
-                        } 
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M()
-                    {
-                        // suffix comment
-                        if (x is string v)
-                        {
+                            if (x is string)
+                            {
+                                [|var|] v = (string)x; // suffix comment
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M()
+                        {
+                            // suffix comment
+                            if (x is string v)
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -317,31 +317,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            // prefix comment
-                            [|var|] v = (string)x; // suffix comment
-                        } 
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M()
-                    {
-                        // prefix comment
-                        // suffix comment
-                        if (x is string v)
-                        {
+                            if (x is string)
+                            {
+                                // prefix comment
+                                [|var|] v = (string)x; // suffix comment
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M()
+                        {
+                            // prefix comment
+                            // suffix comment
+                            if (x is string v)
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -350,41 +350,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                namespace N {
-                    class Program {
-                        public static void Main()
-                        {
-                            object o = null;
-                            if (o is int)
-                                Console.WriteLine();
-                            else if (o is string)
+                    using System;
+                    namespace N {
+                        class Program {
+                            public static void Main()
                             {
-                                // some comment
-                                [|var|] s = (string)o;
-                                Console.WriteLine(s);
+                                object o = null;
+                                if (o is int)
+                                    Console.WriteLine();
+                                else if (o is string)
+                                {
+                                    // some comment
+                                    [|var|] s = (string)o;
+                                    Console.WriteLine(s);
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                namespace N {
-                    class Program {
-                        public static void Main()
-                        {
-                            object o = null;
-                            if (o is int)
-                                Console.WriteLine();
-                            else if (o is string s) // some comment
+                    using System;
+                    namespace N {
+                        class Program {
+                            public static void Main()
                             {
-                                Console.WriteLine(s);
+                                object o = null;
+                                if (o is int)
+                                    Console.WriteLine();
+                                else if (o is string s) // some comment
+                                {
+                                    Console.WriteLine(s);
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -393,28 +393,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if ((x) is string)
+                        void M()
                         {
-                            [|var|] v = (string)x;
+                            if ((x) is string)
+                            {
+                                [|var|] v = (string)x;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if ((x) is string v)
+                        void M()
                         {
+                            if ((x) is string v)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -423,28 +423,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (string)(x);
+                            if (x is string)
+                            {
+                                [|var|] v = (string)(x);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string v)
+                        void M()
                         {
+                            if (x is string v)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -453,28 +453,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = ((string)x);
+                            if (x is string)
+                            {
+                                [|var|] v = ((string)x);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string v)
+                        void M()
                         {
+                            if (x is string v)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -483,21 +483,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (string)x;
-                        }
-                        else
-                        {
-                            var v = 1;
+                            if (x is string)
+                            {
+                                [|var|] v = (string)x;
+                            }
+                            else
+                            {
+                                var v = 1;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -506,22 +506,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            [|var|] v = (string)x;
-                        }
+                            if (x is string)
+                            {
+                                [|var|] v = (string)x;
+                            }
 
-                        if (true)
-                        {
-                            var v = 1;
+                            if (true)
+                            {
+                                var v = 1;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -530,22 +530,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x is string)
+                        void M()
                         {
-                            var v = (string)x;
-                        }
+                            if (x is string)
+                            {
+                                var v = (string)x;
+                            }
 
-                        if (x is bool)
-                        {
-                            [|var|] v = (bool)x;
+                            if (x is bool)
+                            {
+                                [|var|] v = (bool)x;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -554,40 +554,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
+                        void M()
                         {
-                            if (x is string)
                             {
-                                [|var|] v = ((string)x);
+                                if (x is string)
+                                {
+                                    [|var|] v = ((string)x);
+                                }
+                            }
+
+                            {
+                                var v = 1;
                             }
                         }
-
-                        {
-                            var v = 1;
-                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
+                        void M()
                         {
-                            if (x is string v)
                             {
+                                if (x is string v)
+                                {
+                                }
+                            }
+
+                            {
+                                var v = 1;
                             }
                         }
-
-                        {
-                            var v = 1;
-                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -596,32 +596,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class SyntaxNode
-                {
-                    public SyntaxNode Parent;
-                }
-
-                class BaseParameterListSyntax : SyntaxNode
-                {
-                }
-
-                class ParameterSyntax : SyntaxNode
-                {
-
-                }
-
-                public static class C
-                {
-                    static void N(ParameterSyntax parameter)
+                    class SyntaxNode
                     {
-                        if (parameter.Parent is BaseParameterListSyntax)
+                        public SyntaxNode Parent;
+                    }
+
+                    class BaseParameterListSyntax : SyntaxNode
+                    {
+                    }
+
+                    class ParameterSyntax : SyntaxNode
+                    {
+
+                    }
+
+                    public static class C
+                    {
+                        static void N(ParameterSyntax parameter)
                         {
-                            [|SyntaxNode|] parent = (BaseParameterListSyntax)parameter.Parent;
-                            parent = parent.Parent;
+                            if (parameter.Parent is BaseParameterListSyntax)
+                            {
+                                [|SyntaxNode|] parent = (BaseParameterListSyntax)parameter.Parent;
+                                parent = parent.Parent;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -630,19 +630,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public object Convert(object value)
+                    class C
                     {
-                        if (value is bool?)
+                        public object Convert(object value)
                         {
-                            [|bool?|] tmp = (bool?)value;
-                        }
+                            if (value is bool?)
+                            {
+                                [|bool?|] tmp = (bool?)value;
+                            }
 
-                        return null;
+                            return null;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -651,19 +651,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public object Convert(object value)
+                    class C
                     {
-                        if (value is dynamic)
+                        public object Convert(object value)
                         {
-                            [|dynamic|] tmp = (dynamic)value;
-                        }
+                            if (value is dynamic)
+                            {
+                                [|dynamic|] tmp = (dynamic)value;
+                            }
 
-                        return null;
+                            return null;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -678,7 +678,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         if (x is string)
                         {
                             [|var|] v = (string)x;
-                        } 
+                        }
                     }
                 }
                 """;
@@ -703,34 +703,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class Test
-                {
-                    public void TestIt(object o)
+                    public class Test
                     {
-                        if (o is int)
+                        public void TestIt(object o)
                         {
-                            [|var|] value = (int)o;
-                        }
-                        else if (o is Guid value1)
-                        {
+                            if (o is int)
+                            {
+                                [|var|] value = (int)o;
+                            }
+                            else if (o is Guid value1)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                public class Test
-                {
-                    public void TestIt(object o)
+                    public class Test
                     {
-                        if (o is int value)
+                        public void TestIt(object o)
                         {
-                        }
-                        else if (o is Guid value1)
-                        {
+                            if (o is int value)
+                            {
+                            }
+                            else if (o is Guid value1)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -739,20 +739,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingAsync(
                 """
-                public class Test
-                {
-                    public void TestIt(object o)
+                    public class Test
                     {
-                        if (o is int)
+                        public void TestIt(object o)
                         {
-                            [|var|] value = (int)o;
-                        }
-                        else if (o is Guid value)
-                        {
+                            if (o is int)
+                            {
+                                [|var|] value = (int)o;
+                            }
+                            else if (o is Guid value)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -761,25 +761,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingAsync(
                 """
-                public class Test
-                {
-                    public void TestIt(object o)
+                    public class Test
                     {
-                        if (o is int)
+                        public void TestIt(object o)
                         {
-                            [|var|] value = (int)o;
+                            if (o is int)
+                            {
+                                [|var|] value = (int)o;
+                            }
+                            else if (TryGetValue(o, out var value))
+                            }
                         }
-                        else if (TryGetValue(o, out var value))
-                        }
-                    }
 
-                    private bool TryGetValue(object o, out string result)
-                    {
-                        result = "";
-                        return true;
+                        private bool TryGetValue(object o, out string result)
+                        {
+                            result = "";
+                            return true;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -788,46 +788,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        object value = null;
-
-                        if (value is string)
+                        static void Main(string[] args)
                         {
-                            try
-                            {
-                                [|var|] stringValue = (string)value;
-                            }
-                            finally
-                            {
+                            object value = null;
 
+                            if (value is string)
+                            {
+                                try
+                                {
+                                    [|var|] stringValue = (string)value;
+                                }
+                                finally
+                                {
+
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        object value = null;
-
-                        if (value is string stringValue)
+                        static void Main(string[] args)
                         {
-                            try
-                            {
-                            }
-                            finally
-                            {
+                            object value = null;
 
+                            if (value is string stringValue)
+                            {
+                                try
+                                {
+                                }
+                                finally
+                                {
+
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
     }

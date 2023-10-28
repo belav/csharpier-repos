@@ -46,7 +46,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 using NUnit.Framework;
 #endif
 
-
 using ErrorEventArgs = Newtonsoft.Json.Serialization.ErrorEventArgs;
 
 namespace Newtonsoft.Json.Tests.Serialization

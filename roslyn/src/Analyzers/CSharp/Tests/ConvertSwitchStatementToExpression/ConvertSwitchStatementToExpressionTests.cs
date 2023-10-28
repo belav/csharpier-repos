@@ -36,39 +36,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    int M(int i)
+                    class Program
                     {
-                        [|switch|] (i)
+                        int M(int i)
                         {
-                            case 1:
-                                return 4;
-                            case 2:
-                                return 5;
-                            case 3:
-                                return 6;
-                            default:
-                                return 7;
+                            [|switch|] (i)
+                            {
+                                case 1:
+                                    return 4;
+                                case 2:
+                                    return 5;
+                                case 3:
+                                    return 6;
+                                default:
+                                    return 7;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    int M(int i)
+                    class Program
                     {
-                        return i switch
+                        int M(int i)
                         {
-                            1 => 4,
-                            2 => 5,
-                            3 => 6,
-                            _ => 7,
-                        };
+                            return i switch
+                            {
+                                1 => 4,
+                                2 => 5,
+                                3 => 6,
+                                _ => 7,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -77,39 +77,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    int M(int i)
+                    class Program
                     {
-                        [|switch|] (i)
+                        int M(int i)
                         {
-                            case 1:
-                                return 4;
-                            default: 
-                                throw null;
-                            case 2:
-                                return 5;
-                            case 3:
-                                return 6;
+                            [|switch|] (i)
+                            {
+                                case 1:
+                                    return 4;
+                                default:
+                                    throw null;
+                                case 2:
+                                    return 5;
+                                case 3:
+                                    return 6;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    int M(int i)
+                    class Program
                     {
-                        return i switch
+                        int M(int i)
                         {
-                            1 => 4,
-                            2 => 5,
-                            3 => 6,
-                            _ => throw null,
-                        };
+                            return i switch
+                            {
+                                1 => 4,
+                                2 => 5,
+                                3 => 6,
+                                _ => throw null,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -118,47 +118,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    int[] array = new int[1];
-
-                    void M(int i)
+                    class Program
                     {
-                        [|switch|] (i)
+                        int[] array = new int[1];
+
+                        void M(int i)
                         {
-                            case 1:
-                                array[0] = 4;
-                                break;
-                            case 2:
-                                array[0] = 5;
-                                break;
-                            case 3:
-                                array[0] = 6;
-                                break;
-                            default:
-                                array[0] = 7;
-                                break;
+                            [|switch|] (i)
+                            {
+                                case 1:
+                                    array[0] = 4;
+                                    break;
+                                case 2:
+                                    array[0] = 5;
+                                    break;
+                                case 3:
+                                    array[0] = 6;
+                                    break;
+                                default:
+                                    array[0] = 7;
+                                    break;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    int[] array = new int[1];
-
-                    void M(int i)
+                    class Program
                     {
-                        array[0] = i switch
+                        int[] array = new int[1];
+
+                        void M(int i)
                         {
-                            1 => 4,
-                            2 => 5,
-                            3 => 6,
-                            _ => 7,
-                        };
+                            array[0] = i switch
+                            {
+                                1 => 4,
+                                2 => 5,
+                                3 => 6,
+                                _ => 7,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -335,35 +335,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                class Program
-                {
-                    void M(int i)
+                    using System;
+                    class Program
                     {
-                        [|switch|] (i)
+                        void M(int i)
                         {
-                            case 1:
-                                throw null;
-                            default:
-                                throw new Exception();
+                            [|switch|] (i)
+                            {
+                                case 1:
+                                    throw null;
+                                default:
+                                    throw new Exception();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class Program
-                {
-                    void M(int i)
+                    using System;
+                    class Program
                     {
-                        throw i switch
+                        void M(int i)
                         {
-                            1 => null,
-                            _ => new Exception(),
-                        };
+                            throw i switch
+                            {
+                                1 => null,
+                                _ => new Exception(),
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -372,42 +372,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    void M(int i)
+                    class Program
                     {
-                        int j;
-                        [|switch|] (i)
+                        void M(int i)
                         {
-                            case 1:
-                                j = 4;
-                                break;
-                            case 2:
-                                j = 5;
-                                break;
-                            case 3:
-                                j = 6;
-                                break;
+                            int j;
+                            [|switch|] (i)
+                            {
+                                case 1:
+                                    j = 4;
+                                    break;
+                                case 2:
+                                    j = 5;
+                                    break;
+                                case 3:
+                                    j = 6;
+                                    break;
+                            }
+                            throw null;
                         }
-                        throw null;
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void M(int i)
+                    class Program
                     {
-                        var j = i switch
+                        void M(int i)
                         {
-                            1 => 4,
-                            2 => 5,
-                            3 => 6,
-                            _ => throw null,
-                        };
+                            var j = i switch
+                            {
+                                1 => 4,
+                                2 => 5,
+                                3 => 6,
+                                _ => throw null,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -471,43 +471,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    void M(int i)
+                    class Program
                     {
-                        int j = 0;
-                        [|switch|] (i)
+                        void M(int i)
                         {
-                            case 1:
-                                j += 4;
-                                break;
-                            case 2:
-                                j += 5;
-                                break;
-                            case 3:
-                                j += 6;
-                                break;
+                            int j = 0;
+                            [|switch|] (i)
+                            {
+                                case 1:
+                                    j += 4;
+                                    break;
+                                case 2:
+                                    j += 5;
+                                    break;
+                                case 3:
+                                    j += 6;
+                                    break;
+                            }
+                            throw null;
                         }
-                        throw null;
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void M(int i)
+                    class Program
                     {
-                        int j = 0;
-                        j += i switch
+                        void M(int i)
                         {
-                            1 => 4,
-                            2 => 5,
-                            3 => 6,
-                            _ => throw null,
-                        };
+                            int j = 0;
+                            j += i switch
+                            {
+                                1 => 4,
+                                2 => 5,
+                                3 => 6,
+                                _ => throw null,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -516,45 +516,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    void M(int i)
+                    class Program
                     {
-                        int j = 123;
-                        M(i);
-                        [|switch|] (i)
+                        void M(int i)
                         {
-                            case 1:
-                                j = 4;
-                                break;
-                            case 2:
-                                j = 5;
-                                break;
-                            case 3:
-                                j = 6;
-                                break;
+                            int j = 123;
+                            M(i);
+                            [|switch|] (i)
+                            {
+                                case 1:
+                                    j = 4;
+                                    break;
+                                case 2:
+                                    j = 5;
+                                    break;
+                                case 3:
+                                    j = 6;
+                                    break;
+                            }
+                            throw null;
                         }
-                        throw null;
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void M(int i)
+                    class Program
                     {
-                        int j = 123;
-                        M(i);
-                        j = i switch
+                        void M(int i)
                         {
-                            1 => 4,
-                            2 => 5,
-                            3 => 6,
-                            _ => throw null,
-                        };
+                            int j = 123;
+                            M(i);
+                            j = i switch
+                            {
+                                1 => 4,
+                                2 => 5,
+                                3 => 6,
+                                _ => throw null,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -746,48 +746,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    int M(int i)
+                    class Program
                     {
-                        // leading switch
-                        [|switch|] (i) // trailing switch
+                        int M(int i)
                         {
-                            // leading label
-                            case 1: // trailing label
-                                // leading body
-                                return 4; // trailing body
-                            case 2:
-                                return 5;
-                            case 3:
-                                return 6;
-                        }
-                        
-                        // leading next statement
-                        throw null; // leading next statement
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    int M(int i)
-                    {
-                        // leading switch
-                        return i switch // trailing switch
-                        {
-                            // leading label
-                            // trailing label
-                            1 => 4,// leading body
-                                   // trailing body
-                            2 => 5,
-                            3 => 6,
+                            // leading switch
+                            [|switch|] (i) // trailing switch
+                            {
+                                // leading label
+                                case 1: // trailing label
+                                    // leading body
+                                    return 4; // trailing body
+                                case 2:
+                                    return 5;
+                                case 3:
+                                    return 6;
+                            }
+
                             // leading next statement
-                            _ => throw null,// leading next statement
-                        };
+                            throw null; // leading next statement
+                        }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        int M(int i)
+                        {
+                            // leading switch
+                            return i switch // trailing switch
+                            {
+                                // leading label
+                                // trailing label
+                                1 => 4,// leading body
+                                       // trailing body
+                                2 => 5,
+                                3 => 6,
+                                // leading next statement
+                                _ => throw null,// leading next statement
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -796,43 +796,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static int GetValue(int input)
+                    class Program
                     {
-                        [|switch|] (input)
+                        static int GetValue(int input)
                         {
-                            case 1:
-                                // this little piggy went to market
-                                return 42;
-                            case 2:
-                                // this little piggy stayed home
-                                return 50;
-                            case 3:
-                                // this little piggy had roast beef
-                                return 79;
-                            default:
-                                // this little piggy had none
-                                return 80;
+                            [|switch|] (input)
+                            {
+                                case 1:
+                                    // this little piggy went to market
+                                    return 42;
+                                case 2:
+                                    // this little piggy stayed home
+                                    return 50;
+                                case 3:
+                                    // this little piggy had roast beef
+                                    return 79;
+                                default:
+                                    // this little piggy had none
+                                    return 80;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static int GetValue(int input)
+                    class Program
                     {
-                        return input switch
+                        static int GetValue(int input)
                         {
-                            1 => 42,// this little piggy went to market
-                            2 => 50,// this little piggy stayed home
-                            3 => 79,// this little piggy had roast beef
-                            _ => 80,// this little piggy had none
-                        };
+                            return input switch
+                            {
+                                1 => 42,// this little piggy went to market
+                                2 => 50,// this little piggy stayed home
+                                3 => 79,// this little piggy had roast beef
+                                _ => 80,// this little piggy had none
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -841,33 +841,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    int M(int i)
+                    class Program
                     {
-                        [|switch|] (i)
-                        {   // Tip-toe through the trailing trivia
-                            case 0: return 123;
-                            case 1: return 234;
-                            default: throw null;
+                        int M(int i)
+                        {
+                            [|switch|] (i)
+                            {   // Tip-toe through the trailing trivia
+                                case 0: return 123;
+                                case 1: return 234;
+                                default: throw null;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    int M(int i)
+                    class Program
                     {
-                        return i switch
-                        {   // Tip-toe through the trailing trivia
-                            0 => 123,
-                            1 => 234,
-                            _ => throw null,
-                        };
+                        int M(int i)
+                        {
+                            return i switch
+                            {   // Tip-toe through the trailing trivia
+                                0 => 123,
+                                1 => 234,
+                                _ => throw null,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -929,39 +929,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    void M(int i)
+                    class Program
                     {
-                        int j = 123;
-                        [|switch|] (i % 10)
+                        void M(int i)
                         {
-                            case 1:
-                                j = 4;
-                                break;
-                            case 2:
-                                j = 5;
-                                break;
+                            int j = 123;
+                            [|switch|] (i % 10)
+                            {
+                                case 1:
+                                    j = 4;
+                                    break;
+                                case 2:
+                                    j = 5;
+                                    break;
+                            }
+                            throw null;
                         }
-                        throw null;
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void M(int i)
+                    class Program
                     {
-                        int j = 123;
-                        j = (i % 10) switch
+                        void M(int i)
                         {
-                            1 => 4,
-                            2 => 5,
-                            _ => throw null,
-                        };
+                            int j = 123;
+                            j = (i % 10) switch
+                            {
+                                1 => 4,
+                                2 => 5,
+                                _ => throw null,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -970,38 +970,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    public static string FromDay(DayOfWeek dayOfWeek)
+                    class Program
                     {
-                        [|switch|] (dayOfWeek)
+                        public static string FromDay(DayOfWeek dayOfWeek)
                         {
-                            case DayOfWeek.Monday:
-                                return "Monday";
-                            case DayOfWeek.Friday:
-                            default:
-                                return "Other";
+                            [|switch|] (dayOfWeek)
+                            {
+                                case DayOfWeek.Monday:
+                                    return "Monday";
+                                case DayOfWeek.Friday:
+                                default:
+                                    return "Other";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    public static string FromDay(DayOfWeek dayOfWeek)
+                    class Program
                     {
-                        return dayOfWeek switch
+                        public static string FromDay(DayOfWeek dayOfWeek)
                         {
-                            DayOfWeek.Monday => "Monday",
-                            _ => "Other",
-                        };
+                            return dayOfWeek switch
+                            {
+                                DayOfWeek.Monday => "Monday",
+                                _ => "Other",
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1034,85 +1034,85 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class Program
-                {
-                    static SeekOrigin origin;
-                    static long offset;
-                    static long position;
-                    static long length;
-                    public static void Test()
+                    class Program
                     {
-                        long target;
-                        try
+                        static SeekOrigin origin;
+                        static long offset;
+                        static long position;
+                        static long length;
+                        public static void Test()
                         {
-                            [|switch|] (origin)
+                            long target;
+                            try
                             {
-                                case SeekOrigin.Begin:
-                                    target = offset;
-                                    break;
+                                [|switch|] (origin)
+                                {
+                                    case SeekOrigin.Begin:
+                                        target = offset;
+                                        break;
 
-                                case SeekOrigin.Current:
-                                    target = checked(offset + position);
-                                    break;
+                                    case SeekOrigin.Current:
+                                        target = checked(offset + position);
+                                        break;
 
-                                case SeekOrigin.End:
-                                    target = checked(offset + length);
-                                    break;
+                                    case SeekOrigin.End:
+                                        target = checked(offset + length);
+                                        break;
 
-                                default:
-                                    throw new ArgumentOutOfRangeException(nameof(origin));
+                                    default:
+                                        throw new ArgumentOutOfRangeException(nameof(origin));
+                                }
+                            }
+                            catch (OverflowException)
+                            {
+                                throw new ArgumentOutOfRangeException(nameof(offset));
+                            }
+
+                            if (target < 0)
+                            {
+                                throw new ArgumentOutOfRangeException(nameof(offset));
                             }
                         }
-                        catch (OverflowException)
-                        {
-                            throw new ArgumentOutOfRangeException(nameof(offset));
-                        }
-
-                        if (target < 0)
-                        {
-                            throw new ArgumentOutOfRangeException(nameof(offset));
-                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class Program
-                {
-                    static SeekOrigin origin;
-                    static long offset;
-                    static long position;
-                    static long length;
-                    public static void Test()
+                    class Program
                     {
-                        long target;
-                        try
+                        static SeekOrigin origin;
+                        static long offset;
+                        static long position;
+                        static long length;
+                        public static void Test()
                         {
-                            target = origin switch
+                            long target;
+                            try
                             {
-                                SeekOrigin.Begin => offset,
-                                SeekOrigin.Current => checked(offset + position),
-                                SeekOrigin.End => checked(offset + length),
-                                _ => throw new ArgumentOutOfRangeException(nameof(origin)),
-                            };
-                        }
-                        catch (OverflowException)
-                        {
-                            throw new ArgumentOutOfRangeException(nameof(offset));
-                        }
+                                target = origin switch
+                                {
+                                    SeekOrigin.Begin => offset,
+                                    SeekOrigin.Current => checked(offset + position),
+                                    SeekOrigin.End => checked(offset + length),
+                                    _ => throw new ArgumentOutOfRangeException(nameof(origin)),
+                                };
+                            }
+                            catch (OverflowException)
+                            {
+                                throw new ArgumentOutOfRangeException(nameof(offset));
+                            }
 
-                        if (target < 0)
-                        {
-                            throw new ArgumentOutOfRangeException(nameof(offset));
+                            if (target < 0)
+                            {
+                                throw new ArgumentOutOfRangeException(nameof(offset));
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1227,33 +1227,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    public static bool? GetBool(string name)
+                    class Program
                     {
-                        [|switch|] (name)
+                        public static bool? GetBool(string name)
                         {
-                            case "a": return true;
-                            case "b": return false;
-                            default: return null;
+                            [|switch|] (name)
+                            {
+                                case "a": return true;
+                                case "b": return false;
+                                default: return null;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public static bool? GetBool(string name)
+                    class Program
                     {
-                        return name switch
+                        public static bool? GetBool(string name)
                         {
-                            "a" => true,
-                            "b" => false,
-                            _ => null,
-                        };
+                            return name switch
+                            {
+                                "a" => true,
+                                "b" => false,
+                                _ => null,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1262,34 +1262,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    public static void Test(string name)
+                    class Program
                     {
-                        bool? result;
-                        [|switch|] (name)
+                        public static void Test(string name)
                         {
-                            case "a": result = true; break;
-                            case "b": result = false; break;
-                            default: result = null; break;
+                            bool? result;
+                            [|switch|] (name)
+                            {
+                                case "a": result = true; break;
+                                case "b": result = false; break;
+                                default: result = null; break;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    public static void Test(string name)
+                    class Program
                     {
-                        bool? result = name switch
+                        public static void Test(string name)
                         {
-                            "a" => true,
-                            "b" => false,
-                            _ => null,
-                        };
+                            bool? result = name switch
+                            {
+                                "a" => true,
+                                "b" => false,
+                                _ => null,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2103,35 +2103,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                class Program
-                {
-                    static void GetRef(int[] mem, int addr, int mode)
+                    using System;
+                    class Program
                     {
-                        ref int i = ref addr;
-                        [|switch|] (mode)
+                        static void GetRef(int[] mem, int addr, int mode)
                         {
-                            case 0: i = true ? ref mem[mem[addr]] : ref mem[mem[addr]]; break;
-                            default: throw new Exception();
+                            ref int i = ref addr;
+                            [|switch|] (mode)
+                            {
+                                case 0: i = true ? ref mem[mem[addr]] : ref mem[mem[addr]]; break;
+                                default: throw new Exception();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class Program
-                {
-                    static void GetRef(int[] mem, int addr, int mode)
+                    using System;
+                    class Program
                     {
-                        ref int i = ref addr;
-                        i = mode switch
+                        static void GetRef(int[] mem, int addr, int mode)
                         {
-                            0 => true ? ref mem[mem[addr]] : ref mem[mem[addr]],
-                            _ => throw new Exception(),
-                        };
+                            ref int i = ref addr;
+                            i = mode switch
+                            {
+                                0 => true ? ref mem[mem[addr]] : ref mem[mem[addr]],
+                                _ => throw new Exception(),
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2220,7 +2220,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     {
                         [|switch|] (s)
                         {
-                	        case "Last":
+                            case "Last":
                             case "First":
                             case "Count":
                                 return true;
@@ -2257,29 +2257,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    int M(object i)
+                    class Program
                     {
-                        [|switch|] (i.GetType())
+                        int M(object i)
                         {
-                            default: return 0;
+                            [|switch|] (i.GetType())
+                            {
+                                default: return 0;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    int M(object i)
+                    class Program
                     {
-                        return i.GetType() switch
+                        int M(object i)
                         {
-                            _ => 0,
-                        };
+                            return i.GetType() switch
+                            {
+                                _ => 0,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2288,29 +2288,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    int M()
+                    class Program
                     {
-                        [|switch|] (1 + 1)
+                        int M()
                         {
-                            default: return 0;
+                            [|switch|] (1 + 1)
+                            {
+                                default: return 0;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    int M()
+                    class Program
                     {
-                        return (1 + 1) switch
+                        int M()
                         {
-                            _ => 0,
-                        };
+                            return (1 + 1) switch
+                            {
+                                _ => 0,
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2319,40 +2319,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    void M(string s)
+                    class Program
                     {
-                        object result;
-
-                        [|switch|] (s)
+                        void M(string s)
                         {
-                        case "a":
-                            result = 1234;
-                            break;
-                        case "b":
-                            result = 3.14;
-                            break;
-                        default:
-                            throw new System.Exception();
+                            object result;
+
+                            [|switch|] (s)
+                            {
+                            case "a":
+                                result = 1234;
+                                break;
+                            case "b":
+                                result = 3.14;
+                                break;
+                            default:
+                                throw new System.Exception();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void M(string s)
+                    class Program
                     {
-                        object result = s switch
+                        void M(string s)
                         {
-                            "a" => 1234,
-                            "b" => (object)3.14,
-                            _ => throw new System.Exception(),
-                        };
+                            object result = s switch
+                            {
+                                "a" => 1234,
+                                "b" => (object)3.14,
+                                _ => throw new System.Exception(),
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2361,44 +2361,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    void M(string s)
+                    class Program
                     {
-                        object result;
-
-                        [|switch|] (s)
+                        void M(string s)
                         {
-                        case "a":
-                            result = 1234;
-                            break;
-                        case "b":
-                            result = 3.14;
-                            break;
-                        case "c":
-                            result = true;
-                            break;
-                        default:
-                            throw new System.Exception();
+                            object result;
+
+                            [|switch|] (s)
+                            {
+                            case "a":
+                                result = 1234;
+                                break;
+                            case "b":
+                                result = 3.14;
+                                break;
+                            case "c":
+                                result = true;
+                                break;
+                            default:
+                                throw new System.Exception();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void M(string s)
+                    class Program
                     {
-                        object result = s switch
+                        void M(string s)
                         {
-                            "a" => 1234,
-                            "b" => 3.14,
-                            "c" => true,
-                            _ => throw new System.Exception(),
-                        };
+                            object result = s switch
+                            {
+                                "a" => 1234,
+                                "b" => 3.14,
+                                "c" => true,
+                                _ => throw new System.Exception(),
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2407,36 +2407,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    object M(string s)
+                    class Program
                     {
-                        [|switch|] (s)
+                        object M(string s)
                         {
-                        case "a":
-                            return 1234;
-                        case "b":
-                            return 3.14;
-                        default:
-                            throw new System.Exception();
+                            [|switch|] (s)
+                            {
+                            case "a":
+                                return 1234;
+                            case "b":
+                                return 3.14;
+                            default:
+                                throw new System.Exception();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    object M(string s)
+                    class Program
                     {
-                        return s switch
+                        object M(string s)
                         {
-                            "a" => 1234,
-                            "b" => (object)3.14,
-                            _ => throw new System.Exception(),
-                        };
+                            return s switch
+                            {
+                                "a" => 1234,
+                                "b" => (object)3.14,
+                                _ => throw new System.Exception(),
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2445,39 +2445,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    object M(string s)
+                    class Program
                     {
-                        [|switch|] (s)
+                        object M(string s)
                         {
-                        case "a":
-                            return 1234;
-                        case "b":
-                            return 3.14;
-                        case "c":
-                            return true;
-                        default:
-                            throw new System.Exception();
+                            [|switch|] (s)
+                            {
+                            case "a":
+                                return 1234;
+                            case "b":
+                                return 3.14;
+                            case "c":
+                                return true;
+                            default:
+                                throw new System.Exception();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    object M(string s)
+                    class Program
                     {
-                        return s switch
+                        object M(string s)
                         {
-                            "a" => 1234,
-                            "b" => 3.14,
-                            "c" => true,
-                            _ => throw new System.Exception(),
-                        };
+                            return s switch
+                            {
+                                "a" => 1234,
+                                "b" => 3.14,
+                                "c" => true,
+                                _ => throw new System.Exception(),
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2487,50 +2487,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static int RefactorReplacementDemoMethod(int argument)
+                    class C
                     {
-                        Console.WriteLine(nameof(RefactorReplacementDemoMethod));
-
-                        // This comment will get deleted, together with the blank lines around it.
-                        // Very similar issue already filed, but no resolution to this issue so far.
-
-                        int result;
-                        [|switch|] (argument)
+                        public static int RefactorReplacementDemoMethod(int argument)
                         {
-                            case 1: result = 1001; break;
-                            case 2: result = 1002; break;
-                            default: result = -1; break;
+                            Console.WriteLine(nameof(RefactorReplacementDemoMethod));
+
+                            // This comment will get deleted, together with the blank lines around it.
+                            // Very similar issue already filed, but no resolution to this issue so far.
+
+                            int result;
+                            [|switch|] (argument)
+                            {
+                                case 1: result = 1001; break;
+                                case 2: result = 1002; break;
+                                default: result = -1; break;
+                            }
+                            return result;
                         }
-                        return result;
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static int RefactorReplacementDemoMethod(int argument)
+                    class C
                     {
-                        Console.WriteLine(nameof(RefactorReplacementDemoMethod));
-
-                        // This comment will get deleted, together with the blank lines around it.
-                        // Very similar issue already filed, but no resolution to this issue so far.
-
-                        var result = argument switch
+                        public static int RefactorReplacementDemoMethod(int argument)
                         {
-                            1 => 1001,
-                            2 => 1002,
-                            _ => -1,
-                        };
-                        return result;
+                            Console.WriteLine(nameof(RefactorReplacementDemoMethod));
+
+                            // This comment will get deleted, together with the blank lines around it.
+                            // Very similar issue already filed, but no resolution to this issue so far.
+
+                            var result = argument switch
+                            {
+                                1 => 1001,
+                                2 => 1002,
+                                _ => -1,
+                            };
+                            return result;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -2541,51 +2541,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static int RefactorReplacementDemoMethod(int argument)
+                    class C
                     {
-                        Console.WriteLine(nameof(RefactorReplacementDemoMethod));
-
-                        // This comment will get deleted, together with the blank lines around it.
-                        // Very similar issue already filed, but no resolution to this issue so far.
-
-                        int result, x = 0;
-                        [|switch|] (argument)
+                        public static int RefactorReplacementDemoMethod(int argument)
                         {
-                            case 1: result = 1001; break;
-                            case 2: result = 1002; break;
-                            default: result = -1; break;
+                            Console.WriteLine(nameof(RefactorReplacementDemoMethod));
+
+                            // This comment will get deleted, together with the blank lines around it.
+                            // Very similar issue already filed, but no resolution to this issue so far.
+
+                            int result, x = 0;
+                            [|switch|] (argument)
+                            {
+                                case 1: result = 1001; break;
+                                case 2: result = 1002; break;
+                                default: result = -1; break;
+                            }
+                            return result;
                         }
-                        return result;
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static int RefactorReplacementDemoMethod(int argument)
+                    class C
                     {
-                        Console.WriteLine(nameof(RefactorReplacementDemoMethod));
-
-                        // This comment will get deleted, together with the blank lines around it.
-                        // Very similar issue already filed, but no resolution to this issue so far.
-
-                        int x = 0;
-                        var result = argument switch
+                        public static int RefactorReplacementDemoMethod(int argument)
                         {
-                            1 => 1001,
-                            2 => 1002,
-                            _ => -1,
-                        };
-                        return result;
+                            Console.WriteLine(nameof(RefactorReplacementDemoMethod));
+
+                            // This comment will get deleted, together with the blank lines around it.
+                            // Very similar issue already filed, but no resolution to this issue so far.
+
+                            int x = 0;
+                            var result = argument switch
+                            {
+                                1 => 1001,
+                                2 => 1002,
+                                _ => -1,
+                            };
+                            return result;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }

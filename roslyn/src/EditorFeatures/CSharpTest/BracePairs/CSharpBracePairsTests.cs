@@ -23,18 +23,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BracePairs
         {
             await Test(
                 """
-                public class C
-                {|a:{|}
-                    void M{|b:(|}int i{|b:)|}
-                    {|c:{|}
-                    {|c:}|}
+                    public class C
+                    {|a:{|}
+                        void M{|b:(|}int i{|b:)|}
+                        {|c:{|}
+                        {|c:}|}
 
-                    {|d:[|}Attr{|d:]|}
-                    void M2{|e:(|}List{|f:<|}int{|f:>|} i{|e:)|}
-                    {|g:{|}
-                    {|g:}|}
-                {|a:}|}
-                """
+                        {|d:[|}Attr{|d:]|}
+                        void M2{|e:(|}List{|f:<|}int{|f:>|} i{|e:)|}
+                        {|g:{|}
+                        {|g:}|}
+                    {|a:}|}
+                    """
             );
         }
     }

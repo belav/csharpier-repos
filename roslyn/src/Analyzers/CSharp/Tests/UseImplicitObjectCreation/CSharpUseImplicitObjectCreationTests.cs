@@ -26,11 +26,11 @@ public class UseImplicitObjectCreationTests
     public async Task TestMissingBeforeCSharp9()
     {
         var source = """
-                class C
-                {
-                    C c = new C();
-                }
-                """;
+            class C
+            {
+                C c = new C();
+            }
+            """;
         await new VerifyCS.Test
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp8,
@@ -730,11 +730,11 @@ public class UseImplicitObjectCreationTests
     public async Task TestMissingOnNullableStruct()
     {
         var source = """
-                class C
-                {
-                    int? i = new int?();
-                }
-                """;
+            class C
+            {
+                int? i = new int?();
+            }
+            """;
         await new VerifyCS.Test
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
@@ -780,7 +780,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     IList<C> list = new List<C> { new() };
@@ -805,7 +805,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     IList<C> list = new List<C>() { new() };
@@ -830,7 +830,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     List<C> list = new() { new C() };
@@ -889,7 +889,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     C[] list = new C[] { new() };
@@ -914,7 +914,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     C[] list = { new() };

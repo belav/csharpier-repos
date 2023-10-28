@@ -45,19 +45,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    private static string s_goo;
-                    private static string Goo => s_goo [|??|] (s_goo = new string('c', 42));
-                }
-                """,
+                    class Program
+                    {
+                        private static string s_goo;
+                        private static string Goo => s_goo [|??|] (s_goo = new string('c', 42));
+                    }
+                    """,
                 """
-                class Program
-                {
-                    private static string s_goo;
-                    private static string Goo => s_goo ??= new string('c', 42);
-                }
-                """
+                    class Program
+                    {
+                        private static string s_goo;
+                        private static string Goo => s_goo ??= new string('c', 42);
+                    }
+                    """
             );
         }
 
@@ -66,12 +66,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                class Program
-                {
-                    private static string s_goo;
-                    private static string Goo => s_goo ?? (s_goo = new string('c', 42));
-                }
-                """,
+                    class Program
+                    {
+                        private static string s_goo;
+                        private static string Goo => s_goo ?? (s_goo = new string('c', 42));
+                    }
+                    """,
                 LanguageVersion.CSharp7_3
             );
         }
@@ -81,12 +81,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                class Program
-                {
-                    private static string s_goo;
-                    private static string Goo => {|CS0131:s_goo ?? s_goo|} = new string('c', 42);
-                }
-                """
+                    class Program
+                    {
+                        private static string s_goo;
+                        private static string Goo => {|CS0131:s_goo ?? s_goo|} = new string('c', 42);
+                    }
+                    """
             );
         }
 
@@ -95,12 +95,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                class Program
-                {
-                    private static string s_goo;
-                    private static string Goo => {|CS0019:s_goo ?? (s_goo == new string('c', 42))|};
-                }
-                """
+                    class Program
+                    {
+                        private static string s_goo;
+                        private static string Goo => {|CS0019:s_goo ?? (s_goo == new string('c', 42))|};
+                    }
+                    """
             );
         }
 
@@ -109,12 +109,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                class Program
-                {
-                    private static string s_goo;
-                    private static string Goo => s_goo ?? (s_goo ??= new string('c', 42));
-                }
-                """
+                    class Program
+                    {
+                        private static string s_goo;
+                        private static string Goo => s_goo ?? (s_goo ??= new string('c', 42));
+                    }
+                    """
             );
         }
 
@@ -123,13 +123,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                class Program
-                {
-                    private static string s_goo;
-                    private static string s_goo2;
-                    private static string Goo => s_goo ?? (s_goo2 = new string('c', 42));
-                }
-                """
+                    class Program
+                    {
+                        private static string s_goo;
+                        private static string s_goo2;
+                        private static string Goo => s_goo ?? (s_goo2 = new string('c', 42));
+                    }
+                    """
             );
         }
 
@@ -138,12 +138,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                class Program
-                {
-                    private static string s_goo;
-                    private static string Goo => s_goo.GetType() ?? ({|CS0131:s_goo.GetType()|} = new string('c', 42));
-                }
-                """
+                    class Program
+                    {
+                        private static string s_goo;
+                        private static string Goo => s_goo.GetType() ?? ({|CS0131:s_goo.GetType()|} = new string('c', 42));
+                    }
+                    """
             );
         }
 
@@ -152,19 +152,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    private string goo;
-                    private string Goo => this.goo [|??|] (this.goo = new string('c', 42));
-                }
-                """,
+                    class Program
+                    {
+                        private string goo;
+                        private string Goo => this.goo [|??|] (this.goo = new string('c', 42));
+                    }
+                    """,
                 """
-                class Program
-                {
-                    private string goo;
-                    private string Goo => this.goo ??= new string('c', 42);
-                }
-                """
+                    class Program
+                    {
+                        private string goo;
+                        private string Goo => this.goo ??= new string('c', 42);
+                    }
+                    """
             );
         }
 
@@ -173,25 +173,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        int? a = null;
-                        var x = a [|??|] (a = 1);
+                        void Goo()
+                        {
+                            int? a = null;
+                            var x = a [|??|] (a = 1);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        int? a = null;
-                        var x = (int?)(a ??= 1);
+                        void Goo()
+                        {
+                            int? a = null;
+                            var x = (int?)(a ??= 1);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -200,33 +200,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void M(int a) { }
-                    static void M(int? a) { }
-
-                    static void Main()
+                    using System;
+                    class C
                     {
-                        int? a = null;
-                        M(a [|??|] (a = 1));
-                    }
-                }
-                """,
-                """
-                using System;
-                class C
-                {
-                    static void M(int a) { }
-                    static void M(int? a) { }
+                        static void M(int a) { }
+                        static void M(int? a) { }
 
-                    static void Main()
-                    {
-                        int? a = null;
-                        M((int?)(a ??= 1));
+                        static void Main()
+                        {
+                            int? a = null;
+                            M(a [|??|] (a = 1));
+                        }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    class C
+                    {
+                        static void M(int a) { }
+                        static void M(int? a) { }
+
+                        static void Main()
+                        {
+                            int? a = null;
+                            M((int?)(a ??= 1));
+                        }
+                    }
+                    """
             );
         }
 
@@ -235,31 +235,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void M(int? a) { }
-
-                    static void Main()
+                    using System;
+                    class C
                     {
-                        int? a = null;
-                        M(a [|??|] (a = 1));
-                    }
-                }
-                """,
-                """
-                using System;
-                class C
-                {
-                    static void M(int? a) { }
+                        static void M(int? a) { }
 
-                    static void Main()
-                    {
-                        int? a = null;
-                        M(a ??= 1);
+                        static void Main()
+                        {
+                            int? a = null;
+                            M(a [|??|] (a = 1));
+                        }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    class C
+                    {
+                        static void M(int? a) { }
+
+                        static void Main()
+                        {
+                            int? a = null;
+                            M(a ??= 1);
+                        }
+                    }
+                    """
             );
         }
 
@@ -268,28 +268,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        [|if|] (o is null)
+                        static void Main(object o)
                         {
-                            o = "";
+                            [|if|] (o is null)
+                            {
+                                o = "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        o ??= "";
+                        static void Main(object o)
+                        {
+                            o ??= "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -298,18 +298,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                            o = "";
+                            if (o is null)
+                            {
+                                o = "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion.CSharp7_3
             );
         }
@@ -319,22 +319,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                            o = "";
-                        }
-                        else
-                        {
-                            Console.WriteLine();
+                            if (o is null)
+                            {
+                                o = "";
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -343,26 +343,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        [|if|] (o is null)
-                            o = "";
+                        static void Main(object o)
+                        {
+                            [|if|] (o is null)
+                                o = "";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        o ??= "";
+                        static void Main(object o)
+                        {
+                            o ??= "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -371,17 +371,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
+                            if (o is null)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -390,19 +390,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                            o = "";
-                            o = "";
+                            if (o is null)
+                            {
+                                o = "";
+                                o = "";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -411,28 +411,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        [|if|] (o == null)
+                        static void Main(object o)
                         {
-                            o = "";
+                            [|if|] (o == null)
+                            {
+                                o = "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        o ??= "";
+                        static void Main(object o)
+                        {
+                            o ??= "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -441,28 +441,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        [|if|] (ReferenceEquals(o, null))
+                        static void Main(object o)
                         {
-                            o = "";
+                            [|if|] (ReferenceEquals(o, null))
+                            {
+                                o = "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        o ??= "";
+                        static void Main(object o)
+                        {
+                            o ??= "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -471,28 +471,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        [|if|] (ReferenceEquals(null, o))
+                        static void Main(object o)
                         {
-                            o = "";
+                            [|if|] (ReferenceEquals(null, o))
+                            {
+                                o = "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        o ??= "";
+                        static void Main(object o)
+                        {
+                            o ??= "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -501,28 +501,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        [|if|] (object.ReferenceEquals(null, o))
+                        static void Main(object o)
                         {
-                            o = "";
+                            [|if|] (object.ReferenceEquals(null, o))
+                            {
+                                o = "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        o ??= "";
+                        static void Main(object o)
+                        {
+                            o ??= "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -531,18 +531,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (!object.ReferenceEquals(null, o))
+                        static void Main(object o)
                         {
-                            o = "";
+                            if (!object.ReferenceEquals(null, o))
+                            {
+                                o = "";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -551,18 +551,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                            o ??= "";
+                            if (o is null)
+                            {
+                                o ??= "";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -571,28 +571,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(string o)
+                    using System;
+                    class C
                     {
-                        [|if|] (o == null)
+                        static void Main(string o)
                         {
-                            o = "";
+                            [|if|] (o == null)
+                            {
+                                o = "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(string o)
+                    using System;
+                    class C
                     {
-                        o ??= "";
+                        static void Main(string o)
+                        {
+                            o ??= "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -601,25 +601,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class X
-                {
-                    public static bool operator ==(X x1, X x2) => true;
-                    public static bool operator !=(X x1, X x2) => !(x1 == x2);
-                }
-
-                class C
-                {
-                    static void Main(X o)
+                    class X
                     {
-                        if (o == null)
+                        public static bool operator ==(X x1, X x2) => true;
+                        public static bool operator !=(X x1, X x2) => !(x1 == x2);
+                    }
+
+                    class C
+                    {
+                        static void Main(X o)
                         {
-                            o = new X();
+                            if (o == null)
+                            {
+                                o = new X();
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -628,19 +628,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(object o1, object o2)
+                    class C
                     {
-                        if (o1 is null)
+                        static void Main(object o1, object o2)
                         {
-                            o2 = "";
+                            if (o1 is null)
+                            {
+                                o2 = "";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -649,21 +649,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private object o;
-
-                    static void Main()
+                    class C
                     {
-                        if (new C().o is null)
+                        private object o;
+
+                        static void Main()
                         {
-                            new C().o = "";
+                            if (new C().o is null)
+                            {
+                                new C().o = "";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -672,28 +672,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        [|if|] (o is null)
+                        static void Main(object o)
                         {
-                            o = new C();
+                            [|if|] (o is null)
+                            {
+                                o = new C();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        o ??= new C();
+                        static void Main(object o)
+                        {
+                            o ??= new C();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -702,30 +702,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        // Before
-                        [|if|] (o is null)
+                        static void Main(object o)
                         {
-                            o = new C();
-                        } // After
+                            // Before
+                            [|if|] (o is null)
+                            {
+                                o = new C();
+                            } // After
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        // Before
-                        o ??= new C(); // After
+                        static void Main(object o)
+                        {
+                            // Before
+                            o ??= new C(); // After
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -734,30 +734,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        [|if|] (o is null)
+                        static void Main(object o)
                         {
-                            // Before
-                            o = new C(); // After
+                            [|if|] (o is null)
+                            {
+                                // Before
+                                o = new C(); // After
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        // Before
-                        o ??= new C(); // After
+                        static void Main(object o)
+                        {
+                            // Before
+                            o ??= new C(); // After
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -766,32 +766,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        // Before1
-                        [|if|] (o is null)
+                        static void Main(object o)
                         {
-                            // Before2
-                            o = new C(); // After
+                            // Before1
+                            [|if|] (o is null)
+                            {
+                                // Before2
+                                o = new C(); // After
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        // Before1
-                        // Before2
-                        o ??= new C(); // After
+                        static void Main(object o)
+                        {
+                            // Before1
+                            // Before2
+                            o ??= new C(); // After
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -800,20 +800,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                #if true
-                            o = "";
-                #endif
+                            if (o is null)
+                            {
+                    #if true
+                                o = "";
+                    #endif
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -822,21 +822,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                #if X
-                            Console.WriteLine("Only run if o is null");
-                #endif
-                            o = "";
+                            if (o is null)
+                            {
+                    #if X
+                                Console.WriteLine("Only run if o is null");
+                    #endif
+                                o = "";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -845,22 +845,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                #if X
-                            Console.WriteLine("Only run if o is null");
-                #else
-                            o = "";
-                #endif
+                            if (o is null)
+                            {
+                    #if X
+                                Console.WriteLine("Only run if o is null");
+                    #else
+                                o = "";
+                    #endif
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -869,22 +869,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                #if X
-                            Console.WriteLine("Only run if o is null");
-                #elif true
-                            o = "";
-                #endif
+                            if (o is null)
+                            {
+                    #if X
+                                Console.WriteLine("Only run if o is null");
+                    #elif true
+                                o = "";
+                    #endif
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -893,22 +893,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                #if true
-                            o = "";
-                #else
-                            Console.WriteLine("Only run if o is null");
-                #endif
+                            if (o is null)
+                            {
+                    #if true
+                                o = "";
+                    #else
+                                Console.WriteLine("Only run if o is null");
+                    #endif
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -917,22 +917,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
+                        static void Main(object o)
                         {
-                #if true
-                            o = "";
-                #elif X
-                            Console.WriteLine("Only run if o is null");
-                #endif
+                            if (o is null)
+                            {
+                    #if true
+                                o = "";
+                    #elif X
+                                Console.WriteLine("Only run if o is null");
+                    #endif
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -941,18 +941,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
-                #if true
-                            o = "";
-                #endif
+                        static void Main(object o)
+                        {
+                            if (o is null)
+                    #if true
+                                o = "";
+                    #endif
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -961,20 +961,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System;
-                class C
-                {
-                    static void Main(object o)
+                    using System;
+                    class C
                     {
-                        if (o is null)
-                #if true
-                            o = "";
-                #else
-                            o = "";
-                #endif
+                        static void Main(object o)
+                        {
+                            if (o is null)
+                    #if true
+                                o = "";
+                    #else
+                                o = "";
+                    #endif
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -988,17 +988,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
             // Note that, when ??= is supported for pointers, the analyzer should check the language version which supports it.
             await TestMissingAsync(
                 """
-                unsafe class Program
-                {
-                    private static void Main()
+                    unsafe class Program
                     {
-                        byte* ptr = null;
-                        {|CS0019:ptr ??= Get()|};
-                    }
+                        private static void Main()
+                        {
+                            byte* ptr = null;
+                            {|CS0019:ptr ??= Get()|};
+                        }
 
-                    static byte* Get() => null;
-                }
-                """,
+                        static byte* Get() => null;
+                    }
+                    """,
                 LanguageVersion.CSharp12
             );
         }
@@ -1008,20 +1008,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                unsafe class Program
-                {
-                    private static void Main()
+                    unsafe class Program
                     {
-                        byte* ptr = null;
-                        if (ptr is null)
+                        private static void Main()
                         {
-                            ptr = Get();
+                            byte* ptr = null;
+                            if (ptr is null)
+                            {
+                                ptr = Get();
+                            }
                         }
-                    }
 
-                    static byte* Get() => null;
-                }
-                """,
+                        static byte* Get() => null;
+                    }
+                    """,
                 LanguageVersion.CSharp12
             );
         }
@@ -1031,23 +1031,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await TestMissingAsync(
                 """
-                using System.Runtime.InteropServices;
-                public unsafe class C {
-                    [DllImport("A")]
-                    private static extern delegate* unmanaged<void> GetFunc();
+                    using System.Runtime.InteropServices;
+                    public unsafe class C {
+                        [DllImport("A")]
+                        private static extern delegate* unmanaged<void> GetFunc();
 
-                    private delegate* unmanaged<void> s_func;
+                        private delegate* unmanaged<void> s_func;
 
-                    public delegate* unmanaged<void> M() {
-                        delegate* unmanaged<void> func = s_func;
-                        if (func == null)
-                        {
-                            func = s_func = GetFunc();
+                        public delegate* unmanaged<void> M() {
+                            delegate* unmanaged<void> func = s_func;
+                            if (func == null)
+                            {
+                                func = s_func = GetFunc();
+                            }
+                            return func;
                         }
-                        return func;
                     }
-                }
-                """,
+                    """,
                 LanguageVersion.CSharp12
             );
         }

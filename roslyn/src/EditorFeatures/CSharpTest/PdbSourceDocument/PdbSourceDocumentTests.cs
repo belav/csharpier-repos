@@ -564,9 +564,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 File.WriteAllText(
                     Path.Combine(dataDir, "FrameworkList.xml"),
                     """
-                    <FileList FrameworkName="MyPack">
-                    </FileList>
-                    """
+                        <FileList FrameworkName="MyPack">
+                        </FileList>
+                        """
                 );
 
                 await GenerateFileAndVerifyAsync(
@@ -644,9 +644,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 File.WriteAllText(
                     Path.Combine(dataDir, "FrameworkList.xml"),
                     """
-                    <FileList FrameworkName="MyPack">
-                    </FileList>
-                    """
+                        <FileList FrameworkName="MyPack">
+                        </FileList>
+                        """
                 );
 
                 await GenerateFileAndVerifyAsync(
@@ -758,9 +758,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 File.WriteAllText(
                     Path.Combine(dataDir, "FrameworkList.xml"),
                     """
-                    <FileList FrameworkName="MyPack">
-                    </FileList>
-                    """
+                        <FileList FrameworkName="MyPack">
+                        </FileList>
+                        """
                 );
 
                 await GenerateFileAndVerifyAsync(

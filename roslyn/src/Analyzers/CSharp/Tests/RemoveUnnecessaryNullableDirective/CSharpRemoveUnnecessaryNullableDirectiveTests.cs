@@ -56,20 +56,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
             await VerifyCodeFixAsync(
                 NullableContextOptions.Enable,
                 """
-                [|#nullable disable|]
-                enum EnumName
-                {
-                    First,
-                    Second,
-                }
-                """,
+                    [|#nullable disable|]
+                    enum EnumName
+                    {
+                        First,
+                        Second,
+                    }
+                    """,
                 """
-                enum EnumName
-                {
-                    First,
-                    Second,
-                }
-                """
+                    enum EnumName
+                    {
+                        First,
+                        Second,
+                    }
+                    """
             );
         }
 
@@ -79,26 +79,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
             await VerifyCodeFixAsync(
                 NullableContextOptions.Enable,
                 """
-                // File Header
+                    // File Header
 
-                [|#nullable disable|]
+                    [|#nullable disable|]
 
-                enum EnumName
-                {
-                    First,
-                    Second,
-                }
-                """,
+                    enum EnumName
+                    {
+                        First,
+                        Second,
+                    }
+                    """,
                 """
-                // File Header
+                    // File Header
 
 
-                enum EnumName
-                {
-                    First,
-                    Second,
-                }
-                """
+                    enum EnumName
+                    {
+                        First,
+                        Second,
+                    }
+                    """
             );
         }
 
@@ -108,28 +108,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
             await VerifyCodeFixAsync(
                 NullableContextOptions.Enable,
                 """
-                [|#nullable disable|]
+                    [|#nullable disable|]
 
-                using System;
+                    using System;
 
-                namespace X.Y
-                {
-                    class ProgramException : Exception
+                    namespace X.Y
                     {
+                        class ProgramException : Exception
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
 
-                using System;
+                    using System;
 
-                namespace X.Y
-                {
-                    class ProgramException : Exception
+                    namespace X.Y
                     {
+                        class ProgramException : Exception
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -139,24 +139,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
             await VerifyCodeFixAsync(
                 NullableContextOptions.Enable,
                 """
-                [|#nullable disable|]
+                    [|#nullable disable|]
 
-                namespace X.Y
-                {
-                    class ProgramException : System.Exception
+                    namespace X.Y
                     {
+                        class ProgramException : System.Exception
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
 
-                namespace X.Y
-                {
-                    class ProgramException : System.Exception
+                    namespace X.Y
                     {
+                        class ProgramException : System.Exception
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -166,20 +166,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
             await VerifyCodeFixAsync(
                 NullableContextOptions.Enable,
                 """
-                [|#nullable disable|]
+                    [|#nullable disable|]
 
-                using System;
-                using System.Runtime.InteropServices;
-                using CustomException = System.Exception;
-                using static System.String;
-                """,
+                    using System;
+                    using System.Runtime.InteropServices;
+                    using CustomException = System.Exception;
+                    using static System.String;
+                    """,
                 """
 
-                using System;
-                using System.Runtime.InteropServices;
-                using CustomException = System.Exception;
-                using static System.String;
-                """
+                    using System;
+                    using System.Runtime.InteropServices;
+                    using CustomException = System.Exception;
+                    using static System.String;
+                    """
             );
         }
 

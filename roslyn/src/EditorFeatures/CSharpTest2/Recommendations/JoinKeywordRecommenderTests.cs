@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """
+                    class C { }
+                    $$
+                    """
             );
         }
 
@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """
+                    System.Console.WriteLine();
+                    $$
+                    """
             );
         }
 
@@ -47,9 +47,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """
+                    int i = 0;
+                    $$
+                    """
             );
         }
 
@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          $$
-                """
+                        var q = from x in y
+                                  $$
+                        """
                 )
             );
         }
@@ -96,10 +96,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var v = from x in y
-                          where x > y
-                          $$
-                """
+                        var v = from x in y
+                                  where x > y
+                                  $$
+                        """
                 )
             );
         }
@@ -110,10 +110,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var v = from x in y
-                          group x by y into g
-                          $$
-                """
+                        var v = from x in y
+                                  group x by y into g
+                                  $$
+                        """
                 )
             );
         }
@@ -124,10 +124,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          $$
-                          from z in w
-                """
+                        var q = from x in y
+                                  $$
+                                  from z in w
+                        """
                 )
             );
         }
@@ -138,10 +138,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          join $$
-                          from z in w
-                """
+                        var q = from x in y
+                                  join $$
+                                  from z in w
+                        """
                 )
             );
         }

@@ -46,11 +46,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                readonly int i;
-            }
-            """,
+                struct S
+                {
+                    readonly int i;
+                }
+                """,
             LanguageVersion.CSharp7_1
         );
     }
@@ -60,17 +60,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-            }
-            """,
+                struct [|S|]
+                {
+                    readonly int i;
+                }
+                """,
             """
-            readonly struct S
-            {
-                readonly int i;
-            }
-            """,
+                readonly struct S
+                {
+                    readonly int i;
+                }
+                """,
             LanguageVersion.CSharp7_2
         );
     }
@@ -80,11 +80,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            readonly struct S
-            {
-                readonly int i;
-            }
-            """
+                readonly struct S
+                {
+                    readonly int i;
+                }
+                """
         );
     }
 
@@ -93,11 +93,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            readonly record struct S
-            {
-                readonly int i;
-            }
-            """
+                readonly record struct S
+                {
+                    readonly int i;
+                }
+                """
         );
     }
 
@@ -106,11 +106,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                int i;
-            }
-            """
+                struct S
+                {
+                    int i;
+                }
+                """
         );
     }
 
@@ -119,11 +119,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S
-            {
-                int i;
-            }
-            """
+                record struct S
+                {
+                    int i;
+                }
+                """
         );
     }
 
@@ -132,12 +132,12 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                int i;
-                readonly int j;
-            }
-            """
+                struct S
+                {
+                    int i;
+                    readonly int j;
+                }
+                """
         );
     }
 
@@ -146,12 +146,12 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S
-            {
-                int i;
-                readonly int j;
-            }
-            """
+                record struct S
+                {
+                    int i;
+                    readonly int j;
+                }
+                """
         );
     }
 
@@ -160,11 +160,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S(int j)
-            {
-                int i;
-            }
-            """
+                record struct S(int j)
+                {
+                    int i;
+                }
+                """
         );
     }
 
@@ -184,11 +184,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                int P { get; set; }
-            }
-            """
+                struct S
+                {
+                    int P { get; set; }
+                }
+                """
         );
     }
 
@@ -197,11 +197,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S
-            {
-                int P { get; set; }
-            }
-            """
+                record struct S
+                {
+                    int P { get; set; }
+                }
+                """
         );
     }
 
@@ -210,11 +210,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S(int q)
-            {
-                int P { get; set; }
-            }
-            """
+                record struct S(int q)
+                {
+                    int P { get; set; }
+                }
+                """
         );
     }
 
@@ -234,10 +234,10 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-            }
-            """
+                struct S
+                {
+                }
+                """
         );
     }
 
@@ -246,10 +246,10 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S
-            {
-            }
-            """
+                record struct S
+                {
+                }
+                """
         );
     }
 
@@ -258,10 +258,10 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S()
-            {
-            }
-            """
+                record struct S()
+                {
+                }
+                """
         );
     }
 
@@ -280,15 +280,15 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            partial struct S
-            {
-                readonly int i;
-            }
+                partial struct S
+                {
+                    readonly int i;
+                }
 
-            readonly partial struct S
-            {
-            }
-            """
+                readonly partial struct S
+                {
+                }
+                """
         );
     }
 
@@ -297,17 +297,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-            }
-            """,
+                struct [|S|]
+                {
+                    readonly int i;
+                }
+                """,
             """
-            readonly struct S
-            {
-                readonly int i;
-            }
-            """
+                readonly struct S
+                {
+                    readonly int i;
+                }
+                """
         );
     }
 
@@ -316,17 +316,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            record struct [|S|]
-            {
-                readonly int i;
-            }
-            """,
+                record struct [|S|]
+                {
+                    readonly int i;
+                }
+                """,
             """
-            readonly record struct S
-            {
-                readonly int i;
-            }
-            """
+                readonly record struct S
+                {
+                    readonly int i;
+                }
+                """
         );
     }
 
@@ -335,17 +335,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                int P { get; }
-            }
-            """,
+                struct [|S|]
+                {
+                    int P { get; }
+                }
+                """,
             """
-            readonly struct S
-            {
-                int P { get; }
-            }
-            """
+                readonly struct S
+                {
+                    int P { get; }
+                }
+                """
         );
     }
 
@@ -354,17 +354,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            record struct [|S|]
-            {
-                int P { get; }
-            }
-            """,
+                record struct [|S|]
+                {
+                    int P { get; }
+                }
+                """,
             """
-            readonly record struct S
-            {
-                int P { get; }
-            }
-            """
+                readonly record struct S
+                {
+                    int P { get; }
+                }
+                """
         );
     }
 
@@ -373,17 +373,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                int P { get; init; }
-            }
-            """,
+                struct [|S|]
+                {
+                    int P { get; init; }
+                }
+                """,
             """
-            readonly struct S
-            {
-                int P { get; init; }
-            }
-            """
+                readonly struct S
+                {
+                    int P { get; init; }
+                }
+                """
         );
     }
 
@@ -392,17 +392,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            record struct [|S|]
-            {
-                int P { get; init; }
-            }
-            """,
+                record struct [|S|]
+                {
+                    int P { get; init; }
+                }
+                """,
             """
-            readonly record struct S
-            {
-                int P { get; init; }
-            }
-            """
+                readonly record struct S
+                {
+                    int P { get; init; }
+                }
+                """
         );
     }
 
@@ -411,17 +411,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            record struct [|S|]
-            {
-                readonly int i;
-            }
-            """,
+                record struct [|S|]
+                {
+                    readonly int i;
+                }
+                """,
             """
-            readonly record struct S
-            {
-                readonly int i;
-            }
-            """
+                readonly record struct S
+                {
+                    readonly int i;
+                }
+                """
         );
     }
 
@@ -430,10 +430,10 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S(int i)
-            {
-            }
-            """
+                record struct S(int i)
+                {
+                }
+                """
         );
     }
 
@@ -452,11 +452,11 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            record struct S(int i)
-            {
-                readonly int j;
-            }
-            """
+                record struct S(int i)
+                {
+                    readonly int j;
+                }
+                """
         );
     }
 
@@ -481,27 +481,27 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-
-                struct [|T|]
+                struct [|S|]
                 {
-                    readonly int j;
-                }
-            }
-            """,
-            """
-            readonly struct S
-            {
-                readonly int i;
+                    readonly int i;
 
-                readonly struct T
-                {
-                    readonly int j;
+                    struct [|T|]
+                    {
+                        readonly int j;
+                    }
                 }
-            }
+                """,
             """
+                readonly struct S
+                {
+                    readonly int i;
+
+                    readonly struct T
+                    {
+                        readonly int j;
+                    }
+                }
+                """
         );
     }
 
@@ -510,27 +510,27 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-
-                struct T
+                struct [|S|]
                 {
-                    int j;
-                }
-            }
-            """,
-            """
-            readonly struct S
-            {
-                readonly int i;
+                    readonly int i;
 
-                struct T
-                {
-                    int j;
+                    struct T
+                    {
+                        int j;
+                    }
                 }
-            }
+                """,
             """
+                readonly struct S
+                {
+                    readonly int i;
+
+                    struct T
+                    {
+                        int j;
+                    }
+                }
+                """
         );
     }
 
@@ -539,27 +539,27 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct S
-            {
-                int i;
-
-                struct [|T|]
+                struct S
                 {
-                    readonly int j;
-                }
-            }
-            """,
-            """
-            struct S
-            {
-                int i;
+                    int i;
 
-                readonly struct T
-                {
-                    readonly int j;
+                    struct [|T|]
+                    {
+                        readonly int j;
+                    }
                 }
-            }
+                """,
             """
+                struct S
+                {
+                    int i;
+
+                    readonly struct T
+                    {
+                        readonly int j;
+                    }
+                }
+                """
         );
     }
 
@@ -568,37 +568,37 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-
-                struct T
+                struct [|S|]
                 {
-                    readonly int j;
+                    readonly int i;
 
-                    void M()
+                    struct T
                     {
-                        this = default;
+                        readonly int j;
+
+                        void M()
+                        {
+                            this = default;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            readonly struct S
-            {
-                readonly int i;
-
-                struct T
+                readonly struct S
                 {
-                    readonly int j;
+                    readonly int i;
 
-                    void M()
+                    struct T
                     {
-                        this = default;
+                        readonly int j;
+
+                        void M()
+                        {
+                            this = default;
+                        }
                     }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -607,19 +607,19 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            /// <summary>docs</summary>
-            record struct [|S|]
-            {
-                readonly int j;
-            }
-            """,
+                /// <summary>docs</summary>
+                record struct [|S|]
+                {
+                    readonly int j;
+                }
+                """,
             """
-            /// <summary>docs</summary>
-            readonly record struct S
-            {
-                readonly int j;
-            }
-            """
+                /// <summary>docs</summary>
+                readonly record struct S
+                {
+                    readonly int j;
+                }
+                """
         );
     }
 
@@ -628,25 +628,25 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            namespace N
-            {
-                /// <summary>docs</summary>
-                record struct [|S|]
+                namespace N
                 {
-                    readonly int j;
+                    /// <summary>docs</summary>
+                    record struct [|S|]
+                    {
+                        readonly int j;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            namespace N
-            {
-                /// <summary>docs</summary>
-                readonly record struct S
+                namespace N
                 {
-                    readonly int j;
+                    /// <summary>docs</summary>
+                    readonly record struct S
+                    {
+                        readonly int j;
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -655,17 +655,17 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            public record struct [|S|]
-            {
-                readonly int j;
-            }
-            """,
+                public record struct [|S|]
+                {
+                    readonly int j;
+                }
+                """,
             """
-            public readonly record struct S
-            {
-                readonly int j;
-            }
-            """
+                public readonly record struct S
+                {
+                    readonly int j;
+                }
+                """
         );
     }
 
@@ -674,23 +674,23 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            namespace N
-            {
-                public record struct [|S|]
+                namespace N
                 {
-                    readonly int j;
+                    public record struct [|S|]
+                    {
+                        readonly int j;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            namespace N
-            {
-                public readonly record struct S
+                namespace N
                 {
-                    readonly int j;
+                    public readonly record struct S
+                    {
+                        readonly int j;
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -699,21 +699,21 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
+                struct [|S|]
+                {
+                    readonly int i;
 
-                int P { set { } }
-            }
-            """,
+                    int P { set { } }
+                }
+                """,
             """
-            readonly struct S
-            {
-                readonly int i;
+                readonly struct S
+                {
+                    readonly int i;
 
-                int P { set { } }
-            }
-            """
+                    int P { set { } }
+                }
+                """
         );
     }
 
@@ -722,13 +722,13 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                readonly int i;
+                struct S
+                {
+                    readonly int i;
 
-                int P { get; set; }
-            }
-            """
+                    int P { get; set; }
+                }
+                """
         );
     }
 
@@ -737,16 +737,16 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                readonly int i;
-
-                void M()
+                struct S
                 {
-                    this = default;
+                    readonly int i;
+
+                    void M()
+                    {
+                        this = default;
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -755,21 +755,21 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                readonly int i;
-
-                void M()
+                struct S
                 {
-                    this.ByRef();
-                }
-            }
+                    readonly int i;
 
-            static class Extensions
-            {
-                public static void ByRef(ref this S s) { }
-            }
-            """
+                    void M()
+                    {
+                        this.ByRef();
+                    }
+                }
+
+                static class Extensions
+                {
+                    public static void ByRef(ref this S s) { }
+                }
+                """
         );
     }
 
@@ -778,18 +778,18 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                readonly int i;
-
-                void M()
+                struct S
                 {
-                    Goo(ref this);
-                }
+                    readonly int i;
 
-                void Goo(ref S s) { }
-            }
-            """
+                    void M()
+                    {
+                        Goo(ref this);
+                    }
+
+                    void Goo(ref S s) { }
+                }
+                """
         );
     }
 
@@ -798,18 +798,18 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                readonly int i;
-
-                void M()
+                struct S
                 {
-                    Goo(out this);
-                }
+                    readonly int i;
 
-                void Goo(out S s) { s = default; }
-            }
-            """
+                    void M()
+                    {
+                        Goo(out this);
+                    }
+
+                    void Goo(out S s) { s = default; }
+                }
+                """
         );
     }
 
@@ -818,16 +818,16 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                readonly int i;
-
-                void M()
+                struct S
                 {
-                    ref S s = ref this;
+                    readonly int i;
+
+                    void M()
+                    {
+                        ref S s = ref this;
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -836,18 +836,18 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            struct S
-            {
-                readonly int i;
-
-                void M()
+                struct S
                 {
-                    this++;
-                }
+                    readonly int i;
 
-                public static S operator++(S s) => default;
-            }
-            """
+                    void M()
+                    {
+                        this++;
+                    }
+
+                    public static S operator++(S s) => default;
+                }
+                """
         );
     }
 
@@ -856,31 +856,31 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-
-                void M()
+                struct [|S|]
                 {
-                    Goo(in this);
+                    readonly int i;
+
+                    void M()
+                    {
+                        Goo(in this);
+                    }
+
+                    void Goo(in S s) { }
                 }
-
-                void Goo(in S s) { }
-            }
-            """,
+                """,
             """
-            readonly struct S
-            {
-                readonly int i;
-
-                void M()
+                readonly struct S
                 {
-                    Goo(in this);
-                }
+                    readonly int i;
 
-                void Goo(in S s) { }
-            }
-            """
+                    void M()
+                    {
+                        Goo(in this);
+                    }
+
+                    void Goo(in S s) { }
+                }
+                """
         );
     }
 
@@ -889,31 +889,31 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-
-                void M()
+                struct [|S|]
                 {
-                    this.Goo();
+                    readonly int i;
+
+                    void M()
+                    {
+                        this.Goo();
+                    }
+
+                    void Goo() { }
                 }
-
-                void Goo() { }
-            }
-            """,
+                """,
             """
-            readonly struct S
-            {
-                readonly int i;
-
-                void M()
+                readonly struct S
                 {
-                    this.Goo();
-                }
+                    readonly int i;
 
-                void Goo() { }
-            }
-            """
+                    void M()
+                    {
+                        this.Goo();
+                    }
+
+                    void Goo() { }
+                }
+                """
         );
     }
 
@@ -922,37 +922,37 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-
-                void M()
+                struct [|S|]
                 {
-                    this.Goo();
+                    readonly int i;
+
+                    void M()
+                    {
+                        this.Goo();
+                    }
                 }
-            }
 
-            static class Extensions
-            {
-                public static void Goo(this S s) { }
-            }
-            """,
-            """
-            readonly struct S
-            {
-                readonly int i;
-
-                void M()
+                static class Extensions
                 {
-                    this.Goo();
+                    public static void Goo(this S s) { }
                 }
-            }
-
-            static class Extensions
-            {
-                public static void Goo(this S s) { }
-            }
+                """,
             """
+                readonly struct S
+                {
+                    readonly int i;
+
+                    void M()
+                    {
+                        this.Goo();
+                    }
+                }
+
+                static class Extensions
+                {
+                    public static void Goo(this S s) { }
+                }
+                """
         );
     }
 
@@ -961,27 +961,27 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            struct [|S|]
-            {
-                readonly int i;
-
-                void M()
+                struct [|S|]
                 {
-                    ref readonly S s = ref this;
-                }
-            }
-            """,
-            """
-            readonly struct S
-            {
-                readonly int i;
+                    readonly int i;
 
-                void M()
-                {
-                    ref readonly S s = ref this;
+                    void M()
+                    {
+                        ref readonly S s = ref this;
+                    }
                 }
-            }
+                """,
             """
+                readonly struct S
+                {
+                    readonly int i;
+
+                    void M()
+                    {
+                        ref readonly S s = ref this;
+                    }
+                }
+                """
         );
     }
 
@@ -990,15 +990,15 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            using System;
+                using System;
 
-            public struct MyStruct
-            {
-                public event Action MyEvent;
+                public struct MyStruct
+                {
+                    public event Action MyEvent;
 
-                public readonly int MyInt;
-            }
-            """
+                    public readonly int MyInt;
+                }
+                """
         );
     }
 
@@ -1007,25 +1007,25 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            using System;
+                using System;
 
-            public struct [|MyStruct|]
-            {
-                public event Action MyEvent { add { } remove { } }
+                public struct [|MyStruct|]
+                {
+                    public event Action MyEvent { add { } remove { } }
 
-                public readonly int MyInt;
-            }
-            """,
+                    public readonly int MyInt;
+                }
+                """,
             """
-            using System;
+                using System;
 
-            public readonly struct MyStruct
-            {
-                public event Action MyEvent { add { } remove { } }
+                public readonly struct MyStruct
+                {
+                    public event Action MyEvent { add { } remove { } }
 
-                public readonly int MyInt;
-            }
-            """
+                    public readonly int MyInt;
+                }
+                """
         );
     }
 
@@ -1034,31 +1034,31 @@ public class MakeStructReadOnlyTests
     {
         await TestAsync(
             """
-            using System;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-            public struct [|MyStruct|]
-            {
-                private readonly List<Action> actions = new();
+                public struct [|MyStruct|]
+                {
+                    private readonly List<Action> actions = new();
 
-                public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
+                    public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
 
-                public MyStruct() { }
-            }
-            """,
+                    public MyStruct() { }
+                }
+                """,
             """
-            using System;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-            public readonly struct MyStruct
-            {
-                private readonly List<Action> actions = new();
-            
-                public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
-            
-                public MyStruct() { }
-            }
-            """
+                public readonly struct MyStruct
+                {
+                    private readonly List<Action> actions = new();
+
+                    public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
+
+                    public MyStruct() { }
+                }
+                """
         );
     }
 
@@ -1067,18 +1067,18 @@ public class MakeStructReadOnlyTests
     {
         await TestMissingAsync(
             """
-            using System;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-            public struct MyStruct
-            {
-                private List<Action> actions = new();
+                public struct MyStruct
+                {
+                    private List<Action> actions = new();
 
-                public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
-            
-                public MyStruct() { }
-            }
-            """
+                    public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
+
+                    public MyStruct() { }
+                }
+                """
         );
     }
 }

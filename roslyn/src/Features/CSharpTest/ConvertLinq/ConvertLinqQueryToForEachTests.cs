@@ -743,7 +743,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                         int[] nums = { 0, 1, 2, 3, 4, 5 };
                         var query = [|from num in nums
                                     let num = 3
-                                    select num|]; 
+                                    select num|];
                     }
                 }
                 """;
@@ -789,7 +789,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                     void M(IEnumerable<int> nums)
                     {
                         IEnumerable<int> q;
-                        q = [|from int n1 in nums 
+                        q = [|from int n1 in nums
                                 from int n2 in nums
                                 select n1|];
 
@@ -1180,7 +1180,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     IEnumerable<int> M(IEnumerable<int> nums)
                     {
-                        return [|from int n1 in nums 
+                        return [|from int n1 in nums
                                  from int n2 in nums
                                  select n1|];
                     }
@@ -1224,7 +1224,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     partial IEnumerable<int> M(IEnumerable<int> nums)
                     {
-                        return [|from int n1 in nums 
+                        return [|from int n1 in nums
                                  from int n2 in nums
                                  select n1|];
                     }
@@ -1272,7 +1272,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     public partial IEnumerable<int> M(IEnumerable<int> nums)
                     {
-                        return [|from int n1 in nums 
+                        return [|from int n1 in nums
                                  from int n2 in nums
                                  select n1|];
                     }
@@ -1318,7 +1318,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                     {
                         if (nums.Any())
                         {
-                            return [|from int n1 in nums 
+                            return [|from int n1 in nums
                                      from int n2 in nums
                                      select n1|];
                         }
@@ -1373,7 +1373,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     object M(IEnumerable<int> nums)
                     {
-                        return [|from int n1 in nums 
+                        return [|from int n1 in nums
                                  from int n2 in nums
                                  select n1|];
                     }
@@ -1584,7 +1584,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void M(IEnumerable<int> nums)
                     {
-                        var q = [|from int n1 in nums 
+                        var q = [|from int n1 in nums
                                 from int n2 in nums
                                 select n1|];
                         N(q);
@@ -1633,7 +1633,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     T M<T>(IEnumerable<T> nums)
                     {
-                        return ([|from n1 in nums 
+                        return ([|from n1 in nums
                                  from n2 in nums
                                  select n1|]).FirstOrDefault();
                     }
@@ -1987,7 +1987,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void M(IEnumerable<int> nums)
                     {
-                        var q = [|from int n1 in nums 
+                        var q = [|from int n1 in nums
                                 from int n2 in nums
                                 select n1|];
                         foreach (var b in q)
@@ -2040,7 +2040,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void M(IEnumerable<int> nums)
                     {
-                        var q = [|from int n1 in nums 
+                        var q = [|from int n1 in nums
                                 from int n2 in nums
                                 select n1|];
                         foreach(var n1 in q)
@@ -2092,7 +2092,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void M(IEnumerable<int> nums)
                     {
-                        foreach(var b in [|from int n1 in nums 
+                        foreach(var b in [|from int n1 in nums
                                 from int n2 in nums
                                 select n1|])
                         {
@@ -2136,7 +2136,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void M(IEnumerable<int> nums)
                     {
-                        foreach(var n1 in [|from int n1 in nums 
+                        foreach(var n1 in [|from int n1 in nums
                                           from int n2 in nums
                                           select n1|])
                         {
@@ -2178,7 +2178,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void M(IEnumerable<int> nums)
                     {
-                        foreach(var b in [|from int n1 in nums 
+                        foreach(var b in [|from int n1 in nums
                                 from int n2 in nums
                                 select n1|]) Console.WriteLine(b);
                     }
@@ -2317,7 +2317,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void M(IEnumerable<int> nums)
                     {
-                        foreach(var b in [|from int n1 in nums 
+                        foreach(var b in [|from int n1 in nums
                                 from int n2 in nums
                                 select n1|])
                         {
@@ -2748,7 +2748,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     List<int> M(IEnumerable<int> nums)
                     {
-                        var list = ([|from int n1 in nums 
+                        var list = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).ToList();
                         return list;
@@ -2790,7 +2790,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     List<int> M(IEnumerable<int> nums, List<int> list)
                     {
-                        list = ([|from int n1 in nums 
+                        list = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).ToList();
                         return list;
@@ -2832,7 +2832,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     List<int> M(IEnumerable<int> nums, List<int>[] lists)
                     {
-                        lists[0] = ([|from int n1 in nums 
+                        lists[0] = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).ToList();
                     }
@@ -2873,7 +2873,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     List<int> M(IEnumerable<int> nums)
                     {
-                        var list = ([|from int n1 in nums 
+                        var list = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).ToList<int>();
                         return list;
@@ -2915,7 +2915,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     object M(IEnumerable<int> nums)
                     {
-                        object list = ([|from int n1 in nums 
+                        object list = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).ToList<int>();
                         return list;
@@ -2958,7 +2958,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     List<int> M(IEnumerable<int> nums)
                     {
-                        var list = ([|from int n1 in nums 
+                        var list = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|])?.ToList<int>();
                         return list;
@@ -3003,7 +3003,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     List<int> M(IEnumerable<int> nums)
                     {
-                        return ([|from int n1 in nums 
+                        return ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).ToList();
                     }
@@ -3045,7 +3045,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                     List<int> M(IEnumerable<int> nums)
                     {
                         var list = new List<int>();
-                        return ([|from int n1 in nums 
+                        return ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).ToList();
                     }
@@ -3307,7 +3307,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     int M(IEnumerable<int> nums)
                     {
-                        int i = 0, cnt = ([|from int n1 in nums 
+                        int i = 0, cnt = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count();
                         return cnt;
@@ -3353,7 +3353,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void M(IEnumerable<int> nums)
                     {
-                        for(int i = ([|from int n1 in nums 
+                        for(int i = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count(), i < 5; i++)
                         {
@@ -3403,7 +3403,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     int M(IEnumerable<int> nums)
                     {
-                        var cnt = ([|from int n1 in nums 
+                        var cnt = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count();
                         return cnt;
@@ -3445,7 +3445,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     int M(IEnumerable<int> nums)
                     {
-                        return ([|from int n1 in nums 
+                        return ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count();
                     }
@@ -3486,7 +3486,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     int M(IEnumerable<int> nums)
                     {
-                        return (([|from int n1 in nums 
+                        return (([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count());
                     }
@@ -3528,7 +3528,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                     void N(int value) { }
                     void M(IEnumerable<int> nums)
                     {
-                        N(([|from int n1 in nums 
+                        N(([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count());
                     }
@@ -3572,7 +3572,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     void N(int value) { }
                     void M(IEnumerable<int> nums)
-                        => N(([|from int n1 in nums 
+                        => N(([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count());
                 }
@@ -3592,7 +3592,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                     int M(IEnumerable<int> nums)
                     {
                         int count = 1;
-                        return ([|from int n1 in nums 
+                        return ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count();
                     }
@@ -3636,7 +3636,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                     {
                         if (true)
                         {
-                            return ([|from int n1 in nums 
+                            return ([|from int n1 in nums
                                         from int n2 in nums
                                         select n1|]).Count();
                         }
@@ -3692,7 +3692,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                             int count = 1;
                         }
 
-                        return ([|from int n1 in nums 
+                        return ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count();
                     }
@@ -3738,7 +3738,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     int M(IEnumerable<int> nums)
                     {
-                        var cnt = ([|from int n1 in nums 
+                        var cnt = ([|from int n1 in nums
                                  from int n2 in nums
                                  select n1|]).Count(x => x > 2);
                         return cnt;
@@ -4043,7 +4043,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 using System.Linq;
                 class C
                 {
-                    void N() 
+                    void N()
                     {
                         M([|from x in new int[] { 1 } select x|]);
                     }
@@ -4059,7 +4059,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 using System.Linq;
                 class C
                 {
-                    void N() 
+                    void N()
                     {
                         IEnumerable<int> nums()
                         {
@@ -4242,7 +4242,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                 {
                     IEnumerable<int> M(IEnumerable<int> nums)
                     {
-                        return [|from int n1 in /* comment */ nums 
+                        return [|from int n1 in /* comment */ nums
                                  from int n2 in nums
                                  select n1|];
                     }

@@ -52,7 +52,6 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 using System.Linq;
 #endif
 
-
 using Extensions = Newtonsoft.Json.Schema.Extensions;
 
 namespace Newtonsoft.Json.Tests.Schema

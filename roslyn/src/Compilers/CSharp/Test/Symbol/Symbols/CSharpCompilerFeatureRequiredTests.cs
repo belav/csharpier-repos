@@ -23,35 +23,35 @@ public class CSharpCompilerFeatureRequiredTests
 
     protected override CSharpTestSource GetUsage() =>
         """
-        #pragma warning disable 168 // Unused local
-        OnType onType;
-        OnType.M();
-        OnMethod.M();
-        OnMethodReturn.M();
-        OnParameter.M(1);
-        _ = OnField.Field;
-        OnProperty.Property = 1;
-        _ = OnProperty.Property;
-        OnPropertySetter.Property = 1;
-        _ = OnPropertySetter.Property;
-        OnPropertyGetter.Property = 1;
-        _ = OnPropertyGetter.Property;
-        OnEvent.Event += () => {};
-        OnEvent.Event -= () => {};
-        OnEventAdder.Event += () => {};
-        OnEventAdder.Event -= () => {};
-        OnEventRemover.Event += () => {};
-        OnEventRemover.Event -= () => {};
-        OnEnum onEnum;
-        _ = OnEnumMember.A;
-        OnClassTypeParameter<int> onClassTypeParameter;
-        OnMethodTypeParameter.M<int>();
-        OnDelegateType onDelegateType;
-        OnIndexedPropertyParameter.set_Property(1, 1);
-        _ = OnIndexedPropertyParameter.get_Property(1);
-        new OnThisIndexerParameter()[1] = 1;
-        _ = new OnThisIndexerParameter()[1];
-        """;
+            #pragma warning disable 168 // Unused local
+            OnType onType;
+            OnType.M();
+            OnMethod.M();
+            OnMethodReturn.M();
+            OnParameter.M(1);
+            _ = OnField.Field;
+            OnProperty.Property = 1;
+            _ = OnProperty.Property;
+            OnPropertySetter.Property = 1;
+            _ = OnPropertySetter.Property;
+            OnPropertyGetter.Property = 1;
+            _ = OnPropertyGetter.Property;
+            OnEvent.Event += () => {};
+            OnEvent.Event -= () => {};
+            OnEventAdder.Event += () => {};
+            OnEventAdder.Event -= () => {};
+            OnEventRemover.Event += () => {};
+            OnEventRemover.Event -= () => {};
+            OnEnum onEnum;
+            _ = OnEnumMember.A;
+            OnClassTypeParameter<int> onClassTypeParameter;
+            OnMethodTypeParameter.M<int>();
+            OnDelegateType onDelegateType;
+            OnIndexedPropertyParameter.set_Property(1, 1);
+            _ = OnIndexedPropertyParameter.get_Property(1);
+            new OnThisIndexerParameter()[1] = 1;
+            _ = new OnThisIndexerParameter()[1];
+            """;
 
     internal override string VisualizeRealIL(
         IModuleSymbol peModule,
@@ -974,92 +974,92 @@ public class CSharpCompilerFeatureRequiredTests
             new[]
             {
                 """
-            using System;
-            using System.Runtime.CompilerServices;
+                    using System;
+                    using System.Runtime.CompilerServices;
 
-            [CompilerFeatureRequired("OnType")]
-            public class OnType
-            {
-            }
-            
-            public class OnMethod
-            {
-                [CompilerFeatureRequired("OnMethod")]
-                public static void M() {}
-            }
-            
-            public class OnMethodReturn
-            {
-                [return: CompilerFeatureRequired("OnMethodReturn")]
-                public static void M() {}
-            }
-            
-            public class OnParameter
-            {
-                public static void M([CompilerFeatureRequired("OnParameter")] int param) {}
-            }
-            
-            public class OnField
-            {
-                [CompilerFeatureRequired("OnField")]
-                public static int Field;
-            }
-            
-            public class OnProperty
-            {
-                [CompilerFeatureRequired("OnProperty")]
-                public static int Property { get => 0; set {} }
-            }
-            
-            public class OnPropertySetter
-            {
-                public static int Property { get => 0; [CompilerFeatureRequired("OnPropertySetter")] set {} }
-            }
-            
-            public class OnPropertyGetter
-            {
-                public static int Property { [CompilerFeatureRequired("OnPropertyGetter")] get => 0; set {} }
-            }
-            
-            public class OnEvent
-            {
-                [CompilerFeatureRequired("OnEvent")]
-                public static event Action Event { add {} remove {} }
-            }
-            
-            public class OnEventAdder
-            {
-                public static event Action Event { [CompilerFeatureRequired("OnEventAdder")] add {} remove {} }
-            }
-            
-            public class OnEventRemover
-            {
-                public static event Action Event { [CompilerFeatureRequired("OnEventRemover")] add {} remove {} }
-            }
-            
-            [CompilerFeatureRequired("OnEnum")]
-            public enum OnEnum
-            {
-                A
-            }
-            
-            public enum OnEnumMember
-            {
-                [CompilerFeatureRequired("OnEnumMember")] A
-            }
-            
-            public class OnClassTypeParameter<[CompilerFeatureRequired("OnClassTypeParameter")] T>
-            {
-            }
-            
-            public class OnMethodTypeParameter
-            {
-                public static void M<[CompilerFeatureRequired("OnMethodTypeParameter")] T>() {}
-            }
-            
-            [CompilerFeatureRequired("OnDelegateType")]
-            public delegate void OnDelegateType();
-            """,
+                    [CompilerFeatureRequired("OnType")]
+                    public class OnType
+                    {
+                    }
+
+                    public class OnMethod
+                    {
+                        [CompilerFeatureRequired("OnMethod")]
+                        public static void M() {}
+                    }
+
+                    public class OnMethodReturn
+                    {
+                        [return: CompilerFeatureRequired("OnMethodReturn")]
+                        public static void M() {}
+                    }
+
+                    public class OnParameter
+                    {
+                        public static void M([CompilerFeatureRequired("OnParameter")] int param) {}
+                    }
+
+                    public class OnField
+                    {
+                        [CompilerFeatureRequired("OnField")]
+                        public static int Field;
+                    }
+
+                    public class OnProperty
+                    {
+                        [CompilerFeatureRequired("OnProperty")]
+                        public static int Property { get => 0; set {} }
+                    }
+
+                    public class OnPropertySetter
+                    {
+                        public static int Property { get => 0; [CompilerFeatureRequired("OnPropertySetter")] set {} }
+                    }
+
+                    public class OnPropertyGetter
+                    {
+                        public static int Property { [CompilerFeatureRequired("OnPropertyGetter")] get => 0; set {} }
+                    }
+
+                    public class OnEvent
+                    {
+                        [CompilerFeatureRequired("OnEvent")]
+                        public static event Action Event { add {} remove {} }
+                    }
+
+                    public class OnEventAdder
+                    {
+                        public static event Action Event { [CompilerFeatureRequired("OnEventAdder")] add {} remove {} }
+                    }
+
+                    public class OnEventRemover
+                    {
+                        public static event Action Event { [CompilerFeatureRequired("OnEventRemover")] add {} remove {} }
+                    }
+
+                    [CompilerFeatureRequired("OnEnum")]
+                    public enum OnEnum
+                    {
+                        A
+                    }
+
+                    public enum OnEnumMember
+                    {
+                        [CompilerFeatureRequired("OnEnumMember")] A
+                    }
+
+                    public class OnClassTypeParameter<[CompilerFeatureRequired("OnClassTypeParameter")] T>
+                    {
+                    }
+
+                    public class OnMethodTypeParameter
+                    {
+                        public static void M<[CompilerFeatureRequired("OnMethodTypeParameter")] T>() {}
+                    }
+
+                    [CompilerFeatureRequired("OnDelegateType")]
+                    public delegate void OnDelegateType();
+                    """,
                 CSharpTestBase.CompilerFeatureRequiredAttribute
             }
         );

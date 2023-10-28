@@ -17,11 +17,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyDefaultPropertyAsync(
                 """
-                readonly struct MyStruct
-                {
-                    $$
-                }
-                """
+                    readonly struct MyStruct
+                    {
+                        $$
+                    }
+                    """
             );
         }
 
@@ -29,11 +29,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyDefaultPropertyAsync(
                 """
-                interface MyInterface
-                {
-                    $$
-                }
-                """
+                    interface MyInterface
+                    {
+                        $$
+                    }
+                    """
             );
         }
     }

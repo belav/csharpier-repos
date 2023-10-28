@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """
+                    class C { }
+                    $$
+                    """
             );
         }
 
@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """
+                    System.Console.WriteLine();
+                    $$
+                    """
             );
         }
 
@@ -47,9 +47,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """
+                    int i = 0;
+                    $$
+                    """
             );
         }
 
@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                $$
-                return true;
-                """
+                        $$
+                        return true;
+                        """
                 )
             );
         }
@@ -90,9 +90,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                return true;
-                $$
-                """
+                        return true;
+                        $$
+                        """
                 )
             );
         }
@@ -103,10 +103,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                if (true) {
-                }
-                $$
-                """
+                        if (true) {
+                        }
+                        $$
+                        """
                 )
             );
         }
@@ -117,9 +117,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                for (;;)
-                     $$
-                """
+                        for (;;)
+                             $$
+                        """
                 )
             );
         }
@@ -130,10 +130,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                for (;;)
-                     for (;;)
-                        $$
-                """
+                        for (;;)
+                             for (;;)
+                                $$
+                        """
                 )
             );
         }
@@ -144,9 +144,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                for (;;) {
-                     $$
-                """
+                        for (;;) {
+                             $$
+                        """
                 )
             );
         }
@@ -180,11 +180,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C
-                {
-                  $$
-                }
-                """
+                    class C
+                    {
+                      $$
+                    }
+                    """
             );
         }
     }

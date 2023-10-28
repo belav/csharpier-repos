@@ -18,10 +18,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class Test {
-                    unsafe void N() {
-                        delegate* $$
-                """
+                    class Test {
+                        unsafe void N() {
+                            delegate* $$
+                    """
             );
         }
 
@@ -30,10 +30,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class Test {
-                    unsafe void N() {
-                        delegate*$$
-                """
+                    class Test {
+                        unsafe void N() {
+                            delegate*$$
+                    """
             );
         }
     }

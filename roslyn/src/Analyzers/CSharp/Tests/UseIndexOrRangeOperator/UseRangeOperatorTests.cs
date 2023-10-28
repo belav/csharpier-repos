@@ -662,10 +662,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         {
             var source = """
                 using System;
-                struct S { 
-                    public ref S Slice(int start, int length) => throw null; 
-                    public int Length { get; } 
-                    public S this[System.Range r] { get => default; } 
+                struct S {
+                    public ref S Slice(int start, int length) => throw null;
+                    public int Length { get; }
+                    public S this[System.Range r] { get => default; }
                 }
 
                 class C
@@ -721,7 +721,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         {
             var source = """
                 using System;
-                struct S { 
+                struct S {
                     public ref S Slice(int start, int length) => throw null;
                     public int Length { get; }
                     public S this[int r] { get => default; }
@@ -737,7 +737,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                 """;
             var fixedSource = """
                 using System;
-                struct S { 
+                struct S {
                     public ref S Slice(int start, int length) => throw null;
                     public int Length { get; }
                     public S this[int r] { get => default; }
@@ -765,7 +765,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         {
             var source = """
                 using System;
-                struct S { 
+                struct S {
                     public ref S Slice(int start, int length) => throw null;
                     public int Length { get; }
                     public S this[System.Range r] { get => default; set { } }
@@ -781,7 +781,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                 """;
             var fixedSource = """
                 using System;
-                struct S { 
+                struct S {
                     public ref S Slice(int start, int length) => throw null;
                     public int Length { get; }
                     public S this[System.Range r] { get => default; set { } }
@@ -1264,33 +1264,33 @@ public class Test
             {
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Span<byte> buffer = new byte[]{ (byte)'h', (byte)'i', 0 };
-                        long length = 2;
-                        var sliced = buffer.Slice([|0, unchecked((int)length)|]); // or checked((int)length)
+                        void M()
+                        {
+                            Span<byte> buffer = new byte[]{ (byte)'h', (byte)'i', 0 };
+                            long length = 2;
+                            var sliced = buffer.Slice([|0, unchecked((int)length)|]); // or checked((int)length)
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Span<byte> buffer = new byte[]{ (byte)'h', (byte)'i', 0 };
-                        long length = 2;
-                        var sliced = buffer[..unchecked((int)length)]; // or checked((int)length)
+                        void M()
+                        {
+                            Span<byte> buffer = new byte[]{ (byte)'h', (byte)'i', 0 };
+                            long length = 2;
+                            var sliced = buffer[..unchecked((int)length)]; // or checked((int)length)
+                        }
                     }
-                }
-                """,
+                    """,
             }.RunAsync();
         }
     }

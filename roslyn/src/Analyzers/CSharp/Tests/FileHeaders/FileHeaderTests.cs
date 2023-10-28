@@ -165,12 +165,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FileHeaders
                 "[||]    "
                 + """
 
-                using System;
+                    using System;
 
-                namespace N
-                {
-                }
-                """;
+                    namespace N
+                    {
+                    }
+                    """;
             var fixedCode = """
                 // Copyright (c) SomeCorp. All rights reserved.
                 // Licensed under the ??? license. See LICENSE file in the project root for full license information.

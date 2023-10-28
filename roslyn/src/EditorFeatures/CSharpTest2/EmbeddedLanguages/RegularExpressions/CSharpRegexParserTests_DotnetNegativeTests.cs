@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat([a-\d]*)dog"
-                """,
+                    @"cat([a-\d]*)dog"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -76,8 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\k<1"
-                """,
+                    @"\k<1"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -109,8 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\k<"
-                """,
+                    @"\k<"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -142,8 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\k"
-                """,
+                    @"\k"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -172,8 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\1"
-                """,
+                    @"\1"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -202,8 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?')"
-                """,
+                    @"(?')"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -237,8 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<)"
-                """,
+                    @"(?<)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -272,8 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?)"
-                """,
+                    @"(?)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -307,8 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?>"
-                """,
+                    @"(?>"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -340,8 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<!"
-                """,
+                    @"(?<!"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -374,8 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<="
-                """,
+                    @"(?<="
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -408,8 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?!"
-                """,
+                    @"(?!"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -441,8 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?="
-                """,
+                    @"(?="
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -474,8 +474,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?imn )"
-                """,
+                    @"(?imn )"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -513,8 +513,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?imn"
-                """,
+                    @"(?imn"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -545,8 +545,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?:"
-                """,
+                    @"(?:"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -578,8 +578,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?'cat'"
-                """,
+                    @"(?'cat'"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -615,8 +615,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?'"
-                """,
+                    @"(?'"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -651,8 +651,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[^"
-                """,
+                    @"[^"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -683,8 +683,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[cat"
-                """,
+                    @"[cat"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -718,8 +718,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[^cat"
-                """,
+                    @"[^cat"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -754,8 +754,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[a-"
-                """,
+                    @"[a-"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -795,8 +795,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\p{"
-                """,
+                    @"\p{"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -828,8 +828,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\p{cat"
-                """,
+                    @"\p{cat"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -861,8 +861,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\k<cat"
-                """,
+                    @"\k<cat"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -894,8 +894,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\p{cat}"
-                """,
+                    @"\p{cat}"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -927,8 +927,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\P{cat"
-                """,
+                    @"\P{cat"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -960,8 +960,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\P{cat}"
-                """,
+                    @"\P{cat}"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -993,8 +993,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"("
-                """,
+                    @"("
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1025,8 +1025,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?"
-                """,
+                    @"(?"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1062,8 +1062,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<"
-                """,
+                    @"(?<"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1098,8 +1098,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>"
-                """,
+                    @"(?<cat>"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1135,8 +1135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\P{"
-                """,
+                    @"\P{"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -1168,8 +1168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\k<>"
-                """,
+                    @"\k<>"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1201,8 +1201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?("
-                """,
+                    @"(?("
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1238,8 +1238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?()|"
-                """,
+                    @"(?()|"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1279,8 +1279,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"?(a|b)"
-                """,
+                    @"?(a|b)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1326,8 +1326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"?((a)"
-                """,
+                    @"?((a)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1373,8 +1373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"?((a)a"
-                """,
+                    @"?((a)a"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1423,8 +1423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"?((a)a|"
-                """,
+                    @"?((a)a|"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1477,8 +1477,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"?((a)a|b"
-                """,
+                    @"?((a)a|b"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1535,32 +1535,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?i))"
-                """,
+                    @"(?(?i))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>i</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?i))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>i</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?i))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1571,8 +1571,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"?(a)"
-                """,
+                    @"?(a)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1610,32 +1610,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?I))"
-                """,
+                    @"(?(?I))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>I</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?I))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>I</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?I))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1646,32 +1646,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?M))"
-                """,
+                    @"(?(?M))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>M</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?M))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>M</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?M))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1682,32 +1682,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?s))"
-                """,
+                    @"(?(?s))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>s</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?s))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>s</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?s))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1718,32 +1718,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?S))"
-                """,
+                    @"(?(?S))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>S</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?S))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>S</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?S))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1754,32 +1754,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?x))"
-                """,
+                    @"(?(?x))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>x</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?x))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>x</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?x))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1790,32 +1790,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?X))"
-                """,
+                    @"(?(?X))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>X</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?X))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>X</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?X))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1826,32 +1826,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?n))"
-                """,
+                    @"(?(?n))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>n</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?n))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>n</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?n))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1862,32 +1862,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?m))"
-                """,
+                    @"(?(?m))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>m</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?m))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>m</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?m))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -1898,8 +1898,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[a"
-                """,
+                    @"[a"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1933,8 +1933,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"?(a:b)"
-                """,
+                    @"?(a:b)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1972,8 +1972,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?"
-                """,
+                    @"(?(?"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2015,8 +2015,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(cat"
-                """,
+                    @"(?(cat"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2056,8 +2056,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(cat)|"
-                """,
+                    @"(?(cat)|"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2101,8 +2101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"foo(?<0>bar)"
-                """,
+                    @"foo(?<0>bar)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2143,8 +2143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"foo(?'0'bar)"
-                """,
+                    @"foo(?'0'bar)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2185,8 +2185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"foo(?<1bar)"
-                """,
+                    @"foo(?<1bar)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2228,8 +2228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"foo(?'1bar)"
-                """,
+                    @"foo(?'1bar)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2271,8 +2271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?("
-                """,
+                    @"(?("
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2308,8 +2308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\p{klsak"
-                """,
+                    @"\p{klsak"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -2341,8 +2341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?c:cat)"
-                """,
+                    @"(?c:cat)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2380,8 +2380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(??e:cat)"
-                """,
+                    @"(??e:cat)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2423,8 +2423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[a-f-[]]+"
-                """,
+                    @"[a-f-[]]+"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2480,8 +2480,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[A-[]+"
-                """,
+                    @"[A-[]+"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2527,8 +2527,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?e))"
-                """,
+                    @"(?(?e))"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2572,8 +2572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?a)"
-                """,
+                    @"(?(?a)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2618,8 +2618,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?r:cat)"
-                """,
+                    @"(?r:cat)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2657,32 +2657,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?(?N))"
-                """,
+                    @"(?(?N))"
+                    """,
                 """
-                <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>N</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?N))" />
-                  </Captures>
-                </Tree>
-                """,
+                    <Tree>
+                      <CompilationUnit>
+                        <Sequence>
+                          <ConditionalExpressionGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <SimpleOptionsGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <OptionsToken>N</OptionsToken>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleOptionsGrouping>
+                            <Sequence />
+                            <CloseParenToken>)</CloseParenToken>
+                          </ConditionalExpressionGrouping>
+                        </Sequence>
+                        <EndOfFile />
+                      </CompilationUnit>
+                      <Captures>
+                        <Capture Name="0" Span="[10..17)" Text="(?(?N))" />
+                      </Captures>
+                    </Tree>
+                    """,
                 RegexOptions.None,
                 allowNullReference: true
             );
@@ -2693,8 +2693,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[]"
-                """,
+                    @"[]"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2728,8 +2728,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\x2"
-                """,
+                    @"\x2"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2759,8 +2759,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat) (?#cat)    \s+ (?#followed by 1 or more whitespace"
-                """,
+                    @"(cat) (?#cat)    \s+ (?#followed by 1 or more whitespace"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2812,8 +2812,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?(?afdcat)dog)"
-                """,
+                    @"cat(?(?afdcat)dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2864,8 +2864,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?(?<cat>cat)dog)"
-                """,
+                    @"cat(?(?<cat>cat)dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2916,8 +2916,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?(?'cat'cat)dog)"
-                """,
+                    @"cat(?(?'cat'cat)dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2968,8 +2968,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?(?#COMMENT)cat)"
-                """,
+                    @"cat(?(?#COMMENT)cat)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3021,8 +3021,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\w+(?<dog-()*!@>dog)"
-                """,
+                    @"(?<cat>cat)\w+(?<dog-()*!@>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3096,8 +3096,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\w+(?<dog-catdog>dog)"
-                """,
+                    @"(?<cat>cat)\w+(?<dog-catdog>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3162,8 +3162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\w+(?<dog-1uosn>dog)"
-                """,
+                    @"(?<cat>cat)\w+(?<dog-1uosn>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3228,8 +3228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\w+(?<dog-16>dog)"
-                """,
+                    @"(?<cat>cat)\w+(?<dog-16>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3294,8 +3294,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?<->dog)"
-                """,
+                    @"cat(?<->dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3339,8 +3339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?<>dog)"
-                """,
+                    @"cat(?<>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3381,8 +3381,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?<dog<>)_*>dog)"
-                """,
+                    @"cat(?<dog<>)_*>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3438,8 +3438,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?<dog >)_*>dog)"
-                """,
+                    @"cat(?<dog >)_*>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3495,8 +3495,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?<dog!>)_*>dog)"
-                """,
+                    @"cat(?<dog!>)_*>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3552,8 +3552,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?<dog)_*>dog)"
-                """,
+                    @"cat(?<dog)_*>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3605,8 +3605,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?<1dog>dog)"
-                """,
+                    @"cat(?<1dog>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3648,8 +3648,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat(?<0>dog)"
-                """,
+                    @"cat(?<0>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3690,8 +3690,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"([5-\D]*)dog"
-                """,
+                    @"([5-\D]*)dog"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3745,8 +3745,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat([6-\s]*)dog"
-                """,
+                    @"cat([6-\s]*)dog"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3803,8 +3803,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat([c-\S]*)"
-                """,
+                    @"cat([c-\S]*)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3858,8 +3858,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat([7-\w]*)"
-                """,
+                    @"cat([7-\w]*)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3913,8 +3913,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"cat([a-\W]*)dog"
-                """,
+                    @"cat([a-\W]*)dog"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3971,8 +3971,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"([f-\p{Lu}]\w*)\s([\p{Lu}]\w*)"
-                """,
+                    @"([f-\p{Lu}]\w*)\s([\p{Lu}]\w*)"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -4061,8 +4061,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat) (?#cat)    \s+ (?#followed by 1 or more whitespace"
-                """,
+                    @"(cat) (?#cat)    \s+ (?#followed by 1 or more whitespace"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4120,8 +4120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"([1-\P{Ll}][\p{Ll}]*)\s([\P{Ll}][\p{Ll}]*)"
-                """,
+                    @"([1-\P{Ll}][\p{Ll}]*)\s([\P{Ll}][\p{Ll}]*)"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -4228,8 +4228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[\P]"
-                """,
+                    @"[\P]"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4264,8 +4264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"([\pcat])"
-                """,
+                    @"([\pcat])"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4310,8 +4310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"([\Pcat])"
-                """,
+                    @"([\Pcat])"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4356,8 +4356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(\p{"
-                """,
+                    @"(\p{"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -4397,8 +4397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(\p{Ll"
-                """,
+                    @"(\p{Ll"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -4438,8 +4438,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)([\o]*)(dog)"
-                """,
+                    @"(cat)([\o]*)(dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4504,8 +4504,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"[\p]"
-                """,
+                    @"[\p]"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4540,8 +4540,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\s+(?<dog>dog)\kcat"
-                """,
+                    @"(?<cat>cat)\s+(?<dog>dog)\kcat"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4610,8 +4610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\s+(?<dog>dog)\k<cat2>"
-                """,
+                    @"(?<cat>cat)\s+(?<dog>dog)\k<cat2>"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4680,8 +4680,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\s+(?<dog>dog)\k<8>cat"
-                """,
+                    @"(?<cat>cat)\s+(?<dog>dog)\k<8>cat"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4753,8 +4753,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]{1}?*$"
-                """,
+                    @"^[abcd]{1}?*$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -4805,8 +4805,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]*+$"
-                """,
+                    @"^[abcd]*+$"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4852,8 +4852,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]+*$"
-                """,
+                    @"^[abcd]+*$"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4899,8 +4899,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]?*$"
-                """,
+                    @"^[abcd]?*$"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4946,8 +4946,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]*?+$"
-                """,
+                    @"^[abcd]*?+$"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4996,8 +4996,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]+?*$"
-                """,
+                    @"^[abcd]+?*$"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5046,8 +5046,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]{1,}?*$"
-                """,
+                    @"^[abcd]{1,}?*$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -5099,8 +5099,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]??*$"
-                """,
+                    @"^[abcd]??*$"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5149,8 +5149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]+{0,5}$"
-                """,
+                    @"^[abcd]+{0,5}$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -5199,8 +5199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]?{0,5}$"
-                """,
+                    @"^[abcd]?{0,5}$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -5249,8 +5249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\u"
-                """,
+                    @"\u"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5280,8 +5280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\ua"
-                """,
+                    @"\ua"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5311,8 +5311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\u0"
-                """,
+                    @"\u0"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5342,8 +5342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"\x"
-                """,
+                    @"\x"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5373,8 +5373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]*{0,5}$"
-                """,
+                    @"^[abcd]*{0,5}$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -5423,8 +5423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"["
-                """,
+                    @"["
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5454,8 +5454,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]{0,16}?*$"
-                """,
+                    @"^[abcd]{0,16}?*$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -5508,8 +5508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]{1,}*$"
-                """,
+                    @"^[abcd]{1,}*$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -5558,8 +5558,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\s+(?<dog>dog)\k<8>cat"
-                """,
+                    @"(?<cat>cat)\s+(?<dog>dog)\k<8>cat"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5631,8 +5631,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\s+(?<dog>dog)\k8"
-                """,
+                    @"(?<cat>cat)\s+(?<dog>dog)\k8"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5701,8 +5701,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(?<cat>cat)\s+(?<dog>dog)\k8"
-                """,
+                    @"(?<cat>cat)\s+(?<dog>dog)\k8"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5771,8 +5771,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)(\7)"
-                """,
+                    @"(cat)(\7)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5818,8 +5818,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)\s+(?<2147483648>dog)"
-                """,
+                    @"(cat)\s+(?<2147483648>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5875,8 +5875,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)\s+(?<21474836481097>dog)"
-                """,
+                    @"(cat)\s+(?<21474836481097>dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5932,8 +5932,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]{1}*$"
-                """,
+                    @"^[abcd]{1}*$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -5981,8 +5981,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)(\c*)(dog)"
-                """,
+                    @"(cat)(\c*)(dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6042,8 +6042,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)(\c *)(dog)"
-                """,
+                    @"(cat)(\c *)(dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6106,8 +6106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)(\c?*)(dog)"
-                """,
+                    @"(cat)(\c?*)(dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6171,8 +6171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)(\c`*)(dog)"
-                """,
+                    @"(cat)(\c`*)(dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6235,8 +6235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)(\c\|*)(dog)"
-                """,
+                    @"(cat)(\c\|*)(dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6301,8 +6301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)(\c\[*)(dog)"
-                """,
+                    @"(cat)(\c\[*)(dog)"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6360,8 +6360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"^[abcd]{0,16}*$"
-                """,
+                    @"^[abcd]{0,16}*$"
+                    """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -6411,8 +6411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                @"(cat)\c"
-                """,
+                    @"(cat)\c"
+                    """,
                 $"""
                 <Tree>
                   <CompilationUnit>

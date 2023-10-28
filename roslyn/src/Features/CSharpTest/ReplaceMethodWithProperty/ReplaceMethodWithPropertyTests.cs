@@ -94,24 +94,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -120,24 +120,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]Goo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]Goo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -147,23 +147,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo() => 0;
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
+                        int [||]GetGoo() => 0;
+                    }
+                    """,
+                """
+                    class C
+                    {
+                        int Goo
                         {
-                            return 0;
+                            get
+                            {
+                                return 0;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -172,17 +172,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo();
-                }
-                """,
+                    class C
+                    {
+                        int [||]GetGoo();
+                    }
+                    """,
                 """
-                class C
-                {
-                    int Goo { get; }
-                }
-                """
+                    class C
+                    {
+                        int Goo { get; }
+                    }
+                    """
             );
         }
 
@@ -191,24 +191,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    public static int [||]GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    public static int Goo
-                    {
-                        get
+                        public static int [||]GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        public static int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -217,26 +217,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    [A]
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    [A]
-                    int Goo
-                    {
-                        get
+                        [A]
+                        int [||]GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        [A]
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -245,26 +245,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    // Goo
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    // Goo
-                    int Goo
-                    {
-                        get
+                        // Goo
+                        int [||]GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        // Goo
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -273,26 +273,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetP();
-                    bool M()
+                    class C
                     {
-                        return GetP() == 0;
+                        int [||]GetP();
+                        bool M()
+                        {
+                            return GetP() == 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int P { get; }
+                    class C
+                    {
+                        int P { get; }
 
-                    bool M()
-                    {
-                        return P == 0;
+                        bool M()
+                        {
+                            return P == 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -301,35 +301,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                delegate int Mdelegate();
-                class C
-                {
-                    int [||]GetP() => 0;
+                    delegate int Mdelegate();
+                    class C
+                    {
+                        int [||]GetP() => 0;
 
-                    void M()
-                    {
-                        Mdelegate del = new Mdelegate(GetP );
-                    }
-                }
-                """,
-                """
-                delegate int Mdelegate();
-                class C
-                {
-                    int P
-                    {
-                        get
+                        void M()
                         {
-                            return 0;
+                            Mdelegate del = new Mdelegate(GetP );
                         }
                     }
-
-                    void M()
-                    {
-                        Mdelegate del = new Mdelegate({|Conflict:P|} );
-                    }
-                }
+                    """,
                 """
+                    delegate int Mdelegate();
+                    class C
+                    {
+                        int P
+                        {
+                            get
+                            {
+                                return 0;
+                            }
+                        }
+
+                        void M()
+                        {
+                            Mdelegate del = new Mdelegate({|Conflict:P|} );
+                        }
+                    }
+                    """
             );
         }
 
@@ -338,25 +338,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                        int count;
-                        foreach (var x in y)
-                        {
-                            count += bar;
-                        }
-                        return count;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                             int count;
                             foreach (var x in y)
@@ -366,8 +350,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                             return count;
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                                int count;
+                                foreach (var x in y)
+                                {
+                                    count += bar;
+                                }
+                                return count;
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -377,28 +377,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                #if true
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-                #endif
-                }
-                """,
-                """
-                class C
-                {
-                #if true
-                    int Goo
-                    {
-                        get
+                    #if true
+                        int [||]GetGoo()
                         {
                         }
+                    #endif
                     }
-                #endif
-                }
+                    """,
                 """
+                    class C
+                    {
+                    #if true
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    #endif
+                    }
+                    """
             );
         }
 
@@ -408,36 +408,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                #if true
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-
-                    void SetGoo(int val)
-                    {
-                    }
-                #endif
-                }
-                """,
-                """
-                class C
-                {
-                #if true
-                    int Goo
-                    {
-                        get
+                    #if true
+                        int [||]GetGoo()
                         {
                         }
-                    }
 
-                    void SetGoo(int val)
-                    {
+                        void SetGoo(int val)
+                        {
+                        }
+                    #endif
                     }
-                #endif
-                }
+                    """,
                 """
+                    class C
+                    {
+                    #if true
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+
+                        void SetGoo(int val)
+                        {
+                        }
+                    #endif
+                    }
+                    """
             );
         }
 
@@ -447,36 +447,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                #if true
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
+                    #if true
+                        int [||]GetGoo()
+                        {
+                        }
 
-                    void SetGoo(int val)
-                    {
+                        void SetGoo(int val)
+                        {
+                        }
+                    #endif
                     }
-                #endif
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                #if true
-                    int Goo
+                    class C
                     {
-                        get
+                    #if true
+                        int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
+                    #endif
                     }
-                #endif
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -487,36 +487,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                #if true
-                    void SetGoo(int val)
+                    class C
                     {
-                    }
-
-                    int [||]GetGoo()
-                    {
-                    }
-                #endif
-                }
-                """,
-                """
-                class C
-                {
-                #if true
-                    void SetGoo(int val)
-                    {
-                    }
-
-                    int Goo
-                    {
-                        get
+                    #if true
+                        void SetGoo(int val)
                         {
                         }
+
+                        int [||]GetGoo()
+                        {
+                        }
+                    #endif
                     }
-                #endif
-                }
+                    """,
                 """
+                    class C
+                    {
+                    #if true
+                        void SetGoo(int val)
+                        {
+                        }
+
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    #endif
+                    }
+                    """
             );
         }
 
@@ -526,38 +526,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                #if true
-                    void SetGoo(int val)
+                    class C
                     {
-                    }
+                    #if true
+                        void SetGoo(int val)
+                        {
+                        }
 
-                    int [||]GetGoo()
-                    {
+                        int [||]GetGoo()
+                        {
+                        }
+                    #endif
                     }
-                #endif
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-
-                #if true
-
-                    int Goo
+                    class C
                     {
-                        get
-                        {
-                        }
 
-                        set
+                    #if true
+
+                        int Goo
                         {
+                            get
+                            {
+                            }
+
+                            set
+                            {
+                            }
                         }
+                    #endif
                     }
-                #endif
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -567,35 +567,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    // Goo
-                    int [||]GetGoo()
+                    class C
                     {
+                        // Goo
+                        int [||]GetGoo()
+                        {
+                        }
+                        // SetGoo
+                        void SetGoo(int i)
+                        {
+                        }
                     }
-                    // SetGoo
-                    void SetGoo(int i)
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    // Goo
-                    // SetGoo
-                    int Goo
+                    class C
                     {
-                        get
+                        // Goo
+                        // SetGoo
+                        int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -605,24 +605,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]I.GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int I.Goo
-                    {
-                        get
+                        int [||]I.GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int I.Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -631,34 +631,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                interface I
-                {
-                    int GetGoo();
-                }
-
-                class C : I
-                {
-                    int [||]I.GetGoo()
+                    interface I
                     {
+                        int GetGoo();
                     }
-                }
-                """,
-                """
-                interface I
-                {
-                    int Goo { get; }
-                }
 
-                class C : I
-                {
-                    int I.Goo
+                    class C : I
                     {
-                        get
+                        int [||]I.GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    interface I
+                    {
+                        int Goo { get; }
+                    }
+
+                    class C : I
+                    {
+                        int I.Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -667,34 +667,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                interface I
-                {
-                    int [||]GetGoo();
-                }
-
-                class C : I
-                {
-                    int I.GetGoo()
+                    interface I
                     {
+                        int [||]GetGoo();
                     }
-                }
-                """,
-                """
-                interface I
-                {
-                    int Goo { get; }
-                }
 
-                class C : I
-                {
-                    int I.Goo
+                    class C : I
                     {
-                        get
+                        int I.GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    interface I
+                    {
+                        int Goo { get; }
+                    }
+
+                    class C : I
+                    {
+                        int I.Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -703,14 +703,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    [At[||]tr]
-                    int GetGoo()
+                    class C
                     {
+                        [At[||]tr]
+                        int GetGoo()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -719,14 +719,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int GetGoo()
+                    class C
                     {
-                [||]
+                        int GetGoo()
+                        {
+                    [||]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -735,13 +735,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void [||]GetGoo()
+                    class C
                     {
+                        void [||]GetGoo()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -750,13 +750,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    async Task [||]GetGoo()
+                    class C
                     {
+                        async Task [||]GetGoo()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -765,13 +765,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo<T>()
+                    class C
                     {
+                        int [||]GetGoo<T>()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -780,13 +780,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                static class C
-                {
-                    int [||]GetGoo(this int i)
+                    static class C
                     {
+                        int [||]GetGoo(this int i)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -795,13 +795,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo(int i)
+                    class C
                     {
+                        int [||]GetGoo(int i)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -810,13 +810,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo(int i = 0)
+                    class C
                     {
+                        int [||]GetGoo(int i = 0)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -825,14 +825,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    [At[||]tr]
-                    int GetGoo()
+                    class C
                     {
+                        [At[||]tr]
+                        int GetGoo()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -841,14 +841,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int GetGoo()
+                    class C
                     {
-                [||]
+                        int GetGoo()
+                        {
+                    [||]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -857,34 +857,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-
-                    void Bar()
-                    {
-                        var x = GetGoo();
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                         }
-                    }
 
-                    void Bar()
-                    {
-                        var x = Goo;
+                        void Bar()
+                        {
+                            var x = GetGoo();
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+
+                        void Bar()
+                        {
+                            var x = Goo;
+                        }
+                    }
+                    """
             );
         }
 
@@ -893,34 +893,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-
-                    void Bar()
-                    {
-                        var x = GetGoo();
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                         }
-                    }
 
-                    void Bar()
-                    {
-                        var x = Goo;
+                        void Bar()
+                        {
+                            var x = GetGoo();
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+
+                        void Bar()
+                        {
+                            var x = Goo;
+                        }
+                    }
+                    """
             );
         }
 
@@ -929,34 +929,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-
-                    void Bar()
-                    {
-                        var x = this.GetGoo();
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                         }
-                    }
 
-                    void Bar()
-                    {
-                        var x = this.Goo;
+                        void Bar()
+                        {
+                            var x = this.GetGoo();
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+
+                        void Bar()
+                        {
+                            var x = this.Goo;
+                        }
+                    }
+                    """
             );
         }
 
@@ -965,36 +965,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-
-                    void Bar()
-                    {
-                        C x;
-                        var v = x?.GetGoo();
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                         }
-                    }
 
-                    void Bar()
-                    {
-                        C x;
-                        var v = x?.Goo;
+                        void Bar()
+                        {
+                            C x;
+                            var v = x?.GetGoo();
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+
+                        void Bar()
+                        {
+                            C x;
+                            var v = x?.Goo;
+                        }
+                    }
+                    """
             );
         }
 
@@ -1003,26 +1003,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                        return GetGoo();
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
-                            return Goo;
+                            return GetGoo();
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                                return Goo;
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1031,41 +1031,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    public virtual int [||]GetGoo()
+                    class C
                     {
-                    }
-                }
-
-                class D : C
-                {
-                    public override int GetGoo()
-                    {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    public virtual int Goo
-                    {
-                        get
+                        public virtual int [||]GetGoo()
                         {
                         }
                     }
-                }
 
-                class D : C
-                {
-                    public override int Goo
+                    class D : C
                     {
-                        get
+                        public override int GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        public virtual int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+
+                    class D : C
+                    {
+                        public override int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1074,38 +1074,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-
-                    void Bar()
-                    {
-                        Action<int> i = GetGoo;
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                         }
-                    }
 
-                    void Bar()
-                    {
-                        Action<int> i = {|Conflict:Goo|};
+                        void Bar()
+                        {
+                            Action<int> i = GetGoo;
+                        }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+
+                        void Bar()
+                        {
+                            Action<int> i = {|Conflict:Goo|};
+                        }
+                    }
+                    """
             );
         }
 
@@ -1114,42 +1114,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System.Collections;
+                    using System.Collections;
 
-                class C
-                {
-                    public IEnumerator [||]GetEnumerator()
+                    class C
                     {
-                    }
-
-                    void Bar()
-                    {
-                        foreach (var x in this)
+                        public IEnumerator [||]GetEnumerator()
                         {
                         }
-                    }
-                }
-                """,
-                """
-                using System.Collections;
 
-                class C
-                {
-                    public IEnumerator Enumerator
-                    {
-                        get
+                        void Bar()
                         {
+                            foreach (var x in this)
+                            {
+                            }
                         }
                     }
-
-                    void Bar()
-                    {
-                        {|Conflict:foreach (var x in this)
-                        {
-                        }|}
-                    }
-                }
+                    """,
                 """
+                    using System.Collections;
+
+                    class C
+                    {
+                        public IEnumerator Enumerator
+                        {
+                            get
+                            {
+                            }
+                        }
+
+                        void Bar()
+                        {
+                            {|Conflict:foreach (var x in this)
+                            {
+                            }|}
+                        }
+                    }
+                    """
             );
         }
 
@@ -1158,36 +1158,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
+                        int [||]GetGoo()
+                        {
+                        }
 
-                    void SetGoo(int i)
-                    {
+                        void SetGoo(int i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
+                        int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1197,46 +1197,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
+                        int [||]GetGoo()
+                        {
+                        }
 
-                    void SetGoo(int i)
-                    {
-                    }
+                        void SetGoo(int i)
+                        {
+                        }
 
-                    void Bar()
-                    {
-                        Action<int> i = SetGoo;
+                        void Bar()
+                        {
+                            Action<int> i = SetGoo;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
+                        int Goo
                         {
+                            get
+                            {
+                            }
+
+                            set
+                            {
+                            }
                         }
 
-                        set
+                        void Bar()
                         {
+                            Action<int> i = {|Conflict:Goo|};
                         }
                     }
-
-                    void Bar()
-                    {
-                        Action<int> i = {|Conflict:Goo|};
-                    }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1246,36 +1246,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public int [||]GetGoo()
+                    class C
                     {
-                    }
+                        public int [||]GetGoo()
+                        {
+                        }
 
-                    private void SetGoo(int i)
-                    {
+                        private void SetGoo(int i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public int Goo
+                    class C
                     {
-                        get
+                        public int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        private set
-                        {
+                            private set
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1285,33 +1285,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]GetGoo() => 0;
-                    void SetGoo(int i) => Bar();
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
-                        {
-                            return 0;
-                        }
+                        int [||]GetGoo() => 0;
+                        void SetGoo(int i) => Bar();
+                    }
+                    """,
+                """
+                    using System;
 
-                        set
+                    class C
+                    {
+                        int Goo
                         {
-                            Bar();
+                            get
+                            {
+                                return 0;
+                            }
+
+                            set
+                            {
+                                Bar();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1321,46 +1321,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
+                        int [||]GetGoo()
+                        {
+                        }
 
-                    void SetGoo(int i)
-                    {
-                    }
+                        void SetGoo(int i)
+                        {
+                        }
 
-                    void Bar()
-                    {
-                        SetGoo(GetGoo() + 1);
+                        void Bar()
+                        {
+                            SetGoo(GetGoo() + 1);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
+                        int Goo
                         {
+                            get
+                            {
+                            }
+
+                            set
+                            {
+                            }
                         }
 
-                        set
+                        void Bar()
                         {
+                            Goo = Goo + 1;
                         }
                     }
-
-                    void Bar()
-                    {
-                        Goo = Goo + 1;
-                    }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1370,38 +1370,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
+                        int [||]GetGoo()
+                        {
+                        }
 
-                    void SetGoo(int i)
-                    {
-                        v = i;
+                        void SetGoo(int i)
+                        {
+                            v = i;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
+                        int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
-                            v = value;
+                            set
+                            {
+                                v = value;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1411,38 +1411,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-
-                    void SetGoo(int value)
-                    {
-                        v = value;
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                         }
 
-                        set
+                        void SetGoo(int value)
                         {
                             v = value;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+
+                            set
+                            {
+                                v = value;
+                            }
+                        }
+                    }
+                    """,
                 index: 1
             );
         }
@@ -1452,38 +1452,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
+                        int [||]GetGoo()
+                        {
+                        }
 
-                    void SetGoo(int i)
-                    {
-                        SetGoo(i - 1);
+                        void SetGoo(int i)
+                        {
+                            SetGoo(i - 1);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
+                        int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
-                            Goo = value - 1;
+                            set
+                            {
+                                Goo = value - 1;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1493,41 +1493,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    protected virtual int [||]GetGoo()
+                    class C
                     {
+                        protected virtual int [||]GetGoo()
+                        {
+                        }
                     }
-                }
 
-                class D : C
-                {
-                    protected override int GetGoo()
+                    class D : C
                     {
+                        protected override int GetGoo()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    protected virtual int Goo
+                    class C
                     {
-                        get
+                        protected virtual int Goo
                         {
+                            get
+                            {
+                            }
                         }
                     }
-                }
 
-                class D : C
-                {
-                    protected override int Goo
+                    class D : C
                     {
-                        get
+                        protected override int Goo
                         {
+                            get
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 0
             );
         }
@@ -1537,43 +1537,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    protected virtual int [||]GetGoo()
+                    class C
                     {
+                        protected virtual int [||]GetGoo()
+                        {
+                        }
                     }
-                }
 
-                class D : C
-                {
-                    protected override int GetGoo()
+                    class D : C
                     {
-                        base.GetGoo();
+                        protected override int GetGoo()
+                        {
+                            base.GetGoo();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    protected virtual int Goo
+                    class C
                     {
-                        get
+                        protected virtual int Goo
                         {
+                            get
+                            {
+                            }
                         }
                     }
-                }
 
-                class D : C
-                {
-                    protected override int Goo
+                    class D : C
                     {
-                        get
+                        protected override int Goo
                         {
-                            base.Goo;
+                            get
+                            {
+                                base.Goo;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 0
             );
         }
@@ -1583,34 +1583,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                interface I
-                {
-                    int [||]GetGoo();
-                }
-
-                class C : I
-                {
-                    public int GetGoo()
+                    interface I
                     {
+                        int [||]GetGoo();
                     }
-                }
-                """,
-                """
-                interface I
-                {
-                    int Goo { get; }
-                }
 
-                class C : I
-                {
-                    public int Goo
+                    class C : I
                     {
-                        get
+                        public int GetGoo()
                         {
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    interface I
+                    {
+                        int Goo { get; }
+                    }
+
+                    class C : I
+                    {
+                        public int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """,
                 index: 0
             );
         }
@@ -1620,39 +1620,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                partial class C
-                {
-                    int [||]GetGoo()
+                    partial class C
                     {
+                        int [||]GetGoo()
+                        {
+                        }
                     }
-                }
 
-                partial class C
-                {
-                    void SetGoo(int i)
+                    partial class C
                     {
+                        void SetGoo(int i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                partial class C
-                {
-                    int Goo
+                    partial class C
                     {
-                        get
+                        int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
 
-                partial class C
-                {
-                }
-                """,
+                    partial class C
+                    {
+                    }
+                    """,
                 index: 1
             );
         }
@@ -1662,36 +1662,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int [||]getGoo()
+                    class C
                     {
-                    }
+                        int [||]getGoo()
+                        {
+                        }
 
-                    void setGoo(int i)
-                    {
+                        void setGoo(int i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
+                        int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1701,24 +1701,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    (int, string) [||]GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    (int, string) Goo
-                    {
-                        get
+                        (int, string) [||]GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        (int, string) Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1727,36 +1727,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int, string) [||]getGoo()
+                    class C
                     {
-                    }
+                        (int, string) [||]getGoo()
+                        {
+                        }
 
-                    void setGoo((int, string) i)
-                    {
+                        void setGoo((int, string) i)
+                        {
+                        }
                     }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int, string) Goo
+                    class C
                     {
-                        get
+                        (int, string) Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 index: 1
             );
         }
@@ -1766,36 +1766,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int a, string b) [||]getGoo()
+                    class C
                     {
-                    }
+                        (int a, string b) [||]getGoo()
+                        {
+                        }
 
-                    void setGoo((int a, string b) i)
-                    {
+                        void setGoo((int a, string b) i)
+                        {
+                        }
                     }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int a, string b) Goo
+                    class C
                     {
-                        get
+                        (int a, string b) Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 index: 1
             );
         }
@@ -1806,19 +1806,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
             // Cannot refactor tuples with different names together
             await TestActionCountAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int a, string b) [||]getGoo()
+                    class C
                     {
-                    }
+                        (int a, string b) [||]getGoo()
+                        {
+                        }
 
-                    void setGoo((int c, string d) i)
-                    {
+                        void setGoo((int c, string d) i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 count: 1,
                 new TestParameters(options: AllCodeStyleOff)
             );
@@ -1829,45 +1829,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    // Goo
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-                    // SetGoo
-                    void SetGoo(out int i)
-                    {
-                    }
-
-                    void Test()
-                    {
-                        SetGoo(out int i);
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    // Goo
-                    int Goo
-                    {
-                        get
+                        // Goo
+                        int [||]GetGoo()
                         {
                         }
-                    }
+                        // SetGoo
+                        void SetGoo(out int i)
+                        {
+                        }
 
-                    // SetGoo
-                    void SetGoo(out int i)
-                    {
+                        void Test()
+                        {
+                            SetGoo(out int i);
+                        }
                     }
+                    """,
+                """
+                    class C
+                    {
+                        // Goo
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
 
-                    void Test()
-                    {
-                        SetGoo(out int i);
+                        // SetGoo
+                        void SetGoo(out int i)
+                        {
+                        }
+
+                        void Test()
+                        {
+                            SetGoo(out int i);
+                        }
                     }
-                }
-                """,
+                    """,
                 index: 0
             );
         }
@@ -1877,45 +1877,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    // Goo
-                    int [||]GetGoo()
+                    class C
                     {
-                    }
-                    // SetGoo
-                    void SetGoo(int i)
-                    {
-                    }
+                        // Goo
+                        int [||]GetGoo()
+                        {
+                        }
+                        // SetGoo
+                        void SetGoo(int i)
+                        {
+                        }
 
-                    void Test()
-                    {
-                        SetGoo(out int i);
+                        void Test()
+                        {
+                            SetGoo(out int i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    // Goo
-                    // SetGoo
-                    int Goo
+                    class C
                     {
-                        get
+                        // Goo
+                        // SetGoo
+                        int Goo
                         {
+                            get
+                            {
+                            }
+
+                            set
+                            {
+                            }
                         }
 
-                        set
+                        void Test()
                         {
+                            {|Conflict:Goo|}(out int i);
                         }
                     }
-
-                    void Test()
-                    {
-                        {|Conflict:Goo|}(out int i);
-                    }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1925,24 +1925,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    // Goo
-                    int GetGoo()
+                    class C
                     {
-                    }
+                        // Goo
+                        int GetGoo()
+                        {
+                        }
 
-                    // SetGoo
-                    void [||]SetGoo(out int i)
-                    {
-                    }
+                        // SetGoo
+                        void [||]SetGoo(out int i)
+                        {
+                        }
 
-                    void Test()
-                    {
-                        SetGoo(out int i);
+                        void Test()
+                        {
+                            SetGoo(out int i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1951,24 +1951,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    // Goo
-                    int [||]GetGoo(out int i)
+                    class C
                     {
-                    }
+                        // Goo
+                        int [||]GetGoo(out int i)
+                        {
+                        }
 
-                    // SetGoo
-                    void SetGoo(out int i, int j)
-                    {
-                    }
+                        // SetGoo
+                        void SetGoo(out int i, int j)
+                        {
+                        }
 
-                    void Test()
-                    {
-                        var y = GetGoo(out int i);
+                        void Test()
+                        {
+                            var y = GetGoo(out int i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1978,36 +1978,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                public class Goo
-                {
-                    public Goo()
+                    public class Goo
                     {
-                        Goo value = GetValue().GetValue();
-                    }
+                        public Goo()
+                        {
+                            Goo value = GetValue().GetValue();
+                        }
 
-                    public Goo [||]GetValue()
-                    {
-                        return this;
-                    }
-                }
-                """,
-                """
-                public class Goo
-                {
-                    public Goo()
-                    {
-                        Goo value = Value.Value;
-                    }
-
-                    public Goo Value
-                    {
-                        get
+                        public Goo [||]GetValue()
                         {
                             return this;
                         }
                     }
-                }
+                    """,
                 """
+                    public class Goo
+                    {
+                        public Goo()
+                        {
+                            Goo value = Value.Value;
+                        }
+
+                        public Goo Value
+                        {
+                            get
+                            {
+                                return this;
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2017,20 +2017,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                        return 1;
+                        int [||]GetGoo()
+                        {
+                            return 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int Goo { get => 1; }
-                }
-                """,
+                    class C
+                    {
+                        int Goo { get => 1; }
+                    }
+                    """,
                 options: PreferExpressionBodiedAccessors
             );
         }
@@ -2041,20 +2041,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                        return 1;
+                        int [||]GetGoo()
+                        {
+                            return 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int Goo => 1;
-                }
-                """,
+                    class C
+                    {
+                        int Goo => 1;
+                    }
+                    """,
                 options: PreferExpressionBodiedProperties
             );
         }
@@ -2065,20 +2065,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                        return 1;
+                        int [||]GetGoo()
+                        {
+                            return 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int Goo => 1;
-                }
-                """,
+                    class C
+                    {
+                        int Goo => 1;
+                    }
+                    """,
                 options: PreferExpressionBodiedAccessorsAndProperties
             );
         }
@@ -2089,25 +2089,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                        return 1;
-                    }
+                        int [||]GetGoo()
+                        {
+                            return 1;
+                        }
 
-                    void SetGoo(int i)
-                    {
-                        _i = i;
+                        void SetGoo(int i)
+                        {
+                            _i = i;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int Goo { get => 1; set => _i = value; }
-                }
-                """,
+                    class C
+                    {
+                        int Goo { get => 1; set => _i = value; }
+                    }
+                    """,
                 index: 1,
                 options: PreferExpressionBodiedAccessors
             );
@@ -2119,36 +2119,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                        return 1;
-                    }
-
-                    void SetGoo(int i)
-                    {
-                        _i = i;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        int [||]GetGoo()
                         {
                             return 1;
                         }
 
-                        set
+                        void SetGoo(int i)
                         {
-                            _i = value;
+                            _i = i;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                                return 1;
+                            }
+
+                            set
+                            {
+                                _i = value;
+                            }
+                        }
+                    }
+                    """,
                 index: 1,
                 options: PreferExpressionBodiedProperties
             );
@@ -2160,25 +2160,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo()
+                    class C
                     {
-                        return 1;
-                    }
+                        int [||]GetGoo()
+                        {
+                            return 1;
+                        }
 
-                    void SetGoo(int i)
-                    {
-                        _i = i;
+                        void SetGoo(int i)
+                        {
+                            _i = i;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int Goo { get => 1; set => _i = value; }
-                }
-                """,
+                    class C
+                    {
+                        int Goo { get => 1; set => _i = value; }
+                    }
+                    """,
                 index: 1,
                 options: PreferExpressionBodiedAccessorsAndProperties
             );
@@ -2190,17 +2190,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo() => 0;
-                }
-                """,
+                    class C
+                    {
+                        int [||]GetGoo() => 0;
+                    }
+                    """,
                 """
-                class C
-                {
-                    int Goo => 0;
-                }
-                """,
+                    class C
+                    {
+                        int Goo => 0;
+                    }
+                    """,
                 options: PreferExpressionBodiedProperties
             );
         }
@@ -2211,17 +2211,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo() => 0;
-                }
-                """,
+                    class C
+                    {
+                        int [||]GetGoo() => 0;
+                    }
+                    """,
                 """
-                class C
-                {
-                    int Goo { get => 0; }
-                }
-                """,
+                    class C
+                    {
+                        int Goo { get => 0; }
+                    }
+                    """,
                 options: PreferExpressionBodiedAccessors
             );
         }
@@ -2232,17 +2232,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo() => throw e;
-                }
-                """,
+                    class C
+                    {
+                        int [||]GetGoo() => throw e;
+                    }
+                    """,
                 """
-                class C
-                {
-                    int Goo { get => throw e; }
-                }
-                """,
+                    class C
+                    {
+                        int Goo { get => throw e; }
+                    }
+                    """,
                 options: PreferExpressionBodiedAccessors
             );
         }
@@ -2253,17 +2253,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo() { throw e; }
-                }
-                """,
+                    class C
+                    {
+                        int [||]GetGoo() { throw e; }
+                    }
+                    """,
                 """
-                class C
-                {
-                    int Goo => throw e;
-                }
-                """,
+                    class C
+                    {
+                        int Goo => throw e;
+                    }
+                    """,
                 options: PreferExpressionBodiedProperties
             );
         }
@@ -2273,17 +2273,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo() { throw e; }
-                }
-                """,
+                    class C
+                    {
+                        int [||]GetGoo() { throw e; }
+                    }
+                    """,
                 """
-                class C
-                {
-                    int Goo => throw e;
-                }
-                """,
+                    class C
+                    {
+                        int Goo => throw e;
+                    }
+                    """,
                 options: Option(
                     CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
                     CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
@@ -2296,25 +2296,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]GetGoo() { throw e +
-                        e; }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
+                    class C
                     {
-                        get
+                        int [||]GetGoo() { throw e +
+                            e; }
+                    }
+                    """,
+                """
+                    class C
+                    {
+                        int Goo
                         {
-                            throw e +
-                        e;
+                            get
+                            {
+                                throw e +
+                            e;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 options: new OptionsCollection(GetLanguage())
                 {
                     {
@@ -2334,36 +2334,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                interface IGoo
-                {
-                    int [||]GetGoo();
-                }
-
-                class C : IGoo
-                {
-                    int IGoo.GetGoo()
+                    interface IGoo
                     {
-                        throw new System.NotImplementedException();
+                        int [||]GetGoo();
                     }
-                }
-                """,
-                """
-                interface IGoo
-                {
-                    int Goo { get; }
-                }
 
-                class C : IGoo
-                {
-                    int IGoo.Goo
+                    class C : IGoo
                     {
-                        get
+                        int IGoo.GetGoo()
                         {
                             throw new System.NotImplementedException();
                         }
                     }
-                }
+                    """,
                 """
+                    interface IGoo
+                    {
+                        int Goo { get; }
+                    }
+
+                    class C : IGoo
+                    {
+                        int IGoo.Goo
+                        {
+                            get
+                            {
+                                throw new System.NotImplementedException();
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2373,13 +2373,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    public override string [||]ToString()
+                    class C
                     {
+                        public override string [||]ToString()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2389,24 +2389,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C : System.Type
-                {
-                    public override int [||]GetArrayRank()
+                    class C : System.Type
                     {
-                    }
-                }
-                """,
-                """
-                class C : System.Type
-                {
-                    public override int {|Warning:ArrayRank|}
-                    {
-                        get
+                        public override int [||]GetArrayRank()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C : System.Type
+                    {
+                        public override int {|Warning:ArrayRank|}
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2415,38 +2415,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    private string? name;
-
-                    public void SetName(string name)
+                    class C
                     {
-                        this.name = name;
-                    }
+                        private string? name;
 
-                    public string? [||]GetName()
-                    {
-                        return this.name;
+                        public void SetName(string name)
+                        {
+                            this.name = name;
+                        }
+
+                        public string? [||]GetName()
+                        {
+                            return this.name;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    private string? name;
-
-                    public void SetName(string name)
+                    class C
                     {
-                        this.name = name;
-                    }
+                        private string? name;
 
-                    public string? Name => this.name;
-                }
-                """
+                        public void SetName(string name)
+                        {
+                            this.name = name;
+                        }
+
+                        public string? Name => this.name;
+                    }
+                    """
             );
         }
 
@@ -2455,38 +2455,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    private string? name;
-
-                    public void SetName(string? name)
+                    class C
                     {
-                        this.name = name;
-                    }
+                        private string? name;
 
-                    public string [||]GetName()
-                    {
-                        return this.name ?? "";
+                        public void SetName(string? name)
+                        {
+                            this.name = name;
+                        }
+
+                        public string [||]GetName()
+                        {
+                            return this.name ?? "";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    private string? name;
-
-                    public void SetName(string? name)
+                    class C
                     {
-                        this.name = name;
-                    }
+                        private string? name;
 
-                    public string Name => this.name ?? "";
-                }
-                """
+                        public void SetName(string? name)
+                        {
+                            this.name = name;
+                        }
+
+                        public string Name => this.name ?? "";
+                    }
+                    """
             );
         }
 
@@ -2495,38 +2495,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    private IEnumerable<string?> names;
-
-                    public void SetNames(IEnumerable<string> names)
+                    class C
                     {
-                        this.names = names;
-                    }
+                        private IEnumerable<string?> names;
 
-                    public IEnumerable<string?> [||]GetNames()
-                    {
-                        return this.names;
+                        public void SetNames(IEnumerable<string> names)
+                        {
+                            this.names = names;
+                        }
+
+                        public IEnumerable<string?> [||]GetNames()
+                        {
+                            return this.names;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    private IEnumerable<string?> names;
-
-                    public void SetNames(IEnumerable<string> names)
+                    class C
                     {
-                        this.names = names;
-                    }
+                        private IEnumerable<string?> names;
 
-                    public IEnumerable<string?> Names => this.names;
-                }
-                """
+                        public void SetNames(IEnumerable<string> names)
+                        {
+                            this.names = names;
+                        }
+
+                        public IEnumerable<string?> Names => this.names;
+                    }
+                    """
             );
         }
 
@@ -2535,42 +2535,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System.Linq;
+                    using System.Linq;
 
-                class C
-                {
-                    private IEnumerable<string?> names;
-
-                    public void SetNames(IEnumerable<string?> names)
+                    class C
                     {
-                        this.names = names;
-                    }
+                        private IEnumerable<string?> names;
 
-                    public IEnumerable<string> [||]GetNames()
-                    {
-                        return this.names.Where(n => n is object);
+                        public void SetNames(IEnumerable<string?> names)
+                        {
+                            this.names = names;
+                        }
+
+                        public IEnumerable<string> [||]GetNames()
+                        {
+                            return this.names.Where(n => n is object);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System.Linq;
+                    using System.Linq;
 
-                class C
-                {
-                    private IEnumerable<string?> names;
-
-                    public void SetNames(IEnumerable<string?> names)
+                    class C
                     {
-                        this.names = names;
-                    }
+                        private IEnumerable<string?> names;
 
-                    public IEnumerable<string> Names => this.names.Where(n => n is object);
-                }
-                """
+                        public void SetNames(IEnumerable<string?> names)
+                        {
+                            this.names = names;
+                        }
+
+                        public IEnumerable<string> Names => this.names.Where(n => n is object);
+                    }
+                    """
             );
         }
 
@@ -2579,28 +2579,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    private string name;
-
-                    public string? [||]GetName()
+                    class C
                     {
-                        return name;
+                        private string name;
+
+                        public string? [||]GetName()
+                        {
+                            return name;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                class C
-                {
-                    private string name;
+                    class C
+                    {
+                        private string name;
 
-                    public string? Name => name;
-                }
-                """
+                        public string? Name => name;
+                    }
+                    """
             );
         }
 
@@ -2610,28 +2610,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public unsafe int [||]GetP()
+                    class C
                     {
-                        return 0;
-                    }
+                        public unsafe int [||]GetP()
+                        {
+                            return 0;
+                        }
 
-                    public void SetP(int value)
-                    { }
-                }
-                """,
-                """
-                class C
-                {
-                    public unsafe int P
-                    {
-                        get => 0;
-                        set
+                        public void SetP(int value)
                         { }
                     }
-                }
-                """,
+                    """,
+                """
+                    class C
+                    {
+                        public unsafe int P
+                        {
+                            get => 0;
+                            set
+                            { }
+                        }
+                    }
+                    """,
                 index: 1
             );
         }
@@ -2642,28 +2642,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public int [||]GetP()
+                    class C
                     {
-                        return 0;
-                    }
+                        public int [||]GetP()
+                        {
+                            return 0;
+                        }
 
-                    public unsafe void SetP(int value)
-                    { }
-                }
-                """,
-                """
-                class C
-                {
-                    public unsafe int P
-                    {
-                        get => 0;
-                        set
+                        public unsafe void SetP(int value)
                         { }
                     }
-                }
-                """,
+                    """,
+                """
+                    class C
+                    {
+                        public unsafe int P
+                        {
+                            get => 0;
+                            set
+                            { }
+                        }
+                    }
+                    """,
                 index: 1
             );
         }
@@ -2673,24 +2673,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    [||]int GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                        [||]int GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2699,24 +2699,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                [||]    int GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo
-                    {
-                        get
+                    [||]    int GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2725,26 +2725,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    [||]
-                    int GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-
-                    int Goo
-                    {
-                        get
+                        [||]
+                        int GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2753,15 +2753,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    [||]
-
-                    int GetGoo()
+                    class C
                     {
+                        [||]
+
+                        int GetGoo()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2770,26 +2770,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    [||][A]
-                    int GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    [A]
-                    int Goo
-                    {
-                        get
+                        [||][A]
+                        int GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        [A]
+                        int Goo
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2798,14 +2798,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    [||] /// <summary/>
-                    int GetGoo()
+                    class C
                     {
+                        [||] /// <summary/>
+                        int GetGoo()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2814,14 +2814,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    /// [||]<summary/>
-                    int GetGoo()
+                    class C
                     {
+                        /// [||]<summary/>
+                        int GetGoo()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2831,26 +2831,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    int Goo;
-                    [||]int GetGoo()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int Goo;
-                    int Goo1
-                    {
-                        get
+                        int Goo;
+                        [||]int GetGoo()
                         {
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int Goo;
+                        int Goo1
+                        {
+                            get
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2860,21 +2860,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    [||]int Goo() //Vital Comment
+                    class C
                     {
-                      return 1;
+                        [||]int Goo() //Vital Comment
+                        {
+                          return 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    //Vital Comment
-                    int Goo => 1;
-                }
-                """
+                    class C
+                    {
+                        //Vital Comment
+                        int Goo => 1;
+                    }
+                    """
             );
         }
 
@@ -2884,33 +2884,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                class C
-                {
-                    int [||]GetGoo()    // Goo
+                    class C
                     {
+                        int [||]GetGoo()    // Goo
+                        {
+                        }
+                        void SetGoo(int i)    // SetGoo
+                        {
+                        }
                     }
-                    void SetGoo(int i)    // SetGoo
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    // Goo
-                    // SetGoo
-                    int Goo
+                    class C
                     {
-                        get
+                        // Goo
+                        // SetGoo
+                        int Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -2921,44 +2921,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                <Workspace>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                        <Document FilePath='C.cs'>
-                class C
-                {
-                    int [||]GetP();
-                    bool M()
+                    <Workspace>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                            <Document FilePath='C.cs'>
+                    class C
                     {
-                        return GetP() == 0;
+                        int [||]GetP();
+                        bool M()
+                        {
+                            return GetP() == 0;
+                        }
                     }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                    </Project>
-                </Workspace>
-                """,
+                            </Document>
+                        </Project>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                            <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                        <Document FilePath='C.cs'>
-                class C
-                {
-                    int P { get; }
+                    <Workspace>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                            <Document FilePath='C.cs'>
+                    class C
+                    {
+                        int P { get; }
 
-                    bool M()
-                    {
-                        return P == 0;
+                        bool M()
+                        {
+                            return P == 0;
+                        }
                     }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                    </Project>
-                </Workspace>
-                """
+                            </Document>
+                        </Project>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                            <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                        </Project>
+                    </Workspace>
+                    """
             );
         }
 
@@ -2968,37 +2968,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System.Linq;
+                    using System.Linq;
 
-                class C
-                {
-                    private IEnumerable<string?> names;
-
-                    public void SetNames(IEnumerable<string?> names)
+                    class C
                     {
-                        this.names = names;
-                    }
+                        private IEnumerable<string?> names;
 
-                    public IEnumerable<string?> [||]GetNames()
-                    {
-                        return this.names.Where(n => n is object);
+                        public void SetNames(IEnumerable<string?> names)
+                        {
+                            this.names = names;
+                        }
+
+                        public IEnumerable<string?> [||]GetNames()
+                        {
+                            return this.names.Where(n => n is object);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System.Linq;
+                    using System.Linq;
 
-                class C
-                {
-                    private IEnumerable<string?> names;
+                    class C
+                    {
+                        private IEnumerable<string?> names;
 
-                    public IEnumerable<string?> Names { get => this.names.Where(n => n is object); set => this.names = value; }
-                }
-                """,
+                        public IEnumerable<string?> Names { get => this.names.Where(n => n is object); set => this.names = value; }
+                    }
+                    """,
                 index: 1
             );
         }
@@ -3009,33 +3009,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    private Task<string> someTask;
-
-                    public void SetSomeTask(Task<string> t)
+                    class C
                     {
-                        this.someTask = t;
-                    }
+                        private Task<string> someTask;
 
-                    public Task<string> [||]GetSomeTask()
-                    {
-                        return this.someTask;
+                        public void SetSomeTask(Task<string> t)
+                        {
+                            this.someTask = t;
+                        }
+
+                        public Task<string> [||]GetSomeTask()
+                        {
+                            return this.someTask;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    private Task<string> someTask;
+                    class C
+                    {
+                        private Task<string> someTask;
 
-                    public Task<string> SomeTask { get => this.someTask; set => this.someTask = value; }
-                }
-                """,
+                        public Task<string> SomeTask { get => this.someTask; set => this.someTask = value; }
+                    }
+                    """,
                 index: 1
             );
         }
@@ -3046,31 +3046,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    static bool [||]Value() => default;
-
-                    static void Main()
+                    class Class
                     {
-                        if (/*test*/Value())
+                        static bool [||]Value() => default;
+
+                        static void Main()
                         {
+                            if (/*test*/Value())
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    static bool Value => default;
-
-                    static void Main()
+                    class Class
                     {
-                        if (/*test*/Value)
+                        static bool Value => default;
+
+                        static void Main()
                         {
+                            if (/*test*/Value)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3080,31 +3080,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    static bool [||]Value() => default;
-
-                    static void Main()
+                    class Class
                     {
-                        if (Value()/*test*/)
+                        static bool [||]Value() => default;
+
+                        static void Main()
                         {
+                            if (Value()/*test*/)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    static bool Value => default;
-
-                    static void Main()
+                    class Class
                     {
-                        if (Value/*test*/)
+                        static bool Value => default;
+
+                        static void Main()
                         {
+                            if (Value/*test*/)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3114,27 +3114,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    static bool [||]Value() => default;
-
-                    static void Main()
+                    class Class
                     {
-                        var valueAsDelegate = /*test*/Value;
-                    }
-                }
-                """,
-                """
-                class Class
-                {
-                    static bool Value => default;
+                        static bool [||]Value() => default;
 
-                    static void Main()
-                    {
-                        var valueAsDelegate = /*test*/{|Conflict:Value|};
+                        static void Main()
+                        {
+                            var valueAsDelegate = /*test*/Value;
+                        }
                     }
-                }
+                    """,
                 """
+                    class Class
+                    {
+                        static bool Value => default;
+
+                        static void Main()
+                        {
+                            var valueAsDelegate = /*test*/{|Conflict:Value|};
+                        }
+                    }
+                    """
             );
         }
 
@@ -3144,27 +3144,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    static bool [||]Value() => default;
-
-                    static void Main()
+                    class Class
                     {
-                        var valueAsDelegate = Value/*test*/;
-                    }
-                }
-                """,
-                """
-                class Class
-                {
-                    static bool Value => default;
+                        static bool [||]Value() => default;
 
-                    static void Main()
-                    {
-                        var valueAsDelegate = {|Conflict:Value|}/*test*/;
+                        static void Main()
+                        {
+                            var valueAsDelegate = Value/*test*/;
+                        }
                     }
-                }
+                    """,
                 """
+                    class Class
+                    {
+                        static bool Value => default;
+
+                        static void Main()
+                        {
+                            var valueAsDelegate = {|Conflict:Value|}/*test*/;
+                        }
+                    }
+                    """
             );
         }
     }

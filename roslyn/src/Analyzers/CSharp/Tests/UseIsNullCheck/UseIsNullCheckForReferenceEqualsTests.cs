@@ -45,29 +45,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||]ReferenceEquals(s, null))
-                            return;
+                        void M(string s)
+                        {
+                            if ([||]ReferenceEquals(s, null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is null)
+                                return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -76,17 +76,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||]ReferenceEquals(s, null))
-                            return;
+                        void M(string s)
+                        {
+                            if ([||]ReferenceEquals(s, null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new[] { CSharpAnalyzersResources.Use_is_null_check }
             );
         }
@@ -96,17 +96,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (![||]ReferenceEquals(s, null))
-                            return;
+                        void M(string s)
+                        {
+                            if (![||]ReferenceEquals(s, null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new[] { CSharpAnalyzersResources.Use_is_object_check },
                 new TestParameters(
                     parseOptions: CSharpParseOptions
@@ -121,17 +121,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (![||]ReferenceEquals(s, null))
-                            return;
+                        void M(string s)
+                        {
+                            if (![||]ReferenceEquals(s, null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new[] { CSharpAnalyzersResources.Use_is_not_null_check },
                 new TestParameters(
                     parseOptions: CSharpParseOptions
@@ -146,29 +146,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (object.[||]ReferenceEquals(s, null))
-                            return;
+                        void M(string s)
+                        {
+                            if (object.[||]ReferenceEquals(s, null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is null)
+                                return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -177,29 +177,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (Object.[||]ReferenceEquals(s, null))
-                            return;
+                        void M(string s)
+                        {
+                            if (Object.[||]ReferenceEquals(s, null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is null)
+                                return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -208,29 +208,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||]ReferenceEquals(null, s))
-                            return;
+                        void M(string s)
+                        {
+                            if ([||]ReferenceEquals(null, s))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is null)
+                                return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -239,29 +239,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (![||]ReferenceEquals(null, s))
-                            return;
+                        void M(string s)
+                        {
+                            if (![||]ReferenceEquals(null, s))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is object)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is object)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp7)
             );
         }
@@ -271,29 +271,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (![||]ReferenceEquals(null, s))
-                            return;
+                        void M(string s)
+                        {
+                            if (![||]ReferenceEquals(null, s))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is not null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is not null)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp9)
             );
         }
@@ -303,17 +303,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||]ReferenceEquals(null, s))
-                            return;
+                        void M(string s)
+                        {
+                            if ([||]ReferenceEquals(null, s))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters(
                     parseOptions: CSharpParseOptions
                         .Default
@@ -327,31 +327,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s1, string s2)
+                    class C
                     {
-                        if ({|FixAllInDocument:ReferenceEquals|}(s1, null) ||
-                            ReferenceEquals(s2, null))
-                            return;
+                        void M(string s1, string s2)
+                        {
+                            if ({|FixAllInDocument:ReferenceEquals|}(s1, null) ||
+                                ReferenceEquals(s2, null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s1, string s2)
+                    class C
                     {
-                        if (s1 is null ||
-                            s2 is null)
-                            return;
+                        void M(string s1, string s2)
+                        {
+                            if (s1 is null ||
+                                s2 is null)
+                                return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -360,31 +360,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s1, string s2)
+                    class C
                     {
-                        if (ReferenceEquals(s1, null) ||
-                            {|FixAllInDocument:ReferenceEquals|}(s2, null))
-                            return;
+                        void M(string s1, string s2)
+                        {
+                            if (ReferenceEquals(s1, null) ||
+                                {|FixAllInDocument:ReferenceEquals|}(s2, null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s1, string s2)
+                    class C
                     {
-                        if (s1 is null ||
-                            s2 is null)
-                            return;
+                        void M(string s1, string s2)
+                        {
+                            if (s1 is null ||
+                                s2 is null)
+                                return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -393,29 +393,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value)
+                    class C
                     {
-                        if ([||]ReferenceEquals(value, null))
+                        public static void NotNull<T>(T value)
                         {
-                            return;
+                            if ([||]ReferenceEquals(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value)
+                    class C
                     {
-                        if (value == null)
+                        public static void NotNull<T>(T value)
                         {
-                            return;
+                            if (value == null)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp7)
             );
         }
@@ -425,33 +425,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static void NotNull<T>(T value)
+                    class C
                     {
-                        if ({|FixAllInDocument:ReferenceEquals|}(value, null))
+                        public static void NotNull<T>(T value)
                         {
-                            return;
+                            if ({|FixAllInDocument:ReferenceEquals|}(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static void NotNull<T>(T value)
+                    class C
                     {
-                        if (value is null)
+                        public static void NotNull<T>(T value)
                         {
-                            return;
+                            if (value is null)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp8)
             );
         }
@@ -461,29 +461,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value)
+                    class C
                     {
-                        if (![||]ReferenceEquals(value, null))
+                        public static void NotNull<T>(T value)
                         {
-                            return;
+                            if (![||]ReferenceEquals(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value)
+                    class C
                     {
-                        if (value is object)
+                        public static void NotNull<T>(T value)
                         {
-                            return;
+                            if (value is object)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp7)
             );
         }
@@ -493,29 +493,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value)
+                    class C
                     {
-                        if (![||]ReferenceEquals(value, null))
+                        public static void NotNull<T>(T value)
                         {
-                            return;
+                            if (![||]ReferenceEquals(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value)
+                    class C
                     {
-                        if (value is not null)
+                        public static void NotNull<T>(T value)
                         {
-                            return;
+                            if (value is not null)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp9)
             );
         }
@@ -525,29 +525,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:class
+                    class C
                     {
-                        if ([||]ReferenceEquals(value, null))
+                        public static void NotNull<T>(T value) where T:class
                         {
-                            return;
+                            if ([||]ReferenceEquals(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:class
+                    class C
                     {
-                        if (value is null)
+                        public static void NotNull<T>(T value) where T:class
                         {
-                            return;
+                            if (value is null)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -556,29 +556,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:class
+                    class C
                     {
-                        if (![||]ReferenceEquals(value, null))
+                        public static void NotNull<T>(T value) where T:class
                         {
-                            return;
+                            if (![||]ReferenceEquals(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:class
+                    class C
                     {
-                        if (value is object)
+                        public static void NotNull<T>(T value) where T:class
                         {
-                            return;
+                            if (value is object)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp7)
             );
         }
@@ -588,29 +588,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:class
+                    class C
                     {
-                        if (![||]ReferenceEquals(value, null))
+                        public static void NotNull<T>(T value) where T:class
                         {
-                            return;
+                            if (![||]ReferenceEquals(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:class
+                    class C
                     {
-                        if (value is not null)
+                        public static void NotNull<T>(T value) where T:class
                         {
-                            return;
+                            if (value is not null)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp9)
             );
         }
@@ -620,17 +620,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:struct
+                    class C
                     {
-                        if ([||]ReferenceEquals(value, null))
+                        public static void NotNull<T>(T value) where T:struct
                         {
-                            return;
+                            if ([||]ReferenceEquals(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -639,17 +639,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:struct
+                    class C
                     {
-                        if (![||]ReferenceEquals(value, null))
+                        public static void NotNull<T>(T value) where T:struct
                         {
-                            return;
+                            if (![||]ReferenceEquals(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -658,29 +658,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s2)
+                    class C
                     {
-                        if ({|FixAllInDocument:ReferenceEquals|}(ReferenceEquals(s2, null), null))
-                            return;
+                        void M(string s2)
+                        {
+                            if ({|FixAllInDocument:ReferenceEquals|}(ReferenceEquals(s2, null), null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s2)
+                    class C
                     {
-                        if (ReferenceEquals(s2, null) is null)
-                            return;
+                        void M(string s2)
+                        {
+                            if (ReferenceEquals(s2, null) is null)
+                                return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -689,33 +689,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:C
+                    class C
                     {
-                        if ({|FixAllInDocument:ReferenceEquals|}(value, null))
+                        public static void NotNull<T>(T value) where T:C
                         {
-                            return;
+                            if ({|FixAllInDocument:ReferenceEquals|}(value, null))
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public static void NotNull<T>(T value) where T:C
+                    class C
                     {
-                        if (value is null)
+                        public static void NotNull<T>(T value) where T:C
                         {
-                            return;
+                            if (value is null)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(parseOptions: CSharp7)
             );
         }

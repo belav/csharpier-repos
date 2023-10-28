@@ -23,12 +23,12 @@ public class EnumDeclarationStructureTests
     public async Task NoCommentsOrAttributes()
     {
         var code = """
-                {|hint:enum $$E{|textspan:
-                {
-                    A,
-                    B
-                }|}|}
-                """;
+            {|hint:enum $$E{|textspan:
+            {
+                A,
+                B
+            }|}|}
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -40,13 +40,13 @@ public class EnumDeclarationStructureTests
     public async Task WithAttributes()
     {
         var code = """
-                {|hint:{|textspan:[Bar]
-                |}{|#0:enum $$E|}{|textspan2:
-                {
-                    A,
-                    B
-                }|}|#0}
-                """;
+            {|hint:{|textspan:[Bar]
+            |}{|#0:enum $$E|}{|textspan2:
+            {
+                A,
+                B
+            }|}|#0}
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -59,15 +59,15 @@ public class EnumDeclarationStructureTests
     public async Task WithCommentsAndAttributes()
     {
         var code = """
-                {|hint:{|textspan:// Summary:
-                //     This is a summary.
-                [Bar]
-                |}{|#0:enum $$E|}{|textspan2:
-                {
-                    A,
-                    B
-                }|}|#0}
-                """;
+            {|hint:{|textspan:// Summary:
+            //     This is a summary.
+            [Bar]
+            |}{|#0:enum $$E|}{|textspan2:
+            {
+                A,
+                B
+            }|}|#0}
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -80,15 +80,15 @@ public class EnumDeclarationStructureTests
     public async Task WithCommentsAttributesAndModifiers()
     {
         var code = """
-                {|hint:{|textspan:// Summary:
-                //     This is a summary.
-                [Bar]
-                |}{|#0:public enum $$E|}{|textspan2:
-                {
-                    A,
-                    B
-                }|}|#0}
-                """;
+            {|hint:{|textspan:// Summary:
+            //     This is a summary.
+            [Bar]
+            |}{|#0:public enum $$E|}{|textspan2:
+            {
+                A,
+                B
+            }|}|#0}
+            """;
 
         await VerifyBlockSpansAsync(
             code,

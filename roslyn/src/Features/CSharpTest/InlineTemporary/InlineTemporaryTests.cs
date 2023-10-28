@@ -28,14 +28,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         private static string GetTreeText(string initial)
         {
             return """
-                class C
-                {
-                    void F()
-                """
+                    class C
+                    {
+                        void F()
+                    """
                 + initial
                 + """
-                }
-                """;
+                    }
+                    """;
         }
 
         private static SyntaxNode GetNodeToFix(dynamic initialRoot, int declaratorIndex) =>
@@ -69,16 +69,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int [||]x = 42;
-
-                    void M()
+                    class C
                     {
-                        System.Console.WriteLine(x);
+                        int [||]x = 42;
+
+                        void M()
+                        {
+                            System.Console.WriteLine(x);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -87,16 +87,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    ref int M()
+                    class C
                     {
-                        int[] arr = new[] { 1, 2, 3 };
-                        ref int [||]x = ref arr[2];
-                        return ref x;
+                        ref int M()
+                        {
+                            int[] arr = new[] { 1, 2, 3 };
+                            ref int [||]x = ref arr[2];
+                            return ref x;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -127,14 +127,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { int [||]x = 0;
+                    { int [||]x = 0;
 
-                Console.WriteLine(x); }
-                """,
+                    Console.WriteLine(x); }
+                    """,
                 """
-                {
-                        Console.WriteLine(0); }
-                """
+                    {
+                            Console.WriteLine(0); }
+                    """
             );
         }
 
@@ -143,14 +143,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { int [||]@x = 0;
+                    { int [||]@x = 0;
 
-                Console.WriteLine(x); }
-                """,
+                    Console.WriteLine(x); }
+                    """,
                 """
-                {
-                        Console.WriteLine(0); }
-                """
+                    {
+                            Console.WriteLine(0); }
+                    """
             );
         }
 
@@ -159,14 +159,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { int [||]@x = 0;
+                    { int [||]@x = 0;
 
-                Console.WriteLine(@x); }
-                """,
+                    Console.WriteLine(@x); }
+                    """,
                 """
-                {
-                        Console.WriteLine(0); }
-                """
+                    {
+                            Console.WriteLine(0); }
+                    """
             );
         }
 
@@ -175,14 +175,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { int [||]x = 0;
+                    { int [||]x = 0;
 
-                Console.WriteLine(@x); }
-                """,
+                    Console.WriteLine(@x); }
+                    """,
                 """
-                {
-                        Console.WriteLine(0); }
-                """
+                    {
+                            Console.WriteLine(0); }
+                    """
             );
         }
 
@@ -220,7 +220,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             var code = """
                 using System;
-                class C 
+                class C
                 {
                     public void M()
                     {
@@ -232,7 +232,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
             var expected = """
                 using System;
-                class C 
+                class C
                 {
                     public void M()
                     {
@@ -249,7 +249,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             var code = """
                 using System;
-                class C 
+                class C
                 {
                     public void M()
                     {
@@ -261,7 +261,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
             var expected = """
                 using System;
-                class C 
+                class C
                 {
                     public void M()
                     {
@@ -278,14 +278,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { int [||]x = 3;
+                    { int [||]x = 3;
 
-                x.ToString(); }
-                """,
+                    x.ToString(); }
+                    """,
                 """
-                       { 
-                       3.ToString(); }
-                       """
+                    {
+                    3.ToString(); }
+                    """
             );
         }
 
@@ -294,26 +294,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    void M()
+                    using System;
+                    class C
                     {
-                        double [||]x = 3;
-                        Console.WriteLine(x);
+                        void M()
+                        {
+                            double [||]x = 3;
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void M()
+                    using System;
+                    class C
                     {
-                        Console.WriteLine((double)3);
+                        void M()
+                        {
+                            Console.WriteLine((double)3);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -322,40 +322,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Base 
-                {
-                    public void M(object o) { }
-                }
-                class Derived : Base
-                {
-                    public void M(string s) { }
-                }
-                class C
-                {
-                    void F()
+                    class Base
                     {
-                        Base [||]b = new Derived();
-                        b.M("hi");
+                        public void M(object o) { }
                     }
-                }
-                """,
-                """
-                class Base 
-                {
-                    public void M(object o) { }
-                }
-                class Derived : Base
-                {
-                    public void M(string s) { }
-                }
-                class C
-                {
-                    void F()
+                    class Derived : Base
                     {
-                        ((Base)new Derived()).M("hi");
+                        public void M(string s) { }
                     }
-                }
+                    class C
+                    {
+                        void F()
+                        {
+                            Base [||]b = new Derived();
+                            b.M("hi");
+                        }
+                    }
+                    """,
                 """
+                    class Base
+                    {
+                        public void M(object o) { }
+                    }
+                    class Derived : Base
+                    {
+                        public void M(string s) { }
+                    }
+                    class C
+                    {
+                        void F()
+                        {
+                            ((Base)new Derived()).M("hi");
+                        }
+                    }
+                    """
             );
         }
 
@@ -364,40 +364,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Base 
-                {
-                    public void M(int i) { }
-                }
-                class Derived : Base
-                {
-                    public void M(string s) { }
-                }
-                class C
-                {
-                    void F()
+                    class Base
                     {
-                        Base [||]b = new Derived();
-                        b.M(3);
+                        public void M(int i) { }
                     }
-                }
-                """,
-                """
-                class Base 
-                {
-                    public void M(int i) { }
-                }
-                class Derived : Base
-                {
-                    public void M(string s) { }
-                }
-                class C
-                {
-                    void F()
+                    class Derived : Base
                     {
-                        new Derived().M(3);
+                        public void M(string s) { }
                     }
-                }
+                    class C
+                    {
+                        void F()
+                        {
+                            Base [||]b = new Derived();
+                            b.M(3);
+                        }
+                    }
+                    """,
                 """
+                    class Base
+                    {
+                        public void M(int i) { }
+                    }
+                    class Derived : Base
+                    {
+                        public void M(string s) { }
+                    }
+                    class C
+                    {
+                        void F()
+                        {
+                            new Derived().M(3);
+                        }
+                    }
+                    """
             );
         }
 
@@ -410,24 +410,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                        int? [||]x = 42;
-                        var y = true ? x : null;
+                        void F()
+                        {
+                            int? [||]x = 42;
+                            var y = true ? x : null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                        var y = true ? (int?)42 : null;
+                        void F()
+                        {
+                            var y = true ? (int?)42 : null;
+                        }
                     }
-                }
-                """,
+                    """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
             );
         }
@@ -442,28 +442,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                        int? [||]x = 42;
-                        int? y = true ? x : null;
+                        void F()
+                        {
+                            int? [||]x = 42;
+                            int? y = true ? x : null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                        int? y = true ?
-                """
+                        void F()
+                        {
+                            int? y = true ?
+                    """
                     + expectedSubstitution
                     + """
-                 : null;
-                    }
-                }
-                """,
+                         : null;
+                            }
+                        }
+                        """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
             );
         }
@@ -473,14 +473,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { var [||]x = 0;
+                    { var [||]x = 0;
 
-                Console.WriteLine(x); }
-                """,
+                    Console.WriteLine(x); }
+                    """,
                 """
-                {
-                        Console.WriteLine(0); }
-                """
+                    {
+                            Console.WriteLine(0); }
+                    """
             );
         }
 
@@ -506,9 +506,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { int [||]x = 42;
-                var a = new { x }; }
-                """,
+                    { int [||]x = 42;
+                    var a = new { x }; }
+                    """,
                 @"{ var a = new { x = 42 }; }"
             );
         }
@@ -518,9 +518,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { int [||]x = 1 + 1;
-                int y = x * 2; }
-                """,
+                    { int [||]x = 1 + 1;
+                    int y = x * 2; }
+                    """,
                 @"{ int y = (1 + 1) * 2; }"
             );
         }
@@ -619,28 +619,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F(object a, object b)
+                    class C
                     {
-                        int x = 2;
-                        bool [||]y = x > (f);
-                        F(x < x, y);
+                        void F(object a, object b)
+                        {
+                            int x = 2;
+                            bool [||]y = x > (f);
+                            F(x < x, y);
+                        }
+                        int f = 0;
                     }
-                    int f = 0;
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void F(object a, object b)
+                    class C
                     {
-                        int x = 2;
-                        F(x < x, (x > (f)));
+                        void F(object a, object b)
+                        {
+                            int x = 2;
+                            F(x < x, (x > (f)));
+                        }
+                        int f = 0;
                     }
-                    int f = 0;
-                }
-                """
+                    """
             );
         }
 
@@ -653,28 +653,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F(object a, object b)
+                    class C
                     {
-                        int x = 2;
-                        object [||]y = x > (f);
-                        F(x < x, y);
+                        void F(object a, object b)
+                        {
+                            int x = 2;
+                            object [||]y = x > (f);
+                            F(x < x, y);
+                        }
+                        int f = 0;
                     }
-                    int f = 0;
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void F(object a, object b)
+                    class C
                     {
-                        int x = 2;
-                        F(x < x, (x > (f)));
+                        void F(object a, object b)
+                        {
+                            int x = 2;
+                            F(x < x, (x > (f)));
+                        }
+                        int f = 0;
                     }
-                    int f = 0;
-                }
-                """
+                    """
             );
         }
 
@@ -683,28 +683,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F(object a, object b)
+                    class C
                     {
-                        int x = 2;
-                        bool [||]y = x > (int)1;
-                        F(x < x, y);
+                        void F(object a, object b)
+                        {
+                            int x = 2;
+                            bool [||]y = x > (int)1;
+                            F(x < x, y);
+                        }
+                        int f = 0;
                     }
-                    int f = 0;
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void F(object a, object b)
+                    class C
                     {
-                        int x = 2;
-                        F(x < x, (x > (int)1));
+                        void F(object a, object b)
+                        {
+                            int x = 2;
+                            F(x < x, (x > (int)1));
+                        }
+                        int f = 0;
                     }
-                    int f = 0;
-                }
-                """
+                    """
             );
         }
 
@@ -713,34 +713,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = 2;
-                        int y[||] = (1+2);
-                        Bar(x < x, x > y);
-                    }
+                        static void Main()
+                        {
+                            int x = 2;
+                            int y[||] = (1+2);
+                            Bar(x < x, x > y);
+                        }
 
-                    static void Bar(object a, object b)
-                    {
+                        static void Bar(object a, object b)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = 2;
-                        Bar(x < x, x > 1+2);
-                    }
+                        static void Main()
+                        {
+                            int x = 2;
+                            Bar(x < x, x > 1+2);
+                        }
 
-                    static void Bar(object a, object b)
-                    {
+                        static void Bar(object a, object b)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -749,26 +749,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = 2;
-                        int y[||] = (1 + 2);
-                        var z = new[] { x < x, x > y };
+                        static void Main()
+                        {
+                            int x = 2;
+                            int y[||] = (1 + 2);
+                            var z = new[] { x < x, x > y };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int x = 2;
-                        var z = new[] { x < x, x > 1 + 2 };
+                        static void Main()
+                        {
+                            int x = 2;
+                            var z = new[] { x < x, x > 1 + 2 };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -777,21 +777,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                { int[] [||]x = {
-                    3,
-                    4,
-                    5
-                };
-                int a = Array.IndexOf(x, 3); }
-                """,
-                """
-                {
-                        int a = Array.IndexOf(new int[] {
+                    { int[] [||]x = {
                         3,
                         4,
                         5
-                    }, 3); }
+                    };
+                    int a = Array.IndexOf(x, 3); }
+                    """,
                 """
+                    {
+                            int a = Array.IndexOf(new int[] {
+                            3,
+                            4,
+                            5
+                        }, 3); }
+                    """
             );
         }
 
@@ -800,7 +800,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             var initial = """
                 class Program
-                { 
+                {
                     static void Main()
                     {
                         int[] [||]x = { 3, 4, 5 };
@@ -811,7 +811,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
             var expected = """
                 class Program
-                { 
+                {
                     static void Main()
                     {
                         System.Array a = new int[] { 3, 4, 5 };
@@ -827,7 +827,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             var initial = """
                 class Program
-                { 
+                {
                     static void Main()
                     {
                         int[] [||]x = {
@@ -842,7 +842,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
             var expected = """
                 class Program
-                { 
+                {
                     static void Main()
                     {
                         System.Array a = new int[] {
@@ -1506,27 +1506,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                {
-                    int [||]x = 1,
-                #if true
-                        y,
-                #endif
-                        z;
-
-                    int a = x;
-                }
-                """,
-                """
-                {
-                        int
-                #if true
+                    {
+                        int [||]x = 1,
+                    #if true
                             y,
-                #endif
+                    #endif
                             z;
 
-                        int a = 1;
-                }
+                        int a = x;
+                    }
+                    """,
                 """
+                    {
+                            int
+                    #if true
+                                y,
+                    #endif
+                                z;
+
+                            int a = 1;
+                    }
+                    """
             );
         }
 
@@ -1535,27 +1535,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                {
-                    int y,
-                #if true
-                        [||]x = 1,
-                #endif
-                        z;
-
-                    int a = x;
-                }
-                """,
-                """
-                {
+                    {
                         int y,
-                #if true
-
-                #endif
+                    #if true
+                            [||]x = 1,
+                    #endif
                             z;
 
-                        int a = 1;
-                }
+                        int a = x;
+                    }
+                    """,
                 """
+                    {
+                            int y,
+                    #if true
+
+                    #endif
+                                z;
+
+                            int a = 1;
+                    }
+                    """
             );
         }
 
@@ -1564,27 +1564,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-                {
-                    int y,
-                #if true
-                        z,
-                #endif
-                        [||]x = 1;
-
-                    int a = x;
-                }
-                """,
-                """
-                {
+                    {
                         int y,
-                #if true
-                            z
-                #endif
-                            ;
+                    #if true
+                            z,
+                    #endif
+                            [||]x = 1;
 
-                        int a = 1;
-                }
+                        int a = x;
+                    }
+                    """,
                 """
+                    {
+                            int y,
+                    #if true
+                                z
+                    #endif
+                                ;
+
+                            int a = 1;
+                    }
+                    """
             );
         }
 
@@ -2006,28 +2006,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // Leading
-                        int [||]i = 10;
-                        //print
-                        Console.Write(i);
+                        static void Main(string[] args)
+                        {
+                            // Leading
+                            int [||]i = 10;
+                            //print
+                            Console.Write(i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // Leading
-                        //print
-                        Console.Write(10);
+                        static void Main(string[] args)
+                        {
+                            // Leading
+                            //print
+                            Console.Write(10);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2036,29 +2036,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // Leading
-                        int [||]i = 10; // Trailing
-                        //print
-                        Console.Write(i);
+                        static void Main(string[] args)
+                        {
+                            // Leading
+                            int [||]i = 10; // Trailing
+                            //print
+                            Console.Write(i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // Leading
-                        // Trailing
-                        //print
-                        Console.Write(10);
+                        static void Main(string[] args)
+                        {
+                            // Leading
+                            // Trailing
+                            //print
+                            Console.Write(10);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2067,27 +2067,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int [||]i = 10; // Trailing
-                        //print
-                        Console.Write(i);
+                        static void Main(string[] args)
+                        {
+                            int [||]i = 10; // Trailing
+                            //print
+                            Console.Write(i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // Trailing
-                        //print
-                        Console.Write(10);
+                        static void Main(string[] args)
+                        {
+                            // Trailing
+                            //print
+                            Console.Write(10);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2096,30 +2096,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                #if true
-                        int [||]i = 10; 
-                        //print
-                        Console.Write(i);
-                #endif
+                        static void Main(string[] args)
+                        {
+                    #if true
+                            int [||]i = 10;
+                            //print
+                            Console.Write(i);
+                    #endif
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                #if true
-                        //print
-                        Console.Write(10);
-                #endif
+                        static void Main(string[] args)
+                        {
+                    #if true
+                            //print
+                            Console.Write(10);
+                    #endif
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2128,25 +2128,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int [||]i = 5; int j = 110;
-                        Console.Write(i + j);
+                        static void Main(string[] args)
+                        {
+                            int [||]i = 5; int j = 110;
+                            Console.Write(i + j);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int j = 110;
-                        Console.Write(5 + j);
+                        static void Main(string[] args)
+                        {
+                            int j = 110;
+                            Console.Write(5 + j);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2155,36 +2155,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    void M()
+                    using System;
+                    class C
                     {
-                        switch (10)
+                        void M()
                         {
-                            default:
-                                int i[||] = 10;
-                                Console.WriteLine(i);
-                                break;
+                            switch (10)
+                            {
+                                default:
+                                    int i[||] = 10;
+                                    Console.WriteLine(i);
+                                    break;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void M()
+                    using System;
+                    class C
                     {
-                        switch (10)
+                        void M()
                         {
-                            default:
-                                Console.WriteLine(10);
-                                break;
+                            switch (10)
+                            {
+                                default:
+                                    Console.WriteLine(10);
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2193,28 +2193,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    static Action X;
-                    static void M()
+                    using System;
+                    class C
                     {
-                        var [||]y = (X);
-                        y();
+                        static Action X;
+                        static void M()
+                        {
+                            var [||]y = (X);
+                            y();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    static Action X;
-                    static void M()
+                    using System;
+                    class C
                     {
-                        X();
+                        static Action X;
+                        static void M()
+                        {
+                            X();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2223,28 +2223,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class Program
-                {
-                    static void Main()
+                    using System;
+                    class Program
                     {
-                        Action x = Console.WriteLine;
-                        Action y[||] = x;
-                        y();
+                        static void Main()
+                        {
+                            Action x = Console.WriteLine;
+                            Action y[||] = x;
+                            y();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class Program
-                {
-                    static void Main()
+                    using System;
+                    class Program
                     {
-                        Action x = Console.WriteLine;
-                        x();
+                        static void Main()
+                        {
+                            Action x = Console.WriteLine;
+                            x();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2253,36 +2253,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            using System.Collections;
-            using System.Linq;
+                    using System;
+                    using System.Collections;
+                    using System.Linq;
 
-            class A
-            {
-                static void Main()
-                {
-                    var [||]q = from x in "" select x;
-                    if (q is IEnumerable)
+                    class A
                     {
+                        static void Main()
+                        {
+                            var [||]q = from x in "" select x;
+                            if (q is IEnumerable)
+                            {
+                            }
+                        }
                     }
-                }
-            }
-            """,
+                    """,
                 """
-            using System;
-            using System.Collections;
-            using System.Linq;
+                    using System;
+                    using System.Collections;
+                    using System.Linq;
 
-            class A
-            {
-                static void Main()
-                {
-                    if ((from x in "" select x) is IEnumerable)
+                    class A
                     {
+                        static void Main()
+                        {
+                            if ((from x in "" select x) is IEnumerable)
+                            {
+                            }
+                        }
                     }
-                }
-            }
-            """
+                    """
             );
         }
 
@@ -2291,32 +2291,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class C
-            {
-                static void Main()
-                {
-                    Action<string> f[||] = Goo<string>;
-                    Action<string> g = null;
-                    var h = f + g;
-                }
+                    using System;
+                    class C
+                    {
+                        static void Main()
+                        {
+                            Action<string> f[||] = Goo<string>;
+                            Action<string> g = null;
+                            var h = f + g;
+                        }
 
-                static void Goo<T>(T y) { }
-            }
-            """,
+                        static void Goo<T>(T y) { }
+                    }
+                    """,
                 """
-            using System;
-            class C
-            {
-                static void Main()
-                {
-                    Action<string> g = null;
-                    var h = (Goo<string>) + g;
-                }
+                    using System;
+                    class C
+                    {
+                        static void Main()
+                        {
+                            Action<string> g = null;
+                            var h = (Goo<string>) + g;
+                        }
 
-                static void Goo<T>(T y) { }
-            }
-            """
+                        static void Goo<T>(T y) { }
+                    }
+                    """
             );
         }
 
@@ -2325,28 +2325,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            unsafe class C
-            {
-                static void M()
-                {
-                    int x;
-                    int* p[||] = &x;
-                    var i = (Int32)p;
-                }
-            }
-            """,
+                    using System;
+                    unsafe class C
+                    {
+                        static void M()
+                        {
+                            int x;
+                            int* p[||] = &x;
+                            var i = (Int32)p;
+                        }
+                    }
+                    """,
                 """
-            using System;
-            unsafe class C
-            {
-                static void M()
-                {
-                    int x;
-                    var i = (Int32)(&x);
-                }
-            }
-            """
+                    using System;
+                    unsafe class C
+                    {
+                        static void M()
+                        {
+                            int x;
+                            var i = (Int32)(&x);
+                        }
+                    }
+                    """
             );
         }
 
@@ -2355,28 +2355,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            unsafe class C
-            {
-                static void M()
-                {
-                    int x;
-                    int* p[||] = &x;
-                    var i = p->ToString();
-                }
-            }
-            """,
+                    using System;
+                    unsafe class C
+                    {
+                        static void M()
+                        {
+                            int x;
+                            int* p[||] = &x;
+                            var i = p->ToString();
+                        }
+                    }
+                    """,
                 """
-            using System;
-            unsafe class C
-            {
-                static void M()
-                {
-                    int x;
-                    var i = (&x)->ToString();
-                }
-            }
-            """
+                    using System;
+                    unsafe class C
+                    {
+                        static void M()
+                        {
+                            int x;
+                            var i = (&x)->ToString();
+                        }
+                    }
+                    """
             );
         }
 
@@ -2385,28 +2385,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            unsafe class C
-            {
-                static void M()
-                {
-                    int* x = null;
-                    int p[||] = *x;
-                    var i = (Int64)p;
-                }
-            }
-            """,
+                    using System;
+                    unsafe class C
+                    {
+                        static void M()
+                        {
+                            int* x = null;
+                            int p[||] = *x;
+                            var i = (Int64)p;
+                        }
+                    }
+                    """,
                 """
-            using System;
-            unsafe class C
-            {
-                static void M()
-                {
-                    int* x = null;
-                    var i = (Int64)(*x);
-                }
-            }
-            """
+                    using System;
+                    unsafe class C
+                    {
+                        static void M()
+                        {
+                            int* x = null;
+                            var i = (Int64)(*x);
+                        }
+                    }
+                    """
             );
         }
 
@@ -2415,28 +2415,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            unsafe class C
-            {
-                static void M()
-                {
-                    int** x = null;
-                    int* p[||] = *x;
-                    var i = p[1].ToString();
-                }
-            }
-            """,
+                    using System;
+                    unsafe class C
+                    {
+                        static void M()
+                        {
+                            int** x = null;
+                            int* p[||] = *x;
+                            var i = p[1].ToString();
+                        }
+                    }
+                    """,
                 """
-            using System;
-            unsafe class C
-            {
-                static void M()
-                {
-                    int** x = null;
-                    var i = (*x)[1].ToString();
-                }
-            }
-            """
+                    using System;
+                    unsafe class C
+                    {
+                        static void M()
+                        {
+                            int** x = null;
+                            var i = (*x)[1].ToString();
+                        }
+                    }
+                    """
             );
         }
 
@@ -2445,19 +2445,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                unsafe class C
-                {
-                    static void M()
+                    unsafe class C
                     {
-                        int* values[||] = stackalloc int[20];
-                        int* copy = values;
-                        int* p = &values[1];
-                        int* q = &values[15];
+                        static void M()
+                        {
+                            int* values[||] = stackalloc int[20];
+                            int* copy = values;
+                            int* p = &values[1];
+                            int* q = &values[15];
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2466,26 +2466,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class Program
-            {
-                static void Main(string[] args)
-                {
-                    Func<int?,int?> [||]lam = (int? s) => { return s; };
-                    Console.WriteLine(lam);
-                }
-            }
-            """,
+                    using System;
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            Func<int?,int?> [||]lam = (int? s) => { return s; };
+                            Console.WriteLine(lam);
+                        }
+                    }
+                    """,
                 """
-            using System;
-            class Program
-            {
-                static void Main(string[] args)
-                {
-                    Console.WriteLine((int? s) => { return s; });
-                }
-            }
-            """
+                    using System;
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine((int? s) => { return s; });
+                        }
+                    }
+                    """
             );
         }
 
@@ -2494,26 +2494,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class C
-            {
-                void M()
-                {
-                    string [||]x = null;
-                    Console.WriteLine(x);
-                }
-            }
-            """,
+                    using System;
+                    class C
+                    {
+                        void M()
+                        {
+                            string [||]x = null;
+                            Console.WriteLine(x);
+                        }
+                    }
+                    """,
                 """
-            using System;
-            class C
-            {
-                void M()
-                {
-                    Console.WriteLine((string)null);
-                }
-            }
-            """
+                    using System;
+                    class C
+                    {
+                        void M()
+                        {
+                            Console.WriteLine((string)null);
+                        }
+                    }
+                    """
             );
         }
 
@@ -2522,24 +2522,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
-                void M()
-                {
-                    long x[||] = 1;
-                    System.IComparable<long> y = x;
-                }
-            }
-            """,
+                    class C
+                    {
+                        void M()
+                        {
+                            long x[||] = 1;
+                            System.IComparable<long> y = x;
+                        }
+                    }
+                    """,
                 """
-            class C
-            {
-                void M()
-                {
-                    System.IComparable<long> y = (long)1;
-                }
-            }
-            """
+                    class C
+                    {
+                        void M()
+                        {
+                            System.IComparable<long> y = (long)1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -2548,33 +2548,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                    using System;
 
-            class C
-            {
-                static void Main()
-                {
-                    Goo(x => { int [||]y = x[0]; x[1] = y; });
-                }
+                    class C
+                    {
+                        static void Main()
+                        {
+                            Goo(x => { int [||]y = x[0]; x[1] = y; });
+                        }
 
-                static void Goo(Action<int[]> x) { }
-                static void Goo(Action<string[]> x) { }
-            }
-            """,
+                        static void Goo(Action<int[]> x) { }
+                        static void Goo(Action<string[]> x) { }
+                    }
+                    """,
                 """
-            using System;
+                    using System;
 
-            class C
-            {
-                static void Main()
-                {
-                    Goo(x => { x[1] = (int)x[0]; });
-                }
+                    class C
+                    {
+                        static void Main()
+                        {
+                            Goo(x => { x[1] = (int)x[0]; });
+                        }
 
-                static void Goo(Action<int[]> x) { }
-                static void Goo(Action<string[]> x) { }
-            }
-            """
+                        static void Goo(Action<int[]> x) { }
+                        static void Goo(Action<string[]> x) { }
+                    }
+                    """
             );
         }
 
@@ -2583,30 +2583,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
-                void M()
-                {
-                    var c = new C();
-                    int x[||] = 1;
-                    c[x] = 2;
-                }
+                    class C
+                    {
+                        void M()
+                        {
+                            var c = new C();
+                            int x[||] = 1;
+                            c[x] = 2;
+                        }
 
-                int this[object x] { set { } }
-            }
-            """,
+                        int this[object x] { set { } }
+                    }
+                    """,
                 """
-            class C
-            {
-                void M()
-                {
-                    var c = new C();
-                    c[1] = 2;
-                }
+                    class C
+                    {
+                        void M()
+                        {
+                            var c = new C();
+                            c[1] = 2;
+                        }
 
-                int this[object x] { set { } }
-            }
-            """
+                        int this[object x] { set { } }
+                    }
+                    """
             );
         }
 
@@ -2615,32 +2615,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestAsync(
                 """
-            using System;
+                    using System;
 
-            enum E { }
+                    enum E { }
 
-            class Program
-            {
-                static void Main()
-                {
-                    E x[||] = (global::E) -1;
-                    object y = x;
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            E x[||] = (global::E) -1;
+                            object y = x;
+                        }
+                    }
+                    """,
                 """
-            using System;
+                    using System;
 
-            enum E { }
+                    enum E { }
 
-            class Program
-            {
-                static void Main()
-                {
-                    object y = (global::E) -1;
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            object y = (global::E) -1;
+                        }
+                    }
+                    """,
                 parseOptions: null
             );
         }
@@ -2650,28 +2650,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestAsync(
                 """
-            using System;
-            class Program
-            {
-                static void M()
-                {
-                    DayOfWeek x[||] = 0;
-                    object y = x;
-                    Console.WriteLine(y);
-                }
-            }
-            """,
+                    using System;
+                    class Program
+                    {
+                        static void M()
+                        {
+                            DayOfWeek x[||] = 0;
+                            object y = x;
+                            Console.WriteLine(y);
+                        }
+                    }
+                    """,
                 """
-            using System;
-            class Program
-            {
-                static void M()
-                {
-                    object y = (DayOfWeek)0;
-                    Console.WriteLine(y);
-                }
-            }
-            """,
+                    using System;
+                    class Program
+                    {
+                        static void M()
+                        {
+                            object y = (DayOfWeek)0;
+                            Console.WriteLine(y);
+                        }
+                    }
+                    """,
                 parseOptions: null
             );
         }
@@ -2682,26 +2682,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestAsync(
                 """
-            using System;
-            class Program
-            {
-                static void M()
-                {
-                    Action a[||] = Console.WriteLine;
-                    Action b = a + Console.WriteLine;
-                }
-            }
-            """,
+                    using System;
+                    class Program
+                    {
+                        static void M()
+                        {
+                            Action a[||] = Console.WriteLine;
+                            Action b = a + Console.WriteLine;
+                        }
+                    }
+                    """,
                 """
-            using System;
-            class Program
-            {
-                static void M()
-                {
-                    Action b = (Action)Console.WriteLine + Console.WriteLine;
-                }
-            }
-            """,
+                    using System;
+                    class Program
+                    {
+                        static void M()
+                        {
+                            Action b = (Action)Console.WriteLine + Console.WriteLine;
+                        }
+                    }
+                    """,
                 parseOptions: null
             );
         }
@@ -2712,26 +2712,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestAsync(
                 """
-            using System;
-            class Program
-            {
-                static void Main()
-                {
-                    Action a[||] = Console.WriteLine;
-                    object b = a;
-                }
-            }
-            """,
+                    using System;
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            Action a[||] = Console.WriteLine;
+                            object b = a;
+                        }
+                    }
+                    """,
                 """
-            using System;
-            class Program
-            {
-                static void Main()
-                {
-                    object b = (Action)Console.WriteLine;
-                }
-            }
-            """,
+                    using System;
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            object b = (Action)Console.WriteLine;
+                        }
+                    }
+                    """,
                 parseOptions: null
             );
         }
@@ -2741,32 +2741,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestAsync(
                 """
-            class A<T>
-            {
-                static T x;
-                class B<U>
-                {
-                    static void Goo()
+                    class A<T>
                     {
-                        var y[||] = x;
-                        var z = y;
+                        static T x;
+                        class B<U>
+                        {
+                            static void Goo()
+                            {
+                                var y[||] = x;
+                                var z = y;
+                            }
+                        }
                     }
-                }
-            }
-            """,
+                    """,
                 """
-            class A<T>
-            {
-                static T x;
-                class B<U>
-                {
-                    static void Goo()
+                    class A<T>
                     {
-                        var z = x;
+                        static T x;
+                        class B<U>
+                        {
+                            static void Goo()
+                            {
+                                var z = x;
+                            }
+                        }
                     }
-                }
-            }
-            """,
+                    """,
                 parseOptions: null
             );
         }
@@ -2777,28 +2777,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                    using System;
 
-            class Program
-            {
-                static void Main()
-                {
-                    Predicate<object> x[||] = y => true;
-                    var z = new Func<string, bool>(x);
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            Predicate<object> x[||] = y => true;
+                            var z = new Func<string, bool>(x);
+                        }
+                    }
+                    """,
                 """
-            using System;
+                    using System;
 
-            class Program
-            {
-                static void Main()
-                {
-                    var z = new Func<string, bool>(y => true);
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            var z = new Func<string, bool>(y => true);
+                        }
+                    }
+                    """
             );
         }
 
@@ -2807,26 +2807,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class Program
-            {
-                static void Main()
-                {
-                    Exception e[||] = new ArgumentException();
-                    Type b = e.GetType();
-                }
-            }
-            """,
+                    using System;
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            Exception e[||] = new ArgumentException();
+                            Type b = e.GetType();
+                        }
+                    }
+                    """,
                 """
-            using System;
-            class Program
-            {
-                static void Main()
-                {
-                    Type b = new ArgumentException().GetType();
-                }
-            }
-            """
+                    using System;
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            Type b = new ArgumentException().GetType();
+                        }
+                    }
+                    """
             );
         }
 
@@ -2835,32 +2835,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-            class Program
-            {
-                static void Main()
-                {
-                    IEnumerable<char> s[||] = "abc";
-                    foreach (var x in s)
-                        Console.WriteLine(x);
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            IEnumerable<char> s[||] = "abc";
+                            foreach (var x in s)
+                                Console.WriteLine(x);
+                        }
+                    }
+                    """,
                 """
-            using System;
-            using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-            class Program
-            {
-                static void Main()
-                {
-                    foreach (var x in (IEnumerable<char>)"abc")
-                        Console.WriteLine(x);
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            foreach (var x in (IEnumerable<char>)"abc")
+                                Console.WriteLine(x);
+                        }
+                    }
+                    """
             );
         }
 
@@ -2869,32 +2869,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            using System.Collections;
+                    using System;
+                    using System.Collections;
 
-            class Program
-            {
-                static void Main()
-                {
-                    IEnumerable s[||] = "abc";
-                    foreach (object x in s)
-                        Console.WriteLine(x);
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            IEnumerable s[||] = "abc";
+                            foreach (object x in s)
+                                Console.WriteLine(x);
+                        }
+                    }
+                    """,
                 """
-            using System;
-            using System.Collections;
+                    using System;
+                    using System.Collections;
 
-            class Program
-            {
-                static void Main()
-                {
-                    foreach (object x in (IEnumerable)"abc")
-                        Console.WriteLine(x);
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            foreach (object x in (IEnumerable)"abc")
+                                Console.WriteLine(x);
+                        }
+                    }
+                    """
             );
         }
 
@@ -2903,32 +2903,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            using System.Collections;
+                    using System;
+                    using System.Collections;
 
-            class Program
-            {
-                static void Main()
-                {
-                    IEnumerable s[||] = "abc";
-                    foreach (char x in s)
-                        Console.WriteLine(x);
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            IEnumerable s[||] = "abc";
+                            foreach (char x in s)
+                                Console.WriteLine(x);
+                        }
+                    }
+                    """,
                 """
-            using System;
-            using System.Collections;
+                    using System;
+                    using System.Collections;
 
-            class Program
-            {
-                static void Main()
-                {
-                    foreach (char x in (IEnumerable)"abc")
-                        Console.WriteLine(x);
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            foreach (char x in (IEnumerable)"abc")
+                                Console.WriteLine(x);
+                        }
+                    }
+                    """
             );
         }
 
@@ -2937,30 +2937,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class C
-            {
-                static T Goo<T>(T x, T y) { return default(T); }
+                    using System;
+                    class C
+                    {
+                        static T Goo<T>(T x, T y) { return default(T); }
 
-                static void M()
-                {
-                    long [||]x = 1;
-                    IComparable<long> c = Goo(x, x);
-                }
-            }
-            """,
+                        static void M()
+                        {
+                            long [||]x = 1;
+                            IComparable<long> c = Goo(x, x);
+                        }
+                    }
+                    """,
                 """
-            using System;
-            class C
-            {
-                static T Goo<T>(T x, T y) { return default(T); }
+                    using System;
+                    class C
+                    {
+                        static T Goo<T>(T x, T y) { return default(T); }
 
-                static void M()
-                {
-                    IComparable<long> c = Goo(1, (long)1);
-                }
-            }
-            """
+                        static void M()
+                        {
+                            IComparable<long> c = Goo(1, (long)1);
+                        }
+                    }
+                    """
             );
         }
 
@@ -2969,30 +2969,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
-                static void M()
-                {
-                    object x[||] = null;
-                    var a = new[] { x, x };
-                    Goo(a);
-                }
+                    class C
+                    {
+                        static void M()
+                        {
+                            object x[||] = null;
+                            var a = new[] { x, x };
+                            Goo(a);
+                        }
 
-                static void Goo(object[] o) { }
-            }
-            """,
+                        static void Goo(object[] o) { }
+                    }
+                    """,
                 """
-            class C
-            {
-                static void M()
-                {
-                    var a = new[] { null, (object)null };
-                    Goo(a);
-                }
+                    class C
+                    {
+                        static void M()
+                        {
+                            var a = new[] { null, (object)null };
+                            Goo(a);
+                        }
 
-                static void Goo(object[] o) { }
-            }
-            """
+                        static void Goo(object[] o) { }
+                    }
+                    """
             );
         }
 
@@ -3001,30 +3001,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
-                static void M()
-                {
-                    long x[||] = 42;
-                    Goo(x, x);
-                }
+                    class C
+                    {
+                        static void M()
+                        {
+                            long x[||] = 42;
+                            Goo(x, x);
+                        }
 
-                static void Goo(int x, int y) { }
-                static void Goo(long x, long y) { }
-            }
-            """,
+                        static void Goo(int x, int y) { }
+                        static void Goo(long x, long y) { }
+                    }
+                    """,
                 """
-            class C
-            {
-                static void M()
-                {
-                    Goo(42, (long)42);
-                }
+                    class C
+                    {
+                        static void M()
+                        {
+                            Goo(42, (long)42);
+                        }
 
-                static void Goo(int x, int y) { }
-                static void Goo(long x, long y) { }
-            }
-            """
+                        static void Goo(int x, int y) { }
+                        static void Goo(long x, long y) { }
+                    }
+                    """
             );
         }
 
@@ -3033,32 +3033,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class C
-            {
-                static void M()
-                {
-                    long x[||] = 42;
-                    Goo(() => { return x; }, () => { return x; });
-                }
+                    using System;
+                    class C
+                    {
+                        static void M()
+                        {
+                            long x[||] = 42;
+                            Goo(() => { return x; }, () => { return x; });
+                        }
 
-                static void Goo(Func<int> x, Func<int> y) { }
-                static void Goo(Func<long> x, Func<long> y) { }
-            }
-            """,
+                        static void Goo(Func<int> x, Func<int> y) { }
+                        static void Goo(Func<long> x, Func<long> y) { }
+                    }
+                    """,
                 """
-            using System;
-            class C
-            {
-                static void M()
-                {
-                    Goo(() => { return 42; }, () => { return (long)42; });
-                }
+                    using System;
+                    class C
+                    {
+                        static void M()
+                        {
+                            Goo(() => { return 42; }, () => { return (long)42; });
+                        }
 
-                static void Goo(Func<int> x, Func<int> y) { }
-                static void Goo(Func<long> x, Func<long> y) { }
-            }
-            """
+                        static void Goo(Func<int> x, Func<int> y) { }
+                        static void Goo(Func<long> x, Func<long> y) { }
+                    }
+                    """
             );
         }
 
@@ -3067,64 +3067,64 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class C
-            {
-                private int value;
+                    using System;
+                    class C
+                    {
+                        private int value;
 
-                void M()
-                {
-                    C x[||] = 42;
-                    Console.WriteLine(x + x);
-                }
+                        void M()
+                        {
+                            C x[||] = 42;
+                            Console.WriteLine(x + x);
+                        }
 
-                public static int operator +(C x, C y)
-                {
-                    return x.value + y.value;
-                }
+                        public static int operator +(C x, C y)
+                        {
+                            return x.value + y.value;
+                        }
 
-                public static implicit operator C(int l)
-                {
-                    var c = new C();
-                    c.value = l;
-                    return c;
-                }
+                        public static implicit operator C(int l)
+                        {
+                            var c = new C();
+                            c.value = l;
+                            return c;
+                        }
 
-                static void Main()
-                {
-                    new C().M();
-                }
-            }
-            """,
+                        static void Main()
+                        {
+                            new C().M();
+                        }
+                    }
+                    """,
                 """
-            using System;
-            class C
-            {
-                private int value;
+                    using System;
+                    class C
+                    {
+                        private int value;
 
-                void M()
-                {
-                    Console.WriteLine((C)42 + (C)42);
-                }
+                        void M()
+                        {
+                            Console.WriteLine((C)42 + (C)42);
+                        }
 
-                public static int operator +(C x, C y)
-                {
-                    return x.value + y.value;
-                }
+                        public static int operator +(C x, C y)
+                        {
+                            return x.value + y.value;
+                        }
 
-                public static implicit operator C(int l)
-                {
-                    var c = new C();
-                    c.value = l;
-                    return c;
-                }
+                        public static implicit operator C(int l)
+                        {
+                            var c = new C();
+                            c.value = l;
+                            return c;
+                        }
 
-                static void Main()
-                {
-                    new C().M();
-                }
-            }
-            """
+                        static void Main()
+                        {
+                            new C().M();
+                        }
+                    }
+                    """
             );
         }
 
@@ -3133,42 +3133,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                    using System;
 
-            class X
-            {
-                static int Goo(Func<int?, byte> x, object y) { return 1; }
-                static int Goo(Func<X, byte> x, string y) { return 2; }
-
-                const int Value = 1000;
-                static void Main()
-                {
-                    var a[||] = Goo(X => (byte)X.Value, null);
-                    unchecked
+                    class X
                     {
-                        Console.WriteLine(a);
+                        static int Goo(Func<int?, byte> x, object y) { return 1; }
+                        static int Goo(Func<X, byte> x, string y) { return 2; }
+
+                        const int Value = 1000;
+                        static void Main()
+                        {
+                            var a[||] = Goo(X => (byte)X.Value, null);
+                            unchecked
+                            {
+                                Console.WriteLine(a);
+                            }
+                        }
                     }
-                }
-            }
-            """,
+                    """,
                 """
-            using System;
+                    using System;
 
-            class X
-            {
-                static int Goo(Func<int?, byte> x, object y) { return 1; }
-                static int Goo(Func<X, byte> x, string y) { return 2; }
-
-                const int Value = 1000;
-                static void Main()
-                {
-                    unchecked
+                    class X
                     {
-                        Console.WriteLine(Goo(X => (byte)X.Value, null));
+                        static int Goo(Func<int?, byte> x, object y) { return 1; }
+                        static int Goo(Func<X, byte> x, string y) { return 2; }
+
+                        const int Value = 1000;
+                        static void Main()
+                        {
+                            unchecked
+                            {
+                                Console.WriteLine(Goo(X => (byte)X.Value, null));
+                            }
+                        }
                     }
-                }
-            }
-            """
+                    """
             );
         }
 
@@ -3177,46 +3177,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                    using System;
 
-            static class C
-            {
-                static int Outer(Action<int> x, object y) { return 1; }
-                static int Outer(Action<string> x, string y) { return 2; }
-
-                static void Inner(int x, int[] y) { }
-                unsafe static void Inner(string x, int*[] y) { }
-
-                static void Main()
-                {
-                    var a[||] = Outer(x => Inner(x, null), null);
-                    unsafe
+                    static class C
                     {
-                        Console.WriteLine(a);
+                        static int Outer(Action<int> x, object y) { return 1; }
+                        static int Outer(Action<string> x, string y) { return 2; }
+
+                        static void Inner(int x, int[] y) { }
+                        unsafe static void Inner(string x, int*[] y) { }
+
+                        static void Main()
+                        {
+                            var a[||] = Outer(x => Inner(x, null), null);
+                            unsafe
+                            {
+                                Console.WriteLine(a);
+                            }
+                        }
                     }
-                }
-            }
-            """,
+                    """,
                 """
-            using System;
+                    using System;
 
-            static class C
-            {
-                static int Outer(Action<int> x, object y) { return 1; }
-                static int Outer(Action<string> x, string y) { return 2; }
-
-                static void Inner(int x, int[] y) { }
-                unsafe static void Inner(string x, int*[] y) { }
-
-                static void Main()
-                {
-                    unsafe
+                    static class C
                     {
-                        Console.WriteLine(Outer(x => Inner(x, null), null));
+                        static int Outer(Action<int> x, object y) { return 1; }
+                        static int Outer(Action<string> x, string y) { return 2; }
+
+                        static void Inner(int x, int[] y) { }
+                        unsafe static void Inner(string x, int*[] y) { }
+
+                        static void Main()
+                        {
+                            unsafe
+                            {
+                                Console.WriteLine(Outer(x => Inner(x, null), null));
+                            }
+                        }
                     }
-                }
-            }
-            """
+                    """
             );
         }
 
@@ -3225,40 +3225,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                    using System;
 
-            class C
-            {
-                static void Goo(Action<object> a) { }
-                static void Goo(Action<string> a) { }
-
-                static void Main()
-                {
-                    Goo(x =>
+                    class C
                     {
-                        string s[||] = x;
-                        var y = s;
-                    });
-                }
-            }
-            """,
+                        static void Goo(Action<object> a) { }
+                        static void Goo(Action<string> a) { }
+
+                        static void Main()
+                        {
+                            Goo(x =>
+                            {
+                                string s[||] = x;
+                                var y = s;
+                            });
+                        }
+                    }
+                    """,
                 """
-            using System;
+                    using System;
 
-            class C
-            {
-                static void Goo(Action<object> a) { }
-                static void Goo(Action<string> a) { }
-
-                static void Main()
-                {
-                    Goo(x =>
+                    class C
                     {
-                        var y = (string)x;
-                    });
-                }
-            }
-            """
+                        static void Goo(Action<object> a) { }
+                        static void Goo(Action<string> a) { }
+
+                        static void Main()
+                        {
+                            Goo(x =>
+                            {
+                                var y = (string)x;
+                            });
+                        }
+                    }
+                    """
             );
         }
 
@@ -3267,18 +3267,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        int [||]a[10] = {
-                            0,
-                            0
-                        };
-                        System.Console.WriteLine(a);
+                        static void M()
+                        {
+                            int [||]a[10] = {
+                                0,
+                                0
+                            };
+                            System.Console.WriteLine(a);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3287,18 +3287,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        int [|x|] = 0;
+                        void Main()
+                        {
+                            int [|x|] = 0;
 
-                #line hidden
-                        Goo(x);
-                #line default
+                    #line hidden
+                            Goo(x);
+                    #line default
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3307,18 +3307,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        int [|x|] = 0;
-                        Goo(x);
-                #line hidden
-                        Goo(x);
-                #line default
+                        void Main()
+                        {
+                            int [|x|] = 0;
+                            Goo(x);
+                    #line hidden
+                            Goo(x);
+                    #line default
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3327,34 +3327,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
-                        int [|x|] = 0;
+                        void Main()
+                        {
+                            int [|x|] = 0;
 
-                        Goo(x);
-                        #line hidden
-                        Goo();
-                        #line default
+                            Goo(x);
+                            #line hidden
+                            Goo();
+                            #line default
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
+                        void Main()
+                        {
 
-                        Goo(0);
-                        #line hidden
-                        Goo();
-                        #line default
+                            Goo(0);
+                            #line hidden
+                            Goo();
+                            #line default
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3363,36 +3363,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
-                        int [||]x = 0;
+                        void Main()
+                        {
+                            int [||]x = 0;
 
-                        Goo(x);
-                #line hidden
-                        Goo();
-                #line default
-                        Goo(x);
+                            Goo(x);
+                    #line hidden
+                            Goo();
+                    #line default
+                            Goo(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
+                        void Main()
+                        {
 
-                        Goo(0);
-                #line hidden
-                        Goo();
-                #line default
-                        Goo(0);
+                            Goo(0);
+                    #line hidden
+                            Goo();
+                    #line default
+                            Goo(0);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3401,19 +3401,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        int [||]x = 0;
-                        Goo(x);
-                #line hidden
-                        Goo(x);
-                #line default
-                        Goo(x);
+                        void Main()
+                        {
+                            int [||]x = 0;
+                            Goo(x);
+                    #line hidden
+                            Goo(x);
+                    #line default
+                            Goo(x);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3422,32 +3422,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                    using System;
 
-            class Program
-            {
-                static void Main()
-                {
-                label:
-                    int [||]x = 1;
-                    Console.WriteLine();
-                    int y = x;        
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                        label:
+                            int [||]x = 1;
+                            Console.WriteLine();
+                            int y = x;
+                        }
+                    }
+                    """,
                 """
-            using System;
+                    using System;
 
-            class Program
-            {
-                static void Main()
-                {
-                label:
-                    Console.WriteLine();
-                    int y = 1;        
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                        label:
+                            Console.WriteLine();
+                            int y = 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -3456,30 +3456,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-            class Program
-            {
-                static void Main()
-                {
-                    int x = 0;
-                    int y[||] = x += 1;
-                    var z = new List<int> { y };
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            int x = 0;
+                            int y[||] = x += 1;
+                            var z = new List<int> { y };
+                        }
+                    }
+                    """,
                 """
-            using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-            class Program
-            {
-                static void Main()
-                {
-                    int x = 0;
-                    var z = new List<int> { (x += 1) };
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            int x = 0;
+                            var z = new List<int> { (x += 1) };
+                        }
+                    }
+                    """
             );
         }
 
@@ -3488,28 +3488,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-            class Program
-            {
-                static void Main()
-                {
-                    IList<dynamic> x[||] = new List<object>();
-                    IList<object> y = x;
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            IList<dynamic> x[||] = new List<object>();
+                            IList<object> y = x;
+                        }
+                    }
+                    """,
                 """
-            using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-            class Program
-            {
-                static void Main()
-                {
-                    IList<object> y = new List<object>();
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            IList<object> y = new List<object>();
+                        }
+                    }
+                    """
             );
         }
 
@@ -3518,28 +3518,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-            class Program
-            {
-                static void Main()
-                {
-                    IList<object> x[||] = new List<dynamic>();
-                    IList<dynamic> y = x;
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            IList<object> x[||] = new List<dynamic>();
+                            IList<dynamic> y = x;
+                        }
+                    }
+                    """,
                 """
-            using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-            class Program
-            {
-                static void Main()
-                {
-                    IList<dynamic> y = new List<dynamic>();
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            IList<dynamic> y = new List<dynamic>();
+                        }
+                    }
+                    """
             );
         }
 
@@ -3548,28 +3548,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                    using System;
 
-            class Program
-            {
-                static void Main()
-                {
-                    ValueType x[||] = 1;
-                    object y = x;
-                }
-            }
-            """,
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            ValueType x[||] = 1;
+                            object y = x;
+                        }
+                    }
+                    """,
                 """
-            using System;
+                    using System;
 
-            class Program
-            {
-                static void Main()
-                {
-                    object y = 1;
-                }
-            }
-            """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            object y = 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -3578,41 +3578,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScript1Async(
                 """
-            using System;
+                    using System;
 
-            static class C
-            {
-                static void Inner(Action<string> x, string y) { }
-                static void Inner(Action<string> x, int y) { }
-                static void Inner(Action<int> x, int y) { }
+                    static class C
+                    {
+                        static void Inner(Action<string> x, string y) { }
+                        static void Inner(Action<string> x, int y) { }
+                        static void Inner(Action<int> x, int y) { }
 
-                static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
-                static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
+                        static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
+                        static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
 
-                static void Main()
-                {
-                    Outer(y => Inner(x => { var z[||] = x; Action a = () => z.GetType(); }, y), null);
-                }
-            }
-            """,
+                        static void Main()
+                        {
+                            Outer(y => Inner(x => { var z[||] = x; Action a = () => z.GetType(); }, y), null);
+                        }
+                    }
+                    """,
                 """
-            using System;
+                    using System;
 
-            static class C
-            {
-                static void Inner(Action<string> x, string y) { }
-                static void Inner(Action<string> x, int y) { }
-                static void Inner(Action<int> x, int y) { }
+                    static class C
+                    {
+                        static void Inner(Action<string> x, string y) { }
+                        static void Inner(Action<string> x, int y) { }
+                        static void Inner(Action<int> x, int y) { }
 
-                static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
-                static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
+                        static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
+                        static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
 
-                static void Main()
-                {
-                    Outer(y => Inner(x => { Action a = () => ((string)x).GetType(); }, y), null);
-                }
-            }
-            """
+                        static void Main()
+                        {
+                            Outer(y => Inner(x => { Action a = () => ((string)x).GetType(); }, y), null);
+                        }
+                    }
+                    """
             );
         }
 
@@ -3621,36 +3621,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            class A<B>
-            {
-                class C : A<C>
-                {
-                    class B : C
+                    class A<B>
                     {
-                        void M()
+                        class C : A<C>
                         {
-                            var x[||] = new C[0];
-                            C[] y = x;
+                            class B : C
+                            {
+                                void M()
+                                {
+                                    var x[||] = new C[0];
+                                    C[] y = x;
+                                }
+                            }
                         }
                     }
-                }
-            }
-            """,
+                    """,
                 """
-            class A<B>
-            {
-                class C : A<C>
-                {
-                    class B : C
+                    class A<B>
                     {
-                        void M()
+                        class C : A<C>
                         {
-                            C[] y = new C[0];
+                            class B : C
+                            {
+                                void M()
+                                {
+                                    C[] y = new C[0];
+                                }
+                            }
                         }
                     }
-                }
-            }
-            """
+                    """
             );
         }
 
@@ -3659,59 +3659,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                    using System;
 
-            class A
-            {
-                static void Main()
-                {
-                    var a[||] = new A(); // Inline a
-                    Goo(a);
-                }
+                    class A
+                    {
+                        static void Main()
+                        {
+                            var a[||] = new A(); // Inline a
+                            Goo(a);
+                        }
 
-                static void Goo(long x)
-                {
-                    Console.WriteLine(x);
-                }
+                        static void Goo(long x)
+                        {
+                            Console.WriteLine(x);
+                        }
 
-                public static implicit operator int (A x)
-                {
-                    return 1;
-                }
+                        public static implicit operator int (A x)
+                        {
+                            return 1;
+                        }
 
-                public static explicit operator long (A x)
-                {
-                    return 2;
-                }
-            }
-            """,
+                        public static explicit operator long (A x)
+                        {
+                            return 2;
+                        }
+                    }
+                    """,
                 """
-            using System;
+                    using System;
 
-            class A
-            {
-                static void Main()
-                {
-                    // Inline a
-                    Goo(new A());
-                }
+                    class A
+                    {
+                        static void Main()
+                        {
+                            // Inline a
+                            Goo(new A());
+                        }
 
-                static void Goo(long x)
-                {
-                    Console.WriteLine(x);
-                }
+                        static void Goo(long x)
+                        {
+                            Console.WriteLine(x);
+                        }
 
-                public static implicit operator int (A x)
-                {
-                    return 1;
-                }
+                        public static implicit operator int (A x)
+                        {
+                            return 1;
+                        }
 
-                public static explicit operator long (A x)
-                {
-                    return 2;
-                }
-            }
-            """
+                        public static explicit operator long (A x)
+                        {
+                            return 2;
+                        }
+                    }
+                    """
             );
         }
 
@@ -3720,24 +3720,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    bool M(string[] args)
+                    class A
                     {
-                        var [|x|] = args[0];
-                        return x?.Length == 0;
+                        bool M(string[] args)
+                        {
+                            var [|x|] = args[0];
+                            return x?.Length == 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    bool M(string[] args)
+                    class A
                     {
-                        return args[0]?.Length == 0;
+                        bool M(string[] args)
+                        {
+                            return args[0]?.Length == 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3746,24 +3746,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void M(string[] args)
+                    class A
                     {
-                        var [|x|] = args.Length.ToString();
-                        var y = x?.ToString();
+                        void M(string[] args)
+                        {
+                            var [|x|] = args.Length.ToString();
+                            var y = x?.ToString();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    void M(string[] args)
+                    class A
                     {
-                        var y = args.Length.ToString()?.ToString();
+                        void M(string[] args)
+                        {
+                            var y = args.Length.ToString()?.ToString();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3772,24 +3772,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void M(string[] args)
+                    class A
                     {
-                        var [|x|] = args[0]?.Length ?? 10;
-                        var y = x == 10 ? 10 : 4;
+                        void M(string[] args)
+                        {
+                            var [|x|] = args[0]?.Length ?? 10;
+                            var y = x == 10 ? 10 : 4;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    void M(string[] args)
+                    class A
                     {
-                        var y = (args[0]?.Length ?? 10) == 10 ? 10 : 4;
+                        void M(string[] args)
+                        {
+                            var y = (args[0]?.Length ?? 10) == 10 ? 10 : 4;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3798,58 +3798,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                static class M
-                {
-                    public static IEnumerable<string> Something(this C cust)
+                    static class M
                     {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                class C
-                {
-                    private object GetAssemblyIdentity(IEnumerable<C> types)
-                    {
-                        foreach (var t in types)
+                        public static IEnumerable<string> Something(this C cust)
                         {
-                            var [|assembly|] = t?.Something().First();
-                            var identity = assembly?.ToArray();
+                            throw new NotImplementedException();
                         }
-
-                        return null;
                     }
-                }
-                """,
-                """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
 
-                static class M
-                {
-                    public static IEnumerable<string> Something(this C cust)
+                    class C
                     {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                class C
-                {
-                    private object GetAssemblyIdentity(IEnumerable<C> types)
-                    {
-                        foreach (var t in types)
+                        private object GetAssemblyIdentity(IEnumerable<C> types)
                         {
-                            var identity = (t?.Something().First())?.ToArray();
-                        }
+                            foreach (var t in types)
+                            {
+                                var [|assembly|] = t?.Something().First();
+                                var identity = assembly?.ToArray();
+                            }
 
-                        return null;
+                            return null;
+                        }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+
+                    static class M
+                    {
+                        public static IEnumerable<string> Something(this C cust)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+
+                    class C
+                    {
+                        private object GetAssemblyIdentity(IEnumerable<C> types)
+                        {
+                            foreach (var t in types)
+                            {
+                                var identity = (t?.Something().First())?.ToArray();
+                            }
+
+                            return null;
+                        }
+                    }
+                    """
             );
         }
 
@@ -3858,68 +3858,68 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                static class M
-                {
-                    public static IEnumerable<string> Something(this C cust)
+                    static class M
                     {
-                        throw new NotImplementedException();
-                    }
-
-                    public static Func<C> Something2(this C cust)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                class C
-                {
-                    private object GetAssemblyIdentity(IEnumerable<C> types)
-                    {
-                        foreach (var t in types)
+                        public static IEnumerable<string> Something(this C cust)
                         {
-                            var [|assembly|] = (t?.Something2())()?.Something().First();
-                            var identity = assembly?.ToArray();
+                            throw new NotImplementedException();
                         }
 
-                        return null;
-                    }
-                }
-                """,
-                """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-
-                static class M
-                {
-                    public static IEnumerable<string> Something(this C cust)
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    public static Func<C> Something2(this C cust)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                class C
-                {
-                    private object GetAssemblyIdentity(IEnumerable<C> types)
-                    {
-                        foreach (var t in types)
+                        public static Func<C> Something2(this C cust)
                         {
-                            var identity = ((t?.Something2())()?.Something().First())?.ToArray();
+                            throw new NotImplementedException();
+                        }
+                    }
+
+                    class C
+                    {
+                        private object GetAssemblyIdentity(IEnumerable<C> types)
+                        {
+                            foreach (var t in types)
+                            {
+                                var [|assembly|] = (t?.Something2())()?.Something().First();
+                                var identity = assembly?.ToArray();
+                            }
+
+                            return null;
+                        }
+                    }
+                    """,
+                """
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
+
+                    static class M
+                    {
+                        public static IEnumerable<string> Something(this C cust)
+                        {
+                            throw new NotImplementedException();
                         }
 
-                        return null;
+                        public static Func<C> Something2(this C cust)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """
+
+                    class C
+                    {
+                        private object GetAssemblyIdentity(IEnumerable<C> types)
+                        {
+                            foreach (var t in types)
+                            {
+                                var identity = ((t?.Something2())()?.Something().First())?.ToArray();
+                            }
+
+                            return null;
+                        }
+                    }
+                    """
             );
         }
 
@@ -3928,24 +3928,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void M()
+                    class A
                     {
-                        var [|g|] = global::System.Guid.Empty;
-                        var s = $"{g}";
+                        void M()
+                        {
+                            var [|g|] = global::System.Guid.Empty;
+                            var s = $"{g}";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    void M()
+                    class A
                     {
-                        var s = $"{(global::System.Guid.Empty)}";
+                        void M()
+                        {
+                            var s = $"{(global::System.Guid.Empty)}";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3954,24 +3954,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    bool M(bool b)
+                    class A
                     {
-                        var [|x|] = b ? 19 : 23;
-                        var s = $"{x}";
+                        bool M(bool b)
+                        {
+                            var [|x|] = b ? 19 : 23;
+                            var s = $"{x}";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    bool M(bool b)
+                    class A
                     {
-                        var s = $"{(b ? 19 : 23)}";
+                        bool M(bool b)
+                        {
+                            var s = $"{(b ? 19 : 23)}";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3980,24 +3980,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    bool M(bool b)
+                    class A
                     {
-                        var [|x|] = b ? 19 : 23;
-                        var s = $"{x:x}";
+                        bool M(bool b)
+                        {
+                            var [|x|] = b ? 19 : 23;
+                            var s = $"{x:x}";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    bool M(bool b)
+                    class A
                     {
-                        var s = $"{(b ? 19 : 23):x}";
+                        bool M(bool b)
+                        {
+                            var s = $"{(b ? 19 : 23):x}";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4006,24 +4006,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    public static void M(string s)
+                    class A
                     {
-                        var [|x|] = s.ToUpper();
-                        var y = $"{x}";
+                        public static void M(string s)
+                        {
+                            var [|x|] = s.ToUpper();
+                            var y = $"{x}";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    public static void M(string s)
+                    class A
                     {
-                        var y = $"{s.ToUpper()}";
+                        public static void M(string s)
+                        {
+                            var y = $"{s.ToUpper()}";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4032,24 +4032,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public void M()
+                    class C
                     {
-                        var [|s1|] = $"hello";
-                        var s2 = string.Replace(s1, "world");
+                        public void M()
+                        {
+                            var [|s1|] = $"hello";
+                            var s2 = string.Replace(s1, "world");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public void M()
+                    class C
                     {
-                        var s2 = string.Replace($"hello", "world");
+                        public void M()
+                        {
+                            var s2 = string.Replace($"hello", "world");
+                        }
                     }
-                }
-                """,
+                    """,
                 parseOptions: TestOptions.Regular7
             );
         }
@@ -4060,24 +4060,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public void M()
+                    class C
                     {
-                        var [|s1|] = $"hello";
-                        var s2 = string.Replace(s1, "world");
+                        public void M()
+                        {
+                            var [|s1|] = $"hello";
+                            var s2 = string.Replace(s1, "world");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public void M()
+                    class C
                     {
-                        var s2 = string.Replace($"hello", "world");
+                        public void M()
+                        {
+                            var s2 = string.Replace($"hello", "world");
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4087,28 +4087,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public void M()
+                    class C
                     {
-                        var [|s1|] = $"hello";
-                        var s2 = Replace(s1, "world");
-                    }
+                        public void M()
+                        {
+                            var [|s1|] = $"hello";
+                            var s2 = Replace(s1, "world");
+                        }
 
-                    void Replace(string s1, string s2) { }
-                }
-                """,
+                        void Replace(string s1, string s2) { }
+                    }
+                    """,
                 """
-                class C
-                {
-                    public void M()
+                    class C
                     {
-                        var s2 = Replace($"hello", "world");
-                    }
+                        public void M()
+                        {
+                            var s2 = Replace($"hello", "world");
+                        }
 
-                    void Replace(string s1, string s2) { }
-                }
-                """
+                        void Replace(string s1, string s2) { }
+                    }
+                    """
             );
         }
 
@@ -4117,24 +4117,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public void M(int x)
+                    class C
                     {
-                        var [|s1|] = $"hello {x}";
-                        var s2 = string.Replace(s1, "world");
+                        public void M(int x)
+                        {
+                            var [|s1|] = $"hello {x}";
+                            var s2 = string.Replace(s1, "world");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public void M(int x)
+                    class C
                     {
-                        var s2 = string.Replace($"hello {x}", "world");
+                        public void M(int x)
+                        {
+                            var s2 = string.Replace($"hello {x}", "world");
+                        }
                     }
-                }
-                """,
+                    """,
                 parseOptions: TestOptions.Regular7
             );
         }
@@ -4145,24 +4145,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    public void M(int x)
+                    class C
                     {
-                        var [|s1|] = $"hello {x}";
-                        var s2 = string.Replace(s1, "world");
+                        public void M(int x)
+                        {
+                            var [|s1|] = $"hello {x}";
+                            var s2 = string.Replace(s1, "world");
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public void M(int x)
+                    class C
                     {
-                        var s2 = string.Replace($"hello {x}", "world");
+                        public void M(int x)
+                        {
+                            var s2 = string.Replace($"hello {x}", "world");
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4171,30 +4171,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                internal class C
-                {
-                    async Task M()
+                    internal class C
                     {
-                        var [|t|] = await Task.FromResult("");
-                        t.Any();
+                        async Task M()
+                        {
+                            var [|t|] = await Task.FromResult("");
+                            t.Any();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Linq;
-                using System.Threading.Tasks;
+                    using System.Linq;
+                    using System.Threading.Tasks;
 
-                internal class C
-                {
-                    async Task M()
+                    internal class C
                     {
-                        (await Task.FromResult("")).Any();
+                        async Task M()
+                        {
+                            (await Task.FromResult("")).Any();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4203,42 +4203,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             const string initial =
                 """
-                using System;
-                """
+                    using System;
+                    """
                 + CodeSnippets.FormattableStringType
                 + """
-                class C
-                {
-                    static void M(FormattableString s)
+                    class C
                     {
-                    }
+                        static void M(FormattableString s)
+                        {
+                        }
 
-                    static void N(int x, int y)
-                    {
-                        FormattableString [||]s = $"{x}, {y}";
-                        M(s);
+                        static void N(int x, int y)
+                        {
+                            FormattableString [||]s = $"{x}, {y}";
+                            M(s);
+                        }
                     }
-                }
-                """;
+                    """;
 
             const string expected =
                 """
-                using System;
-                """
+                    using System;
+                    """
                 + CodeSnippets.FormattableStringType
                 + """
-                class C
-                {
-                    static void M(FormattableString s)
+                    class C
                     {
-                    }
+                        static void M(FormattableString s)
+                        {
+                        }
 
-                    static void N(int x, int y)
-                    {
-                        M($"{x}, {y}");
+                        static void N(int x, int y)
+                        {
+                            M($"{x}, {y}");
+                        }
                     }
-                }
-                """;
+                    """;
 
             await TestInRegularAndScriptAsync(initial, expected);
         }
@@ -4248,40 +4248,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             const string initial =
                 """
-                using System;
-                """
+                    using System;
+                    """
                 + CodeSnippets.FormattableStringType
                 + """
-                class C
-                {
-                    static void M(string s) { }
-                    static void M(FormattableString s) { }
-
-                    static void N(int x, int y)
+                    class C
                     {
-                        FormattableString [||]s = $"{x}, {y}";
-                        M(s);
+                        static void M(string s) { }
+                        static void M(FormattableString s) { }
+
+                        static void N(int x, int y)
+                        {
+                            FormattableString [||]s = $"{x}, {y}";
+                            M(s);
+                        }
                     }
-                }
-                """;
+                    """;
 
             const string expected =
                 """
-                using System;
-                """
+                    using System;
+                    """
                 + CodeSnippets.FormattableStringType
                 + """
-                class C
-                {
-                    static void M(string s) { }
-                    static void M(FormattableString s) { }
-
-                    static void N(int x, int y)
+                    class C
                     {
-                        M((FormattableString)$"{x}, {y}");
+                        static void M(string s) { }
+                        static void M(FormattableString s) { }
+
+                        static void N(int x, int y)
+                        {
+                            M((FormattableString)$"{x}, {y}");
+                        }
                     }
-                }
-                """;
+                    """;
             await TestInRegularAndScriptAsync(initial, expected);
         }
 
@@ -4908,36 +4908,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    void M()
+                    using System;
+                    class C
                     {
-                        var [|testStr|] = "test";
-                        expand(testStr);
-
-                        void expand(string str)
+                        void M()
                         {
+                            var [|testStr|] = "test";
+                            expand(testStr);
 
+                            void expand(string str)
+                            {
+
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void M()
+                    using System;
+                    class C
                     {
-                        expand("test");
-
-                        void expand(string str)
+                        void M()
                         {
+                            expand("test");
 
+                            void expand(string str)
+                            {
+
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4946,24 +4946,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    bool M<T>(ref T x) 
+                    class C
                     {
-                        var [||]b = M(ref x);
-                        return b || b;
+                        bool M<T>(ref T x)
+                        {
+                            var [||]b = M(ref x);
+                            return b || b;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    bool M<T>(ref T x) 
+                    class C
                     {
-                        return {|Warning:M(ref x) || M(ref x)|};
+                        bool M<T>(ref T x)
+                        {
+                            return {|Warning:M(ref x) || M(ref x)|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4972,24 +4972,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    bool M<T>(out T x) 
+                    class C
                     {
-                        var [||]b = M(out x);
-                        return b || b;
+                        bool M<T>(out T x)
+                        {
+                            var [||]b = M(out x);
+                            return b || b;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    bool M<T>(out T x) 
+                    class C
                     {
-                        return {|Warning:M(out x) || M(out x)|};
+                        bool M<T>(out T x)
+                        {
+                            return {|Warning:M(out x) || M(out x)|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4998,26 +4998,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        var [||]o = M();
-                        if (!o) throw null;
-                        throw null;
+                        bool M()
+                        {
+                            var [||]o = M();
+                            if (!o) throw null;
+                            throw null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        if (!M()) throw null;
-                        throw null;
+                        bool M()
+                        {
+                            if (!M()) throw null;
+                            throw null;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5026,28 +5026,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]o = (Exception)null;
-                        Console.Write(o == new Exception());
+                        void M()
+                        {
+                            var [||]o = (Exception)null;
+                            Console.Write(o == new Exception());
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Console.Write((Exception)null == new Exception());
+                        void M()
+                        {
+                            Console.Write((Exception)null == new Exception());
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5056,28 +5056,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using X = System.ValueTuple<int, int>;
+                    using X = System.ValueTuple<int, int>;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [|x|] = (X)(0, 0);
-                        var x2 = x;
+                        void M()
+                        {
+                            var [|x|] = (X)(0, 0);
+                            var x2 = x;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using X = System.ValueTuple<int, int>;
+                    using X = System.ValueTuple<int, int>;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x2 = (X)(0, 0);
+                        void M()
+                        {
+                            var x2 = (X)(0, 0);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5086,28 +5086,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using X = System.ValueTuple<int, (int, int)>;
+                    using X = System.ValueTuple<int, (int, int)>;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [|x|] = (X)(0, (0, 0));
-                        var x2 = x;
+                        void M()
+                        {
+                            var [|x|] = (X)(0, (0, 0));
+                            var x2 = x;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using X = System.ValueTuple<int, (int, int)>;
+                    using X = System.ValueTuple<int, (int, int)>;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x2 = (X)(0, (0, 0));
+                        void M()
+                        {
+                            var x2 = (X)(0, (0, 0));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5140,14 +5140,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-    { [|int x = 0;|]
+                    { [|int x = 0;|]
 
-    Console.WriteLine(x); }
-    """,
+                    Console.WriteLine(x); }
+                    """,
                 """
-    {
-            Console.WriteLine(0); }
-    """
+                    {
+                            Console.WriteLine(0); }
+                    """
             );
         }
 
@@ -5156,16 +5156,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-    { int [|x = 0|], y = 1;
+                    { int [|x = 0|], y = 1;
 
-    Console.WriteLine(x); }
-    """,
+                    Console.WriteLine(x); }
+                    """,
                 """
-    {
-            int y = 1;
+                    {
+                            int y = 1;
 
-            Console.WriteLine(0); }
-    """
+                            Console.WriteLine(0); }
+                    """
             );
         }
 
@@ -5174,16 +5174,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-    { int x = 0, [|y = 1|], z = 2;
+                    { int x = 0, [|y = 1|], z = 2;
 
-    Console.WriteLine(y); }
-    """,
+                    Console.WriteLine(y); }
+                    """,
                 """
-    {
-            int x = 0, z = 2;
+                    {
+                            int x = 0, z = 2;
 
-            Console.WriteLine(1); }
-    """
+                            Console.WriteLine(1); }
+                    """
             );
         }
 
@@ -5192,14 +5192,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-    { var [|x = true|];
+                    { var [|x = true|];
 
-    System.Diagnostics.Debug.Assert(x); }
-    """,
+                    System.Diagnostics.Debug.Assert(x); }
+                    """,
                 """
-    {
-            {|Warning:System.Diagnostics.Debug.Assert(true)|}; }
-    """
+                    {
+                            {|Warning:System.Diagnostics.Debug.Assert(true)|}; }
+                    """
             );
         }
 
@@ -5208,14 +5208,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestFixOneAsync(
                 """
-    { var [|x = true|];
+                    { var [|x = true|];
 
-    System.Diagnostics.Debug.Assert(x == true); }
-    """,
+                    System.Diagnostics.Debug.Assert(x == true); }
+                    """,
                 """
-    {
-            {|Warning:System.Diagnostics.Debug.Assert(true == true)|}; }
-    """
+                    {
+                            {|Warning:System.Diagnostics.Debug.Assert(true == true)|}; }
+                    """
             );
         }
 
@@ -5224,26 +5224,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [|x = true|];
-                        System.Diagnostics.Debug.Assert(x);
-                        System.Diagnostics.Debug.Assert(x);
+                        void M()
+                        {
+                            var [|x = true|];
+                            System.Diagnostics.Debug.Assert(x);
+                            System.Diagnostics.Debug.Assert(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|Warning:System.Diagnostics.Debug.Assert(true)|};
-                        {|Warning:System.Diagnostics.Debug.Assert(true)|};
+                        void M()
+                        {
+                            {|Warning:System.Diagnostics.Debug.Assert(true)|};
+                            {|Warning:System.Diagnostics.Debug.Assert(true)|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5252,30 +5252,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [|x = true|];
-                        System.Diagnostics.Debug.Assert(x);
-                        Console.Writeline(x);
+                        void M()
+                        {
+                            var [|x = true|];
+                            System.Diagnostics.Debug.Assert(x);
+                            Console.Writeline(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|Warning:System.Diagnostics.Debug.Assert(true)|};
-                        Console.Writeline(true);
+                        void M()
+                        {
+                            {|Warning:System.Diagnostics.Debug.Assert(true)|};
+                            Console.Writeline(true);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5284,32 +5284,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading;
+                    using System.Threading;
 
-                class C
-                {
-                    void Test()
+                    class C
                     {
-                        var [|ct|] = CancellationToken.None;
-                        if (!(Helper(ct) is string notDiscard)) { }
+                        void Test()
+                        {
+                            var [|ct|] = CancellationToken.None;
+                            if (!(Helper(ct) is string notDiscard)) { }
+                        }
+
+                        object Helper(CancellationToken ct) { return null; }
                     }
-
-                    object Helper(CancellationToken ct) { return null; }
-                }
-                """,
+                    """,
                 """
-                using System.Threading;
+                    using System.Threading;
 
-                class C
-                {
-                    void Test()
+                    class C
                     {
-                        if (!(Helper(CancellationToken.None) is string notDiscard)) { }
-                    }
+                        void Test()
+                        {
+                            if (!(Helper(CancellationToken.None) is string notDiscard)) { }
+                        }
 
-                    object Helper(CancellationToken ct) { return null; }
-                }
-                """
+                        object Helper(CancellationToken ct) { return null; }
+                    }
+                    """
             );
         }
 
@@ -5318,28 +5318,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class Class1
-                {
-                    void M()
+                    public class Class1
                     {
-                        var [|c|] = 8;
-                        this.DoStuff(c);
+                        void M()
+                        {
+                            var [|c|] = 8;
+                            this.DoStuff(c);
+                        }
                     }
-                }
 
-                public static class Class1Extensions { public static void DoStuff(this Class1 c, int x) { } }
-                """,
+                    public static class Class1Extensions { public static void DoStuff(this Class1 c, int x) { } }
+                    """,
                 """
-                public class Class1
-                {
-                    void M()
+                    public class Class1
                     {
-                        this.DoStuff(8);
+                        void M()
+                        {
+                            this.DoStuff(8);
+                        }
                     }
-                }
 
-                public static class Class1Extensions { public static void DoStuff(this Class1 c, int x) { } }
-                """
+                    public static class Class1Extensions { public static void DoStuff(this Class1 c, int x) { } }
+                    """
             );
         }
 
@@ -5348,34 +5348,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class C
-                {
-                    void Main()
+                    using System;
+                    class C
                     {
-                        void LocalFunc()
+                        void Main()
                         {
-                            Console.Write(2);
+                            void LocalFunc()
+                            {
+                                Console.Write(2);
+                            }
+                            var [||]local = new Action(LocalFunc);
+                            local();
                         }
-                        var [||]local = new Action(LocalFunc);
-                        local();
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Main()
+                    using System;
+                    class C
                     {
-                        void LocalFunc()
+                        void Main()
                         {
-                            Console.Write(2);
+                            void LocalFunc()
+                            {
+                                Console.Write(2);
+                            }
+                            new Action(LocalFunc)();
                         }
-                        new Action(LocalFunc)();
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5384,46 +5384,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using Syntax;
+                    using Syntax;
 
-                namespace Syntax
-                {
-                    class AwaitExpressionSyntax : ExpressionSyntax { public ExpressionSyntax Expression; }
-                    class ExpressionSyntax { }
-                    class ParenthesizedExpressionSyntax : ExpressionSyntax { }
-                }
-
-                static class Goo
-                {
-                    static void Bar(AwaitExpressionSyntax awaitExpression)
+                    namespace Syntax
                     {
-                        ExpressionSyntax [||]expression = awaitExpression.Expression;
-
-                        if (!(expression is ParenthesizedExpressionSyntax parenthesizedExpression))
-                            return;
+                        class AwaitExpressionSyntax : ExpressionSyntax { public ExpressionSyntax Expression; }
+                        class ExpressionSyntax { }
+                        class ParenthesizedExpressionSyntax : ExpressionSyntax { }
                     }
-                }
-                """,
-                """
-                using Syntax;
 
-                namespace Syntax
-                {
-                    class AwaitExpressionSyntax : ExpressionSyntax { public ExpressionSyntax Expression; }
-                    class ExpressionSyntax { }
-                    class ParenthesizedExpressionSyntax : ExpressionSyntax { }
-                }
-
-                static class Goo
-                {
-                    static void Bar(AwaitExpressionSyntax awaitExpression)
+                    static class Goo
                     {
+                        static void Bar(AwaitExpressionSyntax awaitExpression)
+                        {
+                            ExpressionSyntax [||]expression = awaitExpression.Expression;
 
-                        if (!(awaitExpression.Expression is ParenthesizedExpressionSyntax parenthesizedExpression))
-                            return;
+                            if (!(expression is ParenthesizedExpressionSyntax parenthesizedExpression))
+                                return;
+                        }
                     }
-                }
+                    """,
                 """
+                    using Syntax;
+
+                    namespace Syntax
+                    {
+                        class AwaitExpressionSyntax : ExpressionSyntax { public ExpressionSyntax Expression; }
+                        class ExpressionSyntax { }
+                        class ParenthesizedExpressionSyntax : ExpressionSyntax { }
+                    }
+
+                    static class Goo
+                    {
+                        static void Bar(AwaitExpressionSyntax awaitExpression)
+                        {
+
+                            if (!(awaitExpression.Expression is ParenthesizedExpressionSyntax parenthesizedExpression))
+                                return;
+                        }
+                    }
+                    """
             );
         }
 
@@ -5432,46 +5432,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                using Syntax;
+                    using Syntax;
 
-                namespace Syntax
-                {
-                    class AwaitExpressionSyntax : ExpressionSyntax { public ExpressionSyntax Expression; }
-                    class ExpressionSyntax { }
-                    class ParenthesizedExpressionSyntax : ExpressionSyntax { }
-                }
-
-                static class Goo
-                {
-                    static void Bar(AwaitExpressionSyntax awaitExpression)
+                    namespace Syntax
                     {
-                        ExpressionSyntax [||]expression = awaitExpression.Expression;
-
-                        if (!(expression is ParenthesizedExpressionSyntax { } parenthesizedExpression))
-                            return;
+                        class AwaitExpressionSyntax : ExpressionSyntax { public ExpressionSyntax Expression; }
+                        class ExpressionSyntax { }
+                        class ParenthesizedExpressionSyntax : ExpressionSyntax { }
                     }
-                }
-                """,
-                """
-                using Syntax;
 
-                namespace Syntax
-                {
-                    class AwaitExpressionSyntax : ExpressionSyntax { public ExpressionSyntax Expression; }
-                    class ExpressionSyntax { }
-                    class ParenthesizedExpressionSyntax : ExpressionSyntax { }
-                }
-
-                static class Goo
-                {
-                    static void Bar(AwaitExpressionSyntax awaitExpression)
+                    static class Goo
                     {
+                        static void Bar(AwaitExpressionSyntax awaitExpression)
+                        {
+                            ExpressionSyntax [||]expression = awaitExpression.Expression;
 
-                        if (!(awaitExpression.Expression is ParenthesizedExpressionSyntax { } parenthesizedExpression))
-                            return;
+                            if (!(expression is ParenthesizedExpressionSyntax { } parenthesizedExpression))
+                                return;
+                        }
                     }
-                }
+                    """,
                 """
+                    using Syntax;
+
+                    namespace Syntax
+                    {
+                        class AwaitExpressionSyntax : ExpressionSyntax { public ExpressionSyntax Expression; }
+                        class ExpressionSyntax { }
+                        class ParenthesizedExpressionSyntax : ExpressionSyntax { }
+                    }
+
+                    static class Goo
+                    {
+                        static void Bar(AwaitExpressionSyntax awaitExpression)
+                        {
+
+                            if (!(awaitExpression.Expression is ParenthesizedExpressionSyntax { } parenthesizedExpression))
+                                return;
+                        }
+                    }
+                    """
             );
         }
 
@@ -5480,30 +5480,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        var [||]c = new C();
-                        c.P = 1;
-                        var c2 = c;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int P { get; set; }
+                        int P { get; set; }
 
-                    void M()
-                    {
-                        {|Warning:new C().P = 1|};
-                        var c2 = new C();
+                        void M()
+                        {
+                            var [||]c = new C();
+                            c.P = 1;
+                            var c2 = c;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int P { get; set; }
+
+                        void M()
+                        {
+                            {|Warning:new C().P = 1|};
+                            var c2 = new C();
+                        }
+                    }
+                    """
             );
         }
 
@@ -5512,30 +5512,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        var [||]c = (new C());
-                        c.P = 1;
-                        var c2 = c;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int P { get; set; }
+                        int P { get; set; }
 
-                    void M()
-                    {
-                        {|Warning:new C().P = 1|};
-                        var c2 = new C();
+                        void M()
+                        {
+                            var [||]c = (new C());
+                            c.P = 1;
+                            var c2 = c;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int P { get; set; }
+
+                        void M()
+                        {
+                            {|Warning:new C().P = 1|};
+                            var c2 = new C();
+                        }
+                    }
+                    """
             );
         }
 
@@ -5544,40 +5544,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        var [||]c = M2();
-                        c.P = 1;
-                        var c2 = c;
-                    }
+                        int P { get; set; }
 
-                    C M2()
-                    {
-                        return new C();
+                        void M()
+                        {
+                            var [||]c = M2();
+                            c.P = 1;
+                            var c2 = c;
+                        }
+
+                        C M2()
+                        {
+                            return new C();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        {|Warning:M2().P = 1|};
-                        var c2 = M2();
-                    }
+                        int P { get; set; }
 
-                    C M2()
-                    {
-                        return new C();
+                        void M()
+                        {
+                            {|Warning:M2().P = 1|};
+                            var c2 = M2();
+                        }
+
+                        C M2()
+                        {
+                            return new C();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5586,40 +5586,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        var [||]c = new C();
-                        c.M2();
-                        var c2 = c;
-                    }
+                        int P { get; set; }
 
-                    void M2()
-                    {
-                        P = 1;
+                        void M()
+                        {
+                            var [||]c = new C();
+                            c.M2();
+                            var c2 = c;
+                        }
+
+                        void M2()
+                        {
+                            P = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        {|Warning:new C().M2()|};
-                        var c2 = new C();
-                    }
+                        int P { get; set; }
 
-                    void M2()
-                    {
-                        P = 1;
+                        void M()
+                        {
+                            {|Warning:new C().M2()|};
+                            var c2 = new C();
+                        }
+
+                        void M2()
+                        {
+                            P = 1;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5628,30 +5628,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        var [||]c = new C[1] { new C() };
-                        c[0].P = 1;
-                        var c2 = c;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int P { get; set; }
+                        int P { get; set; }
 
-                    void M()
-                    {
-                        {|Warning:(new C[1] { new C() })[0].P = 1|};
-                        var c2 = new C[1] { new C() };
+                        void M()
+                        {
+                            var [||]c = new C[1] { new C() };
+                            c[0].P = 1;
+                            var c2 = c;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int P { get; set; }
+
+                        void M()
+                        {
+                            {|Warning:(new C[1] { new C() })[0].P = 1|};
+                            var c2 = new C[1] { new C() };
+                        }
+                    }
+                    """
             );
         }
 
@@ -5660,42 +5660,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        var [||]c = new C[1] { M2() };
-                        c[0].P = 1;
-                        var c2 = c;
-                    }
+                        int P { get; set; }
 
-                    C M2()
-                    {
-                        P += 1;
-                        return new C();
+                        void M()
+                        {
+                            var [||]c = new C[1] { M2() };
+                            c[0].P = 1;
+                            var c2 = c;
+                        }
+
+                        C M2()
+                        {
+                            P += 1;
+                            return new C();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int P { get; set; }
-
-                    void M()
+                    class C
                     {
-                        {|Warning:(new C[1] { M2() })[0].P = 1|};
-                        var c2 = new C[1] { M2() };
-                    }
+                        int P { get; set; }
 
-                    C M2()
-                    {
-                        P += 1;
-                        return new C();
+                        void M()
+                        {
+                            {|Warning:(new C[1] { M2() })[0].P = 1|};
+                            var c2 = new C[1] { M2() };
+                        }
+
+                        C M2()
+                        {
+                            P += 1;
+                            return new C();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -5704,38 +5704,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScriptAsync(
                 """
-                record Person(string Name)
-                {
-                    void M(Person p)
+                    record Person(string Name)
                     {
-                        string [||]x = "";
-                        _ = p with { Name = x };
+                        void M(Person p)
+                        {
+                            string [||]x = "";
+                            _ = p with { Name = x };
+                        }
                     }
-                }
 
-                namespace System.Runtime.CompilerServices
-                {
-                    public sealed class IsExternalInit
+                    namespace System.Runtime.CompilerServices
                     {
+                        public sealed class IsExternalInit
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                record Person(string Name)
-                {
-                    void M(Person p)
+                    record Person(string Name)
                     {
-                        _ = p with { Name = "" };
+                        void M(Person p)
+                        {
+                            _ = p with { Name = "" };
+                        }
                     }
-                }
 
-                namespace System.Runtime.CompilerServices
-                {
-                    public sealed class IsExternalInit
+                    namespace System.Runtime.CompilerServices
                     {
+                        public sealed class IsExternalInit
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 parseOptions: CSharpParseOptions
                     .Default
                     .WithLanguageVersion(LanguageVersion.CSharp9)
@@ -5797,18 +5797,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestAsync(
                 """
-                {
-                    int val = 0;
-                    int [||]val2 = val + 1;
-                    System.Console.WriteLine(val2);
-                }
-                """,
+                    {
+                        int val = 0;
+                        int [||]val2 = val + 1;
+                        System.Console.WriteLine(val2);
+                    }
+                    """,
                 """
-                {
-                    int val = 0;
-                    System.Console.WriteLine(val + 1);
-                }
-                """,
+                    {
+                        int val = 0;
+                        System.Console.WriteLine(val + 1);
+                    }
+                    """,
                 TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
@@ -5818,52 +5818,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         {
             await TestInRegularAndScript1Async(
                 """
-                <Workspace>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                        <Document FilePath='C.cs'>
-                using System.Collections.Generic;
-                namespace Whatever
-                {
-                    public class Goo
+                    <Workspace>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                            <Document FilePath='C.cs'>
+                    using System.Collections.Generic;
+                    namespace Whatever
                     {
-                        public void Bar()
+                        public class Goo
                         {
-                            var target = new List&lt;object;gt>();
-                            var [||]newItems = new List&lt;Goo&gt;();
-                            target.AddRange(newItems);
+                            public void Bar()
+                            {
+                                var target = new List&lt;object;gt>();
+                                var [||]newItems = new List&lt;Goo&gt;();
+                                target.AddRange(newItems);
+                            }
                         }
                     }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                    </Project>
-                </Workspace>
-                """,
+                            </Document>
+                        </Project>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                            <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                        </Project>
+                    </Workspace>
+                    """,
                 """
-                <Workspace>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                        <Document FilePath='C.cs'>
-                using System.Collections.Generic;
-                namespace Whatever
-                {
-                    public class Goo
+                    <Workspace>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                            <Document FilePath='C.cs'>
+                    using System.Collections.Generic;
+                    namespace Whatever
                     {
-                        public void Bar()
+                        public class Goo
                         {
-                            var target = new List&lt;object;gt>();
-                            target.AddRange(new List&lt;Goo&gt;());
+                            public void Bar()
+                            {
+                                var target = new List&lt;object;gt>();
+                                target.AddRange(new List&lt;Goo&gt;());
+                            }
                         }
                     }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                    </Project>
-                </Workspace>
-                """
+                            </Document>
+                        </Project>
+                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                            <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                        </Project>
+                    </Workspace>
+                    """
             );
         }
 

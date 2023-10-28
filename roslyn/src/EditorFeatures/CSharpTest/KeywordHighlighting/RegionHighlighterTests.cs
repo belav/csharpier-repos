@@ -22,15 +22,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    {|Cursor:[|#region|]|} Main
-                    static void Main()
+                    class C
                     {
+                        {|Cursor:[|#region|]|} Main
+                        static void Main()
+                        {
+                        }
+                        [|#endregion|]
                     }
-                    [|#endregion|]
-                }
-                """
+                    """
             );
         }
 
@@ -39,15 +39,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    [|#region|] Main
-                    static void Main()
+                    class C
                     {
+                        [|#region|] Main
+                        static void Main()
+                        {
+                        }
+                        {|Cursor:[|#endregion|]|}
                     }
-                    {|Cursor:[|#endregion|]|}
-                }
-                """
+                    """
             );
         }
 
@@ -56,17 +56,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    {|Cursor:[|#region|]|} Main
-                    static void Main()
+                    class C
                     {
-                        #region body
-                        #endregion
+                        {|Cursor:[|#region|]|} Main
+                        static void Main()
+                        {
+                            #region body
+                            #endregion
+                        }
+                        [|#endregion|]
                     }
-                    [|#endregion|]
-                }
-                """
+                    """
             );
         }
 
@@ -75,17 +75,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    #region Main
-                    static void Main()
+                    class C
                     {
-                        {|Cursor:[|#region|]|} body
-                        [|#endregion|]
+                        #region Main
+                        static void Main()
+                        {
+                            {|Cursor:[|#region|]|} body
+                            [|#endregion|]
+                        }
+                        #endregion
                     }
-                    #endregion
-                }
-                """
+                    """
             );
         }
 
@@ -94,17 +94,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    #region Main
-                    static void Main()
+                    class C
                     {
-                        [|#region|] body
-                        {|Cursor:[|#endregion|]|}
+                        #region Main
+                        static void Main()
+                        {
+                            [|#region|] body
+                            {|Cursor:[|#endregion|]|}
+                        }
+                        #endregion
                     }
-                    #endregion
-                }
-                """
+                    """
             );
         }
 
@@ -113,17 +113,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    [|#region|] Main
-                    static void Main()
+                    class C
                     {
-                        #region body
-                        #endregion
+                        [|#region|] Main
+                        static void Main()
+                        {
+                            #region body
+                            #endregion
+                        }
+                        {|Cursor:[|#endregion|]|}
                     }
-                    {|Cursor:[|#endregion|]|}
-                }
-                """
+                    """
             );
         }
     }

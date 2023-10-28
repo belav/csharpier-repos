@@ -21,28 +21,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class Account
-                {
-                    object lockObj = new object();
-                    int balance;
-
-                    int Withdraw(int amount)
+                    class Account
                     {
-                        {|Cursor:[|lock|]|} (lockObj)
+                        object lockObj = new object();
+                        int balance;
+
+                        int Withdraw(int amount)
                         {
-                            if (balance >= amount)
+                            {|Cursor:[|lock|]|} (lockObj)
                             {
-                                balance = balance – amount;
-                                return amount;
-                            }
-                            else
-                            {
-                                return -1;
+                                if (balance >= amount)
+                                {
+                                    balance = balance – amount;
+                                    return amount;
+                                }
+                                else
+                                {
+                                    return -1;
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
     }

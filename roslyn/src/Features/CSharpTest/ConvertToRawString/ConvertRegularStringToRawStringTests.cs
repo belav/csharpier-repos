@@ -112,23 +112,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"\uD83D\uDC69";
+                        void M()
+                        {
+                            var v = [||]"\uD83D\uDC69";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """👩""";
+                        void M()
+                        {
+                            var v = """👩""";
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -169,23 +169,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"a";
+                        void M()
+                        {
+                            var v = [||]"a";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """a""";
+                        void M()
+                        {
+                            var v = """a""";
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -194,23 +194,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"a";
+                        void M()
+                        {
+                            var v = [||]@"a";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """a""";
+                        void M()
+                        {
+                            var v = """a""";
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -219,11 +219,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                var v = [||]"a";
-                """,
+                    var v = [||]"a";
+                    """,
                 """"
-                var v = """a""";
-                """",
+                    var v = """a""";
+                    """",
                 outputKind: OutputKind.ConsoleApplication
             );
         }
@@ -233,23 +233,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"goo\"bar";
+                        void M()
+                        {
+                            var v = [||]"goo\"bar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """goo"bar""";
+                        void M()
+                        {
+                            var v = """goo"bar""";
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -258,23 +258,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"goo""bar";
+                        void M()
+                        {
+                            var v = [||]@"goo""bar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """goo"bar""";
+                        void M()
+                        {
+                            var v = """goo"bar""";
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -283,25 +283,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"\"goobar";
+                        void M()
+                        {
+                            var v = [||]"\"goobar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            "goobar
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                "goobar
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -310,25 +310,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"""goobar";
+                        void M()
+                        {
+                            var v = [||]@"""goobar";
+                        }
                     }
-                }
-                """",
+                    """",
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            "goobar
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                "goobar
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -337,25 +337,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"goobar\"";
+                        void M()
+                        {
+                            var v = [||]"goobar\"";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            goobar"
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                goobar"
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -364,25 +364,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"goobar""";
+                        void M()
+                        {
+                            var v = [||]@"goobar""";
+                        }
                     }
-                }
-                """",
+                    """",
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            goobar"
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                goobar"
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -391,26 +391,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"goo\r\nbar";
+                        void M()
+                        {
+                            var v = [||]"goo\r\nbar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            goo
-                            bar
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                goo
+                                bar
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -419,27 +419,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"goo
-                bar";
+                        void M()
+                        {
+                            var v = [||]@"goo
+                    bar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            goo
-                            bar
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                goo
+                                bar
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -448,27 +448,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"\r\ngoobar\r\n";
+                        void M()
+                        {
+                            var v = [||]"\r\ngoobar\r\n";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
+                        void M()
+                        {
+                            var v = """
 
-                            goobar
+                                goobar
 
-                            """;
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -477,29 +477,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"
-                goobar
-                ";
+                        void M()
+                        {
+                            var v = [||]@"
+                    goobar
+                    ";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
+                        void M()
+                        {
+                            var v = """
 
-                            goobar
+                                goobar
 
-                            """;
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -508,27 +508,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"
-                goobar
-                ";
+                        void M()
+                        {
+                            var v = [||]@"
+                    goobar
+                    ";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            goobar
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                goobar
+                                """;
+                        }
                     }
-                }
-                """",
+                    """",
                 index: 1
             );
         }
@@ -538,26 +538,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]"goo\r\nbar";
+                        void M()
+                        {
+                            var v = [||]"goo\r\nbar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            goo
-                            bar
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                goo
+                                bar
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -566,30 +566,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"
-                from x in y
-                where x > 0
-                select x";
+                        void M()
+                        {
+                            var v = [||]@"
+                    from x in y
+                    where x > 0
+                    select x";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            from x in y
-                            where x > 0
-                            select x
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                from x in y
+                                where x > 0
+                                select x
+                                """;
+                        }
                     }
-                }
-                """",
+                    """",
                 index: 1
             );
         }
@@ -599,14 +599,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                var v = [||]"goo\r\nbar";
-                """,
+                    var v = [||]"goo\r\nbar";
+                    """,
                 """"
-                var v = """
-                    goo
-                    bar
-                    """;
-                """",
+                    var v = """
+                        goo
+                        bar
+                        """;
+                    """",
                 outputKind: OutputKind.ConsoleApplication
             );
         }
@@ -616,18 +616,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                var v = [||]@"
-                from x in y
-                where x > 0
-                select x";
-                """,
-                """"
-                var v = """
+                    var v = [||]@"
                     from x in y
                     where x > 0
-                    select x
-                    """;
-                """",
+                    select x";
+                    """,
+                """"
+                    var v = """
+                        from x in y
+                        where x > 0
+                        select x
+                        """;
+                    """",
                 index: 1,
                 outputKind: OutputKind.ConsoleApplication
             );
@@ -638,27 +638,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"goo
-                bar";
+                        void M()
+                        {
+                            var v = [||]@"goo
+                    bar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            goo
-                            bar
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                goo
+                                bar
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -667,28 +667,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v =
-                                [||]"goo\r\nbar";
+                        void M()
+                        {
+                            var v =
+                                    [||]"goo\r\nbar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v =
-                                """
-                                goo
-                                bar
-                                """;
+                        void M()
+                        {
+                            var v =
+                                    """
+                                    goo
+                                    bar
+                                    """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -697,29 +697,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v =
-                                [||]@"goo
-                bar";
+                        void M()
+                        {
+                            var v =
+                                    [||]@"goo
+                    bar";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v =
-                                """
-                                goo
-                                bar
-                                """;
+                        void M()
+                        {
+                            var v =
+                                    """
+                                    goo
+                                    bar
+                                    """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -728,30 +728,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"
-                            from x in y
-                            where x > 0
-                            select x";
+                        void M()
+                        {
+                            var v = [||]@"
+                                from x in y
+                                where x > 0
+                                select x";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            from x in y
-                            where x > 0
-                            select x
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                from x in y
+                                where x > 0
+                                select x
+                                """;
+                        }
                     }
-                }
-                """",
+                    """",
                 index: 1
             );
         }
@@ -761,31 +761,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"
-                            from x in y
-                            where x > 0
-                            select x
-                            ";
+                        void M()
+                        {
+                            var v = [||]@"
+                                from x in y
+                                where x > 0
+                                select x
+                                ";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            from x in y
-                            where x > 0
-                            select x
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                from x in y
+                                where x > 0
+                                select x
+                                """;
+                        }
                     }
-                }
-                """",
+                    """",
                 index: 1
             );
         }
@@ -795,31 +795,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"
-                            from x in y
-                                where x > 0
-                                select x
-                            ";
+                        void M()
+                        {
+                            var v = [||]@"
+                                from x in y
+                                    where x > 0
+                                    select x
+                                ";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            from x in y
-                                where x > 0
-                                select x
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                from x in y
+                                    where x > 0
+                                    select x
+                                """;
+                        }
                     }
-                }
-                """",
+                    """",
                 index: 1
             );
         }
@@ -829,31 +829,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"
-                                from x in y
-                            where x > 0
-                            select x
-                            ";
+                        void M()
+                        {
+                            var v = [||]@"
+                                    from x in y
+                                where x > 0
+                                select x
+                                ";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                                from x in y
-                            where x > 0
-                            select x
-                            """;
+                        void M()
+                        {
+                            var v = """
+                                    from x in y
+                                where x > 0
+                                select x
+                                """;
+                        }
                     }
-                }
-                """",
+                    """",
                 index: 1
             );
         }
@@ -863,35 +863,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await VerifyRefactoringAsync(
                 """
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = [||]@"
-                            from x in y
+                        void M()
+                        {
+                            var v = [||]@"
+                                from x in y
 
-                            where x > 0
+                                where x > 0
 
-                            select x
-                            ";
+                                select x
+                                ";
+                        }
                     }
-                }
-                """,
+                    """,
                 """"
-                public class C
-                {
-                    void M()
+                    public class C
                     {
-                        var v = """
-                            from x in y
+                        void M()
+                        {
+                            var v = """
+                                from x in y
 
-                            where x > 0
+                                where x > 0
 
-                            select x
-                            """;
+                                select x
+                                """;
+                        }
                     }
-                }
-                """",
+                    """",
                 index: 1
             );
         }

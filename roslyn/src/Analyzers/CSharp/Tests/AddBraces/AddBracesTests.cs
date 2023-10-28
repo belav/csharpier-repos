@@ -34,17 +34,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|if|] (true)
+                        static void Main()
                         {
-                            return;
+                            [|if|] (true)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -63,21 +63,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true)
+                        static void Main()
                         {
-                            return;
-                        }
-                        [|else|]
-                        {
-                            return;
+                            if (true)
+                            {
+                                return;
+                            }
+                            [|else|]
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -96,17 +96,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true)
-                            return;
-                        [|else|] if (false)
-                            return;
+                        static void Main()
+                        {
+                            if (true)
+                                return;
+                            [|else|] if (false)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -125,17 +125,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|for|] (var i = 0; i < 5; i++)
+                        static void Main()
                         {
-                            return;
+                            [|for|] (var i = 0; i < 5; i++)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -154,17 +154,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|foreach|] (var c in "test")
+                        static void Main()
                         {
-                            return;
+                            [|foreach|] (var c in "test")
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -183,17 +183,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|while|] (true)
+                        static void Main()
                         {
-                            return;
+                            [|while|] (true)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -212,18 +212,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|do|]
+                        static void Main()
                         {
-                            return;
+                            [|do|]
+                            {
+                                return;
+                            }
+                            while (true);
                         }
-                        while (true);
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -242,25 +242,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|using|] (var f = new Fizz())
+                        static void Main()
                         {
-                            return;
+                            [|using|] (var f = new Fizz())
+                            {
+                                return;
+                            }
                         }
                     }
-                }
 
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
+                    class Fizz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -279,32 +279,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|using|] (var f = new Fizz())
-                        using (var b = new Buzz())
-                            return;
+                        static void Main()
+                        {
+                            [|using|] (var f = new Fizz())
+                            using (var b = new Buzz())
+                                return;
+                        }
                     }
-                }
 
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
+                    class Fizz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                class Buzz : IDisposable
-                {
-                    public void Dispose()
+                    class Buzz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -323,18 +323,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var str = "test";
-                        [|lock|] (str)
+                        static void Main()
                         {
-                            return;
+                            var str = "test";
+                            [|lock|] (str)
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -353,18 +353,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var str1 = "test";
-                        var str2 = "test";
-                        [|lock|] (str1)
-                            lock (str2)
-                                return;
+                        static void Main()
+                        {
+                            var str1 = "test";
+                            var str2 = "test";
+                            [|lock|] (str1)
+                                lock (str2)
+                                    return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -383,17 +383,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    unsafe static void Main()
+                    class Program
                     {
-                        [|fixed|] (int* p = null)
-                        fixed (int* q = null)
+                        unsafe static void Main()
                         {
+                            [|fixed|] (int* p = null)
+                            fixed (int* q = null)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -412,29 +412,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    unsafe static void Main()
+                    class Program
                     {
-                        fixed (int* p = null)
-                        [|fixed|] (int* q = null)
-                            return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    unsafe static void Main()
-                    {
-                        fixed (int* p = null)
-                        fixed (int* q = null)
+                        unsafe static void Main()
                         {
-                            return;
+                            fixed (int* p = null)
+                            [|fixed|] (int* q = null)
+                                return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        unsafe static void Main()
+                        {
+                            fixed (int* p = null)
+                            fixed (int* q = null)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -448,26 +448,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|if|] (true) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true)
+                        static void Main()
                         {
-                            return;
+                            [|if|] (true) return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -484,14 +484,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                [|if|] (true) return;
-                """,
+                    [|if|] (true) return;
+                    """,
                 """
-                if (true)
-                {
-                    return;
-                }
-                """,
+                    if (true)
+                    {
+                        return;
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -508,28 +508,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true) { return; }
-                        [|else|] return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true) { return; }
-                        else
+                        static void Main()
                         {
-                            return;
+                            if (true) { return; }
+                            [|else|] return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true) { return; }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -543,28 +543,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true) return;
-                        [|else|] return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true) return;
-                        else
+                        static void Main()
                         {
-                            return;
+                            if (true) return;
+                            [|else|] return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true) return;
+                            else
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -581,27 +581,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|else|]
-                            return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        else
+                        static void Main()
                         {
-                            return;
+                            [|else|]
+                                return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            else
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -618,28 +618,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true) return;
-                        else [|if|] (false) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true) return;
-                        else if (false)
+                        static void Main()
                         {
-                            return;
+                            if (true) return;
+                            else [|if|] (false) return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true) return;
+                            else if (false)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -656,36 +656,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true)
-                            if (true)   // This multiline statement does not directly impact the other nested statement
-                                return;
-                            else
-                                return;
-                        else [|if|] (false) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true)
-                            if (true)   // This multiline statement does not directly impact the other nested statement
-                                return;
-                            else
-                                return;
-                        else if (false)
+                        static void Main()
                         {
-                            return;
+                            if (true)
+                                if (true)   // This multiline statement does not directly impact the other nested statement
+                                    return;
+                                else
+                                    return;
+                            else [|if|] (false) return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true)
+                                if (true)   // This multiline statement does not directly impact the other nested statement
+                                    return;
+                                else
+                                    return;
+                            else if (false)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -702,40 +702,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true)
+                        static void Main()
                         {
                             if (true)
-                                return;
-                            else
-                                return;
+                            {
+                                if (true)
+                                    return;
+                                else
+                                    return;
+                            }
+                            else [|if|] (false) return;
                         }
-                        else [|if|] (false) return;
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true)
+                        static void Main()
                         {
                             if (true)
+                            {
+                                if (true)
+                                    return;
+                                else
+                                    return;
+                            }
+                            else if (false)
+                            {
                                 return;
-                            else
-                                return;
-                        }
-                        else if (false)
-                        {
-                            return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -752,39 +752,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true)
-                        {
-                            [|if|] (true)
-                                return;
-                            else
-                                return;
-                        }
-                        else if (false) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true)
+                        static void Main()
                         {
                             if (true)
                             {
-                                return;
+                                [|if|] (true)
+                                    return;
+                                else
+                                    return;
                             }
-                            else
-                                return;
+                            else if (false) return;
                         }
-                        else if (false) return;
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true)
+                            {
+                                if (true)
+                                {
+                                    return;
+                                }
+                                else
+                                    return;
+                            }
+                            else if (false) return;
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -801,39 +801,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true)
+                        static void Main()
                         {
                             if (true)
-                                return;
-                            [|else|]
-                                return;
-                        }
-                        else if (false) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                                return;
-                            else
                             {
-                                return;
+                                if (true)
+                                    return;
+                                [|else|]
+                                    return;
                             }
+                            else if (false) return;
                         }
-                        else if (false) return;
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true)
+                            {
+                                if (true)
+                                    return;
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                            else if (false) return;
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -858,39 +858,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        if (true)
+                        static void Main()
                         {
                             if (true)
-                                if (true) { return; } else { return; }
-                            [|else|]
-                                return;
-                        }
-                        else if (false) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                                if (true) { return; } else { return; }
-                            else
                             {
-                                return;
+                                if (true)
+                                    if (true) { return; } else { return; }
+                                [|else|]
+                                    return;
                             }
+                            else if (false) return;
                         }
-                        else if (false) return;
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true)
+                            {
+                                if (true)
+                                    if (true) { return; } else { return; }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                            else if (false) return;
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -904,26 +904,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|for|] (var i = 0; i < 5; i++) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        for (var i = 0; i < 5; i++)
+                        static void Main()
                         {
-                            return;
+                            [|for|] (var i = 0; i < 5; i++) return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            for (var i = 0; i < 5; i++)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -940,30 +940,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|for|] (var i = 0;
-                            i < 5;
-                            i++) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        for (var i = 0;
-                            i < 5;
-                            i++)
+                        static void Main()
                         {
-                            return;
+                            [|for|] (var i = 0;
+                                i < 5;
+                                i++) return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            for (var i = 0;
+                                i < 5;
+                                i++)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -980,28 +980,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|for|] (var i = 0; i < 5; i++) if (true)
-                            return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        for (var i = 0; i < 5; i++)
+                        static void Main()
                         {
-                            if (true)
-                            return;
+                            [|for|] (var i = 0; i < 5; i++) if (true)
+                                return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            for (var i = 0; i < 5; i++)
+                            {
+                                if (true)
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1018,29 +1018,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|for|] (var i = 0; i < 5; i++)
-                            if (true)
-                                return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        for (var i = 0; i < 5; i++)
+                        static void Main()
                         {
-                            if (true)
-                                return;
+                            [|for|] (var i = 0; i < 5; i++)
+                                if (true)
+                                    return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            for (var i = 0; i < 5; i++)
+                            {
+                                if (true)
+                                    return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1054,26 +1054,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|foreach|] (var c in "test") return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        foreach (var c in "test")
+                        static void Main()
                         {
-                            return;
+                            [|foreach|] (var c in "test") return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            foreach (var c in "test")
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1087,26 +1087,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|while|] (true) return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        while (true)
+                        static void Main()
                         {
-                            return;
+                            [|while|] (true) return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            while (true)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1120,27 +1120,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|do|] return; while (true);
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        do
+                        static void Main()
                         {
-                            return;
+                            [|do|] return; while (true);
                         }
-                        while (true);
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            do
+                            {
+                                return;
+                            }
+                            while (true);
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1154,29 +1154,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|do|]
-                            return;
-                        while (true);
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        do
+                        static void Main()
                         {
-                            return;
+                            [|do|]
+                                return;
+                            while (true);
                         }
-                        while (true);
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            do
+                            {
+                                return;
+                            }
+                            while (true);
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1193,29 +1193,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|do|] return; while (true ||
-                            true);
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        do
+                        static void Main()
                         {
-                            return;
+                            [|do|] return; while (true ||
+                                true);
                         }
-                        while (true ||
-                            true);
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            do
+                            {
+                                return;
+                            }
+                            while (true ||
+                                true);
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1229,43 +1229,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        [|using|] (var f = new Fizz())
-                            return;
-                    }
-                }
-
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        using (var f = new Fizz())
+                        static void Main()
                         {
-                            return;
+                            [|using|] (var f = new Fizz())
+                                return;
                         }
                     }
-                }
 
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
+                    class Fizz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            using (var f = new Fizz())
+                            {
+                                return;
+                            }
+                        }
+                    }
+
+                    class Fizz : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1282,61 +1282,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (var f = new Fizz())
-                        [|using|] (var b = new Buzz())
-                            return;
-                    }
-                }
-
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                class Buzz : IDisposable
-                {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        using (var f = new Fizz())
-                        using (var b = new Buzz())
+                        static void Main()
                         {
-                            return;
+                            using (var f = new Fizz())
+                            [|using|] (var b = new Buzz())
+                                return;
                         }
                     }
-                }
 
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
+                    class Fizz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                class Buzz : IDisposable
-                {
-                    public void Dispose()
+                    class Buzz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            using (var f = new Fizz())
+                            using (var b = new Buzz())
+                            {
+                                return;
+                            }
+                        }
+                    }
+
+                    class Fizz : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+
+                    class Buzz : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1353,63 +1353,63 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (var f        // <-- This multiline condition doesn't trigger a multiline braces requirement when it's the outer 'using' statement
-                            = new Fizz())
-                        [|using|] (var b = new Buzz())
-                            return;
-                    }
-                }
-
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                class Buzz : IDisposable
-                {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        using (var f        // <-- This multiline condition doesn't trigger a multiline braces requirement when it's the outer 'using' statement
-                            = new Fizz())
-                        using (var b = new Buzz())
+                        static void Main()
                         {
-                            return;
+                            using (var f        // <-- This multiline condition doesn't trigger a multiline braces requirement when it's the outer 'using' statement
+                                = new Fizz())
+                            [|using|] (var b = new Buzz())
+                                return;
                         }
                     }
-                }
 
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
+                    class Fizz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                class Buzz : IDisposable
-                {
-                    public void Dispose()
+                    class Buzz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            using (var f        // <-- This multiline condition doesn't trigger a multiline braces requirement when it's the outer 'using' statement
+                                = new Fizz())
+                            using (var b = new Buzz())
+                            {
+                                return;
+                            }
+                        }
+                    }
+
+                    class Fizz : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+
+                    class Buzz : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1426,63 +1426,63 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (var f = new Fizz())
-                        [|using|] (var b        // <-- This multiline condition triggers a multiline braces requirement because it's the inner 'using' statement
-                            = new Buzz())
-                            return;
-                    }
-                }
-
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                class Buzz : IDisposable
-                {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        using (var f = new Fizz())
-                        using (var b        // <-- This multiline condition triggers a multiline braces requirement because it's the inner 'using' statement
-                            = new Buzz())
+                        static void Main()
                         {
-                            return;
+                            using (var f = new Fizz())
+                            [|using|] (var b        // <-- This multiline condition triggers a multiline braces requirement because it's the inner 'using' statement
+                                = new Buzz())
+                                return;
                         }
                     }
-                }
 
-                class Fizz : IDisposable
-                {
-                    public void Dispose()
+                    class Fizz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
 
-                class Buzz : IDisposable
-                {
-                    public void Dispose()
+                    class Buzz : IDisposable
                     {
-                        throw new NotImplementedException();
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            using (var f = new Fizz())
+                            using (var b        // <-- This multiline condition triggers a multiline braces requirement because it's the inner 'using' statement
+                                = new Buzz())
+                            {
+                                return;
+                            }
+                        }
+                    }
+
+                    class Fizz : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+
+                    class Buzz : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1496,29 +1496,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var str = "test";
-                        [|lock|] (str)
-                            return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        var str = "test";
-                        lock (str)
+                        static void Main()
                         {
-                            return;
+                            var str = "test";
+                            [|lock|] (str)
+                                return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            var str = "test";
+                            lock (str)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1535,35 +1535,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var str1 = "test";
-                        var str2 = "test";
+                        static void Main()
+                        {
+                            var str1 = "test";
+                            var str2 = "test";
 
-                        lock (str1)
-                        [|lock|] (str2) // VS thinks this should be indented one more level
-                            return;
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main()
-                    {
-                        var str1 = "test";
-                        var str2 = "test";
-
-                        lock (str1)
-                        lock (str2) // VS thinks this should be indented one more level
-                            {
+                            lock (str1)
+                            [|lock|] (str2) // VS thinks this should be indented one more level
                                 return;
-                            }
+                        }
                     }
-                }
-                """,
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            var str1 = "test";
+                            var str2 = "test";
+
+                            lock (str1)
+                            lock (str2) // VS thinks this should be indented one more level
+                                {
+                                    return;
+                                }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1578,18 +1578,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                #if test
-                        [|if (true)|]
-                #endif
-                            return;
+                        static void Main()
+                        {
+                    #if test
+                            [|if (true)|]
+                    #endif
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -1609,18 +1609,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        [|if (true)|]
-                #if test
-                            return;
-                #endif
+                        static void Main()
+                        {
+                            [|if (true)|]
+                    #if test
+                                return;
+                    #endif
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -1640,20 +1640,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        [|if (true)
-                #if test
-                            return;
-                        else|]
-                #endif
-                            return;
+                        static void Main()
+                        {
+                            [|if (true)
+                    #if test
+                                return;
+                            else|]
+                    #endif
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: Option(
                         CSharpCodeStyleOptions.PreferBraces,
@@ -1676,37 +1676,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                #if test
-                        [|if (true)
-                            return;
-                        else|]
-                #endif
-                            return;
-                    }
-                }
-                """,
-                """
-                #define test
-                class Program
-                {
-                    static void Main()
-                    {
-                #if test
-                        if (true)
+                        static void Main()
                         {
-                            return;
+                    #if test
+                            [|if (true)
+                                return;
+                            else|]
+                    #endif
+                                return;
                         }
-                        else
-                #endif
-                            return;
                     }
-                }
-                """,
+                    """,
+                """
+                    #define test
+                    class Program
+                    {
+                        static void Main()
+                        {
+                    #if test
+                            if (true)
+                            {
+                                return;
+                            }
+                            else
+                    #endif
+                                return;
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1724,37 +1724,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        [|if (true)
-                #if test
-                            return;
-                        else|]
-                            return;
-                #endif
-                    }
-                }
-                """,
-                """
-                #define test
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true)
-                #if test
-                            return;
-                        else
+                        static void Main()
                         {
-                            return;
+                            [|if (true)
+                    #if test
+                                return;
+                            else|]
+                                return;
+                    #endif
                         }
-                #endif
                     }
-                }
-                """,
+                    """,
+                """
+                    #define test
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true)
+                    #if test
+                                return;
+                            else
+                            {
+                                return;
+                            }
+                    #endif
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1772,37 +1772,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                #if test
-                        [|if (true)
-                #endif
-                            return;
-                        else|]
-                            return;
-                    }
-                }
-                """,
-                """
-                #define test
-                class Program
-                {
-                    static void Main()
-                    {
-                #if test
-                        if (true)
-                #endif
-                            return;
-                        else
+                        static void Main()
                         {
-                            return;
+                    #if test
+                            [|if (true)
+                    #endif
+                                return;
+                            else|]
+                                return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    #define test
+                    class Program
+                    {
+                        static void Main()
+                        {
+                    #if test
+                            if (true)
+                    #endif
+                                return;
+                            else
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1820,37 +1820,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        [|if (true)
-                            return;
-                        else|]
-                #if test
-                            return;
-                #endif
-                    }
-                }
-                """,
-                """
-                #define test
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true)
+                        static void Main()
                         {
-                            return;
+                            [|if (true)
+                                return;
+                            else|]
+                    #if test
+                                return;
+                    #endif
                         }
-                        else
-                #if test
-                            return;
-                #endif
                     }
-                }
-                """,
+                    """,
+                """
+                    #define test
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true)
+                            {
+                                return;
+                            }
+                            else
+                    #if test
+                                return;
+                    #endif
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1868,41 +1868,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                #if test
-                        [|if (true)
-                            return;
-                #endif
-                        else|]
+                        static void Main()
                         {
-                            return;
+                    #if test
+                            [|if (true)
+                                return;
+                    #endif
+                            else|]
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                #if test
-                        if (true)
+                        static void Main()
                         {
-                            return;
-                        }
-                #endif
-                        else
-                        {
-                            return;
+                    #if test
+                            if (true)
+                            {
+                                return;
+                            }
+                    #endif
+                            else
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1920,41 +1920,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        [|if (true)
+                        static void Main()
                         {
-                            return;
+                            [|if (true)
+                            {
+                                return;
+                            }
+                    #if test
+                            else|]
+                                return;
+                    #endif
                         }
-                #if test
-                        else|]
-                            return;
-                #endif
                     }
-                }
-                """,
+                    """,
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        if (true)
+                        static void Main()
                         {
-                            return;
+                            if (true)
+                            {
+                                return;
+                            }
+                    #if test
+                            else
+                            {
+                                return;
+                            }
+                    #endif
                         }
-                #if test
-                        else
-                        {
-                            return;
-                        }
-                #endif
                     }
-                }
-                """,
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -1972,33 +1972,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                #if test
-                #endif
-                        [|if (true)|]
-                            return;
-                    }
-                }
-                """,
-                """
-                #define test
-                class Program
-                {
-                    static void Main()
-                    {
-                #if test
-                #endif
-                        if (true)
+                        static void Main()
                         {
-                            return;
+                    #if test
+                    #endif
+                            [|if (true)|]
+                                return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    #define test
+                    class Program
+                    {
+                        static void Main()
+                        {
+                    #if test
+                    #endif
+                            if (true)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -2016,33 +2016,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        [|if (true)|]
-                            return;
-                #if test
-                #endif
-                    }
-                }
-                """,
-                """
-                #define test
-                class Program
-                {
-                    static void Main()
-                    {
-                        if (true)
+                        static void Main()
                         {
-                            return;
+                            [|if (true)|]
+                                return;
+                    #if test
+                    #endif
                         }
-                #if test
-                #endif
                     }
-                }
-                """,
+                    """,
+                """
+                    #define test
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            if (true)
+                            {
+                                return;
+                            }
+                    #if test
+                    #endif
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -2060,35 +2060,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        [|while (true)
-                #if test
-                            if (true)|]
-                                return;
-                #endif
+                        static void Main()
+                        {
+                            [|while (true)
+                    #if test
+                                if (true)|]
+                                    return;
+                    #endif
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        while (true)
-                #if test
-                            if (true)
-                            {
-                                return;
-                            }
-                #endif
+                        static void Main()
+                        {
+                            while (true)
+                    #if test
+                                if (true)
+                                {
+                                    return;
+                                }
+                    #endif
+                        }
                     }
-                }
-                """,
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );
@@ -2106,35 +2106,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         {
             await TestAsync(
                 """
-                #define test
-                class Program
-                {
-                    static void Main()
+                    #define test
+                    class Program
                     {
-                        [|while (true)
-                #if test
-                            if (true)|]
-                #endif
-                                return;
-                    }
-                }
-                """,
-                """
-                #define test
-                class Program
-                {
-                    static void Main()
-                    {
-                        while (true)
+                        static void Main()
                         {
-                #if test
-                            if (true)
-                #endif
-                                return;
+                            [|while (true)
+                    #if test
+                                if (true)|]
+                    #endif
+                                    return;
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    #define test
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            while (true)
+                            {
+                    #if test
+                                if (true)
+                    #endif
+                                    return;
+                            }
+                        }
+                    }
+                    """,
                 (PreferBracesPreference)bracesPreference,
                 expectDiagnostic
             );

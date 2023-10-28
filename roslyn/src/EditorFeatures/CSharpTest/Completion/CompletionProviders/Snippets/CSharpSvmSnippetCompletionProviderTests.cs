@@ -19,11 +19,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                namespace Test
-                {
-                    $$
-                }
-                """,
+                    namespace Test
+                    {
+                        $$
+                    }
+                    """,
                 ItemToCommit
             );
         }
@@ -33,10 +33,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                namespace Test;
-                
-                $$
-                """,
+                    namespace Test;
+
+                    $$
+                    """,
                 ItemToCommit
             );
         }
@@ -46,9 +46,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                System.Console.WriteLine();
-                $$
-                """,
+                    System.Console.WriteLine();
+                    $$
+                    """,
                 ItemToCommit
             );
         }
@@ -87,11 +87,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                enum MyEnum
-                {
-                    $$
-                }
-                """,
+                    enum MyEnum
+                    {
+                        $$
+                    }
+                    """,
                 ItemToCommit
             );
         }
@@ -101,14 +101,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                class Program
-                {
-                    void M()
+                    class Program
                     {
-                        $$
+                        void M()
+                        {
+                            $$
+                        }
                     }
-                }
-                """,
+                    """,
                 ItemToCommit
             );
         }
@@ -118,14 +118,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                class Program
-                {
-                    public Program()
+                    class Program
                     {
-                        $$
+                        public Program()
+                        {
+                            $$
+                        }
                     }
-                }
-                """,
+                    """,
                 ItemToCommit
             );
         }
@@ -182,13 +182,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                class Program
-                {
-                    public int Main => 0;
+                    class Program
+                    {
+                        public int Main => 0;
 
-                    $$
-                }
-                """,
+                        $$
+                    }
+                    """,
                 ItemToCommit
             );
         }
@@ -198,13 +198,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                System.Console.WriteLine();
-                
-                class Program
-                {
-                    $$
-                }
-                """,
+                    System.Console.WriteLine();
+
+                    class Program
+                    {
+                        $$
+                    }
+                    """,
                 ItemToCommit
             );
         }

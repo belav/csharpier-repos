@@ -241,17 +241,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 var builder = new StringBuilder();
                 builder.AppendLine(
                     """
-                    static class E
-                    {
-                        public static C M(this C c, string x) { return c; }
-                    }
-                    class C
-                    {
-                        static C GetC() => new C();
-                        void M2()
+                        static class E
                         {
-                            GetC()
-                    """
+                            public static C M(this C c, string x) { return c; }
+                        }
+                        class C
+                        {
+                            static C GetC() => new C();
+                            void M2()
+                            {
+                                GetC()
+                        """
                 );
                 for (int i = 0; i < depth; i++)
                 {
@@ -626,19 +626,19 @@ public class Test
             files.Add(
                 (
                     """
-                class C
-                {
-                    public static void M() => throw null!;
-                }
+                        class C
+                        {
+                            public static void M() => throw null!;
+                        }
 
-                namespace System.Runtime.CompilerServices
-                {
-                    public class InterceptsLocationAttribute : Attribute
-                    {
-                        public InterceptsLocationAttribute(string path, int line, int column) { }
-                    }
-                }
-                """,
+                        namespace System.Runtime.CompilerServices
+                        {
+                            public class InterceptsLocationAttribute : Attribute
+                            {
+                                public InterceptsLocationAttribute(string path, int line, int column) { }
+                            }
+                        }
+                        """,
                     "C.cs"
                 )
             );
@@ -727,18 +727,18 @@ public class Test
             // Local functions should be similarly fast as lambdas.
             var inner = localFunctions
                 ? """
-                M2(x, L0);
-                static I0 L0(string arg) {
-                    arg = arg + "0";
-                    return default;
-                }
-                """
+                    M2(x, L0);
+                    static I0 L0(string arg) {
+                        arg = arg + "0";
+                        return default;
+                    }
+                    """
                 : """
-                M2(x, static I0 (string arg) => {
-                    arg = arg + "0";
-                    return default;
-                });
-                """;
+                    M2(x, static I0 (string arg) => {
+                        arg = arg + "0";
+                        return default;
+                    });
+                    """;
 
             var source = $$"""
                 {{builder1}}

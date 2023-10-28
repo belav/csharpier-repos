@@ -24,11 +24,11 @@ public class FieldDeclarationStructureTests
     public async Task NoCommentsOrAttributes()
     {
         var code = """
-                class Goo
-                {
-                    public int $$goo
-                }
-                """;
+            class Goo
+            {
+                public int $$goo
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -37,12 +37,12 @@ public class FieldDeclarationStructureTests
     public async Task WithAttributes()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:[Goo]
-                    |}public int $$goo|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:[Goo]
+                |}public int $$goo|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -54,14 +54,14 @@ public class FieldDeclarationStructureTests
     public async Task WithCommentsAndAttributes()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Goo]
-                    |}int $$goo|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Goo]
+                |}int $$goo|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -73,14 +73,14 @@ public class FieldDeclarationStructureTests
     public async Task WithCommentsAttributesAndModifiers()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Goo]
-                    |}public int $$goo|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Goo]
+                |}public int $$goo|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,

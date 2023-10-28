@@ -165,12 +165,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document = new TestHostDocument(
                 """
-                #if GOO
-                class C { }
-                #else
-                class D { }
-                #endif
-                """
+                    #if GOO
+                    class C { }
+                    #else
+                    class D { }
+                    #endif
+                    """
             );
 
             var project1 = new TestHostProject(workspace, document, name: "project1");
@@ -195,12 +195,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document = new TestHostDocument(
                 """
-                #if GOO
-                class C { }
-                #else
-                class D { }
-                #endif
-                """
+                    #if GOO
+                    class C { }
+                    #else
+                    class D { }
+                    #endif
+                    """
             );
 
             var project1 = new TestHostProject(workspace, document, name: "project1");
@@ -512,10 +512,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document2 = new TestHostDocument(
                 """
-                Public Class D 
-                  Inherits C
-                End Class
-                """
+                    Public Class D
+                      Inherits C
+                    End Class
+                    """
             );
             var project2 = new TestHostProject(
                 workspace,
@@ -548,10 +548,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document2 = new TestHostDocument(
                 """
-                Public Class D 
-                  Inherits C
-                End Class
-                """
+                    Public Class D
+                      Inherits C
+                    End Class
+                    """
             );
             var project2 = new TestHostProject(
                 workspace,
@@ -605,10 +605,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document2 = new TestHostDocument(
                 """
-                Public Class D 
-                  Inherits C
-                End Class
-                """
+                    Public Class D
+                      Inherits C
+                    End Class
+                    """
             );
             var project2 = new TestHostProject(
                 workspace,
@@ -683,10 +683,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document2 = new TestHostDocument(
                 """
-                Public Class D 
-                  Inherits C
-                End Class
-                """
+                    Public Class D
+                      Inherits C
+                    End Class
+                    """
             );
             var project2 = new TestHostProject(
                 workspace,
@@ -1688,8 +1688,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             var document = new TestHostDocument("public class C { }", filePath: docFilePath);
             var additionalDoc = new TestHostDocument(
                 """
-                <setting value = "goo"
-                """,
+                    <setting value = "goo"
+                    """,
                 filePath: additionalDocFilePath
             );
             var project1 = new TestHostProject(

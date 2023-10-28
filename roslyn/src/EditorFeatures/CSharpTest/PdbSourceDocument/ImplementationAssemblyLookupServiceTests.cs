@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 File.WriteAllText(
                     Path.Combine(dataDir, "FrameworkList.xml"),
                     """
-                    FileList FrameworkName="MyPack">
-                    """
+                        FileList FrameworkName="MyPack">
+                        """
                 );
 
                 var workspace = (TestWorkspace)project.Solution.Workspace;
@@ -143,9 +143,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 File.WriteAllText(
                     Path.Combine(dataDir, "FrameworkList.xml"),
                     """
-                    <FileList FrameworkName="MyPack">
-                    </FileList>
-                    """
+                        <FileList FrameworkName="MyPack">
+                        </FileList>
+                        """
                 );
 
                 var workspace = (TestWorkspace)project.Solution.Workspace;
@@ -216,9 +216,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 File.WriteAllText(
                     Path.Combine(dataDir, "FrameworkList.xml"),
                     """
-                    <FileList FrameworkName="MyPack">
-                    </FileList>
-                    """
+                        <FileList FrameworkName="MyPack">
+                        </FileList>
+                        """
                 );
 
                 var workspace = (TestWorkspace)project.Solution.Workspace;

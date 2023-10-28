@@ -11854,25 +11854,25 @@ unsafe class Program
                 comp,
                 expectedOutput: ExecutionConditionUtil.IsCoreClr
                     ? """
-              System.Func`1[System.Int32&(System.Int32)[]]
-              System.Action`1[System.Void(System.Int32, System.Int32&)[]]
-              <>F{00000001}`2[System.Int32,System.Int32&(System.Int32)[]]
-              <>A{00000001}`1[System.Void(System.Int32, System.Int32&)[]]
-              System.Func`1[System.Int32&()[]]
-              System.Action`1[System.Void(System.Int32&)[]]
-              <>F{00000001}`2[System.Int32,System.Int32&()[]]
-              <>A{00000001}`1[System.Void(System.Int32&)[]]
-              """
+                        System.Func`1[System.Int32&(System.Int32)[]]
+                        System.Action`1[System.Void(System.Int32, System.Int32&)[]]
+                        <>F{00000001}`2[System.Int32,System.Int32&(System.Int32)[]]
+                        <>A{00000001}`1[System.Void(System.Int32, System.Int32&)[]]
+                        System.Func`1[System.Int32&()[]]
+                        System.Action`1[System.Void(System.Int32&)[]]
+                        <>F{00000001}`2[System.Int32,System.Int32&()[]]
+                        <>A{00000001}`1[System.Void(System.Int32&)[]]
+                        """
                     : """
-              System.Func`1[(fnptr)[]]
-              System.Action`1[(fnptr)[]]
-              <>F{00000001}`2[System.Int32,(fnptr)[]]
-              <>A{00000001}`1[(fnptr)[]]
-              System.Func`1[(fnptr)[]]
-              System.Action`1[(fnptr)[]]
-              <>F{00000001}`2[System.Int32,(fnptr)[]]
-              <>A{00000001}`1[(fnptr)[]]
-              """
+                        System.Func`1[(fnptr)[]]
+                        System.Action`1[(fnptr)[]]
+                        <>F{00000001}`2[System.Int32,(fnptr)[]]
+                        <>A{00000001}`1[(fnptr)[]]
+                        System.Func`1[(fnptr)[]]
+                        System.Action`1[(fnptr)[]]
+                        <>F{00000001}`2[System.Int32,(fnptr)[]]
+                        <>A{00000001}`1[(fnptr)[]]
+                        """
             );
         }
 
@@ -13660,10 +13660,10 @@ class Program
                     extends [mscorlib]System.Object
                 {
                     // Methods
-                    .method public hidebysig static 
+                    .method public hidebysig static
                         void M (
                             int32 x
-                        ) cil managed 
+                        ) cil managed
                     {
                         .param [1]
                             .custom instance void [mscorlib]System.ParamArrayAttribute::.ctor() = (
@@ -13701,11 +13701,11 @@ class Program
                     extends [mscorlib]System.Object
                 {
                     // Methods
-                    .method public hidebysig static 
+                    .method public hidebysig static
                         void M (
                             int32[] x,
                             int32 y
-                        ) cil managed 
+                        ) cil managed
                     {
                         .param [1]
                             .custom instance void [mscorlib]System.ParamArrayAttribute::.ctor() = (
@@ -13752,39 +13752,39 @@ class Program
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
                 expectedOutput: """
-                <>f__AnonymousDelegate0
-                """
+                    <>f__AnonymousDelegate0
+                    """
             );
             verifier.VerifyTypeIL(
                 "<>f__AnonymousDelegate0",
                 """
-                .class private auto ansi sealed '<>f__AnonymousDelegate0'
-                    extends [System.Runtime]System.MulticastDelegate
-                {
-                    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-                        01 00 00 00
-                    )
-                    // Methods
-                    .method public hidebysig specialname rtspecialname 
-                        instance void .ctor (
-                            object 'object',
-                            native int 'method'
-                        ) runtime managed 
+                    .class private auto ansi sealed '<>f__AnonymousDelegate0'
+                        extends [System.Runtime]System.MulticastDelegate
                     {
-                    } // end of method '<>f__AnonymousDelegate0'::.ctor
-                    .method public hidebysig newslot virtual 
-                        instance int32& Invoke (
-                            int32& arg1,
-                            int32& arg2
-                        ) runtime managed 
-                    {
-                        .param [2]
-                            .custom instance void [System.Runtime]System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
-                                01 00 00 00
-                            )
-                    } // end of method '<>f__AnonymousDelegate0'::Invoke
-                } // end of class <>f__AnonymousDelegate0
-                """
+                        .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+                            01 00 00 00
+                        )
+                        // Methods
+                        .method public hidebysig specialname rtspecialname
+                            instance void .ctor (
+                                object 'object',
+                                native int 'method'
+                            ) runtime managed
+                        {
+                        } // end of method '<>f__AnonymousDelegate0'::.ctor
+                        .method public hidebysig newslot virtual
+                            instance int32& Invoke (
+                                int32& arg1,
+                                int32& arg2
+                            ) runtime managed
+                        {
+                            .param [2]
+                                .custom instance void [System.Runtime]System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
+                                    01 00 00 00
+                                )
+                        } // end of method '<>f__AnonymousDelegate0'::Invoke
+                    } // end of class <>f__AnonymousDelegate0
+                    """
             );
         }
 
@@ -13810,39 +13810,39 @@ class Program
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
                 expectedOutput: """
-                <>f__AnonymousDelegate0
-                """
+                    <>f__AnonymousDelegate0
+                    """
             );
             verifier.VerifyTypeIL(
                 "<>f__AnonymousDelegate0",
                 """
-                .class private auto ansi sealed '<>f__AnonymousDelegate0'
-                    extends [System.Runtime]System.MulticastDelegate
-                {
-                    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-                        01 00 00 00
-                    )
-                    // Methods
-                    .method public hidebysig specialname rtspecialname 
-                        instance void .ctor (
-                            object 'object',
-                            native int 'method'
-                        ) runtime managed 
+                    .class private auto ansi sealed '<>f__AnonymousDelegate0'
+                        extends [System.Runtime]System.MulticastDelegate
                     {
-                    } // end of method '<>f__AnonymousDelegate0'::.ctor
-                    .method public hidebysig newslot virtual 
-                        instance int32& Invoke (
-                            int32& arg1,
-                            int32& arg2
-                        ) runtime managed 
-                    {
-                        .param [1]
-                            .custom instance void [System.Runtime]System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
-                                01 00 00 00
-                            )
-                    } // end of method '<>f__AnonymousDelegate0'::Invoke
-                } // end of class <>f__AnonymousDelegate0
-                """
+                        .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+                            01 00 00 00
+                        )
+                        // Methods
+                        .method public hidebysig specialname rtspecialname
+                            instance void .ctor (
+                                object 'object',
+                                native int 'method'
+                            ) runtime managed
+                        {
+                        } // end of method '<>f__AnonymousDelegate0'::.ctor
+                        .method public hidebysig newslot virtual
+                            instance int32& Invoke (
+                                int32& arg1,
+                                int32& arg2
+                            ) runtime managed
+                        {
+                            .param [1]
+                                .custom instance void [System.Runtime]System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
+                                    01 00 00 00
+                                )
+                        } // end of method '<>f__AnonymousDelegate0'::Invoke
+                    } // end of class <>f__AnonymousDelegate0
+                    """
             );
         }
 
@@ -13881,13 +13881,13 @@ class Program
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
                 expectedOutput: """
-                <>F{00000049}`3[System.Int32,System.Int32,System.Int32]
-                <>f__AnonymousDelegate0
-                <>f__AnonymousDelegate1
-                <>f__AnonymousDelegate1
-                <>f__AnonymousDelegate0
-                <>F{00000049}`3[System.Int32,System.Int32,System.Int32]
-                """
+                    <>F{00000049}`3[System.Int32,System.Int32,System.Int32]
+                    <>f__AnonymousDelegate0
+                    <>f__AnonymousDelegate1
+                    <>f__AnonymousDelegate1
+                    <>f__AnonymousDelegate0
+                    <>F{00000049}`3[System.Int32,System.Int32,System.Int32]
+                    """
             );
         }
 
@@ -16294,14 +16294,14 @@ class Program
         public void LambdaRequiredBetweenOptionalsParameters()
         {
             var source = """
-    class Program
-    {
-        public static void Main()
-        {
-            var lam = (string s1 = null, string s2, string s3, string s4, string s5 = "") => s5;
-        }
-    }
-    """;
+                class Program
+                {
+                    public static void Main()
+                    {
+                        var lam = (string s1 = null, string s2, string s3, string s4, string s5 = "") => s5;
+                    }
+                }
+                """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (5,47): error CS1737: Optional parameters must appear after all required parameters
@@ -16323,15 +16323,15 @@ class Program
         public void LambdaWithDefaultInvalidTargetTypeConversion_01()
         {
             var source = """
-    class Program
-    {
-        delegate double D(int x, int d = 3);
-        public static void Main()
-        {
-            D d = (int x, double d = 3.0) => x + d;
-        }
-    }
-    """;
+                class Program
+                {
+                    delegate double D(int x, int d = 3);
+                    public static void Main()
+                    {
+                        D d = (int x, double d = 3.0) => x + d;
+                    }
+                }
+                """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (6,30): error CS1678: Parameter 2 is declared as type 'double' but should be 'int'
@@ -16351,21 +16351,21 @@ class Program
         public void LambdaWithInvalidDefaultValidTargetTypeConversion_02()
         {
             var source = """
-    class A
-    { }
+                class A
+                { }
 
-    class B : A
-    { }
+                class B : A
+                { }
 
-    class Program
-    {
-        delegate double D(int x, B b = null);
-        public static void Main()
-        {
-            D d = (int x, A a = null) => { };
-        }
-    }
-    """;
+                class Program
+                {
+                    delegate double D(int x, B b = null);
+                    public static void Main()
+                    {
+                        D d = (int x, A a = null) => { };
+                    }
+                }
+                """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (12,25): error CS1678: Parameter 2 is declared as type 'A' but should be 'B'
@@ -16385,24 +16385,24 @@ class Program
         public void LambdaWithDefaultsAndRefParameters()
         {
             var source = """
-    using System;
+                using System;
 
-    class Program
-    {
-        static void Report(object d) => Console.WriteLine(d.GetType());
-        public static void Main()
-        {
-            int x = 9;
-            var lam = (ref int x, out int y, int z = 3) => { y = x + z; };
-            lam(ref x, out var y);
-            lam(ref x, out var w, 20);
+                class Program
+                {
+                    static void Report(object d) => Console.WriteLine(d.GetType());
+                    public static void Main()
+                    {
+                        int x = 9;
+                        var lam = (ref int x, out int y, int z = 3) => { y = x + z; };
+                        lam(ref x, out var y);
+                        lam(ref x, out var w, 20);
 
-            Console.WriteLine(y);
-            Console.WriteLine(w);
-            Report(lam);
-        }
-    }
-    """;
+                        Console.WriteLine(y);
+                        Console.WriteLine(w);
+                        Report(lam);
+                    }
+                }
+                """;
             var expectAnonymousDelegateIL =
                 $@"
     .class private auto ansi sealed '<>f__AnonymousDelegate0`3'<T1, T2, T3>
@@ -16641,30 +16641,30 @@ class Program
             verifier.VerifyTypeIL(
                 "<>f__AnonymousDelegate0`2",
                 """
-                .class private auto ansi sealed '<>f__AnonymousDelegate0`2'<T1, T2>
-                	extends [System.Runtime]System.MulticastDelegate
-                {
-                	.custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-                		01 00 00 00
-                	)
-                	// Methods
-                	.method public hidebysig specialname rtspecialname 
-                		instance void .ctor (
-                			object 'object',
-                			native int 'method'
-                		) runtime managed 
-                	{
-                	} // end of method '<>f__AnonymousDelegate0`2'::.ctor
-                	.method public hidebysig newslot virtual 
-                		instance void Invoke (
-                			!T1 arg1,
-                			[opt] !T2 arg2
-                		) runtime managed 
-                	{
-                		.param [2] = "callerArgExpression"
-                	} // end of method '<>f__AnonymousDelegate0`2'::Invoke
-                } // end of class <>f__AnonymousDelegate0`2
-                """
+                    .class private auto ansi sealed '<>f__AnonymousDelegate0`2'<T1, T2>
+                        extends [System.Runtime]System.MulticastDelegate
+                    {
+                        .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+                            01 00 00 00
+                        )
+                        // Methods
+                        .method public hidebysig specialname rtspecialname
+                            instance void .ctor (
+                                object 'object',
+                                native int 'method'
+                            ) runtime managed
+                        {
+                        } // end of method '<>f__AnonymousDelegate0`2'::.ctor
+                        .method public hidebysig newslot virtual
+                            instance void Invoke (
+                                !T1 arg1,
+                                [opt] !T2 arg2
+                            ) runtime managed
+                        {
+                            .param [2] = "callerArgExpression"
+                        } // end of method '<>f__AnonymousDelegate0`2'::Invoke
+                    } // end of class <>f__AnonymousDelegate0`2
+                    """
             );
         }
 
@@ -17800,11 +17800,11 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: """
-                <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                System.Func`2[System.Int32,System.Int32]
-                System.Func`2[System.Int32,System.Int32]
-                <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                """
+                        <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                        System.Func`2[System.Int32,System.Int32]
+                        System.Func`2[System.Int32,System.Int32]
+                        <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                        """
                 )
                 .VerifyDiagnostics();
         }
@@ -18183,15 +18183,15 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                System.Action`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                System.Action`1[System.Nullable`1[System.Decimal]]
-                """
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        System.Action`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        System.Action`1[System.Nullable`1[System.Decimal]]
+                        """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -18305,15 +18305,15 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                System.Action`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                System.Action`1[System.Nullable`1[System.Decimal]]
-                """
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        System.Action`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        System.Action`1[System.Nullable`1[System.Decimal]]
+                        """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -18444,15 +18444,15 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Decimal]
-                System.Action`1[System.Decimal]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                System.Action`1[System.Nullable`1[System.Decimal]]
-                """
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Decimal]
+                        System.Action`1[System.Decimal]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                        System.Action`1[System.Nullable`1[System.Decimal]]
+                        """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -18509,10 +18509,10 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                <>f__AnonymousDelegate0`1[System.DateTime]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
-                System.Action`1[System.DateTime]
-                """
+                        <>f__AnonymousDelegate0`1[System.DateTime]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
+                        System.Action`1[System.DateTime]
+                        """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -18619,10 +18619,10 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                <>f__AnonymousDelegate0`1[System.DateTime]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
-                System.Action`1[System.DateTime]
-                """
+                        <>f__AnonymousDelegate0`1[System.DateTime]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
+                        System.Action`1[System.DateTime]
+                        """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -18640,7 +18640,7 @@ class Program
                 using System.Runtime.InteropServices;
 
                 #pragma warning disable CS8321 // The local function is declared but never used
-                
+
                 void local1([Optional, DateTimeConstant(100L)] DateTime d) {}
                 void local2([Optional, DateTimeConstant(100L)] DateTime? d) {}
                 """;
@@ -18741,10 +18741,10 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                <>f__AnonymousDelegate0`1[System.DateTime]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
-                System.Action`1[System.DateTime]
-                """
+                        <>f__AnonymousDelegate0`1[System.DateTime]
+                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
+                        System.Action`1[System.DateTime]
+                        """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -19863,15 +19863,15 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: """
-                True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                True, System.Func`2[System.Int32[],System.Int32]
-                True, <>A{00000001}`3[System.Int32,System.Int32,System.Int32[]]
-                True, <>f__AnonymousDelegate1`3[System.Int32,System.Int32,System.Int32]
-                True, <>f__AnonymousDelegate2
-                True, <>f__AnonymousDelegate2
-                """
+                        True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                        True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                        True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                        True, System.Func`2[System.Int32[],System.Int32]
+                        True, <>A{00000001}`3[System.Int32,System.Int32,System.Int32[]]
+                        True, <>f__AnonymousDelegate1`3[System.Int32,System.Int32,System.Int32]
+                        True, <>f__AnonymousDelegate2
+                        True, <>f__AnonymousDelegate2
+                        """
                 )
                 .VerifyDiagnostics();
         }
@@ -20281,7 +20281,7 @@ class Program
                 var d6 = new DelegateWithDefault((int x = 2) => x); // 2
                 var d7 = new DelegateWithDefault((int x) => x);
                 var d8 = new DelegateNoDefault((int x) => x);
-                
+
                 int MethodNoParams(int[] xs) => xs.Length;
                 int MethodWithParams(params int[] xs) => xs.Length;
                 var p1 = new DelegateNoParams(MethodWithParams);
@@ -20290,7 +20290,7 @@ class Program
                 var p4 = new DelegateWithParams((params int[] xs) => xs.Length);
                 var p5 = new DelegateWithParams((int[] xs) => xs.Length);
                 var p6 = new DelegateNoParams((int[] xs) => xs.Length);
-                
+
                 delegate int DelegateNoDefault(int x);
                 delegate int DelegateWithDefault(int x = 1);
                 delegate int DelegateNoParams(int[] xs);
@@ -20330,7 +20330,7 @@ class Program
                 var d6 = (DelegateWithDefault)((int x = 2) => x); // 2
                 var d7 = (DelegateWithDefault)((int x) => x);
                 var d8 = (DelegateNoDefault)((int x) => x);
-                
+
                 int MethodNoParams(int[] xs) => xs.Length;
                 int MethodWithParams(params int[] xs) => xs.Length;
                 var p1 = (DelegateNoParams)MethodWithParams;
@@ -20339,7 +20339,7 @@ class Program
                 var p4 = (DelegateWithParams)((params int[] xs) => xs.Length);
                 var p5 = (DelegateWithParams)((int[] xs) => xs.Length);
                 var p6 = (DelegateNoParams)((int[] xs) => xs.Length);
-                
+
                 delegate int DelegateNoDefault(int x);
                 delegate int DelegateWithDefault(int x = 1);
                 delegate int DelegateNoParams(int[] xs);
@@ -20384,7 +20384,7 @@ class Program
                 static void WithDefault(DelegateWithDefault d) { }
                 static void NoParams(DelegateNoParams d) { }
                 static void WithParams(DelegateWithParams d) { }
-                
+
                 delegate int DelegateNoDefault(int x);
                 delegate int DelegateWithDefault(int x = 1);
                 delegate int DelegateNoParams(int[] xs);

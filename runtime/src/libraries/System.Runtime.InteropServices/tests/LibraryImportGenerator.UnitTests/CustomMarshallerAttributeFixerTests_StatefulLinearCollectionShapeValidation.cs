@@ -22,9 +22,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -35,9 +35,9 @@ namespace LibraryImportGenerator.UnitTests
 
             string fixedSource = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -47,7 +47,7 @@ namespace LibraryImportGenerator.UnitTests
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public nint ToUnmanaged()
                     {
                         throw new System.NotImplementedException();
@@ -141,9 +141,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -157,9 +157,9 @@ namespace LibraryImportGenerator.UnitTests
 
             string fixedSource = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -168,12 +168,12 @@ namespace LibraryImportGenerator.UnitTests
                     public void FromManaged(ManagedType m) {}
                     public nint ToUnmanaged() => default;
                     public void Free() {}
-                
+
                     public System.ReadOnlySpan<nint> GetManagedValuesSource()
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public System.Span<T> GetUnmanagedValuesDestination()
                     {
                         throw new System.NotImplementedException();
@@ -209,9 +209,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -227,9 +227,9 @@ namespace LibraryImportGenerator.UnitTests
             string fixedSource = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -239,7 +239,7 @@ namespace LibraryImportGenerator.UnitTests
                     public nint ToUnmanaged() => default;
                     public void Free() {}
                     public Span<T> GetUnmanagedValuesDestination() => default;
-                
+
                     public ReadOnlySpan<nint> GetManagedValuesSource()
                     {
                         throw new NotImplementedException();
@@ -275,9 +275,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -293,9 +293,9 @@ namespace LibraryImportGenerator.UnitTests
             string fixedSource = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -305,7 +305,7 @@ namespace LibraryImportGenerator.UnitTests
                     public nint ToUnmanaged() => default;
                     public void Free() {}
                     public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                
+
                     public Span<T> GetUnmanagedValuesDestination()
                     {
                         throw new NotImplementedException();
@@ -341,9 +341,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -366,9 +366,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -406,9 +406,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -419,9 +419,9 @@ namespace LibraryImportGenerator.UnitTests
 
             string fixedSource = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -436,17 +436,17 @@ namespace LibraryImportGenerator.UnitTests
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public System.ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements)
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public System.Span<nint> GetManagedValuesDestination(int numElements)
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public void Free()
                     {
                         throw new System.NotImplementedException();
@@ -525,9 +525,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -541,9 +541,9 @@ namespace LibraryImportGenerator.UnitTests
 
             string fixedSource = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -552,12 +552,12 @@ namespace LibraryImportGenerator.UnitTests
                     public void FromUnmanaged(int f) {}
                     public ManagedType ToManaged() => default;
                     public void Free() {}
-                
+
                     public System.ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements)
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public System.Span<nint> GetManagedValuesDestination(int numElements)
                     {
                         throw new System.NotImplementedException();
@@ -593,9 +593,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -611,9 +611,9 @@ namespace LibraryImportGenerator.UnitTests
             string fixedSource = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -659,9 +659,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -677,9 +677,9 @@ namespace LibraryImportGenerator.UnitTests
             string fixedSource = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -689,7 +689,7 @@ namespace LibraryImportGenerator.UnitTests
                     public ManagedType ToManaged() => default;
                     public void Free() {}
                     public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
-                
+
                     public Span<nint> GetManagedValuesDestination(int numElements)
                     {
                         throw new NotImplementedException();
@@ -725,9 +725,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
@@ -750,9 +750,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -791,9 +791,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
                 struct MarshallerType<T>
@@ -809,9 +809,9 @@ namespace LibraryImportGenerator.UnitTests
             string fixedSource = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
                 [ContiguousCollectionMarshaller]
                 struct MarshallerType<T>
@@ -848,9 +848,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -877,9 +877,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<>|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<>|}))]
                 [ContiguousCollectionMarshaller]
@@ -922,7 +922,7 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder[]), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<,>|}))]
                 [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder[]), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<,>|}))]
                 [ContiguousCollectionMarshaller]

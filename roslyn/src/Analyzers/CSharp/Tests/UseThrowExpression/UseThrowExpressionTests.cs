@@ -38,29 +38,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s == null)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        _s = s;
+                        void M(string s)
+                        {
+                            if (s == null)
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            _s = s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
+                        void M(string s)
+                        {
+                            _s = s ?? throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -69,18 +69,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        [|if|] (s == null)
-                            throw new ArgumentNullException(nameof(s));
-                        _s = s;
+                        void M(string s)
+                        {
+                            [|if|] (s == null)
+                                throw new ArgumentNullException(nameof(s));
+                            _s = s;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -89,32 +89,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s == null)
+                        void M(string s)
                         {
-                            [|throw|] new ArgumentNullException(nameof(s));
+                            if (s == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            }
+
+                            _s = s;
                         }
-
-                        _s = s;
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
+                        void M(string s)
+                        {
+                            _s = s ?? throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -123,18 +123,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s == null)
-                            throw new ArgumentNullException(nameof(s));
-                        _s = [|s|];
+                        void M(string s)
+                        {
+                            if (s == null)
+                                throw new ArgumentNullException(nameof(s));
+                            _s = [|s|];
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -143,19 +143,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s == null)
+                        void M(string s)
                         {
-                            [|throw|] new ArgumentNullException(nameof(s)) };
-                        _s = s;
+                            if (s == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(s)) };
+                            _s = s;
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)
                 )
@@ -167,42 +167,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s, string t)
+                    class C
                     {
-                        if (s == null)
+                        void M(string s, string t)
                         {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        }
+                            if (s == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            }
 
-                        if (t == null)
-                        {
-                            throw new ArgumentNullException(nameof(t));
-                        }
+                            if (t == null)
+                            {
+                                throw new ArgumentNullException(nameof(t));
+                            }
 
-                        _s = s;
+                            _s = s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s, string t)
+                    class C
                     {
-                        if (t == null)
+                        void M(string s, string t)
                         {
-                            throw new ArgumentNullException(nameof(t));
-                        }
+                            if (t == null)
+                            {
+                                throw new ArgumentNullException(nameof(t));
+                            }
 
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
+                            _s = s ?? throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -211,21 +211,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s, string t)
+                    class C
                     {
-                        if (s == null)
+                        void M(string s, string t)
                         {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        };
-                        s = "something";
-                        _s = s;
+                            if (s == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            };
+                            s = "something";
+                            _s = s;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -234,21 +234,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s, string t)
+                    class C
                     {
-                        if (s == null)
+                        void M(string s, string t)
                         {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        };
-                        s.ToString();
-                        _s = s;
+                            if (s == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            };
+                            s.ToString();
+                            _s = s;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -257,29 +257,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (null == s)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        _s = s;
+                        void M(string s)
+                        {
+                            if (null == s)
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            _s = s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
+                        void M(string s)
+                        {
+                            _s = s ?? throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -288,31 +288,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        string s = null;
-                        if (null == s)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        _s = s;
+                        void M()
+                        {
+                            string s = null;
+                            if (null == s)
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            _s = s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        string s = null;
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
+                        void M()
+                        {
+                            string s = null;
+                            _s = s ?? throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -321,20 +321,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string s;
-
-                    void M()
+                    class C
                     {
-                        if (null == s)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        _s = s;
+                        string s;
+
+                        void M()
+                        {
+                            if (null == s)
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            _s = s;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -343,18 +343,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        _s = s;
-                        if (s == null)
-                            [|throw|] new ArgumentNullException(nameof(s));
+                        void M(string s)
+                        {
+                            _s = s;
+                            if (s == null)
+                                [|throw|] new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -363,25 +363,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                class C
-                {
-                    private string _s;
-
-                    void Goo()
+                    class C
                     {
-                        Expression<Action<string>> e = s =>
-                        {
-                            if (s == null)
-                                [|throw|] new ArgumentNullException(nameof(s));
+                        private string _s;
 
-                            _s = s;
-                        };
+                        void Goo()
+                        {
+                            Expression<Action<string>> e = s =>
+                            {
+                                if (s == null)
+                                    [|throw|] new ArgumentNullException(nameof(s));
+
+                                _s = s;
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -390,34 +390,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class BswParser3
-                {
-                    private ParserSyntax m_syntax;
-
-                    public BswParser3(ISyntax syntax)
+                    class BswParser3
                     {
-                        if (syntax == null)
+                        private ParserSyntax m_syntax;
+
+                        public BswParser3(ISyntax syntax)
                         {
-                            [|throw|] new ArgumentNullException(nameof(syntax));
+                            if (syntax == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(syntax));
+                            }
+
+                            m_syntax = syntax as ParserSyntax;
+
+                            if (m_syntax == null)
+                                throw new ArgumentException();
                         }
-
-                        m_syntax = syntax as ParserSyntax;
-
-                        if (m_syntax == null)
-                            throw new ArgumentException();
                     }
-                }
 
-                internal class ParserSyntax
-                {
-                }
+                    internal class ParserSyntax
+                    {
+                    }
 
-                public interface ISyntax
-                {
-                }
-                """
+                    public interface ISyntax
+                    {
+                    }
+                    """
             );
         }
 
@@ -426,27 +426,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    int? _x;
-
-                    public C(int? x)
+                    class C
                     {
-                        if (x == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(x));
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                        }
+                        int? _x;
 
-                        _x = x;
+                        public C(int? x)
+                        {
+                            if (x == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(x));
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                            }
+
+                            _x = x;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -455,21 +455,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s == null)
+                        void M(string s)
                         {
-                            Console.WriteLine();
-                            [|throw|] new ArgumentNullException(nameof(s));
+                            if (s == null)
+                            {
+                                Console.WriteLine();
+                                [|throw|] new ArgumentNullException(nameof(s));
+                            }
+                            _s = s;
                         }
-                        _s = s;
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -478,21 +478,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s == null)
+                        void M(string s)
                         {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                            Console.WriteLine();
+                            if (s == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(s));
+                                Console.WriteLine();
+                            }
+                            _s = s;
                         }
-                        _s = s;
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -501,24 +501,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class A
-                {
-                    public string Id;
-                }
-
-                class B
-                {
-                    private Dictionary<string, A> map = new Dictionary<string, A>();
-                    public B(A a)
+                    class A
                     {
-                        if (a == null) [|throw|] new ArgumentNullException();
-                        map[a.Id] = a;
+                        public string Id;
                     }
-                }
-                """
+
+                    class B
+                    {
+                        private Dictionary<string, A> map = new Dictionary<string, A>();
+                        public B(A a)
+                        {
+                            if (a == null) [|throw|] new ArgumentNullException();
+                            map[a.Id] = a;
+                        }
+                    }
+                    """
             );
         }
 
@@ -527,23 +527,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class B
-                {
-                    public B(object arg)
+                    class B
                     {
-                        Dictionary<object, object> map = null;
+                        public B(object arg)
+                        {
+                            Dictionary<object, object> map = null;
 
-                        if (arg == null) [|throw|] new ArgumentNullException();
-                        var key = MakeKey(arg);
-                        map[key] = arg;
+                            if (arg == null) [|throw|] new ArgumentNullException();
+                            var key = MakeKey(arg);
+                            map[key] = arg;
+                        }
+
+                        object MakeKey(object x) => null;
                     }
-
-                    object MakeKey(object x) => null;
-                }
-                """
+                    """
             );
         }
 
@@ -552,17 +552,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                class A<T>
-                {
-                    T x;
-                    public A(T t)
+                    using System;
+                    class A<T>
                     {
-                        if (t == null) [|throw|] new ArgumentNullException();
-                        x = t;
+                        T x;
+                        public A(T t)
+                        {
+                            if (t == null) [|throw|] new ArgumentNullException();
+                            x = t;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -571,28 +571,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class A<T> where T: class
-                {
-                    T x;
-                    public A(T t)
+                    using System;
+                    class A<T> where T: class
                     {
-                        if (t == null) [|throw|] new ArgumentNullException();
-                        x = t;
+                        T x;
+                        public A(T t)
+                        {
+                            if (t == null) [|throw|] new ArgumentNullException();
+                            x = t;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class A<T> where T: class
-                {
-                    T x;
-                    public A(T t)
+                    using System;
+                    class A<T> where T: class
                     {
-                        x = t ?? throw new ArgumentNullException();
+                        T x;
+                        public A(T t)
+                        {
+                            x = t ?? throw new ArgumentNullException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -601,28 +601,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                class A<T> where T: struct
-                {
-                    T? x;
-                    public A(T? t)
+                    using System;
+                    class A<T> where T: struct
                     {
-                        if (t == null) [|throw|] new ArgumentNullException();
-                        x = t;
+                        T? x;
+                        public A(T? t)
+                        {
+                            if (t == null) [|throw|] new ArgumentNullException();
+                            x = t;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class A<T> where T: struct
-                {
-                    T? x;
-                    public A(T? t)
+                    using System;
+                    class A<T> where T: struct
                     {
-                        x = t ?? throw new ArgumentNullException();
+                        T? x;
+                        public A(T? t)
+                        {
+                            x = t ?? throw new ArgumentNullException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -631,19 +631,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestAsync(
                 """
-                using System;
-                string s = null;
-                string x = null;
-                if (s == null) [|throw|] new ArgumentNullException();
-                x = s;
-                """,
+                    using System;
+                    string s = null;
+                    string x = null;
+                    if (s == null) [|throw|] new ArgumentNullException();
+                    x = s;
+                    """,
                 """
-                using System;
-                string s = null;
-                string x = null;
+                    using System;
+                    string s = null;
+                    string x = null;
 
-                x = s ?? throw new ArgumentNullException();
-                """,
+                    x = s ?? throw new ArgumentNullException();
+                    """,
                 TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
@@ -653,35 +653,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    object _arg;
-
-                    public Program(object arg)
+                    class Program
                     {
-                        if (arg == null)
+                        object _arg;
+
+                        public Program(object arg)
                         {
-                            [|throw|] new ArgumentNullException(nameof(arg)); // Oh no!
+                            if (arg == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(arg)); // Oh no!
+                            }
+                            _arg = arg;
                         }
-                        _arg = arg;
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    object _arg;
-
-                    public Program(object arg)
+                    class Program
                     {
-                        _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // Oh no!
+                        object _arg;
+
+                        public Program(object arg)
+                        {
+                            _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // Oh no!
+                        }
                     }
-                }
-                """,
+                    """,
                 TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
@@ -691,36 +691,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         {
             await TestAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    object _arg;
-
-                    public Program(object arg)
+                    class Program
                     {
-                        if (arg == null)
+                        object _arg;
+
+                        public Program(object arg)
                         {
-                            [|throw|] new ArgumentNullException(nameof(arg)); // Oh no!
+                            if (arg == null)
+                            {
+                                [|throw|] new ArgumentNullException(nameof(arg)); // Oh no!
+                            }
+                            _arg = arg; // oh yes!
                         }
-                        _arg = arg; // oh yes!
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    object _arg;
-
-                    public Program(object arg)
+                    class Program
                     {
-                        // Oh no!
-                        _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // oh yes!
+                        object _arg;
+
+                        public Program(object arg)
+                        {
+                            // Oh no!
+                            _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // oh yes!
+                        }
                     }
-                }
-                """,
+                    """,
                 TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }

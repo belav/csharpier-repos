@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     public void Fizz(int [|i|], int j, int k) {}
@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     public void Fizz(int i, int j, int [|k|]) {}
@@ -78,7 +78,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -96,7 +96,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="k"></param>
@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -126,7 +126,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// text
@@ -139,7 +139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -158,7 +158,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i">Parameter <paramref name="i"/> does something</param>
                     /// <param name="k">Parameter <paramref name="k"/> does something else</param>
@@ -170,7 +170,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i">Parameter <paramref name="i"/> does something</param>
                     /// <param name="j"></param>
@@ -309,7 +309,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                     /// <summary></summary>
                     // ...
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     public void Fizz(int [|i|], int j, int k) {}
@@ -322,7 +322,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                     /// <summary></summary>
                     // ...
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -340,7 +340,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     public Program(int [|i|], int j, int k) {}
@@ -351,7 +351,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -369,7 +369,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     public delegate int Goo(int [|i|], int j, int k);
@@ -380,7 +380,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -405,7 +405,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                     }
 
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="s1"></param>
                     /// <returns></returns>
@@ -427,7 +427,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                     }
 
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="s1"></param>
                     /// <param name="s2"></param>
@@ -485,14 +485,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program1
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
                     public void Fizz(int i, int j, {|FixAllInDocument:int k|}) {}
 
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     /// <param name="k"></param>
@@ -505,7 +505,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program2
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -519,7 +519,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program3
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -538,7 +538,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program1
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -546,7 +546,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                     public void Fizz(int i, int j, int k) {}
 
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -560,7 +560,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program2
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -574,7 +574,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program3
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -600,7 +600,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program1
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -612,7 +612,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program2
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     /// <param name="k"></param>
@@ -627,7 +627,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program3
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     /// <param name="k"></param>
@@ -647,7 +647,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program1
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -660,7 +660,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program2
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -676,7 +676,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program3
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     /// <param name="k"></param>
@@ -703,7 +703,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program1
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -715,7 +715,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program2
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="j"></param>
                     public void Fizz(int i, int j, int k) {}
@@ -728,7 +728,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program3
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -747,7 +747,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program1
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -760,7 +760,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program2
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -775,7 +775,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 class Program3
                 {
                     /// <summary>
-                    /// 
+                    ///
                     /// </summary>
                     /// <param name="i"></param>
                     /// <param name="j"></param>
@@ -796,7 +796,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         {
             var initial = """
                 /// <summary>
-                /// 
+                ///
                 /// </summary>
                 /// <param name="Second"></param>
                 record R(int [|First|], int Second, int Third);
@@ -804,7 +804,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
 
             var expected = """
                 /// <summary>
-                /// 
+                ///
                 /// </summary>
                 /// <param name="First"></param>
                 /// <param name="Second"></param>

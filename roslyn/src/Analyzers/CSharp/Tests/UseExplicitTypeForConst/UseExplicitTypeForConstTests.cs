@@ -29,23 +29,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = 0;
+                        void M()
+                        {
+                            const [|var|] v = 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const int v = 0;
+                        void M()
+                        {
+                            const int v = 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -54,25 +54,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    const string s = null;
-                    void M()
+                    class C
                     {
-                        const [|var|] v = s;
+                        const string s = null;
+                        void M()
+                        {
+                            const [|var|] v = s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    const string s = null;
-                    void M()
+                    class C
                     {
-                        const string v = s;
+                        const string s = null;
+                        void M()
+                        {
+                            const string v = s;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -81,23 +81,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = default(System.Action);
+                        void M()
+                        {
+                            const [|var|] v = default(System.Action);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const System.Action v = default(System.Action);
+                        void M()
+                        {
+                            const System.Action v = default(System.Action);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -106,23 +106,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = System.Console.ReadLine();
+                        void M()
+                        {
+                            const [|var|] v = System.Console.ReadLine();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const string v = System.Console.ReadLine();
+                        void M()
+                        {
+                            const string v = System.Console.ReadLine();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -131,23 +131,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = (0, true);
+                        void M()
+                        {
+                            const [|var|] v = (0, true);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const (int, bool) v = (0, true);
+                        void M()
+                        {
+                            const (int, bool) v = (0, true);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -156,14 +156,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = null;
+                        void M()
+                        {
+                            const [|var|] v = null;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -172,14 +172,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = default;
+                        void M()
+                        {
+                            const [|var|] v = default;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -188,23 +188,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = () => { };
+                        void M()
+                        {
+                            const [|var|] v = () => { };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const System.Action v = () => { };
+                        void M()
+                        {
+                            const System.Action v = () => { };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -213,14 +213,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = new { a = 0 };
+                        void M()
+                        {
+                            const [|var|] v = new { a = 0 };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -229,14 +229,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v = { 0, 1 };
+                        void M()
+                        {
+                            const [|var|] v = { 0, 1 };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -245,14 +245,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] v =
+                        void M()
+                        {
+                            const [|var|] v =
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -261,15 +261,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    class var { }
-                    void M()
+                    class C
                     {
-                        const [|var|] v = 0;
+                        class var { }
+                        void M()
+                        {
+                            const [|var|] v = 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -278,11 +278,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    const [|var|] v = 0;
-                }
-                """
+                    class C
+                    {
+                        const [|var|] v = 0;
+                    }
+                    """
             );
         }
 
@@ -291,14 +291,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        const [|var|] a = 0, b = 0;
+                        void M()
+                        {
+                            const [|var|] a = 0, b = 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

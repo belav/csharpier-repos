@@ -29,7 +29,7 @@ public class StringLiteralExpressionStructureTests
                     {
                         var v =
                 {|hint:{|textspan:$$@"
-                class 
+                class
                 {
                 }
                 "|}|};

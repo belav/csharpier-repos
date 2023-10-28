@@ -3882,19 +3882,19 @@ static void Main(string[] args)
         {
             await AssertFormatAsync(
                 """
-                F(stackalloc int[]
-                    {
-                        1,
-                        2,
-                    });
-                """,
+                    F(stackalloc int[]
+                        {
+                            1,
+                            2,
+                        });
+                    """,
                 """
-                F(stackalloc int[]
-                    {
-                        1,
-                        2,
-                    }                );
-                """
+                    F(stackalloc int[]
+                        {
+                            1,
+                            2,
+                        }                );
+                    """
             );
         }
 
@@ -3903,21 +3903,21 @@ static void Main(string[] args)
         {
             await AssertFormatAsync(
                 """
-                F(stackalloc[]
-                    {
-                        1,
-                        2,
-                    }
-                );
-                """,
+                    F(stackalloc[]
+                        {
+                            1,
+                            2,
+                        }
+                    );
+                    """,
                 """
-                F(                    stackalloc []
-                    {
-                        1,
-                        2,
-                    }
-                );
-                """
+                    F(                    stackalloc []
+                        {
+                            1,
+                            2,
+                        }
+                    );
+                    """
             );
         }
 
@@ -3926,23 +3926,23 @@ static void Main(string[] args)
         {
             await AssertFormatAsync(
                 """
-                F(
-                    stackalloc int[]
-                    {
-                        1,2,
-                        3,4
-                    }
-                );
-                """,
+                    F(
+                        stackalloc int[]
+                        {
+                            1,2,
+                            3,4
+                        }
+                    );
+                    """,
                 """
-                F(
-                    stackalloc int[]
-                    {
-                        1,2,
-                        3,4
-                    }
-                );
-                """
+                    F(
+                        stackalloc int[]
+                        {
+                            1,2,
+                            3,4
+                        }
+                    );
+                    """
             );
         }
 
@@ -3951,23 +3951,23 @@ static void Main(string[] args)
         {
             await AssertFormatAsync(
                 """
-                F(
-                    stackalloc[]
-                    {
-                        1,2,
-                        3,4
-                    }
-                );
-                """,
+                    F(
+                        stackalloc[]
+                        {
+                            1,2,
+                            3,4
+                        }
+                    );
+                    """,
                 """
-                F(
-                    stackalloc []
-                    {
-                        1,2,
-                        3,4
-                    }
-                );
-                """
+                    F(
+                        stackalloc []
+                        {
+                            1,2,
+                            3,4
+                        }
+                    );
+                    """
             );
         }
 
@@ -3976,15 +3976,15 @@ static void Main(string[] args)
         {
             await AssertFormatAsync(
                 """
-                var x = (stackalloc int[] {1,2,
-                     3
-                });
-                """,
+                    var x = (stackalloc int[] {1,2,
+                         3
+                    });
+                    """,
                 """
-                var x = (stackalloc int[] {1,2,
-                     3
-                });
-                """
+                    var x = (stackalloc int[] {1,2,
+                         3
+                    });
+                    """
             );
         }
 
@@ -3993,17 +3993,17 @@ static void Main(string[] args)
         {
             await AssertFormatAsync(
                 """
-                var x = (stackalloc[]
-                {1,
-                    2, 3
-                });
-                """,
+                    var x = (stackalloc[]
+                    {1,
+                        2, 3
+                    });
+                    """,
                 """
-                var x = (stackalloc []
-                {1,
-                    2, 3
-                });
-                """
+                    var x = (stackalloc []
+                    {1,
+                        2, 3
+                    });
+                    """
             );
         }
 
@@ -11963,11 +11963,11 @@ f( [Attribute] () => { });
         {
             await AssertFormatAsync(
                 expected: """
-                var f = ([Attribute] int x = 1) => x;
-                """,
+                    var f = ([Attribute] int x = 1) => x;
+                    """,
                 code: """
-                var f = (  [ Attribute ]int x=1)=>x;
-                """
+                    var f = (  [ Attribute ]int x=1)=>x;
+                    """
             );
         }
 

@@ -227,32 +227,32 @@ namespace Wasm.Build.Tests
         {
             string code =
                 """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Runtime.InteropServices;
-            """
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
+                    """
                 + (
                     withDisabledRuntimeMarshallingAttribute
                         ? "[assembly: DisableRuntimeMarshalling]"
                         : ""
                 )
                 + """
-            public class Test
-            {
-                public static int Main()
-                {
-                    var x = new S { Value = 5 };
+                    public class Test
+                    {
+                        public static int Main()
+                        {
+                            var x = new S { Value = 5 };
 
-                    Console.WriteLine("Main running " + x.Value);
-                    return 42;
-                }
+                            Console.WriteLine("Main running " + x.Value);
+                            return 42;
+                        }
 
-                public struct S { public int Value; }
+                        public struct S { public int Value; }
 
-                [UnmanagedCallersOnly]
-                public static void M(S myStruct) { }
-            }
-            """;
+                        [UnmanagedCallersOnly]
+                        public static void M(S myStruct) { }
+                    }
+                    """;
 
             buildArgs = ExpandBuildArgs(
                 buildArgs with
@@ -380,27 +380,27 @@ namespace Wasm.Build.Tests
 
             code =
                 """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Runtime.InteropServices;
-            """
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices;
+                    """
                 + (appHasAttribute ? "[assembly: DisableRuntimeMarshalling]" : "")
                 + """
 
-            public class Test
-            {
-                public static int Main()
-                {
-                    var x = new S { Value = 5 };
+                    public class Test
+                    {
+                        public static int Main()
+                        {
+                            var x = new S { Value = 5 };
 
-                    Console.WriteLine("Main running " + x.Value);
-                    return 42;
-                }
+                            Console.WriteLine("Main running " + x.Value);
+                            return 42;
+                        }
 
-                [UnmanagedCallersOnly]
-                public static void M(S myStruct) { }
-            }
-            """;
+                        [UnmanagedCallersOnly]
+                        public static void M(S myStruct) { }
+                    }
+                    """;
 
             buildArgs = ExpandBuildArgs(
                 buildArgs with
@@ -538,25 +538,25 @@ namespace Wasm.Build.Tests
             // Build a library containing icalls with overloaded parameters.
 
             string code = """
-            using System;
-            using System.Runtime.CompilerServices;
+                using System;
+                using System.Runtime.CompilerServices;
 
-            public static class Interop
-            {
-                public enum Numbers { A, B, C, D }
-
-                [MethodImplAttribute(MethodImplOptions.InternalCall)]
-                internal static extern void Square(Numbers x);
-
-                [MethodImplAttribute(MethodImplOptions.InternalCall)]
-                internal static extern void Square(Numbers x, Numbers y);
-
-                public static void Main()
+                public static class Interop
                 {
-                    // Noop
+                    public enum Numbers { A, B, C, D }
+
+                    [MethodImplAttribute(MethodImplOptions.InternalCall)]
+                    internal static extern void Square(Numbers x);
+
+                    [MethodImplAttribute(MethodImplOptions.InternalCall)]
+                    internal static extern void Square(Numbers x, Numbers y);
+
+                    public static void Main()
+                    {
+                        // Noop
+                    }
                 }
-            }
-            """;
+                """;
 
             var libraryBuildArgs = ExpandBuildArgs(
                 buildArgs with
@@ -582,43 +582,43 @@ namespace Wasm.Build.Tests
             // Build a project with ManagedToNativeGenerator task reading icalls from the above library and runtime-icall-table.h bellow.
 
             string projectCode = """
-            <Project>
-                <UsingTask TaskName="ManagedToNativeGenerator" AssemblyFile="###WasmAppBuilder###" />
-                <Target Name="Build">
-                  <PropertyGroup>
-                    <WasmPInvokeTablePath>pinvoke-table.h</WasmPInvokeTablePath>
-                    <WasmInterpToNativeTablePath>wasm_m2n_invoke.g.h</WasmInterpToNativeTablePath>
-                    <WasmRuntimeICallTablePath>runtime-icall-table.h</WasmRuntimeICallTablePath>
-                  </PropertyGroup>
+                <Project>
+                    <UsingTask TaskName="ManagedToNativeGenerator" AssemblyFile="###WasmAppBuilder###" />
+                    <Target Name="Build">
+                      <PropertyGroup>
+                        <WasmPInvokeTablePath>pinvoke-table.h</WasmPInvokeTablePath>
+                        <WasmInterpToNativeTablePath>wasm_m2n_invoke.g.h</WasmInterpToNativeTablePath>
+                        <WasmRuntimeICallTablePath>runtime-icall-table.h</WasmRuntimeICallTablePath>
+                      </PropertyGroup>
 
-                  <ItemGroup>
-                    <WasmPInvokeModule Include="libSystem.Native" />
-                    ###WasmPInvokeModule###
-                  </ItemGroup>
+                      <ItemGroup>
+                        <WasmPInvokeModule Include="libSystem.Native" />
+                        ###WasmPInvokeModule###
+                      </ItemGroup>
 
-                  <ManagedToNativeGenerator
-                    Assemblies="@(WasmPInvokeAssembly)"
-                    PInvokeModules="@(WasmPInvokeModule)"
-                    PInvokeOutputPath="$(WasmPInvokeTablePath)"
-                    RuntimeIcallTableFile="$(WasmRuntimeICallTablePath)"
-                    InterpToNativeOutputPath="$(WasmInterpToNativeTablePath)">
-                    <Output TaskParameter="FileWrites" ItemName="FileWrites" />
-                  </ManagedToNativeGenerator>
-                </Target>
-            </Project>
-            """;
+                      <ManagedToNativeGenerator
+                        Assemblies="@(WasmPInvokeAssembly)"
+                        PInvokeModules="@(WasmPInvokeModule)"
+                        PInvokeOutputPath="$(WasmPInvokeTablePath)"
+                        RuntimeIcallTableFile="$(WasmRuntimeICallTablePath)"
+                        InterpToNativeOutputPath="$(WasmInterpToNativeTablePath)">
+                        <Output TaskParameter="FileWrites" ItemName="FileWrites" />
+                      </ManagedToNativeGenerator>
+                    </Target>
+                </Project>
+                """;
 
             string AddAssembly(string name) =>
                 $"<WasmPInvokeAssembly Include=\"{Path.Combine(libraryDir, "bin", buildArgs.Config, DefaultTargetFramework, "browser-wasm", name + ".dll")}\" />";
 
             string icallTable = """
-            [
-             { "klass":"Interop", "icalls": [{} 	,{ "name": "Square(Numbers)", "func": "ves_abc", "handles": false }
-            	,{ "name": "Add(Numbers,Numbers)", "func": "ves_def", "handles": false }
-            ]}
-            ]
+                [
+                 { "klass":"Interop", "icalls": [{} 	,{ "name": "Square(Numbers)", "func": "ves_abc", "handles": false }
+                    ,{ "name": "Add(Numbers,Numbers)", "func": "ves_def", "handles": false }
+                ]}
+                ]
 
-            """;
+                """;
 
             string tasksDir = Path.Combine(
                 s_buildEnv.WorkloadPacksDir,

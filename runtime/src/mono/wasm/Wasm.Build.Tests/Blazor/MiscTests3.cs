@@ -98,9 +98,9 @@ public class MiscTests3 : BlazorWasmTestBase
         BlazorAddRazorButton(
             "cpp_add",
             """
-            var result = MyDllImports.cpp_add(10, 12);
-            outputText = $"{result}";
-        """
+                    var result = MyDllImports.cpp_add(10, 12);
+                    outputText = $"{result}";
+                """
         );
 
         if (build)

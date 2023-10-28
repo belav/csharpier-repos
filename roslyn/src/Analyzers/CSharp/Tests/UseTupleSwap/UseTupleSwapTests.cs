@@ -80,25 +80,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        [|var|] temp = args[0];
-                        args[0] = args[1];
-                        args[1] = temp;
+                        void M(string[] args)
+                        {
+                            [|var|] temp = args[0];
+                            args[0] = args[1];
+                            args[1] = temp;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        (args[1], args[0]) = (args[0], args[1]);
+                        void M(string[] args)
+                        {
+                            (args[1], args[0]) = (args[0], args[1]);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -125,25 +125,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        [|var|] temp = (args[0]);
-                        ((args[0])) = (((args[1])));
-                        ((((args[1])))) = (((((temp)))));
+                        void M(string[] args)
+                        {
+                            [|var|] temp = (args[0]);
+                            ((args[0])) = (((args[1])));
+                            ((((args[1])))) = (((((temp)))));
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        (args[1], args[0]) = (args[0], args[1]);
+                        void M(string[] args)
+                        {
+                            (args[1], args[0]) = (args[0], args[1]);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -152,27 +152,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        // Comment
-                        [|var|] temp = args[0];
-                        args[0] = args[1];
-                        args[1] = temp;
+                        void M(string[] args)
+                        {
+                            // Comment
+                            [|var|] temp = args[0];
+                            args[0] = args[1];
+                            args[1] = temp;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        // Comment
-                        (args[1], args[0]) = (args[0], args[1]);
+                        void M(string[] args)
+                        {
+                            // Comment
+                            (args[1], args[0]) = (args[0], args[1]);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -181,25 +181,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        [|var|] temp = args [ 0 ] ;
-                        args  [  0  ] = args   [   1   ];
-                        args    [    1    ] = temp;
+                        void M(string[] args)
+                        {
+                            [|var|] temp = args [ 0 ] ;
+                            args  [  0  ] = args   [   1   ];
+                            args    [    1    ] = temp;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        (args   [   1   ], args  [  0  ]) = (args  [  0  ], args   [   1   ]);
+                        void M(string[] args)
+                        {
+                            (args   [   1   ], args  [  0  ]) = (args  [  0  ], args   [   1   ]);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -334,35 +334,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(string[] args, int x)
+                    class C
                     {
-                        switch (x)
+                        void M(string[] args, int x)
                         {
-                            default:
-                                [|var|] temp = args[0];
-                                args[0] = args[1];
-                                args[1] = temp;
-                                break;
+                            switch (x)
+                            {
+                                default:
+                                    [|var|] temp = args[0];
+                                    args[0] = args[1];
+                                    args[1] = temp;
+                                    break;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string[] args, int x)
+                    class C
                     {
-                        switch (x)
+                        void M(string[] args, int x)
                         {
-                            default:
-                                (args[1], args[0]) = (args[0], args[1]);
-                                break;
+                            switch (x)
+                            {
+                                default:
+                                    (args[1], args[0]) = (args[0], args[1]);
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -371,35 +371,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        // comment 1
-                        [|var|] temp1 = args[0];
-                        args[0] = args[1];
-                        args[1] = temp1;
+                        void M(string[] args)
+                        {
+                            // comment 1
+                            [|var|] temp1 = args[0];
+                            args[0] = args[1];
+                            args[1] = temp1;
 
-                        // comment 2
-                        [|var|] temp2 = args[2];
-                        args[2] = args[3];
-                        args[3] = temp2;
+                            // comment 2
+                            [|var|] temp2 = args[2];
+                            args[2] = args[3];
+                            args[3] = temp2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string[] args)
+                    class C
                     {
-                        // comment 1
-                        (args[1], args[0]) = (args[0], args[1]);
+                        void M(string[] args)
+                        {
+                            // comment 1
+                            (args[1], args[0]) = (args[0], args[1]);
 
-                        // comment 2
-                        (args[3], args[2]) = (args[2], args[3]);
+                            // comment 2
+                            (args[3], args[2]) = (args[2], args[3]);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -433,10 +433,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                     Sources =
                     {
                         """
-                        [|var|] temp = args[0];
-                        args[0] = args[1];
-                        args[1] = temp;
-                        """,
+                            [|var|] temp = args[0];
+                            args[0] = args[1];
+                            args[1] = temp;
+                            """,
                     },
                     OutputKind = OutputKind.ConsoleApplication,
                 },
@@ -476,35 +476,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
             await new VerifyCS.Test
             {
                 TestCode = """
-                struct S { }
+                    struct S { }
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        S v0 = default;
-                        S v1 = default;
+                        void M()
+                        {
+                            S v0 = default;
+                            S v1 = default;
 
-                        [|var|] vTmp = v0;
-                        v0 = v1;
-                        v1 = vTmp;
+                            [|var|] vTmp = v0;
+                            v0 = v1;
+                            v1 = vTmp;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                struct S { }
+                    struct S { }
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        S v0 = default;
-                        S v1 = default;
+                        void M()
+                        {
+                            S v0 = default;
+                            S v1 = default;
 
-                        (v1, v0) = (v0, v1);
+                            (v1, v0) = (v0, v1);
+                        }
                     }
-                }
-                """,
+                    """,
             }.RunAsync();
         }
 

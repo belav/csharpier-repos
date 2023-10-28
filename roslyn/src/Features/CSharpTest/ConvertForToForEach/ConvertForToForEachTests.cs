@@ -42,33 +42,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -77,39 +77,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Action a = () =>
+                            [||]for (int i = 0; i < array.Length; i++)
                             {
-                                Console.WriteLine(array[i]);
-                            };
+                                Action a = () =>
+                                {
+                                    Console.WriteLine(array[i]);
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Action a = () =>
+                            foreach (string {|Rename:v|} in array)
                             {
-                                Console.WriteLine({|Warning:v|});
-                            };
+                                Action a = () =>
+                                {
+                                    Console.WriteLine({|Warning:v|});
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -118,37 +118,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        [||]for (int i = 0; i < list.Count; i++)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(list[i]);
-                            list.Add(null);
+                            [||]for (int i = 0; i < list.Count; i++)
+                            {
+                                Console.WriteLine(list[i]);
+                                list.Add(null);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in list)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(v);
-                            {|Warning:list|}.Add(null);
+                            foreach (string {|Rename:v|} in list)
+                            {
+                                Console.WriteLine(v);
+                                {|Warning:list|}.Add(null);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -157,37 +157,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        [||]for (int i = 0; i < list.Count; i++)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(list[i]);
-                            list = null;
+                            [||]for (int i = 0; i < list.Count; i++)
+                            {
+                                Console.WriteLine(list[i]);
+                                list = null;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in list)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(v);
-                            {|Warning:list|} = null;
+                            foreach (string {|Rename:v|} in list)
+                            {
+                                Console.WriteLine(v);
+                                {|Warning:list|} = null;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -196,37 +196,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        [||]for (int i = 0; i < list.Count; i++)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(list[i]);
-                            Console.WriteLine(list.Count);
+                            [||]for (int i = 0; i < list.Count; i++)
+                            {
+                                Console.WriteLine(list[i]);
+                                Console.WriteLine(list.Count);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in list)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(v);
-                            Console.WriteLine(list.Count);
+                            foreach (string {|Rename:v|} in list)
+                            {
+                                Console.WriteLine(v);
+                                Console.WriteLine(list.Count);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -235,39 +235,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        Action a = () =>
+                        void Test(string[] array)
                         {
-                            [||]for (int i = 0; i < array.Length; i++)
+                            Action a = () =>
                             {
-                                Console.WriteLine(array[i]);
-                            }
-                        };
+                                [||]for (int i = 0; i < array.Length; i++)
+                                {
+                                    Console.WriteLine(array[i]);
+                                }
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        Action a = () =>
+                        void Test(string[] array)
                         {
-                            foreach (string {|Rename:v|} in array)
+                            Action a = () =>
                             {
-                                Console.WriteLine(v);
-                            }
-                        };
+                                foreach (string {|Rename:v|} in array)
+                                {
+                                    Console.WriteLine(v);
+                                }
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -276,35 +276,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -313,29 +313,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
-                            Console.WriteLine(array[i]);
+                        void Test(string[] array)
+                        {
+                            [||]for (int i = 0; i < array.Length; i++)
+                                Console.WriteLine(array[i]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
-                            Console.WriteLine(v);
+                        void Test(string[] array)
+                        {
+                            foreach (string {|Rename:v|} in array)
+                                Console.WriteLine(v);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -344,33 +344,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; ++i)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; ++i)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -379,33 +379,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i += 1)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; i += 1)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -414,33 +414,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                       [||] for (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                           [||] for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -449,19 +449,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        for ( [||]int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            for ( [||]int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -470,33 +470,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        for ([||]int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            for ([||]int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -505,19 +505,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        for (int i = 0; i < array.Length; i++[||] )
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            for (int i = 0; i < array.Length; i++[||] )
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -526,33 +526,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        for (int i = 0; i < array.Length; i++[||])
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            for (int i = 0; i < array.Length; i++[||])
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -561,33 +561,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        for[||] (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            for[||] (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -596,33 +596,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [|for|] (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [|for|] (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -631,33 +631,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        for [||](int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            for [||](int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -666,33 +666,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        for (int i = 0; i < array.Length; i++)[||]
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            for (int i = 0; i < array.Length; i++)[||]
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -701,19 +701,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; )
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; )
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -722,19 +722,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i += 2)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; i += 2)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -743,19 +743,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; j += 2)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; j += 2)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -764,19 +764,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; ; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; ; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -785,19 +785,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; j < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; j < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -806,19 +806,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < GetLength(array); i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < GetLength(array); i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -827,19 +827,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -848,20 +848,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        int i;
-                        [||]for (i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            int i;
+                            [||]for (i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -870,19 +870,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -891,19 +891,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 1; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 1; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -912,19 +912,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0, j = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0, j = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -933,35 +933,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        [||]for (int i = 0; i < list.Count; i++)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(list[i]);
+                            [||]for (int i = 0; i < list.Count; i++)
+                            {
+                                Console.WriteLine(list[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in list)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(v);
+                            foreach (string {|Rename:v|} in list)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -970,36 +970,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        [||]for (int i = 0; i < list.Count; i++)
+                        void Test(IList<string> list)
                         {
-                            var val = list[i];
-                            Console.WriteLine(list[i]);
+                            [||]for (int i = 0; i < list.Count; i++)
+                            {
+                                var val = list[i];
+                                Console.WriteLine(list[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        foreach (var val in list)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(val);
+                            foreach (var val in list)
+                            {
+                                Console.WriteLine(val);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1008,36 +1008,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        [||]for (int i = 0; i < list.Count; i++)
+                        void Test(IList<string> list)
                         {
-                            var val = list [ i ];
-                            Console.WriteLine(list [ /*find me*/ i ]);
+                            [||]for (int i = 0; i < list.Count; i++)
+                            {
+                                var val = list [ i ];
+                                Console.WriteLine(list [ /*find me*/ i ]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        foreach (var val in list)
+                        void Test(IList<string> list)
                         {
-                            Console.WriteLine(val);
+                            foreach (var val in list)
+                            {
+                                Console.WriteLine(val);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1046,40 +1046,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        [||]for (int i = 0; i < list.Count; i++)
+                        void Test(IList<string> list)
                         {
-                            // loop comment
+                            [||]for (int i = 0; i < list.Count; i++)
+                            {
+                                // loop comment
 
-                            var val = list[i];
-                            Console.WriteLine(list[i]);
+                                var val = list[i];
+                                Console.WriteLine(list[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        foreach (var val in list)
+                        void Test(IList<string> list)
                         {
-                            // loop comment
+                            foreach (var val in list)
+                            {
+                                // loop comment
 
-                            Console.WriteLine(val);
+                                Console.WriteLine(val);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1088,44 +1088,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        [||]for (int i = 0; i < list.Count; i++)
+                        void Test(IList<string> list)
                         {
-                #if true
+                            [||]for (int i = 0; i < list.Count; i++)
+                            {
+                    #if true
 
-                            var val = list[i];
-                            Console.WriteLine(list[i]);
+                                var val = list[i];
+                                Console.WriteLine(list[i]);
 
-                #endif
+                    #endif
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void Test(IList<string> list)
+                    class C
                     {
-                        foreach (var val in list)
+                        void Test(IList<string> list)
                         {
-                #if true
+                            foreach (var val in list)
+                            {
+                    #if true
 
-                            Console.WriteLine(val);
+                                Console.WriteLine(val);
 
-                #endif
+                    #endif
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1134,19 +1134,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(i);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(i);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1155,19 +1155,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(other[i]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(other[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1176,33 +1176,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            array[i] = 1;
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                array[i] = 1;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (string {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            {|Warning:v|} = 1;
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                {|Warning:v|} = 1;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1211,33 +1211,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        foreach (var {|Rename:v|} in array)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (var {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeEverywhere()
             );
         }
@@ -1247,53 +1247,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class MyList
-                {
-                  public string this[int i] { get; }
-
-                  public Enumerator GetEnumerator() { }
-
-                  public struct Enumerator { public object Current { get; } }
-                }
-
-                class C
-                {
-                    void Test(MyList list)
+                    class MyList
                     {
-                        // need to use 'string' here to preserve original index semantics.
-                        [||]for (int i = 0; i < list.Length; i++)
+                      public string this[int i] { get; }
+
+                      public Enumerator GetEnumerator() { }
+
+                      public struct Enumerator { public object Current { get; } }
+                    }
+
+                    class C
+                    {
+                        void Test(MyList list)
                         {
-                            Console.WriteLine(list[i]);
+                            // need to use 'string' here to preserve original index semantics.
+                            [||]for (int i = 0; i < list.Length; i++)
+                            {
+                                Console.WriteLine(list[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class MyList
-                {
-                  public string this[int i] { get; }
-
-                  public Enumerator GetEnumerator() { }
-
-                  public struct Enumerator { public object Current { get; } }
-                }
-
-                class C
-                {
-                    void Test(MyList list)
+                    class MyList
                     {
-                        // need to use 'string' here to preserve original index semantics.
-                        foreach (string {|Rename:v|} in list)
+                      public string this[int i] { get; }
+
+                      public Enumerator GetEnumerator() { }
+
+                      public struct Enumerator { public object Current { get; } }
+                    }
+
+                    class C
+                    {
+                        void Test(MyList list)
                         {
-                            Console.WriteLine(v);
+                            // need to use 'string' here to preserve original index semantics.
+                            foreach (string {|Rename:v|} in list)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeEverywhere()
             );
         }
@@ -1303,53 +1303,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class MyList
-                {
-                    public object this[int i] { get => default; }
-
-                    public Enumerator GetEnumerator() { return default; }
-
-                    public struct Enumerator { public object Current { get; } public bool MoveNext() => true; }
-                }
-
-                class C
-                {
-                    void Test(MyList list)
+                    class MyList
                     {
-                        // can use 'var' here since hte type stayed the same.
-                        [||]for (int i = 0; i < list.Length; i++)
+                        public object this[int i] { get => default; }
+
+                        public Enumerator GetEnumerator() { return default; }
+
+                        public struct Enumerator { public object Current { get; } public bool MoveNext() => true; }
+                    }
+
+                    class C
+                    {
+                        void Test(MyList list)
                         {
-                            Console.WriteLine(list[i]);
+                            // can use 'var' here since hte type stayed the same.
+                            [||]for (int i = 0; i < list.Length; i++)
+                            {
+                                Console.WriteLine(list[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class MyList
-                {
-                    public object this[int i] { get => default; }
-
-                    public Enumerator GetEnumerator() { return default; }
-
-                    public struct Enumerator { public object Current { get; } public bool MoveNext() => true; }
-                }
-
-                class C
-                {
-                    void Test(MyList list)
+                    class MyList
                     {
-                        // can use 'var' here since hte type stayed the same.
-                        foreach (var {|Rename:v|} in list)
+                        public object this[int i] { get => default; }
+
+                        public Enumerator GetEnumerator() { return default; }
+
+                        public struct Enumerator { public object Current { get; } public bool MoveNext() => true; }
+                    }
+
+                    class C
+                    {
+                        void Test(MyList list)
                         {
-                            Console.WriteLine(v);
+                            // can use 'var' here since hte type stayed the same.
+                            foreach (var {|Rename:v|} in list)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeEverywhere()
             );
         }
@@ -1359,37 +1359,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        // trivia 1
-                        [||]for /*trivia 2*/ ( /*trivia 3*/ int i = 0; i < array.Length; i++) /*trivia 4*/
-                        // trivia 5
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
-                        } // trivia 6
+                            // trivia 1
+                            [||]for /*trivia 2*/ ( /*trivia 3*/ int i = 0; i < array.Length; i++) /*trivia 4*/
+                            // trivia 5
+                            {
+                                Console.WriteLine(array[i]);
+                            } // trivia 6
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        // trivia 1
-                        foreach /*trivia 2*/ ( /*trivia 3*/ string {|Rename:v|} in array) /*trivia 4*/
-                        // trivia 5
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(v);
-                        } // trivia 6
+                            // trivia 1
+                            foreach /*trivia 2*/ ( /*trivia 3*/ string {|Rename:v|} in array) /*trivia 4*/
+                            // trivia 5
+                            {
+                                Console.WriteLine(v);
+                            } // trivia 6
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1398,19 +1398,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[] array)
+                    class C
                     {
-                        [||]for (var (i, j) = (0, 0); i < array.Length; i++)
+                        void Test(string[] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (var (i, j) = (0, 0); i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1419,19 +1419,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[,] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[,] array)
                         {
-                            Console.WriteLine(array[i, 0]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i, 0]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1440,19 +1440,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[,] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[,] array)
                         {
-                            Console.WriteLine(array[i, i]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i, i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1461,33 +1461,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[][] array)
                         {
-                            Console.WriteLine(array[i]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        foreach (string[] {|Rename:v|} in array)
+                        void Test(string[][] array)
                         {
-                            Console.WriteLine(v);
+                            foreach (string[] {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1496,33 +1496,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[][] array)
                         {
-                            Console.WriteLine(array[i][0]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i][0]);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        foreach (string[] {|Rename:v|} in array)
+                        void Test(string[][] array)
                         {
-                            Console.WriteLine(v[0]);
+                            foreach (string[] {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v[0]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1531,40 +1531,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[][] array)
                         {
-                            var subArray = array[i];
-                            for (int j = 0; j < subArray.Length; j++)
+                            [||]for (int i = 0; i < array.Length; i++)
                             {
-                                Console.WriteLine(array[i][j]);
+                                var subArray = array[i];
+                                for (int j = 0; j < subArray.Length; j++)
+                                {
+                                    Console.WriteLine(array[i][j]);
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        foreach (var subArray in array)
+                        void Test(string[][] array)
                         {
-                            for (int j = 0; j < subArray.Length; j++)
+                            foreach (var subArray in array)
                             {
-                                Console.WriteLine(subArray[j]);
+                                for (int j = 0; j < subArray.Length; j++)
+                                {
+                                    Console.WriteLine(subArray[j]);
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1573,39 +1573,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[][] array)
                         {
-                            for (int j = 0; j < array[i].Length; j++)
+                            [||]for (int i = 0; i < array.Length; i++)
                             {
-                                Console.WriteLine(array[i][j]);
+                                for (int j = 0; j < array[i].Length; j++)
+                                {
+                                    Console.WriteLine(array[i][j]);
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        foreach (string[] {|Rename:v|} in array)
+                        void Test(string[][] array)
                         {
-                            for (int j = 0; j < v.Length; j++)
+                            foreach (string[] {|Rename:v|} in array)
                             {
-                                Console.WriteLine(v[j]);
+                                for (int j = 0; j < v.Length; j++)
+                                {
+                                    Console.WriteLine(v[j]);
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1614,39 +1614,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        for (int i = 0; i < array.Length; i++)
+                        void Test(string[][] array)
                         {
-                            [||]for (int j = 0; j < array[i].Length; j++)
+                            for (int i = 0; i < array.Length; i++)
                             {
-                                Console.WriteLine(array[i][j]);
+                                [||]for (int j = 0; j < array[i].Length; j++)
+                                {
+                                    Console.WriteLine(array[i][j]);
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        for (int i = 0; i < array.Length; i++)
+                        void Test(string[][] array)
                         {
-                            foreach (string {|Rename:v|} in array[i])
+                            for (int i = 0; i < array.Length; i++)
                             {
-                                Console.WriteLine(v);
+                                foreach (string {|Rename:v|} in array[i])
+                                {
+                                    Console.WriteLine(v);
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1655,19 +1655,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Test(string[][] array)
+                    class C
                     {
-                        [||]for (int i = 0; i < array.Length; i++)
+                        void Test(string[][] array)
                         {
-                            Console.WriteLine(array[i][i]);
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i][i]);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1676,37 +1676,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-    using System;
+                    using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            [||]for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+                    class C
+                    {
+                        void Test(string[] array)
+                        {
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
 
-            void v() { }
-        }
-    }
-    """,
+                            void v() { }
+                        }
+                    }
+                    """,
                 """
-    using System;
+                    using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            foreach (string {|Rename:v1|} in array)
-            {
-                Console.WriteLine(v1);
-            }
+                    class C
+                    {
+                        void Test(string[] array)
+                        {
+                            foreach (string {|Rename:v1|} in array)
+                            {
+                                Console.WriteLine(v1);
+                            }
 
-            void v() { }
-        }
-    }
-    """
+                            void v() { }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1715,41 +1715,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-    using System;
+                    using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            [||]for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+                    class C
+                    {
+                        void Test(string[] array)
+                        {
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
 
-            void M(string v)
-            {
-            }
-        }
-    }
-    """,
+                            void M(string v)
+                            {
+                            }
+                        }
+                    }
+                    """,
                 """
-    using System;
+                    using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            foreach (string {|Rename:v|} in array)
-            {
-                Console.WriteLine(v);
-            }
+                    class C
+                    {
+                        void Test(string[] array)
+                        {
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
 
-            void M(string v)
-            {
-            }
-        }
-    }
-    """
+                            void M(string v)
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1758,37 +1758,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-    using System;
+                    using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            [||]for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+                    class C
+                    {
+                        void Test(string[] array)
+                        {
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
 
-            Action<int> myLambda = v => { };
-        }
-    }
-    """,
+                            Action<int> myLambda = v => { };
+                        }
+                    }
+                    """,
                 """
-    using System;
+                    using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            foreach (string {|Rename:v1|} in array)
-            {
-                Console.WriteLine(v1);
-            }
+                    class C
+                    {
+                        void Test(string[] array)
+                        {
+                            foreach (string {|Rename:v1|} in array)
+                            {
+                                Console.WriteLine(v1);
+                            }
 
-            Action<int> myLambda = v => { };
-        }
-    }
-    """,
+                            Action<int> myLambda = v => { };
+                        }
+                    }
+                    """,
                 parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_3))
             );
         }
@@ -1798,37 +1798,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-    using System;
+                    using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            [||]for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+                    class C
+                    {
+                        void Test(string[] array)
+                        {
+                            [||]for (int i = 0; i < array.Length; i++)
+                            {
+                                Console.WriteLine(array[i]);
+                            }
 
-            Action<int> myLambda = v => { };
-        }
-    }
-    """,
+                            Action<int> myLambda = v => { };
+                        }
+                    }
+                    """,
                 """
-    using System;
+                    using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            foreach (string {|Rename:v|} in array)
-            {
-                Console.WriteLine(v);
-            }
+                    class C
+                    {
+                        void Test(string[] array)
+                        {
+                            foreach (string {|Rename:v|} in array)
+                            {
+                                Console.WriteLine(v);
+                            }
 
-            Action<int> myLambda = v => { };
-        }
-    }
-    """,
+                            Action<int> myLambda = v => { };
+                        }
+                    }
+                    """,
                 parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp8))
             );
         }
@@ -1838,25 +1838,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestMissingAsync(
                 """
-                using System;
-                using System.Collection.Generic;
+                    using System;
+                    using System.Collection.Generic;
 
-                class Item { public string Value; }
+                    class Item { public string Value; }
 
-                class C
-                {
-                    static void Test()
+                    class C
                     {
-                        var first = new { list = new List<Item>() };
-                        var second = new { list = new List<Item>() };
-
-                        [||]for (var i = 0; i < first.list.Count; i++)
+                        static void Test()
                         {
-                            first.list[i].Value = second.list[i].Value;
+                            var first = new { list = new List<Item>() };
+                            var second = new { list = new List<Item>() };
+
+                            [||]for (var i = 0; i < first.list.Count; i++)
+                            {
+                                first.list[i].Value = second.list[i].Value;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1865,41 +1865,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class V
-                {
-                    void M(ICollection<V> collection)
+                    class V
                     {
-                        [||]for (int i = 0; i < collection.Count; ++i)
-                            collection.ElementAt(i).M();
-                    }
+                        void M(ICollection<V> collection)
+                        {
+                            [||]for (int i = 0; i < collection.Count; ++i)
+                                collection.ElementAt(i).M();
+                        }
 
-                    private void M()
-                    {
+                        private void M()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class V
-                {
-                    void M(ICollection<V> collection)
+                    class V
                     {
-                        foreach (V {|Rename:v|} in collection)
-                            v.M();
-                    }
+                        void M(ICollection<V> collection)
+                        {
+                            foreach (V {|Rename:v|} in collection)
+                                v.M();
+                        }
 
-                    private void M()
-                    {
+                        private void M()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

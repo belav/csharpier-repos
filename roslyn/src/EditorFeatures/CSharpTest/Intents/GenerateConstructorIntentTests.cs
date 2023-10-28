@@ -200,11 +200,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             var additionalDocuments = new string[]
             {
                 """
-                partial class C
-                {
-                    private readonly int _someInt;
-                }
-                """
+                    partial class C
+                    {
+                        private readonly int _someInt;
+                    }
+                    """
             };
             var expectedText = """
                 partial class C

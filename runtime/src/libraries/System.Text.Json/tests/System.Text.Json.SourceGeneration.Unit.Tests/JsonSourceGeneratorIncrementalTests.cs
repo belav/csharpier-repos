@@ -51,12 +51,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             string source1 = """
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public int MyProperty { get; set; } = 42;
@@ -67,7 +67,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source2 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     // Same as above but with different implementation
@@ -111,12 +111,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             string source1 = """
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public int MyProperty { get; set; } = 42;
@@ -126,12 +126,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             string source2 = """
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public int MyProperty { get; } = 42; // same, but missing a getter
@@ -301,12 +301,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source1 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public string MyProperty { get; set; } = 42;
@@ -317,7 +317,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source2 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     // Same as above but with different implementation
@@ -393,12 +393,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source1 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public string MyProperty { get; set; } = 42;
@@ -409,12 +409,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source2 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public string MyProperty { get; } = 42; // same, but missing a getter

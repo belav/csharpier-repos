@@ -10472,17 +10472,17 @@ public static class Program
             verifier.VerifyIL(
                 "Program.Main",
                 """
-                {
-                  // Code size       10 (0xa)
-                  .maxstack  1
-                  .locals init (int V_0) //x
-                  IL_0000:  ldc.i4.5
-                  IL_0001:  stloc.0
-                  IL_0002:  ldloca.s   V_0
-                  IL_0004:  call       "void Program.Method(in int)"
-                  IL_0009:  ret
-                }
-                """
+                    {
+                      // Code size       10 (0xa)
+                      .maxstack  1
+                      .locals init (int V_0) //x
+                      IL_0000:  ldc.i4.5
+                      IL_0001:  stloc.0
+                      IL_0002:  ldloca.s   V_0
+                      IL_0004:  call       "void Program.Method(in int)"
+                      IL_0009:  ret
+                    }
+                    """
             );
         }
 

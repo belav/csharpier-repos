@@ -28,7 +28,8 @@
 extern alias MonoSecurity;
 #endif
 
-using System;using System.IO;
+using System;
+using System.IO;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography;
@@ -43,7 +44,6 @@ using MonoSecurity::Mono.Security.Interface;
 using Mono.Security.Interface;
 using MX = Mono.Security.X509;
 #endif
-
 
 using MNS = Mono.Net.Security;
 using MX = MonoSecurity::Mono.Security.X509;

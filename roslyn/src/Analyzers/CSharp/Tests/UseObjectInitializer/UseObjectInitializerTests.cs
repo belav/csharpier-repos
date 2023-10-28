@@ -54,31 +54,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C();
-                        [|c.|]i = 1;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
+                        int i;
 
-                    void M()
-                    {
-                        var c = new C
+                        void M()
                         {
-                            i = 1
-                        };
+                            var c = [|new|] C();
+                            [|c.|]i = 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+
+                        void M()
+                        {
+                            var c = new C
+                            {
+                                i = 1
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -87,11 +87,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    C c = new C();
-                }
-                """
+                    class C
+                    {
+                        C c = new C();
+                    }
+                    """
             );
         }
 
@@ -100,11 +100,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    C c = new C() { };
-                }
-                """
+                    class C
+                    {
+                        C c = new C() { };
+                    }
+                    """
             );
         }
 
@@ -113,11 +113,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    C c = new C { };
-                }
-                """
+                    class C
+                    {
+                        C c = new C { };
+                    }
+                    """
             );
         }
 
@@ -126,12 +126,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int P;
-                    C c = new C() { P = 1 };
-                }
-                """
+                    class C
+                    {
+                        int P;
+                        C c = new C() { P = 1 };
+                    }
+                    """
             );
         }
 
@@ -140,12 +140,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int P;
-                    C c = new C { P = 1 };
-                }
-                """
+                    class C
+                    {
+                        int P;
+                        C c = new C { P = 1 };
+                    }
+                    """
             );
         }
 
@@ -154,33 +154,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C();
-                        [|c.|]i = 1;
-                        c.i = c.i + 1;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
+                        int i;
 
-                    void M()
-                    {
-                        var c = new C
+                        void M()
                         {
-                            i = 1
-                        };
-                        c.i = c.i + 1;
+                            var c = [|new|] C();
+                            [|c.|]i = 1;
+                            c.i = c.i + 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+
+                        void M()
+                        {
+                            var c = new C
+                            {
+                                i = 1
+                            };
+                            c.i = c.i + 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -189,17 +189,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-
-                    void M()
+                    class C
                     {
-                        var c = new C();
-                        c.i = c.i + 1;
+                        int i;
+
+                        void M()
+                        {
+                            var c = new C();
+                            c.i = c.i + 1;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -208,35 +208,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-
-                    void M()
+                    class C
                     {
-                        C c;
-                        c = [|new|] C();
-                        [|c.|]i = 1;
-                        c.i = c.i + 1;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
+                        int i;
 
-                    void M()
-                    {
-                        C c;
-                        c = new C
+                        void M()
                         {
-                            i = 1
-                        };
-                        c.i = c.i + 1;
+                            C c;
+                            c = [|new|] C();
+                            [|c.|]i = 1;
+                            c.i = c.i + 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+
+                        void M()
+                        {
+                            C c;
+                            c = new C
+                            {
+                                i = 1
+                            };
+                            c.i = c.i + 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -245,18 +245,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-
-                    void M()
+                    class C
                     {
-                        C c;
-                        c = new C();
-                        c.i = c.i + 1;
+                        int i;
+
+                        void M()
+                        {
+                            C c;
+                            c = new C();
+                            c.i = c.i + 1;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -265,33 +265,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-
-                    void M()
+                    class C
                     {
-                        C c = null;
-                        c = [|new|] C();
-                        [|c.|]i = 1;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
+                        int i;
 
-                    void M()
-                    {
-                        C c = null;
-                        c = new C
+                        void M()
                         {
-                            i = 1
-                        };
+                            C c = null;
+                            c = [|new|] C();
+                            [|c.|]i = 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+
+                        void M()
+                        {
+                            C c = null;
+                            c = new C
+                            {
+                                i = 1
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -300,33 +300,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C();
-                        [|c.|]i = 1;
-                        c.i = 2;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
+                        int i;
 
-                    void M()
-                    {
-                        var c = new C
+                        void M()
                         {
-                            i = 1
-                        };
-                        c.i = 2;
+                            var c = [|new|] C();
+                            [|c.|]i = 1;
+                            c.i = 2;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+
+                        void M()
+                        {
+                            var c = new C
+                            {
+                                i = 1
+                            };
+                            c.i = 2;
+                        }
+                    }
+                    """
             );
         }
 
@@ -335,35 +335,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-
-                    void M(C[] array)
+                    class C
                     {
-                        array[0] = [|new|] C();
-                        [|array[0].|]i = 1;
-                        [|array[0].|]j = 2;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
+                        int i;
+                        int j;
 
-                    void M(C[] array)
-                    {
-                        array[0] = new C
+                        void M(C[] array)
                         {
-                            i = 1,
-                            j = 2
-                        };
+                            array[0] = [|new|] C();
+                            [|array[0].|]i = 1;
+                            [|array[0].|]j = 2;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        int j;
+
+                        void M(C[] array)
+                        {
+                            array[0] = new C
+                            {
+                                i = 1,
+                                j = 2
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -372,35 +372,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C();
-                        [|c.|]i = 1;
-                        c.j += 1;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
+                        int i;
+                        int j;
 
-                    void M()
-                    {
-                        var c = new C
+                        void M()
                         {
-                            i = 1
-                        };
-                        c.j += 1;
+                            var c = [|new|] C();
+                            [|c.|]i = 1;
+                            c.j += 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        int j;
+
+                        void M()
+                        {
+                            var c = new C
+                            {
+                                i = 1
+                            };
+                            c.j += 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -409,34 +409,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C() { i = 1 };
-                        [|c.|]j = 1;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
+                        int i;
+                        int j;
 
-                    void M()
-                    {
-                        var c = [||]new C
+                        void M()
                         {
-                            i = 1,
-                            j = 1
-                        };
+                            var c = [|new|] C() { i = 1 };
+                            [|c.|]j = 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        int j;
+
+                        void M()
+                        {
+                            var c = [||]new C
+                            {
+                                i = 1,
+                                j = 1
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -445,37 +445,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C()
-                        {
-                            i = 1,
-                        };
-                        [|c.|]j = 1;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
+                        int i;
+                        int j;
 
-                    void M()
-                    {
-                        var c = [||]new C
+                        void M()
                         {
-                            i = 1,
-                            j = 1
-                        };
+                            var c = [|new|] C()
+                            {
+                                i = 1,
+                            };
+                            [|c.|]j = 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        int j;
+
+                        void M()
+                        {
+                            var c = [||]new C
+                            {
+                                i = 1,
+                                j = 1
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -484,39 +484,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C()
-                        {
-                            i = 1,
-                        };
-                        [|c.|]j = 1;
-                        c.i = 2;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
+                        int i;
+                        int j;
 
-                    void M()
-                    {
-                        var c = [||]new C
+                        void M()
                         {
-                            i = 1,
-                            j = 1
-                        };
-                        c.i = 2;
+                            var c = [|new|] C()
+                            {
+                                i = 1,
+                            };
+                            [|c.|]j = 1;
+                            c.i = 2;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        int j;
+
+                        void M()
+                        {
+                            var c = [||]new C
+                            {
+                                i = 1,
+                                j = 1
+                            };
+                            c.i = 2;
+                        }
+                    }
+                    """
             );
         }
 
@@ -525,18 +525,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-
-                    void M()
+                    class C
                     {
-                        C c = new C();
-                        c.j = 1;
+                        int i;
+                        int j;
+
+                        void M()
+                        {
+                            C c = new C();
+                            c.j = 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion.CSharp2
             );
         }
@@ -546,48 +546,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-
-                    public C() { }
-                    public C(System.Action a) { }
-
-                    void M()
+                    class C
                     {
-                        var v = [|new|] C(() => {
-                            var v2 = [|new|] C();
-                            [|v2.|]i = 1;
-                        });
-                        [|v.|]j = 2;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
+                        int i;
+                        int j;
 
-                    public C() { }
-                    public C(System.Action a) { }
+                        public C() { }
+                        public C(System.Action a) { }
 
-                    void M()
-                    {
-                        var v = new C(() =>
+                        void M()
                         {
-                            var v2 = new C
+                            var v = [|new|] C(() => {
+                                var v2 = [|new|] C();
+                                [|v2.|]i = 1;
+                            });
+                            [|v.|]j = 2;
+                        }
+                    }
+                    """,
+                """
+                    class C
+                    {
+                        int i;
+                        int j;
+
+                        public C() { }
+                        public C(System.Action a) { }
+
+                        void M()
+                        {
+                            var v = new C(() =>
                             {
-                                i = 1
+                                var v2 = new C
+                                {
+                                    i = 1
+                                };
+                            })
+                            {
+                                j = 2
                             };
-                        })
-                        {
-                            j = 2
-                        };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -596,42 +596,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    System.Action j;
-
-                    void M()
+                    class C
                     {
-                        var v = [|new|] C();
-                        [|v.|]j = () => {
-                            var v2 = [|new|] C();
-                            [|v2.|]i = 1;
-                        };
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    System.Action j;
+                        int i;
+                        System.Action j;
 
-                    void M()
-                    {
-                        var v = new C
+                        void M()
                         {
-                            j = () =>
-                            {
-                                var v2 = new C
-                                {
-                                    i = 1
-                                };
-                            }
-                        };
+                            var v = [|new|] C();
+                            [|v.|]j = () => {
+                                var v2 = [|new|] C();
+                                [|v2.|]i = 1;
+                            };
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        System.Action j;
+
+                        void M()
+                        {
+                            var v = new C
+                            {
+                                j = () =>
+                                {
+                                    var v2 = new C
+                                    {
+                                        i = 1
+                                    };
+                                }
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -640,43 +640,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-
-                    void M(C[] array)
+                    class C
                     {
-                        array[0] = [|new|] C();
-                        [|array[0].|]i = 1;
-                        [|array[0].|]j = 2;
-                        array[1] = [|new|] C();
-                        [|array[1].|]i = 3;
-                        [|array[1].|]j = 4;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
+                        int i;
+                        int j;
 
-                    void M(C[] array)
-                    {
-                        array[0] = new C
+                        void M(C[] array)
                         {
-                            i = 1,
-                            j = 2
-                        };
-                        array[1] = new C
-                        {
-                            i = 3,
-                            j = 4
-                        };
+                            array[0] = [|new|] C();
+                            [|array[0].|]i = 1;
+                            [|array[0].|]j = 2;
+                            array[1] = [|new|] C();
+                            [|array[1].|]i = 3;
+                            [|array[1].|]j = 4;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        int j;
+
+                        void M(C[] array)
+                        {
+                            array[0] = new C
+                            {
+                                i = 1,
+                                j = 2
+                            };
+                            array[1] = new C
+                            {
+                                i = 3,
+                                j = 4
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -685,33 +685,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C();
-                        [|c.|]i = 1; // Goo
-                        [|c.|]j = 2; // Bar
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
-                    void M()
-                    {
-                        var c = new C
+                        int i;
+                        int j;
+                        void M()
                         {
-                            i = 1, // Goo
-                            j = 2 // Bar
-                        };
+                            var c = [|new|] C();
+                            [|c.|]i = 1; // Goo
+                            [|c.|]j = 2; // Bar
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        int j;
+                        void M()
+                        {
+                            var c = new C
+                            {
+                                i = 1, // Goo
+                                j = 2 // Bar
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -720,40 +720,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-                    int j;
-                    void M()
+                    class C
                     {
-                        var c = [|new|] C();
-
-                        //Goo
-                        [|c.|]i = 1;
-
-                        //Bar
-                        [|c.|]j = 2;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
-                    int j;
-                    void M()
-                    {
-                        var c = new C
+                        int i;
+                        int j;
+                        void M()
                         {
+                            var c = [|new|] C();
+
                             //Goo
-                            i = 1,
+                            [|c.|]i = 1;
 
                             //Bar
-                            j = 2
-                        };
+                            [|c.|]j = 2;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+                        int j;
+                        void M()
+                        {
+                            var c = new C
+                            {
+                                //Goo
+                                i = 1,
+
+                                //Bar
+                                j = 2
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -762,15 +762,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C {
-                	int a;
-                	C Add(int x) {
-                		var c = Add(new int());
-                		c.a = 1;
-                		return c;
-                	}
-                }
-                """
+                    class C {
+                        int a;
+                        C Add(int x) {
+                            var c = Add(new int());
+                            c.a = 1;
+                            return c;
+                        }
+                    }
+                    """
             );
         }
 
@@ -779,17 +779,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System.Dynamic;
+                    using System.Dynamic;
 
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        dynamic body = new ExpandoObject();
-                        body.content = new ExpandoObject();
+                        void Goo()
+                        {
+                            dynamic body = new ExpandoObject();
+                            body.content = new ExpandoObject();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -798,19 +798,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public class Goo
-                {
-                    public void M()
+                    public class Goo
                     {
-                        var goo = new Goo();
-                #if true
-                        goo.Value = "";
-                #endif
-                    }
+                        public void M()
+                        {
+                            var goo = new Goo();
+                    #if true
+                            goo.Value = "";
+                    #endif
+                        }
 
-                    public string Value { get; set; }
-                }
-                """
+                        public string Value { get; set; }
+                    }
+                    """
             );
         }
 
@@ -819,35 +819,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                public class Goo
-                {
-                    public void M()
+                    public class Goo
                     {
-                #if true
-                        var goo = [|new|] Goo();
-                        [|goo.|]Value = "";
-                #endif
-                    }
-
-                    public string Value { get; set; }
-                }
-                """,
-                """
-                public class Goo
-                {
-                    public void M()
-                    {
-                #if true
-                        var goo = new Goo
+                        public void M()
                         {
-                            Value = ""
-                        };
-                #endif
-                    }
+                    #if true
+                            var goo = [|new|] Goo();
+                            [|goo.|]Value = "";
+                    #endif
+                        }
 
-                    public string Value { get; set; }
-                }
+                        public string Value { get; set; }
+                    }
+                    """,
                 """
+                    public class Goo
+                    {
+                        public void M()
+                        {
+                    #if true
+                            var goo = new Goo
+                            {
+                                Value = ""
+                            };
+                    #endif
+                        }
+
+                        public string Value { get; set; }
+                    }
+                    """
             );
         }
 
@@ -856,41 +856,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Goo
-                {
-                    public int Bar { get; set; }
-                }
-
-                class MyClass
-                {
-                    public void Main()
+                    class Goo
                     {
-                        var goo = [|new|] Goo();
-                        [|goo.|]Bar = 1;
-
-                        int horse = 1;
+                        public int Bar { get; set; }
                     }
-                }
-                """,
-                """
-                class Goo
-                {
-                    public int Bar { get; set; }
-                }
 
-                class MyClass
-                {
-                    public void Main()
+                    class MyClass
                     {
-                        var goo = new Goo
+                        public void Main()
                         {
-                            Bar = 1
-                        };
+                            var goo = [|new|] Goo();
+                            [|goo.|]Bar = 1;
 
-                        int horse = 1;
+                            int horse = 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class Goo
+                    {
+                        public int Bar { get; set; }
+                    }
+
+                    class MyClass
+                    {
+                        public void Main()
+                        {
+                            var goo = new Goo
+                            {
+                                Bar = 1
+                            };
+
+                            int horse = 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -899,23 +899,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                interface IExample {
-                    string Name { get; set; }
-                }
-
-                class C : IExample {
-                    string IExample.Name { get; set; }
-                }
-
-                class MyClass
-                {
-                    public void Main()
-                    {
-                        IExample e = new C();
-                        e.Name = string.Empty;
+                    interface IExample {
+                        string Name { get; set; }
                     }
-                }
-                """
+
+                    class C : IExample {
+                        string IExample.Name { get; set; }
+                    }
+
+                    class MyClass
+                    {
+                        public void Main()
+                        {
+                            IExample e = new C();
+                            e.Name = string.Empty;
+                        }
+                    }
+                    """
             );
         }
 
@@ -924,26 +924,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                interface IExample {
-                    string Name { get; set; }
-                    string LastName { get; set; }
-                }
-
-                class C : IExample {
-                    string IExample.Name { get; set; }
-                    public string LastName { get; set; }
-                }
-
-                class MyClass
-                {
-                    public void Main()
-                    {
-                        IExample e = new C();
-                        e.Name = string.Empty;
-                        e.LastName = string.Empty;
+                    interface IExample {
+                        string Name { get; set; }
+                        string LastName { get; set; }
                     }
-                }
-                """
+
+                    class C : IExample {
+                        string IExample.Name { get; set; }
+                        public string LastName { get; set; }
+                    }
+
+                    class MyClass
+                    {
+                        public void Main()
+                        {
+                            IExample e = new C();
+                            e.Name = string.Empty;
+                            e.LastName = string.Empty;
+                        }
+                    }
+                    """
             );
         }
 
@@ -952,49 +952,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IExample {
-                    string Name { get; set; }
-                    string LastName { get; set; }
-                }
-
-                class C : IExample {
-                    string IExample.Name { get; set; }
-                    public string LastName { get; set; }
-                }
-
-                class MyClass
-                {
-                    public void Main()
-                    {
-                        IExample e = [|new|] C();
-                        [|e.|]LastName = string.Empty;
-                        e.Name = string.Empty;
+                    interface IExample {
+                        string Name { get; set; }
+                        string LastName { get; set; }
                     }
-                }
-                """,
-                """
-                interface IExample {
-                    string Name { get; set; }
-                    string LastName { get; set; }
-                }
 
-                class C : IExample {
-                    string IExample.Name { get; set; }
-                    public string LastName { get; set; }
-                }
+                    class C : IExample {
+                        string IExample.Name { get; set; }
+                        public string LastName { get; set; }
+                    }
 
-                class MyClass
-                {
-                    public void Main()
+                    class MyClass
                     {
-                        IExample e = new C
+                        public void Main()
                         {
-                            LastName = string.Empty
-                        };
-                        e.Name = string.Empty;
+                            IExample e = [|new|] C();
+                            [|e.|]LastName = string.Empty;
+                            e.Name = string.Empty;
+                        }
                     }
-                }
+                    """,
                 """
+                    interface IExample {
+                        string Name { get; set; }
+                        string LastName { get; set; }
+                    }
+
+                    class C : IExample {
+                        string IExample.Name { get; set; }
+                        public string LastName { get; set; }
+                    }
+
+                    class MyClass
+                    {
+                        public void Main()
+                        {
+                            IExample e = new C
+                            {
+                                LastName = string.Empty
+                            };
+                            e.Name = string.Empty;
+                        }
+                    }
+                    """
             );
         }
 
@@ -1003,21 +1003,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C : System.IDisposable
-                {
-                    int i;
-
-                    void M()
+                    class C : System.IDisposable
                     {
-                        using var c = new C();
-                        c.i = 1;
-                    }
+                        int i;
 
-                    public void Dispose()
-                    {
+                        void M()
+                        {
+                            using var c = new C();
+                            c.i = 1;
+                        }
+
+                        public void Dispose()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1026,31 +1026,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int i;
-
-                    void M()
+                    class C
                     {
-                        C c = [|new|]();
-                        [|c.|]i = 1;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    int i;
+                        int i;
 
-                    void M()
-                    {
-                        C c = new()
+                        void M()
                         {
-                            i = 1
-                        };
+                            C c = [|new|]();
+                            [|c.|]i = 1;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        int i;
+
+                        void M()
+                        {
+                            C c = new()
+                            {
+                                i = 1
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -1059,25 +1059,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         {
             await TestInRegularAndScriptAsync(
                 """
-                MyClass cl = [|new|]();
-                [|cl.|]MyProperty = 5;
+                    MyClass cl = [|new|]();
+                    [|cl.|]MyProperty = 5;
 
-                class MyClass
-                {
-                    public int MyProperty { get; set; }
-                }
-                """,
+                    class MyClass
+                    {
+                        public int MyProperty { get; set; }
+                    }
+                    """,
                 """
-                MyClass cl = new()
-                {
-                    MyProperty = 5
-                };
+                    MyClass cl = new()
+                    {
+                        MyProperty = 5
+                    };
 
-                class MyClass
-                {
-                    public int MyProperty { get; set; }
-                }
-                """,
+                    class MyClass
+                    {
+                        public int MyProperty { get; set; }
+                    }
+                    """,
                 OutputKind.ConsoleApplication
             );
         }

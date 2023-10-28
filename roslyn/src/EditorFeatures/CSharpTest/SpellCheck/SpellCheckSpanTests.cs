@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                {|Comment:// Goo|}
-                """
+                    {|Comment:// Goo|}
+                    """
             );
         }
 
@@ -43,10 +43,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                {|Comment:/*
-                   Goo
-                 */|}
-                """
+                    {|Comment:/*
+                       Goo
+                     */|}
+                    """
             );
         }
 
@@ -55,10 +55,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                {|Comment:/*
-                   Goo
-                 |}
-                """
+                    {|Comment:/*
+                       Goo
+                     |}
+                    """
             );
         }
 
@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                {|Comment:/**/|}
-                """
+                    {|Comment:/**/|}
+                    """
             );
         }
 
@@ -77,8 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                {|Comment:/*/|}
-                """
+                    {|Comment:/*/|}
+                    """
             );
         }
 
@@ -87,11 +87,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                ///{|Comment:goo bar baz|}
-                class {|Identifier:C|}
-                {
-                }
-                """
+                    ///{|Comment:goo bar baz|}
+                    class {|Identifier:C|}
+                    {
+                    }
+                    """
             );
         }
 
@@ -100,12 +100,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                ///{|Comment:goo bar baz|}
-                ///{|Comment:goo bar baz|}
-                class {|Identifier:C|}
-                {
-                }
-                """
+                    ///{|Comment:goo bar baz|}
+                    ///{|Comment:goo bar baz|}
+                    class {|Identifier:C|}
+                    {
+                    }
+                    """
             );
         }
 
@@ -114,11 +114,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                ///{|Comment: |}<summary>{|Comment: goo bar baz |}</summary>
-                class {|Identifier:C|}
-                {
-                }
-                """
+                    ///{|Comment: |}<summary>{|Comment: goo bar baz |}</summary>
+                    class {|Identifier:C|}
+                    {
+                    }
+                    """
             );
         }
 
@@ -133,8 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                " goo
-                """
+                    " goo
+                    """
             );
         }
 
@@ -143,8 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                {|String:" goo "|}
-                """
+                    {|String:" goo "|}
+                    """
             );
         }
 
@@ -153,8 +153,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                " goo
-                """
+                    " goo
+                    """
             );
         }
 
@@ -163,8 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                {|String:@" goo "|}
-                """
+                    {|String:@" goo "|}
+                    """
             );
         }
 
@@ -173,8 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                @" goo
-                """
+                    @" goo
+                    """
             );
         }
 
@@ -189,8 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                """ goo ""
-                """"
+                    """ goo ""
+                    """"
             );
         }
 
@@ -199,8 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                """ goo "
-                """"
+                    """ goo "
+                    """"
             );
         }
 
@@ -209,8 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                """ goo
-                """"
+                    """ goo
+                    """"
             );
         }
 
@@ -219,10 +219,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                {|String:"""
-                    goo 
-                    """|}
-                """"
+                    {|String:"""
+                        goo
+                        """|}
+                    """"
             );
         }
 
@@ -231,10 +231,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                """
-                    goo
-                    ""
-                """"
+                    """
+                        goo
+                        ""
+                    """"
             );
         }
 
@@ -243,10 +243,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                """
-                    goo
-                    "
-                """"
+                    """
+                        goo
+                        "
+                    """"
             );
         }
 
@@ -255,9 +255,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                """
-                    goo
-                """"
+                    """
+                        goo
+                    """"
             );
         }
 
@@ -266,8 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                $"{|String: goo |}"
-                """
+                    $"{|String: goo |}"
+                    """
             );
         }
 
@@ -276,8 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                $"{|String: goo |}{0}{|String: bar |}"
-                """
+                    $"{|String: goo |}{0}{|String: bar |}"
+                    """
             );
         }
 
@@ -286,8 +286,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                $"""{|String: goo |}{0}{|String: bar |}"""
-                """"
+                    $"""{|String: goo |}{0}{|String: bar |}"""
+                    """"
             );
         }
 
@@ -296,8 +296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """"
-                $"""{|String: goo |}{0:abcd}{|String: bar |}"""
-                """"
+                    $"""{|String: goo |}{0:abcd}{|String: bar |}"""
+                    """"
             );
         }
 
@@ -368,10 +368,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                    }
+                    """
             );
         }
 
@@ -380,10 +380,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                record {|Identifier:C|}
-                {
-                }
-                """
+                    record {|Identifier:C|}
+                    {
+                    }
+                    """
             );
         }
 
@@ -392,10 +392,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                record class {|Identifier:C|}
-                {
-                }
-                """
+                    record class {|Identifier:C|}
+                    {
+                    }
+                    """
             );
         }
 
@@ -404,8 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                delegate void {|Identifier:C|}();
-                """
+                    delegate void {|Identifier:C|}();
+                    """
             );
         }
 
@@ -414,8 +414,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                enum {|Identifier:C|} { }
-                """
+                    enum {|Identifier:C|} { }
+                    """
             );
         }
 
@@ -424,11 +424,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                enum {|Identifier:C|}
-                {
-                    {|Identifier:D|}
-                }
-                """
+                    enum {|Identifier:C|}
+                    {
+                        {|Identifier:D|}
+                    }
+                    """
             );
         }
 
@@ -437,11 +437,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                enum {|Identifier:C|}
-                {
-                    {|Identifier:D|}, {|Identifier:E|}
-                }
-                """
+                    enum {|Identifier:C|}
+                    {
+                        {|Identifier:D|}, {|Identifier:E|}
+                    }
+                    """
             );
         }
 
@@ -450,8 +450,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                interface {|Identifier:C|} { }
-                """
+                    interface {|Identifier:C|} { }
+                    """
             );
         }
 
@@ -460,8 +460,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                struct {|Identifier:C|} { }
-                """
+                    struct {|Identifier:C|} { }
+                    """
             );
         }
 
@@ -470,8 +470,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                record struct {|Identifier:C|}() { }
-                """
+                    record struct {|Identifier:C|}() { }
+                    """
             );
         }
 
@@ -480,8 +480,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}<{|Identifier:T|}> { }
-                """
+                    class {|Identifier:C|}<{|Identifier:T|}> { }
+                    """
             );
         }
 
@@ -490,11 +490,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    private int {|Identifier:X|};
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                        private int {|Identifier:X|};
+                    }
+                    """
             );
         }
 
@@ -503,11 +503,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    private int {|Identifier:X|}, {|Identifier:Y|};
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                        private int {|Identifier:X|}, {|Identifier:Y|};
+                    }
+                    """
             );
         }
 
@@ -516,11 +516,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    private const int {|Identifier:X|};
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                        private const int {|Identifier:X|};
+                    }
+                    """
             );
         }
 
@@ -529,11 +529,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    private const int {|Identifier:X|}, {|Identifier:Y|};
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                        private const int {|Identifier:X|}, {|Identifier:Y|};
+                    }
+                    """
             );
         }
 
@@ -542,11 +542,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    private int {|Identifier:X|} => 0;
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                        private int {|Identifier:X|} => 0;
+                    }
+                    """
             );
         }
 
@@ -555,11 +555,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    private event Action {|Identifier:X|};
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                        private event Action {|Identifier:X|};
+                    }
+                    """
             );
         }
 
@@ -568,11 +568,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    private event Action {|Identifier:X|}, {|Identifier:Y|};
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                        private event Action {|Identifier:X|}, {|Identifier:Y|};
+                    }
+                    """
             );
         }
 
@@ -581,11 +581,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    private event Action {|Identifier:X|} { add { } remove { } }
-                }
-                """
+                    class {|Identifier:C|}
+                    {
+                        private event Action {|Identifier:X|} { add { } remove { } }
+                    }
+                    """
             );
         }
 
@@ -594,14 +594,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    void {|Identifier:D|}()
+                    class {|Identifier:C|}
                     {
-                        int {|Identifier:E|};
+                        void {|Identifier:D|}()
+                        {
+                            int {|Identifier:E|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -610,14 +610,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    void {|Identifier:D|}()
+                    class {|Identifier:C|}
                     {
-                        int {|Identifier:E|}, {|Identifier:F|};
+                        void {|Identifier:D|}()
+                        {
+                            int {|Identifier:E|}, {|Identifier:F|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -626,15 +626,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    void {|Identifier:D|}()
+                    class {|Identifier:C|}
                     {
-                {|Identifier:E|}:
-                        return;
+                        void {|Identifier:D|}()
+                        {
+                    {|Identifier:E|}:
+                            return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -643,13 +643,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    void {|Identifier:D|}(int {|Identifier:E|})
+                    class {|Identifier:C|}
                     {
+                        void {|Identifier:D|}(int {|Identifier:E|})
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -658,13 +658,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    void {|Identifier:D|}(int {|Identifier:E|})
+                    class {|Identifier:C|}
                     {
+                        void {|Identifier:D|}(int {|Identifier:E|})
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -673,13 +673,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    void {|Identifier:D|}(int {|Identifier:E|}, int {|Identifier:F|})
+                    class {|Identifier:C|}
                     {
+                        void {|Identifier:D|}(int {|Identifier:E|}, int {|Identifier:F|})
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -688,13 +688,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                static class {|Identifier:C|}
-                {
-                    static void {|Identifier:D|}(this int {|Identifier:E|})
+                    static class {|Identifier:C|}
                     {
+                        static void {|Identifier:D|}(this int {|Identifier:E|})
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -703,10 +703,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                namespace {|Identifier:C|}
-                {
-                }
-                """
+                    namespace {|Identifier:C|}
+                    {
+                    }
+                    """
             );
         }
 
@@ -715,10 +715,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                namespace {|Identifier:C|}.{|Identifier:D|}
-                {
-                }
-                """
+                    namespace {|Identifier:C|}.{|Identifier:D|}
+                    {
+                    }
+                    """
             );
         }
 
@@ -727,16 +727,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    void {|Identifier:D|}()
+                    class {|Identifier:C|}
                     {
-                        for (int {|Identifier:E|} = 0; E < 10; E++)
+                        void {|Identifier:D|}()
                         {
+                            for (int {|Identifier:E|} = 0; E < 10; E++)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -745,14 +745,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}
-                {
-                    void {|Identifier:D|}()
+                    class {|Identifier:C|}
                     {
-                        Goo(out var {|Identifier:E|});
+                        void {|Identifier:D|}()
+                        {
+                            Goo(out var {|Identifier:E|});
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -761,8 +761,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|}() { }
-                """
+                    class {|Identifier:C|}() { }
+                    """
             );
         }
 
@@ -771,8 +771,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                struct {|Identifier:C|}() { }
-                """
+                    struct {|Identifier:C|}() { }
+                    """
             );
         }
 
@@ -781,8 +781,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                class {|Identifier:C|};
-                """
+                    class {|Identifier:C|};
+                    """
             );
         }
 
@@ -791,8 +791,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestAsync(
                 """
-                struct {|Identifier:C|};
-                """
+                    struct {|Identifier:C|};
+                    """
             );
         }
     }

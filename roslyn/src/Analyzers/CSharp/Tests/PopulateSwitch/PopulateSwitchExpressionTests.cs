@@ -34,30 +34,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = [||]e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                _ => 3,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = [||]e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    _ => 3,
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -66,31 +66,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => 3,
-                                _ => 4,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => 3,
+                                    _ => 4,
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -99,56 +99,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => 3,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => 3,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => 3,
-                                _ => throw new System.NotImplementedException(),
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => 3,
+                                    _ => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -157,56 +157,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => 3
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => 3
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => 3,
-                                _ => throw new System.NotImplementedException()
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => 3,
+                                    _ => throw new System.NotImplementedException()
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -215,55 +215,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                                _ => throw new System.NotImplementedException(),
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                    _ => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 2
             );
         }
@@ -273,56 +273,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                _ => 3,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    _ => 3,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                                _ => 3,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                    _ => 3,
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -331,55 +331,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum : long
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum : long
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum : long
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum : long
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                                _ => throw new System.NotImplementedException(),
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                    _ => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 2
             );
         }
@@ -389,56 +389,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                _ => 3,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    _ => 3,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                                _ => 3,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                    _ => 3,
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -447,56 +447,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                _ => 1,
-                                MyEnum.Fizz => 2,
-                                MyEnum.Buzz => 3,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    _ => 1,
+                                    MyEnum.Fizz => 2,
+                                    MyEnum.Buzz => 3,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                _ => 1,
-                                MyEnum.Fizz => 2,
-                                MyEnum.Buzz => 3,
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    _ => 1,
+                                    MyEnum.Fizz => 2,
+                                    MyEnum.Buzz => 3,
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -505,52 +505,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => throw new System.NotImplementedException(),
-                                MyEnum.Buzz => throw new System.NotImplementedException(),
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => throw new System.NotImplementedException(),
+                                    MyEnum.Buzz => throw new System.NotImplementedException(),
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 0
             );
         }
@@ -560,50 +560,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                _ => throw new System.NotImplementedException(),
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    _ => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -613,53 +613,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => throw new System.NotImplementedException(),
-                                MyEnum.Buzz => throw new System.NotImplementedException(),
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                                _ => throw new System.NotImplementedException(),
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => throw new System.NotImplementedException(),
+                                    MyEnum.Buzz => throw new System.NotImplementedException(),
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                    _ => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 2
             );
         }
@@ -669,29 +669,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using static System.IO.FileMode;
+                    using static System.IO.FileMode;
 
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        void Method()
+                        class MyClass
                         {
-                            var e = Append;
-                            _ = e [||]switch
+                            void Method()
                             {
-                                CreateNew => 1,
-                                Create => 2,
-                                Open => 3,
-                                OpenOrCreate => 4,
-                                Truncate => 5,
-                                Append => 6,
-                                _ => 7,
-                            };
+                                var e = Append;
+                                _ = e [||]switch
+                                {
+                                    CreateNew => 1,
+                                    Create => 2,
+                                    Open => 3,
+                                    OpenOrCreate => 4,
+                                    Truncate => 5,
+                                    Append => 6,
+                                    _ => 7,
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -700,29 +700,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using static System.IO.FileMode;
+                    using static System.IO.FileMode;
 
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        void Method()
+                        class MyClass
                         {
-                            var e = Append;
-                            _ = e [||]switch
+                            void Method()
                             {
-                                CreateNew => 1,
-                                OpenOrCreate => 2,
-                                Truncate => 3,
-                                Open => 4,
-                                Append => 5,
-                                Create => 6,
-                                _ => 7,
-                            };
+                                var e = Append;
+                                _ = e [||]switch
+                                {
+                                    CreateNew => 1,
+                                    OpenOrCreate => 2,
+                                    Truncate => 3,
+                                    Open => 4,
+                                    Append => 5,
+                                    Create => 6,
+                                    _ => 7,
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -731,51 +731,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                using static System.IO.FileMode;
+                    using static System.IO.FileMode;
 
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        void Method()
+                        class MyClass
                         {
-                            var e = Append;
-                            _ = e [||]switch
+                            void Method()
                             {
-                                CreateNew => 1,
-                                Create => 2,
-                                Open => 3,
-                                OpenOrCreate => 4,
-                                _ => 5,
-                            };
+                                var e = Append;
+                                _ = e [||]switch
+                                {
+                                    CreateNew => 1,
+                                    Create => 2,
+                                    Open => 3,
+                                    OpenOrCreate => 4,
+                                    _ => 5,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using static System.IO.FileMode;
+                    using static System.IO.FileMode;
 
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        void Method()
+                        class MyClass
                         {
-                            var e = Append;
-                            _ = e switch
+                            void Method()
                             {
-                                CreateNew => 1,
-                                Create => 2,
-                                Open => 3,
-                                OpenOrCreate => 4,
-                                Truncate => throw new System.NotImplementedException(),
-                                Append => throw new System.NotImplementedException(),
-                                _ => 5,
-                            };
+                                var e = Append;
+                                _ = e switch
+                                {
+                                    CreateNew => 1,
+                                    Create => 2,
+                                    Open => 3,
+                                    OpenOrCreate => 4,
+                                    Truncate => throw new System.NotImplementedException(),
+                                    Append => throw new System.NotImplementedException(),
+                                    _ => 5,
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -784,46 +784,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                using static System.IO.FileMode;
+                    using static System.IO.FileMode;
 
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        void Method()
+                        class MyClass
                         {
-                            var e = Append;
-                            _ = e [||]switch
+                            void Method()
                             {
-                            };
+                                var e = Append;
+                                _ = e [||]switch
+                                {
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using static System.IO.FileMode;
+                    using static System.IO.FileMode;
 
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        void Method()
+                        class MyClass
                         {
-                            var e = Append;
-                            _ = e switch
+                            void Method()
                             {
-                                CreateNew => throw new System.NotImplementedException(),
-                                Create => throw new System.NotImplementedException(),
-                                Open => throw new System.NotImplementedException(),
-                                OpenOrCreate => throw new System.NotImplementedException(),
-                                Truncate => throw new System.NotImplementedException(),
-                                Append => throw new System.NotImplementedException(),
-                                _ => throw new System.NotImplementedException(),
-                            };
+                                var e = Append;
+                                _ = e switch
+                                {
+                                    CreateNew => throw new System.NotImplementedException(),
+                                    Create => throw new System.NotImplementedException(),
+                                    Open => throw new System.NotImplementedException(),
+                                    OpenOrCreate => throw new System.NotImplementedException(),
+                                    Truncate => throw new System.NotImplementedException(),
+                                    Append => throw new System.NotImplementedException(),
+                                    _ => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 2
             );
         }
@@ -833,57 +833,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    [System.Obsolete]
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        [System.Obsolete]
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    [System.Obsolete]
-                    enum MyEnum
+                    namespace ConsoleApplication1
                     {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
-
-                    class MyClass
-                    {
-                        void Method()
+                        [System.Obsolete]
+                        enum MyEnum
                         {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            Fizz,
+                            Buzz,
+                            FizzBuzz
+                        }
+
+                        class MyClass
+                        {
+                            void Method()
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                                _ => throw new System.NotImplementedException(),
-                            };
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                    _ => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 2
             );
         }
@@ -893,55 +893,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        enum MyEnum
+                        class MyClass
                         {
-                            Fizz,
-                            Buzz,
-                            FizzBuzz
-                        }
-
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            _ = e [||]switch
+                            enum MyEnum
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                            };
+                                Fizz,
+                                Buzz,
+                                FizzBuzz
+                            }
+
+                            void Method()
+                            {
+                                var e = MyEnum.Fizz;
+                                _ = e [||]switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        enum MyEnum
+                        class MyClass
                         {
-                            Fizz,
-                            Buzz,
-                            FizzBuzz
-                        }
-
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            _ = e switch
+                            enum MyEnum
                             {
-                                MyEnum.Fizz => 1,
-                                MyEnum.Buzz => 2,
-                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                                _ => throw new System.NotImplementedException(),
-                            };
+                                Fizz,
+                                Buzz,
+                                FizzBuzz
+                            }
+
+                            void Method()
+                            {
+                                var e = MyEnum.Fizz;
+                                _ = e switch
+                                {
+                                    MyEnum.Fizz => 1,
+                                    MyEnum.Buzz => 2,
+                                    MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                    _ => throw new System.NotImplementedException(),
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 2
             );
         }
@@ -951,25 +951,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                namespace ConsoleApplication1
-                {
-                    class MyClass
+                    namespace ConsoleApplication1
                     {
-                        void Method()
+                        class MyClass
                         {
-                            var e = "test";
-                            _ = e [||]switch
+                            void Method()
                             {
-                                "test1" => 1,
-                                "test2" => 2,
-                                _ => 3,
+                                var e = "test";
+                                _ = e [||]switch
+                                {
+                                    "test1" => 1,
+                                    "test2" => 2,
+                                    _ => 3,
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -978,49 +978,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                enum MyEnum
-                {
-                    Fizz,
-                    Buzz,
-                    FizzBuzz
-                }
-
-                class MyClass
-                {
-                    void Method()
+                    enum MyEnum
                     {
-                        var e = MyEnum.Fizz;
-                        _ = e [||]switch
+                        Fizz,
+                        Buzz,
+                        FizzBuzz
+                    }
+
+                    class MyClass
+                    {
+                        void Method()
                         {
-                            (MyEnum)0 => 1,
-                            (MyEnum)1 => 2,
+                            var e = MyEnum.Fizz;
+                            _ = e [||]switch
+                            {
+                                (MyEnum)0 => 1,
+                                (MyEnum)1 => 2,
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                enum MyEnum
-                {
-                    Fizz,
-                    Buzz,
-                    FizzBuzz
-                }
-
-                class MyClass
-                {
-                    void Method()
+                    enum MyEnum
                     {
-                        var e = MyEnum.Fizz;
-                        _ = e switch
+                        Fizz,
+                        Buzz,
+                        FizzBuzz
+                    }
+
+                    class MyClass
+                    {
+                        void Method()
                         {
-                            (MyEnum)0 => 1,
-                            (MyEnum)1 => 2,
-                            MyEnum.FizzBuzz => throw new System.NotImplementedException(),
-                            _ => throw new System.NotImplementedException(),
+                            var e = MyEnum.Fizz;
+                            _ = e switch
+                            {
+                                (MyEnum)0 => 1,
+                                (MyEnum)1 => 2,
+                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                                _ => throw new System.NotImplementedException(),
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 index: 2
             );
         }
@@ -1030,50 +1030,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                enum MyEnum
-                {
-                    Fizz,
-                    Buzz,
-                    FizzBuzz
-                }
-
-                class MyClass
-                {
-                    void Method()
+                    enum MyEnum
                     {
-                        var e = MyEnum.Fizz;
-                        _ = e [||]switch
+                        Fizz,
+                        Buzz,
+                        FizzBuzz
+                    }
+
+                    class MyClass
+                    {
+                        void Method()
                         {
-                            (MyEnum)0 => 1,
-                            (MyEnum)1 => 2,
-                            "Mismatching constant" => 3,
+                            var e = MyEnum.Fizz;
+                            _ = e [||]switch
+                            {
+                                (MyEnum)0 => 1,
+                                (MyEnum)1 => 2,
+                                "Mismatching constant" => 3,
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                enum MyEnum
-                {
-                    Fizz,
-                    Buzz,
-                    FizzBuzz
-                }
-
-                class MyClass
-                {
-                    void Method()
+                    enum MyEnum
                     {
-                        var e = MyEnum.Fizz;
-                        _ = e switch
+                        Fizz,
+                        Buzz,
+                        FizzBuzz
+                    }
+
+                    class MyClass
+                    {
+                        void Method()
                         {
-                            (MyEnum)0 => 1,
-                            (MyEnum)1 => 2,
-                            "Mismatching constant" => 3,
-                            MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                            var e = MyEnum.Fizz;
+                            _ = e switch
+                            {
+                                (MyEnum)0 => 1,
+                                (MyEnum)1 => 2,
+                                "Mismatching constant" => 3,
+                                MyEnum.FizzBuzz => throw new System.NotImplementedException(),
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1082,36 +1082,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-            enum MyEnum
-            {
-                Fizz
-            }
-            class MyClass
-            {
-                void Method()
-                {
-                    var e = MyEnum.Fizz;
-                    _ = e [||]switch
-                }
-            }
-            """,
-                """
-            enum MyEnum
-            {
-                Fizz
-            }
-            class MyClass
-            {
-                void Method()
-                {
-                    var e = MyEnum.Fizz;
-                    _ = e switch
+                    enum MyEnum
                     {
-                        MyEnum.Fizz => throw new System.NotImplementedException(),
-                    };
-                }
-            }
-            """
+                        Fizz
+                    }
+                    class MyClass
+                    {
+                        void Method()
+                        {
+                            var e = MyEnum.Fizz;
+                            _ = e [||]switch
+                        }
+                    }
+                    """,
+                """
+                    enum MyEnum
+                    {
+                        Fizz
+                    }
+                    class MyClass
+                    {
+                        void Method()
+                        {
+                            var e = MyEnum.Fizz;
+                            _ = e switch
+                            {
+                                MyEnum.Fizz => throw new System.NotImplementedException(),
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -1120,50 +1120,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                public class Program
-                {
-                    void Main() 
+                    public class Program
                     {
-                        var bar = Bar.Option1;
-                        var b = bar [||]switch
+                        void Main()
                         {
-                            Bar.Option1 => 1,
-                            Bar.Option2 => 2,
-                            null => null,
-                        };
-                    }
+                            var bar = Bar.Option1;
+                            var b = bar [||]switch
+                            {
+                                Bar.Option1 => 1,
+                                Bar.Option2 => 2,
+                                null => null,
+                            };
+                        }
 
-                    public enum Bar
-                {
-                    Option1, 
-                    Option2, 
-                    Option3,
-                }
-                }
-                """,
-                """
-                public class Program
-                {
-                    void Main() 
+                        public enum Bar
                     {
-                        var bar = Bar.Option1;
-                        var b = bar switch
-                        {
-                            Bar.Option1 => 1,
-                            Bar.Option2 => 2,
-                            null => null,
-                            Bar.Option3 => throw new System.NotImplementedException(),
-                        };
+                        Option1,
+                        Option2,
+                        Option3,
                     }
-
-                    public enum Bar
-                {
-                    Option1, 
-                    Option2, 
-                    Option3,
-                }
-                }
+                    }
+                    """,
                 """
+                    public class Program
+                    {
+                        void Main()
+                        {
+                            var bar = Bar.Option1;
+                            var b = bar switch
+                            {
+                                Bar.Option1 => 1,
+                                Bar.Option2 => 2,
+                                null => null,
+                                Bar.Option3 => throw new System.NotImplementedException(),
+                            };
+                        }
+
+                        public enum Bar
+                    {
+                        Option1,
+                        Option2,
+                        Option3,
+                    }
+                    }
+                    """
             );
         }
 
@@ -1172,57 +1172,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                public static class C
-                {
-                    static bool IsValidValue(E e) 
+                    public static class C
                     {
-                        return e [||]switch
+                        static bool IsValidValue(E e)
                         {
-                            E.A or E.B or E.C => true,
-                            _ = false
-                        };
-                    }
+                            return e [||]switch
+                            {
+                                E.A or E.B or E.C => true,
+                                _ = false
+                            };
+                        }
 
-                    public enum E
-                    {
-                        A,
-                        B,
-                        C,
-                        D,
-                        E,
-                        F,
-                        G,
-                    }
-                }
-                """,
-                """
-                public static class C
-                {
-                    static bool IsValidValue(E e) 
-                    {
-                        return e [||]switch
+                        public enum E
                         {
-                            E.A or E.B or E.C => true,
-                            E.D => throw new System.NotImplementedException(),
-                            E.E => throw new System.NotImplementedException(),
-                            E.F => throw new System.NotImplementedException(),
-                            E.G => throw new System.NotImplementedException(),
-                            _ = false
-                        };
+                            A,
+                            B,
+                            C,
+                            D,
+                            E,
+                            F,
+                            G,
+                        }
                     }
-
-                    public enum E
-                    {
-                        A,
-                        B,
-                        C,
-                        D,
-                        E,
-                        F,
-                        G,
-                    }
-                }
+                    """,
                 """
+                    public static class C
+                    {
+                        static bool IsValidValue(E e)
+                        {
+                            return e [||]switch
+                            {
+                                E.A or E.B or E.C => true,
+                                E.D => throw new System.NotImplementedException(),
+                                E.E => throw new System.NotImplementedException(),
+                                E.F => throw new System.NotImplementedException(),
+                                E.G => throw new System.NotImplementedException(),
+                                _ = false
+                            };
+                        }
+
+                        public enum E
+                        {
+                            A,
+                            B,
+                            C,
+                            D,
+                            E,
+                            F,
+                            G,
+                        }
+                    }
+                    """
             );
         }
 
@@ -1231,30 +1231,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                public static class C
-                {
-                    static bool IsValidValue(E e) 
+                    public static class C
                     {
-                        return e [||]switch
+                        static bool IsValidValue(E e)
                         {
-                            (E.A or E.B) or (E.C or E.D) => true,
-                            (E.E or E.F) or (E.G) => true,
-                            _ = false
-                        };
-                    }
+                            return e [||]switch
+                            {
+                                (E.A or E.B) or (E.C or E.D) => true,
+                                (E.E or E.F) or (E.G) => true,
+                                _ = false
+                            };
+                        }
 
-                    public enum E
-                    {
-                        A,
-                        B,
-                        C,
-                        D,
-                        E,
-                        F,
-                        G,
+                        public enum E
+                        {
+                            A,
+                            B,
+                            C,
+                            D,
+                            E,
+                            F,
+                            G,
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1263,60 +1263,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                public static class C
-                {
-                    static bool M(E e) 
+                    public static class C
                     {
-                        return e [||]switch
+                        static bool M(E e)
                         {
-                            (E.A or E.B) and (E.C or E.D) => true,
-                            _ = false
-                        };
-                    }
+                            return e [||]switch
+                            {
+                                (E.A or E.B) and (E.C or E.D) => true,
+                                _ = false
+                            };
+                        }
 
-                    public enum E
-                    {
-                        A,
-                        B,
-                        C,
-                        D,
-                        E,
-                        F,
-                        G,
-                    }
-                }
-                """,
-                """
-                public static class C
-                {
-                    static bool M(E e) 
-                    {
-                        return e [||]switch
+                        public enum E
                         {
-                            (E.A or E.B) and (E.C or E.D) => true,
-                            E.A => throw new System.NotImplementedException(),
-                            E.B => throw new System.NotImplementedException(),
-                            E.C => throw new System.NotImplementedException(),
-                            E.D => throw new System.NotImplementedException(),
-                            E.E => throw new System.NotImplementedException(),
-                            E.F => throw new System.NotImplementedException(),
-                            E.G => throw new System.NotImplementedException(),
-                            _ = false
-                        };
+                            A,
+                            B,
+                            C,
+                            D,
+                            E,
+                            F,
+                            G,
+                        }
                     }
-
-                    public enum E
-                    {
-                        A,
-                        B,
-                        C,
-                        D,
-                        E,
-                        F,
-                        G,
-                    }
-                }
+                    """,
                 """
+                    public static class C
+                    {
+                        static bool M(E e)
+                        {
+                            return e [||]switch
+                            {
+                                (E.A or E.B) and (E.C or E.D) => true,
+                                E.A => throw new System.NotImplementedException(),
+                                E.B => throw new System.NotImplementedException(),
+                                E.C => throw new System.NotImplementedException(),
+                                E.D => throw new System.NotImplementedException(),
+                                E.E => throw new System.NotImplementedException(),
+                                E.F => throw new System.NotImplementedException(),
+                                E.G => throw new System.NotImplementedException(),
+                                _ = false
+                            };
+                        }
+
+                        public enum E
+                        {
+                            A,
+                            B,
+                            C,
+                            D,
+                            E,
+                            F,
+                            G,
+                        }
+                    }
+                    """
             );
         }
 
@@ -1325,58 +1325,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                public static class C
-                {
-                    static bool M(E e) 
+                    public static class C
                     {
-                        return e [||]switch
+                        static bool M(E e)
                         {
-                            (E.A or E.B) or (E.C and E.D) => true,
-                            _ = false
-                        };
-                    }
+                            return e [||]switch
+                            {
+                                (E.A or E.B) or (E.C and E.D) => true,
+                                _ = false
+                            };
+                        }
 
-                    public enum E
-                    {
-                        A,
-                        B,
-                        C,
-                        D,
-                        E,
-                        F,
-                        G,
-                    }
-                }
-                """,
-                """
-                public static class C
-                {
-                    static bool M(E e) 
-                    {
-                        return e [||]switch
+                        public enum E
                         {
-                            (E.A or E.B) or (E.C and E.D) => true,
-                            E.C => throw new System.NotImplementedException(),
-                            E.D => throw new System.NotImplementedException(),
-                            E.E => throw new System.NotImplementedException(),
-                            E.F => throw new System.NotImplementedException(),
-                            E.G => throw new System.NotImplementedException(),
-                            _ = false
-                        };
+                            A,
+                            B,
+                            C,
+                            D,
+                            E,
+                            F,
+                            G,
+                        }
                     }
-
-                    public enum E
-                    {
-                        A,
-                        B,
-                        C,
-                        D,
-                        E,
-                        F,
-                        G,
-                    }
-                }
+                    """,
                 """
+                    public static class C
+                    {
+                        static bool M(E e)
+                        {
+                            return e [||]switch
+                            {
+                                (E.A or E.B) or (E.C and E.D) => true,
+                                E.C => throw new System.NotImplementedException(),
+                                E.D => throw new System.NotImplementedException(),
+                                E.E => throw new System.NotImplementedException(),
+                                E.F => throw new System.NotImplementedException(),
+                                E.G => throw new System.NotImplementedException(),
+                                _ = false
+                            };
+                        }
+
+                        public enum E
+                        {
+                            A,
+                            B,
+                            C,
+                            D,
+                            E,
+                            F,
+                            G,
+                        }
+                    }
+                    """
             );
         }
 
@@ -1385,25 +1385,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                enum Greeting
-                {
-                    Hello,
-                    Goodbye
-                };
-
-                class C
-                {
-                    void M()
+                    enum Greeting
                     {
-                        Greeting greeting = Greeting.Hello;
-                        string message = greeting [||]switch
+                        Hello,
+                        Goodbye
+                    };
+
+                    class C
+                    {
+                        void M()
                         {
-                            Greeting.Hello => "Hey!",
-                            Greeting.Goodbye or _ => "Not sure what to say 🤔"
-                        };
+                            Greeting greeting = Greeting.Hello;
+                            string message = greeting [||]switch
+                            {
+                                Greeting.Hello => "Hey!",
+                                Greeting.Goodbye or _ => "Not sure what to say 🤔"
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1412,25 +1412,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                enum Greeting
-                {
-                    Hello,
-                    Goodbye
-                };
-
-                class C
-                {
-                    void M()
+                    enum Greeting
                     {
-                        Greeting greeting = Greeting.Hello;
-                        string message = greeting [||]switch
+                        Hello,
+                        Goodbye
+                    };
+
+                    class C
+                    {
+                        void M()
                         {
-                            Greeting.Hello => "Hey!",
-                            _ or Greeting.Goodbye => "Not sure what to say 🤔"
-                        };
+                            Greeting greeting = Greeting.Hello;
+                            string message = greeting [||]switch
+                            {
+                                Greeting.Hello => "Hey!",
+                                _ or Greeting.Goodbye => "Not sure what to say 🤔"
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1439,26 +1439,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                enum Greeting
-                {
-                    Hello,
-                    Goodbye
-                };
-
-                class C
-                {
-                    void M()
+                    enum Greeting
                     {
-                        Greeting greeting = Greeting.Hello;
-                        string message = greeting [||]switch
+                        Hello,
+                        Goodbye
+                    };
+
+                    class C
+                    {
+                        void M()
                         {
-                            Greeting.Hello => "Hey!",
-                            Greeting.Goodbye => "Bye!",
-                            _ and var v => "Not sure what to say 🤔"
-                        };
+                            Greeting greeting = Greeting.Hello;
+                            string message = greeting [||]switch
+                            {
+                                Greeting.Hello => "Hey!",
+                                Greeting.Goodbye => "Bye!",
+                                _ and var v => "Not sure what to say 🤔"
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1467,26 +1467,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                enum Greeting
-                {
-                    Hello,
-                    Goodbye
-                };
-
-                class C
-                {
-                    void M()
+                    enum Greeting
                     {
-                        Greeting greeting = Greeting.Hello;
-                        string message = greeting [||]switch
+                        Hello,
+                        Goodbye
+                    };
+
+                    class C
+                    {
+                        void M()
                         {
-                            Greeting.Hello => "Hey!",
-                            Greeting.Goodbye => "Bye!",
-                            var x and var y => "Not sure what to say 🤔"
-                        };
+                            Greeting greeting = Greeting.Hello;
+                            string message = greeting [||]switch
+                            {
+                                Greeting.Hello => "Hey!",
+                                Greeting.Goodbye => "Bye!",
+                                var x and var y => "Not sure what to say 🤔"
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1495,40 +1495,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                #nullable enable
+                    #nullable enable
 
-                static class MyEnumExtensions
-                {
-                    public static string ToAnotherEnum(this MyEnum? myEnumValue)
-                        => myEnumValue [||]switch
-                        {
-                        };
-                }
+                    static class MyEnumExtensions
+                    {
+                        public static string ToAnotherEnum(this MyEnum? myEnumValue)
+                            => myEnumValue [||]switch
+                            {
+                            };
+                    }
 
-                enum MyEnum
-                {
-                    Value1, Value2
-                }
-                """,
+                    enum MyEnum
+                    {
+                        Value1, Value2
+                    }
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                static class MyEnumExtensions
-                {
-                    public static string ToAnotherEnum(this MyEnum? myEnumValue)
-                        => myEnumValue switch
-                        {
-                            MyEnum.Value1 => throw new System.NotImplementedException(),
-                            MyEnum.Value2 => throw new System.NotImplementedException(),
-                            null => throw new System.NotImplementedException(),
-                        };
-                }
+                    static class MyEnumExtensions
+                    {
+                        public static string ToAnotherEnum(this MyEnum? myEnumValue)
+                            => myEnumValue switch
+                            {
+                                MyEnum.Value1 => throw new System.NotImplementedException(),
+                                MyEnum.Value2 => throw new System.NotImplementedException(),
+                                null => throw new System.NotImplementedException(),
+                            };
+                    }
 
-                enum MyEnum
-                {
-                    Value1, Value2
-                }
-                """
+                    enum MyEnum
+                    {
+                        Value1, Value2
+                    }
+                    """
             );
         }
 
@@ -1537,41 +1537,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                #nullable enable
+                    #nullable enable
 
-                static class MyEnumExtensions
-                {
-                    public static string ToAnotherEnum(this MyEnum? myEnumValue)
-                        => myEnumValue [||]switch
-                        {
-                            null => throw null,
-                        };
-                }
+                    static class MyEnumExtensions
+                    {
+                        public static string ToAnotherEnum(this MyEnum? myEnumValue)
+                            => myEnumValue [||]switch
+                            {
+                                null => throw null,
+                            };
+                    }
 
-                enum MyEnum
-                {
-                    Value1, Value2
-                }
-                """,
+                    enum MyEnum
+                    {
+                        Value1, Value2
+                    }
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                static class MyEnumExtensions
-                {
-                    public static string ToAnotherEnum(this MyEnum? myEnumValue)
-                        => myEnumValue switch
-                        {
-                            null => throw null,
-                            MyEnum.Value1 => throw new System.NotImplementedException(),
-                            MyEnum.Value2 => throw new System.NotImplementedException(),
-                        };
-                }
+                    static class MyEnumExtensions
+                    {
+                        public static string ToAnotherEnum(this MyEnum? myEnumValue)
+                            => myEnumValue switch
+                            {
+                                null => throw null,
+                                MyEnum.Value1 => throw new System.NotImplementedException(),
+                                MyEnum.Value2 => throw new System.NotImplementedException(),
+                            };
+                    }
 
-                enum MyEnum
-                {
-                    Value1, Value2
-                }
-                """
+                    enum MyEnum
+                    {
+                        Value1, Value2
+                    }
+                    """
             );
         }
 
@@ -1580,40 +1580,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                #nullable disable
+                    #nullable disable
 
-                static class MyEnumExtensions
-                {
-                    public static string ToAnotherEnum(this MyEnum? myEnumValue)
-                        => myEnumValue [||]switch
-                        {
-                        };
-                }
+                    static class MyEnumExtensions
+                    {
+                        public static string ToAnotherEnum(this MyEnum? myEnumValue)
+                            => myEnumValue [||]switch
+                            {
+                            };
+                    }
 
-                enum MyEnum
-                {
-                    Value1, Value2
-                }
-                """,
+                    enum MyEnum
+                    {
+                        Value1, Value2
+                    }
+                    """,
                 """
-                #nullable disable
+                    #nullable disable
 
-                static class MyEnumExtensions
-                {
-                    public static string ToAnotherEnum(this MyEnum? myEnumValue)
-                        => myEnumValue switch
-                        {
-                            MyEnum.Value1 => throw new System.NotImplementedException(),
-                            MyEnum.Value2 => throw new System.NotImplementedException(),
-                            null => throw new System.NotImplementedException(),
-                        };
-                }
+                    static class MyEnumExtensions
+                    {
+                        public static string ToAnotherEnum(this MyEnum? myEnumValue)
+                            => myEnumValue switch
+                            {
+                                MyEnum.Value1 => throw new System.NotImplementedException(),
+                                MyEnum.Value2 => throw new System.NotImplementedException(),
+                                null => throw new System.NotImplementedException(),
+                            };
+                    }
 
-                enum MyEnum
-                {
-                    Value1, Value2
-                }
-                """
+                    enum MyEnum
+                    {
+                        Value1, Value2
+                    }
+                    """
             );
         }
 
@@ -1622,41 +1622,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                #nullable disable
+                    #nullable disable
 
-                static class MyEnumExtensions
-                {
-                    public static string ToAnotherEnum(this MyEnum? myEnumValue)
-                        => myEnumValue [||]switch
-                        {
-                            null => throw null,
-                        };
-                }
+                    static class MyEnumExtensions
+                    {
+                        public static string ToAnotherEnum(this MyEnum? myEnumValue)
+                            => myEnumValue [||]switch
+                            {
+                                null => throw null,
+                            };
+                    }
 
-                enum MyEnum
-                {
-                    Value1, Value2
-                }
-                """,
+                    enum MyEnum
+                    {
+                        Value1, Value2
+                    }
+                    """,
                 """
-                #nullable disable
+                    #nullable disable
 
-                static class MyEnumExtensions
-                {
-                    public static string ToAnotherEnum(this MyEnum? myEnumValue)
-                        => myEnumValue switch
-                        {
-                            null => throw null,
-                            MyEnum.Value1 => throw new System.NotImplementedException(),
-                            MyEnum.Value2 => throw new System.NotImplementedException(),
-                        };
-                }
+                    static class MyEnumExtensions
+                    {
+                        public static string ToAnotherEnum(this MyEnum? myEnumValue)
+                            => myEnumValue switch
+                            {
+                                null => throw null,
+                                MyEnum.Value1 => throw new System.NotImplementedException(),
+                                MyEnum.Value2 => throw new System.NotImplementedException(),
+                            };
+                    }
 
-                enum MyEnum
-                {
-                    Value1, Value2
-                }
-                """
+                    enum MyEnum
+                    {
+                        Value1, Value2
+                    }
+                    """
             );
         }
 
@@ -1665,18 +1665,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingAsync(
                 """
-                public class Sample
-                {
-                    public string Method(bool boolean)
+                    public class Sample
                     {
-                        return boolean [||]switch
+                        public string Method(bool boolean)
                         {
-                            true => "true",
-                            false => "false",
-                        };
+                            return boolean [||]switch
+                            {
+                                true => "true",
+                                false => "false",
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1685,19 +1685,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestMissingAsync(
                 """
-                public class Sample
-                {
-                    public string Method(bool? boolean)
+                    public class Sample
                     {
-                        return boolean [||]switch
+                        public string Method(bool? boolean)
                         {
-                            true => "true",
-                            false => "false",
-                            null => "null",
-                        };
+                            return boolean [||]switch
+                            {
+                                true => "true",
+                                false => "false",
+                                null => "null",
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1706,30 +1706,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                public class Sample
-                {
-                    public string Method(bool boolean)
+                    public class Sample
                     {
-                        return boolean [||]switch
+                        public string Method(bool boolean)
                         {
-                            true => "true",
-                        };
+                            return boolean [||]switch
+                            {
+                                true => "true",
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class Sample
-                {
-                    public string Method(bool boolean)
+                    public class Sample
                     {
-                        return boolean switch
+                        public string Method(bool boolean)
                         {
-                            true => "true",
-                            _ => throw new System.NotImplementedException(),
-                        };
+                            return boolean switch
+                            {
+                                true => "true",
+                                _ => throw new System.NotImplementedException(),
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1738,32 +1738,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScript1Async(
                 """
-                public class Sample
-                {
-                    public string Method(bool? boolean)
+                    public class Sample
                     {
-                        return boolean [||]switch
+                        public string Method(bool? boolean)
                         {
-                            true => "true",
-                            false => "false",
-                        };
+                            return boolean [||]switch
+                            {
+                                true => "true",
+                                false => "false",
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                public class Sample
-                {
-                    public string Method(bool? boolean)
+                    public class Sample
                     {
-                        return boolean switch
+                        public string Method(bool? boolean)
                         {
-                            true => "true",
-                            false => "false",
-                            _ => throw new System.NotImplementedException(),
-                        };
+                            return boolean switch
+                            {
+                                true => "true",
+                                false => "false",
+                                _ => throw new System.NotImplementedException(),
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

@@ -22,13 +22,13 @@ public class NamespaceDeclarationStructureTests
     public async Task TestNamespace()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$namespace N{|textspan:
                 {
-                    {|hint:$$namespace N{|textspan:
-                    {
-                    }|}|}
-                }
-                """;
+                }|}|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -40,15 +40,15 @@ public class NamespaceDeclarationStructureTests
     public async Task TestNamespaceWithLeadingComments()
     {
         var code = """
-                class C
+            class C
+            {
+                {|span1:// Goo
+                // Bar|}
+                {|hint2:$$namespace N{|textspan2:
                 {
-                    {|span1:// Goo
-                    // Bar|}
-                    {|hint2:$$namespace N{|textspan2:
-                    {
-                    }|}|}
-                }
-                """;
+                }|}|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -61,15 +61,15 @@ public class NamespaceDeclarationStructureTests
     public async Task TestNamespaceWithNestedUsings()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint1:$$namespace N{|textspan1:
                 {
-                    {|hint1:$$namespace N{|textspan1:
-                    {
-                        {|hint2:using {|textspan2:System;
-                        using System.Linq;|}|}
-                    }|}|}
-                }
-                """;
+                    {|hint2:using {|textspan2:System;
+                    using System.Linq;|}|}
+                }|}|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -82,17 +82,17 @@ public class NamespaceDeclarationStructureTests
     public async Task TestNamespaceWithNestedUsingsWithLeadingComments()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint1:$$namespace N{|textspan1:
                 {
-                    {|hint1:$$namespace N{|textspan1:
-                    {
-                        {|span2:// Goo
-                        // Bar|}
-                        {|hint3:using {|textspan3:System;
-                        using System.Linq;|}|}
-                    }|}|}
-                }
-                """;
+                    {|span2:// Goo
+                    // Bar|}
+                    {|hint3:using {|textspan3:System;
+                    using System.Linq;|}|}
+                }|}|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -106,15 +106,15 @@ public class NamespaceDeclarationStructureTests
     public async Task TestNamespaceWithNestedComments()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint1:$$namespace N{|textspan1:
                 {
-                    {|hint1:$$namespace N{|textspan1:
-                    {
-                        {|span2:// Goo
-                        // Bar|}
-                    }|}|}
-                }
-                """;
+                    {|span2:// Goo
+                    // Bar|}
+                }|}|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,

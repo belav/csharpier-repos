@@ -111,7 +111,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var expected = """
                 partial class C<T> { }
 
-                partial class C<T> 
+                partial class C<T>
                 """;
 
             await VerifyProviderCommitAsync(text, "C<T>", expected, ' ');

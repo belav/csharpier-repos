@@ -56,12 +56,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                _ _()
-                {
-                }
-                ///<param name='_
-                }
-                """,
+                    _ _()
+                    {
+                    }
+                    ///<param name='_
+                    }
+                    """,
                 testHost,
                 ParseOptions(Options.Regular),
                 Method("_"),
@@ -167,13 +167,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class var
-                {
-                    var()
+                    class var
                     {
+                        var()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("var"),
@@ -192,13 +192,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                record class R
-                {
-                    R()
+                    record class R
                     {
+                        R()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("record"),
                 Keyword("class"),
@@ -218,13 +218,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                record struct R
-                {
-                    R(int i)
+                    record struct R
                     {
+                        R(int i)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("record"),
                 Keyword("struct"),
@@ -336,17 +336,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C
-                {
-                    int P
+                    class C
                     {
-                        set
+                        int P
                         {
-                            var t = new { value = value };
+                            set
+                            {
+                                var t = new { value = value };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -377,19 +377,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                event int Bar
-                {
-                    add
+                    event int Bar
                     {
-                        this.value = value;
-                    }
+                        add
+                        {
+                            this.value = value;
+                        }
 
-                    remove
-                    {
-                        this.value = value;
+                        remove
+                        {
+                            this.value = value;
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("event"),
                 Keyword("int"),
@@ -422,19 +422,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                int Goo
-                {
-                    get
+                    int Goo
                     {
-                        this.value = value;
-                    }
+                        get
+                        {
+                            this.value = value;
+                        }
 
-                    set
-                    {
-                        this.value = value;
+                        set
+                        {
+                            this.value = value;
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("int"),
                 Property("Goo"),
@@ -466,14 +466,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                int P
-                {
-                    set
+                    int P
                     {
-                        this.value = value;
+                        set
+                        {
+                            this.value = value;
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("int"),
                 Property("P"),
@@ -516,14 +516,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class var
-                {
-                    void Main()
+                    class var
                     {
-                        new var();
+                        void Main()
+                        {
+                            new var();
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("var"),
@@ -549,14 +549,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class X
-                {
-                    void Goo<var>()
+                    class X
                     {
-                        var x;
+                        void Goo<var>()
+                        {
+                            var x;
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("X"),
@@ -583,13 +583,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
+                    using System;
 
-                [var]
-                class var : Attribute
-                {
-                }
-                """,
+                    [var]
+                    class var : Attribute
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("using"),
                 Namespace("System"),
@@ -612,13 +612,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
+                    using System;
 
-                [var]
-                class varAttribute : Attribute
-                {
-                }
-                """,
+                    [var]
+                    class varAttribute : Attribute
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("using"),
                 Namespace("System"),
@@ -641,16 +641,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        var tree = Console
+                        static void Main()
+                        {
+                            var tree = Console
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("using"),
                 Namespace("System"),
@@ -681,14 +681,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C
-                {
-                }
+                    class C
+                    {
+                    }
 
-                namespace C
-                {
-                }
-                """,
+                    namespace C
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -706,14 +706,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Program<T>
-                {
-                    /// <param name="x"/>
-                    void Goo(int x)
+                    class Program<T>
                     {
+                        /// <param name="x"/>
+                        void Goo(int x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("Program"),
@@ -729,14 +729,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Delimiter("="),
                 XmlDoc.AttributeQuotes(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 Parameter("x"),
                 XmlDoc.AttributeQuotes(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 XmlDoc.Delimiter("/>"),
                 Keyword("void"),
@@ -756,14 +756,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                /// <see cref="Program{T}"/>
-                class Program<T>
-                {
-                    void Goo()
+                    /// <see cref="Program{T}"/>
+                    class Program<T>
                     {
+                        void Goo()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 XmlDoc.Delimiter("///"),
                 XmlDoc.Text(" "),
@@ -773,8 +773,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Delimiter("="),
                 XmlDoc.AttributeQuotes(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 Class("Program"),
                 Punctuation.OpenCurly,
@@ -782,8 +782,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseCurly,
                 XmlDoc.AttributeQuotes(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 XmlDoc.Delimiter("/>"),
                 Keyword("class"),
@@ -807,14 +807,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                ///  <see cref="N"/>
-                namespace N
-                {
-                    class Program
+                    ///  <see cref="N"/>
+                    namespace N
                     {
+                        class Program
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 XmlDoc.Delimiter("///"),
                 XmlDoc.Text("  "),
@@ -824,14 +824,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Delimiter("="),
                 XmlDoc.AttributeQuotes(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 Namespace("N"),
                 XmlDoc.AttributeQuotes(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 XmlDoc.Delimiter("/>"),
                 Keyword("namespace"),
@@ -850,13 +850,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface IGoo
-                {
-                    int IGoo { get; set; }
+                    interface IGoo
+                    {
+                        int IGoo { get; set; }
 
-                    void Bar(int x = IGoo);
-                }
-                """,
+                        void Bar(int x = IGoo);
+                    }
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("IGoo"),
@@ -888,16 +888,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                /// <summary>
-                /// <see cref="MyClass.MyClass(int)"/>
-                /// </summary>
-                class MyClass
-                {
-                    public MyClass(int x)
+                    /// <summary>
+                    /// <see cref="MyClass.MyClass(int)"/>
+                    /// </summary>
+                    class MyClass
                     {
+                        public MyClass(int x)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 XmlDoc.Delimiter("///"),
                 XmlDoc.Text(" "),
@@ -912,8 +912,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Delimiter("="),
                 XmlDoc.AttributeQuotes(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 Class("MyClass"),
                 Operators.Dot,
@@ -923,8 +923,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 XmlDoc.AttributeQuotes(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 XmlDoc.Delimiter("/>"),
                 XmlDoc.Delimiter("///"),
@@ -952,12 +952,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program : IReadOnlyCollection
-                {
-                }
-                """,
+                    class Program : IReadOnlyCollection
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("using"),
                 Namespace("System"),
@@ -980,12 +980,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program : IReadOnlyCollection<int,string>
-                {
-                }
-                """,
+                    class Program : IReadOnlyCollection<int,string>
+                    {
+                    }
+                    """,
                 testHost,
                 Keyword("using"),
                 Namespace("System"),
@@ -1013,13 +1013,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                static class ExtMethod
-                {
-                    public static void TestMethod(this C c)
+                    static class ExtMethod
                     {
+                        public static void TestMethod(this C c)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("static"),
                 Keyword("class"),
@@ -1047,22 +1047,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                static class ExtMethod
-                {
-                    public static void TestMethod(this C c)
+                    static class ExtMethod
                     {
+                        public static void TestMethod(this C c)
+                        {
+                        }
                     }
-                }
 
-                class C
-                {
-                    void Test()
+                    class C
                     {
-                        ExtMethod.TestMethod(new C());
-                        new C().TestMethod();
+                        void Test()
+                        {
+                            ExtMethod.TestMethod(new C());
+                            new C().TestMethod();
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 ParseOptions(Options.Regular),
                 Keyword("static"),
@@ -1122,9 +1122,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                const int Number = 42;
-                var x = Number;
-                """,
+                    const int Number = 42;
+                    var x = Number;
+                    """,
                 testHost,
                 Keyword("const"),
                 Keyword("int"),
@@ -1146,9 +1146,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                var unmanaged = 0;
-                unmanaged++;
-                """,
+                    var unmanaged = 0;
+                    unmanaged++;
+                    """,
                 testHost,
                 Keyword("var"),
                 Local("unmanaged"),
@@ -1186,9 +1186,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface unmanaged {}
-                class X<T> where T : unmanaged { }
-                """,
+                    interface unmanaged {}
+                    class X<T> where T : unmanaged { }
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("unmanaged"),
@@ -1215,12 +1215,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace OtherScope
-                {
-                    interface unmanaged {}
-                }
-                class X<T> where T : unmanaged { }
-                """,
+                    namespace OtherScope
+                    {
+                        interface unmanaged {}
+                    }
+                    class X<T> where T : unmanaged { }
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("OtherScope"),
@@ -1249,11 +1249,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class X
-                {
-                    void M<T>() where T : unmanaged { }
-                }
-                """,
+                    class X
+                    {
+                        void M<T>() where T : unmanaged { }
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("X"),
@@ -1280,12 +1280,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface unmanaged {}
-                class X
-                {
-                    void M<T>() where T : unmanaged { }
-                }
-                """,
+                    interface unmanaged {}
+                    class X
+                    {
+                        void M<T>() where T : unmanaged { }
+                    }
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("unmanaged"),
@@ -1318,15 +1318,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace OtherScope
-                {
-                    interface unmanaged {}
-                }
-                class X
-                {
-                    void M<T>() where T : unmanaged { }
-                }
-                """,
+                    namespace OtherScope
+                    {
+                        interface unmanaged {}
+                    }
+                    class X
+                    {
+                        void M<T>() where T : unmanaged { }
+                    }
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("OtherScope"),
@@ -1383,9 +1383,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface unmanaged {}
-                delegate void D<T>() where T : unmanaged;
-                """,
+                    interface unmanaged {}
+                    delegate void D<T>() where T : unmanaged;
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("unmanaged"),
@@ -1414,12 +1414,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace OtherScope
-                {
-                    interface unmanaged {}
-                }
-                delegate void D<T>() where T : unmanaged;
-                """,
+                    namespace OtherScope
+                    {
+                        interface unmanaged {}
+                    }
+                    delegate void D<T>() where T : unmanaged;
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("OtherScope"),
@@ -1450,14 +1450,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class X
-                {
-                    void N()
+                    class X
                     {
-                        void M<T>() where T : unmanaged { }
+                        void N()
+                        {
+                            void M<T>() where T : unmanaged { }
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("X"),
@@ -1490,15 +1490,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface unmanaged {}
-                class X
-                {
-                    void N()
+                    interface unmanaged {}
+                    class X
                     {
-                        void M<T>() where T : unmanaged { }
+                        void N()
+                        {
+                            void M<T>() where T : unmanaged { }
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("unmanaged"),
@@ -1537,18 +1537,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace OtherScope
-                {
-                    interface unmanaged {}
-                }
-                class X
-                {
-                    void N()
+                    namespace OtherScope
                     {
-                        void M<T>() where T : unmanaged { }
+                        interface unmanaged {}
                     }
-                }
-                """,
+                    class X
+                    {
+                        void N()
+                        {
+                            void M<T>() where T : unmanaged { }
+                        }
+                    }
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("OtherScope"),
@@ -1590,22 +1590,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var a = 1 + 1;
-                        var b = new True() + new True();
+                        void M()
+                        {
+                            var a = 1 + 1;
+                            var b = new True() + new True();
+                        }
                     }
-                }
-                class True
-                {
-                    public static True operator +(True a, True b)
+                    class True
                     {
-                         return new True();
+                        public static True operator +(True a, True b)
+                        {
+                             return new True();
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -1669,9 +1669,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                var notnull = 0;
-                notnull++;
-                """,
+                    var notnull = 0;
+                    notnull++;
+                    """,
                 testHost,
                 Keyword("var"),
                 Local("notnull"),
@@ -1709,9 +1709,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface notnull {}
-                class X<T> where T : notnull { }
-                """,
+                    interface notnull {}
+                    class X<T> where T : notnull { }
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("notnull"),
@@ -1738,12 +1738,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace OtherScope
-                {
-                    interface notnull {}
-                }
-                class X<T> where T : notnull { }
-                """,
+                    namespace OtherScope
+                    {
+                        interface notnull {}
+                    }
+                    class X<T> where T : notnull { }
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("OtherScope"),
@@ -1772,11 +1772,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class X
-                {
-                    void M<T>() where T : notnull { }
-                }
-                """,
+                    class X
+                    {
+                        void M<T>() where T : notnull { }
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("X"),
@@ -1803,12 +1803,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface notnull {}
-                class X
-                {
-                    void M<T>() where T : notnull { }
-                }
-                """,
+                    interface notnull {}
+                    class X
+                    {
+                        void M<T>() where T : notnull { }
+                    }
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("notnull"),
@@ -1841,15 +1841,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace OtherScope
-                {
-                    interface notnull {}
-                }
-                class X
-                {
-                    void M<T>() where T : notnull { }
-                }
-                """,
+                    namespace OtherScope
+                    {
+                        interface notnull {}
+                    }
+                    class X
+                    {
+                        void M<T>() where T : notnull { }
+                    }
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("OtherScope"),
@@ -1906,9 +1906,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface notnull {}
-                delegate void D<T>() where T : notnull;
-                """,
+                    interface notnull {}
+                    delegate void D<T>() where T : notnull;
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("notnull"),
@@ -1937,12 +1937,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace OtherScope
-                {
-                    interface notnull {}
-                }
-                delegate void D<T>() where T : notnull;
-                """,
+                    namespace OtherScope
+                    {
+                        interface notnull {}
+                    }
+                    delegate void D<T>() where T : notnull;
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("OtherScope"),
@@ -1973,14 +1973,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class X
-                {
-                    void N()
+                    class X
                     {
-                        void M<T>() where T : notnull { }
+                        void N()
+                        {
+                            void M<T>() where T : notnull { }
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("X"),
@@ -2013,15 +2013,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface notnull {}
-                class X
-                {
-                    void N()
+                    interface notnull {}
+                    class X
                     {
-                        void M<T>() where T : notnull { }
+                        void N()
+                        {
+                            void M<T>() where T : notnull { }
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("notnull"),
@@ -2060,18 +2060,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace OtherScope
-                {
-                    interface notnull {}
-                }
-                class X
-                {
-                    void N()
+                    namespace OtherScope
                     {
-                        void M<T>() where T : notnull { }
+                        interface notnull {}
                     }
-                }
-                """,
+                    class X
+                    {
+                        void N()
+                        {
+                            void M<T>() where T : notnull { }
+                        }
+                    }
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("OtherScope"),
@@ -2113,21 +2113,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
+                    using System;
 
-                class Person { public string Name; }
+                    class Person { public string Name; }
 
-                class Program
-                {
-                    void Goo(object o)
+                    class Program
                     {
-                        if (o is Person { Name: var n })
+                        void Goo(object o)
                         {
-                            Console.WriteLine(n);
+                            if (o is Person { Name: var n })
+                            {
+                                Console.WriteLine(n);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("using"),
                 Namespace("System"),
@@ -2184,16 +2184,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Person
-                {
-                    void Goo(object o)
+                    class Person
                     {
-                        if (o is not Person p)
+                        void Goo(object o)
                         {
+                            if (o is not Person p)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("Person"),
@@ -2226,16 +2226,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Person
-                {
-                    void Goo(object o)
+                    class Person
                     {
-                        if (o is Person or int)
+                        void Goo(object o)
                         {
+                            if (o is Person or int)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("Person"),
@@ -2268,10 +2268,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                void M(object o) {
-                    _ = o is [var (x, y), {} z] list;
-                }
-                """,
+                    void M(object o) {
+                        _ = o is [var (x, y), {} z] list;
+                    }
+                    """,
                 testHost,
                 Keyword("void"),
                 Method("M"),
@@ -2308,16 +2308,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Person
-                {
-                    void Goo(object o)
+                    class Person
                     {
-                        if (o is >= 0)
+                        void Goo(object o)
                         {
+                            if (o is >= 0)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("Person"),
@@ -2348,10 +2348,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                namespace NS;
+                    namespace NS;
 
-                class C { }
-                """,
+                    class C { }
+                    """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("NS"),
@@ -2374,8 +2374,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.Equals,
                 Verbatim(
                     """
-                    $@"
-                    """
+                        $@"
+                        """
                 ),
                 Escape("{{"),
                 Punctuation.OpenCurly,
@@ -2386,8 +2386,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Escape("}}"),
                 Verbatim(
                     """
-                    "
-                    """
+                        "
+                        """
                 ),
                 Punctuation.Semicolon
             );
@@ -2399,11 +2399,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C
-                {
-                    static C() { }
-                }
-                """,
+                    class C
+                    {
+                        static C() { }
+                    }
+                    """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -2425,11 +2425,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                interface C
-                {
-                    static C() { }
-                }
-                """,
+                    interface C
+                    {
+                        static C() { }
+                    }
+                    """,
                 testHost,
                 Keyword("interface"),
                 Interface("C"),
@@ -2451,10 +2451,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                [|foreach (var arg in args)
-                {
-                }|]
-                """,
+                    [|foreach (var arg in args)
+                    {
+                    }|]
+                    """,
                 testHost,
                 parseOptions: null,
                 ControlKeyword("foreach"),
@@ -2475,16 +2475,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|foreach (var arg in args)
+                        static void Main(string[] args)
                         {
-                        }|]
+                            [|foreach (var arg in args)
+                            {
+                            }|]
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 parseOptions: null,
                 ControlKeyword("foreach"),
@@ -2505,11 +2505,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Test
-                {
-                    public async
-                }
-                """,
+                    class Test
+                    {
+                        public async
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("class"),
@@ -2527,15 +2527,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                [|class Test
-                {
-                    public async
-                }|]
+                    [|class Test
+                    {
+                        public async
+                    }|]
 
-                class async
-                {
-                }
-                """,
+                    class async
+                    {
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("class"),
@@ -2553,11 +2553,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                void M()
-                {
-                    async
-                }
-                """,
+                    void M()
+                    {
+                        async
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("void"),
@@ -2578,15 +2578,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                [|void M()
-                {
-                    async
-                }|]
+                    [|void M()
+                    {
+                        async
+                    }|]
 
-                class async
-                {
-                }
-                """,
+                    class async
+                    {
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("void"),
@@ -2605,14 +2605,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Test
-                {
-                    void M()
+                    class Test
                     {
-                        [|async a;|]
+                        void M()
+                        {
+                            [|async a;|]
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("async"),
@@ -2627,16 +2627,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class async { }
+                    class async { }
 
-                class Test
-                {
-                    void M()
+                    class Test
                     {
-                        [|async a;|]
+                        void M()
+                        {
+                            [|async a;|]
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 parseOptions: null,
                 Class("async"),
@@ -2651,11 +2651,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Test
-                {
-                    [|public async Prop { get; set; }|]
-                }
-                """,
+                    class Test
+                    {
+                        [|public async Prop { get; set; }|]
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("public"),
@@ -2676,13 +2676,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class async { }
+                    class async { }
 
-                class Test
-                {
-                    [|public async Prop { get; set; }|]
-                }
-                """,
+                    class Test
+                    {
+                        [|public async Prop { get; set; }|]
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("public"),
@@ -2703,11 +2703,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Test
-                {
-                    [|public async M()|] {}
-                }
-                """,
+                    class Test
+                    {
+                        [|public async M()|] {}
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("public"),
@@ -2724,13 +2724,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class async { }
+                    class async { }
 
-                class Test
-                {
-                    [|public async M()|] {}
-                }
-                """,
+                    class Test
+                    {
+                        [|public async M()|] {}
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("public"),
@@ -2747,19 +2747,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class Test
-                {
-                    void M()
+                    class Test
                     {
-                        var a = [|C.async;|]
+                        void M()
+                        {
+                            var a = [|C.async;|]
+                        }
                     }
-                }
 
-                class C
-                {
-                    public static int async;
-                }
-                """,
+                    class C
+                    {
+                        public static int async;
+                    }
+                    """,
                 testHost,
                 parseOptions: null,
                 Class("C"),
@@ -2776,15 +2776,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
-                class Test
-                {
-                    void M()
+                    using System;
+                    class Test
                     {
-                        [|Action a = async |]
+                        void M()
+                        {
+                            [|Action a = async |]
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 parseOptions: null,
                 Delegate("Action"),
@@ -2799,11 +2799,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C
-                {
-                    [|partial|]
-                }
-                """,
+                    class C
+                    {
+                        [|partial|]
+                    }
+                    """,
                 testHost,
                 Keyword("partial")
             );
@@ -2814,11 +2814,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C
-                {
-                    [|public partial|]
-                }
-                """,
+                    class C
+                    {
+                        [|public partial|]
+                    }
+                    """,
                 testHost,
                 Keyword("public"),
                 Keyword("partial")
@@ -2830,15 +2830,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class partial
-                {
-                }
+                    class partial
+                    {
+                    }
 
-                class C
-                {
-                    [|partial|]
-                }
-                """,
+                    class C
+                    {
+                        [|partial|]
+                    }
+                    """,
                 testHost,
                 Class("partial")
             );
@@ -2849,15 +2849,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class partial
-                {
-                }
+                    class partial
+                    {
+                    }
 
-                class C
-                {
-                    [|public partial|]
-                }
-                """,
+                    class C
+                    {
+                        [|public partial|]
+                    }
+                    """,
                 testHost,
                 Keyword("public"),
                 Class("partial")
@@ -2869,8 +2869,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                partial
-                """,
+                    partial
+                    """,
                 testHost,
                 Keyword("partial")
             );
@@ -2881,8 +2881,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                public partial
-                """,
+                    public partial
+                    """,
                 testHost,
                 Keyword("public"),
                 Keyword("partial")
@@ -2894,12 +2894,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class partial
-                {
-                }
+                    class partial
+                    {
+                    }
 
-                [|partial|]
-                """,
+                    [|partial|]
+                    """,
                 testHost,
                 Class("partial")
             );
@@ -2910,12 +2910,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class partial
-                {
-                }
+                    class partial
+                    {
+                    }
 
-                [|public partial|]
-                """,
+                    [|public partial|]
+                    """,
                 testHost,
                 Keyword("public"),
                 Class("partial")
@@ -2929,24 +2929,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(Action action)
+                    class C
                     {
-                        [|localFunction();
-                        staticLocalFunction();
+                        void M(Action action)
+                        {
+                            [|localFunction();
+                            staticLocalFunction();
 
-                        M(localFunction);
-                        M(staticLocalFunction);
+                            M(localFunction);
+                            M(staticLocalFunction);
 
-                        void localFunction() { }
-                        static void staticLocalFunction() { }|]
+                            void localFunction() { }
+                            static void staticLocalFunction() { }|]
+                        }
                     }
-                }
 
-                """,
+                    """,
                 testHost,
                 Method("localFunction"),
                 Punctuation.OpenParen,
@@ -2990,13 +2990,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                static void method(scoped in S s)
-                {
-                    scoped var rs1 = s;
-                }
+                    static void method(scoped in S s)
+                    {
+                        scoped var rs1 = s;
+                    }
 
-                file readonly ref struct S { }
-                """,
+                    file readonly ref struct S { }
+                    """,
                 testHost,
                 Keyword("static"),
                 Keyword("void"),
@@ -3031,17 +3031,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                class C
-                {
-                    const int N = 10;
-
-                    void M()
+                    class C
                     {
-                        var lam = [|(int x = N) => x|];
-                    }
-                }
+                        const int N = 10;
 
-                """,
+                        void M()
+                        {
+                            var lam = [|(int x = N) => x|];
+                        }
+                    }
+
+                    """,
                 testHost,
                 Punctuation.OpenParen,
                 Keyword("int"),
@@ -3060,8 +3060,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using X = int;
-                """,
+                    using X = int;
+                    """,
                 testHost,
                 Keyword("using"),
                 Struct("X"),
@@ -3076,8 +3076,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using X = int[];
-                """,
+                    using X = int[];
+                    """,
                 testHost,
                 Keyword("using"),
                 Identifier("X"),
@@ -3094,8 +3094,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using unsafe X = int*;
-                """,
+                    using unsafe X = int*;
+                    """,
                 testHost,
                 Keyword("using"),
                 Keyword("unsafe"),
@@ -3112,8 +3112,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using unsafe X = delegate*<int,int>;
-                """,
+                    using unsafe X = delegate*<int,int>;
+                    """,
                 testHost,
                 Keyword("using"),
                 Keyword("unsafe"),
@@ -3135,8 +3135,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using X = (int x, string b);
-                """,
+                    using X = (int x, string b);
+                    """,
                 testHost,
                 Keyword("using"),
                 Struct("X"),
@@ -3158,8 +3158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                delegate* unmanaged[Fastcall, Stdcall, Thiscall]<int> fp;
-                """,
+                    delegate* unmanaged[Fastcall, Stdcall, Thiscall]<int> fp;
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("delegate"),
@@ -3186,8 +3186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                delegate* unmanaged[Member]<int> fp;
-                """,
+                    delegate* unmanaged[Member]<int> fp;
+                    """,
                 testHost,
                 parseOptions: null,
                 Keyword("delegate"),

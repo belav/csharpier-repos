@@ -764,9 +764,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspaceWithProjectAndLinkedDocuments(
                 """
-                #if NETSTANDARD
-                public class Goo { }
-                """
+                    #if NETSTANDARD
+                    public class Goo { }
+                    """
             );
             var solution = workspace.CurrentSolution;
 
@@ -853,9 +853,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             using var workspace = CreateWorkspaceWithProjectAndLinkedDocuments(
                 """
-                #if NETSTANDARD
-                public class Goo { }
-                """,
+                    #if NETSTANDARD
+                    public class Goo { }
+                    """,
                 parseOptions1,
                 parseOptions2
             );
@@ -955,9 +955,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspaceWithProjectAndLinkedDocuments(
                 """
-                #if NETSTANDARD
-                public class Goo { }
-                """,
+                    #if NETSTANDARD
+                    public class Goo { }
+                    """,
                 CSharpParseOptions.Default.WithPreprocessorSymbols("UNIQUE_NAME"),
                 CSharpParseOptions.Default
             );
@@ -1044,9 +1044,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspaceWithProjectAndLinkedDocuments(
                 """
-                #nullable enable // should not impact being able to reuse.
-                public class Goo { }
-                """
+                    #nullable enable // should not impact being able to reuse.
+                    public class Goo { }
+                    """
             );
             var solution = workspace.CurrentSolution;
 
@@ -4528,21 +4528,21 @@ End Class";
                 (language == LanguageNames.CSharp)
                     ? CS.SyntaxFactory.ParseCompilationUnit(
                         """
-                #define X
-                #if X
-                class NewType {}
-                #endif
-                """
+                            #define X
+                            #if X
+                            class NewType {}
+                            #endif
+                            """
                     )
                     : (SyntaxNode)
                         VB.SyntaxFactory.ParseCompilationUnit(
                             """
-                #Define X
-                #If X
-                Class C
-                End Class
-                #End If
-                """
+                                #Define X
+                                #If X
+                                Class C
+                                End Class
+                                #End If
+                                """
                         );
 
             Assert.True(newRoot.ContainsDirectives);

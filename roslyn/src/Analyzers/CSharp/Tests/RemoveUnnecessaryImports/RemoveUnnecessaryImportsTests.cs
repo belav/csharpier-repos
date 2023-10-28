@@ -27,25 +27,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;
-                using System.Linq;|}|]
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -54,29 +54,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                // Copyright (c) Somebody.
+                    // Copyright (c) Somebody.
 
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;
-                using System.Linq;|}|]
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                // Copyright (c) Somebody.
+                    // Copyright (c) Somebody.
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -85,36 +85,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                // Copyright (c) Somebody.
+                    // Copyright (c) Somebody.
 
-                [|using System;
+                    [|using System;
 
-                {|IDE0005:using System.Collections.Generic;
-                // This is important
-                using System.Linq;|}|]
+                    {|IDE0005:using System.Collections.Generic;
+                    // This is important
+                    using System.Linq;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Action a;
+                        static void Main(string[] args)
+                        {
+                            Action a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                // Copyright (c) Somebody.
+                    // Copyright (c) Somebody.
 
-                using System;
-                // This is important
+                    using System;
+                    // This is important
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Action a;
+                        static void Main(string[] args)
+                        {
+                            Action a;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -123,35 +123,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                // Copyright (c) Somebody.
+                    // Copyright (c) Somebody.
 
-                [|using System;
+                    [|using System;
 
-                {|IDE0005:using System.Collections.Generic;
+                    {|IDE0005:using System.Collections.Generic;
 
-                using System.Linq;|}|]
+                    using System.Linq;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Action a;
+                        static void Main(string[] args)
+                        {
+                            Action a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                // Copyright (c) Somebody.
+                    // Copyright (c) Somebody.
 
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Action a;
+                        static void Main(string[] args)
+                        {
+                            Action a;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -160,29 +160,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|using System;
-                {|IDE0005:using System.Collections.Generic;
-                using System.Linq;|}|]
+                    [|using System;
+                    {|IDE0005:using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        DateTime d;
+                        static void Main(string[] args)
+                        {
+                            DateTime d;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        DateTime d;
+                        static void Main(string[] args)
+                        {
+                            DateTime d;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -238,29 +238,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System;|}
-                using System.Collections.Generic;
-                {|IDE0005:using System.Linq;|}|]
+                    [|{|IDE0005:using System;|}
+                    using System.Collections.Generic;
+                    {|IDE0005:using System.Linq;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        List<int> list;
+                        static void Main(string[] args)
+                        {
+                            List<int> list;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        List<int> list;
+                        static void Main(string[] args)
+                        {
+                            List<int> list;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -269,32 +269,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|using System;
-                using System.Collections.Generic;
-                {|IDE0005:using System.Linq;|}|]
+                    [|using System;
+                    using System.Collections.Generic;
+                    {|IDE0005:using System.Linq;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        List<int> list;
-                        DateTime d;
+                        static void Main(string[] args)
+                        {
+                            List<int> list;
+                            DateTime d;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        List<int> list;
-                        DateTime d;
+                        static void Main(string[] args)
+                        {
+                            List<int> list;
+                            DateTime d;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -303,29 +303,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;|}
-                using System.Linq;|]
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;|}
+                    using System.Linq;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        args.Where(a => a.Length > 10);
+                        static void Main(string[] args)
+                        {
+                            args.Where(a => a.Length > 10);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        args.Where(a => a.Length > 10);
+                        static void Main(string[] args)
+                        {
+                            args.Where(a => a.Length > 10);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -377,29 +377,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System;|}
-                using G = System.Collections.Generic;
-                {|IDE0005:using System.Linq;|}|]
+                    [|{|IDE0005:using System;|}
+                    using G = System.Collections.Generic;
+                    {|IDE0005:using System.Linq;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        G::List<int> list;
+                        static void Main(string[] args)
+                        {
+                            G::List<int> list;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using G = System.Collections.Generic;
+                    using G = System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        G::List<int> list;
+                        static void Main(string[] args)
+                        {
+                            G::List<int> list;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -408,28 +408,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System;|}
-                using G = System.Collections.Generic;|]
+                    [|{|IDE0005:using System;|}
+                    using G = System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        G.List<int> list;
+                        static void Main(string[] args)
+                        {
+                            G.List<int> list;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using G = System.Collections.Generic;
+                    using G = System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        G.List<int> list;
+                        static void Main(string[] args)
+                        {
+                            G.List<int> list;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -438,37 +438,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;
-                using System.Linq;|}|]
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                namespace N
-                {
-                    using System;
-
-                    class Program
+                    namespace N
                     {
-                        static void Main(string[] args)
+                        using System;
+
+                        class Program
                         {
-                            DateTime d;
+                            static void Main(string[] args)
+                            {
+                                DateTime d;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                    using System;
-
-                    class Program
+                    namespace N
                     {
-                        static void Main(string[] args)
+                        using System;
+
+                        class Program
                         {
-                            DateTime d;
+                            static void Main(string[] args)
+                            {
+                                DateTime d;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -478,35 +478,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
             await new VerifyCS.Test
             {
                 TestCode = """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;
-                using System.Linq;|}|]
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                namespace N;
+                    namespace N;
 
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        DateTime d;
+                        static void Main(string[] args)
+                        {
+                            DateTime d;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                namespace N;
+                    namespace N;
 
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        DateTime d;
+                        static void Main(string[] args)
+                        {
+                            DateTime d;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -516,49 +516,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|using System;
-                {|IDE0005:using System.Collections.Generic;
-                using System.Linq;|}|]
+                    [|using System;
+                    {|IDE0005:using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                namespace N
-                {
-                    using System;
-
-                    class Program
+                    namespace N
                     {
-                        static void Main(string[] args)
+                        using System;
+
+                        class Program
                         {
-                            DateTime d;
+                            static void Main(string[] args)
+                            {
+                                DateTime d;
+                            }
                         }
                     }
-                }
 
-                class F
-                {
-                    DateTime d;
-                }
-                """,
+                    class F
+                    {
+                        DateTime d;
+                    }
+                    """,
                 """
-                using System;
-
-                namespace N
-                {
                     using System;
 
-                    class Program
+                    namespace N
                     {
-                        static void Main(string[] args)
+                        using System;
+
+                        class Program
                         {
-                            DateTime d;
+                            static void Main(string[] args)
+                            {
+                                DateTime d;
+                            }
                         }
                     }
-                }
 
-                class F
-                {
-                    DateTime d;
-                }
-                """
+                    class F
+                    {
+                        DateTime d;
+                    }
+                    """
             );
         }
 
@@ -567,12 +567,65 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|using System;
-                {|IDE0005:using System.Collections.Generic;
-                using System.Linq;|}|]
+                    [|using System;
+                    {|IDE0005:using System.Collections.Generic;
+                    using System.Linq;|}|]
 
-                namespace N
-                {
+                    namespace N
+                    {
+                        [|using System;
+                        {|IDE0005:using System.Collections.Generic;|}|]
+
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+                                DateTime d;
+                            }
+                        }
+                    }
+
+                    class F
+                    {
+                        DateTime d;
+                    }
+                    """,
+                """
+                    using System;
+
+                    namespace N
+                    {
+                        using System;
+
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+                                DateTime d;
+                            }
+                        }
+                    }
+
+                    class F
+                    {
+                        DateTime d;
+                    }
+                    """
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/712656")]
+        public async Task TestNestedUsedUsings2_FileScopedNamespace()
+        {
+            await new VerifyCS.Test
+            {
+                TestCode = """
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;
+                    using System.Linq;|}|]
+
+                    namespace N;
+
                     [|using System;
                     {|IDE0005:using System.Collections.Generic;|}|]
 
@@ -583,18 +636,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                             DateTime d;
                         }
                     }
-                }
 
-                class F
-                {
-                    DateTime d;
-                }
-                """,
-                """
-                using System;
+                    class F
+                    {
+                        DateTime d;
+                    }
+                    """,
+                FixedCode = """
+                    namespace N;
 
-                namespace N
-                {
                     using System;
 
                     class Program
@@ -604,62 +654,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                             DateTime d;
                         }
                     }
-                }
 
-                class F
-                {
-                    DateTime d;
-                }
-                """
-            );
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/712656")]
-        public async Task TestNestedUsedUsings2_FileScopedNamespace()
-        {
-            await new VerifyCS.Test
-            {
-                TestCode = """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;
-                using System.Linq;|}|]
-
-                namespace N;
-
-                [|using System;
-                {|IDE0005:using System.Collections.Generic;|}|]
-
-                class Program
-                {
-                    static void Main(string[] args)
+                    class F
                     {
                         DateTime d;
                     }
-                }
-
-                class F
-                {
-                    DateTime d;
-                }
-                """,
-                FixedCode = """
-                namespace N;
-
-                using System;
-
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        DateTime d;
-                    }
-                }
-
-                class F
-                {
-                    DateTime d;
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -723,32 +723,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                #if true
+                    #if true
 
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;|}|]
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;|}|]
 
-                #endif
+                    #endif
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #if true
+                    #if true
 
-                #endif
+                    #endif
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -757,36 +757,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                #if true
+                    #if true
 
-                [|{|IDE0005:using System;|}
-                using System.Collections.Generic;|]
+                    [|{|IDE0005:using System;|}
+                    using System.Collections.Generic;|]
 
-                #endif
+                    #endif
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        List<int> list;
+                        static void Main(string[] args)
+                        {
+                            List<int> list;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #if true
+                    #if true
 
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                #endif
+                    #endif
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        List<int> list;
+                        static void Main(string[] args)
+                        {
+                            List<int> list;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -795,38 +795,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                namespace N
-                {
-                #if true
-
-                    [|{|IDE0005:using System;
-                    using System.Collections.Generic;|}|]
-
-                #endif
-
-                    class Program
+                    namespace N
                     {
-                        static void Main(string[] args)
+                    #if true
+
+                        [|{|IDE0005:using System;
+                        using System.Collections.Generic;|}|]
+
+                    #endif
+
+                        class Program
                         {
+                            static void Main(string[] args)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                #if true
-
-                #endif
-
-                    class Program
+                    namespace N
                     {
-                        static void Main(string[] args)
+                    #if true
+
+                    #endif
+
+                        class Program
                         {
+                            static void Main(string[] args)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -835,42 +835,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                namespace N
-                {
-                #if true
-
-                    [|{|IDE0005:using System;|}
-                    using System.Collections.Generic;|]
-
-                #endif
-
-                    class Program
+                    namespace N
                     {
-                        static void Main(string[] args)
+                    #if true
+
+                        [|{|IDE0005:using System;|}
+                        using System.Collections.Generic;|]
+
+                    #endif
+
+                        class Program
                         {
-                            List<int> list;
+                            static void Main(string[] args)
+                            {
+                                List<int> list;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
-                #if true
-
-                    using System.Collections.Generic;
-
-                #endif
-
-                    class Program
+                    namespace N
                     {
-                        static void Main(string[] args)
+                    #if true
+
+                        using System.Collections.Generic;
+
+                    #endif
+
+                        class Program
                         {
-                            List<int> list;
+                            static void Main(string[] args)
+                            {
+                                List<int> list;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -879,58 +879,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|using Goo; {|IDE0005:using System.Collections.Generic; /*comment*/|} using Goo2;|]
+                    [|using Goo; {|IDE0005:using System.Collections.Generic; /*comment*/|} using Goo2;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Bar q;
-                        Bar2 qq;
+                        static void Main(string[] args)
+                        {
+                            Bar q;
+                            Bar2 qq;
+                        }
                     }
-                }
 
-                namespace Goo
-                {
-                    public class Bar
+                    namespace Goo
                     {
+                        public class Bar
+                        {
+                        }
                     }
-                }
 
-                namespace Goo2
-                {
-                    public class Bar2
+                    namespace Goo2
                     {
+                        public class Bar2
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using Goo;
-                using Goo2;
+                    using Goo;
+                    using Goo2;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Bar q;
-                        Bar2 qq;
+                        static void Main(string[] args)
+                        {
+                            Bar q;
+                            Bar2 qq;
+                        }
                     }
-                }
 
-                namespace Goo
-                {
-                    public class Bar
+                    namespace Goo
                     {
+                        public class Bar
+                        {
+                        }
                     }
-                }
 
-                namespace Goo2
-                {
-                    public class Bar2
+                    namespace Goo2
                     {
+                        public class Bar2
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -939,24 +939,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                //c1
-                /*c2*/
-                {|IDE0005:[|using/*c3*/ System/*c4*/;|] //c5|}
-                //c6
+                    //c1
+                    /*c2*/
+                    {|IDE0005:[|using/*c3*/ System/*c4*/;|] //c5|}
+                    //c6
 
-                class Program
-                {
-                }
-                """,
+                    class Program
+                    {
+                    }
+                    """,
                 """
-                //c1
-                /*c2*/
-                //c6
+                    //c1
+                    /*c2*/
+                    //c6
 
-                class Program
-                {
-                }
-                """
+                    class Program
+                    {
+                    }
+                    """
             );
         }
 
@@ -965,23 +965,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System.Collections.Generic;|}|]
+                    [|{|IDE0005:using System.Collections.Generic;|}|]
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
+                        static void Main()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
+                        static void Main()
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -990,33 +990,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;|}
-                using System.Linq;|]
+                    [|{|IDE0005:using System;
+                    using System.Collections.Generic;|}
+                    using System.Linq;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var q = from a in args
-                                where a.Length > 21
-                                select a;
+                        static void Main(string[] args)
+                        {
+                            var q = from a in args
+                                    where a.Length > 21
+                                    select a;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var q = from a in args
-                                where a.Length > 21
-                                select a;
+                        static void Main(string[] args)
+                        {
+                            var q = from a in args
+                                    where a.Length > 21
+                                    select a;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1185,37 +1185,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
             // Test intentionally uses 'using' instead of 'using static'
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using {|CS0138:SomeNS.Goo|};|}|]
+                    [|{|IDE0005:using {|CS0138:SomeNS.Goo|};|}|]
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
+                        static void Main()
+                        {
+                        }
                     }
-                }
 
-                namespace SomeNS
-                {
-                    static class Goo
+                    namespace SomeNS
                     {
+                        static class Goo
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
+                        static void Main()
+                        {
+                        }
                     }
-                }
 
-                namespace SomeNS
-                {
-                    static class Goo
+                    namespace SomeNS
                     {
+                        static class Goo
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1224,37 +1224,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using static SomeNS.Goo;|}|]
+                    [|{|IDE0005:using static SomeNS.Goo;|}|]
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
+                        static void Main()
+                        {
+                        }
                     }
-                }
 
-                namespace SomeNS
-                {
-                    static class Goo
+                    namespace SomeNS
                     {
+                        static class Goo
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
+                        static void Main()
+                        {
+                        }
                     }
-                }
 
-                namespace SomeNS
-                {
-                    static class Goo
+                    namespace SomeNS
                     {
+                        static class Goo
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1263,23 +1263,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                {|IDE0005:[|using System.Collections.Generic;|] // comment|}
+                    {|IDE0005:[|using System.Collections.Generic;|] // comment|}
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
+                        static void Main(string[] args)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1288,17 +1288,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using {|CS0246:gibberish|};|}|]
+                    [|{|IDE0005:using {|CS0246:gibberish|};|}|]
 
-                public static class Program
-                {
-                }
-                """,
+                    public static class Program
+                    {
+                    }
+                    """,
                 """
-                public static class Program
-                {
-                }
-                """
+                    public static class Program
+                    {
+                    }
+                    """
             );
         }
 
@@ -1332,17 +1332,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using {|CS0246:gibberish|};|}|]
+                    [|{|IDE0005:using {|CS0246:gibberish|};|}|]
 
-                public static class Program
-                {
-                }
-                """,
+                    public static class Program
+                    {
+                    }
+                    """,
                 """
-                public static class Program
-                {
-                }
-                """
+                    public static class Program
+                    {
+                    }
+                    """
             );
         }
 
@@ -1351,37 +1351,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|{|IDE0005:using System;
-                using System.Collections.Generic;
-                using System.Linq;|}|]
-
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-
-                    }
-                }
-                """
-            );
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542016")]
-        public async Task TestRemoveLeadingNewLines2()
-        {
-            await VerifyCS.VerifyCodeFixAsync(
-                """
-                namespace N
-                {
                     [|{|IDE0005:using System;
                     using System.Collections.Generic;
                     using System.Linq;|}|]
@@ -1393,11 +1362,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
 
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                namespace N
-                {
                     class Program
                     {
                         static void Main(string[] args)
@@ -1405,8 +1371,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
 
                         }
                     }
-                }
+                    """
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542016")]
+        public async Task TestRemoveLeadingNewLines2()
+        {
+            await VerifyCS.VerifyCodeFixAsync(
                 """
+                    namespace N
+                    {
+                        [|{|IDE0005:using System;
+                        using System.Collections.Generic;
+                        using System.Linq;|}|]
+
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+
+                            }
+                        }
+                    }
+                    """,
+                """
+                    namespace N
+                    {
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2102,29 +2102,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [|using System;
-                {|IDE0005:using System.Linq;
-                using System.Threading.Tasks;|}|]
+                    [|using System;
+                    {|IDE0005:using System.Linq;
+                    using System.Threading.Tasks;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2133,14 +2133,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                #if true
-                [|{|IDE0005:using System;|}|]
-                #endif
-                """,
+                    #if true
+                    [|{|IDE0005:using System;|}|]
+                    #endif
+                    """,
                 """
-                #if true
-                #endif
-                """
+                    #if true
+                    #endif
+                    """
             );
         }
 
@@ -2171,13 +2171,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
                 0 => code,
                 _
                     => """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                    }
-                }
-                """,
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+                            }
+                        }
+                        """,
             };
 
             var markupMode = warningLevel switch
@@ -2214,32 +2214,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
             await new VerifyCS.Test
             {
                 TestCode = """
-                namespace N;
+                    namespace N;
 
-                [|{|IDE0005:using System;|}
-                using System.Collections.Generic;|]
+                    [|{|IDE0005:using System;|}
+                    using System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                namespace N;
+                    namespace N;
 
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -2250,29 +2250,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
             await new VerifyCS.Test
             {
                 TestCode = """
-                [|{|IDE0005:using System;|}
+                    [|{|IDE0005:using System;|}
 
-                using System.Collections.Generic;|]
+                    using System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """
+                    """
             }.RunAsync();
         }
 
@@ -2282,30 +2282,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
             await new VerifyCS.Test
             {
                 TestCode = """
-                [|{|IDE0005:using System;
-                using System.Threading.Tasks;|}
+                    [|{|IDE0005:using System;
+                    using System.Threading.Tasks;|}
 
-                using System.Collections.Generic;|]
+                    using System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """
+                    """
             }.RunAsync();
         }
 
@@ -2315,34 +2315,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
             await new VerifyCS.Test
             {
                 TestCode = """
-                [|{|IDE0005:using System;|}
-                using System.Threading.Tasks;
+                    [|{|IDE0005:using System;|}
+                    using System.Threading.Tasks;
 
-                using System.Collections.Generic;|]
+                    using System.Collections.Generic;|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
-                        Task task = null;
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                            Task task = null;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
-                        Task task = null;
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                            Task task = null;
+                        }
                     }
-                }
-                """
+                    """
             }.RunAsync();
         }
 
@@ -2352,30 +2352,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
             await new VerifyCS.Test
             {
                 TestCode = """
-                [|using System.Collections.Generic;
+                    [|using System.Collections.Generic;
 
-                {|IDE0005:using System;
-                using System.Threading.Tasks;|}|]
+                    {|IDE0005:using System;
+                    using System.Threading.Tasks;|}|]
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var argList = new List<string>(args);
+                        static void Main(string[] args)
+                        {
+                            var argList = new List<string>(args);
+                        }
                     }
-                }
-                """
+                    """
             }.RunAsync();
         }
     }

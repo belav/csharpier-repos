@@ -65,27 +65,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        new DateTime()[||]
+                        void M()
+                        {
+                            new DateTime()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            DateTime {|Rename:dateTime|} = new DateTime();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -94,29 +94,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        new DateTime()[||]
+                        void M()
+                        {
+                            new DateTime()[||]
 
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            DateTime {|Rename:dateTime|} = new DateTime();
 
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -125,27 +125,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|new DateTime()|]
+                        void M()
+                        {
+                            [|new DateTime()|]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            DateTime {|Rename:dateTime|} = new DateTime();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -154,27 +154,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        new TimeSpan() +[||] new TimeSpan();
+                        void M()
+                        {
+                            new TimeSpan() +[||] new TimeSpan();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        TimeSpan {|Rename:timeSpan|} = new TimeSpan() + new TimeSpan();
+                        void M()
+                        {
+                            TimeSpan {|Rename:timeSpan|} = new TimeSpan() + new TimeSpan();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -183,27 +183,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        new DateTime();[||]
+                        void M()
+                        {
+                            new DateTime();[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            DateTime {|Rename:dateTime|} = new DateTime();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -212,29 +212,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        new DateTime();[||]
+                        void M()
+                        {
+                            new DateTime();[||]
 
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            DateTime {|Rename:dateTime|} = new DateTime();
 
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -243,27 +243,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|new DateTime()|];
+                        void M()
+                        {
+                            [|new DateTime()|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            DateTime {|Rename:dateTime|} = new DateTime();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -272,27 +272,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|new DateTime();|]
+                        void M()
+                        {
+                            [|new DateTime();|]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            DateTime {|Rename:dateTime|} = new DateTime();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -301,17 +301,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int a = 42;
-                        [||]a = 42;
+                        void M()
+                        {
+                            int a = 42;
+                            [||]a = 42;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -320,27 +320,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        new DateTime(); [||]
+                        void M()
+                        {
+                            new DateTime(); [||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        DateTime {|Rename:dateTime|} = new DateTime(); 
+                        void M()
+                        {
+                            DateTime {|Rename:dateTime|} = new DateTime();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -349,29 +349,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // Comment
-                        new DateTime();[||]
+                        void M()
+                        {
+                            // Comment
+                            new DateTime();[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // Comment
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            // Comment
+                            DateTime {|Rename:dateTime|} = new DateTime();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -380,27 +380,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        new DateTime();[||]
+                        void M()
+                        {
+                            new DateTime();[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var {|Rename:dateTime|} = new DateTime();
+                        void M()
+                        {
+                            var {|Rename:dateTime|} = new DateTime();
+                        }
                     }
-                }
-                """,
+                    """,
                 options: new OptionsCollection(GetLanguage())
                 {
                     {
@@ -420,16 +420,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Console.WriteLine();[||]
+                        void M()
+                        {
+                            Console.WriteLine();[||]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -438,16 +438,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = new DateTime()[||]
+                        void M()
+                        {
+                            var v = new DateTime()[||]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -456,27 +456,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        1 + 1[||]
+                        void M()
+                        {
+                            1 + 1[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int {|Rename:v|} = 1 + 1;
+                        void M()
+                        {
+                            int {|Rename:v|} = 1 + 1;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -485,31 +485,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string someString, int someInt) = X();
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            (string someString, int someInt) = X();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -518,31 +518,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string someString, int someInt) {|Rename:value|} = X();
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            (string someString, int someInt) {|Rename:value|} = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -552,31 +552,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        var (someString, someInt) = X();
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            var (someString, someInt) = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeEverywhere()
             );
         }
@@ -586,31 +586,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X();[||]
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            X();[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string someString, int someInt) = X();
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            (string someString, int someInt) = X();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -619,31 +619,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X();[||]
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            X();[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string someString, int someInt) {|Rename:value|} = X();
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            (string someString, int someInt) {|Rename:value|} = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -653,31 +653,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X();[||]
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            X();[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        var (someString, someInt) = X();
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            var (someString, someInt) = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeEverywhere()
             );
         }
@@ -687,35 +687,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string someString, int someInt) X() => default;
 
-                        string someString;
+                        void M()
+                        {
+                            X()[||]
+
+                            string someString;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string someString1, int someInt) = X();
+                        (string someString, int someInt) X() => default;
 
-                        string someString;
+                        void M()
+                        {
+                            (string someString1, int someInt) = X();
+
+                            string someString;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -724,35 +724,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string someString, int someInt) X() => default;
 
-                        string someString;
+                        void M()
+                        {
+                            X()[||]
+
+                            string someString;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string someString, int someInt) {|Rename:value|} = X();
+                        (string someString, int someInt) X() => default;
 
-                        string someString;
+                        void M()
+                        {
+                            (string someString, int someInt) {|Rename:value|} = X();
+
+                            string someString;
+                        }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -762,35 +762,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string someString, int someInt) X() => default;
 
-                        string someString;
+                        void M()
+                        {
+                            X()[||]
+
+                            string someString;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        var (someString1, someInt) = X();
+                        (string someString, int someInt) X() => default;
 
-                        string someString;
+                        void M()
+                        {
+                            var (someString1, someInt) = X();
+
+                            string someString;
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeEverywhere()
             );
         }
@@ -800,31 +800,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    ValueTuple<string, int> X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        ValueTuple<string, int> X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    ValueTuple<string, int> X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string item1, int item2) = X();
+                        ValueTuple<string, int> X() => default;
+
+                        void M()
+                        {
+                            (string item1, int item2) = X();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -833,31 +833,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    ValueTuple<string, int> X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        ValueTuple<string, int> X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    ValueTuple<string, int> X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string, int) {|Rename:value|} = X();
+                        ValueTuple<string, int> X() => default;
+
+                        void M()
+                        {
+                            (string, int) {|Rename:value|} = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -867,31 +867,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    ValueTuple<string, int> X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        ValueTuple<string, int> X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    ValueTuple<string, int> X() => default;
-
-                    void M()
+                    class C
                     {
-                        var (item1, item2) = X();
+                        ValueTuple<string, int> X() => default;
+
+                        void M()
+                        {
+                            var (item1, item2) = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeEverywhere()
             );
         }
@@ -901,31 +901,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string, int) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string, int) X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string, int) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string item1, int item2) = X();
+                        (string, int) X() => default;
+
+                        void M()
+                        {
+                            (string item1, int item2) = X();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -934,31 +934,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string, int) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string, int) X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string, int) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string, int) {|Rename:value|} = X();
+                        (string, int) X() => default;
+
+                        void M()
+                        {
+                            (string, int) {|Rename:value|} = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -968,31 +968,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string, int) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string, int) X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string, int) X() => default;
-
-                    void M()
+                    class C
                     {
-                        var (item1, item2) = X();
+                        (string, int) X() => default;
+
+                        void M()
+                        {
+                            var (item1, item2) = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeEverywhere()
             );
         }
@@ -1002,31 +1002,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        var (someString, someInt) = X();
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            var (someString, someInt) = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeForIntrinsics()
             );
         }
@@ -1036,33 +1036,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, C c) X() => default;
-
-                    void M()
+                    class C
                     {
-                        // don't use `var (...)` here as not all the individual types will be 'var'
-                        X()[||]
+                        (string someString, C c) X() => default;
+
+                        void M()
+                        {
+                            // don't use `var (...)` here as not all the individual types will be 'var'
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, C c) X() => default;
-
-                    void M()
+                    class C
                     {
-                        // don't use `var (...)` here as not all the individual types will be 'var'
-                        (var someString, C c) = X();
+                        (string someString, C c) X() => default;
+
+                        void M()
+                        {
+                            // don't use `var (...)` here as not all the individual types will be 'var'
+                            (var someString, C c) = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeForIntrinsics()
             );
         }
@@ -1072,31 +1072,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        X()[||]
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            X()[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (string someString, int someInt) X() => default;
-
-                    void M()
+                    class C
                     {
-                        (string someString, int someInt) = X();
+                        (string someString, int someInt) X() => default;
+
+                        void M()
+                        {
+                            (string someString, int someInt) = X();
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeForApparent()
             );
         }
@@ -1106,29 +1106,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // literal is not apparent (it is builtin). default(...) is both apparent
-                        (someString: "", someC: default(C))[||]
+                        void M()
+                        {
+                            // literal is not apparent (it is builtin). default(...) is both apparent
+                            (someString: "", someC: default(C))[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // literal is not apparent (it is builtin). default(...) is both apparent
-                        (string someString, C someC) = (someString: "", someC: default(C));
+                        void M()
+                        {
+                            // literal is not apparent (it is builtin). default(...) is both apparent
+                            (string someString, C someC) = (someString: "", someC: default(C));
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeForApparent()
             );
         }
@@ -1138,29 +1138,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // literal is is builtin, as is default(...)
-                        (someString: "", someC: default(C))[||]
+                        void M()
+                        {
+                            // literal is is builtin, as is default(...)
+                            (someString: "", someC: default(C))[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // literal is is builtin, as is default(...)
-                        var (someString, someC) = (someString: "", someC: default(C));
+                        void M()
+                        {
+                            // literal is is builtin, as is default(...)
+                            var (someString, someC) = (someString: "", someC: default(C));
+                        }
                     }
-                }
-                """,
+                    """,
                 options: ImplicitTypeForApparentAndBuiltIn()
             );
         }

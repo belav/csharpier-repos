@@ -26,23 +26,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS0127:return|} 1;
+                        void M()
+                        {
+                            {|CS0127:return|} 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        return 1;
+                        int M()
+                        {
+                            return 1;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -51,24 +51,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    /*A*/ void /*B*/ M()
+                    class C
                     {
-                        {|CS0127:return|} 1;
+                        /*A*/ void /*B*/ M()
+                        {
+                            {|CS0127:return|} 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    /*A*/
-                    int /*B*/ M()
+                    class C
                     {
-                        return 1;
+                        /*A*/
+                        int /*B*/ M()
+                        {
+                            return 1;
+                        }
                     }
-                }
-                """
+                    """
             );
             // Note: the formatting change is introduced by Formatter.FormatAsync
         }
@@ -78,23 +78,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS0127:return|} "";
+                        void M()
+                        {
+                            {|CS0127:return|} "";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return "";
+                        string M()
+                        {
+                            return "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -103,23 +103,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS0127:return|} null;
+                        void M()
+                        {
+                            {|CS0127:return|} null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    object M()
+                    class C
                     {
-                        return null;
+                        object M()
+                        {
+                            return null;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -128,23 +128,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS0127:return|} (null, string.Empty);
+                        void M()
+                        {
+                            {|CS0127:return|} (null, string.Empty);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    (object, string) M()
+                    class C
                     {
-                        return (null, string.Empty);
+                        (object, string) M()
+                        {
+                            return (null, string.Empty);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -153,23 +153,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS0127:return|} ((5, null), string.Empty);
+                        void M()
+                        {
+                            {|CS0127:return|} ((5, null), string.Empty);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    ((int, object), string) M()
+                    class C
                     {
-                        return ((5, null), string.Empty);
+                        ((int, object), string) M()
+                        {
+                            return ((5, null), string.Empty);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -178,23 +178,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    async void M()
+                    class C
                     {
-                        {|CS0127:return|} (null, string.Empty);
+                        async void M()
+                        {
+                            {|CS0127:return|} (null, string.Empty);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    async System.Threading.Tasks.Task<(object, string)> M()
+                    class C
                     {
-                        return (null, string.Empty);
+                        async System.Threading.Tasks.Task<(object, string)> M()
+                        {
+                            return (null, string.Empty);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -203,23 +203,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    async void M()
+                    class C
                     {
-                        {|CS0127:return|} ((5, null), string.Empty);
+                        async void M()
+                        {
+                            {|CS0127:return|} ((5, null), string.Empty);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    async System.Threading.Tasks.Task<((int, object), string)> M()
+                    class C
                     {
-                        return ((5, null), string.Empty);
+                        async System.Threading.Tasks.Task<((int, object), string)> M()
+                        {
+                            return ((5, null), string.Empty);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -255,23 +255,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS0127:return|} new C();
+                        void M()
+                        {
+                            {|CS0127:return|} new C();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    C M()
+                    class C
                     {
-                        return new C();
+                        C M()
+                        {
+                            return new C();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -280,23 +280,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    async void M()
+                    class C
                     {
-                        {|CS0127:return|} "";
+                        async void M()
+                        {
+                            {|CS0127:return|} "";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    async System.Threading.Tasks.Task<string> M()
+                    class C
                     {
-                        return "";
+                        async System.Threading.Tasks.Task<string> M()
+                        {
+                            return "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -305,27 +305,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    async void M()
+                    class C
                     {
-                        {|CS0127:return|} "";
+                        async void M()
+                        {
+                            {|CS0127:return|} "";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    async Task<string> M()
+                    class C
                     {
-                        return "";
+                        async Task<string> M()
+                        {
+                            return "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -334,23 +334,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    async System.Threading.Tasks.Task M()
+                    class C
                     {
-                        {|CS1997:return|} "";
+                        async System.Threading.Tasks.Task M()
+                        {
+                            {|CS1997:return|} "";
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    async System.Threading.Tasks.Task<string> M()
+                    class C
                     {
-                        return "";
+                        async System.Threading.Tasks.Task<string> M()
+                        {
+                            return "";
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -359,29 +359,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        void local()
+                        void M()
                         {
-                            {|CS0127:return|} "";
+                            void local()
+                            {
+                                {|CS0127:return|} "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        string local()
+                        void M()
                         {
-                            return "";
+                            string local()
+                            {
+                                return "";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -390,29 +390,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        async void local()
+                        void M()
                         {
-                            {|CS0127:return|} "";
+                            async void local()
+                            {
+                                {|CS0127:return|} "";
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        async System.Threading.Tasks.Task<string> local()
+                        void M()
                         {
-                            return "";
+                            async System.Threading.Tasks.Task<string> local()
+                            {
+                                return "";
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -421,17 +421,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    void M() => {|CS0201:1|};
-                }
-                """,
+                    class C
+                    {
+                        void M() => {|CS0201:1|};
+                    }
+                    """,
                 """
-                class C
-                {
-                    int M() => 1;
-                }
-                """
+                    class C
+                    {
+                        int M() => 1;
+                    }
+                    """
             );
         }
 
@@ -457,23 +457,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    public void Method()
+                    class C
                     {
-                        {|CS0127:return|} new { A = 0, B = 1 };
+                        public void Method()
+                        {
+                            {|CS0127:return|} new { A = 0, B = 1 };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public object Method()
+                    class C
                     {
-                        return new { A = 0, B = 1 };
+                        public object Method()
+                        {
+                            return new { A = 0, B = 1 };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -482,23 +482,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    public void Method()
+                    class C
                     {
-                        {|CS0127:return|} new[] { new { A = 0, B = 1 } };
+                        public void Method()
+                        {
+                            {|CS0127:return|} new[] { new { A = 0, B = 1 } };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    public object Method()
+                    class C
                     {
-                        return new[] { new { A = 0, B = 1 } };
+                        public object Method()
+                        {
+                            return new[] { new { A = 0, B = 1 } };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -509,7 +509,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
             {
                 TestCode = """
                     using System.Threading.Tasks;
-                
+
                     class C
                     {
                         async ValueTask M()
@@ -520,7 +520,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
                     """,
                 FixedCode = """
                     using System.Threading.Tasks;
-                
+
                     class C
                     {
                         async ValueTask<string> M()
@@ -538,7 +538,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
         {
             var markup = """
                 using System.Runtime.CompilerServices;
-                
+
                 [AsyncMethodBuilder(typeof(C))]
                 class C
                 {

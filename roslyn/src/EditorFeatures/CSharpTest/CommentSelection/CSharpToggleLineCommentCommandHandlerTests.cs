@@ -989,27 +989,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
             var expected = new string[]
             {
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|////var i = 1;
+                        void M()
+                        {
+                            [|////var i = 1;
 
-                        //var j = 2;|]
+                            //var j = 2;|]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|//var i = 1;
+                        void M()
+                        {
+                            [|//var i = 1;
 
-                        var j = 2;|]
+                            var j = 2;|]
+                        }
                     }
-                }
-                """
+                    """
             };
 
             ToggleCommentMultiple(markup, expected);
@@ -1032,27 +1032,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
             var expected = new string[]
             {
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|////var i = |]1;
-                [||]
-                        [|//var j = 2;|]
+                        void M()
+                        {
+                            [|////var i = |]1;
+                    [||]
+                            [|//var j = 2;|]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|//var i = |]1;
-                [||]
-                        [|var j = 2;|]
+                        void M()
+                        {
+                            [|//var i = |]1;
+                    [||]
+                            [|var j = 2;|]
+                        }
                     }
-                }
-                """
+                    """
             };
 
             ToggleCommentMultiple(markup, expected);

@@ -37,31 +37,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    void IGoo.[||]Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        void IGoo.[||]Goo1() { }
 
-                    void IGoo.Goo2() { }
+                        void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
-                }
-                """,
+                        void IBar.Bar() { }
+                    }
+                    """,
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    public void Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        public void Goo1() { }
 
-                    void IGoo.Goo2() { }
+                        void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
-                }
-                """,
+                        void IBar.Bar() { }
+                    }
+                    """,
                 index: SingleMember
             );
         }
@@ -71,31 +71,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    void IGoo.[||]Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        void IGoo.[||]Goo1() { }
 
-                    void IGoo.Goo2() { }
+                        void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
-                }
-                """,
+                        void IBar.Bar() { }
+                    }
+                    """,
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    public void Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        public void Goo1() { }
 
-                    public void Goo2() { }
+                        public void Goo2() { }
 
-                    void IBar.Bar() { }
-                }
-                """,
+                        void IBar.Bar() { }
+                    }
+                    """,
                 index: SameInterface
             );
         }
@@ -105,31 +105,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    void IGoo.[||]Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        void IGoo.[||]Goo1() { }
 
-                    void IGoo.Goo2() { }
+                        void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
-                }
-                """,
+                        void IBar.Bar() { }
+                    }
+                    """,
                 """
-                interface IGoo { void Goo1(); void Goo2(); }
-                interface IBar { void Bar(); }
+                    interface IGoo { void Goo1(); void Goo2(); }
+                    interface IBar { void Bar(); }
 
-                class C : IGoo, IBar
-                {
-                    public void Goo1() { }
+                    class C : IGoo, IBar
+                    {
+                        public void Goo1() { }
 
-                    public void Goo2() { }
+                        public void Goo2() { }
 
-                    public void Bar() { }
-                }
-                """,
+                        public void Bar() { }
+                    }
+                    """,
                 index: AllInterfaces
             );
         }
@@ -139,21 +139,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { int Goo1 { get; } }
+                    interface IGoo { int Goo1 { get; } }
 
-                class C : IGoo
-                {
-                    int IGoo.[||]Goo1 { get { } }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        int IGoo.[||]Goo1 { get { } }
+                    }
+                    """,
                 """
-                interface IGoo { int Goo1 { get; } }
+                    interface IGoo { int Goo1 { get; } }
 
-                class C : IGoo
-                {
-                    public int Goo1 { get { } }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        public int Goo1 { get { } }
+                    }
+                    """,
                 index: SingleMember
             );
         }
@@ -163,21 +163,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { event Action E; }
+                    interface IGoo { event Action E; }
 
-                class C : IGoo
-                {
-                    event Action IGoo.[||]E { add { } remove { } }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        event Action IGoo.[||]E { add { } remove { } }
+                    }
+                    """,
                 """
-                interface IGoo { event Action E; }
+                    interface IGoo { event Action E; }
 
-                class C : IGoo
-                {
-                    public event Action E { add { } remove { } }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        public event Action E { add { } remove { } }
+                    }
+                    """,
                 index: SingleMember
             );
         }
@@ -187,13 +187,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestMissingAsync(
                 """
-                interface IGoo { void Goo1(); }
+                    interface IGoo { void Goo1(); }
 
-                class C : IGoo
-                {
-                    public void [||]Goo1() { }
-                }
-                """
+                    class C : IGoo
+                    {
+                        public void [||]Goo1() { }
+                    }
+                    """
             );
         }
 
@@ -202,11 +202,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestMissingAsync(
                 """
-                class C : IGoo
-                {
-                    void IGoo.[||]Goo1() { }
-                }
-                """
+                    class C : IGoo
+                    {
+                        void IGoo.[||]Goo1() { }
+                    }
+                    """
             );
         }
 
@@ -217,25 +217,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
             // don't blow up here.
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { void Goo1(); }
+                    interface IGoo { void Goo1(); }
 
-                class C : IGoo
-                {
-                    void IGoo.[||]Goo1() { }
+                    class C : IGoo
+                    {
+                        void IGoo.[||]Goo1() { }
 
-                    private void Goo1() { }
-                }
-                """,
+                        private void Goo1() { }
+                    }
+                    """,
                 """
-                interface IGoo { void Goo1(); }
+                    interface IGoo { void Goo1(); }
 
-                class C : IGoo
-                {
-                    public void Goo1() { }
+                    class C : IGoo
+                    {
+                        public void Goo1() { }
 
-                    private void Goo1() { }
-                }
-                """,
+                        private void Goo1() { }
+                    }
+                    """,
                 index: SingleMember
             );
         }
@@ -245,17 +245,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestMissingAsync(
                 """
-                using System;
-                using System.Collections;
+                    using System;
+                    using System.Collections;
 
-                class C
-                {
-                    IEnumerator IEnumerable.[||]GetEnumerator()
+                    class C
                     {
-                        throw new NotImplementedException();
+                        IEnumerator IEnumerable.[||]GetEnumerator()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -264,21 +264,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                interface IGoo { void Goo1(); }
+                    interface IGoo { void Goo1(); }
 
-                class C : IGoo
-                {
-                    readonly void IGoo.[||]Goo1() { }
-                }
-                """,
+                    class C : IGoo
+                    {
+                        readonly void IGoo.[||]Goo1() { }
+                    }
+                    """,
                 """
-                interface IGoo { void Goo1(); }
+                    interface IGoo { void Goo1(); }
 
-                class C : IGoo
-                {
-                    public readonly void Goo1() { }
-                }
-                """
+                    class C : IGoo
+                    {
+                        public readonly void Goo1() { }
+                    }
+                    """
             );
         }
     }

@@ -1513,9 +1513,9 @@ public class A3 : System.Attribute { }
             var attributes =
                 ReloadableAttributeSrc
                 + """
-                class A : System.Attribute { }
-                class B : System.Attribute { }
-                """;
+                    class A : System.Attribute { }
+                    class B : System.Attribute { }
+                    """;
 
             var srcA1 = attributes + "[CreateNewOnMetadataUpdate]partial class C { }";
             var srcB1 = "partial class C { }";
@@ -23549,7 +23549,7 @@ class C
                 {
                     int P { get; }
                 }
-                
+
                 interface J
                 {
                     int P { get; }
@@ -25922,7 +25922,7 @@ class C(int A, int B)
                 {
                     int this[int a] { get; }
                 }
-                
+
                 interface J
                 {
                     int this[int a] { get; }
@@ -25950,7 +25950,7 @@ class C(int A, int B)
                 {
                     int this[int a] { get; }
                 }
-                
+
                 interface J
                 {
                     int this[int a] { get; }
@@ -25978,7 +25978,7 @@ class C(int A, int B)
                 {
                     int this[int a] { get; }
                 }
-                
+
                 interface J
                 {
                     int this[int a] { get; }
@@ -26013,7 +26013,7 @@ class C(int A, int B)
                 {
                     int this[int a] { get; }
                 }
-                
+
                 interface J
                 {
                     int this[int a] { get; }

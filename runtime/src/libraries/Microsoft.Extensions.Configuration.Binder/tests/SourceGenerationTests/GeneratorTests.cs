@@ -49,16 +49,16 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 using System;
                 using System.Collections.Generic;
                 using Microsoft.Extensions.Configuration;
-                
+
                 public class Program
                 {
-                	public static void Main()
-                	{
-                		ConfigurationBuilder configurationBuilder = new();
-                		IConfigurationRoot config = configurationBuilder.Build();
+                    public static void Main()
+                    {
+                        ConfigurationBuilder configurationBuilder = new();
+                        IConfigurationRoot config = configurationBuilder.Build();
 
                         int myInt = 1
-                		config.Bind(myInt);
+                        config.Bind(myInt);
                         int? myNInt = 2;
                         config.Bind(myNInt)
 
@@ -74,7 +74,7 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
 
                         Memory<int> memory = new(new int[] {1, 2, 3});
                         config.Bind(memory);
-                	}
+                    }
 
                     public struct MyStruct { }
                     public record struct MyRecordStruct { }
@@ -143,16 +143,16 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 using Microsoft.AspNetCore.Builder;
                 using Microsoft.Extensions.Configuration;
                 using Microsoft.Extensions.DependencyInjection;
-                
+
                 public class Program
                 {
-                	public static void Main()
-                	{
-                		ConfigurationBuilder configurationBuilder = new();
-                		IConfiguration config = configurationBuilder.Build();
-                
-                		PerformGenericBinderCalls<MyClass>(config);
-                	}
+                    public static void Main()
+                    {
+                        ConfigurationBuilder configurationBuilder = new();
+                        IConfiguration config = configurationBuilder.Build();
+
+                        PerformGenericBinderCalls<MyClass>(config);
+                    }
 
                     public static void PerformGenericBinderCalls<T>(IConfiguration config) where T : class
                     {
@@ -162,7 +162,7 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         config.GetValue<T>("key", default(T));
 
                         IConfigurationSection section = config.GetSection("MySection");
-                		ServiceCollection services = new();
+                        ServiceCollection services = new();
                         services.Configure<T>(section);
                     }
 
@@ -257,13 +257,13 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 using Microsoft.AspNetCore.Builder;
                 using Microsoft.Extensions.Configuration;
                 using Microsoft.Extensions.DependencyInjection;
-                
+
                 public class Program
                 {
-                	public static void Main()
-                	{
-                		ConfigurationBuilder configurationBuilder = new();
-                		IConfiguration configuration = configurationBuilder.Build();
+                    public static void Main()
+                    {
+                        ConfigurationBuilder configurationBuilder = new();
+                        IConfiguration configuration = configurationBuilder.Build();
 
                         var obj = new TypeGraphWithUnsupportedMember();
                         configuration.Bind(obj);
@@ -281,7 +281,7 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         configuration.Get(typeof(AnotherGraphWithUnsupportedMembers), _ => { });
                         configuration.Bind(obj4);
                         configuration.Get<Encoding>();
-                	}
+                    }
 
                     public class TypeGraphWithUnsupportedMember
                     {

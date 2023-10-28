@@ -37,28 +37,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
+                        void M()
                         {
+                            [|int|] i;
+                            if (int.TryParse(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (int.TryParse(v, out int i))
+                        void M()
                         {
+                            if (int.TryParse(v, out int i))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -67,28 +67,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (Goo(int.TryParse(v, out i)))
+                        void M()
                         {
+                            [|int|] i;
+                            if (Goo(int.TryParse(v, out i)))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (Goo(int.TryParse(v, out int i)))
+                        void M()
                         {
+                            if (Goo(int.TryParse(v, out int i)))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -97,32 +97,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C1
-                {
-                    public C1(int v, out int i) {}
-
-                    void M(int v)
+                    class C1
                     {
-                        [|int|] i;
-                        if (new C1(v, out i))
+                        public C1(int v, out int i) {}
+
+                        void M(int v)
                         {
+                            [|int|] i;
+                            if (new C1(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C1
-                {
-                    public C1(int v, out int i) {}
-
-                    void M(int v)
+                    class C1
                     {
-                        if (new C1(v, out int i))
+                        public C1(int v, out int i) {}
+
+                        void M(int v)
                         {
+                            if (new C1(v, out int i))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -131,17 +131,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (this[out i])
+                        void M()
                         {
+                            [|int|] i;
+                            if (this[out i])
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -150,28 +150,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (int.TryParse(v, out i, out i))
+                        void M()
                         {
+                            [|int|] i;
+                            if (int.TryParse(v, out i, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (int.TryParse(v, out int i, out i))
+                        void M()
                         {
+                            if (int.TryParse(v, out int i, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -180,36 +180,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
+                        void M()
                         {
-                        }
+                            [|int|] i;
+                            if (int.TryParse(v, out i))
+                            {
+                            }
 
-                        if (int.TryParse(v, out i))
-                        {
+                            if (int.TryParse(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (int.TryParse(v, out int i))
+                        void M()
                         {
-                        }
+                            if (int.TryParse(v, out int i))
+                            {
+                            }
 
-                        if (int.TryParse(v, out i))
-                        {
+                            if (int.TryParse(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -218,17 +218,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
+                        void M()
                         {
+                            [|int|] i;
+                            if (int.TryParse(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     parseOptions: CSharpParseOptions
                         .Default
@@ -242,28 +242,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M(string v)
+                    class C
                     {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
+                        void M(string v)
                         {
+                            [|int|] i;
+                            if (int.TryParse(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string v)
+                    class C
                     {
-                        if (int.TryParse(v, out var i))
+                        void M(string v)
                         {
+                            if (int.TryParse(v, out var i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(options: new UseImplicitTypeTests().ImplicitTypeEverywhere())
             );
         }
@@ -273,28 +273,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M(string v)
+                    class C
                     {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
+                        void M(string v)
                         {
+                            [|int|] i;
+                            if (int.TryParse(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(string v)
+                    class C
                     {
-                        if (int.TryParse(v, out int i))
+                        void M(string v)
                         {
+                            if (int.TryParse(v, out int i))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     options: new UseImplicitTypeTests().ImplicitTypeButKeepIntrinsics()
                 )
@@ -306,32 +306,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
+                        void M()
                         {
-                        }
+                            [|int|] i;
+                            if (int.TryParse(v, out i))
+                            {
+                            }
 
-                        i = 0;
+                            i = 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (int.TryParse(v, out int i))
+                        void M()
                         {
-                        }
+                            if (int.TryParse(v, out int i))
+                            {
+                            }
 
-                        i = 0;
+                            i = 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -340,18 +340,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        i = 0;
-                        if (int.TryParse(v, out i))
+                        void M()
                         {
+                            [|int|] i;
+                            i = 0;
+                            if (int.TryParse(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -360,22 +360,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i = 0;
-                        M1(i);
-                        if (int.TryParse(v, out i))
+                        void M()
+                        {
+                            [|int|] i = 0;
+                            M1(i);
+                            if (int.TryParse(v, out i))
+                            {
+                            }
+                        }
+
+                        void M1(int i)
                         {
                         }
                     }
-
-                    void M1(int i)
-                    {
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -384,21 +384,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i = M1();
-                        if (int.TryParse(v, out i))
+                        void M()
+                        {
+                            [|int|] i = M1();
+                            if (int.TryParse(v, out i))
+                            {
+                            }
+                        }
+
+                        int M1()
                         {
                         }
                     }
-
-                    int M1()
-                    {
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -407,21 +407,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i = 0;
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            [|int|] i = 0;
                             {
-                            }
+                                if (int.TryParse(v, out i))
+                                {
+                                }
 
-                            i = 1;
+                                i = 1;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -430,21 +430,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i = 0;
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            [|int|] i = 0;
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
-                        }
 
-                        i = 1;
+                            i = 1;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -453,20 +453,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i = 0;
+                        void M()
                         {
-                            i = 1;
-                            if (int.TryParse(v, out i))
+                            [|int|] i = 0;
                             {
+                                i = 1;
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -475,17 +475,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (int.TryParse(v, i))
+                        void M()
                         {
+                            [|int|] i;
+                            if (int.TryParse(v, i))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -494,18 +494,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    [|int|] i;
-
-                    void M()
+                    class C
                     {
-                        if (int.TryParse(v, out this.i))
+                        [|int|] i;
+
+                        void M()
                         {
+                            if (int.TryParse(v, out this.i))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -514,18 +514,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    [|int|] i;
-
-                    void M()
+                    class C
                     {
-                        if (int.TryParse(v, out i))
+                        [|int|] i;
+
+                        void M()
                         {
+                            if (int.TryParse(v, out i))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -534,19 +534,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        foreach ([|int|] i in e)
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            foreach ([|int|] i in e)
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -555,20 +555,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        while (true)
-                            if (int.TryParse(v, out i))
-                            {
-                            }
+                        void M()
+                        {
+                            [|int|] i;
+                            while (true)
+                                if (int.TryParse(v, out i))
+                                {
+                                }
 
-                        i = 1;
+                            i = 1;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -577,32 +577,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        while (true)
-                            if (int.TryParse(v, out i))
-                            {
-                                i = 1;
-                            }
+                        void M()
+                        {
+                            [|int|] i;
+                            while (true)
+                                if (int.TryParse(v, out i))
+                                {
+                                    i = 1;
+                                }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        while (true)
-                            if (int.TryParse(v, out int i))
-                            {
-                                i = 1;
-                            }
+                        void M()
+                        {
+                            while (true)
+                                if (int.TryParse(v, out int i))
+                                {
+                                    i = 1;
+                                }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -611,34 +611,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        while (true)
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            [|int|] i;
+                            while (true)
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        while (true)
+                        void M()
                         {
-                            if (int.TryParse(v, out int i))
+                            while (true)
                             {
+                                if (int.TryParse(v, out int i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -647,44 +647,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (M2(out i))
+                        void M()
+                        {
+                            [|int|] i;
+                            if (M2(out i))
+                            {
+                            }
+                        }
+
+                        void M2(out int i)
+                        {
+                        }
+
+                        void M2(out string s)
                         {
                         }
                     }
-
-                    void M2(out int i)
-                    {
-                    }
-
-                    void M2(out string s)
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (M2(out int i))
+                        void M()
+                        {
+                            if (M2(out int i))
+                            {
+                            }
+                        }
+
+                        void M2(out int i)
+                        {
+                        }
+
+                        void M2(out string s)
                         {
                         }
                     }
-
-                    void M2(out int i)
-                    {
-                    }
-
-                    void M2(out string s)
-                    {
-                    }
-                }
-                """,
+                    """,
                 new TestParameters(options: new UseImplicitTypeTests().ImplicitTypeEverywhere())
             );
         }
@@ -694,44 +694,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|var|] i = 0;
-                        if (M2(out i))
+                        void M()
+                        {
+                            [|var|] i = 0;
+                            if (M2(out i))
+                            {
+                            }
+                        }
+
+                        void M2(out int i)
+                        {
+                        }
+
+                        void M2(out string s)
                         {
                         }
                     }
-
-                    void M2(out int i)
-                    {
-                    }
-
-                    void M2(out string s)
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (M2(out int i))
+                        void M()
+                        {
+                            if (M2(out int i))
+                            {
+                            }
+                        }
+
+                        void M2(out int i)
+                        {
+                        }
+
+                        void M2(out string s)
                         {
                         }
                     }
-
-                    void M2(out int i)
-                    {
-                    }
-
-                    void M2(out string s)
-                    {
-                    }
-                }
-                """,
+                    """,
                 new TestParameters(options: new UseImplicitTypeTests().ImplicitTypeEverywhere())
             );
         }
@@ -741,36 +741,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i;
-                        if (M2(out i))
+                        void M()
+                        {
+                            [|int|] i;
+                            if (M2(out i))
+                            {
+                            }
+                        }
+
+                        void M2<T>(out T i)
                         {
                         }
                     }
-
-                    void M2<T>(out T i)
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (M2(out int i))
+                        void M()
+                        {
+                            if (M2(out int i))
+                            {
+                            }
+                        }
+
+                        void M2<T>(out T i)
                         {
                         }
                     }
-
-                    void M2<T>(out T i)
-                    {
-                    }
-                }
-                """,
+                    """,
                 new TestParameters(options: new UseImplicitTypeTests().ImplicitTypeEverywhere())
             );
         }
@@ -780,34 +780,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // prefix comment
-                        [|int|] i;
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            // prefix comment
+                            [|int|] i;
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // prefix comment
+                        void M()
                         {
-                            if (int.TryParse(v, out int i))
+                            // prefix comment
                             {
+                                if (int.TryParse(v, out int i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -816,33 +816,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] i; // suffix comment
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            [|int|] i; // suffix comment
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // suffix comment
+                        void M()
                         {
-                            if (int.TryParse(v, out int i))
+                            // suffix comment
                             {
+                                if (int.TryParse(v, out int i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -851,35 +851,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // prefix comment
-                        [|int|] i; // suffix comment
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            // prefix comment
+                            [|int|] i; // suffix comment
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // prefix comment
-                        // suffix comment
+                        void M()
                         {
-                            if (int.TryParse(v, out int i))
+                            // prefix comment
+                            // suffix comment
                             {
+                                if (int.TryParse(v, out int i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -888,33 +888,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [|i|] /*suffix*/, j;
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            int [|i|] /*suffix*/, j;
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int j;
+                        void M()
                         {
-                            if (int.TryParse(v, out int i /*suffix*/))
+                            int j;
                             {
+                                if (int.TryParse(v, out int i /*suffix*/))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -923,33 +923,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int /*prefix*/ [|i|], j;
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            int /*prefix*/ [|i|], j;
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int j;
+                        void M()
                         {
-                            if (int.TryParse(v, out int /*prefix*/ i))
+                            int j;
                             {
+                                if (int.TryParse(v, out int /*prefix*/ i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -958,33 +958,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int /*prefix*/ [|i|] /*suffix*/, j;
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            int /*prefix*/ [|i|] /*suffix*/, j;
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int j;
+                        void M()
                         {
-                            if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                            int j;
                             {
+                                if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -993,33 +993,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int j, /*prefix*/ [|i|] /*suffix*/;
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            int j, /*prefix*/ [|i|] /*suffix*/;
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int j;
+                        void M()
                         {
-                            if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                            int j;
                             {
+                                if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1028,35 +1028,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // prefix
-                        int j, [|i|]; // suffix
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            // prefix
+                            int j, [|i|]; // suffix
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // prefix
-                        int j; // suffix
+                        void M()
                         {
-                            if (int.TryParse(v, out int i))
+                            // prefix
+                            int j; // suffix
                             {
+                                if (int.TryParse(v, out int i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1065,36 +1065,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int /*int comment*/
-                            /*prefix*/ [|i|] /*suffix*/,
-                            j;
+                        void M()
                         {
-                            if (int.TryParse(v, out i))
+                            int /*int comment*/
+                                /*prefix*/ [|i|] /*suffix*/,
+                                j;
                             {
+                                if (int.TryParse(v, out i))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int /*int comment*/
-                            j;
+                        void M()
                         {
-                            if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                            int /*int comment*/
+                                j;
                             {
+                                if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1103,38 +1103,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine("Goo");
-
-                        int [|result|];
-                        if (int.TryParse("12", out result))
+                        static void Main(string[] args)
                         {
+                            Console.WriteLine("Goo");
 
+                            int [|result|];
+                            if (int.TryParse("12", out result))
+                            {
+
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine("Goo");
-
-                        if (int.TryParse("12", out int result))
+                        static void Main(string[] args)
                         {
+                            Console.WriteLine("Goo");
 
+                            if (int.TryParse("12", out int result))
+                            {
+
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1143,54 +1143,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine("Goo");
-
-
-
-
-
-                        // Goo
-
-
-
-                        int [|result|];
-                        if (int.TryParse("12", out result))
+                        static void Main(string[] args)
                         {
+                            Console.WriteLine("Goo");
 
+
+
+
+
+                            // Goo
+
+
+
+                            int [|result|];
+                            if (int.TryParse("12", out result))
+                            {
+
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine("Goo");
-
-
-
-
-
-                        // Goo
-
-
-
-                        if (int.TryParse("12", out int result))
+                        static void Main(string[] args)
                         {
+                            Console.WriteLine("Goo");
 
+
+
+
+
+                            // Goo
+
+
+
+                            if (int.TryParse("12", out int result))
+                            {
+
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1199,36 +1199,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        string [|s|];  
-                        Bar(() => Baz(out s));
+                        void M()
+                        {
+                            string [|s|];
+                            Bar(() => Baz(out s));
+                        }
+
+                        void Baz(out string s) { }
+
+                        void Bar(Action a) { }
                     }
-
-                    void Baz(out string s) { }
-
-                    void Bar(Action a) { }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Bar(() => Baz(out string s));
+                        void M()
+                        {
+                            Bar(() => Baz(out string s));
+                        }
+
+                        void Baz(out string s) { }
+
+                        void Bar(Action a) { }
                     }
-
-                    void Baz(out string s) { }
-
-                    void Bar(Action a) { }
-                }
-                """
+                    """
             );
         }
 
@@ -1237,22 +1237,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        string [|s|];  
-                        Bar(() => Baz(out s));
-                        Console.WriteLine(s);
+                        void M()
+                        {
+                            string [|s|];
+                            Bar(() => Baz(out s));
+                            Console.WriteLine(s);
+                        }
+
+                        void Baz(out string s) { }
+
+                        void Bar(Action a) { }
                     }
-
-                    void Baz(out string s) { }
-
-                    void Bar(Action a) { }
-                }
-                """
+                    """
             );
         }
 
@@ -1261,25 +1261,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo(string x)
+                    class C
                     {
-                        object [|s|] = null; 
-                        if (x != null || TryBaz(out s))
+                        void Goo(string x)
                         {
-                            Console.WriteLine(s); 
+                            object [|s|] = null;
+                            if (x != null || TryBaz(out s))
+                            {
+                                Console.WriteLine(s);
+                            }
+                        }
+
+                        private bool TryBaz(out object s)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private bool TryBaz(out object s)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1288,44 +1288,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo(string x)
+                    class C
                     {
-                        object [|s|] = null; 
-                        if (x != null && TryBaz(out s))
+                        void Goo(string x)
                         {
-                            Console.WriteLine(s); 
+                            object [|s|] = null;
+                            if (x != null && TryBaz(out s))
+                            {
+                                Console.WriteLine(s);
+                            }
+                        }
+
+                        private bool TryBaz(out object s)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private bool TryBaz(out object s)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo(string x)
+                    class C
                     {
-                        if (x != null && TryBaz(out object s))
+                        void Goo(string x)
                         {
-                            Console.WriteLine(s);
+                            if (x != null && TryBaz(out object s))
+                            {
+                                Console.WriteLine(s);
+                            }
+                        }
+
+                        private bool TryBaz(out object s)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private bool TryBaz(out object s)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1334,28 +1334,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int [|result|];
-                        Method(() => GetValue(out result));
-                    }
+                        static void Main(string[] args)
+                        {
+                            int [|result|];
+                            Method(() => GetValue(out result));
+                        }
 
-                    public static void GetValue(out int result)
-                    {
-                        result = 0;
-                    }
+                        public static void GetValue(out int result)
+                        {
+                            result = 0;
+                        }
 
-                    public static void Method(Expression<Action> expression)
-                    {
+                        public static void Method(Expression<Action> expression)
+                        {
 
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1364,34 +1364,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private int Bar()
+                    class C
                     {
-                        IProjectRuleSnapshot [|unresolvedReferenceSnapshot|] = null;
-                        var itemType = GetUnresolvedReferenceItemType(originalItemSpec,
-                                                                      updatedUnresolvedSnapshots,
-                                                                      catalogs,
-                                                                      out unresolvedReferenceSnapshot);
+                        private int Bar()
+                        {
+                            IProjectRuleSnapshot [|unresolvedReferenceSnapshot|] = null;
+                            var itemType = GetUnresolvedReferenceItemType(originalItemSpec,
+                                                                          updatedUnresolvedSnapshots,
+                                                                          catalogs,
+                                                                          out unresolvedReferenceSnapshot);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private int Bar()
+                    class C
                     {
-                        var itemType = GetUnresolvedReferenceItemType(originalItemSpec,
-                                                                      updatedUnresolvedSnapshots,
-                                                                      catalogs,
-                                                                      out IProjectRuleSnapshot unresolvedReferenceSnapshot);
+                        private int Bar()
+                        {
+                            var itemType = GetUnresolvedReferenceItemType(originalItemSpec,
+                                                                          updatedUnresolvedSnapshots,
+                                                                          catalogs,
+                                                                          out IProjectRuleSnapshot unresolvedReferenceSnapshot);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1400,27 +1400,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        do
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            do
+                            {
+                            }
+                            while (!TryExtractTokenFromEmail(out token));
+
+                            Console.WriteLine(token == "Test");
                         }
-                        while (!TryExtractTokenFromEmail(out token));
 
-                        Console.WriteLine(token == "Test");
+                        private static bool TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1429,26 +1429,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        while (!TryExtractTokenFromEmail(out token))
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            while (!TryExtractTokenFromEmail(out token))
+                            {
+                            }
+
+                            Console.WriteLine(token == "Test");
                         }
 
-                        Console.WriteLine(token == "Test");
+                        private static bool TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1457,27 +1457,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        foreach (var v in TryExtractTokenFromEmail(out token))
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            foreach (var v in TryExtractTokenFromEmail(out token))
+                            {
+                            }
+
+                            Console.WriteLine(token == "Test");
                         }
 
-                        Console.WriteLine(token == "Test");
+                        private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-
-                    private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1486,27 +1486,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        for ( ; TryExtractTokenFromEmail(out token); )
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            for ( ; TryExtractTokenFromEmail(out token); )
+                            {
+                            }
+
+                            Console.WriteLine(token == "Test");
                         }
 
-                        Console.WriteLine(token == "Test");
+                        private static bool TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1515,26 +1515,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        using (GetDisposableAndValue(out token))
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            using (GetDisposableAndValue(out token))
+                            {
+                            }
+
+                            Console.WriteLine(token);
                         }
 
-                        Console.WriteLine(token);
+                        private static IDisposable GetDisposableAndValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-
-                    private static IDisposable GetDisposableAndValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1543,29 +1543,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        try
+                        static void Main(string[] args)
                         {
-                        }
-                        catch when (GetValue(out token))
-                        {
+                            string [|token|];
+                            try
+                            {
+                            }
+                            catch when (GetValue(out token))
+                            {
+                            }
+
+                            Console.WriteLine(token);
                         }
 
-                        Console.WriteLine(token);
+                        private static bool GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1574,23 +1574,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|] = null;
-                        bool condition = false && GetValue(out token);
-                        Console.WriteLine(token);
-                    }
+                        static void Main(string[] args)
+                        {
+                            string [|token|] = null;
+                            bool condition = false && GetValue(out token);
+                            Console.WriteLine(token);
+                        }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
+                        private static bool GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1599,23 +1599,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        bool condition = false && GetValue(out token);
-                        Console.WriteLine(token);
-                    }
+                        static void Main(string[] args)
+                        {
+                            string [|token|];
+                            bool condition = false && GetValue(out token);
+                            Console.WriteLine(token);
+                        }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
+                        private static bool GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1624,26 +1624,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static unsafe void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        fixed (int* p = GetValue(out token))
+                        static unsafe void Main(string[] args)
                         {
+                            string [|token|];
+                            fixed (int* p = GetValue(out token))
+                            {
+                            }
+
+                            Console.WriteLine(token);
                         }
 
-                        Console.WriteLine(token);
+                        private static int[] GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-
-                    private static int[] GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1652,44 +1652,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        do
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            do
+                            {
+                            }
+                            while (!TryExtractTokenFromEmail(out token));
                         }
-                        while (!TryExtractTokenFromEmail(out token));
-                    }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    static void Main(string[] args)
-                    {
-                        do
+                        private static bool TryExtractTokenFromEmail(out string token)
                         {
+                            throw new NotImplementedException();
                         }
-                        while (!TryExtractTokenFromEmail(out string token));
                     }
-
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        static void Main(string[] args)
+                        {
+                            do
+                            {
+                            }
+                            while (!TryExtractTokenFromEmail(out string token));
+                        }
+
+                        private static bool TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
             );
         }
 
@@ -1698,42 +1698,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        while (!TryExtractTokenFromEmail(out token))
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            while (!TryExtractTokenFromEmail(out token))
+                            {
+                            }
+                        }
+
+                        private static bool TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        while (!TryExtractTokenFromEmail(out string token))
+                        static void Main(string[] args)
                         {
+                            while (!TryExtractTokenFromEmail(out string token))
+                            {
+                            }
+                        }
+
+                        private static bool TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1742,44 +1742,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        foreach (var v in TryExtractTokenFromEmail(out token))
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            foreach (var v in TryExtractTokenFromEmail(out token))
+                            {
+                            }
+                        }
+
+                        private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        foreach (var v in TryExtractTokenFromEmail(out string token))
+                        static void Main(string[] args)
                         {
+                            foreach (var v in TryExtractTokenFromEmail(out string token))
+                            {
+                            }
+                        }
+
+                        private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1788,44 +1788,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        for ( ; TryExtractTokenFromEmail(out token); )
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            for ( ; TryExtractTokenFromEmail(out token); )
+                            {
+                            }
+                        }
+
+                        private static bool TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        for (; TryExtractTokenFromEmail(out string token);)
+                        static void Main(string[] args)
                         {
+                            for (; TryExtractTokenFromEmail(out string token);)
+                            {
+                            }
+                        }
+
+                        private static bool TryExtractTokenFromEmail(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1834,42 +1834,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        using (GetDisposableAndValue(out token))
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            using (GetDisposableAndValue(out token))
+                            {
+                            }
+                        }
+
+                        private static IDisposable GetDisposableAndValue(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static IDisposable GetDisposableAndValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        using (GetDisposableAndValue(out string token))
+                        static void Main(string[] args)
                         {
+                            using (GetDisposableAndValue(out string token))
+                            {
+                            }
+                        }
+
+                        private static IDisposable GetDisposableAndValue(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static IDisposable GetDisposableAndValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1878,48 +1878,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        try
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            try
+                            {
+                            }
+                            catch when (GetValue(out token))
+                            {
+                            }
                         }
-                        catch when (GetValue(out token))
+
+                        private static bool GetValue(out string token)
                         {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        try
+                        static void Main(string[] args)
                         {
+                            try
+                            {
+                            }
+                            catch when (GetValue(out string token))
+                            {
+                            }
                         }
-                        catch when (GetValue(out string token))
+
+                        private static bool GetValue(out string token)
                         {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1928,38 +1928,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|] = null;
-                        bool condition = false && GetValue(out token);
-                    }
+                        static void Main(string[] args)
+                        {
+                            string [|token|] = null;
+                            bool condition = false && GetValue(out token);
+                        }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
+                        private static bool GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        bool condition = false && GetValue(out string token);
-                    }
+                        static void Main(string[] args)
+                        {
+                            bool condition = false && GetValue(out string token);
+                        }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
+                        private static bool GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1968,38 +1968,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        bool condition = false && GetValue(out token);
-                    }
+                        static void Main(string[] args)
+                        {
+                            string [|token|];
+                            bool condition = false && GetValue(out token);
+                        }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
+                        private static bool GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        bool condition = false && GetValue(out string token);
-                    }
+                        static void Main(string[] args)
+                        {
+                            bool condition = false && GetValue(out string token);
+                        }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
+                        private static bool GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2008,42 +2008,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        string [|token|];
-                        fixed (int* p = GetValue(out token))
+                        static void Main(string[] args)
                         {
+                            string [|token|];
+                            fixed (int* p = GetValue(out token))
+                            {
+                            }
+                        }
+
+                        private static int[] GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static int[] GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        fixed (int* p = GetValue(out string token))
+                        static void Main(string[] args)
                         {
+                            fixed (int* p = GetValue(out string token))
+                            {
+                            }
+                        }
+
+                        private static int[] GetValue(out string token)
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-
-                    private static int[] GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -2052,27 +2052,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Demo
-                {
-                    static void Main()
+                    class Demo
                     {
-                        F();
-                        void F()
+                        static void Main()
                         {
-                            Action f = () =>
+                            F();
+                            void F()
                             {
-                                Dictionary<int, int> dict = null;
-                                int [|x|] = 0;
-                                dict?.TryGetValue(0, out x);
-                                Console.WriteLine(x);
-                            };
+                                Action f = () =>
+                                {
+                                    Dictionary<int, int> dict = null;
+                                    int [|x|] = 0;
+                                    dict?.TryGetValue(0, out x);
+                                    Console.WriteLine(x);
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2081,48 +2081,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Demo
-                {
-                    static void Main()
+                    class Demo
                     {
-                        F();
-                        void F()
+                        static void Main()
                         {
-                            Action f = () =>
+                            F();
+                            void F()
                             {
-                                Dictionary<int, int> dict = null;
-                                int [|x|] = 0;
-                                dict.TryGetValue(0, out x);
-                                Console.WriteLine(x);
-                            };
+                                Action f = () =>
+                                {
+                                    Dictionary<int, int> dict = null;
+                                    int [|x|] = 0;
+                                    dict.TryGetValue(0, out x);
+                                    Console.WriteLine(x);
+                                };
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                class Demo
-                {
-                    static void Main()
+                    class Demo
                     {
-                        F();
-                        void F()
+                        static void Main()
                         {
-                            Action f = () =>
+                            F();
+                            void F()
                             {
-                                Dictionary<int, int> dict = null;
-                                dict.TryGetValue(0, out int x);
-                                Console.WriteLine(x);
-                            };
+                                Action f = () =>
+                                {
+                                    Dictionary<int, int> dict = null;
+                                    dict.TryGetValue(0, out int x);
+                                    Console.WriteLine(x);
+                                };
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2131,25 +2131,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        string a; string [|b|];
-                        Method(out a, out b);
+                        void Goo()
+                        {
+                            string a; string [|b|];
+                            Method(out a, out b);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        string a; 
-                        Method(out a, out string b);
+                        void Goo()
+                        {
+                            string a;
+                            Method(out a, out string b);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2158,25 +2158,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        string a; /*leading*/ string [|b|]; // trailing
-                        Method(out a, out b);
+                        void Goo()
+                        {
+                            string a; /*leading*/ string [|b|]; // trailing
+                            Method(out a, out b);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        string a; /*leading*/  // trailing
-                        Method(out a, out string b);
+                        void Goo()
+                        {
+                            string a; /*leading*/  // trailing
+                            Method(out a, out string b);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2185,27 +2185,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        string a;
-                        /*leading*/ string [|b|]; // trailing
-                        Method(out a, out b);
+                        void Goo()
+                        {
+                            string a;
+                            /*leading*/ string [|b|]; // trailing
+                            Method(out a, out b);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        string a;
-                        /*leading*/ // trailing
-                        Method(out a, out string b);
+                        void Goo()
+                        {
+                            string a;
+                            /*leading*/ // trailing
+                            Method(out a, out string b);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2214,20 +2214,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|int|] _;
-                        if (N(out _)
+                        void M()
                         {
-                            Console.WriteLine(_);
+                            [|int|] _;
+                            if (N(out _)
+                            {
+                                Console.WriteLine(_);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2236,18 +2236,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M(bool condition)
+                    class C
                     {
-                        [|var|] x = 1;
-                        var result = condition && int.TryParse("2", out x);
-                        Console.WriteLine(x);
+                        static void M(bool condition)
+                        {
+                            [|var|] x = 1;
+                            var result = condition && int.TryParse("2", out x);
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2256,18 +2256,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M(bool condition)
+                    class C
                     {
-                        [|int|] x = 1;
-                        var result = condition && int.TryParse("2", out x);
-                        Console.WriteLine(x);
+                        static void M(bool condition)
+                        {
+                            [|int|] x = 1;
+                            var result = condition && int.TryParse("2", out x);
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2276,29 +2276,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                  static void Main(string[] args)
-                  {
-                    Method<string>();
-                  }
-
-                  public static void Method<T>()
-                  { 
-                    [|T t|];
-                    void Local<T>()
+                    class Program
                     {
-                      Out(out t);
-                      Console.WriteLine(t);
-                    }
-                    Local<int>();
-                  }
+                      static void Main(string[] args)
+                      {
+                        Method<string>();
+                      }
 
-                  public static void Out<T>(out T t) => t = default;
-                }
-                """
+                      public static void Method<T>()
+                      {
+                        [|T t|];
+                        void Local<T>()
+                        {
+                          Out(out t);
+                          Console.WriteLine(t);
+                        }
+                        Local<int>();
+                      }
+
+                      public static void Out<T>(out T t) => t = default;
+                    }
+                    """
             );
         }
 
@@ -2307,32 +2307,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                  static void Main(string[] args)
-                  {
-                    Method<string>();
-                  }
-
-                  public static void Method<T>()
-                  { 
-                    void Local<T>()
+                    class Program
                     {
-                        [|T t|];
-                        void InnerLocal<T>()
-                        {
-                          Out(out t);
-                          Console.WriteLine(t);
-                        }
-                    }
-                    Local<int>();
-                  }
+                      static void Main(string[] args)
+                      {
+                        Method<string>();
+                      }
 
-                  public static void Out<T>(out T t) => t = default;
-                }
-                """
+                      public static void Method<T>()
+                      {
+                        void Local<T>()
+                        {
+                            [|T t|];
+                            void InnerLocal<T>()
+                            {
+                              Out(out t);
+                              Console.WriteLine(t);
+                            }
+                        }
+                        Local<int>();
+                      }
+
+                      public static void Out<T>(out T t) => t = default;
+                    }
+                    """
             );
         }
 
@@ -2341,31 +2341,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Method<string>();
-                    }
-
-                    public static void Method<T>()
-                    { 
-                        [|T t|];
-                        void Local<T>()
+                        static void Main(string[] args)
                         {
-                            { // <-- note this set of added braces
-                                Out(out t);
-                                Console.WriteLine(t);
-                            }
+                            Method<string>();
                         }
-                        Local<int>();
-                    }
 
-                    public static void Out<T>(out T t) => t = default;
-                }
-                """
+                        public static void Method<T>()
+                        {
+                            [|T t|];
+                            void Local<T>()
+                            {
+                                { // <-- note this set of added braces
+                                    Out(out t);
+                                    Console.WriteLine(t);
+                                }
+                            }
+                            Local<int>();
+                        }
+
+                        public static void Out<T>(out T t) => t = default;
+                    }
+                    """
             );
         }
 
@@ -2374,33 +2374,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Method<string>();
-                    }
-
-                    public static void Method<T>()
-                    {
-                        { // <-- note this set of added braces
-                            [|T t|];
-                            void Local<T>()
-                            {
-                                { // <-- and my axe
-                                    Out(out t);
-                                    Console.WriteLine(t);
-                                }
-                            }
-                            Local<int>();
+                        static void Main(string[] args)
+                        {
+                            Method<string>();
                         }
-                    }
 
-                    public static void Out<T>(out T t) => t = default;
-                }
-                """
+                        public static void Method<T>()
+                        {
+                            { // <-- note this set of added braces
+                                [|T t|];
+                                void Local<T>()
+                                {
+                                    { // <-- and my axe
+                                        Out(out t);
+                                        Console.WriteLine(t);
+                                    }
+                                }
+                                Local<int>();
+                            }
+                        }
+
+                        public static void Out<T>(out T t) => t = default;
+                    }
+                    """
             );
         }
 
@@ -2409,22 +2409,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static bool M(out bool i) => throw null;
-
-                    static void M(bool condition)
+                    class C
                     {
-                        [|bool|] x = false;
-                        if (condition || M(out x))
+                        static bool M(out bool i) => throw null;
+
+                        static void M(bool condition)
                         {
-                            Console.WriteLine(x);
+                            [|bool|] x = false;
+                            if (condition || M(out x))
+                            {
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2433,23 +2433,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static bool M(out bool i) => throw null;
-                    static bool Use(bool i) => throw null;
-
-                    static void M(bool condition)
+                    class C
                     {
-                        [|bool|] x = false;
-                        if (condition || M(out x))
+                        static bool M(out bool i) => throw null;
+                        static bool Use(bool i) => throw null;
+
+                        static void M(bool condition)
                         {
-                            x = Use(x);
+                            [|bool|] x = false;
+                            if (condition || M(out x))
+                            {
+                                x = Use(x);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2501,28 +2501,28 @@ class C
         {
             await TestInRegularAndScript1Async(
                 """
-                #nullable enable
-                class C
-                {
-                    void M(out C c2)
+                    #nullable enable
+                    class C
                     {
-                        [|C|] c;
-                        M(out c);
-                        c2 = c;
+                        void M(out C c2)
+                        {
+                            [|C|] c;
+                            M(out c);
+                            c2 = c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
-                class C
-                {
-                    void M(out C c2)
+                    #nullable enable
+                    class C
                     {
-                        M(out C c);
-                        c2 = c;
+                        void M(out C c2)
+                        {
+                            M(out C c);
+                            c2 = c;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2531,11 +2531,11 @@ class C
         {
             await TestMissingAsync(
                 """
-                [|int|] i;
-                if (int.TryParse(v, out i))
-                {
-                }
-                """,
+                    [|int|] i;
+                    if (int.TryParse(v, out i))
+                    {
+                    }
+                    """,
                 new TestParameters(TestOptions.Regular)
             );
         }
@@ -2545,23 +2545,23 @@ class C
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    private List<Func<string, bool>> _funcs2 = new List<Func<string, bool>>()
+                    class C
                     {
-                        s => { int [|i|] = 0; return int.TryParse(s, out i); }
-                    };
-                }
-                """,
+                        private List<Func<string, bool>> _funcs2 = new List<Func<string, bool>>()
+                        {
+                            s => { int [|i|] = 0; return int.TryParse(s, out i); }
+                        };
+                    }
+                    """,
                 """
-                class C
-                {
-                    private List<Func<string, bool>> _funcs2 = new List<Func<string, bool>>()
+                    class C
                     {
-                        s => { return int.TryParse(s, out int i); }
-                    };
-                }
-                """
+                        private List<Func<string, bool>> _funcs2 = new List<Func<string, bool>>()
+                        {
+                            s => { return int.TryParse(s, out int i); }
+                        };
+                    }
+                    """
             );
         }
 
@@ -2570,44 +2570,44 @@ class C
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        #region test
+                        void M()
+                        {
+                            #region test
 
-                        int i = 0;
+                            int i = 0;
 
-                        #endregion
+                            #endregion
 
-                        int [|hello|];
-                        TestMethod(out hello);
+                            int [|hello|];
+                            TestMethod(out hello);
+                        }
+
+                        private void TestMethod(out int hello)
+                        {
+                        }
                     }
-
-                    private void TestMethod(out int hello)
-                    {
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        #region test
+                        void M()
+                        {
+                            #region test
 
-                        int i = 0;
+                            int i = 0;
 
-                        #endregion
+                            #endregion
 
-                        TestMethod(out int hello);
+                            TestMethod(out int hello);
+                        }
+
+                        private void TestMethod(out int hello)
+                        {
+                        }
                     }
-
-                    private void TestMethod(out int hello)
-                    {
-                    }
-                }
-                """
+                    """
             );
         }
     }

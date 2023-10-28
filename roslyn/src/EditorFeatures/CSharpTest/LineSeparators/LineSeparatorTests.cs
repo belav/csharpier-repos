@@ -491,15 +491,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         {
             await AssertTagsOnBracesOrSemicolonsAsync(
                 """
-                class C
-                {
-                    int Prop => 3;
-
-                    void M()
+                    class C
                     {
+                        int Prop => 3;
+
+                        void M()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 0,
                 2
             );
@@ -510,15 +510,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         {
             await AssertTagsOnBracesOrSemicolonsAsync(
                 """
-                class C
-                {
-                    int this[int i] => 3;
-
-                    void M()
+                    class C
                     {
+                        int this[int i] => 3;
+
+                        void M()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 0,
                 2
             );
@@ -531,15 +531,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
             // the 3 is because there is a skipped } in the event declaration.
             await AssertTagsOnBracesOrSemicolonsAsync(
                 """
-                class C
-                {
-                    event EventHandler MyEvent => 3;
-
-                    void M()
+                    class C
                     {
+                        event EventHandler MyEvent => 3;
+
+                        void M()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 3
             );
         }

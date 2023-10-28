@@ -33,16 +33,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var r = new Regex(@"[|)|]");
-                    }     
-                }
-                """,
+                        void Main()
+                        {
+                            var r = new Regex(@"[|)|]");
+                        }
+                    }
+                    """,
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractRegexDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -58,16 +58,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var r = new Regex("[|\u0029|]");
-                    }     
-                }
-                """,
+                        void Main()
+                        {
+                            var r = new Regex("[|\u0029|]");
+                        }
+                    }
+                    """,
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractRegexDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -83,16 +83,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var r = new Regex(@"[|\u0029|]");
-                    }     
-                }
-                """
+                        void Main()
+                        {
+                            var r = new Regex(@"[|\u0029|]");
+                        }
+                    }
+                    """
             );
         }
     }

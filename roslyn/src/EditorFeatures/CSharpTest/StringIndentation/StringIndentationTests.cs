@@ -363,17 +363,17 @@ goo
         {
             await TestAsync(
                 """""
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v =
-                             $$""""
-                            |goo
-                             """";
+                        void M()
+                        {
+                            var v =
+                                 $$""""
+                                |goo
+                                 """";
+                        }
                     }
-                }
-                """""
+                    """""
             );
         }
 
@@ -382,17 +382,17 @@ goo
         {
             await TestAsync(
                 """""
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v =
-                            $$""""
-                            |goo
-                             """";
+                        void M()
+                        {
+                            var v =
+                                $$""""
+                                |goo
+                                 """";
+                        }
                     }
-                }
-                """""
+                    """""
             );
         }
 
@@ -401,17 +401,17 @@ goo
         {
             await TestAsync(
                 """""
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v =
-                           $$""""
-                            |goo
-                             """";
+                        void M()
+                        {
+                            var v =
+                               $$""""
+                                |goo
+                                 """";
+                        }
                     }
-                }
-                """""
+                    """""
             );
         }
 
@@ -420,18 +420,18 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    goo
-                           |    { 1 + 1 }
-                           |    baz
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    goo
+                               |    { 1 + 1 }
+                               |    baz
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -440,18 +440,18 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    goo{
-                           |    1 + 1
-                           |    }baz
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    goo{
+                               |    1 + 1
+                               |    }baz
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -460,18 +460,18 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    goo{
-                           |1 + 1
-                           |    }baz
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    goo{
+                               |1 + 1
+                               |    }baz
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -480,18 +480,18 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    goo{
-                           1 + 1
-                                }baz
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    goo{
+                               1 + 1
+                                    }baz
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -500,19 +500,19 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    goo{
-                           |1 + 1
-                           |    }baz
-                           |    quux
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    goo{
+                               |1 + 1
+                               |    }baz
+                               |    quux
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -521,19 +521,19 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    goo{
-                         1 + 1
-                                }baz
-                           |    quux
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    goo{
+                             1 + 1
+                                    }baz
+                               |    quux
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -542,19 +542,19 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |goo{
-                         1 + 1
-                         }baz
-                           |quux
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |goo{
+                             1 + 1
+                             }baz
+                               |quux
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -563,17 +563,17 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    { 1 + 1 }
-                           |    baz
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    { 1 + 1 }
+                               |    baz
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -582,19 +582,19 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    {
-                           |        1 + 1
-                           |    }
-                           |    baz
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    {
+                               |        1 + 1
+                               |    }
+                               |    baz
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -603,19 +603,19 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = $"""
-                           |    {
-                        1 + 1
-                                }
-                           |    baz
-                            """;
+                        void M()
+                        {
+                            var v = $"""
+                               |    {
+                            1 + 1
+                                    }
+                               |    baz
+                                """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -624,23 +624,23 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x =
-                            $"""
-                            |goo
-                            |{
-                            |   $"""
-                            |   |bar
-                            |    """
-                            |}
-                            |baz
-                             """;
+                        void M()
+                        {
+                            var x =
+                                $"""
+                                |goo
+                                |{
+                                |   $"""
+                                |   |bar
+                                |    """
+                                |}
+                                |baz
+                                 """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -649,26 +649,26 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x =
-                            $"""
-                            |goo
-                            |{
-                            |   $"""
-                            |   |bar
-                            |   |{
-                            |   |   1 + 1
-                            |   |}
-                            |    """
-                            |}
-                            |baz
-                             """;
+                        void M()
+                        {
+                            var x =
+                                $"""
+                                |goo
+                                |{
+                                |   $"""
+                                |   |bar
+                                |   |{
+                                |   |   1 + 1
+                                |   |}
+                                |    """
+                                |}
+                                |baz
+                                 """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -677,26 +677,26 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x =
-                            $"""
-                            |goo
-                            |{
-                            |   $"""
-                            |   |bar
-                            |   |{
-                            |   1 + 1
-                            |    }
-                            |    """
-                            |}
-                            |baz
-                             """;
+                        void M()
+                        {
+                            var x =
+                                $"""
+                                |goo
+                                |{
+                                |   $"""
+                                |   |bar
+                                |   |{
+                                |   1 + 1
+                                |    }
+                                |    """
+                                |}
+                                |baz
+                                 """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -705,26 +705,26 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x =
-                            $"""
-                            |goo
-                            |{
+                        void M()
+                        {
+                            var x =
                                 $"""
-                                |bar
+                                |goo
                                 |{
-                            1 + 1
+                                    $"""
+                                    |bar
+                                    |{
+                                1 + 1
+                                     }
+                                     """
                                  }
-                                 """
-                             }
-                            |baz
-                             """;
+                                |baz
+                                 """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -733,23 +733,23 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x =
+                        void M()
+                        {
+                            var x =
+                                $"""
+                                |goo
+                                |{
                             $"""
-                            |goo
-                            |{
-                        $"""
-                        |bar
-                         """
-                             }
-                            |baz
-                             """;
+                            |bar
+                             """
+                                 }
+                                |baz
+                                 """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -758,26 +758,26 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x =
+                        void M()
+                        {
+                            var x =
+                                $"""
+                                |goo
+                                |{
                             $"""
-                            |goo
+                            |bar
                             |{
-                        $"""
-                        |bar
-                        |{
-                        |   1 + 1
-                        |}
-                         """
-                             }
-                            |baz
-                             """;
+                            |   1 + 1
+                            |}
+                             """
+                                 }
+                                |baz
+                                 """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -786,26 +786,26 @@ goo
         {
             await TestAsync(
                 """"
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x =
+                        void M()
+                        {
+                            var x =
+                                $"""
+                                |goo
+                                |{
                             $"""
-                            |goo
+                            |bar
                             |{
-                        $"""
-                        |bar
-                        |{
-                        1 + 1
-                         }
-                         """
+                            1 + 1
                              }
-                            |baz
-                             """;
+                             """
+                                 }
+                                |baz
+                                 """;
+                        }
                     }
-                }
-                """"
+                    """"
             );
         }
 
@@ -814,29 +814,29 @@ goo
         {
             var input = new StringBuilder(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        _ =
-                """
+                        void M()
+                        {
+                            _ =
+                    """
             );
 
             for (var i = 0; i < 2000; i++)
             {
                 input.AppendLine(
                     """
-                            @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" +
-                    """
+                                @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" +
+                        """
                 );
             }
 
             input.AppendLine(
                 """
-                        @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"";
+                            @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"";
+                        }
                     }
-                }
-                """
+                    """
             );
 
             await TestAsync(input.ToString());

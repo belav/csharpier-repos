@@ -30,9 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """
+                    class C { }
+                    $$
+                    """
             );
         }
 
@@ -42,9 +42,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """
+                    System.Console.WriteLine();
+                    $$
+                    """
             );
         }
 
@@ -54,9 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """
+                    int i = 0;
+                    $$
+                    """
             );
         }
 
@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var x = "\{0}$$\{1}\{2}"
-                """
+                        var x = "\{0}$$\{1}\{2}"
+                        """
                 )
             );
         }
@@ -114,8 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var x = "\{0}\{1}$$\{2}"
-                """
+                        var x = "\{0}\{1}$$\{2}"
+                        """
                 )
             );
         }
@@ -126,8 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var x = "\{0}\{1}\{2}$$"
-                """
+                        var x = "\{0}\{1}\{2}$$"
+                        """
                 )
             );
         }
@@ -149,20 +149,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        Bar(async $$
-                    }
+                        void Goo()
+                        {
+                            Bar(async $$
+                        }
 
-                    void Bar(Func<int, string> f)
-                    {
+                        void Bar(Func<int, string> f)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -171,12 +171,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C {
-                    void M() {
-                        var v = Console.WriteLine $$
-                """
+                    class C {
+                        void M() {
+                            var v = Console.WriteLine $$
+                    """
             );
         }
 
@@ -185,12 +185,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C {
-                    void M() {
-                        Action a = delegate { } $$
-                """
+                    class C {
+                        void M() {
+                            Action a = delegate { } $$
+                    """
             );
         }
 
@@ -199,12 +199,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C {
-                    void M() {
-                        Action b = (() => 0) $$
-                """
+                    class C {
+                        void M() {
+                            Action b = (() => 0) $$
+                    """
             );
         }
 
@@ -213,12 +213,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C {
-                    void M() {
-                        Action b = () => {} $$
-                """
+                    class C {
+                        void M() {
+                            Action b = () => {} $$
+                    """
             );
         }
 
@@ -227,14 +227,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = 1$$
+                        void M()
+                        {
+                            var x = 1$$
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -243,14 +243,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = 1.$$
+                        void M()
+                        {
+                            var x = 1.$$
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -259,14 +259,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = 1. $$
+                        void M()
+                        {
+                            var x = 1. $$
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -275,22 +275,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class A
-                {
-
-                }
-
-                class C
-                {
-                    void M(object o)
+                    class A
                     {
-                        switch (o)
+
+                    }
+
+                    class C
+                    {
+                        void M(object o)
                         {
-                            case A $$
+                            switch (o)
+                            {
+                                case A $$
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -299,25 +299,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                namespace N
-                {
-                    class A
+                    namespace N
                     {
-
-                    }
-                }
-
-                class C
-                {
-                    void M(object o)
-                    {
-                        switch (o)
+                        class A
                         {
-                            case N.A $$
+
                         }
                     }
-                }
-                """
+
+                    class C
+                    {
+                        void M(object o)
+                        {
+                            switch (o)
+                            {
+                                case N.A $$
+                            }
+                        }
+                    }
+                    """
             );
         }
     }

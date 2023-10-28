@@ -27,29 +27,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
+                        void M()
                         {
-                            Console.WriteLine(x);
+                            int [||]x;
+                            {
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
+                        void M()
                         {
-                            int x;
-                            Console.WriteLine(x);
+                            {
+                                int x;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -58,17 +58,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                int [||]x;
-                {
-                    Console.WriteLine(x);
-                }
-                """,
+                    int [||]x;
+                    {
+                        Console.WriteLine(x);
+                    }
+                    """,
                 """
-                {
-                    int x;
-                    Console.WriteLine(x);
-                }
-                """,
+                    {
+                        int x;
+                        Console.WriteLine(x);
+                    }
+                    """,
                 Options.Regular
             );
         }
@@ -78,27 +78,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
-                        Console.WriteLine();
-                        Console.WriteLine(x);
+                        void M()
+                        {
+                            int [||]x;
+                            Console.WriteLine();
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Console.WriteLine();
-                        int x;
-                        Console.WriteLine(x);
+                        void M()
+                        {
+                            Console.WriteLine();
+                            int x;
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -107,15 +107,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                int [||]x;
-                Console.WriteLine();
-                Console.WriteLine(x);
-                """,
+                    int [||]x;
+                    Console.WriteLine();
+                    Console.WriteLine(x);
+                    """,
                 """
-                Console.WriteLine();
-                int x;
-                Console.WriteLine(x);
-                """,
+                    Console.WriteLine();
+                    int x;
+                    Console.WriteLine(x);
+                    """,
                 Options.Regular
             );
         }
@@ -125,37 +125,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
-                        Console.WriteLine();
+                        void M()
                         {
-                            Console.WriteLine(x);
-                        }
+                            int [||]x;
+                            Console.WriteLine();
+                            {
+                                Console.WriteLine(x);
+                            }
 
-                        {
-                            Console.WriteLine(x);
+                            {
+                                Console.WriteLine(x);
+                            }
                         }
-                    }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Console.WriteLine();
-                        int x;
+                        void M()
                         {
-                            Console.WriteLine(x);
-                        }
+                            Console.WriteLine();
+                            int x;
+                            {
+                                Console.WriteLine(x);
+                            }
 
-                        {
-                            Console.WriteLine(x);
+                            {
+                                Console.WriteLine(x);
+                            }
                         }
-                    }
-                """
+                    """
             );
         }
 
@@ -164,27 +164,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                int [||]x;
-                Console.WriteLine();
-                {
-                    Console.WriteLine(x);
-                }
+                    int [||]x;
+                    Console.WriteLine();
+                    {
+                        Console.WriteLine(x);
+                    }
 
-                {
-                    Console.WriteLine(x);
-                }
-                """,
+                    {
+                        Console.WriteLine(x);
+                    }
+                    """,
                 """
-                Console.WriteLine();
-                int x;
-                {
-                Console.WriteLine(x);
-                }
-
-                {
+                    Console.WriteLine();
+                    int x;
+                    {
                     Console.WriteLine(x);
-                }
-                """,
+                    }
+
+                    {
+                        Console.WriteLine(x);
+                    }
+                    """,
                 Options.Regular
             );
         }
@@ -194,29 +194,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
-                        Console.WriteLine();
+                        void M()
                         {
-                            Console.WriteLine(x);
+                            int [||]x;
+                            Console.WriteLine();
+                            {
+                                Console.WriteLine(x);
+                            }
                         }
-                    }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Console.WriteLine();
+                        void M()
                         {
-                            int x;
-                            Console.WriteLine(x);
+                            Console.WriteLine();
+                            {
+                                int x;
+                                Console.WriteLine(x);
+                            }
                         }
-                    }
-                """
+                    """
             );
         }
 
@@ -225,19 +225,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                int [||]x;
-                Console.WriteLine();
-                {
-                    Console.WriteLine(x);
-                }
-                """,
+                    int [||]x;
+                    Console.WriteLine();
+                    {
+                        Console.WriteLine(x);
+                    }
+                    """,
                 """
-                Console.WriteLine();
-                {
-                    int x;
-                    Console.WriteLine(x);
-                }
-                """,
+                    Console.WriteLine();
+                    {
+                        int x;
+                        Console.WriteLine(x);
+                    }
+                    """,
                 Options.Regular
             );
         }
@@ -247,30 +247,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
+                        void M()
                         {
-                            x = 5;
-                            Console.WriteLine(x);
+                            int [||]x;
+                            {
+                                x = 5;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
+                        void M()
                         {
-                            int x = 5;
-                            Console.WriteLine(x);
+                            {
+                                int x = 5;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -279,30 +279,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x = 0;
+                        void M()
                         {
-                            x = 5;
-                            Console.WriteLine(x);
+                            int [||]x = 0;
+                            {
+                                x = 5;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
+                        void M()
                         {
-                            int x = 5;
-                            Console.WriteLine(x);
+                            {
+                                int x = 5;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -311,31 +311,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]x = (short)0;
+                        void M()
                         {
-                            x = 5;
-                            Console.WriteLine(x);
+                            var [||]x = (short)0;
+                            {
+                                x = 5;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
+                        void M()
                         {
-                            var x = (short)0;
-                            x = 5;
-                            Console.WriteLine(x);
+                            {
+                                var x = (short)0;
+                                x = 5;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -344,15 +344,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
-                        Console.WriteLine(x);
+                        void M()
+                        {
+                            int [||]x;
+                            Console.WriteLine(x);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -361,9 +361,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                int [||]x;
-                Console.WriteLine(x);
-                """
+                    int [||]x;
+                    Console.WriteLine(x);
+                    """
             );
         }
 
@@ -372,17 +372,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        object[] [||]x = {
-                            x = null
-                        };
-                        x.ToString();
+                        static void Main()
+                        {
+                            object[] [||]x = {
+                                x = null
+                            };
+                            x.ToString();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -391,16 +391,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        int [||]i = 5;
-                        int j = 10;
-                        Console.WriteLine(i);
+                        static void Main()
+                        {
+                            int [||]i = 5;
+                            int j = 10;
+                            Console.WriteLine(i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -409,10 +409,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                int [||]i = 5;
-                int j = 10;
-                Console.WriteLine(i);
-                """
+                    int [||]i = 5;
+                    int j = 10;
+                    Console.WriteLine(i);
+                    """
             );
         }
 
@@ -421,16 +421,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    void M()
+                    class Program
                     {
+                        void M()
                         {
-                            object x;
-                            [|object|] }
+                            {
+                                object x;
+                                [|object|] }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -439,25 +439,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int [||]i = 5; Console.WriteLine();
-                        Console.Write(i);
+                        static void Main(string[] args)
+                        {
+                            int [||]i = 5; Console.WriteLine();
+                            Console.Write(i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine();
-                        int i = 5; Console.Write(i);
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
+                            int i = 5; Console.Write(i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -466,13 +466,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                int [||]i = 5; Console.WriteLine();
-                Console.Write(i);
-                """,
+                    int [||]i = 5; Console.WriteLine();
+                    Console.Write(i);
+                    """,
                 """
-                Console.WriteLine();
-                int i = 5; Console.Write(i);
-                """,
+                    Console.WriteLine();
+                    int i = 5; Console.Write(i);
+                    """,
                 Options.Regular
             );
         }
@@ -482,19 +482,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
-                        int [|x|] = 0;
-                        Goo();
-                #line hidden
-                        Bar(x);
+                        void Main()
+                        {
+                            int [|x|] = 0;
+                            Goo();
+                    #line hidden
+                            Bar(x);
+                        }
+                    #line default
                     }
-                #line default
-                }
-                """
+                    """
             );
         }
 
@@ -503,20 +503,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
-                        int [|x|] = 0;
-                        Goo();
-                #line hidden
-                        Goo();
-                #line default
-                        Bar(x);
+                        void Main()
+                        {
+                            int [|x|] = 0;
+                            Goo();
+                    #line hidden
+                            Goo();
+                    #line default
+                            Bar(x);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -525,15 +525,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                #line default
+                    #line default
 
-                int [|x|] = 0;
-                Goo();
-                #line hidden
-                Goo();
-                #line default
-                Bar(x);
-                """
+                    int [|x|] = 0;
+                    Goo();
+                    #line hidden
+                    Goo();
+                    #line default
+                    Bar(x);
+                    """
             );
         }
 
@@ -542,33 +542,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
-                        int [||]x = 0;
-                        Goo();
-                        Bar(x);
-                #line hidden
+                        void Main()
+                        {
+                            int [||]x = 0;
+                            Goo();
+                            Bar(x);
+                    #line hidden
+                        }
+                    #line default
                     }
-                #line default
-                }
-                """,
+                    """,
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
-                        Goo();
-                        int x = 0;
-                        Bar(x);
-                #line hidden
+                        void Main()
+                        {
+                            Goo();
+                            int x = 0;
+                            Bar(x);
+                    #line hidden
+                        }
+                    #line default
                     }
-                #line default
-                }
-                """
+                    """
             );
         }
 
@@ -577,37 +577,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
-                        int [||]x = 0;
-                        Goo();
-                #line hidden
-                        Goo();
-                #line default
-                        Goo();
-                        Bar(x);
+                        void Main()
+                        {
+                            int [||]x = 0;
+                            Goo();
+                    #line hidden
+                            Goo();
+                    #line default
+                            Goo();
+                            Bar(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #line default
-                class Program
-                {
-                    void Main()
+                    #line default
+                    class Program
                     {
-                        Goo();
-                #line hidden
-                        Goo();
-                #line default
-                        Goo();
-                        int x = 0;
-                        Bar(x);
+                        void Main()
+                        {
+                            Goo();
+                    #line hidden
+                            Goo();
+                    #line default
+                            Goo();
+                            int x = 0;
+                            Bar(x);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -616,29 +616,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                #line default
+                    #line default
 
-                int [||]x = 0;
-                Goo();
-                #line hidden
-                Goo();
-                #line default
-                Goo();
-                Bar(x);
-                """,
+                    int [||]x = 0;
+                    Goo();
+                    #line hidden
+                    Goo();
+                    #line default
+                    Goo();
+                    Bar(x);
+                    """,
                 """
-                #line default
+                    #line default
 
-                Goo();
-                #line hidden
-                Goo();
-                #line default
-                Goo();
-                #line default
+                    Goo();
+                    #line hidden
+                    Goo();
+                    #line default
+                    Goo();
+                    #line default
 
-                int x = 0;
-                Bar(x);
-                """,
+                    int x = 0;
+                    Bar(x);
+                    """,
                 Options.Regular
             );
         }
@@ -648,38 +648,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var [||]@lock = new object();
-                        new[] { 1 }.AsParallel().ForAll((i) => {
-                            lock (@lock)
-                            {
-                            }
-                        });
-                    }
-                }
-                """,
-                """
-                using System.Linq;
-
-                class Program
-                {
-                    void Main()
-                    {
-                        new[] { 1 }.AsParallel().ForAll((i) =>
+                        void Main()
                         {
-                            {|Warning:var @lock = new object();|}
-                            lock (@lock)
-                            {
-                            }
-                        });
+                            var [||]@lock = new object();
+                            new[] { 1 }.AsParallel().ForAll((i) => {
+                                lock (@lock)
+                                {
+                                }
+                            });
+                        }
                     }
-                }
+                    """,
                 """
+                    using System.Linq;
+
+                    class Program
+                    {
+                        void Main()
+                        {
+                            new[] { 1 }.AsParallel().ForAll((i) =>
+                            {
+                                {|Warning:var @lock = new object();|}
+                                lock (@lock)
+                                {
+                                }
+                            });
+                        }
+                    }
+                    """
             );
         }
 
@@ -688,27 +688,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                var [||]@lock = new object();
-                new[] { 1 }.AsParallel().ForAll((i) => {
-                    lock (@lock)
-                    {
-                    }
-                });
-                """,
+                    var [||]@lock = new object();
+                    new[] { 1 }.AsParallel().ForAll((i) => {
+                        lock (@lock)
+                        {
+                        }
+                    });
+                    """,
                 """
-                using System.Linq;
+                    using System.Linq;
 
-                new[] { 1 }.AsParallel().ForAll((i) =>
-                {
-
-                    {|Warning:var @lock = new object();|}
-                    lock (@lock)
+                    new[] { 1 }.AsParallel().ForAll((i) =>
                     {
-                    }
-                });
-                """,
+
+                        {|Warning:var @lock = new object();|}
+                        lock (@lock)
+                        {
+                        }
+                    });
+                    """,
                 Options.Regular
             );
         }
@@ -718,39 +718,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var [||]i = 0;
-                        foreach (var v in new[] { 1 })
+                        void Main()
                         {
-                            Console.Write(i);
-                            i++;
+                            var [||]i = 0;
+                            foreach (var v in new[] { 1 })
+                            {
+                                Console.Write(i);
+                                i++;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        foreach (var v in new[] { 1 })
+                        void Main()
                         {
-                            {|Warning:var i = 0;|}
-                            Console.Write(i);
-                            i++;
+                            foreach (var v in new[] { 1 })
+                            {
+                                {|Warning:var i = 0;|}
+                                Console.Write(i);
+                                i++;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -759,28 +759,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                var [||]i = 0;
-                foreach (var v in new[] { 1 })
-                {
-                    Console.Write(i);
-                    i++;
-                }
-                """,
+                    var [||]i = 0;
+                    foreach (var v in new[] { 1 })
+                    {
+                        Console.Write(i);
+                        i++;
+                    }
+                    """,
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                foreach (var v in new[] { 1 })
-                {
+                    foreach (var v in new[] { 1 })
+                    {
 
-                    {|Warning:var i = 0;|}
-                    Console.Write(i);
-                    i++;
-                }
-                """,
+                        {|Warning:var i = 0;|}
+                        Console.Write(i);
+                        i++;
+                    }
+                    """,
                 Options.Regular
             );
         }
@@ -790,39 +790,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        var [||]i = 0;
-                        void LocalFunction()
+                        void Main()
                         {
-                            Console.Write(i);
-                            i++;
+                            var [||]i = 0;
+                            void LocalFunction()
+                            {
+                                Console.Write(i);
+                                i++;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                class Program
-                {
-                    void Main()
+                    class Program
                     {
-                        void LocalFunction()
+                        void Main()
                         {
-                            {|Warning:var i = 0;|}
-                            Console.Write(i);
-                            i++;
+                            void LocalFunction()
+                            {
+                                {|Warning:var i = 0;|}
+                                Console.Write(i);
+                                i++;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -831,28 +831,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                var [||]i = 0;
-                void LocalFunction()
-                {
-                    Console.Write(i);
-                    i++;
-                }
-                """,
+                    var [||]i = 0;
+                    void LocalFunction()
+                    {
+                        Console.Write(i);
+                        i++;
+                    }
+                    """,
                 """
-                using System;
-                using System.Linq;
+                    using System;
+                    using System.Linq;
 
-                void LocalFunction()
-                {
+                    void LocalFunction()
+                    {
 
-                    {|Warning:var i = 0;|}
-                    Console.Write(i);
-                    i++;
-                }
-                """,
+                        {|Warning:var i = 0;|}
+                        Console.Write(i);
+                        i++;
+                    }
+                    """,
                 Options.Regular
             );
         }
@@ -862,47 +862,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                static class C
-                {
-                    static int Outer(Action<int> x, object y) { return 1; }
-                    static int Outer(Action<string> x, string y) { return 2; }
-
-                    static void Inner(int x, int[] y) { }
-                    unsafe static void Inner(string x, int*[] y) { }
-
-                    static void Main()
+                    static class C
                     {
-                        var [||]a = Outer(x => Inner(x, null), null);
-                        unsafe
+                        static int Outer(Action<int> x, object y) { return 1; }
+                        static int Outer(Action<string> x, string y) { return 2; }
+
+                        static void Inner(int x, int[] y) { }
+                        unsafe static void Inner(string x, int*[] y) { }
+
+                        static void Main()
                         {
-                            Console.WriteLine(a);
+                            var [||]a = Outer(x => Inner(x, null), null);
+                            unsafe
+                            {
+                                Console.WriteLine(a);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                static class C
-                {
-                    static int Outer(Action<int> x, object y) { return 1; }
-                    static int Outer(Action<string> x, string y) { return 2; }
-
-                    static void Inner(int x, int[] y) { }
-                    unsafe static void Inner(string x, int*[] y) { }
-
-                    static void Main()
+                    static class C
                     {
-                        unsafe
+                        static int Outer(Action<int> x, object y) { return 1; }
+                        static int Outer(Action<string> x, string y) { return 2; }
+
+                        static void Inner(int x, int[] y) { }
+                        unsafe static void Inner(string x, int*[] y) { }
+
+                        static void Main()
                         {
-                            var a = Outer(x => Inner(x, null), (object)null);
-                            Console.WriteLine(a);
+                            unsafe
+                            {
+                                var a = Outer(x => Inner(x, null), (object)null);
+                                Console.WriteLine(a);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -911,43 +911,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class X
-                {
-                    static int Goo(Func<int?, byte> x, object y) { return 1; }
-                    static int Goo(Func<X, byte> x, string y) { return 2; }
-
-                    const int Value = 1000;
-                    static void Main()
+                    class X
                     {
-                        var [||]a = Goo(X => (byte)X.Value, null);
-                        unchecked
+                        static int Goo(Func<int?, byte> x, object y) { return 1; }
+                        static int Goo(Func<X, byte> x, string y) { return 2; }
+
+                        const int Value = 1000;
+                        static void Main()
                         {
-                            Console.WriteLine(a);
+                            var [||]a = Goo(X => (byte)X.Value, null);
+                            unchecked
+                            {
+                                Console.WriteLine(a);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class X
-                {
-                    static int Goo(Func<int?, byte> x, object y) { return 1; }
-                    static int Goo(Func<X, byte> x, string y) { return 2; }
-
-                    const int Value = 1000;
-                    static void Main()
+                    class X
                     {
-                        unchecked
+                        static int Goo(Func<int?, byte> x, object y) { return 1; }
+                        static int Goo(Func<X, byte> x, string y) { return 2; }
+
+                        const int Value = 1000;
+                        static void Main()
                         {
-                            {|Warning:var a = Goo(X => (byte)X.Value, (object)null);|}
-                            Console.WriteLine(a);
+                            unchecked
+                            {
+                                {|Warning:var a = Goo(X => (byte)X.Value, (object)null);|}
+                                Console.WriteLine(a);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -956,27 +956,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+                    using System;
+                    using System.Collections.Generic;
+                    using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // Comment [||]about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        int goo;
-                        Console.WriteLine();
-                        Console.WriteLine(goo);
+                        static void Main(string[] args)
+                        {
+                            // Comment [||]about goo!
+                            // Comment about goo!
+                            // Comment about goo!
+                            // Comment about goo!
+                            // Comment about goo!
+                            // Comment about goo!
+                            // Comment about goo!
+                            int goo;
+                            Console.WriteLine();
+                            Console.WriteLine(goo);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -985,29 +985,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        (int, string) [||]x;
+                        void M()
                         {
-                            Console.WriteLine(x);
+                            (int, string) [||]x;
+                            {
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
+                        void M()
                         {
-                            (int, string) x;
-                            Console.WriteLine(x);
+                            {
+                                (int, string) x;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1016,29 +1016,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        (int a, string b) [||]x;
+                        void M()
                         {
-                            Console.WriteLine(x);
+                            (int a, string b) [||]x;
+                            {
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
+                        void M()
                         {
-                            (int a, string b) x;
-                            Console.WriteLine(x);
+                            {
+                                (int a, string b) x;
+                                Console.WriteLine(x);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1047,31 +1047,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            // leading trivia
+                            int [||]i = 5;
+                            Console.WriteLine();
 
-                        Console.Write(i);
+                            Console.Write(i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
 
-                        // leading trivia
-                        int i = 5;
-                        Console.Write(i);
+                            // leading trivia
+                            int i = 5;
+                            Console.Write(i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1080,35 +1080,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        {
-                            Console.Write(i);
-                        }
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
-
+                        static void Main(string[] args)
                         {
                             // leading trivia
-                            int i = 5;
-                            Console.Write(i);
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            {
+                                Console.Write(i);
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
+
+                            {
+                                // leading trivia
+                                int i = 5;
+                                Console.Write(i);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1117,33 +1117,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            // leading trivia
+                            int [||]i = 5;
+                            Console.WriteLine();
 
-                        // Existing trivia
-                        Console.Write(i);
+                            // Existing trivia
+                            Console.Write(i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
 
-                        // leading trivia
-                        int i = 5;
-                        // Existing trivia
-                        Console.Write(i);
+                            // leading trivia
+                            int i = 5;
+                            // Existing trivia
+                            Console.Write(i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1152,37 +1152,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        {
-                            // Existing trivia
-                            Console.Write(i);
-                        }
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
-
+                        static void Main(string[] args)
                         {
                             // leading trivia
-                            int i = 5;
-                            // Existing trivia
-                            Console.Write(i);
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            {
+                                // Existing trivia
+                                Console.Write(i);
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
+
+                            {
+                                // leading trivia
+                                int i = 5;
+                                // Existing trivia
+                                Console.Write(i);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1191,40 +1191,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (false)
+                        static void Main(string[] args)
                         {
+                            if (false)
+                            {
+                            }
+
+                            // leading trivia
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            i = 0;
+                            Console.Write(i);
                         }
-
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        i = 0;
-                        Console.Write(i);
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (false)
+                        static void Main(string[] args)
                         {
+                            if (false)
+                            {
+                            }
+
+                            Console.WriteLine();
+
+                            // leading trivia
+                            int i = 0;
+                            Console.Write(i);
                         }
-
-                        Console.WriteLine();
-
-                        // leading trivia
-                        int i = 0;
-                        Console.Write(i);
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1233,44 +1233,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (false)
+                        static void Main(string[] args)
                         {
-                        }
+                            if (false)
+                            {
+                            }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        {
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
-
-                        Console.WriteLine();
-
-                        {
                             // leading trivia
-                            int i = 0;
-                            Console.Write(i);
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            {
+                                i = 0;
+                                Console.Write(i);
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            if (false)
+                            {
+                            }
+
+                            Console.WriteLine();
+
+                            {
+                                // leading trivia
+                                int i = 0;
+                                Console.Write(i);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1279,42 +1279,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (false)
+                        static void Main(string[] args)
                         {
+                            if (false)
+                            {
+                            }
+
+                            // leading trivia
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            // Existing trivia
+                            i = 0;
+                            Console.Write(i);
                         }
-
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        // Existing trivia
-                        i = 0;
-                        Console.Write(i);
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (false)
+                        static void Main(string[] args)
                         {
+                            if (false)
+                            {
+                            }
+
+                            Console.WriteLine();
+
+                            // leading trivia
+                            // Existing trivia
+                            int i = 0;
+                            Console.Write(i);
                         }
-
-                        Console.WriteLine();
-
-                        // leading trivia
-                        // Existing trivia
-                        int i = 0;
-                        Console.Write(i);
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1323,46 +1323,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (false)
+                        static void Main(string[] args)
                         {
-                        }
+                            if (false)
+                            {
+                            }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        {
-                            // Existing trivia
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
-
-                        Console.WriteLine();
-
-                        {
                             // leading trivia
-                            // Existing trivia
-                            int i = 0;
-                            Console.Write(i);
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            {
+                                // Existing trivia
+                                i = 0;
+                                Console.Write(i);
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            if (false)
+                            {
+                            }
+
+                            Console.WriteLine();
+
+                            {
+                                // leading trivia
+                                // Existing trivia
+                                int i = 0;
+                                Console.Write(i);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1371,32 +1371,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            // leading trivia
+                            int [||]i = 5;
+                            Console.WriteLine();
 
-                        i = 0;
-                        Console.Write(i);
+                            i = 0;
+                            Console.Write(i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
 
-                        // leading trivia
-                        int i = 0;
-                        Console.Write(i);
+                            // leading trivia
+                            int i = 0;
+                            Console.Write(i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1405,36 +1405,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        {
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
-
+                        static void Main(string[] args)
                         {
                             // leading trivia
-                            int i = 0;
-                            Console.Write(i);
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            {
+                                i = 0;
+                                Console.Write(i);
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
+
+                            {
+                                // leading trivia
+                                int i = 0;
+                                Console.Write(i);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1443,34 +1443,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            // leading trivia
+                            int [||]i = 5;
+                            Console.WriteLine();
 
-                        // Existing trivia
-                        i = 0;
-                        Console.Write(i);
+                            // Existing trivia
+                            i = 0;
+                            Console.Write(i);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Console.WriteLine();
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
 
-                        // leading trivia
-                        // Existing trivia
-                        int i = 0;
-                        Console.Write(i);
+                            // leading trivia
+                            // Existing trivia
+                            int i = 0;
+                            Console.Write(i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1479,38 +1479,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        {
-                            // Existing trivia
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
-
+                        static void Main(string[] args)
                         {
                             // leading trivia
-                            // Existing trivia
-                            int i = 0;
-                            Console.Write(i);
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            {
+                                // Existing trivia
+                                i = 0;
+                                Console.Write(i);
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine();
+
+                            {
+                                // leading trivia
+                                // Existing trivia
+                                int i = 0;
+                                Console.Write(i);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1519,40 +1519,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (true)
+                        static void Main(string[] args)
                         {
+                            if (true)
+                            {
+                            }
+
+                            // leading trivia
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            i = 0;
+                            Console.Write(i);
                         }
-
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        i = 0;
-                        Console.Write(i);
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (true)
+                        static void Main(string[] args)
                         {
+                            if (true)
+                            {
+                            }
+
+                            Console.WriteLine();
+
+                            // leading trivia
+                            int i = 0;
+                            Console.Write(i);
                         }
-
-                        Console.WriteLine();
-
-                        // leading trivia
-                        int i = 0;
-                        Console.Write(i);
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1561,44 +1561,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (true)
+                        static void Main(string[] args)
                         {
-                        }
+                            if (true)
+                            {
+                            }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        {
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
-
-                        Console.WriteLine();
-
-                        {
                             // leading trivia
-                            int i = 0;
-                            Console.Write(i);
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            {
+                                i = 0;
+                                Console.Write(i);
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            if (true)
+                            {
+                            }
+
+                            Console.WriteLine();
+
+                            {
+                                // leading trivia
+                                int i = 0;
+                                Console.Write(i);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1607,42 +1607,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (true)
+                        static void Main(string[] args)
                         {
+                            if (true)
+                            {
+                            }
+
+                            // leading trivia
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            // Existing trivia
+                            i = 0;
+                            Console.Write(i);
                         }
-
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        // Existing trivia
-                        i = 0;
-                        Console.Write(i);
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (true)
+                        static void Main(string[] args)
                         {
+                            if (true)
+                            {
+                            }
+
+                            Console.WriteLine();
+
+                            // leading trivia
+                            // Existing trivia
+                            int i = 0;
+                            Console.Write(i);
                         }
-
-                        Console.WriteLine();
-
-                        // leading trivia
-                        // Existing trivia
-                        int i = 0;
-                        Console.Write(i);
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1651,30 +1651,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                if (true)
-                {
-                }
+                    if (true)
+                    {
+                    }
 
-                // leading trivia
-                int [||]i = 5;
-                Console.WriteLine();
+                    // leading trivia
+                    int [||]i = 5;
+                    Console.WriteLine();
 
-                // Existing trivia
-                i = 0;
-                Console.Write(i);
-                """,
+                    // Existing trivia
+                    i = 0;
+                    Console.Write(i);
+                    """,
                 """
-                if (true)
-                {
-                }
+                    if (true)
+                    {
+                    }
 
-                Console.WriteLine();
+                    Console.WriteLine();
 
-                // leading trivia
-                // Existing trivia
-                int i = 0;
-                Console.Write(i);
-                """,
+                    // leading trivia
+                    // Existing trivia
+                    int i = 0;
+                    Console.Write(i);
+                    """,
                 Options.Regular
             );
         }
@@ -1684,46 +1684,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        if (true)
+                        static void Main(string[] args)
                         {
-                        }
+                            if (true)
+                            {
+                            }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
-
-                        {
-                            // Existing trivia
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
-
-                        Console.WriteLine();
-
-                        {
                             // leading trivia
-                            // Existing trivia
-                            int i = 0;
-                            Console.Write(i);
+                            int [||]i = 5;
+                            Console.WriteLine();
+
+                            {
+                                // Existing trivia
+                                i = 0;
+                                Console.Write(i);
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            if (true)
+                            {
+                            }
+
+                            Console.WriteLine();
+
+                            {
+                                // leading trivia
+                                // Existing trivia
+                                int i = 0;
+                                Console.Write(i);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1732,34 +1732,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                if (true)
-                {
-                }
+                    if (true)
+                    {
+                    }
 
-                // leading trivia
-                int [||]i = 5;
-                Console.WriteLine();
-
-                {
-                    // Existing trivia
-                    i = 0;
-                    Console.Write(i);
-                }
-                """,
-                """
-                if (true)
-                {
-                }
-
-                Console.WriteLine();
-
-                {
                     // leading trivia
-                    // Existing trivia
-                    int i = 0;
-                    Console.Write(i);
-                }
-                """,
+                    int [||]i = 5;
+                    Console.WriteLine();
+
+                    {
+                        // Existing trivia
+                        i = 0;
+                        Console.Write(i);
+                    }
+                    """,
+                """
+                    if (true)
+                    {
+                    }
+
+                    Console.WriteLine();
+
+                    {
+                        // leading trivia
+                        // Existing trivia
+                        int i = 0;
+                        Console.Write(i);
+                    }
+                    """,
                 Options.Regular
             );
         }
@@ -1769,29 +1769,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                  static void Main(string[] args)
-                  {
-                    Method<string>();
-                  }
-
-                  public static void Method<T>()
-                  { 
-                    [|T t|];
-                    void Local<T>()
+                    class Program
                     {
-                      Out(out t);
-                      Console.WriteLine(t);
-                    }
-                    Local<int>();
-                  }
+                      static void Main(string[] args)
+                      {
+                        Method<string>();
+                      }
 
-                  public static void Out<T>(out T t) => t = default;
-                }
-                """
+                      public static void Method<T>()
+                      {
+                        [|T t|];
+                        void Local<T>()
+                        {
+                          Out(out t);
+                          Console.WriteLine(t);
+                        }
+                        Local<int>();
+                      }
+
+                      public static void Out<T>(out T t) => t = default;
+                    }
+                    """
             );
         }
 
@@ -1800,32 +1800,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                  static void Main(string[] args)
-                  {
-                    Method<string>();
-                  }
-
-                  public static void Method<T>()
-                  { 
-                    void Local<T>()
+                    class Program
                     {
-                        [|T t|];
-                        void InnerLocal<T>()
-                        {
-                          Out(out t);
-                          Console.WriteLine(t);
-                        }
-                    }
-                    Local<int>();
-                  }
+                      static void Main(string[] args)
+                      {
+                        Method<string>();
+                      }
 
-                  public static void Out<T>(out T t) => t = default;
-                }
-                """
+                      public static void Method<T>()
+                      {
+                        void Local<T>()
+                        {
+                            [|T t|];
+                            void InnerLocal<T>()
+                            {
+                              Out(out t);
+                              Console.WriteLine(t);
+                            }
+                        }
+                        Local<int>();
+                      }
+
+                      public static void Out<T>(out T t) => t = default;
+                    }
+                    """
             );
         }
 
@@ -1834,31 +1834,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Method<string>();
-                    }
-
-                    public static void Method<T>()
-                    { 
-                        [|T t|];
-                        void Local<T>()
+                        static void Main(string[] args)
                         {
-                            { // <-- note this set of added braces
-                                Out(out t);
-                                Console.WriteLine(t);
-                            }
+                            Method<string>();
                         }
-                        Local<int>();
-                    }
 
-                    public static void Out<T>(out T t) => t = default;
-                }
-                """
+                        public static void Method<T>()
+                        {
+                            [|T t|];
+                            void Local<T>()
+                            {
+                                { // <-- note this set of added braces
+                                    Out(out t);
+                                    Console.WriteLine(t);
+                                }
+                            }
+                            Local<int>();
+                        }
+
+                        public static void Out<T>(out T t) => t = default;
+                    }
+                    """
             );
         }
 
@@ -1867,33 +1867,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Method<string>();
-                    }
-
-                    public static void Method<T>()
-                    {
-                        { // <-- note this set of added braces
-                            [|T t|];
-                            void Local<T>()
-                            {
-                                { // <-- and my axe
-                                    Out(out t);
-                                    Console.WriteLine(t);
-                                }
-                            }
-                            Local<int>();
+                        static void Main(string[] args)
+                        {
+                            Method<string>();
                         }
-                    }
 
-                    public static void Out<T>(out T t) => t = default;
-                }
-                """
+                        public static void Method<T>()
+                        {
+                            { // <-- note this set of added braces
+                                [|T t|];
+                                void Local<T>()
+                                {
+                                    { // <-- and my axe
+                                        Out(out t);
+                                        Console.WriteLine(t);
+                                    }
+                                }
+                                Local<int>();
+                            }
+                        }
+
+                        public static void Out<T>(out T t) => t = default;
+                    }
+                    """
             );
         }
 
@@ -1902,37 +1902,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        switch (true)
+                        void M()
                         {
-                            case true:
-                                int [||]x = 0;
-                                System.Console.WriteLine();
-                                System.Console.WriteLine(x);
-                                break;
+                            switch (true)
+                            {
+                                case true:
+                                    int [||]x = 0;
+                                    System.Console.WriteLine();
+                                    System.Console.WriteLine(x);
+                                    break;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        switch (true)
+                        void M()
                         {
-                            case true:
-                                System.Console.WriteLine();
-                                int x = 0;
-                                System.Console.WriteLine(x);
-                                break;
+                            switch (true)
+                            {
+                                case true:
+                                    System.Console.WriteLine();
+                                    int x = 0;
+                                    System.Console.WriteLine(x);
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1941,34 +1941,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
-                        switch (true)
+                        void M()
                         {
-                            case true:
-                                x = 0;
-                                break;
+                            int [||]x;
+                            switch (true)
+                            {
+                                case true:
+                                    x = 0;
+                                    break;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        switch (true)
+                        void M()
                         {
-                            case true:
-                                int x = 0;
-                                break;
+                            switch (true)
+                            {
+                                case true:
+                                    int x = 0;
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1977,22 +1977,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                int [||]x;
-                switch (true)
-                {
-                    case true:
-                        x = 0;
-                        break;
-                }
-                """,
+                    int [||]x;
+                    switch (true)
+                    {
+                        case true:
+                            x = 0;
+                            break;
+                    }
+                    """,
                 """
-                switch (true)
-                {
-                    case true:
-                        int x = 0;
-                        break;
-                }
-                """,
+                    switch (true)
+                    {
+                        case true:
+                            int x = 0;
+                            break;
+                    }
+                    """,
                 Options.Regular
             );
         }
@@ -2002,43 +2002,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
-                        System.Console.WriteLine();
-                        switch (true)
+                        void M()
                         {
-                            case true:
-                                x = 0;
-                                break;
-                            case false:
-                                x = 0;
-                                break;
+                            int [||]x;
+                            System.Console.WriteLine();
+                            switch (true)
+                            {
+                                case true:
+                                    x = 0;
+                                    break;
+                                case false:
+                                    x = 0;
+                                    break;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        System.Console.WriteLine();
-                        int x;
-                        switch (true)
+                        void M()
                         {
-                            case true:
-                                x = 0;
-                                break;
-                            case false:
-                                x = 0;
-                                break;
+                            System.Console.WriteLine();
+                            int x;
+                            switch (true)
+                            {
+                                case true:
+                                    x = 0;
+                                    break;
+                                case false:
+                                    x = 0;
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2047,31 +2047,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestAsync(
                 """
-                int [||]x;
-                System.Console.WriteLine();
-                switch (true)
-                {
-                    case true:
-                        x = 0;
-                        break;
-                    case false:
-                        x = 0;
-                        break;
-                }
-                """,
+                    int [||]x;
+                    System.Console.WriteLine();
+                    switch (true)
+                    {
+                        case true:
+                            x = 0;
+                            break;
+                        case false:
+                            x = 0;
+                            break;
+                    }
+                    """,
                 """
-                System.Console.WriteLine();
-                int x;
-                switch (true)
-                {
-                    case true:
-                        x = 0;
-                        break;
-                    case false:
-                        x = 0;
-                        break;
-                }
-                """,
+                    System.Console.WriteLine();
+                    int x;
+                    switch (true)
+                    {
+                        case true:
+                            x = 0;
+                            break;
+                        case false:
+                            x = 0;
+                            break;
+                    }
+                    """,
                 Options.Regular
             );
         }
@@ -2081,23 +2081,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int [||]x;
-                        switch (true)
+                        void M()
                         {
-                            case true:
-                                x = 0;
-                                break;
-                            case false:
-                                x = 0;
-                                break;
+                            int [||]x;
+                            switch (true)
+                            {
+                                case true:
+                                    x = 0;
+                                    break;
+                                case false:
+                                    x = 0;
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2106,17 +2106,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                int [||]x;
-                switch (true)
-                {
-                    case true:
-                        x = 0;
-                        break;
-                    case false:
-                        x = 0;
-                        break;
-                }
-                """
+                    int [||]x;
+                    switch (true)
+                    {
+                        case true:
+                            x = 0;
+                            break;
+                        case false:
+                            x = 0;
+                            break;
+                    }
+                    """
             );
         }
     }

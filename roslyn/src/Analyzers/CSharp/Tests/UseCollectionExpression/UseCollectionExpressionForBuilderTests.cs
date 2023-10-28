@@ -26,7 +26,7 @@ public partial class UseCollectionExpressionForBuilderTests
         internal sealed partial class ArrayBuilder<T>
         {
             public void Add(T item) { }
-        
+
             public void AddRange(ArrayBuilder<T> items) { }
             public void AddRange(System.Collections.Immutable.ImmutableArray<T> items) { }
             public void AddRange(System.Collections.Generic.IEnumerable<T> items) { }
@@ -37,7 +37,7 @@ public partial class UseCollectionExpressionForBuilderTests
             public System.Collections.Immutable.ImmutableArray<T> ToImmutable() => default;
             public System.Collections.Immutable.ImmutableArray<T> ToImmutableAndClear() => default;
             public System.Collections.Immutable.ImmutableArray<T> ToImmutableAndFree() => default;
-        
+
             public T[] ToArray() => default;
             public T[] ToArrayAndFree() => default;
 
@@ -136,16 +136,16 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    ImmutableArray<int> M()
+                    class C
                     {
-                        return [0];
+                        ImmutableArray<int> M()
+                        {
+                            return [0];
+                        }
                     }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -173,16 +173,16 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = (ImmutableArray<int>)[0];
+                        void M()
+                        {
+                            var v = (ImmutableArray<int>)[0];
+                        }
                     }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -238,18 +238,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Goo([0]);
+                        void M()
+                        {
+                            Goo([0]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -279,18 +279,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Goo([0]);
+                        void M()
+                        {
+                            Goo([0]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -320,18 +320,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Goo([0]);
+                        void M()
+                        {
+                            Goo([0]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -361,18 +361,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Goo([0]);
+                        void M()
+                        {
+                            Goo([0]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -459,18 +459,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x)
+                    class C
                     {
-                        Goo([0, .. x]);
+                        void M(int[] x)
+                        {
+                            Goo([0, .. x]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -505,18 +505,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x)
+                    class C
                     {
-                        Goo([0, .. x]);
+                        void M(int[] x)
+                        {
+                            Goo([0, .. x]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -619,18 +619,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x, int[] y)
+                    class C
                     {
-                        Goo([0, .. x, .. y]);
+                        void M(int[] x, int[] y)
+                        {
+                            Goo([0, .. x, .. y]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -669,18 +669,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x, int[] y)
+                    class C
                     {
-                        Goo([.. x, 0, .. y]);
+                        void M(int[] x, int[] y)
+                        {
+                            Goo([.. x, 0, .. y]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -719,18 +719,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x, int[] y)
+                    class C
                     {
-                        Goo([.. x, .. y, 0]);
+                        void M(int[] x, int[] y)
+                        {
+                            Goo([.. x, .. y, 0]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -766,18 +766,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x, bool b)
+                    class C
                     {
-                        Goo([.. {|CS0173:b ? [0] : []|}]);
+                        void M(int[] x, bool b)
+                        {
+                            Goo([.. {|CS0173:b ? [0] : []|}]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -811,18 +811,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x, bool b)
+                    class C
                     {
-                        Goo([b ? 0 : 1]);
+                        void M(int[] x, bool b)
+                        {
+                            Goo([b ? 0 : 1]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -860,18 +860,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x, bool b)
+                    class C
                     {
-                        Goo([.. {|CS0173:b ? [0] : []|}]);
+                        void M(int[] x, bool b)
+                        {
+                            Goo([.. {|CS0173:b ? [0] : []|}]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -909,18 +909,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x, bool b)
+                    class C
                     {
-                        Goo([b ? 0 : 1]);
+                        void M(int[] x, bool b)
+                        {
+                            Goo([b ? 0 : 1]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -950,18 +950,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x)
+                    class C
                     {
-                        Goo([.. x]);
+                        void M(int[] x)
+                        {
+                            Goo([.. x]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -991,18 +991,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x)
+                    class C
                     {
-                        Goo([1]);
+                        void M(int[] x)
+                        {
+                            Goo([1]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1032,18 +1032,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M(int[] x)
+                    class C
                     {
-                        Goo([1, 2, 3]);
+                        void M(int[] x)
+                        {
+                            Goo([1, 2, 3]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1100,18 +1100,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Goo([0]);
+                        void M()
+                        {
+                            Goo([0]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1141,18 +1141,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Goo([0]);
+                        void M()
+                        {
+                            Goo([0]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1182,18 +1182,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Goo([0]);
+                        void M()
+                        {
+                            Goo([0]);
+                        }
+
+                        void Goo(ImmutableArray<int> values) { }
                     }
-                
-                    void Goo(ImmutableArray<int> values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1223,18 +1223,18 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Goo([0]);
+                        void M()
+                        {
+                            Goo([0]);
+                        }
+
+                        void Goo(int[] values) { }
                     }
-                
-                    void Goo(int[] values) { }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1320,20 +1320,20 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    ImmutableArray<int> M()
+                    class C
                     {
-                        return
-                        [
-                            // Leading
-                            0, // Trailing
-                        ];
+                        ImmutableArray<int> M()
+                        {
+                            return
+                            [
+                                // Leading
+                                0, // Trailing
+                            ];
+                        }
                     }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1362,20 +1362,20 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    ImmutableArray<int> M()
+                    class C
                     {
-                        return
-                        [
-                            1 +
-                                2,
-                        ];
+                        ImmutableArray<int> M()
+                        {
+                            return
+                            [
+                                1 +
+                                    2,
+                            ];
+                        }
                     }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1406,22 +1406,22 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    ImmutableArray<int> M()
+                    class C
                     {
-                        return
-                        [
-                            1 +
-                                2,
-                            3 +
-                                4,
-                        ];
+                        ImmutableArray<int> M()
+                        {
+                            return
+                            [
+                                1 +
+                                    2,
+                                3 +
+                                    4,
+                            ];
+                        }
                     }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1468,10 +1468,10 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                ImmutableArray<int> array = [0];
-                """ + s_arrayBuilderApi,
+                    ImmutableArray<int> array = [0];
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             TestState = { OutputKind = OutputKind.ConsoleApplication, },
@@ -1498,17 +1498,17 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                ImmutableArray<int> array =
-                [
-                    0,
-                    1 +
-                        2,
-                    3 +
-                        4,
-                ];
-                """ + s_arrayBuilderApi,
+                    ImmutableArray<int> array =
+                    [
+                        0,
+                        1 +
+                            2,
+                        3 +
+                            4,
+                    ];
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             TestState = { OutputKind = OutputKind.ConsoleApplication, },
@@ -1539,16 +1539,16 @@ public partial class UseCollectionExpressionForBuilderTests
                 + s_arrayBuilderApi,
             FixedCode =
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    ImmutableArray<ImmutableArray<int>> M()
+                    class C
                     {
-                        return [[0]];
+                        ImmutableArray<ImmutableArray<int>> M()
+                        {
+                            return [[0]];
+                        }
                     }
-                }
-                """ + s_arrayBuilderApi,
+                    """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             NumberOfFixAllIterations = 2,
@@ -1582,16 +1582,16 @@ public partial class UseCollectionExpressionForBuilderTests
             ).ReplaceLineEndings(endOfLine),
             FixedCode = (
                 """
-                using System.Collections.Immutable;
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    ImmutableArray<ImmutableArray<int>> M()
+                    class C
                     {
-                        return [[0]];
+                        ImmutableArray<ImmutableArray<int>> M()
+                        {
+                            return [[0]];
+                        }
                     }
-                }
-                """ + s_arrayBuilderApi
+                    """ + s_arrayBuilderApi
             ).ReplaceLineEndings(endOfLine),
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,

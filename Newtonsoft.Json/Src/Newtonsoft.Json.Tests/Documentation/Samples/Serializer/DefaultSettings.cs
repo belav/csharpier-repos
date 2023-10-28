@@ -38,7 +38,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 using NUnit.Framework;
 #endif
 
-
 using Staff = Newtonsoft.Json.Tests.TestObjects.Organization.Employee;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer

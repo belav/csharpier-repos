@@ -196,7 +196,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 
                     foreach (int i in source.Where(
                            x   =>
-                           { 
+                           {
                                 if (x <= 3)
                     return true;
                                    else if (x >= 7)

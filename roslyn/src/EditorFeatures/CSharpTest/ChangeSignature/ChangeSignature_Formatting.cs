@@ -137,7 +137,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
             var markup = """
                 class C
                 {
-                    void $$Method(int a, 
+                    void $$Method(int a,
                         int b)
                     {
                         Method(1,

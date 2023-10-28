@@ -844,15 +844,15 @@ public partial class C
     public void Generic_01()
     {
         var source = """
-        using System;
+            using System;
 
-        C<int>.M(1);
+            C<int>.M(1);
 
-        file class C<T>
-        {
-            public static void M(T t) { Console.Write(t); }
-        }
-        """;
+            file class C<T>
+            {
+                public static void M(T t) { Console.Write(t); }
+            }
+            """;
 
         var verifier = CompileAndVerify(
             SyntaxFactory.ParseSyntaxTree(
@@ -907,15 +907,15 @@ public partial class C
     public void BadFileNames_01()
     {
         var source = """
-        using System;
+            using System;
 
-        C.M();
+            C.M();
 
-        file class C
-        {
-            public static void M() { Console.Write(1); }
-        }
-        """;
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """;
 
         const string expectedMetadataName =
             "<My__File>FCE8825365B7010B8DE2ACFBE270B3B795D1AB2633451F8A6C1A94FB1933D5E4E__C";
@@ -952,15 +952,15 @@ public partial class C
     public void BadFileNames_02()
     {
         var source = """
-        using System;
+            using System;
 
-        C.M();
+            C.M();
 
-        file class C
-        {
-            public static void M() { Console.Write(1); }
-        }
-        """;
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """;
 
         var verifier = CompileAndVerify(
             SyntaxFactory.ParseSyntaxTree(
@@ -1003,15 +1003,15 @@ public partial class C
         var path = "path/to/file.cs";
         var source1 = SyntaxFactory.ParseSyntaxTree(
             """
-            using System;
+                using System;
 
-            C.M();
+                C.M();
 
-            file class C
-            {
-                public static void M() { Console.Write(1); }
-            }
-            """,
+                file class C
+                {
+                    public static void M() { Console.Write(1); }
+                }
+                """,
             options: TestOptions.RegularPreview,
             path: path,
             encoding: Encoding.Default
@@ -1054,30 +1054,30 @@ public partial class C
         var path = "path/to/file.cs";
         var source1 = SyntaxFactory.ParseSyntaxTree(
             """
-            using System;
+                using System;
 
-            C.M();
+                C.M();
 
-            file class C
-            {
-                public static void M() { Console.Write(1); }
-            }
-            """,
+                file class C
+                {
+                    public static void M() { Console.Write(1); }
+                }
+                """,
             options: TestOptions.RegularPreview,
             path: path,
             encoding: Encoding.Default
         );
         var source2 = SyntaxFactory.ParseSyntaxTree(
             """
-            using System;
+                using System;
 
-            namespace NS;
+                namespace NS;
 
-            file class C
-            {
-                public static void M() { Console.Write(2); }
-            }
-            """,
+                file class C
+                {
+                    public static void M() { Console.Write(2); }
+                }
+                """,
             options: TestOptions.RegularPreview,
             path: path,
             encoding: Encoding.Default
@@ -1119,15 +1119,15 @@ public partial class C
         var path = "path/to/file.cs";
         var source1 = SyntaxFactory.ParseSyntaxTree(
             """
-            using System;
+                using System;
 
-            namespace NS1.NS2;
+                namespace NS1.NS2;
 
-            file class C<T>
-            {
-                public static void M() { Console.Write(1); }
-            }
-            """,
+                file class C<T>
+                {
+                    public static void M() { Console.Write(1); }
+                }
+                """,
             options: TestOptions.RegularPreview,
             path: path,
             encoding: Encoding.Default
@@ -1169,15 +1169,15 @@ public partial class C
     {
         var source1 = SyntaxFactory.ParseSyntaxTree(
             """
-            using System;
+                using System;
 
-            C.M();
+                C.M();
 
-            file class C
-            {
-                public static void M() { Console.Write(1); }
-            }
-            """,
+                file class C
+                {
+                    public static void M() { Console.Write(1); }
+                }
+                """,
             options: TestOptions.RegularPreview,
             path: "path/to/file.cs",
             encoding: Encoding.Default
@@ -1278,15 +1278,15 @@ public partial class C
     public void BadFileNames_03(char badChar)
     {
         var source = """
-        using System;
+            using System;
 
-        C.M();
+            C.M();
 
-        file class C
-        {
-            public static void M() { Console.Write(1); }
-        }
-        """;
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """;
 
         var comp = CreateCompilation(
             SyntaxFactory.ParseSyntaxTree(
@@ -1366,15 +1366,15 @@ public partial class C
     public void Pdb_01()
     {
         var source = """
-        using System;
+            using System;
 
-        C.M();
+            C.M();
 
-        file class C
-        {
-            public static void M() { Console.Write(1); }
-        }
-        """;
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """;
 
         var verifier = CompileAndVerify(
             SyntaxFactory.ParseSyntaxTree(
@@ -3135,19 +3135,19 @@ public partial class C
     public void BaseClause_06()
     {
         var source = """
-        file class C<T> { }
+            file class C<T> { }
 
-        class D : C<int> { } // 1
-        file class E : C<int> { }
+            class D : C<int> { } // 1
+            file class E : C<int> { }
 
-        file interface I<T> { }
+            file interface I<T> { }
 
-        class F : I<int> { } // ok
-        file class G : I<int> { }
+            class F : I<int> { } // ok
+            file class G : I<int> { }
 
-        interface J : I<int> { } // 2
-        file interface K : I<int> { }
-        """;
+            interface J : I<int> { } // 2
+            file interface K : I<int> { }
+            """;
 
         var comp = CreateCompilation((source, "Program.cs"));
         comp.VerifyEmitDiagnostics(
@@ -5461,8 +5461,8 @@ public partial class C
     {
         var tree = SyntaxFactory.ParseSyntaxTree(
             """
-            partial file class C { }
-            """,
+                partial file class C { }
+                """,
             path: "file1.cs",
             encoding: Encoding.Default
         );

@@ -10075,9 +10075,9 @@ class C
         {
             var source = """
                 class C(string str) {
-                	public void Reset() {
-                		str = string.Empty;
-                	}
+                    public void Reset() {
+                        str = string.Empty;
+                    }
                 }
                 """;
 

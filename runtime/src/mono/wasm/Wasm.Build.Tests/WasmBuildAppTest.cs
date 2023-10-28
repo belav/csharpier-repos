@@ -129,13 +129,13 @@ namespace Wasm.Build.Tests
             TestMain(
                 "main_exception",
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                public class TestClass {
-                    public static int Main() => throw new Exception("MessageFromMyException");
-                }
-                """,
+                    public class TestClass {
+                        public static int Main() => throw new Exception("MessageFromMyException");
+                    }
+                    """,
                 buildArgs,
                 host,
                 id,

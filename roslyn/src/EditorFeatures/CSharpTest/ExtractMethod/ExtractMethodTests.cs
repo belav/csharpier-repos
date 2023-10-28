@@ -1683,7 +1683,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         // unassigned = ReturnVal(0);
                         [|unassigned = unassigned + 10;|]
 
-                        // read 
+                        // read
                         // int newVar = unassigned;
 
                         // write
@@ -1710,7 +1710,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         // unassigned = ReturnVal(0);
                         unassigned = NewMethod(unassigned);
 
-                        // read 
+                        // read
                         // int newVar = unassigned;
 
                         // write
@@ -1750,7 +1750,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         [|// unassigned = ReturnVal(0);
                         unassigned = unassigned + 10;
 
-                        // read|] 
+                        // read|]
                         // int newVar = unassigned;
 
                         // write
@@ -1786,7 +1786,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         // unassigned = ReturnVal(0);
                         unassigned = unassigned + 10;
 
-                        // read 
+                        // read
                         return unassigned;
                     }
                 }
@@ -1821,32 +1821,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             //        NewMethod();
             await TestExtractMethodAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // a
-                        // b
-                        [|System.Console.WriteLine();|]
+                        void M()
+                        {
+                            // a
+                            // b
+                            [|System.Console.WriteLine();|]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // a
-                        // b
-                        NewMethod();
-                    }
+                        void M()
+                        {
+                            // a
+                            // b
+                            NewMethod();
+                        }
 
-                    private static void NewMethod()
-                    {
-                        System.Console.WriteLine();
+                        private static void NewMethod()
+                        {
+                            System.Console.WriteLine();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -6624,7 +6624,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         int i = 10;
                         [|int j = j + i;|]
                         Console.Write(i);
-                        Console.Write(j); 
+                        Console.Write(j);
                     }
                 }
                 """;
@@ -8254,7 +8254,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                 using System.Collections.Generic;
                 using System.Linq;
 
-                class 
+                class
                 {
                     static void Main(string[] args)
                     {
@@ -8278,7 +8278,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                     {
                         #if A
                             [|Console.Write(5);|]
-                        #endif 
+                        #endif
                     }
                 }
                 """;
@@ -11270,12 +11270,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             using var workspace = TestWorkspace.Create(
                 XElement.Parse(
                     """
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">  
-                        typeof(string).$$Name
-                    </Submission>
-                </Workspace>
-                """
+                        <Workspace>
+                            <Submission Language="C#" CommonReferences="true">
+                                typeof(string).$$Name
+                            </Submission>
+                        </Workspace>
+                        """
                 ),
                 workspaceKind: WorkspaceKind.Interactive,
                 composition: EditorTestCompositions.EditorFeaturesWpf

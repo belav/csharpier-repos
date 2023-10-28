@@ -20,27 +20,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        $$
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        lock (this)
+                        public void Method()
                         {
                             $$
                         }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            lock (this)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -49,15 +49,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                $$
-                """,
+                    $$
+                    """,
                 ItemToCommit,
                 """
-                lock (this)
-                {
-                    $$
-                }
-                """
+                    lock (this)
+                    {
+                        $$
+                    }
+                    """
             );
         }
 
@@ -66,11 +66,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                namespace Namespace
-                {
-                    $$
-                }
-                """,
+                    namespace Namespace
+                    {
+                        $$
+                    }
+                    """,
                 ItemToCommit
             );
         }
@@ -80,9 +80,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                namespace Namespace;
-                $$
-                """,
+                    namespace Namespace;
+                    $$
+                    """,
                 ItemToCommit
             );
         }
@@ -92,27 +92,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public Program()
+                    class Program
                     {
-                        $$
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public Program()
-                    {
-                        lock (this)
+                        public Program()
                         {
                             $$
                         }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public Program()
+                        {
+                            lock (this)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -121,11 +121,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemIsAbsentAsync(
                 """
-                class Program
-                {
-                    $$
-                }
-                """,
+                    class Program
+                    {
+                        $$
+                    }
+                    """,
                 ItemToCommit
             );
         }
@@ -135,33 +135,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        void LocalFunction()
+                        public void Method()
                         {
-                            $$
-                        }
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        void LocalFunction()
-                        {
-                            lock (this)
+                            void LocalFunction()
                             {
                                 $$
                             }
                         }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            void LocalFunction()
+                            {
+                                lock (this)
+                                {
+                                    $$
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -170,33 +170,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        var action = delegate()
+                        public void Method()
                         {
-                            $$
-                        };
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        var action = delegate()
-                        {
-                            lock (this)
+                            var action = delegate()
                             {
                                 $$
-                            }
-                        };
+                            };
+                        }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            var action = delegate()
+                            {
+                                lock (this)
+                                {
+                                    $$
+                                }
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -205,33 +205,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        var action = () =>
+                        public void Method()
                         {
-                            $$
-                        };
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        var action = () =>
-                        {
-                            lock (this)
+                            var action = () =>
                             {
                                 $$
-                            }
-                        };
+                            };
+                        }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            var action = () =>
+                            {
+                                lock (this)
+                                {
+                                    $$
+                                }
+                            };
+                        }
+                    }
+                    """
             );
         }
     }

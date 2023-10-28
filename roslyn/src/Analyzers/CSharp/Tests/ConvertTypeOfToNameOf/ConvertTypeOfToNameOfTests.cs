@@ -240,9 +240,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
             var text = """
                 class Test
                 {
-                    class Goo<T> 
-                    { 
-                        void M() 
+                    class Goo<T>
+                    {
+                        void M()
                         {
                             _ = typeof(Goo<int>).Name;
                         }
@@ -258,11 +258,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
             var text = """
                 class Test
                 {
-                    class Goo<T> 
-                    { 
-                        class Bar 
-                        { 
-                            void M() 
+                    class Goo<T>
+                    {
+                        class Bar
+                        {
+                            void M()
                             {
                                 _ = [|typeof(Bar).Name|];
                             }
@@ -273,11 +273,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
             var expected = """
                 class Test
                 {
-                    class Goo<T> 
-                    { 
-                        class Bar 
-                        { 
-                            void M() 
+                    class Goo<T>
+                    {
+                        class Bar
+                        {
+                            void M()
                             {
                                 _ = nameof(Bar);
                             }

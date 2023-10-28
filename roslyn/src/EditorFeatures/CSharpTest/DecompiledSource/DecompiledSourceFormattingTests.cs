@@ -25,24 +25,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
             await TestAsync(
                 """
-                class C {
-                  void M() {
-                    if (true) {
+                    class C {
+                      void M() {
+                        if (true) {
+                        }
+                      }
                     }
-                  }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
+                            if (true)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -51,27 +51,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
             await TestAsync(
                 """
-                class C {
-                  void M() {
-                    if (true) {
-                    }
-                    return;
-                  }
-                }
-                """,
-                """
-                class C
-                {
-                    void M()
-                    {
-                        if (true)
-                        {
+                    class C {
+                      void M() {
+                        if (true) {
                         }
-
                         return;
+                      }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M()
+                        {
+                            if (true)
+                            {
+                            }
+
+                            return;
+                        }
+                    }
+                    """
             );
         }
 
@@ -80,30 +80,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
             await TestAsync(
                 """
-                class C {
-                  void M() {
-                    if (true) {
-                    } else {
-                    return;
-                }
-                  }
-                }
-                """,
+                    class C {
+                      void M() {
+                        if (true) {
+                        } else {
+                        return;
+                    }
+                      }
+                    }
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
-                        }
-                        else
-                        {
-                            return;
+                            if (true)
+                            {
+                            }
+                            else
+                            {
+                                return;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -112,32 +112,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
             await TestAsync(
                 """
-                class C {
-                  void M() {
-                    try {
-                    } catch {
-                    } finally {
+                    class C {
+                      void M() {
+                        try {
+                        } catch {
+                        } finally {
+                        }
+                      }
                     }
-                  }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        try
+                        void M()
                         {
-                        }
-                        catch
-                        {
-                        }
-                        finally
-                        {
+                            try
+                            {
+                            }
+                            catch
+                            {
+                            }
+                            finally
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -146,24 +146,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
             await TestAsync(
                 """
-                class C {
-                  void M() {
-                    do {
-                    } while(true);
-                  }
-                }
-                """,
-                """
-                class C
-                {
-                    void M()
-                    {
-                        do
-                        {
-                        } while (true);
+                    class C {
+                      void M() {
+                        do {
+                        } while(true);
+                      }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M()
+                        {
+                            do
+                            {
+                            } while (true);
+                        }
+                    }
+                    """
             );
         }
 
@@ -172,29 +172,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
             await TestAsync(
                 """
-                class C {
-                  void M() {
-                    if (true) {
+                    class C {
+                      void M() {
                         if (true) {
+                            if (true) {
+                            }
                         }
+                      }
                     }
-                  }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
                             if (true)
                             {
+                                if (true)
+                                {
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -203,58 +203,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
             await TestAsync(
                 """
-                class C {
-                  void M() {
-                    if (true) {
+                    class C {
+                      void M() {
+                        if (true) {
+                        }
+                        while (true) {
+                        }
+                        switch (true) {
+                        }
+                        try {
+                        } finally {
+                        }
+                        using (null) {
+                        }
+                        foreach (var x in y) {
+                        }
+                      }
                     }
-                    while (true) {
-                    }
-                    switch (true) {
-                    }
-                    try {
-                    } finally {
-                    }
-                    using (null) {
-                    }
-                    foreach (var x in y) {
-                    }
-                  }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
-                        }
+                            if (true)
+                            {
+                            }
 
-                        while (true)
-                        {
-                        }
+                            while (true)
+                            {
+                            }
 
-                        switch (true)
-                        {
-                        }
+                            switch (true)
+                            {
+                            }
 
-                        try
-                        {
-                        }
-                        finally
-                        {
-                        }
+                            try
+                            {
+                            }
+                            finally
+                            {
+                            }
 
-                        using (null)
-                        {
-                        }
+                            using (null)
+                            {
+                            }
 
-                        foreach (var x in y)
-                        {
+                            foreach (var x in y)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 

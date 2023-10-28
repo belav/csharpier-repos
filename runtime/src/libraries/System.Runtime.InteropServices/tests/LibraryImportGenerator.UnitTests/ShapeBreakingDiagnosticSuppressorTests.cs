@@ -24,40 +24,40 @@ namespace LibraryImportGenerator.UnitTests
         {
             await VerifySuppressorAsync(
                 """
-                using System;
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices.Marshalling;
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices.Marshalling;
 
-                struct S
-                {
-                    public bool b;
-                };
-
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
-                static class Marshaller
-                {
-                    public struct ManagedToUnmanagedIn
+                    struct S
                     {
-                        public static int BufferSize { get; } = 1;
+                        public bool b;
+                    };
 
-                        public void {|#0:FromManaged|}(S s) {}
+                    [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
+                    static class Marshaller
+                    {
+                        public struct ManagedToUnmanagedIn
+                        {
+                            public static int BufferSize { get; } = 1;
 
-                        public void {|#1:FromManaged|}(S s, Span<byte> buffer){}
+                            public void {|#0:FromManaged|}(S s) {}
 
-                        public ManagedToUnmanagedIn {|#2:ToUnmanaged|}() => default;
+                            public void {|#1:FromManaged|}(S s, Span<byte> buffer){}
 
-                        public void {|#3:FromUnmanaged|}(ManagedToUnmanagedIn unmanaged) {}
+                            public ManagedToUnmanagedIn {|#2:ToUnmanaged|}() => default;
 
-                        public S {|#4:ToManaged|}() => default;
+                            public void {|#3:FromUnmanaged|}(ManagedToUnmanagedIn unmanaged) {}
 
-                        public void {|#5:Free|}() {}
+                            public S {|#4:ToManaged|}() => default;
 
-                        public void {|#6:OnInvoked|}() {}
+                            public void {|#5:Free|}() {}
 
-                        public ref byte {|#7:GetPinnableReference|}() => ref Unsafe.NullRef<byte>();
+                            public void {|#6:OnInvoked|}() {}
+
+                            public ref byte {|#7:GetPinnableReference|}() => ref Unsafe.NullRef<byte>();
+                        }
                     }
-                }
-                """,
+                    """,
                 SuppressedDiagnostic(
                         ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
                         DiagnosticSeverity.Info
@@ -106,41 +106,41 @@ namespace LibraryImportGenerator.UnitTests
         {
             await VerifySuppressorAsync(
                 """
-                using System;
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices.Marshalling;
+                    using System;
+                    using System.Runtime.CompilerServices;
+                    using System.Runtime.InteropServices.Marshalling;
 
-                struct S
-                {
-                    public bool b;
-                };
-
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller<>.ManagedToUnmanagedIn))]
-                [ContiguousCollectionMarshaller]
-                static class Marshaller<TNative>
-                {
-                    public struct ManagedToUnmanagedIn
+                    struct S
                     {
-                        public void {|#0:FromManaged|}(S s) {}
+                        public bool b;
+                    };
 
-                        public void {|#1:FromManaged|}(S s, Span<byte> buffer){}
+                    [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller<>.ManagedToUnmanagedIn))]
+                    [ContiguousCollectionMarshaller]
+                    static class Marshaller<TNative>
+                    {
+                        public struct ManagedToUnmanagedIn
+                        {
+                            public void {|#0:FromManaged|}(S s) {}
 
-                        public ManagedToUnmanagedIn {|#2:ToUnmanaged|}() => default;
+                            public void {|#1:FromManaged|}(S s, Span<byte> buffer){}
 
-                        public void {|#3:FromUnmanaged|}(ManagedToUnmanagedIn unmanaged) {}
+                            public ManagedToUnmanagedIn {|#2:ToUnmanaged|}() => default;
 
-                        public S {|#4:ToManaged|}() => default;
+                            public void {|#3:FromUnmanaged|}(ManagedToUnmanagedIn unmanaged) {}
 
-                        public ReadOnlySpan<int> {|#5:GetManagedValuesSource|}() => default;
+                            public S {|#4:ToManaged|}() => default;
 
-                        public Span<TNative> {|#6:GetUnmanagedValuesDestination|}() => default;
+                            public ReadOnlySpan<int> {|#5:GetManagedValuesSource|}() => default;
 
-                        public ReadOnlySpan<TNative> {|#7:GetUnmanagedValuesSource|}(int numElements) => default;
+                            public Span<TNative> {|#6:GetUnmanagedValuesDestination|}() => default;
 
-                        public Span<int> {|#8:GetManagedValuesDestination|}(int numElements) => default;
+                            public ReadOnlySpan<TNative> {|#7:GetUnmanagedValuesSource|}(int numElements) => default;
+
+                            public Span<int> {|#8:GetManagedValuesDestination|}(int numElements) => default;
+                        }
                     }
-                }
-                """,
+                    """,
                 SuppressedDiagnostic(
                         ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
                         DiagnosticSeverity.Info
@@ -194,22 +194,22 @@ namespace LibraryImportGenerator.UnitTests
         {
             await VerifySuppressorAsync(
                 """
-                using System.Runtime.InteropServices.Marshalling;
+                    using System.Runtime.InteropServices.Marshalling;
 
-                struct S
-                {
-                    public bool b;
-                };
-
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
-                static class Marshaller
-                {
-                    public struct ManagedToUnmanagedIn
+                    struct S
                     {
-                        public void {|#0:Free|}(int i) {}
+                        public bool b;
+                    };
+
+                    [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
+                    static class Marshaller
+                    {
+                        public struct ManagedToUnmanagedIn
+                        {
+                            public void {|#0:Free|}(int i) {}
+                        }
                     }
-                }
-                """,
+                    """,
                 Diagnostic(
                         ShapeBreakingDiagnosticSuppressor
                             .MarkMethodsAsStaticSuppression
@@ -230,23 +230,23 @@ namespace LibraryImportGenerator.UnitTests
             // to have a worse dev experience.
             await VerifySuppressorAsync(
                 """
-                using System.Runtime.InteropServices.Marshalling;
+                    using System.Runtime.InteropServices.Marshalling;
 
-                struct S
-                {
-                    public bool b;
-                };
+                    struct S
+                    {
+                        public bool b;
+                    };
 
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
-                static class Marshaller
-                {
-                }
+                    [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
+                    static class Marshaller
+                    {
+                    }
 
-                public struct ManagedToUnmanagedIn
-                {
-                    public void {|#0:Free|}() {}
-                }
-                """,
+                    public struct ManagedToUnmanagedIn
+                    {
+                        public void {|#0:Free|}() {}
+                    }
+                    """,
                 Diagnostic(
                         ShapeBreakingDiagnosticSuppressor
                             .MarkMethodsAsStaticSuppression

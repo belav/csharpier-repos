@@ -32,29 +32,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
+                        void M()
                         {
+                            [|using|] (var a = {|CS0103:b|})
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using var a = {|CS0103:b|};
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -91,29 +91,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] ({|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|})
+                        void M()
                         {
+                            [|using|] ({|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|})
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using {|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|};
+                        void M()
+                        {
+                            using {|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -207,31 +207,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             // not actually legal code.
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS0103:async|} {|CS1002:[|using|]|} (var a = {|CS0103:b|})
+                        void M()
                         {
+                            {|CS0103:async|} {|CS1002:[|using|]|} (var a = {|CS0103:b|})
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS0103:async|} {|CS1002:using|} var a = {|CS0103:b|};
+                        void M()
+                        {
+                            {|CS0103:async|} {|CS1002:using|} var a = {|CS0103:b|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -240,31 +240,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS4033:await|} [|using|] (var a = {|CS0103:b|})
+                        void M()
                         {
+                            {|CS4033:await|} [|using|] (var a = {|CS0103:b|})
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|CS4033:await|} using var a = {|CS0103:b|};
+                        void M()
+                        {
+                            {|CS4033:await|} using var a = {|CS0103:b|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -273,31 +273,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
+                        void M()
                         {
+                            [|using|] (var a = {|CS0103:b|})
+                            {
+                                Console.WriteLine(a);
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
                             Console.WriteLine(a);
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        Console.WriteLine(a);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -306,29 +306,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
+                        void M()
+                        {
+                            [|using|] (var a = {|CS0103:b|})
+                                Console.WriteLine(a);
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
                             Console.WriteLine(a);
+                        }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        Console.WriteLine(a);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -337,33 +337,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
-                        using (var c = {|CS0103:d|})
+                        void M()
                         {
+                            [|using|] (var a = {|CS0103:b|})
+                            using (var c = {|CS0103:d|})
+                            {
+                                Console.WriteLine(a);
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                            using var c = {|CS0103:d|};
                             Console.WriteLine(a);
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        Console.WriteLine(a);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -372,35 +372,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
+                        void M()
                         {
-                            [|using|] (var c = {|CS0103:d|})
+                            [|using|] (var a = {|CS0103:b|})
                             {
-                                Console.WriteLine(a);
+                                [|using|] (var c = {|CS0103:d|})
+                                {
+                                    Console.WriteLine(a);
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        Console.WriteLine(a);
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                            using var c = {|CS0103:d|};
+                            Console.WriteLine(a);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -409,39 +409,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
-                        using (var c = {|CS0103:d|})
+                        void M()
                         {
-                            [|using|] (var e = {|CS0103:f|})
-                            using (var g = {|CS0103:h|})
+                            [|using|] (var a = {|CS0103:b|})
+                            using (var c = {|CS0103:d|})
                             {
-                                Console.WriteLine(a);
+                                [|using|] (var e = {|CS0103:f|})
+                                using (var g = {|CS0103:h|})
+                                {
+                                    Console.WriteLine(a);
+                                }
                             }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        using var e = {|CS0103:f|};
-                        using var g = {|CS0103:h|};
-                        Console.WriteLine(a);
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                            using var c = {|CS0103:d|};
+                            using var e = {|CS0103:f|};
+                            using var g = {|CS0103:h|};
+                            Console.WriteLine(a);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -450,15 +450,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
-                        using (var c = {|CS0103:d|})
+                        void M()
                         {
+                            [|using|] (var a = {|CS0103:b|})
+                            using (var c = {|CS0103:d|})
+                            {
+                                using ({|CS0103:e|})
+                                using ({|CS0103:f|})
+                                {
+                                    Console.WriteLine(a);
+                                }
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                            using var c = {|CS0103:d|};
                             using ({|CS0103:e|})
                             using ({|CS0103:f|})
                             {
@@ -466,25 +484,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             }
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        using ({|CS0103:e|})
-                        using ({|CS0103:f|})
-                        {
-                            Console.WriteLine(a);
-                        }
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -493,29 +493,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using (var a = {|CS0103:b|}) { }
-                        [|using|] (var c = {|CS0103:d|}) { }
+                        void M()
+                        {
+                            using (var a = {|CS0103:b|}) { }
+                            [|using|] (var c = {|CS0103:d|}) { }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using (var a = {|CS0103:b|}) { }
-                        using var c = {|CS0103:d|};
+                        void M()
+                        {
+                            using (var a = {|CS0103:b|}) { }
+                            using var c = {|CS0103:d|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -524,31 +524,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
+                        void M()
                         {
+                            [|using|] (var a = {|CS0103:b|})
+                            {
+                            }
+                            return;
                         }
-                        return;
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using var a = {|CS0103:b|};
-                        return;
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                            return;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -557,43 +557,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        switch (0)
+                        void M()
                         {
-                            case 0:
-                                {
-                                    [|using|] (var a = {|CS0103:b|})
+                            switch (0)
+                            {
+                                case 0:
                                     {
+                                        [|using|] (var a = {|CS0103:b|})
+                                        {
+                                        }
+                                        break;
                                     }
-                                    break;
-                                }
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        switch (0)
+                        void M()
                         {
-                            case 0:
-                                {
-                                    using var a = {|CS0103:b|};
-                                    break;
-                                }
+                            switch (0)
+                            {
+                                case 0:
+                                    {
+                                        using var a = {|CS0103:b|};
+                                        break;
+                                    }
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -700,35 +700,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (Stream stream = File.OpenRead("test"))
+                        static void Main()
                         {
-                        }
-                        [|using|] (Stream stream1 = File.OpenRead("test"))
-                        {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                            }
+                            [|using|] (Stream stream1 = File.OpenRead("test"))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.IO;
+                    using System.IO;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (Stream stream = File.OpenRead("test"))
+                        static void Main()
                         {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                            }
+                            using Stream stream1 = File.OpenRead("test");
                         }
-                        using Stream stream1 = File.OpenRead("test");
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -762,37 +762,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (Stream stream = File.OpenRead("test"))
+                        static void Main()
                         {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                            }
+                            [|using|] (Stream stream1 = File.OpenRead("test"))
+                            {
+                                Stream stream2;
+                            }
                         }
-                        [|using|] (Stream stream1 = File.OpenRead("test"))
+                    }
+                    """,
+                """
+                    using System.IO;
+
+                    class Program
+                    {
+                        static void Main()
                         {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                            }
+                            using Stream stream1 = File.OpenRead("test");
                             Stream stream2;
                         }
                     }
-                }
-                """,
-                """
-                using System.IO;
-
-                class Program
-                {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        using Stream stream1 = File.OpenRead("test");
-                        Stream stream2;
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -826,37 +826,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (Stream stream = File.OpenRead("test"))
+                        static void Main()
                         {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                            }
+                            [|using|] (Stream stream1 = File.OpenRead("test"))
+                            {
+                                {|CS0103:Goo|}(out var stream2);
+                            }
                         }
-                        [|using|] (Stream stream1 = File.OpenRead("test"))
+                    }
+                    """,
+                """
+                    using System.IO;
+
+                    class Program
+                    {
+                        static void Main()
                         {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                            }
+                            using Stream stream1 = File.OpenRead("test");
                             {|CS0103:Goo|}(out var stream2);
                         }
                     }
-                }
-                """,
-                """
-                using System.IO;
-
-                class Program
-                {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        using Stream stream1 = File.OpenRead("test");
-                        {|CS0103:Goo|}(out var stream2);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -888,35 +888,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (Stream stream = File.OpenRead("test"))
+                        static void Main()
                         {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                            }
+                            [|using|] (Stream stream1 = File.OpenRead("test"))
+                                {|CS0103:Goo|}(out var stream2);
                         }
-                        [|using|] (Stream stream1 = File.OpenRead("test"))
+                    }
+                    """,
+                """
+                    using System.IO;
+
+                    class Program
+                    {
+                        static void Main()
+                        {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                            }
+                            using Stream stream1 = File.OpenRead("test");
                             {|CS0103:Goo|}(out var stream2);
-                    }
-                }
-                """,
-                """
-                using System.IO;
-
-                class Program
-                {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
                         }
-                        using Stream stream1 = File.OpenRead("test");
-                        {|CS0103:Goo|}(out var stream2);
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -950,37 +950,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (Stream stream = File.OpenRead("test"))
+                        static void Main()
                         {
-                            Stream stream1;
-                        }
-                        [|using|] (Stream stream2 = File.OpenRead("test"))
-                        {
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                                Stream stream1;
+                            }
+                            [|using|] (Stream stream2 = File.OpenRead("test"))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.IO;
+                    using System.IO;
 
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        using (Stream stream = File.OpenRead("test"))
+                        static void Main()
                         {
-                            Stream stream1;
+                            using (Stream stream = File.OpenRead("test"))
+                            {
+                                Stream stream1;
+                            }
+                            using Stream stream2 = File.OpenRead("test");
                         }
-                        using Stream stream2 = File.OpenRead("test");
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -989,27 +989,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|using|] (var x = {|CS0103:y|})
+                        static void Main(string[] args)
                         {
+                            [|using|] (var x = {|CS0103:y|})
+                            {
+                                // comment
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            using var x = {|CS0103:y|};
                             // comment
                         }
                     }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        using var x = {|CS0103:y|};
-                        // comment
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1018,29 +1018,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        [|using|] (var x = {|CS0103:y|})
-                        using (var a = {|CS0103:b|})
+                        static void Main(string[] args)
                         {
+                            [|using|] (var x = {|CS0103:y|})
+                            using (var a = {|CS0103:b|})
+                            {
+                                // comment
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            using var x = {|CS0103:y|};
+                            using var a = {|CS0103:b|};
                             // comment
                         }
                     }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        using var x = {|CS0103:y|};
-                        using var a = {|CS0103:b|};
-                        // comment
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1049,39 +1049,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
+                        void M()
                         {
-                            [|using|] (var c = {|CS0103:d|})
+                            [|using|] (var a = {|CS0103:b|})
                             {
-                                Console.WriteLine(a);
-                                // comment1
+                                [|using|] (var c = {|CS0103:d|})
+                                {
+                                    Console.WriteLine(a);
+                                    // comment1
+                                }
+                                // comment2
                             }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                            using var c = {|CS0103:d|};
+                            Console.WriteLine(a);
+                            // comment1
                             // comment2
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        Console.WriteLine(a);
-                        // comment1
-                        // comment2
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1090,49 +1090,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        [|using|] (var obj = Dummy())
+                        static void M()
                         {
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                            LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
+                            [|using|] (var obj = Dummy())
+                            {
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                                LegacyMethod();
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                            }
                         }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        using var obj = Dummy();
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                        LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
+                        static void M()
+                        {
+                            using var obj = Dummy();
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                            LegacyMethod();
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                        }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """
+                    """
             );
         }
 
@@ -1141,51 +1141,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        [|using|] (var obj = Dummy())
+                        static void M()
                         {
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                            LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
-                        // comment
+                            [|using|] (var obj = Dummy())
+                            {
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                                LegacyMethod();
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                            // comment
+                            }
                         }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        using var obj = Dummy();
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                        LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
-                        // comment
+                        static void M()
+                        {
+                            using var obj = Dummy();
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                            LegacyMethod();
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                            // comment
+                        }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """
+                    """
             );
         }
 
@@ -1194,51 +1194,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        [|using|] (var obj = Dummy())
+                        static void M()
                         {
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
+                            [|using|] (var obj = Dummy())
+                            {
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                                LegacyMethod();
+                                // comment
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                            }
+                        }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        static void M()
+                        {
+                            using var obj = Dummy();
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
                             LegacyMethod();
                             // comment
-                #endif
-                #pragma warning restore CS0618, CS0612
+                    #endif
+                    #pragma warning restore CS0618, CS0612
                         }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    static void M()
-                    {
-                        using var obj = Dummy();
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                        LegacyMethod();
-                        // comment
-                #endif
-                #pragma warning restore CS0618, CS0612
-                    }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """
+                    """
             );
         }
 
@@ -1247,51 +1247,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        [|using|] (var obj = Dummy())
+                        static void M()
                         {
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
+                            [|using|] (var obj = Dummy())
+                            {
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                                // comment
+                                LegacyMethod();
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                            }
+                        }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        static void M()
+                        {
+                            using var obj = Dummy();
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
                             // comment
                             LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
+                    #endif
+                    #pragma warning restore CS0618, CS0612
                         }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    static void M()
-                    {
-                        using var obj = Dummy();
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                        // comment
-                        LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
-                    }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """
+                    """
             );
         }
 
@@ -1300,51 +1300,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        [|using|] (var obj = Dummy())
+                        static void M()
                         {
-                            // comment
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                            LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
+                            [|using|] (var obj = Dummy())
+                            {
+                                // comment
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                                LegacyMethod();
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                            }
                         }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        using var obj = Dummy();
-                        // comment
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                        LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
+                        static void M()
+                        {
+                            using var obj = Dummy();
+                            // comment
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                            LegacyMethod();
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                        }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """
+                    """
             );
         }
 
@@ -1353,53 +1353,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    static void M()
+                    class C
                     {
-                        [|using|] (var obj = Dummy())
+                        static void M()
                         {
+                            [|using|] (var obj = Dummy())
+                            {
+                                LegacyMethod();
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
+                                LegacyMethod();
+                    #endif
+                    #pragma warning restore CS0618, CS0612
+                                LegacyMethod();
+                            }
+                        }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        static void M()
+                        {
+                            using var obj = Dummy();
                             LegacyMethod();
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
+                    #pragma warning disable CS0618, CS0612
+                    #if !FOO
                             LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
+                    #endif
+                    #pragma warning restore CS0618, CS0612
                             LegacyMethod();
                         }
+
+                        static IDisposable Dummy() => throw new NotImplementedException();
+
+                        [Obsolete]
+                        static void LegacyMethod() => throw new NotImplementedException();
                     }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    static void M()
-                    {
-                        using var obj = Dummy();
-                        LegacyMethod();
-                #pragma warning disable CS0618, CS0612
-                #if !FOO
-                        LegacyMethod();
-                #endif
-                #pragma warning restore CS0618, CS0612
-                        LegacyMethod();
-                    }
-
-                    static IDisposable Dummy() => throw new NotImplementedException();
-
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
-                }
-                """
+                    """
             );
         }
 
@@ -1408,14 +1408,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo(IDisposable disposable)
+                    class C
                     {
-                        [|using|] (var v = disposable)
+                        void Goo(IDisposable disposable)
                         {
+                            [|using|] (var v = disposable)
+                            {
+                                {|CS0103:Bar|}(1,
+                                    2,
+                                    3);
+                                {|CS1501:Goo|}(1,
+                                    2,
+                                    3);
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void Goo(IDisposable disposable)
+                        {
+                            using var v = disposable;
                             {|CS0103:Bar|}(1,
                                 2,
                                 3);
@@ -1424,25 +1442,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                                 3);
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void Goo(IDisposable disposable)
-                    {
-                        using var v = disposable;
-                        {|CS0103:Bar|}(1,
-                            2,
-                            3);
-                        {|CS1501:Goo|}(1,
-                            2,
-                            3);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1451,37 +1451,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class C
-                {
-                    static void Main()
+                    class C
                     {
-                        [|using|] (var stream = new MemoryStream())
+                        static void Main()
                         {
+                            [|using|] (var stream = new MemoryStream())
+                            {
+                                _ = new Action(
+                                        () => { }
+                                    );
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+                    using System.IO;
+
+                    class C
+                    {
+                        static void Main()
+                        {
+                            using var stream = new MemoryStream();
                             _ = new Action(
                                     () => { }
                                 );
                         }
                     }
-                }
-                """,
-                """
-                using System;
-                using System.IO;
-
-                class C
-                {
-                    static void Main()
-                    {
-                        using var stream = new MemoryStream();
-                        _ = new Action(
-                                () => { }
-                            );
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1490,33 +1490,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|})
-                        { // Make sure that...
+                        void M()
+                        {
+                            [|using|] (var a = {|CS0103:b|})
+                            { // Make sure that...
+                                Console.WriteLine({|CS0103:s|}.CanRead);
+                            } // ...all comments remain
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                            // Make sure that...
                             Console.WriteLine({|CS0103:s|}.CanRead);
-                        } // ...all comments remain
+                            // ...all comments remain
+                        }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        // Make sure that...
-                        Console.WriteLine({|CS0103:s|}.CanRead);
-                        // ...all comments remain
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1525,37 +1525,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // Make...
-                        [|using|] (var a = {|CS0103:b|}) // ...sure...
-                        { // ...that...
+                        void M()
+                        {
+                            // Make...
+                            [|using|] (var a = {|CS0103:b|}) // ...sure...
+                            { // ...that...
+                                Console.WriteLine({|CS0103:s|}.CanRead); // ...all...
+                            } // ...comments...
+                            // ...remain
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            // Make...
+                            using var a = {|CS0103:b|}; // ...sure...
+                                             // ...that...
                             Console.WriteLine({|CS0103:s|}.CanRead); // ...all...
-                        } // ...comments...
-                        // ...remain
+                                                          // ...comments...
+                                                          // ...remain
+                        }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        // Make...
-                        using var a = {|CS0103:b|}; // ...sure...
-                                         // ...that...
-                        Console.WriteLine({|CS0103:s|}.CanRead); // ...all...
-                                                      // ...comments...
-                                                      // ...remain
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1564,45 +1564,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // Make...
-                        [|using|] (var a = {|CS0103:b|}) // ...sure...
-                        using (var c = {|CS0103:d|}) // ...that...
-                        // ...really...
-                        using (var e = {|CS0103:f|}) // ...all...
-                        { // ...comments...
+                        void M()
+                        {
+                            // Make...
+                            [|using|] (var a = {|CS0103:b|}) // ...sure...
+                            using (var c = {|CS0103:d|}) // ...that...
+                            // ...really...
+                            using (var e = {|CS0103:f|}) // ...all...
+                            { // ...comments...
+                                Console.WriteLine({|CS0103:s|}.CanRead); // ...are...
+                            } // ...kept...
+                            // ...during...
+                            // ...transformation
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            // Make...
+                            using var a = {|CS0103:b|}; // ...sure...
+                            using var c = {|CS0103:d|}; // ...that...
+                            // ...really...
+                            using var e = {|CS0103:f|}; // ...all...
+                                             // ...comments...
                             Console.WriteLine({|CS0103:s|}.CanRead); // ...are...
-                        } // ...kept...
-                        // ...during...
-                        // ...transformation
+                                                          // ...kept...
+                                                          // ...during...
+                                                          // ...transformation
+                        }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        // Make...
-                        using var a = {|CS0103:b|}; // ...sure...
-                        using var c = {|CS0103:d|}; // ...that...
-                        // ...really...
-                        using var e = {|CS0103:f|}; // ...all...
-                                         // ...comments...
-                        Console.WriteLine({|CS0103:s|}.CanRead); // ...are...
-                                                      // ...kept...
-                                                      // ...during...
-                                                      // ...transformation
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1611,30 +1611,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|}){
+                        void M()
+                        {
+                            [|using|] (var a = {|CS0103:b|}){
+                                Console.WriteLine(a);
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
                             Console.WriteLine(a);
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        Console.WriteLine(a);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1643,30 +1643,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|}) {
+                        void M()
+                        {
+                            [|using|] (var a = {|CS0103:b|}) {
+                                Console.WriteLine(a);
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
                             Console.WriteLine(a);
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        Console.WriteLine(a);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1675,30 +1675,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|}) { //comment
+                        void M()
+                        {
+                            [|using|] (var a = {|CS0103:b|}) { //comment
+                                Console.WriteLine(a);
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};  //comment
                             Console.WriteLine(a);
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};  //comment
-                        Console.WriteLine(a);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1707,28 +1707,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|}) {
+                        void M()
+                        {
+                            [|using|] (var a = {|CS0103:b|}) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using var a = {|CS0103:b|};
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1737,30 +1737,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var a = {|CS0103:b|}) {
+                        void M()
+                        {
+                            [|using|] (var a = {|CS0103:b|}) {
+                                // intentionally empty
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using var a = {|CS0103:b|};
                             // intentionally empty
                         }
                     }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        // intentionally empty
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1769,51 +1769,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                public class Test
-                {
-                    public IEnumerable<Test> Collection { get; } = new[]
+                    public class Test
                     {
-                        new Test()
+                        public IEnumerable<Test> Collection { get; } = new[]
                         {
-                            Prop = () =>
+                            new Test()
                             {
-                                [|using|](var x = Get())
+                                Prop = () =>
                                 {
-                                    int i = 0;
+                                    [|using|](var x = Get())
+                                    {
+                                        int i = 0;
+                                    }
                                 }
                             }
-                        }
-                    };
+                        };
 
-                    public Action Prop { get; set; }
-                    public static IDisposable Get() => throw new NotImplementedException();
-                }
-                """,
+                        public Action Prop { get; set; }
+                        public static IDisposable Get() => throw new NotImplementedException();
+                    }
+                    """,
                 """
-                using System;
-                using System.Collections.Generic;
+                    using System;
+                    using System.Collections.Generic;
 
-                public class Test
-                {
-                    public IEnumerable<Test> Collection { get; } = new[]
+                    public class Test
                     {
-                        new Test()
+                        public IEnumerable<Test> Collection { get; } = new[]
                         {
-                            Prop = () =>
+                            new Test()
                             {
-                                using var x = Get();
-                                    int i = 0;
+                                Prop = () =>
+                                {
+                                    using var x = Get();
+                                        int i = 0;
+                                }
                             }
-                        }
-                    };
+                        };
 
-                    public Action Prop { get; set; }
-                    public static IDisposable Get() => throw new NotImplementedException();
-                }
-                """
+                        public Action Prop { get; set; }
+                        public static IDisposable Get() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -1822,33 +1822,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        [|using|] (var foo = new MemoryStream())
+                        bool M()
                         {
+                            [|using|] (var foo = new MemoryStream())
+                            {
+                            }
+
+                            return true;
                         }
-
-                        return true;
                     }
-                }
-                """,
+                    """,
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        using var foo = new MemoryStream();
+                        bool M()
+                        {
+                            using var foo = new MemoryStream();
 
-                        return true;
+                            return true;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1880,35 +1880,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using|] (var foo = new MemoryStream())
+                        void M()
                         {
+                            [|using|] (var foo = new MemoryStream())
+                            {
+                            }
+
+                            void Inner1() { }
+                            void Inner2() { }
                         }
-
-                        void Inner1() { }
-                        void Inner2() { }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using var foo = new MemoryStream();
+                        void M()
+                        {
+                            using var foo = new MemoryStream();
 
-                        void Inner1() { }
-                        void Inner2() { }
+                            void Inner1() { }
+                            void Inner2() { }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1943,39 +1943,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    bool M(int a, int b)
+                    class C
                     {
-                        [|using|] (var foo = new MemoryStream())
+                        bool M(int a, int b)
                         {
+                            [|using|] (var foo = new MemoryStream())
+                            {
+                            }
+
+                            void Inner1() { }
+                            void Inner2() { }
+
+                            return true;
                         }
-
-                        void Inner1() { }
-                        void Inner2() { }
-
-                        return true;
                     }
-                }
-                """,
+                    """,
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    bool M(int a, int b)
+                    class C
                     {
-                        using var foo = new MemoryStream();
+                        bool M(int a, int b)
+                        {
+                            using var foo = new MemoryStream();
 
-                        void Inner1() { }
-                        void Inner2() { }
+                            void Inner1() { }
+                            void Inner2() { }
 
-                        return true;
+                            return true;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1984,35 +1984,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.Security.Cryptography;
+                    using System.Security.Cryptography;
 
-                class C
-                {
-                    public static byte[] ComputeMD5Hash(byte[] source)
+                    class C
                     {
-                #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        [|using|] (var md5 = MD5.Create())
-                #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
+                        public static byte[] ComputeMD5Hash(byte[] source)
                         {
+                    #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
+                            [|using|] (var md5 = MD5.Create())
+                    #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
+                            {
+                                return md5.ComputeHash(source);
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System.Security.Cryptography;
+
+                    class C
+                    {
+                        public static byte[] ComputeMD5Hash(byte[] source)
+                        {
+                    #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
+                            using var md5 = MD5.Create();
+                    #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
                             return md5.ComputeHash(source);
                         }
                     }
-                }
-                """,
-                """
-                using System.Security.Cryptography;
-
-                class C
-                {
-                    public static byte[] ComputeMD5Hash(byte[] source)
-                    {
-                #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        using var md5 = MD5.Create();
-                #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        return md5.ComputeHash(source);
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -2021,36 +2021,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System.Security.Cryptography;
+                    using System.Security.Cryptography;
 
-                class C
-                {
-                    public static byte[] ComputeMD5Hash(byte[] source)
+                    class C
                     {
-                #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        [|using|] (var md5 = MD5.Create())
-                #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        { // comment
+                        public static byte[] ComputeMD5Hash(byte[] source)
+                        {
+                    #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
+                            [|using|] (var md5 = MD5.Create())
+                    #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
+                            { // comment
+                                return md5.ComputeHash(source);
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System.Security.Cryptography;
+
+                    class C
+                    {
+                        public static byte[] ComputeMD5Hash(byte[] source)
+                        {
+                    #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
+                            using var md5 = MD5.Create();
+                    #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
+                            // comment
                             return md5.ComputeHash(source);
                         }
                     }
-                }
-                """,
-                """
-                using System.Security.Cryptography;
-
-                class C
-                {
-                    public static byte[] ComputeMD5Hash(byte[] source)
-                    {
-                #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        using var md5 = MD5.Create();
-                #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        // comment
-                        return md5.ComputeHash(source);
-                    }
-                }
-                """
+                    """
             );
         }
     }

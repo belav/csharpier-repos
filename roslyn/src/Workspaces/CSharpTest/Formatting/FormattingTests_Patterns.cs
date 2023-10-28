@@ -611,7 +611,7 @@ class TypeName
                     {
                         if (ss is [[]])
                         {
-                
+
                         }
                     }
                 }
@@ -643,7 +643,7 @@ class TypeName
                     {
                         if (ss is [[], []])
                         {
-                
+
                         }
                     }
                 }
@@ -675,7 +675,7 @@ class TypeName
                     {
                         if (ss is [[], [], []])
                         {
-                
+
                         }
                     }
                 }
@@ -707,7 +707,7 @@ class TypeName
                     {
                         if (ss is [[[]]])
                         {
-                
+
                         }
                     }
                 }

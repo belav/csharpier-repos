@@ -34,10 +34,12 @@
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
 #else
-using Mono.Security;using MX = Mono.Security.X509;
+using Mono.Security;
+using MX = Mono.Security.X509;
 #endif
 
-using System.Collections;using MonoSecurity::Mono.Security;
+using System.Collections;
+using MonoSecurity::Mono.Security;
 using MX = MonoSecurity::Mono.Security.X509;
 
 namespace System.Security.Cryptography.X509Certificates

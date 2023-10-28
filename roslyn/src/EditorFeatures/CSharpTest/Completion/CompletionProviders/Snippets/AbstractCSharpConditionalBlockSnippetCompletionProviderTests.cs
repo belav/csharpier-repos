@@ -254,7 +254,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     public void Method()
                     {
                        var operation = 2;
-  
+
                         var result = operation switch
                         {
                             $$

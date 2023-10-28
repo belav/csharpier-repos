@@ -195,15 +195,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
             using var workspace = TestWorkspace.Create(
                 XElement.Parse(
                     """
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">  
-                        class C
-                        {
-                            object $$goo;
-                        }
-                    </Submission>
-                </Workspace>
-                """
+                        <Workspace>
+                            <Submission Language="C#" CommonReferences="true">
+                                class C
+                                {
+                                    object $$goo;
+                                }
+                            </Submission>
+                        </Workspace>
+                        """
                 ),
                 workspaceKind: WorkspaceKind.Interactive,
                 composition: EditorTestCompositions.EditorFeaturesWpf

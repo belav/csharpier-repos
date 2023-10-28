@@ -195,7 +195,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         {
             var code = """
                 #nullable enable
-                
+
                 class MyClass
                 {
                     public string {|CS8618:MyProperty|} { get; }
@@ -385,7 +385,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             {
                 TestCode = """
                     #nullable enable
-                
+
                     class MyClass
                     {
                         public string {|CS8618:_myField|};
@@ -393,7 +393,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     """,
                 FixedCode = """
                     #nullable enable
-                
+
                     class MyClass
                     {
                         public required string _myField;
@@ -472,7 +472,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         {
             var code = """
                 #nullable enable
-                
+
                 class MyClass
                 {
                     public string {|CS8618:MyProperty|} { get; set; }
@@ -493,7 +493,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         {
             var code = """
                 #nullable enable
-                
+
                 class MyClass
                 {
                     public string MyProperty { get; set; }
@@ -515,7 +515,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         {
             var code = """
                 #nullable enable
-                
+
                 class MyClass
                 {
                     public event System.EventHandler {|CS8618:MyEvent|};

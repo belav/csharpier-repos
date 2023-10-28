@@ -521,51 +521,51 @@ using System.Diagnostics.CodeAnalysis;
 
                     var expected =
                         """
-                        <Workspace>
-                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                                <Document>
-                        using System;
+                            <Workspace>
+                                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                    <Document>
+                            using System;
 
-                        class Class1
-                        {
-                            int Method()
+                            class Class1
                             {
-                                int x = 0;
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
                             }
-                        }
 
-                        class Class2
-                        {
-                        }
-                                </Document>
-                                <Document>
-                        class Class3
-                        {
-                        }
-                                </Document>
-                                <Document FilePath="GlobalSuppressions.cs">
-                        """
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                    <Document>
+                            class Class3
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
                         + addedGlobalSuppressions
                         + """
-        </Document>
-            </Project>
-            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                <Document>
-        class Class1
-        {
-            int Method()
-            {
-                int x = 0;
-            }
-        }
+                            </Document>
+                                </Project>
+                                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                                    <Document>
+                            class Class1
+                            {
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
+                            }
 
-        class Class2
-        {
-        }
-                </Document>
-            </Project>
-        </Workspace>
-        """;
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                </Project>
+                            </Workspace>
+                            """;
 
                     await TestInRegularAndScriptAsync(input, expected, index: 1);
                 }
@@ -632,51 +632,51 @@ using System.Diagnostics.CodeAnalysis;
 
                     var expected =
                         """
-                        <Workspace>
-                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                                <Document>
-                        using System;
+                            <Workspace>
+                                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                    <Document>
+                            using System;
 
-                        class Class1
-                        {
-                            int Method()
+                            class Class1
                             {
-                                int x = 0;
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
                             }
-                        }
 
-                        class Class2
-                        {
-                        }
-                                </Document>
-                                <Document>
-                        class Class3
-                        {
-                        }
-                                </Document>
-                                <Document FilePath="GlobalSuppressions.cs">
-                        """
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                    <Document>
+                            class Class3
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
                         + addedGlobalSuppressions
                         + """
-        </Document>
-            </Project>
-            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                <Document>
-        class Class1
-        {
-            int Method()
-            {
-                int x = 0;
-            }
-        }
+                            </Document>
+                                </Project>
+                                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                                    <Document>
+                            class Class1
+                            {
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
+                            }
 
-        class Class2
-        {
-        }
-                </Document>
-            </Project>
-        </Workspace>
-        """;
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                </Project>
+                            </Workspace>
+                            """;
 
                     await TestInRegularAndScriptAsync(input, expected, index: 1);
                 }
@@ -760,56 +760,56 @@ using System.Diagnostics.CodeAnalysis;
 
                     var expected =
                         """
-                        <Workspace>
-                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                                <Document>
-                        using System;
+                            <Workspace>
+                                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                    <Document>
+                            using System;
 
-                        class Class1
-                        {
-                            int Method()
+                            class Class1
                             {
-                                int x = 0;
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
                             }
-                        }
 
-                        class Class2
-                        {
-                        }
-                                </Document>
-                                <Document>
-                        class Class3
-                        {
-                        }
-                                </Document>
-                                <Document FilePath="GlobalSuppressions.cs">
-                        """
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                    <Document>
+                            class Class3
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
                         + addedGlobalSuppressionsProject1
                         + """
-        </Document>
-            </Project>
-            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                <Document>
-        class Class1
-        {
-            int Method()
-            {
-                int x = 0;
-            }
-        }
+                            </Document>
+                                </Project>
+                                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                                    <Document>
+                            class Class1
+                            {
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
+                            }
 
-        class Class2
-        {
-        }
-                </Document>
-                <Document FilePath="GlobalSuppressions.cs">
-        """
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
                         + addedGlobalSuppressionsProject2
                         + """
-        </Document>
-            </Project>
-        </Workspace>
-        """;
+                            </Document>
+                                </Project>
+                            </Workspace>
+                            """;
 
                     await TestInRegularAndScriptAsync(input, expected);
                 }
@@ -897,44 +897,44 @@ using System.Diagnostics.CodeAnalysis;
 
                     var expected =
                         """
-                        <Workspace>
-                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                                <Document>
-                        using System;
+                            <Workspace>
+                                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                    <Document>
+                            using System;
 
-                        partial class Class1
-                        {
-                            int Method1()
+                            partial class Class1
                             {
-                                int x = 0;
+                                int Method1()
+                                {
+                                    int x = 0;
+                                }
                             }
-                        }
 
-                        class Class2
-                        {
-                        }
-                                </Document>
-                                <Document>
-                        partial class Class1
-                        {
-                            int Method2()
+                            class Class2
                             {
-                                int x = 0;
                             }
-                        }
+                                    </Document>
+                                    <Document>
+                            partial class Class1
+                            {
+                                int Method2()
+                                {
+                                    int x = 0;
+                                }
+                            }
 
-                        class Class3
-                        {
-                        }
-                                </Document>
-                                <Document FilePath="GlobalSuppressions.cs">
-                        """
+                            class Class3
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
                         + addedGlobalSuppressions
                         + """
-        </Document>
-            </Project>
-        </Workspace>
-        """;
+                            </Document>
+                                </Project>
+                            </Workspace>
+                            """;
 
                     await TestInRegularAndScriptAsync(input, expected, index: 1);
                 }
@@ -1004,51 +1004,51 @@ using System.Diagnostics.CodeAnalysis;
 
                 var expected =
                     """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document>
-                    using System;
+                        <Workspace>
+                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                <Document>
+                        using System;
 
-                    class Class1
-                    {
-                        int Method()
+                        class Class1
                         {
-                            int x = 0;
+                            int Method()
+                            {
+                                int x = 0;
+                            }
                         }
-                    }
 
-                    class Class2
-                    {
-                    }
-                            </Document>
-                            <Document>
-                    class Class3
-                    {
-                    }
-                            </Document>
-                            <Document FilePath="GlobalSuppressions.cs">
-                    """
+                        class Class2
+                        {
+                        }
+                                </Document>
+                                <Document>
+                        class Class3
+                        {
+                        }
+                                </Document>
+                                <Document FilePath="GlobalSuppressions.cs">
+                        """
                     + addedGlobalSuppressions
                     + """
-    </Document>
-        </Project>
-        <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-            <Document>
-    class Class1
-    {
-        int Method()
-        {
-            int x = 0;
-        }
-    }
+                        </Document>
+                            </Project>
+                            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                                <Document>
+                        class Class1
+                        {
+                            int Method()
+                            {
+                                int x = 0;
+                            }
+                        }
 
-    class Class2
-    {
-    }
-            </Document>
-        </Project>
-    </Workspace>
-    """;
+                        class Class2
+                        {
+                        }
+                                </Document>
+                            </Project>
+                        </Workspace>
+                        """;
 
                 await TestInRegularAndScriptAsync(input, expected);
             }

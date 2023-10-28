@@ -49,27 +49,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                """
+                        void M(System.IDisposable disposable)
+                        {
+                    """
                     + declaration
                     + """
-                    }
-                }
-                """,
+                            }
+                        }
+                        """,
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        using (var name = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            using (var name = disposable)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -78,27 +78,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {                             [|
-                """
-                    + """
-                        var name = disposable;    |]
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        using (var name = disposable)
+                        void M(System.IDisposable disposable)
+                        {                             [|
+                    """
+                    + """
+                                var name = disposable;    |]
+                            }
+                        }
+                        """,
+                """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
                         {
+                            using (var name = disposable)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -107,27 +107,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        var ignore = disposable;
-                        [||]var name = disposable;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        var ignore = disposable;
-                        using (var name = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            var ignore = disposable;
+                            [||]var name = disposable;
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            var ignore = disposable;
+                            using (var name = disposable)
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -136,27 +136,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        var ignore = disposable;
-                [||]        var name = disposable;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        var ignore = disposable;
-                        using (var name = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            var ignore = disposable;
+                    [||]        var name = disposable;
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            var ignore = disposable;
+                            using (var name = disposable)
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -165,28 +165,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        var name = disposable;[||]
-                        var ignore = disposable;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        using (var name = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            var name = disposable;[||]
+                            var ignore = disposable;
                         }
-
-                        var ignore = disposable;
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            using (var name = disposable)
+                            {
+                            }
+
+                            var ignore = disposable;
+                        }
+                    }
+                    """
             );
         }
 
@@ -195,28 +195,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        var name = disposable;    [||]
-                        var ignore = disposable;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        using (var name = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            var name = disposable;    [||]
+                            var ignore = disposable;
                         }
-
-                        var ignore = disposable;
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            using (var name = disposable)
+                            {
+                            }
+
+                            var ignore = disposable;
+                        }
+                    }
+                    """
             );
         }
 
@@ -228,16 +228,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                """
+                        void M(System.IDisposable disposable)
+                        {
+                    """
                     + declaration
                     + """
-                    }
-                }
-                """
+                            }
+                        }
+                        """
             );
         }
 
@@ -246,14 +246,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        System.IDisposable name =[||]
+                        void M(System.IDisposable disposable)
+                        {
+                            System.IDisposable name =[||]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -262,16 +262,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        using ([||]var name = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            using ([||]var name = disposable)
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -284,16 +284,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                """
+                        void M(System.IDisposable disposable)
+                        {
+                    """
                     + declaration
                     + """
-                    }
-                }
-                """
+                            }
+                        }
+                        """
             );
         }
 
@@ -302,25 +302,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C<T> where T : System.IDisposable
-                {
-                    void M(T disposable)
+                    class C<T> where T : System.IDisposable
                     {
-                        var x = disposable;[||]
-                    }
-                }
-                """,
-                """
-                class C<T> where T : System.IDisposable
-                {
-                    void M(T disposable)
-                    {
-                        using (var x = disposable)
+                        void M(T disposable)
                         {
+                            var x = disposable;[||]
                         }
                     }
-                }
+                    """,
                 """
+                    class C<T> where T : System.IDisposable
+                    {
+                        void M(T disposable)
+                        {
+                            using (var x = disposable)
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -329,14 +329,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestMissingAsync(
                 """
-                class C<T>
-                {
-                    void M(T disposable)
+                    class C<T>
                     {
-                        var x = disposable;[||]
+                        void M(T disposable)
+                        {
+                            var x = disposable;[||]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -345,27 +345,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        // Comment
-                        var x = disposable;[||]
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        // Comment
-                        using (var x = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            // Comment
+                            var x = disposable;[||]
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            // Comment
+                            using (var x = disposable)
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -374,25 +374,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        var x = disposable;[||] // Comment
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        using (var x = disposable) // Comment
+                        void M(System.IDisposable disposable)
                         {
+                            var x = disposable;[||] // Comment
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            using (var x = disposable) // Comment
+                            {
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -401,27 +401,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        var x = disposable;[||]
-                        // Comment
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        using (var x = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            var x = disposable;[||]
+                            // Comment
                         }
-                        // Comment
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            using (var x = disposable)
+                            {
+                            }
+                            // Comment
+                        }
+                    }
+                    """
             );
         }
 
@@ -430,29 +430,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                #if true
-                        var x = disposable;[||]
-                #endif
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                #if true
-                        using (var x = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                    #if true
+                            var x = disposable;[||]
+                    #endif
                         }
-                #endif
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                    #if true
+                            using (var x = disposable)
+                            {
+                            }
+                    #endif
+                        }
+                    }
+                    """
             );
         }
 
@@ -461,31 +461,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                #if true
-                        var x = disposable;[||]
-                #endif
-                        _ = x;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                #if true
-                        using (var x = disposable)
+                        void M(System.IDisposable disposable)
                         {
-                #endif
+                    #if true
+                            var x = disposable;[||]
+                    #endif
                             _ = x;
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                    #if true
+                            using (var x = disposable)
+                            {
+                    #endif
+                                _ = x;
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -494,29 +494,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                #if true
-                        var x = disposable;[||]
-                #endif
-                        _ = x;
+                        void M(System.IDisposable disposable)
+                        {
+                    #if true
+                            var x = disposable;[||]
+                    #endif
+                            _ = x;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                #if true
-                        using var x = disposable;
-                #endif
-                        _ = x;
+                        void M(System.IDisposable disposable)
+                        {
+                    #if true
+                            using var x = disposable;
+                    #endif
+                            _ = x;
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion.CSharp8
             );
         }
@@ -526,34 +526,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        M(null);
-                        var x = disposable;[||]
-                        M(null);
-                        M(x);
-                        M(null);
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        M(null);
-                        using (var x = disposable)
+                        void M(System.IDisposable disposable)
                         {
                             M(null);
+                            var x = disposable;[||]
+                            M(null);
                             M(x);
+                            M(null);
                         }
-
-                        M(null);
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            M(null);
+                            using (var x = disposable)
+                            {
+                                M(null);
+                                M(x);
+                            }
+
+                            M(null);
+                        }
+                    }
+                    """
             );
         }
 
@@ -562,31 +562,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        var x = disposable;[||]
-                        // A
-                        M(x); // B
-                        // C
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        using (var x = disposable)
+                        void M(System.IDisposable disposable)
                         {
+                            var x = disposable;[||]
                             // A
                             M(x); // B
+                            // C
                         }
-                        // C
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            using (var x = disposable)
+                            {
+                                // A
+                                M(x); // B
+                            }
+                            // C
+                        }
+                    }
+                    """
             );
         }
 
@@ -595,38 +595,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        switch (disposable)
+                        void M(System.IDisposable disposable)
                         {
-                            default:
-                                var x = disposable;[||]
-                                M(x);
-                                break;
-                        }
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        switch (disposable)
-                        {
-                            default:
-                                using (var x = disposable)
-                                {
+                            switch (disposable)
+                            {
+                                default:
+                                    var x = disposable;[||]
                                     M(x);
-                                }
-
-                                break;
+                                    break;
+                            }
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            switch (disposable)
+                            {
+                                default:
+                                    using (var x = disposable)
+                                    {
+                                        M(x);
+                                    }
+
+                                    break;
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -635,27 +635,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        if (disposable != null)
-                            var x = disposable;[||]
+                        void M(System.IDisposable disposable)
+                        {
+                            if (disposable != null)
+                                var x = disposable;[||]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        if (disposable != null)
-                            using (var x = disposable)
-                            {
-                            }
+                        void M(System.IDisposable disposable)
+                        {
+                            if (disposable != null)
+                                using (var x = disposable)
+                                {
+                                }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -664,14 +664,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        new Action(() => var x = disposable[||]);
+                        void M(System.IDisposable disposable)
+                        {
+                            new Action(() => var x = disposable[||]);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -680,36 +680,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        var buffer = reader.GetBuffer();
-                        buffer.Clone();
-                        var a = 1;
-                    }
-                }
-                """,
-                """
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
+                        void M()
                         {
+                            var reader = new MemoryStream()[||];
                             var buffer = reader.GetBuffer();
                             buffer.Clone();
+                            var a = 1;
                         }
-
-                        var a = 1;
                     }
-                }
+                    """,
                 """
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                var buffer = reader.GetBuffer();
+                                buffer.Clone();
+                            }
+
+                            var a = 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -718,33 +718,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        var buffer = reader.GetBuffer();
-                        if (!int.TryParse(buffer[0].ToString(), out var number))
+                        void M()
                         {
-                            return;
-                        }
-                        var a = number;
-                        var b = a;
-                        var c = 1;
-                    }
-                }
-                """,
-                """
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             var buffer = reader.GetBuffer();
                             if (!int.TryParse(buffer[0].ToString(), out var number))
                             {
@@ -752,12 +732,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                             var a = number;
                             var b = a;
+                            var c = 1;
                         }
-
-                        var c = 1;
                     }
-                }
+                    """,
                 """
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                var buffer = reader.GetBuffer();
+                                if (!int.TryParse(buffer[0].ToString(), out var number))
+                                {
+                                    return;
+                                }
+                                var a = number;
+                                var b = a;
+                            }
+
+                            var c = 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -766,33 +766,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        var buffer = reader.GetBuffer();
-                        if (!(buffer[0] is int number))
+                        void M()
                         {
-                            return;
-                        }
-                        var a = number;
-                        var b = a;
-                        var c = 1;
-                    }
-                }
-                """,
-                """
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             var buffer = reader.GetBuffer();
                             if (!(buffer[0] is int number))
                             {
@@ -800,12 +780,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                             var a = number;
                             var b = a;
+                            var c = 1;
                         }
-
-                        var c = 1;
                     }
-                }
+                    """,
                 """
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                var buffer = reader.GetBuffer();
+                                if (!(buffer[0] is int number))
+                                {
+                                    return;
+                                }
+                                var a = number;
+                                var b = a;
+                            }
+
+                            var c = 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -814,38 +814,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        var buffer = reader.GetBuffer();
-                        int a = buffer[0], b = a;
-                        var c = b;
-                        var d = 1;
-                    }
-                }
-                """,
-                """
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
+                        void M()
                         {
+                            var reader = new MemoryStream()[||];
                             var buffer = reader.GetBuffer();
                             int a = buffer[0], b = a;
                             var c = b;
+                            var d = 1;
                         }
-
-                        var d = 1;
                     }
-                }
+                    """,
                 """
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                var buffer = reader.GetBuffer();
+                                int a = buffer[0], b = a;
+                                var c = b;
+                            }
+
+                            var d = 1;
+                        }
+                    }
+                    """
             );
         }
 
@@ -854,44 +854,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        try
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
-                        }
-                        finally
-                        {
-                            reader.Dispose();
+                            var reader = new MemoryStream()[||];
+                            try
+                            {
+                                var buffer = reader.GetBuffer();
+                                int a = buffer[0], b = a;
+                                var c = b;
+                                var d = 1;
+                            }
+                            finally
+                            {
+                                reader.Dispose();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.IO;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        using (var reader = new MemoryStream())
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
+                            using (var reader = new MemoryStream())
+                            {
+                                var buffer = reader.GetBuffer();
+                                int a = buffer[0], b = a;
+                                var c = b;
+                                var d = 1;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -900,41 +900,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        try
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
-                        }
-                        catch (Exception e)
-                        {
-                        }
-                        finally
-                        {
-                            reader.Dispose();
-                        }
-                    }
-                }
-                """,
-                """
-                using System;
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             try
                             {
                                 var buffer = reader.GetBuffer();
@@ -951,8 +924,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                try
+                                {
+                                    var buffer = reader.GetBuffer();
+                                    int a = buffer[0], b = a;
+                                    var c = b;
+                                    var d = 1;
+                                }
+                                catch (Exception e)
+                                {
+                                }
+                                finally
+                                {
+                                    reader.Dispose();
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -961,37 +961,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        try
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
-                        }
-                        finally
-                        {
-                        }
-                    }
-                }
-                """,
-                """
-                using System;
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             try
                             {
                                 var buffer = reader.GetBuffer();
@@ -1004,8 +981,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                try
+                                {
+                                    var buffer = reader.GetBuffer();
+                                    int a = buffer[0], b = a;
+                                    var c = b;
+                                    var d = 1;
+                                }
+                                finally
+                                {
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1014,38 +1014,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        try
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
-                        }
-                        finally
-                        {
-                            return;
-                        }
-                    }
-                }
-                """,
-                """
-                using System;
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             try
                             {
                                 var buffer = reader.GetBuffer();
@@ -1059,8 +1035,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                try
+                                {
+                                    var buffer = reader.GetBuffer();
+                                    int a = buffer[0], b = a;
+                                    var c = b;
+                                    var d = 1;
+                                }
+                                finally
+                                {
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1069,38 +1069,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        try
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
-                        }
-                        finally
-                        {
-                            reader = null;
-                        }
-                    }
-                }
-                """,
-                """
-                using System;
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             try
                             {
                                 var buffer = reader.GetBuffer();
@@ -1114,8 +1090,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                try
+                                {
+                                    var buffer = reader.GetBuffer();
+                                    int a = buffer[0], b = a;
+                                    var c = b;
+                                    var d = 1;
+                                }
+                                finally
+                                {
+                                    reader = null;
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1124,38 +1124,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        try
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
-                        }
-                        finally
-                        {
-                            Dispose();
-                        }
-                    }
-                }
-                """,
-                """
-                using System;
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             try
                             {
                                 var buffer = reader.GetBuffer();
@@ -1169,8 +1145,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                try
+                                {
+                                    var buffer = reader.GetBuffer();
+                                    int a = buffer[0], b = a;
+                                    var c = b;
+                                    var d = 1;
+                                }
+                                finally
+                                {
+                                    Dispose();
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1179,38 +1179,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        try
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
-                        }
-                        finally
-                        {
-                            reader.X();
-                        }
-                    }
-                }
-                """,
-                """
-                using System;
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             try
                             {
                                 var buffer = reader.GetBuffer();
@@ -1224,8 +1200,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                try
+                                {
+                                    var buffer = reader.GetBuffer();
+                                    int a = buffer[0], b = a;
+                                    var c = b;
+                                    var d = 1;
+                                }
+                                finally
+                                {
+                                    reader.X();
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1234,38 +1234,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                using System;
-                using System.IO;
+                    using System;
+                    using System.IO;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var reader = new MemoryStream()[||];
-                        try
+                        void M()
                         {
-                            var buffer = reader.GetBuffer();
-                            int a = buffer[0], b = a;
-                            var c = b;
-                            var d = 1;
-                        }
-                        finally
-                        {
-                            other.Dispose();
-                        }
-                    }
-                }
-                """,
-                """
-                using System;
-                using System.IO;
-
-                class C
-                {
-                    void M()
-                    {
-                        using (var reader = new MemoryStream())
-                        {
+                            var reader = new MemoryStream()[||];
                             try
                             {
                                 var buffer = reader.GetBuffer();
@@ -1279,8 +1255,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+                    using System.IO;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            using (var reader = new MemoryStream())
+                            {
+                                try
+                                {
+                                    var buffer = reader.GetBuffer();
+                                    int a = buffer[0], b = a;
+                                    var c = b;
+                                    var d = 1;
+                                }
+                                finally
+                                {
+                                    other.Dispose();
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1289,34 +1289,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        M(null);
-                        var x = disposable;[||]
-                        M(null);
-                        M(x);
-                        M(null);
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        M(null);
-                        using (var x = disposable)
+                        void M(System.IDisposable disposable)
                         {
                             M(null);
+                            var x = disposable;[||]
+                            M(null);
                             M(x);
+                            M(null);
                         }
-
-                        M(null);
                     }
-                }
-                """,
+                    """,
+                """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            M(null);
+                            using (var x = disposable)
+                            {
+                                M(null);
+                                M(x);
+                            }
+
+                            M(null);
+                        }
+                    }
+                    """,
                 LanguageVersion.CSharp8
             );
         }
@@ -1326,29 +1326,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        M(null);
-                        var x = disposable;[||]
-                        M(null);
-                        M(x);
+                        void M(System.IDisposable disposable)
+                        {
+                            M(null);
+                            var x = disposable;[||]
+                            M(null);
+                            M(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        M(null);
-                        using var x = disposable;
-                        M(null);
-                        M(x);
+                        void M(System.IDisposable disposable)
+                        {
+                            M(null);
+                            using var x = disposable;
+                            M(null);
+                            M(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion.CSharp8
             );
         }
@@ -1358,31 +1358,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        M(null);
-                        // leading comment
-                        var x = disposable;[||]
-                        M(null);
-                        M(x);
+                        void M(System.IDisposable disposable)
+                        {
+                            M(null);
+                            // leading comment
+                            var x = disposable;[||]
+                            M(null);
+                            M(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        M(null);
-                        // leading comment
-                        using var x = disposable;
-                        M(null);
-                        M(x);
+                        void M(System.IDisposable disposable)
+                        {
+                            M(null);
+                            // leading comment
+                            using var x = disposable;
+                            M(null);
+                            M(x);
+                        }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion.CSharp8
             );
         }
@@ -1392,43 +1392,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        switch (0)
+                        void M(System.IDisposable disposable)
                         {
-                            case 0:
-                                M(null);
-                                var x = disposable;[||]
-                                M(null);
-                                M(x);
-
-                            case 1:
-                        }
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(System.IDisposable disposable)
-                    {
-                        switch (0)
-                        {
-                            case 0:
-                                M(null);
-                                using (var x = disposable)
-                                {
+                            switch (0)
+                            {
+                                case 0:
+                                    M(null);
+                                    var x = disposable;[||]
                                     M(null);
                                     M(x);
-                                }
 
-                            case 1:
+                                case 1:
+                            }
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    class C
+                    {
+                        void M(System.IDisposable disposable)
+                        {
+                            switch (0)
+                            {
+                                case 0:
+                                    M(null);
+                                    using (var x = disposable)
+                                    {
+                                        M(null);
+                                        M(x);
+                                    }
+
+                                case 1:
+                            }
+                        }
+                    }
+                    """,
                 LanguageVersion.CSharp8
             );
         }
@@ -1438,45 +1438,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        switch (0)
+                        void M(System.IDisposable disposable)
                         {
-                            case 0:
+                            switch (0)
                             {
-                                M(null);
-                                var x = disposable;[||]
-                                M(null);
-                                M(x);
-                            }
+                                case 0:
+                                {
+                                    M(null);
+                                    var x = disposable;[||]
+                                    M(null);
+                                    M(x);
+                                }
 
-                            case 1:
+                                case 1:
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(System.IDisposable disposable)
+                    class C
                     {
-                        switch (0)
+                        void M(System.IDisposable disposable)
                         {
-                            case 0:
+                            switch (0)
                             {
-                                M(null);
-                                using var x = disposable;
-                                M(null);
-                                M(x);
-                            }
+                                case 0:
+                                {
+                                    M(null);
+                                    using var x = disposable;
+                                    M(null);
+                                    M(x);
+                                }
 
-                            case 1:
+                                case 1:
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 LanguageVersion.CSharp8
             );
         }

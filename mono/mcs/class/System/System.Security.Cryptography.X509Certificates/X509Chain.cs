@@ -38,7 +38,8 @@ using System.Text;
 using MX = Mono.Security.X509;
 #endif
 
-using Microsoft.Win32.SafeHandles;using MX = MonoSecurity::Mono.Security.X509;
+using Microsoft.Win32.SafeHandles;
+using MX = MonoSecurity::Mono.Security.X509;
 
 namespace System.Security.Cryptography.X509Certificates
 {

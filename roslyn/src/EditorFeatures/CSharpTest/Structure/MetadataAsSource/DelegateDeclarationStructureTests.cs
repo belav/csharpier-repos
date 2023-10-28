@@ -24,8 +24,8 @@ public class DelegateDeclarationStructureTests
     public async Task NoCommentsOrAttributes()
     {
         var code = """
-                public delegate TResult $$Blah<in T, out TResult>(T arg);
-                """;
+            public delegate TResult $$Blah<in T, out TResult>(T arg);
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -34,9 +34,9 @@ public class DelegateDeclarationStructureTests
     public async Task WithAttributes()
     {
         var code = """
-                {|hint:{|textspan:[Goo]
-                |}public delegate TResult $$Blah<in T, out TResult>(T arg);|}
-                """;
+            {|hint:{|textspan:[Goo]
+            |}public delegate TResult $$Blah<in T, out TResult>(T arg);|}
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -48,11 +48,11 @@ public class DelegateDeclarationStructureTests
     public async Task WithCommentsAndAttributes()
     {
         var code = """
-                {|hint:{|textspan:// Summary:
-                //     This is a summary.
-                [Goo]
-                |}delegate TResult $$Blah<in T, out TResult>(T arg);|}
-                """;
+            {|hint:{|textspan:// Summary:
+            //     This is a summary.
+            [Goo]
+            |}delegate TResult $$Blah<in T, out TResult>(T arg);|}
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -64,11 +64,11 @@ public class DelegateDeclarationStructureTests
     public async Task WithCommentsAttributesAndModifiers()
     {
         var code = """
-                {|hint:{|textspan:// Summary:
-                //     This is a summary.
-                [Goo]
-                |}public delegate TResult $$Blah<in T, out TResult>(T arg);|}
-                """;
+            {|hint:{|textspan:// Summary:
+            //     This is a summary.
+            [Goo]
+            |}public delegate TResult $$Blah<in T, out TResult>(T arg);|}
+            """;
 
         await VerifyBlockSpansAsync(
             code,

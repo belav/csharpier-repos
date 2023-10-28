@@ -162,47 +162,47 @@ public class RenameIntentTests : IntentTestsBase
         var additionalDocuments = new string[]
         {
             """
-            namespace M
-            {
-                public class D
+                namespace M
                 {
-                    void M()
+                    public class D
                     {
-                        var m = C.SomeString;
+                        void M()
+                        {
+                            var m = C.SomeString;
+                        }
                     }
                 }
-            }
-            """
+                """
         };
 
         var expectedTexts = new string[]
         {
             """
-            namespace M
-            {
-                public class C
+                namespace M
                 {
-                    public static string BetterString = string.Empty;
+                    public class C
+                    {
+                        public static string BetterString = string.Empty;
 
-                    void M()
-                    {
-                        var m = BetterString;
+                        void M()
+                        {
+                            var m = BetterString;
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            namespace M
-            {
-                public class D
+                namespace M
                 {
-                    void M()
+                    public class D
                     {
-                        var m = C.BetterString;
+                        void M()
+                        {
+                            var m = C.BetterString;
+                        }
                     }
                 }
-            }
-            """
+                """
         };
 
         await VerifyExpectedRenameAsync(

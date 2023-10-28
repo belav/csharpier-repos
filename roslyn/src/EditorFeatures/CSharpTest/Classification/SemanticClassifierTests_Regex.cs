@@ -18,16 +18,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = new Regex(@"$(\a\t\u0020)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^");
+                        void Goo()
+                        {
+                            var r = new Regex(@"$(\a\t\u0020)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^");
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -102,17 +102,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        // language=regex
-                        var r = @"$(\a\t\u0020)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^";
+                        void Goo()
+                        {
+                            // language=regex
+                            var r = @"$(\a\t\u0020)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -186,16 +186,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* language=regex */@"$(\a\t\u0020\\)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^";
+                        void Goo()
+                        {
+                            var r = /* language=regex */@"$(\a\t\u0020\\)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -271,16 +271,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regex */@"$\a(?#comment)";
+                        void Goo()
+                        {
+                            var r = /* lang=regex */@"$\a(?#comment)";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -298,16 +298,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regex */"$\\a(?#comment)";
+                        void Goo()
+                        {
+                            var r = /* lang=regex */"$\\a(?#comment)";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -325,16 +325,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regex */@"$\a(?#comment)"u8;
+                        void Goo()
+                        {
+                            var r = /* lang=regex */@"$\a(?#comment)"u8;
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -352,16 +352,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regexp */@"$\a(?#comment)";
+                        void Goo()
+                        {
+                            var r = /* lang=regexp */@"$\a(?#comment)";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -379,16 +379,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regexp */@"$\a(?#comment) # not end of line comment";
+                        void Goo()
+                        {
+                            var r = /* lang=regexp */@"$\a(?#comment) # not end of line comment";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -407,16 +407,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regexp,ignorepatternwhitespace */@"$\a(?#comment) # is end of line comment";
+                        void Goo()
+                        {
+                            var r = /* lang=regexp,ignorepatternwhitespace */@"$\a(?#comment) # is end of line comment";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -435,16 +435,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang = regexp , ignorepatternwhitespace */@"$\a(?#comment) # is end of line comment";
+                        void Goo()
+                        {
+                            var r = /* lang = regexp , ignorepatternwhitespace */@"$\a(?#comment) # is end of line comment";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -463,16 +463,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = new Regex(@"$\a(?#comment) # is end of line comment", RegexOptions.IgnorePatternWhitespace);
+                        void Goo()
+                        {
+                            var r = new Regex(@"$\a(?#comment) # is end of line comment", RegexOptions.IgnorePatternWhitespace);
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -494,16 +494,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = new Regex(@"$\a(?#comment) # is not end of line comment");
+                        void Goo()
+                        {
+                            var r = new Regex(@"$\a(?#comment) # is not end of line comment");
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -523,17 +523,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        // lang=regex
-                        var r = @"$\a(?#comment) # is not end of line comment"u8;
+                        void Goo()
+                        {
+                            // lang=regex
+                            var r = @"$\a(?#comment) # is not end of line comment"u8;
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -552,14 +552,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    // language=regex
-                    private static string myRegex = @"$(\a\t\u0020)";
-                }
-                """,
+                    class Program
+                    {
+                        // language=regex
+                        private static string myRegex = @"$(\a\t\u0020)";
+                    }
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -582,16 +582,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """"
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regex */ """$\a(?#comment)""";
+                        void Goo()
+                        {
+                            var r = /* lang=regex */ """$\a(?#comment)""";
+                        }
                     }
-                }
-                """",
+                    """",
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -609,16 +609,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """"
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regex */ """$\a(?#comment)"""u8;
+                        void Goo()
+                        {
+                            var r = /* lang=regex */ """$\a(?#comment)"""u8;
+                        }
                     }
-                }
-                """",
+                    """",
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -636,18 +636,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """"
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regex */ """
-                            $\a(?#comment)
-                            """;
+                        void Goo()
+                        {
+                            var r = /* lang=regex */ """
+                                $\a(?#comment)
+                                """;
+                        }
                     }
-                }
-                """",
+                    """",
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -665,18 +665,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """"
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = /* lang=regex */ """
-                            $\a(?#comment)
-                            """u8;
+                        void Goo()
+                        {
+                            var r = /* lang=regex */ """
+                                $\a(?#comment)
+                                """u8;
+                        }
                     }
-                }
-                """",
+                    """",
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -695,14 +695,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    // the double-quote inside the string should not affect this being classified as a regex.
-                    private Regex myRegex = new Regex(@"^ "" $";
-                }
-                """,
+                    class Program
+                    {
+                        // the double-quote inside the string should not affect this being classified as a regex.
+                        private Regex myRegex = new Regex(@"^ "" $";
+                    }
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -721,14 +721,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    // lang=regex
-                    private string myRegex = @"^ "" $"u8;
-                }
-                """,
+                    class Program
+                    {
+                        // lang=regex
+                        private string myRegex = @"^ "" $"u8;
+                    }
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -744,20 +744,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    [StringSyntax(StringSyntaxAttribute.Regex)]
-                    private string field;
-
-                    void Goo()
+                    class Program
                     {
-                        [|this.field = @"$\a(?#comment)";|]
+                        [StringSyntax(StringSyntaxAttribute.Regex)]
+                        private string field;
+
+                        void Goo()
+                        {
+                            [|this.field = @"$\a(?#comment)";|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Field("field"),
                 Regex.Anchor("$"),
@@ -772,15 +772,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    [StringSyntax(StringSyntaxAttribute.Regex)]
-                    [|private string field = @"$\a(?#comment)";|]
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    class Program
+                    {
+                        [StringSyntax(StringSyntaxAttribute.Regex)]
+                        [|private string field = @"$\a(?#comment)";|]
+                    }
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
@@ -794,20 +794,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    [StringSyntax(StringSyntaxAttribute.Regex)]
-                    private string Prop { get; set; }
-
-                    void Goo()
+                    class Program
                     {
-                        [|this.Prop = @"$\a(?#comment)";|]
+                        [StringSyntax(StringSyntaxAttribute.Regex)]
+                        private string Prop { get; set; }
+
+                        void Goo()
+                        {
+                            [|this.Prop = @"$\a(?#comment)";|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Property("Prop"),
                 Regex.Anchor("$"),
@@ -822,15 +822,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    [StringSyntax(StringSyntaxAttribute.Regex)]
-                    [|private string Prop { get; set; } = @"$\a(?#comment)";|]
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    class Program
+                    {
+                        [StringSyntax(StringSyntaxAttribute.Regex)]
+                        [|private string Prop { get; set; } = @"$\a(?#comment)";|]
+                    }
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
@@ -844,21 +844,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Regex)] string p)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Regex)] string p)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(@"$\a(?#comment)");|]
+                        void Goo()
+                        {
+                            [|M(@"$\a(?#comment)");|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Regex.Anchor("$"),
@@ -873,21 +873,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Regex)] params string[] p)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Regex)] params string[] p)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(@"$\a(?#comment)");|]
+                        void Goo()
+                        {
+                            [|M(@"$\a(?#comment)");|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Regex.Anchor("$"),
@@ -903,21 +903,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Regex)] params string[] p)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Regex)] params string[] p)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(@"$\a(?#comment)", @"$\a(?#comment)");|]
+                        void Goo()
+                        {
+                            [|M(@"$\a(?#comment)", @"$\a(?#comment)");|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Regex.Anchor("$"),
@@ -936,21 +936,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Regex)] string[] p)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Regex)] string[] p)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(new string[] { @"$\a(?#comment)" });|]
+                        void Goo()
+                        {
+                            [|M(new string[] { @"$\a(?#comment)" });|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Regex.Anchor("$"),
@@ -967,21 +967,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Regex)] string[] p)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Regex)] string[] p)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(new[] { @"$\a(?#comment)" });|]
+                        void Goo()
+                        {
+                            [|M(new[] { @"$\a(?#comment)" });|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Regex.Anchor("$"),
@@ -998,22 +998,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Collections.Generic;
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Collections.Generic;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Regex)] List<string> p)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Regex)] List<string> p)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(new List<string> { @"$\a(?#comment)" });|]
+                        void Goo()
+                        {
+                            [|M(new List<string> { @"$\a(?#comment)" });|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Class("List"),
@@ -1031,22 +1031,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Collections.Generic;
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Collections.Generic;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Regex)] List<string> p)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Regex)] List<string> p)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(new() { @"$\a(?#comment)" });|]
+                        void Goo()
+                        {
+                            [|M(new() { @"$\a(?#comment)" });|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Regex.Anchor("$"),
@@ -1063,21 +1063,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Regex)] string p, RegexOptions options)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Regex)] string p, RegexOptions options)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(@"$\a(?#comment) # is end of line comment", RegexOptions.IgnorePatternWhitespace);|]
+                        void Goo()
+                        {
+                            [|M(@"$\a(?#comment) # is end of line comment", RegexOptions.IgnorePatternWhitespace);|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Regex.Anchor("$"),
@@ -1095,22 +1095,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                [AttributeUsage(AttributeTargets.Field)]
-                class RegexTestAttribute : Attribute
-                {
-                    public RegexTestAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string value) { }
-                }
+                    [AttributeUsage(AttributeTargets.Field)]
+                    class RegexTestAttribute : Attribute
+                    {
+                        public RegexTestAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string value) { }
+                    }
 
-                class Program
-                {
-                    [|[RegexTest(@"$\a(?#comment)")]|]
-                    private string field;
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    class Program
+                    {
+                        [|[RegexTest(@"$\a(?#comment)")]|]
+                        private string field;
+                    }
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Class("RegexTest"),
                 Regex.Anchor("$"),
@@ -1126,25 +1126,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                [AttributeUsage(AttributeTargets.Field)]
-                class RegexTestAttribute : Attribute
-                {
-                    public RegexTestAttribute() { }
+                    [AttributeUsage(AttributeTargets.Field)]
+                    class RegexTestAttribute : Attribute
+                    {
+                        public RegexTestAttribute() { }
 
-                    [StringSyntax(StringSyntaxAttribute.Regex)]
-                    public string value;
-                }
+                        [StringSyntax(StringSyntaxAttribute.Regex)]
+                        public string value;
+                    }
 
-                class Program
-                {
-                    [|[RegexTest(value = @"$\a(?#comment)")]|]
-                    private string field;
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    class Program
+                    {
+                        [|[RegexTest(value = @"$\a(?#comment)")]|]
+                        private string field;
+                    }
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Class("RegexTest"),
                 Field("value"),
@@ -1163,25 +1163,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                [AttributeUsage(AttributeTargets.Field)]
-                class RegexTestAttribute : Attribute
-                {
-                    public RegexTestAttribute() { }
+                    [AttributeUsage(AttributeTargets.Field)]
+                    class RegexTestAttribute : Attribute
+                    {
+                        public RegexTestAttribute() { }
 
-                    [StringSyntax(StringSyntaxAttribute.Regex)]
-                    public string value { get; set; }
-                }
+                        [StringSyntax(StringSyntaxAttribute.Regex)]
+                        public string value { get; set; }
+                    }
 
-                class Program
-                {
-                    [|[RegexTest(value = @"$\a(?#comment)")]|]
-                    private string field;
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    class Program
+                    {
+                        [|[RegexTest(value = @"$\a(?#comment)")]|]
+                        private string field;
+                    }
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Class("RegexTest"),
                 Property("value"),
@@ -1197,22 +1197,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                [AttributeUsage(AttributeTargets.Field)]
-                class RegexTestAttribute : Attribute
-                {
-                    public RegexTestAttribute([StringSyntax(StringSyntaxAttribute.Regex)] params string[] value) { }
-                }
+                    [AttributeUsage(AttributeTargets.Field)]
+                    class RegexTestAttribute : Attribute
+                    {
+                        public RegexTestAttribute([StringSyntax(StringSyntaxAttribute.Regex)] params string[] value) { }
+                    }
 
-                class Program
-                {
-                    [|[RegexTest(@"$\a(?#comment)")]|]
-                    private string field;
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    class Program
+                    {
+                        [|[RegexTest(@"$\a(?#comment)")]|]
+                        private string field;
+                    }
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Class("RegexTest"),
                 Regex.Anchor("$"),
@@ -1227,22 +1227,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                [AttributeUsage(AttributeTargets.Field)]
-                class RegexTestAttribute : Attribute
-                {
-                    public RegexTestAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string[] value) { }
-                }
+                    [AttributeUsage(AttributeTargets.Field)]
+                    class RegexTestAttribute : Attribute
+                    {
+                        public RegexTestAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string[] value) { }
+                    }
 
-                class Program
-                {
-                    [|[RegexTest(new string[] { @"$\a(?#comment)" })]|]
-                    private string field;
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    class Program
+                    {
+                        [|[RegexTest(new string[] { @"$\a(?#comment)" })]|]
+                        private string field;
+                    }
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Class("RegexTest"),
                 Regex.Anchor("$"),
@@ -1259,22 +1259,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System;
-                using System.Diagnostics.CodeAnalysis;
-                using System.Text.RegularExpressions;
+                    using System;
+                    using System.Diagnostics.CodeAnalysis;
+                    using System.Text.RegularExpressions;
 
-                [AttributeUsage(AttributeTargets.Field)]
-                class RegexTestAttribute : Attribute
-                {
-                    public RegexTestAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string[] value) { }
-                }
+                    [AttributeUsage(AttributeTargets.Field)]
+                    class RegexTestAttribute : Attribute
+                    {
+                        public RegexTestAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string[] value) { }
+                    }
 
-                class Program
-                {
-                    [|[RegexTest(new[] { @"$\a(?#comment)" })]|]
-                    private string field;
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    class Program
+                    {
+                        [|[RegexTest(new[] { @"$\a(?#comment)" })]|]
+                        private string field;
+                    }
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Class("RegexTest"),
                 Regex.Anchor("$"),
@@ -1291,24 +1291,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void M()
+                    class Program
                     {
-                        // not terminating this string caused us to eat up to the quote on the next line.
-                        // we then treated #comment as a directive with a lot of skipped tokens on it, including
-                        // a skipped token for ";
-                        //
-                        // Because it's a comment on a directive, special lexing rules apply (i.e. no escape
-                        // characters are supposed, and we want our system to bail there and not try to validate
-                        // it.
-                        var r = new Regex(@"$;
-                        var s = /* language=regex */ @"(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^";
+                        void M()
+                        {
+                            // not terminating this string caused us to eat up to the quote on the next line.
+                            // we then treated #comment as a directive with a lot of skipped tokens on it, including
+                            // a skipped token for ";
+                            //
+                            // Because it's a comment on a directive, special lexing rules apply (i.e. no escape
+                            // characters are supposed, and we want our system to bail there and not try to validate
+                            // it.
+                            var r = new Regex(@"$;
+                            var s = /* language=regex */ @"(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^";
+                        }
                     }
-                }
-                """,
+                    """,
                 testHost,
                 Namespace("System"),
                 Namespace("Text"),
@@ -1324,14 +1324,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = Regex.Match("", [|@"$\a(?#comment)"|]
-                """,
+                        void Goo()
+                        {
+                            var r = Regex.Match("", [|@"$\a(?#comment)"|]
+                    """,
                 testHost,
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
@@ -1346,14 +1346,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Text.RegularExpressions;
+                    using System.Text.RegularExpressions;
 
-                class Program
-                {
-                    void Goo()
+                    class Program
                     {
-                        var r = Regex.Match("", [|@"$\a(?#comment)"|],
-                """,
+                        void Goo()
+                        {
+                            var r = Regex.Match("", [|@"$\a(?#comment)"|],
+                    """,
                 testHost,
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),

@@ -28,7 +28,8 @@
 extern alias MonoSecurity;
 #endif
 
-using System;using System.IO;
+using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Authentication;
@@ -42,7 +43,6 @@ using MonoSecurity::Mono.Security.Interface;
 #else
 using Mono.Security.Interface;
 #endif
-
 
 using MNS = Mono.Net.Security;
 

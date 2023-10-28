@@ -35,33 +35,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        return [|X() && Y() ? true : false|];
+                        bool M()
+                        {
+                            return [|X() && Y() ? true : false|];
+                        }
+
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
                     }
-
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        return X() && Y();
-                    }
+                        bool M()
+                        {
+                            return X() && Y();
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -70,33 +70,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        return [|X() && Y() ? false : true|];
+                        bool M()
+                        {
+                            return [|X() && Y() ? false : true|];
+                        }
+
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
                     }
-
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        return !X() || !Y();
-                    }
+                        bool M()
+                        {
+                            return !X() || !Y();
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -105,19 +105,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return [|X() && Y() ? "" : null|];
-                    }
+                        string M()
+                        {
+                            return [|X() && Y() ? "" : null|];
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -126,19 +126,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return [|X() && Y() ? null : ""|];
-                    }
+                        string M()
+                        {
+                            return [|X() && Y() ? null : ""|];
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -147,33 +147,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        return [|X() && Y() ? true : true|];
+                        bool M()
+                        {
+                            return [|X() && Y() ? true : true|];
+                        }
+
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
                     }
-
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        return X() && Y() || true;
-                    }
+                        bool M()
+                        {
+                            return X() && Y() || true;
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -182,33 +182,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        return [|X() && Y() ? false : false|];
+                        bool M()
+                        {
+                            return [|X() && Y() ? false : false|];
+                        }
+
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
                     }
-
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    bool M()
+                    class C
                     {
-                        return X() && Y() && false;
-                    }
+                        bool M()
+                        {
+                            return X() && Y() && false;
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -217,33 +217,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return [|X() ? true : Y()|];
+                        string M()
+                        {
+                            return [|X() ? true : Y()|];
+                        }
+
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
                     }
-
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return X() || Y();
-                    }
+                        string M()
+                        {
+                            return X() || Y();
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -252,33 +252,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return [|X() ? false : Y()|];
+                        string M()
+                        {
+                            return [|X() ? false : Y()|];
+                        }
+
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
                     }
-
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return !X() && Y();
-                    }
+                        string M()
+                        {
+                            return !X() && Y();
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -287,33 +287,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return [|X() ? Y() : true|];
+                        string M()
+                        {
+                            return [|X() ? Y() : true|];
+                        }
+
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
                     }
-
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return !X() || Y();
-                    }
+                        string M()
+                        {
+                            return !X() || Y();
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -322,33 +322,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return [|X() ? Y() : false|];
+                        string M()
+                        {
+                            return [|X() ? Y() : false|];
+                        }
+
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
                     }
-
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return X() && Y();
-                    }
+                        string M()
+                        {
+                            return X() && Y();
+                        }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
-                }
-                """
+                        private bool X() => throw new NotImplementedException();
+                        private bool Y() => throw new NotImplementedException();
+                    }
+                    """
             );
         }
 
@@ -357,27 +357,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public bool M(object x, object y, Func<object, object, bool> isEqual)
+                    class C
                     {
-                        return {|FixAllInDocument:x == null ? false : y == null ? false : isEqual == null ? x.Equals(y) : isEqual(x, y)|};
+                        public bool M(object x, object y, Func<object, object, bool> isEqual)
+                        {
+                            return {|FixAllInDocument:x == null ? false : y == null ? false : isEqual == null ? x.Equals(y) : isEqual(x, y)|};
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public bool M(object x, object y, Func<object, object, bool> isEqual)
+                    class C
                     {
-                        return x != null && y != null && (isEqual == null ? x.Equals(y) : isEqual(x, y));
+                        public bool M(object x, object y, Func<object, object, bool> isEqual)
+                        {
+                            return x != null && y != null && (isEqual == null ? x.Equals(y) : isEqual(x, y));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

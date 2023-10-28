@@ -292,22 +292,22 @@ namespace LibraryImportGenerator.UnitTests
             string source =
                 """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Utf8)]
-                    public static partial void {|#0:Method1|}(string s);
-
-                    [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Custom, StringMarshallingCustomType = typeof(Native))]
-                    public static partial void Method2(string {|#1:s|});
-
-                    struct Native
+                    using System.Runtime.InteropServices;
+                    partial class Test
                     {
-                        public Native(string s) { }
-                        public string ToManaged() => default;
+                        [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Utf8)]
+                        public static partial void {|#0:Method1|}(string s);
+
+                        [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Custom, StringMarshallingCustomType = typeof(Native))]
+                        public static partial void Method2(string {|#1:s|});
+
+                        struct Native
+                        {
+                            public Native(string s) { }
+                            public string ToManaged() => default;
+                        }
                     }
-                }
-                """ + CodeSnippets.LibraryImportAttributeDeclaration;
+                    """ + CodeSnippets.LibraryImportAttributeDeclaration;
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
                 VerifyCS

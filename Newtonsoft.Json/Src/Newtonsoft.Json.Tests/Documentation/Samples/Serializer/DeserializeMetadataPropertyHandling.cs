@@ -36,7 +36,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 using NUnit.Framework;
 #endif
 
-
 using User = Newtonsoft.Json.Tests.Serialization.MetadataPropertyHandlingTests.User;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer

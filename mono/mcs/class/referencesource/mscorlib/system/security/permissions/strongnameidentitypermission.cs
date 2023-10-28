@@ -23,7 +23,6 @@ namespace System.Security.Permissions
     using SecurityElement = System.Security.SecurityElement;
 #endif // FEATURE_CAS_POLICY
 
-
     using String = System.String;
     using Version = System.Version;
 

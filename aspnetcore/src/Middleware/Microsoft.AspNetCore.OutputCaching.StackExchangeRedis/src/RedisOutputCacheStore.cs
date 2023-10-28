@@ -376,11 +376,11 @@ internal partial class RedisOutputCacheStore
                 {
                     // semantic equivalent of ZADD GT
                     const string ZADD_GT = """
-                    local oldScore = tonumber(redis.call('ZSCORE', KEYS[1], ARGV[2]))
-                    if oldScore == nil or oldScore < tonumber(ARGV[1]) then
-                        redis.call('ZADD', KEYS[1], ARGV[1], ARGV[2])
-                    end
-                    """;
+                        local oldScore = tonumber(redis.call('ZSCORE', KEYS[1], ARGV[2]))
+                        if oldScore == nil or oldScore < tonumber(ARGV[1]) then
+                            redis.call('ZADD', KEYS[1], ARGV[1], ARGV[2])
+                        end
+                        """;
 
                     // note we're not sharing an ARGV array between tags here because then we'd need to wait on latency to avoid conflicts;
                     // in reality most caches have very limited tags (if any), so this is not perceived as an issue

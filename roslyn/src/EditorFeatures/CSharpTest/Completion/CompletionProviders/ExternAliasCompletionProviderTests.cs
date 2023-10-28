@@ -23,11 +23,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyNoItemsExistAsync(
                 """
-                extern alias $$
-                class C
-                {
-                }
-                """
+                    extern alias $$
+                    class C
+                    {
+                    }
+                    """
             );
         }
 

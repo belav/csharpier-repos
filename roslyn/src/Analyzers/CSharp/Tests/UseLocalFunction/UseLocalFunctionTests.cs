@@ -39,24 +39,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
+                                return fibonacci(v - 1, v - 2);
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters(
                     parseOptions: CSharpParseOptions
                         .Default
@@ -70,26 +70,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
+                                return fibonacci(v - 1, v - 2);
+                            };
 
-                        fibonacci = null;
+                            fibonacci = null;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -98,25 +98,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            fibonacci = null;
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                fibonacci = null;
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
+                                return fibonacci(v - 1, v - 2);
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -125,23 +125,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // Func can't be bound.
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            // Func can't be bound.
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
+                                return fibonacci(v - 1, v - 2);
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -150,24 +150,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        }, fib2 = x => x;
+                                return fibonacci(v - 1, v - 2);
+                            }, fib2 = x => x;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -176,21 +176,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    Func<int, int> [||]fibonacci = v =>
-                        {
-                            if (v <= 1)
+                    class C
+                    {
+                        Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                }
-                """
+                                return fibonacci(v - 1, v - 2);
+                            };
+                    }
+                    """
             );
         }
 
@@ -199,43 +199,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -244,43 +244,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = (v) =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = (v) =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -289,43 +289,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = (int v) =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = (int v) =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -334,43 +334,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = delegate (int v)
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = delegate (int v)
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -379,33 +379,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = v =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            Func<int, int> [||]fibonacci = v =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -414,33 +414,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = (v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            Func<int, int> [||]fibonacci = (v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -449,33 +449,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = (int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            Func<int, int> [||]fibonacci = (int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -484,43 +484,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = (Func<int, int>)(v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            var [||]fibonacci = (Func<int, int>)(v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        });
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            });
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -529,43 +529,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = ((Func<int, int>)(v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            var [||]fibonacci = ((Func<int, int>)(v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        }));
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            }));
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -574,43 +574,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = (Func<int, int>)((v) =>
+                        void M()
                         {
-                            if (v <= 1)
+                            var [||]fibonacci = (Func<int, int>)((v) =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        });
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            });
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -619,43 +619,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = (Func<int, int>)((int v) =>
+                        void M()
                         {
-                            if (v <= 1)
+                            var [||]fibonacci = (Func<int, int>)((int v) =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        });
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            });
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -664,43 +664,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = (Func<int, int>)(delegate (int v)
+                        void M()
                         {
-                            if (v <= 1)
+                            var [||]fibonacci = (Func<int, int>)(delegate (int v)
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        });
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            });
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -709,33 +709,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = (Func<int, int>)(v =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2));
+                        void M()
+                        {
+                            var [||]fibonacci = (Func<int, int>)(v =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2));
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -744,33 +744,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = (Func<int, int>)((v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2));
+                        void M()
+                        {
+                            var [||]fibonacci = (Func<int, int>)((v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2));
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -779,33 +779,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = (Func<int, int>)((int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2));
+                        void M()
+                        {
+                            var [||]fibonacci = (Func<int, int>)((int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2));
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -814,25 +814,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fib = null;
-                        fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fib = null;
+                            fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
+                                return fibonacci(v - 1, v - 2);
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -841,25 +841,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = GetCallback();
-                        fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = GetCallback();
+                            fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
+                                return fibonacci(v - 1, v - 2);
+                            };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -868,44 +868,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = null;
-                        fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = null;
+                            fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -914,44 +914,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci;
-                        fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci;
+                            fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -960,44 +960,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = default;
-                        fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = default;
+                            fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
-                """,
+                    """,
+                """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """,
                 // 7.1 is required for default literals, so 7.2 should be sufficient
                 // and is used in other tests
                 new TestParameters(parseOptions: CSharp72ParseOptions)
@@ -1009,44 +1009,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = default(Func<int, int>);
-                        fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = default(Func<int, int>);
+                            fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1055,44 +1055,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var [||]fibonacci = default(Func<int, int>);
-                        fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            var [||]fibonacci = default(Func<int, int>);
+                            fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1101,44 +1101,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = null;
-                        fibonacci = (v) =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = null;
+                            fibonacci = (v) =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1147,44 +1147,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = null;
-                        fibonacci = (int v) =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = null;
+                            fibonacci = (int v) =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1193,44 +1193,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = null;
-                        fibonacci = delegate (int v)
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = null;
+                            fibonacci = delegate (int v)
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1239,34 +1239,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = null;
-                        fibonacci = v =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            Func<int, int> [||]fibonacci = null;
+                            fibonacci = v =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1275,34 +1275,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = null;
-                        fibonacci = (v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            Func<int, int> [||]fibonacci = null;
+                            fibonacci = (v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1311,34 +1311,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = null;
-                        fibonacci = (int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            Func<int, int> [||]fibonacci = null;
+                            fibonacci = (int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static int fibonacci(int v) =>
-                            v <= 1
-                                ? 1
-                                : fibonacci(v - 1, v - 2);
+                        void M()
+                        {
+                            static int fibonacci(int v) =>
+                                v <= 1
+                                    ? 1
+                                    : fibonacci(v - 1, v - 2);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1347,37 +1347,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> {|FixAllInDocument:fibonacci|} = v =>
+                        void M()
                         {
-                            Func<bool, bool> isTrue = b => b;
+                            Func<int, int> {|FixAllInDocument:fibonacci|} = v =>
+                            {
+                                Func<bool, bool> isTrue = b => b;
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            bool isTrue(bool b) => b;
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                bool isTrue(bool b) => b;
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1386,37 +1386,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> fibonacci = v =>
+                        void M()
                         {
-                            Func<bool, bool> {|FixAllInDocument:isTrue|} = b => b;
+                            Func<int, int> fibonacci = v =>
+                            {
+                                Func<bool, bool> {|FixAllInDocument:isTrue|} = b => b;
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            bool isTrue(bool b) => b;
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                bool isTrue(bool b) => b;
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1425,38 +1425,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> fibonacci = null;
-                        fibonacci = v =>
+                        void M()
                         {
-                            Func<bool, bool> {|FixAllInDocument:isTrue|} = null;
-                            isTrue = b => b;
+                            Func<int, int> fibonacci = null;
+                            fibonacci = v =>
+                            {
+                                Func<bool, bool> {|FixAllInDocument:isTrue|} = null;
+                                isTrue = b => b;
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            bool isTrue(bool b) => b;
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                bool isTrue(bool b) => b;
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1465,38 +1465,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> {|FixAllInDocument:fibonacci|} = null;
-                        fibonacci = v =>
+                        void M()
                         {
-                            Func<int, int> fibonacciHelper = null;
-                            fibonacciHelper = n => fibonacci.Invoke(n - 1) + fibonacci(arg: n - 2);
+                            Func<int, int> {|FixAllInDocument:fibonacci|} = null;
+                            fibonacci = v =>
+                            {
+                                Func<int, int> fibonacciHelper = null;
+                                fibonacciHelper = n => fibonacci.Invoke(n - 1) + fibonacci(arg: n - 2);
 
-                            return fibonacciHelper(v);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            int fibonacciHelper(int n) => fibonacci(n - 1) + fibonacci(v: n - 2);
-                            return fibonacciHelper(v);
+                                return fibonacciHelper(v);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                int fibonacciHelper(int n) => fibonacci(n - 1) + fibonacci(v: n - 2);
+                                return fibonacciHelper(v);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -1505,45 +1505,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // Leading trivia
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            // Leading trivia
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        }; // Trailing trivia
+                                return fibonacci(v - 1, v - 2);
+                            }; // Trailing trivia
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        // Leading trivia
-                        static int fibonacci(int v)
+                        void M()
                         {
-                            if (v <= 1)
+                            // Leading trivia
+                            static int fibonacci(int v)
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        } // Trailing trivia
+                                return fibonacci(v - 1, v - 2);
+                            } // Trailing trivia
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1552,25 +1552,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                delegate void D(in int p);
-                class C
-                {
-                    void M()
+                    delegate void D(in int p);
+                    class C
                     {
-                        D [||]lambda = (in int p) => throw null;
+                        void M()
+                        {
+                            D [||]lambda = (in int p) => throw null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                delegate void D(in int p);
-                class C
-                {
-                    void M()
+                    delegate void D(in int p);
+                    class C
                     {
-                        void lambda(in int p) => throw null;
+                        void M()
+                        {
+                            void lambda(in int p) => throw null;
+                        }
                     }
-                }
-                """,
+                    """,
                 // Run with 7.2 to get read-only references
                 new TestParameters(parseOptions: CSharp72ParseOptions)
             );
@@ -1581,25 +1581,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                delegate ref readonly int D();
-                class C
-                {
-                    void M()
+                    delegate ref readonly int D();
+                    class C
                     {
-                        D [||]lambda = () => throw null;
+                        void M()
+                        {
+                            D [||]lambda = () => throw null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                delegate ref readonly int D();
-                class C
-                {
-                    void M()
+                    delegate ref readonly int D();
+                    class C
                     {
-                        static ref readonly int lambda() => throw null;
+                        void M()
+                        {
+                            static ref readonly int lambda() => throw null;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1608,21 +1608,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<string, Task> [||]f = x => { return Task.CompletedTask; };
-                        Func<string, Task> actual = null;
-                        AssertSame(f, actual);
-                    }
+                        static void Main(string[] args)
+                        {
+                            Func<string, Task> [||]f = x => { return Task.CompletedTask; };
+                            Func<string, Task> actual = null;
+                            AssertSame(f, actual);
+                        }
 
-                    public static void AssertSame(object expected, object actual) { }
-                }
-                """
+                        public static void AssertSame(object expected, object actual) { }
+                    }
+                    """
             );
         }
 
@@ -1631,37 +1631,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<string, Task> [||]f = x => { return Task.CompletedTask; };
-                        Func<string, Task> actual = null;
-                        AssertSame(f, actual);
+                        static void Main(string[] args)
+                        {
+                            Func<string, Task> [||]f = x => { return Task.CompletedTask; };
+                            Func<string, Task> actual = null;
+                            AssertSame(f, actual);
+                        }
+
+                        public static void AssertSame(Func<string, Task> expected, object actual) { }
                     }
-
-                    public static void AssertSame(Func<string, Task> expected, object actual) { }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        static Task f(string x) { return Task.CompletedTask; }
-                        Func<string, Task> actual = null;
-                        AssertSame(f, actual);
-                    }
+                        static void Main(string[] args)
+                        {
+                            static Task f(string x) { return Task.CompletedTask; }
+                            Func<string, Task> actual = null;
+                            AssertSame(f, actual);
+                        }
 
-                    public static void AssertSame(Func<string, Task> expected, object actual) { }
-                }
-                """
+                        public static void AssertSame(Func<string, Task> expected, object actual) { }
+                    }
+                    """
             );
         }
 
@@ -1670,19 +1670,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<object, string> [||]f = x => "";
-                        M(f);
-                    }
+                        static void Main(string[] args)
+                        {
+                            Func<object, string> [||]f = x => "";
+                            M(f);
+                        }
 
-                    public static void M(Delegate expected) { }
-                }
-                """
+                        public static void M(Delegate expected) { }
+                    }
+                    """
             );
         }
 
@@ -1691,19 +1691,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<object, string> [||]f = x => "";
-                        M(f);
-                    }
+                        static void Main(string[] args)
+                        {
+                            Func<object, string> [||]f = x => "";
+                            M(f);
+                        }
 
-                    public static void M(MulticastDelegate expected) { }
-                }
-                """
+                        public static void M(MulticastDelegate expected) { }
+                    }
+                    """
             );
         }
 
@@ -1712,33 +1712,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<object, string> [||]f = x => "";
-                        M(f);
+                        static void Main(string[] args)
+                        {
+                            Func<object, string> [||]f = x => "";
+                            M(f);
+                        }
+
+                        public static void M(Func<object, string> expected) { }
                     }
-
-                    public static void M(Func<object, string> expected) { }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        static string f(object x) => "";
-                        M(f);
-                    }
+                        static void Main(string[] args)
+                        {
+                            static string f(object x) => "";
+                            M(f);
+                        }
 
-                    public static void M(Func<object, string> expected) { }
-                }
-                """
+                        public static void M(Func<object, string> expected) { }
+                    }
+                    """
             );
         }
 
@@ -1748,33 +1748,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<object, string> [||]f = x => "";
-                        M(f);
+                        static void Main(string[] args)
+                        {
+                            Func<object, string> [||]f = x => "";
+                            M(f);
+                        }
+
+                        public static void M(Func<string, object> expected) { }
                     }
-
-                    public static void M(Func<string, object> expected) { }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        static string f(object x) => "";
-                        M(f);
-                    }
+                        static void Main(string[] args)
+                        {
+                            static string f(object x) => "";
+                            M(f);
+                        }
 
-                    public static void M(Func<string, object> expected) { }
-                }
-                """
+                        public static void M(Func<string, object> expected) { }
+                    }
+                    """
             );
         }
 
@@ -1784,33 +1784,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<string, string> [||]f = x => "";
-                        M(f);
+                        static void Main(string[] args)
+                        {
+                            Func<string, string> [||]f = x => "";
+                            M(f);
+                        }
+
+                        public static void M(Func<string, object> expected) { }
                     }
-
-                    public static void M(Func<string, object> expected) { }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        static string f(string x) => "";
-                        M(f);
-                    }
+                        static void Main(string[] args)
+                        {
+                            static string f(string x) => "";
+                            M(f);
+                        }
 
-                    public static void M(Func<string, object> expected) { }
-                }
-                """
+                        public static void M(Func<string, object> expected) { }
+                    }
+                    """
             );
         }
 
@@ -1820,33 +1820,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<object, object> [||]f = x => "";
-                        M(f);
+                        static void Main(string[] args)
+                        {
+                            Func<object, object> [||]f = x => "";
+                            M(f);
+                        }
+
+                        public static void M(Func<string, object> expected) { }
                     }
-
-                    public static void M(Func<string, object> expected) { }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        static object f(object x) => "";
-                        M(f);
-                    }
+                        static void Main(string[] args)
+                        {
+                            static object f(object x) => "";
+                            M(f);
+                        }
 
-                    public static void M(Func<string, object> expected) { }
-                }
-                """
+                        public static void M(Func<string, object> expected) { }
+                    }
+                    """
             );
         }
 
@@ -1855,24 +1855,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                class Enclosing<T> where T : class
-                {
-                  delegate T MyDelegate(T t = null);
-
-                  public class Class
-                  {
-                    public void Caller()
+                    class Enclosing<T> where T : class
                     {
-                      MyDelegate [||]local = x => x;
+                      delegate T MyDelegate(T t = null);
 
-                      var doubleDelegate = local + local;
+                      public class Class
+                      {
+                        public void Caller()
+                        {
+                          MyDelegate [||]local = x => x;
+
+                          var doubleDelegate = local + local;
+                        }
+                      }
                     }
-                  }
-                }
-                """
+                    """
             );
         }
 
@@ -1881,23 +1881,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller()
-                        {
-                            MyDelegate [||]local = x => x;
+                        delegate T MyDelegate(T t = null);
 
-                            var str = local.ToString();
+                        public class Class
+                        {
+                            public void Caller()
+                            {
+                                MyDelegate [||]local = x => x;
+
+                                var str = local.ToString();
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1906,26 +1906,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller(T t)
+                        delegate T MyDelegate(T t = null);
+
+                        public class Class
                         {
-                            MyDelegate[||]local = x => x;
+                            public void Caller(T t)
+                            {
+                                MyDelegate[||]local = x => x;
 
-                            Console.Write(local.Invoke(t));
+                                Console.Write(local.Invoke(t));
 
-                            var str = local.ToString();
-                            local.Invoke(t);
+                                var str = local.ToString();
+                                local.Invoke(t);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1934,24 +1934,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                class Enclosing<T> where T : class
-                {
-                  delegate T MyDelegate(T t = null);
-
-                  public class Class
-                  {
-                    public void Caller()
+                    class Enclosing<T> where T : class
                     {
-                      MyDelegate [||]local = x => x;
+                      delegate T MyDelegate(T t = null);
 
-                      Expression<Action> expression = () => local(null);
+                      public class Class
+                      {
+                        public void Caller()
+                        {
+                          MyDelegate [||]local = x => x;
+
+                          Expression<Action> expression = () => local(null);
+                        }
+                      }
                     }
-                  }
-                }
-                """
+                    """
             );
         }
 
@@ -1960,20 +1960,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
-                using System.Linq.Expressions;
+                    using System;
+                    using System.Linq.Expressions;
 
-                public class C
-                {
-                    void Method(Action action) { }
-
-                    Expression<Action> Example()
+                    public class C
                     {
-                        Action [||]action = () => Method(null);
-                        return () => Method(action);
+                        void Method(Action action) { }
+
+                        Expression<Action> Example()
+                        {
+                            Action [||]action = () => Method(null);
+                            return () => Method(action);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1982,41 +1982,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller()
-                        {
-                            MyDelegate [||]local = x => x;
+                        delegate T MyDelegate(T t = null);
 
-                            local.Invoke();
+                        public class Class
+                        {
+                            public void Caller()
+                            {
+                                MyDelegate [||]local = x => x;
+
+                                local.Invoke();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller()
-                        {
-                            static T local(T x = null) => x;
+                        delegate T MyDelegate(T t = null);
 
-                            local();
+                        public class Class
+                        {
+                            public void Caller()
+                            {
+                                static T local(T x = null) => x;
+
+                                local();
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2025,41 +2025,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller(T t)
-                        {
-                            MyDelegate [||]local = x => x;
+                        delegate T MyDelegate(T t = null);
 
-                            Console.Write(local.Invoke(t));
+                        public class Class
+                        {
+                            public void Caller(T t)
+                            {
+                                MyDelegate [||]local = x => x;
+
+                                Console.Write(local.Invoke(t));
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller(T t)
-                        {
-                            static T local(T x = null) => x;
+                        delegate T MyDelegate(T t = null);
 
-                            Console.Write(local(t));
+                        public class Class
+                        {
+                            public void Caller(T t)
+                            {
+                                static T local(T x = null) => x;
+
+                                Console.Write(local(t));
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2068,47 +2068,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller(T t)
+                        delegate T MyDelegate(T t = null);
+
+                        public class Class
                         {
-                            MyDelegate [||]local = x => x;
+                            public void Caller(T t)
+                            {
+                                MyDelegate [||]local = x => x;
 
-                            Console.Write(local.Invoke(t));
+                                Console.Write(local.Invoke(t));
 
-                            var val = local.Invoke(t);
-                            local.Invoke(t);
+                                var val = local.Invoke(t);
+                                local.Invoke(t);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller(T t)
+                        delegate T MyDelegate(T t = null);
+
+                        public class Class
                         {
-                            static T local(T x = null) => x;
+                            public void Caller(T t)
+                            {
+                                static T local(T x = null) => x;
 
-                            Console.Write(local(t));
+                                Console.Write(local(t));
 
-                            var val = local(t);
-                            local(t);
+                                var val = local(t);
+                                local(t);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2117,47 +2117,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller(T t)
+                        delegate T MyDelegate(T t = null);
+
+                        public class Class
                         {
-                            MyDelegate [||]local = x => x;
+                            public void Caller(T t)
+                            {
+                                MyDelegate [||]local = x => x;
 
-                            Console.Write(local.Invoke(t));
+                                Console.Write(local.Invoke(t));
 
-                            var val = local.Invoke(t);
-                            local(t);
+                                var val = local.Invoke(t);
+                                local(t);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T> where T : class
-                {
-                    delegate T MyDelegate(T t = null);
-
-                    public class Class
+                    class Enclosing<T> where T : class
                     {
-                        public void Caller(T t)
+                        delegate T MyDelegate(T t = null);
+
+                        public class Class
                         {
-                            static T local(T x = null) => x;
+                            public void Caller(T t)
+                            {
+                                static T local(T x = null) => x;
 
-                            Console.Write(local(t));
+                                Console.Write(local(t));
 
-                            var val = local(t);
-                            local(t);
+                                var val = local(t);
+                                local(t);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2166,28 +2166,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action [||]local = null;
-                        local = () => local.Invoke();
+                        void M()
+                        {
+                            Action [||]local = null;
+                            local = () => local.Invoke();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void local() => local();
+                        void M()
+                        {
+                            static void local() => local();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2196,28 +2196,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action [||]local = null;
-                        local = () => { local.Invoke(); }
+                        void M()
+                        {
+                            Action [||]local = null;
+                            local = () => { local.Invoke(); }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void local() { local(); }
+                        void M()
+                        {
+                            static void local() { local(); }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2226,29 +2226,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string, string> [||]a = s => s;
-                        a.Invoke(a.Invoke(null));
+                        void M()
+                        {
+                            Func<string, string> [||]a = s => s;
+                            a.Invoke(a.Invoke(null));
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string a(string s) => s;
-                        a(a(null));
+                        void M()
+                        {
+                            static string a(string s) => s;
+                            a(a(null));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2257,28 +2257,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string, string> [||]a = null;
-                        a = s => a.Invoke(a.Invoke(s));
+                        void M()
+                        {
+                            Func<string, string> [||]a = null;
+                            a = s => a.Invoke(a.Invoke(s));
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string a(string s) => a(a(s));
+                        void M()
+                        {
+                            static string a(string s) => a(a(s));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2287,27 +2287,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    delegate string MyDelegate(string arg = "hello");
-
-                    void M()
+                    class C
                     {
-                        MyDelegate [||]local = (s) => s;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    delegate string MyDelegate(string arg = "hello");
+                        delegate string MyDelegate(string arg = "hello");
 
-                    void M()
-                    {
-                        static string local(string s = "hello") => s;
+                        void M()
+                        {
+                            MyDelegate [||]local = (s) => s;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        delegate string MyDelegate(string arg = "hello");
+
+                        void M()
+                        {
+                            static string local(string s = "hello") => s;
+                        }
+                    }
+                    """
             );
         }
 
@@ -2316,27 +2316,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    delegate string MyDelegate(string arg = "hello");
-
-                    void M()
+                    class C
                     {
-                        MyDelegate [||]local = (string s) => s;
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    delegate string MyDelegate(string arg = "hello");
+                        delegate string MyDelegate(string arg = "hello");
 
-                    void M()
-                    {
-                        static string local(string s = "hello") => s;
+                        void M()
+                        {
+                            MyDelegate [||]local = (string s) => s;
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        delegate string MyDelegate(string arg = "hello");
+
+                        void M()
+                        {
+                            static string local(string s = "hello") => s;
+                        }
+                    }
+                    """
             );
         }
 
@@ -2345,27 +2345,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    delegate string MyDelegate(string arg = "hello");
-
-                    void M()
+                    class C
                     {
-                        MyDelegate [||]local = delegate (string s) { return s; };
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    delegate string MyDelegate(string arg = "hello");
+                        delegate string MyDelegate(string arg = "hello");
 
-                    void M()
-                    {
-                        static string local(string s = "hello") { return s; }
+                        void M()
+                        {
+                            MyDelegate [||]local = delegate (string s) { return s; };
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        delegate string MyDelegate(string arg = "hello");
+
+                        void M()
+                        {
+                            static string local(string s = "hello") { return s; }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2374,27 +2374,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action [||]x = (a, b) => { };
+                        void M()
+                        {
+                            Action [||]x = (a, b) => { };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void x(object a, object b) { }
+                        void M()
+                        {
+                            static void x(object a, object b) { }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2403,27 +2403,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action [||]x = (string a, int b) => { };
+                        void M()
+                        {
+                            Action [||]x = (string a, int b) => { };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void x(string a, int b) { }
+                        void M()
+                        {
+                            static void x(string a, int b) { }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2432,29 +2432,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<Task> [||]f = async () => await Task.Yield();
+                        void M()
+                        {
+                            Func<Task> [||]f = async () => await Task.Yield();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static async Task f() => await Task.Yield();
+                        void M()
+                        {
+                            static async Task f() => await Task.Yield();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2463,29 +2463,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<Task<int>> [||]f = async delegate () { return 0; };
+                        void M()
+                        {
+                            Func<Task<int>> [||]f = async delegate () { return 0; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static async Task<int> f() { return 0; }
+                        void M()
+                        {
+                            static async Task<int> f() { return 0; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2494,35 +2494,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        EventHandler [||]handler = delegate { };
+                        void M()
+                        {
+                            EventHandler [||]handler = delegate { };
 
-                        E += handler;
+                            E += handler;
+                        }
+
+                        event EventHandler E;
                     }
-
-                    event EventHandler E;
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void handler(object sender, EventArgs e) { }
+                        void M()
+                        {
+                            static void handler(object sender, EventArgs e) { }
 
-                        E += handler;
+                            E += handler;
+                        }
+
+                        event EventHandler E;
                     }
-
-                    event EventHandler E;
-                }
-                """
+                    """
             );
         }
 
@@ -2531,33 +2531,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action<string, int, int> [||]x = (a1, a2, a3) => { };
+                        void M()
+                        {
+                            Action<string, int, int> [||]x = (a1, a2, a3) => { };
 
-                        x(arg1: null, 0, 0);
-                        x.Invoke(arg1: null, 0, 0);
+                            x(arg1: null, 0, 0);
+                            x.Invoke(arg1: null, 0, 0);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void x(string a1, int a2, int a3) { }
+                        void M()
+                        {
+                            static void x(string a1, int a2, int a3) { }
 
-                        x(a1: null, 0, 0);
-                        x(a1: null, 0, 0);
+                            x(a1: null, 0, 0);
+                            x(a1: null, 0, 0);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2566,35 +2566,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action<string, int, int> [||]x = (a1, a2, a3) =>
+                        void M()
                         {
-                            x(null, arg3: 0, arg2: 0);
-                            x.Invoke(null, arg3: 0, arg2: 0);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static void x(string a1, int a2, int a3)
-                        {
-                            x(null, a3: 0, a2: 0);
-                            x(null, a3: 0, a2: 0);
+                            Action<string, int, int> [||]x = (a1, a2, a3) =>
+                            {
+                                x(null, arg3: 0, arg2: 0);
+                                x.Invoke(null, arg3: 0, arg2: 0);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static void x(string a1, int a2, int a3)
+                            {
+                                x(null, a3: 0, a2: 0);
+                                x(null, a3: 0, a2: 0);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2603,35 +2603,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action<string, int, int> [||]x = (int a1, string a2, string a3, a4) => { };
+                        void M()
+                        {
+                            Action<string, int, int> [||]x = (int a1, string a2, string a3, a4) => { };
 
-                        x(null, arg3: 0, arg2: 0, arg4: 0);
-                        x.Invoke(null, arg3: 0, arg2: 0, arg4: 0);
-                        x.Invoke(0, null, null, null, null, null);
+                            x(null, arg3: 0, arg2: 0, arg4: 0);
+                            x.Invoke(null, arg3: 0, arg2: 0, arg4: 0);
+                            x.Invoke(0, null, null, null, null, null);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static void x(int a1, string a2, string a3, object a4) { }
+                        void M()
+                        {
+                            static void x(int a1, string a2, string a3, object a4) { }
 
-                        x(null, a3: 0, a2: 0, arg4: 0);
-                        x(null, a3: 0, a2: 0, arg4: 0);
-                        x(0, null, null, null, null, null);
+                            x(null, a3: 0, a2: 0, arg4: 0);
+                            x(null, a3: 0, a2: 0, arg4: 0);
+                            x(0, null, null, null, null, null);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2640,37 +2640,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Action<string, int, int> [||]x = (a1, a2) =>
+                        void M()
                         {
-                            x(null, arg3: 0, arg2: 0);
-                            x.Invoke(null, arg3: 0, arg2: 0);
-                            x.Invoke();
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static void x(string a1, int a2)
-                        {
-                            x(null, arg3: 0, a2: 0);
-                            x(null, arg3: 0, a2: 0);
-                            x();
+                            Action<string, int, int> [||]x = (a1, a2) =>
+                            {
+                                x(null, arg3: 0, arg2: 0);
+                                x.Invoke(null, arg3: 0, arg2: 0);
+                                x.Invoke();
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static void x(string a1, int a2)
+                            {
+                                x(null, arg3: 0, a2: 0);
+                                x(null, arg3: 0, a2: 0);
+                                x();
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2679,36 +2679,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
-
-                    void M()
+                    class C
                     {
-                        MyDelegate [||]x = null;
-                        x = (a1, a2, a3) =>
-                        {
-                            x(null, arg3: 42);
-                            return x.Invoke(null, arg3: 42);
-                        };
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
+                        delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
 
-                    void M()
-                    {
-                        static string x(string a1, int a2 = 2, int a3 = 3)
+                        void M()
                         {
-                            x(null, a3: 42);
-                            return x(null, a3: 42);
+                            MyDelegate [||]x = null;
+                            x = (a1, a2, a3) =>
+                            {
+                                x(null, arg3: 42);
+                                return x.Invoke(null, arg3: 42);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
+
+                        void M()
+                        {
+                            static string x(string a1, int a2 = 2, int a3 = 3)
+                            {
+                                x(null, a3: 42);
+                                return x(null, a3: 42);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -2717,56 +2717,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
-
-                    void M()
+                    class C
                     {
-                        var x = (MyDelegate)delegate
-                        {
-                            MyDelegate {|FixAllInDocument:a|} = null;
-                            a = (string a1, int a2, int a3) =>
-                            {
-                                MyDelegate b = null;
-                                b = (b1, b2, b3) =>
-                                    b.Invoke(arg1: b(null), arg2: a(arg1: a.Invoke(null)).Length, arg3: 42) +
-                                    b(arg1: b.Invoke(null), arg3: a(arg1: a.Invoke(null)).Length, arg2: 42);
+                        delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
 
-                                return b(arg1: a1, b(arg1: a1).Length);
+                        void M()
+                        {
+                            var x = (MyDelegate)delegate
+                            {
+                                MyDelegate {|FixAllInDocument:a|} = null;
+                                a = (string a1, int a2, int a3) =>
+                                {
+                                    MyDelegate b = null;
+                                    b = (b1, b2, b3) =>
+                                        b.Invoke(arg1: b(null), arg2: a(arg1: a.Invoke(null)).Length, arg3: 42) +
+                                        b(arg1: b.Invoke(null), arg3: a(arg1: a.Invoke(null)).Length, arg2: 42);
+
+                                    return b(arg1: a1, b(arg1: a1).Length);
+                                };
+
+                                return a(arg1: null);
                             };
 
-                            return a(arg1: null);
-                        };
-
-                        x(arg1: null);
+                            x(arg1: null);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
-
-                    void M()
+                    class C
                     {
-                        string x(string arg1, int arg2 = 2, int arg3 = 3)
+                        delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
+
+                        void M()
                         {
-                            string a(string a1, int a2 = 2, int a3 = 3)
+                            string x(string arg1, int arg2 = 2, int arg3 = 3)
                             {
-                                string b(string b1, int b2 = 2, int b3 = 3) =>
-                                    b(b1: b(null), b2: a(a1: a(null)).Length, b3: 42) +
-                                    b(b1: b(null), b3: a(a1: a(null)).Length, b2: 42);
-                                return b(b1: a1, b(b1: a1).Length);
+                                string a(string a1, int a2 = 2, int a3 = 3)
+                                {
+                                    string b(string b1, int b2 = 2, int b3 = 3) =>
+                                        b(b1: b(null), b2: a(a1: a(null)).Length, b3: 42) +
+                                        b(b1: b(null), b3: a(a1: a(null)).Length, b2: 42);
+                                    return b(b1: a1, b(b1: a1).Length);
+                                }
+
+                                return a(a1: null);
                             }
 
-                            return a(a1: null);
+                            x(arg1: null);
                         }
-
-                        x(arg1: null);
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2775,27 +2775,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action [||]onUpdateSolutionCancel = () => { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action [||]onUpdateSolutionCancel = () => { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel() { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel() { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2804,27 +2804,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = a => { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = a => { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2833,27 +2833,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = async a => { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = async a => { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2862,25 +2862,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        Func<int, int[]> [||]onUpdateSolutionCancel = a => { return null; };
+                        void Goo()
+                        {
+                            Func<int, int[]> [||]onUpdateSolutionCancel = a => { return null; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        static int[] onUpdateSolutionCancel(int a) { return null; }
+                        void Goo()
+                        {
+                            static int[] onUpdateSolutionCancel(int a) { return null; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2889,27 +2889,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Threading.Tasks;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    using System.Threading.Tasks;
+                    class C
                     {
-                        Func<int, Task<int[]>> [||]onUpdateSolutionCancel = async a => { return null; };
+                        void Goo()
+                        {
+                            Func<int, Task<int[]>> [||]onUpdateSolutionCancel = async a => { return null; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    using System.Threading.Tasks;
+                    class C
                     {
-                        static async Task<int[]> onUpdateSolutionCancel(int a) { return null; }
+                        void Goo()
+                        {
+                            static async Task<int[]> onUpdateSolutionCancel(int a) { return null; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2918,27 +2918,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = (int a) => { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = (int a) => { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2947,27 +2947,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = delegate (int a) { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = delegate (int a) { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2976,27 +2976,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = async delegate (int a) { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = async delegate (int a) { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3005,27 +3005,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        var [||]onUpdateSolutionCancel = (Action)(() => { buildCancelled = true; });
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            var [||]onUpdateSolutionCancel = (Action)(() => { buildCancelled = true; });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel() { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel() { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3034,27 +3034,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        var [||]onUpdateSolutionCancel = (Action<int>)(a => { buildCancelled = true; });
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            var [||]onUpdateSolutionCancel = (Action<int>)(a => { buildCancelled = true; });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3063,27 +3063,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        var [||]onUpdateSolutionCancel = (Action<int>)(async a => { buildCancelled = true; });
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            var [||]onUpdateSolutionCancel = (Action<int>)(async a => { buildCancelled = true; });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3092,27 +3092,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        var [||]onUpdateSolutionCancel = (Action<int>)((int a) => { buildCancelled = true; });
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            var [||]onUpdateSolutionCancel = (Action<int>)((int a) => { buildCancelled = true; });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3121,27 +3121,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        var [||]onUpdateSolutionCancel = (Action<int>)(delegate (int a) { buildCancelled = true; });
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            var [||]onUpdateSolutionCancel = (Action<int>)(delegate (int a) { buildCancelled = true; });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3150,27 +3150,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        var [||]onUpdateSolutionCancel = (Action<int>)(async delegate (int a) { buildCancelled = true; });
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            var [||]onUpdateSolutionCancel = (Action<int>)(async delegate (int a) { buildCancelled = true; });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3179,28 +3179,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action [||]onUpdateSolutionCancel = null;
-                        onUpdateSolutionCancel = () => { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action [||]onUpdateSolutionCancel = null;
+                            onUpdateSolutionCancel = () => { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel() { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel() { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3209,28 +3209,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = null;
-                        onUpdateSolutionCancel = a => { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = null;
+                            onUpdateSolutionCancel = a => { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3239,28 +3239,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = null;
-                        onUpdateSolutionCancel = async a => { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = null;
+                            onUpdateSolutionCancel = async a => { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3269,28 +3269,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = null;
-                        onUpdateSolutionCancel = (int a) => { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = null;
+                            onUpdateSolutionCancel = (int a) => { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3299,28 +3299,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = null;
-                        onUpdateSolutionCancel = delegate (int a) { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = null;
+                            onUpdateSolutionCancel = delegate (int a) { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3329,28 +3329,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        Action<int> [||]onUpdateSolutionCancel = null;
-                        onUpdateSolutionCancel = async delegate (int a) { buildCancelled = true; };
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            Action<int> [||]onUpdateSolutionCancel = null;
+                            onUpdateSolutionCancel = async delegate (int a) { buildCancelled = true; };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                class C
-                {
-                    void Goo()
+                    using System;
+                    class C
                     {
-                        var buildCancelled = false;
-                        async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        void Goo()
+                        {
+                            var buildCancelled = false;
+                            async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3359,23 +3359,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T>
-                {
-                    delegate T MyDelegate(T t);
-                    static void Callee(MyDelegate d) => d(default);
-
-                    public class Class<T>
+                    class Enclosing<T>
                     {
-                        public void Caller()
+                        delegate T MyDelegate(T t);
+                        static void Callee(MyDelegate d) => d(default);
+
+                        public class Class<T>
                         {
-                            MyDelegate [||]local = x => x;
-                            Callee(local);
+                            public void Caller()
+                            {
+                                MyDelegate [||]local = x => x;
+                                Callee(local);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3384,26 +3384,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T>
-                {
-                    delegate T MyDelegate(T t);
-                    static void Callee(MyDelegate d) => d(default);
-
-                    public class Goo<T>
+                    class Enclosing<T>
                     {
-                        public class Class
+                        delegate T MyDelegate(T t);
+                        static void Callee(MyDelegate d) => d(default);
+
+                        public class Goo<T>
                         {
-                            public void Caller()
+                            public class Class
                             {
-                                MyDelegate [||]local = x => x;
-                                Callee(local);
+                                public void Caller()
+                                {
+                                    MyDelegate [||]local = x => x;
+                                    Callee(local);
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3412,21 +3412,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                public class Class<T>
-                {
-                    delegate T MyDelegate(T t);
-                    static void Callee(MyDelegate d) => d(default);
-
-                    public void Caller()
+                    public class Class<T>
                     {
-                        void Some<T>(T t)
+                        delegate T MyDelegate(T t);
+                        static void Callee(MyDelegate d) => d(default);
+
+                        public void Caller()
                         {
-                            MyDelegate [||]local = x => x;
-                            Callee(local);
+                            void Some<T>(T t)
+                            {
+                                MyDelegate [||]local = x => x;
+                                Callee(local);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3435,26 +3435,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class Enclosing<T>
-                {
-                    delegate T MyDelegate(T t);
-                    static void Callee(MyDelegate d) => d(default);
-
-                    public class Goo<T>
+                    class Enclosing<T>
                     {
-                        public class Class<U>
+                        delegate T MyDelegate(T t);
+                        static void Callee(MyDelegate d) => d(default);
+
+                        public class Goo<T>
                         {
-                            public void Caller()
+                            public class Class<U>
                             {
-                                MyDelegate [||]local = x => x;
-                                Callee(local);
+                                public void Caller()
+                                {
+                                    MyDelegate [||]local = x => x;
+                                    Callee(local);
+                                }
                             }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3464,43 +3464,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class DelegateEnclosing<T>
-                {
-                    protected delegate T MyDelegate(T t);
-                }
-
-                class Enclosing<T> : DelegateEnclosing<T>
-                {
-                    static void Callee(MyDelegate d) => d(default);
-
-                    public void Caller()
+                    class DelegateEnclosing<T>
                     {
-                        MyDelegate [||]local = x => x;
-                        Callee(local);
+                        protected delegate T MyDelegate(T t);
                     }
-                }
-                """,
-                """
-                using System;
 
-                class DelegateEnclosing<T>
-                {
-                    protected delegate T MyDelegate(T t);
-                }
-
-                class Enclosing<T> : DelegateEnclosing<T>
-                {
-                    static void Callee(MyDelegate d) => d(default);
-
-                    public void Caller()
+                    class Enclosing<T> : DelegateEnclosing<T>
                     {
-                        static T local(T x) => x;
-                        Callee(local);
+                        static void Callee(MyDelegate d) => d(default);
+
+                        public void Caller()
+                        {
+                            MyDelegate [||]local = x => x;
+                            Callee(local);
+                        }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class DelegateEnclosing<T>
+                    {
+                        protected delegate T MyDelegate(T t);
+                    }
+
+                    class Enclosing<T> : DelegateEnclosing<T>
+                    {
+                        static void Callee(MyDelegate d) => d(default);
+
+                        public void Caller()
+                        {
+                            static T local(T x) => x;
+                            Callee(local);
+                        }
+                    }
+                    """
             );
         }
 
@@ -3509,43 +3509,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class DelegateEnclosing<T>
-                {
-                    protected delegate T MyDelegate(T t);
-                }
-
-                class Enclosing<U> : DelegateEnclosing<U>
-                {
-                    static void Callee(MyDelegate d) => d(default);
-
-                    public void Caller()
+                    class DelegateEnclosing<T>
                     {
-                        MyDelegate [||]local = x => x;
-                        Callee(local);
+                        protected delegate T MyDelegate(T t);
                     }
-                }
-                """,
-                """
-                using System;
 
-                class DelegateEnclosing<T>
-                {
-                    protected delegate T MyDelegate(T t);
-                }
-
-                class Enclosing<U> : DelegateEnclosing<U>
-                {
-                    static void Callee(MyDelegate d) => d(default);
-
-                    public void Caller()
+                    class Enclosing<U> : DelegateEnclosing<U>
                     {
-                        static U local(U x) => x;
-                        Callee(local);
+                        static void Callee(MyDelegate d) => d(default);
+
+                        public void Caller()
+                        {
+                            MyDelegate [||]local = x => x;
+                            Callee(local);
+                        }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class DelegateEnclosing<T>
+                    {
+                        protected delegate T MyDelegate(T t);
+                    }
+
+                    class Enclosing<U> : DelegateEnclosing<U>
+                    {
+                        static void Callee(MyDelegate d) => d(default);
+
+                        public void Caller()
+                        {
+                            static U local(U x) => x;
+                            Callee(local);
+                        }
+                    }
+                    """
             );
         }
 
@@ -3555,31 +3555,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string> [||]f = () => null;
+                        void M()
+                        {
+                            Func<string> [||]f = () => null;
 
-                        var f2 = f;
+                            var f2 = f;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string f() => null;
+                        void M()
+                        {
+                            static string f() => null;
 
-                        var f2 = (Func<string>)f;
+                            var f2 = (Func<string>)f;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3588,39 +3588,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, string> [||]f = _ => null;
+                        void M()
+                        {
+                            Func<int, string> [||]f = _ => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string f(int _) => null;
+                        void M()
+                        {
+                            static string f(int _) => null;
 
-                        Method((Func<int, string>)f);
-                    }
+                            Method((Func<int, string>)f);
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3629,47 +3629,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, string> [||]f = _ => null;
+                        void M()
+                        {
+                            Func<int, string> [||]f = _ => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
-                    }
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
 
-                    void Method(string o)
-                    {
+                        void Method(string o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string f(int _) => null;
+                        void M()
+                        {
+                            static string f(int _) => null;
 
-                        Method((Func<int, string>)f);
-                    }
+                            Method((Func<int, string>)f);
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
-                    }
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
 
-                    void Method(string o)
-                    {
+                        void Method(string o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3678,51 +3678,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                delegate string CustomDelegate();
+                    delegate string CustomDelegate();
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string> [||]f = () => null;
+                        void M()
+                        {
+                            Func<string> [||]f = () => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method(Func<string> o)
-                    {
-                    }
+                        void Method(Func<string> o)
+                        {
+                        }
 
-                    void Method(CustomDelegate o)
-                    {
+                        void Method(CustomDelegate o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                delegate string CustomDelegate();
+                    delegate string CustomDelegate();
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string f() => null;
+                        void M()
+                        {
+                            static string f() => null;
 
-                        Method((Func<string>)f);
-                    }
+                            Method((Func<string>)f);
+                        }
 
-                    void Method(Func<string> o)
-                    {
-                    }
+                        void Method(Func<string> o)
+                        {
+                        }
 
-                    void Method(CustomDelegate o)
-                    {
+                        void Method(CustomDelegate o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3731,51 +3731,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                delegate string CustomDelegate(object arg);
+                    delegate string CustomDelegate(object arg);
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string> [||]f = () => null;
+                        void M()
+                        {
+                            Func<string> [||]f = () => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method(Func<string> o)
-                    {
-                    }
+                        void Method(Func<string> o)
+                        {
+                        }
 
-                    void Method(CustomDelegate o)
-                    {
+                        void Method(CustomDelegate o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                delegate string CustomDelegate(object arg);
+                    delegate string CustomDelegate(object arg);
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string f() => null;
+                        void M()
+                        {
+                            static string f() => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method(Func<string> o)
-                    {
-                    }
+                        void Method(Func<string> o)
+                        {
+                        }
 
-                    void Method(CustomDelegate o)
-                    {
+                        void Method(CustomDelegate o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3784,22 +3784,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string> [||]f = () => null);
+                        void M()
+                        {
+                            Func<string> [||]f = () => null);
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method(Func<string> o)
-                    {
+                        void Method(Func<string> o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3808,22 +3808,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string> [||]f) = () => null;
+                        void M()
+                        {
+                            Func<string> [||]f) = () => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method(Func<string> o)
-                    {
+                        void Method(Func<string> o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3832,22 +3832,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<string>) [||]f = () => null;
+                        void M()
+                        {
+                            Func<string>) [||]f = () => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method(Func<string> o)
-                    {
+                        void Method(Func<string> o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3856,39 +3856,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, string> [||]f = _ => null;
+                        void M()
+                        {
+                            Func<int, string> [||]f = _ => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method<T>(Func<T, string> o))
-                    {
+                        void Method<T>(Func<T, string> o))
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string f(int _) => null;
+                        void M()
+                        {
+                            static string f(int _) => null;
 
-                        Method((Func<int, string>)f);
-                    }
+                            Method((Func<int, string>)f);
+                        }
 
-                    void Method<T>(Func<T, string> o))
-                    {
+                        void Method<T>(Func<T, string> o))
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3897,39 +3897,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, string> [||]f = _ => null;
+                        void M()
+                        {
+                            Func<int, string> [||]f = _ => null;
 
-                        (Method(f);
-                    }
+                            (Method(f);
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static string f(int _) => null;
+                        void M()
+                        {
+                            static string f(int _) => null;
 
-                        (Method((Func<int, string>)f);
-                    }
+                            (Method((Func<int, string>)f);
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3938,51 +3938,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, string> [||]f = _ => S();
+                        void M()
+                        {
+                            Func<int, string> [||]f = _ => S();
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    [System.Obsolete]
-                    string S()
-                    {
-                        return null;
-                    }
+                        [System.Obsolete]
+                        string S()
+                        {
+                            return null;
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        string f(int _) => S();
+                        void M()
+                        {
+                            string f(int _) => S();
 
-                        Method((Func<int, string>)f);
-                    }
+                            Method((Func<int, string>)f);
+                        }
 
-                    [System.Obsolete]
-                    string S()
-                    {
-                        return null;
-                    }
+                        [System.Obsolete]
+                        string S()
+                        {
+                            return null;
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3991,41 +3991,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                #warning Declaration Warning
-                        Func<int, string> [||]f = _ => null;
+                        void M()
+                        {
+                    #warning Declaration Warning
+                            Func<int, string> [||]f = _ => null;
 
-                        Method(f);
-                    }
+                            Method(f);
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                #warning Declaration Warning
-                        static string f(int _) => null;
+                        void M()
+                        {
+                    #warning Declaration Warning
+                            static string f(int _) => null;
 
-                        Method((Func<int, string>)f);
-                    }
+                            Method((Func<int, string>)f);
+                        }
 
-                    void Method<T>(Func<T, string> o)
-                    {
+                        void Method<T>(Func<T, string> o)
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4034,43 +4034,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        static int fibonacci(int v)
-                        {
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            static int fibonacci(int v)
+                            {
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -4079,45 +4079,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<int, int> [||]fibonacci = v =>
+                        void M()
                         {
-                            M();
-                            if (v <= 1)
+                            Func<int, int> [||]fibonacci = v =>
                             {
-                                return 1;
-                            }
+                                M();
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
 
-                            return fibonacci(v - 1, v - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class C
-                {
-                    void M()
-                    {
-                        int fibonacci(int v)
-                        {
-                            M();
-                            if (v <= 1)
-                            {
-                                return 1;
-                            }
-
-                            return fibonacci(v - 1, v - 2);
+                                return fibonacci(v - 1, v - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            int fibonacci(int v)
+                            {
+                                M();
+                                if (v <= 1)
+                                {
+                                    return 1;
+                                }
+
+                                return fibonacci(v - 1, v - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -4126,29 +4126,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Func<Task> [||]f = async () => await Task.Yield();
+                        void M()
+                        {
+                            Func<Task> [||]f = async () => await Task.Yield();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        static async Task f() => await Task.Yield();
+                        void M()
+                        {
+                            static async Task f() => await Task.Yield();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4157,31 +4157,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        Func<string?, string?> [||]f = s => s;
+                        static void Main(string[] args)
+                        {
+                            Func<string?, string?> [||]f = s => s;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
+                    #nullable enable
 
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        static string? f(string? s) => s;
+                        static void Main(string[] args)
+                        {
+                            static string? f(string? s) => s;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4190,23 +4190,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        System.Func<int, string, int, long> [||]f = (_, _, a) => 1;
+                        static void Main(string[] args)
+                        {
+                            System.Func<int, string, int, long> [||]f = (_, _, a) => 1;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        static long f(int _, string _, int a) => 1;
+                        static void Main(string[] args)
+                        {
+                            static long f(int _, string _, int a) => 1;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -4215,29 +4215,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        System.Func<int, int> [||]fibonacci = (int n = 1) =>
+                        static void Main(string[] args)
                         {
-                            return n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
-                        };
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        static int fibonacci(int n = 1)
-                        {
-                            return n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+                            System.Func<int, int> [||]fibonacci = (int n = 1) =>
+                            {
+                                return n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            static int fibonacci(int n = 1)
+                            {
+                                return n <= 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -4246,29 +4246,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScript1Async(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        System.Func<int[], int> [||]last = (params int[] xs) =>
+                        static void Main(string[] args)
                         {
-                            return x.Length == 1 ? xs[0] : last(xs[1..]);
-                        };
-                    }
-                }
-                """,
-                """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        static int last(params int[] xs)
-                        {
-                            return x.Length == 1 ? xs[0] : last(xs[1..]);
+                            System.Func<int[], int> [||]last = (params int[] xs) =>
+                            {
+                                return x.Length == 1 ? xs[0] : last(xs[1..]);
+                            };
                         }
                     }
-                }
+                    """,
                 """
+                    class Program
+                    {
+                        static void Main(string[] args)
+                        {
+                            static int last(params int[] xs)
+                            {
+                                return x.Length == 1 ? xs[0] : last(xs[1..]);
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -4277,23 +4277,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var [||]test = (int n) => n * 2;
+                        static void Main()
+                        {
+                            var [||]test = (int n) => n * 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        static int test(int n) => n * 2;
+                        static void Main()
+                        {
+                            static int test(int n) => n * 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 parseOptions: CSharpParseOptions
                     .Default
                     .WithLanguageVersion(LanguageVersion.CSharp10)
@@ -4305,14 +4305,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Program
-                {
-                    static void Main()
+                    class Program
                     {
-                        var [||]test = (int n) => n * 2;
+                        static void Main()
+                        {
+                            var [||]test = (int n) => n * 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(
                     parseOptions: CSharpParseOptions
                         .Default

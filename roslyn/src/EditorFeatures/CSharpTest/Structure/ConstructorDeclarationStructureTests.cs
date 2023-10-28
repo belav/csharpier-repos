@@ -23,13 +23,13 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor1()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C(){|textspan:
                 {
-                    {|hint:$$public C(){|textspan:
-                    {
-                    }|}|}
-                }
-                """;
+                }|}|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -41,13 +41,13 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor2()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C(){|textspan:
                 {
-                    {|hint:$$public C(){|textspan:
-                    {
-                    }                 |}|}
-                }
-                """;
+                }                 |}|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -59,13 +59,13 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor3()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C(){|textspan:
                 {
-                    {|hint:$$public C(){|textspan:
-                    {
-                    }|}|} // .ctor
-                }
-                """;
+                }|}|} // .ctor
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -77,13 +77,13 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor4()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C(){|textspan:
                 {
-                    {|hint:$$public C(){|textspan:
-                    {
-                    }|}|} /* .ctor */
-                }
-                """;
+                }|}|} /* .ctor */
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -95,13 +95,13 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor5()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C() // .ctor{|textspan:
                 {
-                    {|hint:$$public C() // .ctor{|textspan:
-                    {
-                    }|}|} // .ctor
-                }
-                """;
+                }|}|} // .ctor
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -113,13 +113,13 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor6()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C() /* .ctor */{|textspan:
                 {
-                    {|hint:$$public C() /* .ctor */{|textspan:
-                    {
-                    }|}|} // .ctor
-                }
-                """;
+                }|}|} // .ctor
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -131,14 +131,14 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor7()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C(){|textspan:
+                // .ctor
                 {
-                    {|hint:$$public C(){|textspan:
-                    // .ctor
-                    {
-                    }|}|} // .ctor
-                }
-                """;
+                }|}|} // .ctor
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -150,14 +150,14 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor8()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C(){|textspan:
+                /* .ctor */
                 {
-                    {|hint:$$public C(){|textspan:
-                    /* .ctor */
-                    {
-                    }|}|} // .ctor
-                }
-                """;
+                }|}|} // .ctor
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -169,16 +169,16 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor9()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C(){|textspan:
                 {
-                    {|hint:$$public C(){|textspan:
-                    {
-                    }|}|}
-                    public C()
-                    {
-                    }
+                }|}|}
+                public C()
+                {
                 }
-                """;
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -190,17 +190,17 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor10()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public C(){|textspan:
                 {
-                    {|hint:$$public C(){|textspan:
-                    {
-                    }|}|}
+                }|}|}
 
-                    public C(int x)
-                    {
-                    }
+                public C(int x)
+                {
                 }
-                """;
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -212,15 +212,15 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructorWithComments()
     {
         var code = """
-                class C
+            class C
+            {
+                {|span1:// Goo
+                // Bar|}
+                {|hint2:$$public C(){|textspan2:
                 {
-                    {|span1:// Goo
-                    // Bar|}
-                    {|hint2:$$public C(){|textspan2:
-                    {
-                    }|}|} // .ctor
-                }
-                """;
+                }|}|} // .ctor
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -235,11 +235,11 @@ public class ConstructorDeclarationStructureTests
         // Expected behavior is that the class should be outlined, but the constructor should not.
 
         var code = """
-                class C
-                {
-                    $$C(
-                }
-                """;
+            class C
+            {
+                $$C(
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }

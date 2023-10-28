@@ -35,10 +35,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         {
             await TestInMethodAsync(
                 """
-                #pragma warning disable CS0219$$
-                            var i = 0;
-                #pragma warning restore CS0219
-                """,
+                    #pragma warning disable CS0219$$
+                                var i = 0;
+                    #pragma warning restore CS0219
+                    """,
                 GetFormattedErrorTitle(ErrorCode.WRN_UnreferencedVarAssg)
             );
         }
@@ -49,10 +49,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         {
             await TestInMethodAsync(
                 """
-                #pragma warning disable CS0219
-                            var i = 0;
-                #pragma warning restore CS0219$$
-                """,
+                    #pragma warning disable CS0219
+                                var i = 0;
+                    #pragma warning restore CS0219$$
+                    """,
                 GetFormattedErrorTitle(ErrorCode.WRN_UnreferencedVarAssg)
             );
         }
@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         {
             await TestInMethodAsync(
                 """
-                #pragma warning disable CS0219$$
-                """,
+                    #pragma warning disable CS0219$$
+                    """,
                 GetFormattedErrorTitle(ErrorCode.WRN_UnreferencedVarAssg)
             );
         }
@@ -148,16 +148,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
-                namespace T
-                {
-                    [SuppressMessage("CodeQuality", "IDE0051$$")]
-                    public class C
+                    using System.Diagnostics.CodeAnalysis;
+                    namespace T
                     {
-                        private int _i;
+                        [SuppressMessage("CodeQuality", "IDE0051$$")]
+                        public class C
+                        {
+                            private int _i;
+                        }
                     }
-                }
-                """,
+                    """,
                 GetFormattedIDEAnalyzerTitle(
                     51,
                     nameof(AnalyzersResources.Remove_unused_private_members)
@@ -224,8 +224,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         // False negative: Aliased attribute is not supported
         [InlineData(
             """
-            [SM("CodeQuality", "IDE0051$$"
-            """,
+                [SM("CodeQuality", "IDE0051$$"
+                """,
             false
         )]
         public async Task QuickInfoSuppressMessageAttributeUseCases(
@@ -383,9 +383,9 @@ namespace T
         ) =>
             TestAsync(
                 """
-                class C
-                {
-                """
+                    class C
+                    {
+                    """
                     + code
                     + "}",
                 expectedDescription,
@@ -399,9 +399,9 @@ namespace T
         ) =>
             TestInClassAsync(
                 """
-                void M()
-                {
-                """
+                    void M()
+                    {
+                    """
                     + code
                     + "}",
                 expectedDescription,

@@ -174,16 +174,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|_goo|];
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|_goo|];
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -192,16 +192,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|M|]() => 0;
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|M|]() => 0;
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -210,16 +210,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|M|]<T>() => 0;
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|M|]<T>() => 0;
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -228,16 +228,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass<T>
-                {
-                    private int [|M|]() => 0;
-                }
-                """,
+                    class MyClass<T>
+                    {
+                        private int [|M|]() => 0;
+                    }
+                    """,
                 """
-                class MyClass<T>
-                {
-                }
-                """
+                    class MyClass<T>
+                    {
+                    }
+                    """
             );
         }
 
@@ -260,16 +260,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private [|MyClass|](int i) { }
-                }
-                """,
+                    class MyClass
+                    {
+                        private [|MyClass|](int i) { }
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -304,16 +304,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|P|] { get; set; }
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|P|] { get; set; }
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -322,16 +322,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|this|][int x] { get { return 0; } set { } }
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|this|][int x] { get { return 0; } set { } }
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -340,16 +340,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private event System.EventHandler [|e|];
-                }
-                """,
+                    class MyClass
+                    {
+                        private event System.EventHandler [|e|];
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -512,16 +512,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private readonly int [|_goo|];
-                }
-                """,
+                    class MyClass
+                    {
+                        private readonly int [|_goo|];
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -530,16 +530,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|P|] { get; }
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|P|] { get; }
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -548,17 +548,17 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    // error CS0106: The modifier 'readonly' is not valid for this item
-                    private readonly event System.EventHandler {|CS0106:[|E|]|};
-                }
-                """,
+                    class MyClass
+                    {
+                        // error CS0106: The modifier 'readonly' is not valid for this item
+                        private readonly event System.EventHandler {|CS0106:[|E|]|};
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -567,16 +567,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private static int [|_goo|];
-                }
-                """,
+                    class MyClass
+                    {
+                        private static int [|_goo|];
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -585,16 +585,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private static void [|M|]() { }
-                }
-                """,
+                    class MyClass
+                    {
+                        private static void [|M|]() { }
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -603,16 +603,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private static int [|P|] { get { return 0; } }
-                }
-                """,
+                    class MyClass
+                    {
+                        private static int [|P|] { get { return 0; } }
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -621,17 +621,17 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    // error CS0106: The modifier 'static' is not valid for this item
-                    private static int {|CS0106:[|this|]|}[int x] { get { return 0; } set { } }
-                }
-                """,
+                    class MyClass
+                    {
+                        // error CS0106: The modifier 'static' is not valid for this item
+                        private static int {|CS0106:[|this|]|}[int x] { get { return 0; } set { } }
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -640,16 +640,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private static event System.EventHandler [|e1|];
-                }
-                """,
+                    class MyClass
+                    {
+                        private static event System.EventHandler [|e1|];
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -758,16 +758,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    int [|P|] { set { } }
-                }
-                """,
+                    class C
+                    {
+                        int [|P|] { set { } }
+                    }
+                    """,
                 """
-                class C
-                {
-                }
-                """
+                    class C
+                    {
+                    }
+                    """
             );
         }
 
@@ -790,16 +790,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private const int [|_goo|] = 0;
-                }
-                """,
+                    class MyClass
+                    {
+                        private const int [|_goo|] = 0;
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -2163,16 +2163,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|_goo|] = 0, [|_bar|] = 0;
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|_goo|] = 0, [|_bar|] = 0;
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -2215,19 +2215,19 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|_goo|] = 0, _bar = 0;
-                    public int M() => _bar;
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|_goo|] = 0, _bar = 0;
+                        public int M() => _bar;
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                    private int _bar = 0;
-                    public int M() => _bar;
-                }
-                """
+                    class MyClass
+                    {
+                        private int _bar = 0;
+                        public int M() => _bar;
+                    }
+                    """
             );
         }
 
@@ -2236,19 +2236,19 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int _goo = 0, [|_bar|] = 0;
-                    public int M() => _goo;
-                }
-                """,
+                    class MyClass
+                    {
+                        private int _goo = 0, [|_bar|] = 0;
+                        public int M() => _goo;
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                    private int _goo = 0;
-                    public int M() => _goo;
-                }
-                """
+                    class MyClass
+                    {
+                        private int _goo = 0;
+                        public int M() => _goo;
+                    }
+                    """
             );
         }
 
@@ -2293,22 +2293,22 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    class NestedType
+                    class MyClass
                     {
-                        private int [|_goo|];
+                        class NestedType
+                        {
+                            private int [|_goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class MyClass
-                {
-                    class NestedType
+                    class MyClass
                     {
+                        class NestedType
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2335,16 +2335,16 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                partial class MyClass
-                {
-                    private int [|_goo|];
-                }
-                """,
+                    partial class MyClass
+                    {
+                        private int [|_goo|];
+                    }
+                    """,
                 """
-                partial class MyClass
-                {
-                }
-                """
+                    partial class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -2476,29 +2476,29 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    private int [|i|];
-
-                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                    private int j;
-
-                    public void M()
+                    class C
                     {
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                    private int j;
+                        private int [|i|];
 
-                    public void M()
-                    {
+                        [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+                        private int j;
+
+                        public void M()
+                        {
+                        }
                     }
-                }
+                    """,
                 """
+                    class C
+                    {
+                        [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+                        private int j;
+
+                        public void M()
+                        {
+                        }
+                    }
+                    """
             );
         }
 
@@ -2572,28 +2572,28 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class C
-                {
-                    private int [|i|];
-                }
+                    class C
+                    {
+                        private int [|i|];
+                    }
 
-                class C2
-                {
-                    // 'ii' is undefined.
-                    public int M() => {|CS0103:ii|};
-                }
-                """,
+                    class C2
+                    {
+                        // 'ii' is undefined.
+                        public int M() => {|CS0103:ii|};
+                    }
+                    """,
                 """
-                class C
-                {
-                }
+                    class C
+                    {
+                    }
 
-                class C2
-                {
-                    // 'ii' is undefined.
-                    public int M() => {|CS0103:ii|};
-                }
-                """
+                    class C2
+                    {
+                        // 'ii' is undefined.
+                        public int M() => {|CS0103:ii|};
+                    }
+                    """
             );
         }
 
@@ -2775,7 +2775,7 @@ class MyClass
                 using System;
                 using System.Runtime.Serialization;
 
-                class C : Exception 
+                class C : Exception
                 {
                     public C()
                     {
@@ -2896,23 +2896,23 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|_goo|] = 0, [|_bar|];
-                    private int [|_x|] = 0, [|_y|], _z = 0;
-                    private string [|_fizz|] = null;
+                    class MyClass
+                    {
+                        private int [|_goo|] = 0, [|_bar|];
+                        private int [|_x|] = 0, [|_y|], _z = 0;
+                        private string [|_fizz|] = null;
 
-                    public int Method() => _z;
-                }
-                """,
+                        public int Method() => _z;
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                    private int _z = 0;
+                    class MyClass
+                    {
+                        private int _z = 0;
 
-                    public int Method() => _z;
-                }
-                """
+                        public int Method() => _z;
+                    }
+                    """
             );
         }
 
@@ -2921,25 +2921,25 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|M1|]() => 0;
-                    private void [|M2|]() { }
-                    private static void [|M3|]() { }
-                    private class NestedClass
+                    class MyClass
                     {
-                        private void [|M4|]() { }
+                        private int [|M1|]() => 0;
+                        private void [|M2|]() { }
+                        private static void [|M3|]() { }
+                        private class NestedClass
+                        {
+                            private void [|M4|]() { }
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class MyClass
-                {
-                    private class NestedClass
+                    class MyClass
                     {
+                        private class NestedClass
+                        {
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -2948,19 +2948,19 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class MyClass
-                {
-                    private int [|P1|] => 0;
-                    private int [|P2|] { get; set; }
-                    private int [|P3|] { get { return 0; } set { } }
-                    private int [|this|][int i] { get { return 0; } }
-                }
-                """,
+                    class MyClass
+                    {
+                        private int [|P1|] => 0;
+                        private int [|P2|] { get; set; }
+                        private int [|P3|] { get { return 0; } set { } }
+                        private int [|this|][int i] { get { return 0; } }
+                    }
+                    """,
                 """
-                class MyClass
-                {
-                }
-                """
+                    class MyClass
+                    {
+                    }
+                    """
             );
         }
 
@@ -2969,37 +2969,37 @@ class MyClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                using System;
+                    using System;
 
-                class MyClass
-                {
-                    private event EventHandler [|E1|], E2 = null, [|E3|];
-                    private event EventHandler [|E4|], [|E5|] = null;
-                    private event EventHandler [|E|]
+                    class MyClass
                     {
-                        add { }
-                        remove { }
-                    }
+                        private event EventHandler [|E1|], E2 = null, [|E3|];
+                        private event EventHandler [|E4|], [|E5|] = null;
+                        private event EventHandler [|E|]
+                        {
+                            add { }
+                            remove { }
+                        }
 
-                    public void M()
-                    {
-                        EventHandler handler = E2;
+                        public void M()
+                        {
+                            EventHandler handler = E2;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class MyClass
-                {
-                    private event EventHandler E2 = null;
-
-                    public void M()
+                    class MyClass
                     {
-                        EventHandler handler = E2;
+                        private event EventHandler E2 = null;
+
+                        public void M()
+                        {
+                            EventHandler handler = E2;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -3172,11 +3172,11 @@ class MyClass
         {
             await VerifyCS.VerifyAnalyzerAsync(
                 """
-                class C
-                {
-                    private C(int i) { }
-                }
-                """,
+                    class C
+                    {
+                        private C(int i) { }
+                    }
+                    """,
                 // /0/Test0.cs(3,13): info IDE0051: Private member 'C.C' is unused
                 VerifyCS.Diagnostic("IDE0051").WithSpan(3, 13, 3, 14).WithArguments("C.C")
             );

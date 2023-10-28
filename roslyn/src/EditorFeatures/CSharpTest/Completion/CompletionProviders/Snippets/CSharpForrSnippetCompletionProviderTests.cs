@@ -20,27 +20,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        $$
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        for (int i = length - 1; i >= 0; i--)
+                        public void Method()
                         {
                             $$
                         }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            for (int i = length - 1; i >= 0; i--)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -49,29 +49,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int i;
-                        $$
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        int i;
-                        for (int j = length - 1; j >= 0; j--)
+                        public void Method()
                         {
+                            int i;
                             $$
                         }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            int i;
+                            for (int j = length - 1; j >= 0; j--)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -80,29 +80,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        int i, j, k;
-                        $$
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        int i, j, k;
-                        for (int i1 = length - 1; i1 >= 0; i1--)
+                        public void Method()
                         {
+                            int i, j, k;
                             $$
                         }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            int i, j, k;
+                            for (int i1 = length - 1; i1 >= 0; i1--)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -111,15 +111,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                $$
-                """,
+                    $$
+                    """,
                 ItemToCommit,
                 """
-                for (int i = length - 1; i >= 0; i--)
-                {
-                    $$
-                }
-                """
+                    for (int i = length - 1; i >= 0; i--)
+                    {
+                        $$
+                    }
+                    """
             );
         }
 
@@ -128,27 +128,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public Program()
+                    class Program
                     {
-                        $$
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public Program()
-                    {
-                        for (int i = length - 1; i >= 0; i--)
+                        public Program()
                         {
                             $$
                         }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public Program()
+                        {
+                            for (int i = length - 1; i >= 0; i--)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -158,33 +158,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        void LocalFunction()
+                        public void Method()
                         {
-                            $$
-                        }
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        void LocalFunction()
-                        {
-                            for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                            void LocalFunction()
                             {
                                 $$
                             }
                         }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            void LocalFunction()
+                            {
+                                for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                                {
+                                    $$
+                                }
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -194,33 +194,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        var action = delegate()
+                        public void Method()
                         {
-                            $$
-                        };
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        var action = delegate()
-                        {
-                            for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                            var action = delegate()
                             {
                                 $$
-                            }
-                        };
+                            };
+                        }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            var action = delegate()
+                            {
+                                for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                                {
+                                    $$
+                                }
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -230,33 +230,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
             await VerifyCustomCommitProviderAsync(
                 """
-                class Program
-                {
-                    public void Method()
+                    class Program
                     {
-                        var action = () =>
+                        public void Method()
                         {
-                            $$
-                        };
-                    }
-                }
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        var action = () =>
-                        {
-                            for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                            var action = () =>
                             {
                                 $$
-                            }
-                        };
+                            };
+                        }
                     }
-                }
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            var action = () =>
+                            {
+                                for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                                {
+                                    $$
+                                }
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -267,38 +267,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             // so it cannot be simplified to `var`. Therefore having explicit `int` type here is expected
             await VerifyCustomCommitProviderAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath="/0/Test0.cs">class Program
-                {
-                    public void Method()
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document FilePath="/0/Test0.cs">class Program
                     {
-                        $$
-                    }
-                }</Document>
-                <AnalyzerConfigDocument FilePath="/.editorconfig">
-                root = true
-
-                [*]
-                # IDE0008: Use explicit type
-                csharp_style_var_for_built_in_types = true
-                    </AnalyzerConfigDocument>
-                    </Project>
-                </Workspace>
-                """,
-                ItemToCommit,
-                """
-                class Program
-                {
-                    public void Method()
-                    {
-                        for (int i = length - 1; i >= 0; i--)
+                        public void Method()
                         {
                             $$
                         }
-                    }
-                }
+                    }</Document>
+                    <AnalyzerConfigDocument FilePath="/.editorconfig">
+                    root = true
+
+                    [*]
+                    # IDE0008: Use explicit type
+                    csharp_style_var_for_built_in_types = true
+                        </AnalyzerConfigDocument>
+                        </Project>
+                    </Workspace>
+                    """,
+                ItemToCommit,
                 """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            for (int i = length - 1; i >= 0; i--)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
             );
         }
 
@@ -412,38 +412,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath="/0/Test0.cs">class Program
-                {
-                    public void Method(int l)
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document FilePath="/0/Test0.cs">class Program
                     {
-                        l.$$
-                    }
-                }</Document>
-                <AnalyzerConfigDocument FilePath="/.editorconfig">
-                root = true
+                        public void Method(int l)
+                        {
+                            l.$$
+                        }
+                    }</Document>
+                    <AnalyzerConfigDocument FilePath="/.editorconfig">
+                    root = true
 
-                [*]
-                # IDE0008: Use explicit type
-                csharp_style_var_for_built_in_types = true
-                    </AnalyzerConfigDocument>
-                    </Project>
-                </Workspace>
-                """,
+                    [*]
+                    # IDE0008: Use explicit type
+                    csharp_style_var_for_built_in_types = true
+                        </AnalyzerConfigDocument>
+                        </Project>
+                    </Workspace>
+                    """,
                 ItemToCommit,
                 """
-                class Program
-                {
-                    public void Method(int l)
+                    class Program
                     {
-                        for (var i = l - 1; i >= 0; i--)
+                        public void Method(int l)
                         {
-                            $$
+                            for (var i = l - 1; i >= 0; i--)
+                            {
+                                $$
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 

@@ -416,10 +416,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 PPKeyword("if"),
                 Inactive(
                     """
-                    aoeu
-                    aoeu
+                        aoeu
+                        aoeu
 
-                    """
+                        """
                 ),
                 PPKeyword("#"),
                 PPKeyword("endif")
@@ -603,9 +603,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                #region
-                #endregion
-                """,
+                    #region
+                    #endregion
+                    """,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
@@ -619,9 +619,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                #region adsf //comment
-                #endregion
-                """,
+                    #region adsf //comment
+                    #endregion
+                    """,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
@@ -636,9 +636,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                #region //comment
-                #endregion
-                """,
+                    #region //comment
+                    #endregion
+                    """,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
@@ -653,9 +653,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                #region
-                #endregion adsf //comment
-                """,
+                    #region
+                    #endregion adsf //comment
+                    """,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
@@ -670,9 +670,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                #region
-                #endregion //comment
-                """,
+                    #region
+                    #endregion //comment
+                    """,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
@@ -687,9 +687,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                #define A
-                #undef B
-                """,
+                    #define A
+                    #undef B
+                    """,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("define"),
@@ -916,8 +916,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Number("100"),
                 String(
                     """
-                    "C:\Goo"
-                    """
+                        "C:\Goo"
+                        """
                 )
             );
         }
@@ -935,8 +935,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Number("100"),
                 String(
                     """
-                    "C:\Goo"
-                    """
+                        "C:\Goo"
+                        """
                 ),
                 Comment("//Goo")
             );
@@ -968,8 +968,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Number("5"),
                 String(
                     """
-                    "file.txt"
-                    """
+                        "file.txt"
+                        """
                 )
             );
         }
@@ -997,8 +997,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 String(
                     """
-                    ""
-                    """
+                        ""
+                        """
                 ),
                 Comment("//comment")
             );
@@ -1142,26 +1142,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                #pragma checksum "file.txt" "{00000000-0000-0000-0000-000000000000}" "2453"
-                """,
+                    #pragma checksum "file.txt" "{00000000-0000-0000-0000-000000000000}" "2453"
+                    """,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("checksum"),
                 String(
                     """
-                    "file.txt"
-                    """
+                        "file.txt"
+                        """
                 ),
                 String(
                     """
-                    "{00000000-0000-0000-0000-000000000000}"
-                    """
+                        "{00000000-0000-0000-0000-000000000000}"
+                        """
                 ),
                 String(
                     """
-                    "2453"
-                    """
+                        "2453"
+                        """
                 )
             );
         }
@@ -1177,18 +1177,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 PPKeyword("checksum"),
                 String(
                     """
-                    "file.txt"
-                    """
+                        "file.txt"
+                        """
                 ),
                 String(
                     """
-                    "{00000000-0000-0000-0000-000000000000}"
-                    """
+                        "{00000000-0000-0000-0000-000000000000}"
+                        """
                 ),
                 String(
                     """
-                    "2453"
-                    """
+                        "2453"
+                        """
                 ),
                 Comment("// Goo")
             );

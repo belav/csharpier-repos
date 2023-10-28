@@ -75,19 +75,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             // User may want to type a floating point literal.
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static C operator +(C a, C b) => default;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        1.$$
+                        public static C operator +(C a, C b) => default;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            1.$$
+                        }
+                    }
+                    """,
                 SourceCodeKind.Regular
             );
         }
@@ -97,20 +97,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemExistsAsync(
                 """
-                public class C
-                {
-                    public static C operator +(C a, C b) => default;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$;
+                        public static C operator +(C a, C b) => default;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$;
+                        }
+                    }
+                    """,
                 "+",
                 inlineDescription: "x + y",
                 glyph: (int)Glyph.Operator,
@@ -163,19 +163,19 @@ public class Program
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static C operator +(C a, C b) => default;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        C.$$
+                        public static C operator +(C a, C b) => default;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -184,20 +184,20 @@ public class Program
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static C operator +(C a, C b) => default;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        var name = nameof(c.$$
+                        public static C operator +(C a, C b) => default;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            var name = nameof(c.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -206,44 +206,44 @@ public class Program
         {
             var items = await GetCompletionItemsAsync(
                 """
-                public class C
-                {
-                    public static C operator +(C a, C b) => null;
-                    public static C operator -(C a, C b) => null;
-                    public static C operator *(C a, C b) => null;
-                    public static C operator /(C a, C b) => null;
-                    public static C operator %(C a, C b) => null;
-                    public static bool operator ==(C a, C b) => true;
-                    public static bool operator !=(C a, C b) => false;
-                    public static bool operator <(C a, C b) => true;
-                    public static bool operator >(C a, C b) => false;
-                    public static bool operator <=(C a, C b) => true;
-                    public static bool operator >=(C a, C b) => false;
-                    public static C operator +(C a) => null;
-                    public static C operator -(C a) => null;
-                    public static C operator ++(C a) => null;
-                    public static C operator --(C a) => null;
-                    public static bool operator true(C w) => true;
-                    public static bool operator false(C w) => false;
-                    public static bool operator &(C a, C b) => true;
-                    public static bool operator |(C a, C b) => true;
-                    public static C operator !(C a) => null;
-                    public static C operator ^(C a, C b) => null;
-                    public static C operator <<(C a, int b) => null;
-                    public static C operator >>(C a, int b) => null;
-                    public static C operator >>>(C a, int b) => null;
-                    public static C operator ~(C a) => null;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$;
+                        public static C operator +(C a, C b) => null;
+                        public static C operator -(C a, C b) => null;
+                        public static C operator *(C a, C b) => null;
+                        public static C operator /(C a, C b) => null;
+                        public static C operator %(C a, C b) => null;
+                        public static bool operator ==(C a, C b) => true;
+                        public static bool operator !=(C a, C b) => false;
+                        public static bool operator <(C a, C b) => true;
+                        public static bool operator >(C a, C b) => false;
+                        public static bool operator <=(C a, C b) => true;
+                        public static bool operator >=(C a, C b) => false;
+                        public static C operator +(C a) => null;
+                        public static C operator -(C a) => null;
+                        public static C operator ++(C a) => null;
+                        public static C operator --(C a) => null;
+                        public static bool operator true(C w) => true;
+                        public static bool operator false(C w) => false;
+                        public static bool operator &(C a, C b) => true;
+                        public static bool operator |(C a, C b) => true;
+                        public static C operator !(C a) => null;
+                        public static C operator ^(C a, C b) => null;
+                        public static C operator <<(C a, int b) => null;
+                        public static C operator >>(C a, int b) => null;
+                        public static C operator >>>(C a, int b) => null;
+                        public static C operator ~(C a) => null;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$;
+                        }
+                    }
+                    """,
                 SourceCodeKind.Regular
             );
             // true and false operators are not listed
@@ -345,21 +345,21 @@ public class Program
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static bool operator true(C _) => true;
-                    public static bool operator false(C _) => true;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public static bool operator true(C _) => true;
+                        public static bool operator false(C _) => true;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -746,36 +746,36 @@ public class Program
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                public struct S
-                {
-                    public static bool operator ==(S a, S b) => default;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public struct S
                     {
-                        S? s = null;
-                        s.$$
+                        public static bool operator ==(S a, S b) => default;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            S? s = null;
+                            s.$$
+                        }
+                    }
+                    """,
                 "==",
                 """
-                public struct S
-                {
-                    public static bool operator ==(S a, S b) => default;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public struct S
                     {
-                        S? s = null;
-                        s == $$
+                        public static bool operator ==(S a, S b) => default;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            S? s = null;
+                            s == $$
+                        }
+                    }
+                    """
             );
         }
 
@@ -784,22 +784,22 @@ public class Program
         {
             await VerifyItemExistsAsync(
                 """
-                public class Base {
-                    public static int operator +(Base b, int a)=>0;
-                }
-                public class Derived: Base
-                {
-                }
-
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        var d = new Derived();
-                        d.$$
+                    public class Base {
+                        public static int operator +(Base b, int a)=>0;
                     }
-                }
-                """,
+                    public class Derived: Base
+                    {
+                    }
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var d = new Derived();
+                            d.$$
+                        }
+                    }
+                    """,
                 "+",
                 inlineDescription: "x + y",
                 glyph: (int)Glyph.Operator,
@@ -812,18 +812,18 @@ public class Program
         {
             await VerifyItemExistsAsync(
                 """
-                public record R {
-                }
-
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        var r = new R();
-                        r.$$
+                    public record R {
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var r = new R();
+                            r.$$
+                        }
+                    }
+                    """,
                 "==",
                 inlineDescription: "x == y",
                 glyph: (int)Glyph.Operator,
@@ -930,40 +930,40 @@ public class Program
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                public class C
-                {
-                    public static C operator +(C a, C b) => default;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        C? c = null;
-                        var _ = c!.$$
+                        public static C operator +(C a, C b) => default;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C? c = null;
+                            var _ = c!.$$
+                        }
+                    }
+                    """,
                 "+",
                 """
-                #nullable enable
+                    #nullable enable
 
-                public class C
-                {
-                    public static C operator +(C a, C b) => default;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        C? c = null;
-                        var _ = c! + $$
+                        public static C operator +(C a, C b) => default;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C? c = null;
+                            var _ = c! + $$
+                        }
+                    }
+                    """
             );
         }
     }

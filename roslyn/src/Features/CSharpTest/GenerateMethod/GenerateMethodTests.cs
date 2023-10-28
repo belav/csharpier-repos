@@ -9729,50 +9729,50 @@ class Context
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class E
-                {
-                    void M(string s)
+                    class E
                     {
-                        var v = s switch
+                        void M(string s)
                         {
-                            "" => [|Goo()|],
-                            "a" => Bar(),
-                        };
-                    }
+                            var v = s switch
+                            {
+                                "" => [|Goo()|],
+                                "a" => Bar(),
+                            };
+                        }
 
-                    private int Bar()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """,
-                """
-                using System;
-
-                class E
-                {
-                    void M(string s)
-                    {
-                        var v = s switch
+                        private int Bar()
                         {
-                            "" => Goo(),
-                            "a" => Bar(),
-                        };
+                            throw new NotImplementedException();
+                        }
                     }
-
-                    private int Goo()
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    private int Bar()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
+                    """,
                 """
+                    using System;
+
+                    class E
+                    {
+                        void M(string s)
+                        {
+                            var v = s switch
+                            {
+                                "" => Goo(),
+                                "a" => Bar(),
+                            };
+                        }
+
+                        private int Goo()
+                        {
+                            throw new NotImplementedException();
+                        }
+
+                        private int Bar()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
             );
         }
 
@@ -9781,40 +9781,40 @@ class Context
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class E
-                {
-                    void M(string s)
+                    class E
                     {
-                        var v = s switch
+                        void M(string s)
                         {
-                            "" => [|Goo()|],
-                            "a" => Bar(),
-                        };
+                            var v = s switch
+                            {
+                                "" => [|Goo()|],
+                                "a" => Bar(),
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class E
-                {
-                    void M(string s)
+                    class E
                     {
-                        var v = s switch
+                        void M(string s)
                         {
-                            "" => Goo(),
-                            "a" => Bar(),
-                        };
-                    }
+                            var v = s switch
+                            {
+                                "" => Goo(),
+                                "a" => Bar(),
+                            };
+                        }
 
-                    private object Goo()
-                    {
-                        throw new NotImplementedException();
+                        private object Goo()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -9823,40 +9823,40 @@ class Context
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class E
-                {
-                    void M(string s)
+                    class E
                     {
-                        var v = s switch
+                        void M(string s)
                         {
-                            "" => Goo(),
-                            "a" => [|Bar()|],
-                        };
+                            var v = s switch
+                            {
+                                "" => Goo(),
+                                "a" => [|Bar()|],
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class E
-                {
-                    void M(string s)
+                    class E
                     {
-                        var v = s switch
+                        void M(string s)
                         {
-                            "" => Goo(),
-                            "a" => Bar(),
-                        };
-                    }
+                            var v = s switch
+                            {
+                                "" => Goo(),
+                                "a" => Bar(),
+                            };
+                        }
 
-                    private object Bar()
-                    {
-                        throw new NotImplementedException();
+                        private object Bar()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -9865,32 +9865,32 @@ class Context
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                public unsafe class Bar
-                {
-                    public static ZZZ()
+                    public unsafe class Bar
                     {
-                         int* i = &[|Goo|]();
+                        public static ZZZ()
+                        {
+                             int* i = &[|Goo|]();
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                public unsafe class Bar
-                {
-                    public static ZZZ()
+                    public unsafe class Bar
                     {
-                         int* i = &Goo();
+                        public static ZZZ()
+                        {
+                             int* i = &Goo();
+                        }
+
+                        private static int Goo()
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                
-                    private static int Goo()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -9899,32 +9899,32 @@ class Context
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                
-                public unsafe class Bar
-                {
-                    public static ZZZ()
-                    {
-                         delegate*<void> i = &[|Goo|];
-                    }
-                }
-                """,
-                """
-                using System;
-                
-                public unsafe class Bar
-                {
-                    public static ZZZ()
-                    {
-                         delegate*<void> i = &Goo;
-                    }
+                    using System;
 
-                    private static void Goo()
+                    public unsafe class Bar
                     {
-                        throw new NotImplementedException();
+                        public static ZZZ()
+                        {
+                             delegate*<void> i = &[|Goo|];
+                        }
                     }
-                }
+                    """,
                 """
+                    using System;
+
+                    public unsafe class Bar
+                    {
+                        public static ZZZ()
+                        {
+                             delegate*<void> i = &Goo;
+                        }
+
+                        private static void Goo()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                    """
             );
         }
 
@@ -9933,32 +9933,32 @@ class Context
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                
-                public unsafe class Bar
-                {
-                    public static ZZZ()
+                    using System;
+
+                    public unsafe class Bar
                     {
-                         delegate*<int, bool> i = &[|Goo|];
+                        public static ZZZ()
+                        {
+                             delegate*<int, bool> i = &[|Goo|];
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                
-                public unsafe class Bar
-                {
-                    public static ZZZ()
+                    using System;
+
+                    public unsafe class Bar
                     {
-                         delegate*<int, bool> i = &Goo;
+                        public static ZZZ()
+                        {
+                             delegate*<int, bool> i = &Goo;
+                        }
+
+                        private static bool Goo(int arg)
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                
-                    private static bool Goo(int arg)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """
+                    """
             );
         }
     }

@@ -75,23 +75,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or $$(b and c);
+                        void M(object o)
+                        {
+                            bool x = o is a or $$(b and c);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or b and c;
+                        void M(object o)
+                        {
+                            bool x = o is a or b and c;
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters(
                     options: RequireArithmeticBinaryParenthesesForClarity
                 )
@@ -103,14 +103,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or $$(b and c);
+                        void M(object o)
+                        {
+                            bool x = o is a or $$(b and c);
+                        }
                     }
-                }
-                """,
+                    """,
                 new TestParameters(options: RequireOtherBinaryParenthesesForClarity)
             );
         }
@@ -120,23 +120,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or $$(b or c);
+                        void M(object o)
+                        {
+                            bool x = o is a or $$(b or c);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or b or c;
+                        void M(object o)
+                        {
+                            bool x = o is a or b or c;
+                        }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -146,23 +146,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is $$(a or b) or c;
+                        void M(object o)
+                        {
+                            bool x = o is $$(a or b) or c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or b or c;
+                        void M(object o)
+                        {
+                            bool x = o is a or b or c;
+                        }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -172,23 +172,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is $$(a or b);
+                        void M(object o)
+                        {
+                            bool x = o is $$(a or b);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or b;
+                        void M(object o)
+                        {
+                            bool x = o is a or b;
+                        }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -198,31 +198,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        switch (o)
+                        void M(object o)
                         {
-                            case $$(a or b):
-                                return;
+                            switch (o)
+                            {
+                                case $$(a or b):
+                                    return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        switch (o)
+                        void M(object o)
                         {
-                            case a or b:
-                                return;
+                            switch (o)
+                            {
+                                case a or b:
+                                    return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -232,29 +232,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    int M(object o)
+                    class C
                     {
-                        return o switch
+                        int M(object o)
                         {
-                            $$(a or b) => 0,
-                        };
+                            return o switch
+                            {
+                                $$(a or b) => 0,
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int M(object o)
+                    class C
                     {
-                        return o switch
+                        int M(object o)
                         {
-                            a or b => 0,
-                        };
+                            return o switch
+                            {
+                                a or b => 0,
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -264,23 +264,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is { X: $$(a or b) };
+                        void M(object o)
+                        {
+                            bool x = o is { X: $$(a or b) };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is { X: a or b };
+                        void M(object o)
+                        {
+                            bool x = o is { X: a or b };
+                        }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -290,23 +290,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or $$(not b);
+                        void M(object o)
+                        {
+                            bool x = o is a or $$(not b);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is a or not b;
+                        void M(object o)
+                        {
+                            bool x = o is a or not b;
+                        }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: false
             );
         }
@@ -316,23 +316,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is $$(not a) or b;
+                        void M(object o)
+                        {
+                            bool x = o is $$(not a) or b;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        bool x = o is not a or b;
+                        void M(object o)
+                        {
+                            bool x = o is not a or b;
+                        }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: false
             );
         }
@@ -342,16 +342,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestDiagnosticMissingAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is $$(_))
+                        void M(object o)
                         {
+                            if (o is $$(_))
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -360,27 +360,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is string { Length: $$(_) })
+                        void M(object o)
                         {
+                            if (o is string { Length: $$(_) })
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M(object o)
+                    class C
                     {
-                        if (o is string { Length: _ })
+                        void M(object o)
                         {
+                            if (o is string { Length: _ })
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }

@@ -44,31 +44,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    var c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                void M()
-                {
-                    var c = new List<int>
+                    void M()
                     {
-                        1
-                    };
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    void M()
+                    {
+                        var c = new List<int>
+                        {
+                            1
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -77,16 +77,16 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    var c = new List<int>(new[] { 1, 2, 3 });
+                    void M()
+                    {
+                        var c = new List<int>(new[] { 1, 2, 3 });
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -95,31 +95,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    var c = [|new|] List<int>(new[] { 1, 2, 3 });
-                    [|c.Add(|]1);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                void M()
-                {
-                    var c = new List<int>(new[] { 1, 2, 3 })
+                    void M()
                     {
-                        1
-                    };
+                        var c = [|new|] List<int>(new[] { 1, 2, 3 });
+                        [|c.Add(|]1);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    void M()
+                    {
+                        var c = new List<int>(new[] { 1, 2, 3 })
+                        {
+                            1
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -128,21 +128,21 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [|new|] List<int>();
-            }
-            """,
+                class C
+                {
+                    List<int> c = [|new|] List<int>();
+                }
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [];
-            }
-            """
+                class C
+                {
+                    List<int> c = [];
+                }
+                """
         );
     }
 
@@ -151,21 +151,21 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [|new|] List<int>() { 1, 2, 3 };
-            }
-            """,
+                class C
+                {
+                    List<int> c = [|new|] List<int>() { 1, 2, 3 };
+                }
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [1, 2, 3];
-            }
-            """
+                class C
+                {
+                    List<int> c = [1, 2, 3];
+                }
+                """
         );
     }
 
@@ -174,31 +174,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [|new|] List<int>()
+                class C
                 {
-                    1,
-                    2,
-                    3
-                };
-            }
-            """,
+                    List<int> c = [|new|] List<int>()
+                    {
+                        1,
+                        2,
+                        3
+                    };
+                }
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c =
-                [
-                    1,
-                    2,
-                    3
-                ];
-            }
-            """
+                class C
+                {
+                    List<int> c =
+                    [
+                        1,
+                        2,
+                        3
+                    ];
+                }
+                """
         );
     }
 
@@ -207,13 +207,13 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = new List<int>(new[] { 1, 2, 3 });
-            }
-            """
+                class C
+                {
+                    List<int> c = new List<int>(new[] { 1, 2, 3 });
+                }
+                """
         );
     }
 
@@ -222,21 +222,21 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [|new|] List<int> { };
-            }
-            """,
+                class C
+                {
+                    List<int> c = [|new|] List<int> { };
+                }
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [];
-            }
-            """
+                class C
+                {
+                    List<int> c = [];
+                }
+                """
         );
     }
 
@@ -245,21 +245,21 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [|new|] List<int> { 1, 2, 3 };
-            }
-            """,
+                class C
+                {
+                    List<int> c = [|new|] List<int> { 1, 2, 3 };
+                }
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [1, 2, 3];
-            }
-            """
+                class C
+                {
+                    List<int> c = [1, 2, 3];
+                }
+                """
         );
     }
 
@@ -268,31 +268,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c = [|new|] List<int>
+                class C
                 {
-                    1,
-                    2,
-                    3
-                };
-            }
-            """,
+                    List<int> c = [|new|] List<int>
+                    {
+                        1,
+                        2,
+                        3
+                    };
+                }
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                List<int> c =
-                [
-                    1,
-                    2,
-                    3
-                ];
-            }
-            """
+                class C
+                {
+                    List<int> c =
+                    [
+                        1,
+                        2,
+                        3
+                    ];
+                }
+                """
         );
     }
 
@@ -301,31 +301,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    X([|new|] List<int>());
-                }
+                    void M()
+                    {
+                        X([|new|] List<int>());
+                    }
 
-                void X(List<int> list) { }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            
-            class C
-            {
-                void M()
-                {
-                    X([]);
+                    void X(List<int> list) { }
                 }
-            
-                void X(List<int> list) { }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    void M()
+                    {
+                        X([]);
+                    }
+
+                    void X(List<int> list) { }
+                }
+                """
         );
     }
 
@@ -334,18 +334,18 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    X(new List<int>());
-                }
+                    void M()
+                    {
+                        X(new List<int>());
+                    }
 
-                void X(IEnumerable<int> list) { }
-            }
-            """
+                    void X(IEnumerable<int> list) { }
+                }
+                """
         );
     }
 
@@ -354,28 +354,28 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [1];
+                    void M()
+                    {
+                        List<int> c = [1];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -387,30 +387,30 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    if (b)
-                        c.Add(2);
+                    void M(bool b)
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                            c.Add(2);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [1, .. {|CS0173:b ? [2] : []|}];
+                    void M(bool b)
+                    {
+                        List<int> c = [1, .. {|CS0173:b ? [2] : []|}];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -419,32 +419,32 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    if (b)
-                        c.Add(2);
-                    else
-                        c.Add(3);
+                    void M(bool b)
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                            c.Add(2);
+                        else
+                            c.Add(3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [1, b ? 2 : 3];
+                    void M(bool b)
+                    {
+                        List<int> c = [1, b ? 2 : 3];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -456,32 +456,32 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    if (b)
+                    void M(bool b)
                     {
-                        c.Add(2);
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                        {
+                            c.Add(2);
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [1, .. {|CS0173:b ? [2] : []|}];
+                    void M(bool b)
+                    {
+                        List<int> c = [1, .. {|CS0173:b ? [2] : []|}];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -490,36 +490,36 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    if (b)
+                    void M(bool b)
                     {
-                        c.Add(2);
-                    }
-                    else
-                    {
-                        c.Add(3);
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                        {
+                            c.Add(2);
+                        }
+                        else
+                        {
+                            c.Add(3);
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [1, b ? 2 : 3];
+                    void M(bool b)
+                    {
+                        List<int> c = [1, b ? 2 : 3];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -528,38 +528,38 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    if (b)
+                    void M(bool b)
                     {
-                        c.Add(2);
-                        c.Add(3);
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                        {
+                            c.Add(2);
+                            c.Add(3);
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [1];
-                    if (b)
+                    void M(bool b)
                     {
-                        c.Add(2);
-                        c.Add(3);
+                        List<int> c = [1];
+                        if (b)
+                        {
+                            c.Add(2);
+                            c.Add(3);
+                        }
                     }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -568,46 +568,46 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    if (b)
+                    void M(bool b)
                     {
-                        c.Add(2);
-                    }
-                    else
-                    {
-                        c.Add(3);
-                        c.Add(4);
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                        {
+                            c.Add(2);
+                        }
+                        else
+                        {
+                            c.Add(3);
+                            c.Add(4);
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [1];
-                    if (b)
+                    void M(bool b)
                     {
-                        c.Add(2);
-                    }
-                    else
-                    {
-                        c.Add(3);
-                        c.Add(4);
+                        List<int> c = [1];
+                        if (b)
+                        {
+                            c.Add(2);
+                        }
+                        else
+                        {
+                            c.Add(3);
+                            c.Add(4);
+                        }
                     }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -616,34 +616,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    if (b)
+                    void M(bool b)
                     {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                        {
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [1];
-                    if (b)
+                    void M(bool b)
                     {
+                        List<int> c = [1];
+                        if (b)
+                        {
+                        }
                     }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -652,42 +652,42 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    if (b)
+                    void M(bool b)
                     {
-                        c.Add(2);
-                    }
-                    else
-                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                        {
+                            c.Add(2);
+                        }
+                        else
+                        {
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    List<int> c = [1];
-                    if (b)
+                    void M(bool b)
                     {
-                        c.Add(2);
-                    }
-                    else
-                    {
+                        List<int> c = [1];
+                        if (b)
+                        {
+                            c.Add(2);
+                        }
+                        else
+                        {
+                        }
                     }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -696,31 +696,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    IList<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                void M()
-                {
-                    IList<int> c = new List<int>
+                    void M()
                     {
-                        1
-                    };
+                        IList<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    void M()
+                    {
+                        IList<int> c = new List<int>
+                        {
+                            1
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -729,30 +729,30 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    [|foreach (var v in |]x)
-                        c.Add(v);
+                    void M(int[] x)
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        [|foreach (var v in |]x)
+                            c.Add(v);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [1, .. x];
+                    void M(int[] x)
+                    {
+                        List<int> c = [1, .. x];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -761,32 +761,32 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    [|foreach (var v in |]x)
+                    void M(int[] x)
                     {
-                        c.Add(v);
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        [|foreach (var v in |]x)
+                        {
+                            c.Add(v);
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [1, .. x];
+                    void M(int[] x)
+                    {
+                        List<int> c = [1, .. x];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -795,36 +795,36 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    foreach (var v in x)
+                    void M(int[] x)
                     {
-                        c.Add(0);
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        foreach (var v in x)
+                        {
+                            c.Add(0);
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [1];
-                    foreach (var v in x)
+                    void M(int[] x)
                     {
-                        c.Add(0);
+                        List<int> c = [1];
+                        foreach (var v in x)
+                        {
+                            c.Add(0);
+                        }
                     }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -833,36 +833,36 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int z)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    foreach (var v in x)
+                    void M(int[] x, int z)
                     {
-                        c.Add(z);
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        foreach (var v in x)
+                        {
+                            c.Add(z);
+                        }
                     }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int z)
+                class C
                 {
-                    List<int> c = [1];
-                    foreach (var v in x)
+                    void M(int[] x, int z)
                     {
-                        c.Add(z);
+                        List<int> c = [1];
+                        foreach (var v in x)
+                        {
+                            c.Add(z);
+                        }
                     }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -871,32 +871,32 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int[] y)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    [|foreach (var v in |]x)
-                        c.Add(v);
-                    [|foreach (var v in |]y)
-                        c.Add(v);
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        [|foreach (var v in |]x)
+                            c.Add(v);
+                        [|foreach (var v in |]y)
+                            c.Add(v);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int[] y)
+                class C
                 {
-                    List<int> c = [1, .. x, .. y];
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [1, .. x, .. y];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -905,32 +905,32 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int[] y)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|foreach (var v in |]x)
-                        c.Add(v);
-                    [|c.Add(|]1);
-                    [|foreach (var v in |]y)
-                        c.Add(v);
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|foreach (var v in |]x)
+                            c.Add(v);
+                        [|c.Add(|]1);
+                        [|foreach (var v in |]y)
+                            c.Add(v);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int[] y)
+                class C
                 {
-                    List<int> c = [.. x, 1, .. y];
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [.. x, 1, .. y];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -939,32 +939,32 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int[] y)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|foreach (var v in |]x)
-                        c.Add(v);
-                    [|foreach (var v in |]y)
-                        c.Add(v);
-                    [|c.Add(|]1);
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|foreach (var v in |]x)
+                            c.Add(v);
+                        [|foreach (var v in |]y)
+                            c.Add(v);
+                        [|c.Add(|]1);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int[] y)
+                class C
                 {
-                    List<int> c = [.. x, .. y, 1];
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [.. x, .. y, 1];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -973,29 +973,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    [|c.AddRange(|]x);
+                    void M(int[] x)
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        [|c.AddRange(|]x);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [1, .. x];
+                    void M(int[] x)
+                    {
+                        List<int> c = [1, .. x];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1004,31 +1004,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int[] y)
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    [|foreach (var v in |]x)
-                        c.Add(v);
-                    [|c.AddRange(|]y);
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        [|foreach (var v in |]x)
+                            c.Add(v);
+                        [|c.AddRange(|]y);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x, int[] y)
+                class C
                 {
-                    List<int> c = [1, .. x, .. y];
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [1, .. x, .. y];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1037,29 +1037,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    c[1] = 2;
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
-                {
-                    List<int> c = new List<int>
+                    void M()
                     {
-                        [1] = 2
-                    };
+                        List<int> c = [|new|] List<int>();
+                        c[1] = 2;
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
+                    {
+                        List<int> c = new List<int>
+                        {
+                            [1] = 2
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -1068,33 +1068,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(int[] x)
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    c[1] = 2;
-                    foreach (var v in x)
-                        c.Add(v);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(int[] x)
-                {
-                    List<int> c = new List<int>
+                    void M(int[] x)
                     {
-                        [1] = 2
-                    };
-                    foreach (var v in x)
-                        c.Add(v);
+                        List<int> c = [|new|] List<int>();
+                        c[1] = 2;
+                        foreach (var v in x)
+                            c.Add(v);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M(int[] x)
+                    {
+                        List<int> c = new List<int>
+                        {
+                            [1] = 2
+                        };
+                        foreach (var v in x)
+                            c.Add(v);
+                    }
+                }
+                """
         );
     }
 
@@ -1103,51 +1103,51 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class A
-            {
-                public B b;
-            }
-
-            class B
-            {
-                public List<int> c;
-            }
-
-            class C
-            {
-                void M(A a)
+                class A
                 {
-                    a.b.c = [|new|] List<int>();
-                    a.b.c[1] = 2;
+                    public B b;
                 }
-            }
-            """,
-            """
-            using System.Collections.Generic;
 
-            class A
-            {
-                public B b;
-            }
-
-            class B
-            {
-                public List<int> c;
-            }
-
-            class C
-            {
-                void M(A a)
+                class B
                 {
-                    a.b.c = new List<int>
+                    public List<int> c;
+                }
+
+                class C
+                {
+                    void M(A a)
                     {
-                        [1] = 2
-                    };
+                        a.b.c = [|new|] List<int>();
+                        a.b.c[1] = 2;
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class A
+                {
+                    public B b;
+                }
+
+                class B
+                {
+                    public List<int> c;
+                }
+
+                class C
+                {
+                    void M(A a)
+                    {
+                        a.b.c = new List<int>
+                        {
+                            [1] = 2
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -1156,31 +1156,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
+                using System.Collections.Generic;
+                class C
                 {
-                    List<object> c = [|new|] List<object>();
-                    c[1] = 2;
-                    c[2] = "";
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
-                {
-                    List<object> c = new List<object>
+                    void M()
                     {
-                        [1] = 2,
-                        [2] = ""
-                    };
+                        List<object> c = [|new|] List<object>();
+                        c[1] = 2;
+                        c[2] = "";
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
+                    {
+                        List<object> c = new List<object>
+                        {
+                            [1] = 2,
+                            [2] = ""
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -1189,53 +1189,53 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections;
+                using System.Collections;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    X c = [|new|] X();
-                    c[1] = 2;
-                    c[2] = "";
-                    c[3, 4] = 5;
-                }
-            }
-
-            class X : IEnumerable
-            {
-                public object this[int i] { get => null; set { } }
-                public object this[int i, int j] { get => null; set { } }
-
-                public IEnumerator GetEnumerator() => null;
-                public void Add(int i) { }
-            }
-            """,
-            """
-            using System.Collections;
-
-            class C
-            {
-                void M()
-                {
-                    X c = new X
+                    void M()
                     {
-                        [1] = 2,
-                        [2] = "",
-                        [3, 4] = 5
-                    };
+                        X c = [|new|] X();
+                        c[1] = 2;
+                        c[2] = "";
+                        c[3, 4] = 5;
+                    }
                 }
-            }
 
-            class X : IEnumerable
-            {
-                public object this[int i] { get => null; set { } }
-                public object this[int i, int j] { get => null; set { } }
+                class X : IEnumerable
+                {
+                    public object this[int i] { get => null; set { } }
+                    public object this[int i, int j] { get => null; set { } }
 
-                public IEnumerator GetEnumerator() => null;
-                public void Add(int i) { }
-            }
+                    public IEnumerator GetEnumerator() => null;
+                    public void Add(int i) { }
+                }
+                """,
             """
+                using System.Collections;
+
+                class C
+                {
+                    void M()
+                    {
+                        X c = new X
+                        {
+                            [1] = 2,
+                            [2] = "",
+                            [3, 4] = 5
+                        };
+                    }
+                }
+
+                class X : IEnumerable
+                {
+                    public object this[int i] { get => null; set { } }
+                    public object this[int i, int j] { get => null; set { } }
+
+                    public IEnumerator GetEnumerator() => null;
+                    public void Add(int i) { }
+                }
+                """
         );
     }
 
@@ -1244,31 +1244,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    c[1] = 2;
-                    c.Add(0);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
-                {
-                    List<int> c = new List<int>
+                    void M()
                     {
-                        [1] = 2
-                    };
-                    c.Add(0);
+                        List<int> c = [|new|] List<int>();
+                        c[1] = 2;
+                        c.Add(0);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
+                    {
+                        List<int> c = new List<int>
+                        {
+                            [1] = 2
+                        };
+                        c.Add(0);
+                    }
+                }
+                """
         );
     }
 
@@ -1277,28 +1277,28 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]0);
-                    c[1] = 2;
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]0);
+                        c[1] = 2;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [0];
-                    c[1] = 2;
+                    void M()
+                    {
+                        List<int> c = [0];
+                        c[1] = 2;
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1307,35 +1307,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1);
-                    [|c.Add(|]2);
-                    throw new System.Exception();
-                    c.Add(3);
-                    c.Add(4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        [|c.Add(|]2);
+                        throw new System.Exception();
+                        c.Add(3);
+                        c.Add(4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [1, 2];
-                    throw new System.Exception();
-                    c.Add(3);
-                    c.Add(4);
+                    void M()
+                    {
+                        List<int> c = [1, 2];
+                        throw new System.Exception();
+                        c.Add(3);
+                        c.Add(4);
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1344,19 +1344,19 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    C c = new C();
-                    c.Add(1);
-                }
+                    void M()
+                    {
+                        C c = new C();
+                        c.Add(1);
+                    }
 
-                void Add(int i) { }
-            }
-            """
+                    void Add(int i) { }
+                }
+                """
         );
     }
 
@@ -1365,21 +1365,21 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    C c = new C();
-                    c.Add(1);
-                }
+                    void M()
+                    {
+                        C c = new C();
+                        c.Add(1);
+                    }
 
-                public void Add(int i)
-                {
+                    public void Add(int i)
+                    {
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1388,31 +1388,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>(1);
-                    [|c.Add(|]1);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                void M()
-                {
-                    List<int> c = new List<int>(1)
+                    void M()
                     {
-                        1
-                    };
+                        List<int> c = [|new|] List<int>(1);
+                        [|c.Add(|]1);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    void M()
+                    {
+                        List<int> c = new List<int>(1)
+                        {
+                            1
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -1421,30 +1421,30 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = null;
-                    c = [|new|] List<int>();
-                    [|c.Add(|]1);
+                    void M()
+                    {
+                        List<int> c = null;
+                        c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = null;
-                    c = [1];
+                    void M()
+                    {
+                        List<int> c = null;
+                        c = [1];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1453,25 +1453,25 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int i)
+                class C
                 {
-                    List c = new List();
-                    c.Add(ref i);
+                    void M(int i)
+                    {
+                        List c = new List();
+                        c.Add(ref i);
+                    }
                 }
-            }
 
 
-            class List
-            {
-                public void Add(ref int i)
+                class List
                 {
+                    public void Add(ref int i)
+                    {
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1480,29 +1480,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(List<int>[] array)
+                class C
                 {
-                    array[0] = [|new|] List<int>();
-                    [|array[0].Add(|]1);
-                    [|array[0].Add(|]2);
+                    void M(List<int>[] array)
+                    {
+                        array[0] = [|new|] List<int>();
+                        [|array[0].Add(|]1);
+                        [|array[0].Add(|]2);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(List<int>[] array)
+                class C
                 {
-                    array[0] = [1, 2];
+                    void M(List<int>[] array)
+                    {
+                        array[0] = [1, 2];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1511,29 +1511,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    c.Add(item: 1);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
+                        c.Add(item: 1);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [];
-                    c.Add(item: 1);
+                    void M()
+                    {
+                        List<int> c = [];
+                        c.Add(item: 1);
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1542,34 +1542,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
+                    void M()
                     {
-                        1
-                    };
-                    [|c.Add(|]2);
+                        List<int> c = [|new|] List<int>()
+                        {
+                            1
+                        };
+                        [|c.Add(|]2);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1, 2
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1, 2
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1578,34 +1578,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>
+                    void M()
                     {
-                        1
-                    };
-                    [|c.Add(|]2);
+                        List<int> c = [|new|] List<int>
+                        {
+                            1
+                        };
+                        [|c.Add(|]2);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1, 2
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1, 2
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1614,34 +1614,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
+                    void M()
                     {
-                        1,
-                    };
-                    [|c.Add(|]2);
+                        List<int> c = [|new|] List<int>()
+                        {
+                            1,
+                        };
+                        [|c.Add(|]2);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1, 2,
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1, 2,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1650,35 +1650,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
+                    void M(int[] x)
                     {
-                        1
-                    };
-                    [|foreach (var y in |]x)
-                        c.Add(y);
+                        List<int> c = [|new|] List<int>()
+                        {
+                            1
+                        };
+                        [|foreach (var y in |]x)
+                            c.Add(y);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(int[] x)
+                class C
                 {
-                    List<int> c =
-                    [
-                        1, .. x
-                    ];
+                    void M(int[] x)
+                    {
+                        List<int> c =
+                        [
+                            1, .. x
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1687,33 +1687,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(List<int>[] array)
+                class C
                 {
-                    array[0] = [|new|] List<int>();
-                    [|array[0].Add(|]1);
-                    [|array[0].Add(|]2);
-                    array[1] = [|new|] List<int>();
-                    [|array[1].Add(|]3);
-                    [|array[1].Add(|]4);
+                    void M(List<int>[] array)
+                    {
+                        array[0] = [|new|] List<int>();
+                        [|array[0].Add(|]1);
+                        [|array[0].Add(|]2);
+                        array[1] = [|new|] List<int>();
+                        [|array[1].Add(|]3);
+                        [|array[1].Add(|]4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M(List<int>[] array)
+                class C
                 {
-                    array[0] = [1, 2];
-                    array[1] = [3, 4];
+                    void M(List<int>[] array)
+                    {
+                        array[0] = [1, 2];
+                        array[1] = [3, 4];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1722,57 +1722,57 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System;
-            using System.Collections;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    Bar list1 = [|new|] Bar(() => {
-                        List<int> list2 = [|new|] List<int>();
-                        [|list2.Add(|]2);
-                    });
-                    [|list1.Add(|]1);
+                    void M()
+                    {
+                        Bar list1 = [|new|] Bar(() => {
+                            List<int> list2 = [|new|] List<int>();
+                            [|list2.Add(|]2);
+                        });
+                        [|list1.Add(|]1);
+                    }
                 }
-            }
 
-            class Bar : IEnumerable
-            {
-                public Bar(Action action) { }
-
-                public IEnumerator GetEnumerator() => null;
-                public void Add(int i) { }
-            }
-            """,
-            """
-            using System;
-            using System.Collections;
-            using System.Collections.Generic;
-
-            class C
-            {
-                void M()
+                class Bar : IEnumerable
                 {
-                    Bar list1 = new Bar(() =>
-                    {
-                        List<int> list2 = [2];
-                    })
-                    {
-                        1
-                    };
+                    public Bar(Action action) { }
+
+                    public IEnumerator GetEnumerator() => null;
+                    public void Add(int i) { }
                 }
-            }
-
-            class Bar : IEnumerable
-            {
-                public Bar(Action action) { }
-
-                public IEnumerator GetEnumerator() => null;
-                public void Add(int i) { }
-            }
+                """,
             """
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
+
+                class C
+                {
+                    void M()
+                    {
+                        Bar list1 = new Bar(() =>
+                        {
+                            List<int> list2 = [2];
+                        })
+                        {
+                            1
+                        };
+                    }
+                }
+
+                class Bar : IEnumerable
+                {
+                    public Bar(Action action) { }
+
+                    public IEnumerator GetEnumerator() => null;
+                    public void Add(int i) { }
+                }
+                """
         );
     }
 
@@ -1782,55 +1782,55 @@ public partial class UseCollectionInitializerTests_CollectionExpression
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<Action> list1 = [|new|] List<Action>();
-                    [|list1.Add(|]() => {
-                        List<int> list2 = [|new|] List<int>();
-                        [|list2.Add(|]2);
-                    });
+                    void M()
+                    {
+                        List<Action> list1 = [|new|] List<Action>();
+                        [|list1.Add(|]() => {
+                            List<int> list2 = [|new|] List<int>();
+                            [|list2.Add(|]2);
+                        });
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            using System;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<Action> list1 =
-                    [
-                        () => {
-                            List<int> list2 = [2];
-                        },
-                    ];
+                    void M()
+                    {
+                        List<Action> list1 =
+                        [
+                            () => {
+                                List<int> list2 = [2];
+                            },
+                        ];
+                    }
                 }
-            }
-            """,
+                """,
             BatchFixedCode = """
-            using System;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<Action> list1 =
-                    [
-                        () => {
-                            List<int> list2 = [2];
-                        },
-                    ];
+                    void M()
+                    {
+                        List<Action> list1 =
+                        [
+                            () => {
+                                List<int> list2 = [2];
+                            },
+                        ];
+                    }
                 }
-            }
-            """,
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -1840,31 +1840,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1); // Goo
-                    [|c.Add(|]2); // Bar
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1); // Goo
+                        [|c.Add(|]2); // Bar
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c =
-                    [
-                        1, // Goo
-                        2, // Bar
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1, // Goo
+                            2, // Bar
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -1873,38 +1873,38 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(int[] x, int[] y)
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    // Goo
-                    [|foreach (var v in |]x)
-                        c.Add(v);
-
-                    // Bar
-                    [|foreach (var v in |]y)
-                        c.Add(v);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(int[] x, int[] y)
-                {
-                    List<int> c =
-                    [
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [|new|] List<int>();
                         // Goo
-                        .. x,
+                        [|foreach (var v in |]x)
+                            c.Add(v);
+
                         // Bar
-                        .. y,
-                    ];
+                        [|foreach (var v in |]y)
+                            c.Add(v);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c =
+                        [
+                            // Goo
+                            .. x,
+                            // Bar
+                            .. y,
+                        ];
+                    }
+                }
+                """
         );
     }
 
@@ -1913,42 +1913,42 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(int[] x, int[] y)
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    // Goo
-                    // Bar
-                    [|foreach (var v in |]x)
-                        c.Add(v);
-
-                    // Baz
-                    // Quux
-                    [|foreach (var v in |]y)
-                        c.Add(v);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(int[] x, int[] y)
-                {
-                    List<int> c =
-                    [
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c = [|new|] List<int>();
                         // Goo
                         // Bar
-                        .. x,
+                        [|foreach (var v in |]x)
+                            c.Add(v);
+
                         // Baz
                         // Quux
-                        .. y,
-                    ];
+                        [|foreach (var v in |]y)
+                            c.Add(v);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M(int[] x, int[] y)
+                    {
+                        List<int> c =
+                        [
+                            // Goo
+                            // Bar
+                            .. x,
+                            // Baz
+                            // Quux
+                            .. y,
+                        ];
+                    }
+                }
+                """
         );
     }
 
@@ -1957,46 +1957,46 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(bool b1, bool b2)
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    // Goo
-                    if (b1)
-                        c.Add(0);
-                    else
-                        c.Add(1);
-
-                    // Bar
-                    if (b2)
+                    void M(bool b1, bool b2)
                     {
-                        c.Add(2);
-                    }
-                    else
-                    {
-                        c.Add(3);
-                    }
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(bool b1, bool b2)
-                {
-                    List<int> c =
-                    [
+                        List<int> c = [|new|] List<int>();
                         // Goo
-                        b1 ? 0 : 1,
+                        if (b1)
+                            c.Add(0);
+                        else
+                            c.Add(1);
+
                         // Bar
-                        b2 ? 2 : 3,
-                    ];
+                        if (b2)
+                        {
+                            c.Add(2);
+                        }
+                        else
+                        {
+                            c.Add(3);
+                        }
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M(bool b1, bool b2)
+                    {
+                        List<int> c =
+                        [
+                            // Goo
+                            b1 ? 0 : 1,
+                            // Bar
+                            b2 ? 2 : 3,
+                        ];
+                    }
+                }
+                """
         );
     }
 
@@ -2005,50 +2005,50 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(bool b1, bool b2)
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    // Goo
-                    // Bar
-                    if (b1)
-                        c.Add(0);
-                    else
-                        c.Add(1);
-            
-                    // Baz
-                    // Quux
-                    if (b2)
+                    void M(bool b1, bool b2)
                     {
-                        c.Add(2);
-                    }
-                    else
-                    {
-                        c.Add(3);
-                    }
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M(bool b1, bool b2)
-                {
-                    List<int> c =
-                    [
+                        List<int> c = [|new|] List<int>();
                         // Goo
                         // Bar
-                        b1 ? 0 : 1,
+                        if (b1)
+                            c.Add(0);
+                        else
+                            c.Add(1);
+
                         // Baz
                         // Quux
-                        b2 ? 2 : 3,
-                    ];
+                        if (b2)
+                        {
+                            c.Add(2);
+                        }
+                        else
+                        {
+                            c.Add(3);
+                        }
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M(bool b1, bool b2)
+                    {
+                        List<int> c =
+                        [
+                            // Goo
+                            // Bar
+                            b1 ? 0 : 1,
+                            // Baz
+                            // Quux
+                            b2 ? 2 : 3,
+                        ];
+                    }
+                }
+                """
         );
     }
 
@@ -2058,37 +2058,37 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
+                using System.Collections.Generic;
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
 
-                    // Goo
-                    [|c.Add(|]1);
-
-                    // Bar
-                    [|c.Add(|]2);
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-            class C
-            {
-                void M()
-                {
-                    List<int> c =
-                    [
                         // Goo
-                        1,
+                        [|c.Add(|]1);
+
                         // Bar
-                        2,
-                    ];
+                        [|c.Add(|]2);
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            // Goo
+                            1,
+                            // Bar
+                            2,
+                        ];
+                    }
+                }
+                """
         );
     }
 
@@ -2097,33 +2097,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    Dictionary<int, string> c = [|new|] Dictionary<int, string>();
-                    [|c.Add(|]1, "x");
-                    [|c.Add(|]2, "y");
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                void M()
-                {
-                    Dictionary<int, string> c = new Dictionary<int, string>
+                    void M()
                     {
-                        { 1, "x" },
-                        { 2, "y" }
-                    };
+                        Dictionary<int, string> c = [|new|] Dictionary<int, string>();
+                        [|c.Add(|]1, "x");
+                        [|c.Add(|]2, "y");
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    void M()
+                    {
+                        Dictionary<int, string> c = new Dictionary<int, string>
+                        {
+                            { 1, "x" },
+                            { 2, "y" }
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -2132,36 +2132,36 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public static void Bar()
+                public class Goo
                 {
-                    string item = null;
-                    var items = new List<string>();
+                    public static void Bar()
+                    {
+                        string item = null;
+                        var items = new List<string>();
 
-                    List<string> values = [|new|] List<string>(); // Collection initialization can be simplified
-                    [|values.Add(|]item);
-                    values.Remove(item);
+                        List<string> values = [|new|] List<string>(); // Collection initialization can be simplified
+                        [|values.Add(|]item);
+                        values.Remove(item);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public static void Bar()
+                public class Goo
                 {
-                    string item = null;
-                    var items = new List<string>();
+                    public static void Bar()
+                    {
+                        string item = null;
+                        var items = new List<string>();
 
-                    List<string> values = [item]; // Collection initialization can be simplified
-                    values.Remove(item);
+                        List<string> values = [item]; // Collection initialization can be simplified
+                        values.Remove(item);
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2170,33 +2170,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-            class Program
-            {
-                static void Main(string[] args)
+                class Program
                 {
-                    string[] myStringArray = new string[] { "Test", "123", "ABC" };
-                    List<string> myStringList = myStringArray?.ToList() ?? [|new|] List<string>();
-                    myStringList.Add("Done");
+                    static void Main(string[] args)
+                    {
+                        string[] myStringArray = new string[] { "Test", "123", "ABC" };
+                        List<string> myStringList = myStringArray?.ToList() ?? [|new|] List<string>();
+                        myStringList.Add("Done");
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
-            using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-            class Program
-            {
-                static void Main(string[] args)
+                class Program
                 {
-                    string[] myStringArray = new string[] { "Test", "123", "ABC" };
-                    List<string> myStringList = myStringArray?.ToList() ?? [];
-                    myStringList.Add("Done");
+                    static void Main(string[] args)
+                    {
+                        string[] myStringArray = new string[] { "Test", "123", "ABC" };
+                        List<string> myStringList = myStringArray?.ToList() ?? [];
+                        myStringList.Add("Done");
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2205,29 +2205,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                static void M()
+                class C
                 {
-                    List<object> items = [|new|] List<object>();
-                    items[0] = items[0];
+                    static void M()
+                    {
+                        List<object> items = [|new|] List<object>();
+                        items[0] = items[0];
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                static void M()
+                class C
                 {
-                    List<object> items = [];
-                    items[0] = items[0];
+                    static void M()
+                    {
+                        List<object> items = [];
+                        items[0] = items[0];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2236,33 +2236,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                static void M()
+                class C
                 {
-                    List<object> items = [|new|] List<object>();
-                    items[0] = 1;
-                    items[1] = items[0];
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                static void M()
-                {
-                    List<object> items = [|new|] List<object>
+                    static void M()
                     {
-                        [0] = 1
-                    };
-                    items[1] = items[0];
+                        List<object> items = [|new|] List<object>();
+                        items[0] = 1;
+                        items[1] = items[0];
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    static void M()
+                    {
+                        List<object> items = [|new|] List<object>
+                        {
+                            [0] = 1
+                        };
+                        items[1] = items[0];
+                    }
+                }
+                """
         );
     }
 
@@ -2271,18 +2271,18 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> t = new List<int>(new int[] { 1, 2, 3 });
-                    t.Add(t.Min() - 1);
+                    void M()
+                    {
+                        List<int> t = new List<int>(new int[] { 1, 2, 3 });
+                        t.Add(t.Min() - 1);
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2291,35 +2291,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                static void M()
+                class C
                 {
-                    List<object> items = null;
-                    items = [|new|] List<object>();
-                    items[0] = 1;
-                    items[1] = items[0];
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                static void M()
-                {
-                    List<object> items = null;
-                    items = [|new|] List<object>
+                    static void M()
                     {
-                        [0] = 1
-                    };
-                    items[1] = items[0];
+                        List<object> items = null;
+                        items = [|new|] List<object>();
+                        items[0] = 1;
+                        items[1] = items[0];
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    static void M()
+                    {
+                        List<object> items = null;
+                        items = [|new|] List<object>
+                        {
+                            [0] = 1
+                        };
+                        items[1] = items[0];
+                    }
+                }
+                """
         );
     }
 
@@ -2328,19 +2328,19 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> t = null;
-                    t = new List<int>(new int[] { 1, 2, 3 });
-                    t.Add(t.Min() - 1);
+                    void M()
+                    {
+                        List<int> t = null;
+                        t = new List<int>(new int[] { 1, 2, 3 });
+                        t.Add(t.Min() - 1);
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2349,31 +2349,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                private List<int> myField;
-                void M()
+                class C
                 {
-                    myField = [|new|] List<int>();
-                    myField.Add(this.myField.Count);
+                    private List<int> myField;
+                    void M()
+                    {
+                        myField = [|new|] List<int>();
+                        myField.Add(this.myField.Count);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                private List<int> myField;
-                void M()
+                class C
                 {
-                    myField = [];
-                    myField.Add(this.myField.Count);
+                    private List<int> myField;
+                    void M()
+                    {
+                        myField = [];
+                        myField.Add(this.myField.Count);
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2382,17 +2382,17 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Dynamic;
+                using System.Dynamic;
 
-            class C
-            {
-                void Goo()
+                class C
                 {
-                    dynamic body = new ExpandoObject();
-                    body[0] = new ExpandoObject();
+                    void Goo()
+                    {
+                        dynamic body = new ExpandoObject();
+                        body[0] = new ExpandoObject();
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2401,19 +2401,19 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public void M()
+                public class Goo
                 {
-                    List<object> items = new List<object>();
-            #if true
-                    items.Add(1);
-            #endif
+                    public void M()
+                    {
+                        List<object> items = new List<object>();
+                #if true
+                        items.Add(1);
+                #endif
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2422,32 +2422,32 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public void M()
+                public class Goo
                 {
-            #if true
-                    List<object> items = [|new|] List<object>();
-                    [|items.Add(|]1);
-            #endif
+                    public void M()
+                    {
+                #if true
+                        List<object> items = [|new|] List<object>();
+                        [|items.Add(|]1);
+                #endif
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public void M()
+                public class Goo
                 {
-            #if true
-                    List<object> items = [1];
-            #endif
+                    public void M()
+                    {
+                #if true
+                        List<object> items = [1];
+                #endif
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2456,30 +2456,30 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public void M()
+                public class Goo
                 {
-                    int lastItem;
-                    List<int> list = [|new|] List<int>();
-                    [|list.Add(|]lastItem = 5);
+                    public void M()
+                    {
+                        int lastItem;
+                        List<int> list = [|new|] List<int>();
+                        [|list.Add(|]lastItem = 5);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public void M()
+                public class Goo
                 {
-                    int lastItem;
-                    List<int> list = [lastItem = 5];
+                    public void M()
+                    {
+                        int lastItem;
+                        List<int> list = [lastItem = 5];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2488,30 +2488,30 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public void M()
+                public class Goo
                 {
-                    int lastItem = 0;
-                    List<int> list = [|new|] List<int>();
-                    [|list.Add(|]lastItem += 5);
+                    public void M()
+                    {
+                        int lastItem = 0;
+                        List<int> list = [|new|] List<int>();
+                        [|list.Add(|]lastItem += 5);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            public class Goo
-            {
-                public void M()
+                public class Goo
                 {
-                    int lastItem = 0;
-                    List<int> list = [lastItem += 5];
+                    public void M()
+                    {
+                        int lastItem = 0;
+                        List<int> list = [lastItem += 5];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2520,32 +2520,32 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class MyClass
-            {
-                public void Main()
+                class MyClass
                 {
-                    List<int> list = [|new|] List<int>();
-                    [|list.Add(|]1);
+                    public void Main()
+                    {
+                        List<int> list = [|new|] List<int>();
+                        [|list.Add(|]1);
 
-                    int horse = 1;
+                        int horse = 1;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class MyClass
-            {
-                public void Main()
+                class MyClass
                 {
-                    List<int> list = [1];
+                    public void Main()
+                    {
+                        List<int> list = [1];
 
-                    int horse = 1;
+                        int horse = 1;
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2554,20 +2554,20 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestMissingInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
-            using System.Dynamic;
+                using System.Collections.Generic;
+                using System.Dynamic;
 
-            public class Goo
-            {
-                public void M()
+                public class Goo
                 {
-                    IDictionary<string, object> obj = new ExpandoObject();
-                    obj.Add("string", "v");
-                    obj.Add("int", 1);
-                    obj.Add(" object", new { X = 1, Y = 2 });
+                    public void M()
+                    {
+                        IDictionary<string, object> obj = new ExpandoObject();
+                        obj.Add("string", "v");
+                        obj.Add("int", 1);
+                        obj.Add(" object", new { X = 1, Y = 2 });
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2576,33 +2576,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                static void M()
+                class C
                 {
-                    List<object> items = [|new|] List<object>();
-                    items[0] = 1;
-                    items[items.Count - 1] = 2;
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                static void M()
-                {
-                    List<object> items = [|new|] List<object>
+                    static void M()
                     {
-                        [0] = 1
-                    };
-                    items[items.Count - 1] = 2;
+                        List<object> items = [|new|] List<object>();
+                        items[0] = 1;
+                        items[items.Count - 1] = 2;
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    static void M()
+                    {
+                        List<object> items = [|new|] List<object>
+                        {
+                            [0] = 1
+                        };
+                        items[items.Count - 1] = 2;
+                    }
+                }
+                """
         );
     }
 
@@ -2611,33 +2611,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                static void M()
+                class C
                 {
-                    List<object> items = [|new|] List<object>();
-                    items[0] = 1;
-                    items[^1] = 2;
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                static void M()
-                {
-                    List<object> items = new List<object>
+                    static void M()
                     {
-                        [0] = 1
-                    };
-                    items[^1] = 2;
+                        List<object> items = [|new|] List<object>();
+                        items[0] = 1;
+                        items[^1] = 2;
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    static void M()
+                    {
+                        List<object> items = new List<object>
+                        {
+                            [0] = 1
+                        };
+                        items[^1] = 2;
+                    }
+                }
+                """
         );
     }
 
@@ -2646,31 +2646,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                static void M()
+                class C
                 {
-                    List<object> items = [|new|]();
-                    items[0] = 1;
-                }
-            }
-            """,
-            """
-            using System.Collections.Generic;
-
-            class C
-            {
-                static void M()
-                {
-                    List<object> items = new()
+                    static void M()
                     {
-                        [0] = 1
-                    };
+                        List<object> items = [|new|]();
+                        items[0] = 1;
+                    }
                 }
-            }
+                """,
             """
+                using System.Collections.Generic;
+
+                class C
+                {
+                    static void M()
+                    {
+                        List<object> items = new()
+                        {
+                            [0] = 1
+                        };
+                    }
+                }
+                """
         );
     }
 
@@ -2680,17 +2680,17 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            List<int> list = [|new|] List<int>();
-            [|list.Add(|]1);
-            """,
+                List<int> list = [|new|] List<int>();
+                [|list.Add(|]1);
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            List<int> list = [1];
+                List<int> list = [1];
 
-            """,
+                """,
             OutputKind.ConsoleApplication
         );
     }
@@ -2700,27 +2700,27 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [];
+                    void M()
+                    {
+                        List<int> c = [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2729,33 +2729,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
+                    void M()
                     {
-                        1
-                    };
+                        List<int> c = [|new|] List<int>()
+                        {
+                            1
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2764,33 +2764,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
+                    void M()
                     {
-                        1,
-                    };
+                        List<int> c = [|new|] List<int>()
+                        {
+                            1,
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1,
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2799,35 +2799,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
+                    void M()
                     {
-                        1,
-                        2
-                    };
+                        List<int> c = [|new|] List<int>()
+                        {
+                            1,
+                            2
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1,
-                        2
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1,
+                            2
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2836,35 +2836,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
+                    void M()
                     {
-                        1,
-                        2,
-                    };
+                        List<int> c = [|new|] List<int>()
+                        {
+                            1,
+                            2,
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1,
-                        2,
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1,
+                            2,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2873,27 +2873,27 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() { };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() { };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [];
+                    void M()
+                    {
+                        List<int> c = [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2902,28 +2902,28 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                    { };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                        { };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [];
+                    void M()
+                    {
+                        List<int> c = [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2932,28 +2932,28 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                    };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [];
+                    void M()
+                    {
+                        List<int> c = [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2962,29 +2962,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>() { };
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>() { };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [];
+                    void M()
+                    {
+                        List<int> c =
+                            [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -2993,30 +2993,30 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        { };
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            { };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [];
+                    void M()
+                    {
+                        List<int> c =
+                            [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3025,31 +3025,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        {
-                        };
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            {
+                            };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [];
+                    void M()
+                    {
+                        List<int> c =
+                            [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3058,29 +3058,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                        {
-                        };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                            {
+                            };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [];
+                    void M()
+                    {
+                        List<int> c = [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3089,28 +3089,28 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                        };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                            };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [];
+                    void M()
+                    {
+                        List<int> c = [];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3119,27 +3119,27 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() { 1, 2 };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() { 1, 2 };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [1, 2];
+                    void M()
+                    {
+                        List<int> c = [1, 2];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3148,28 +3148,28 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                    { 1, 2 };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                        { 1, 2 };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [1, 2];
+                    void M()
+                    {
+                        List<int> c = [1, 2];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3178,33 +3178,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                        1,
-                        2
-                    };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                            1,
+                            2
+                        };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [
-                        1,
-                        2
-                    ];
+                    void M()
+                    {
+                        List<int> c = [
+                            1,
+                            2
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3213,29 +3213,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>() { 1, 2 };
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>() { 1, 2 };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [1, 2];
+                    void M()
+                    {
+                        List<int> c =
+                            [1, 2];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3244,30 +3244,30 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        { 1, 2 };
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            { 1, 2 };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [1, 2];
+                    void M()
+                    {
+                        List<int> c =
+                            [1, 2];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3276,36 +3276,36 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        {
-                            1,
-                            2,
-                        };
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            {
+                                1,
+                                2,
+                            };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1,
-                            2,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1,
+                                2,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3314,35 +3314,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                        {
-                            1,
-                            2,
-                        };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                            {
+                                1,
+                                2,
+                            };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1,
-                            2,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1,
+                                2,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3351,33 +3351,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                            1,
-                            2
-                        };
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                                1,
+                                2
+                            };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [
-                            1,
-                            2
-                        ];
+                    void M()
+                    {
+                        List<int> c = [
+                                1,
+                                2
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3386,34 +3386,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        {
-                            1, 2
-                        };
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            {
+                                1, 2
+                            };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1, 2
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1, 2
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3422,34 +3422,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        {
-                            1, 2,
-                        };
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            {
+                                1, 2,
+                            };
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1, 2,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1, 2,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3458,28 +3458,28 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() { 1, 2 };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() { 1, 2 };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [1, 2, 3];
+                    void M()
+                    {
+                        List<int> c = [1, 2, 3];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3488,29 +3488,29 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                    { 1, 2 };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                        { 1, 2 };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [1, 2, 3];
+                    void M()
+                    {
+                        List<int> c = [1, 2, 3];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3519,35 +3519,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                        1,
-                        2
-                    };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                            1,
+                            2
+                        };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [
-                        1,
-                        2,
-                        3,
-                    ];
+                    void M()
+                    {
+                        List<int> c = [
+                            1,
+                            2,
+                            3,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3556,30 +3556,30 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>() { 1, 2 };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>() { 1, 2 };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [1, 2, 3];
+                    void M()
+                    {
+                        List<int> c =
+                            [1, 2, 3];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3588,31 +3588,31 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        { 1, 2 };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            { 1, 2 };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [1, 2, 3];
+                    void M()
+                    {
+                        List<int> c =
+                            [1, 2, 3];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3621,38 +3621,38 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        {
-                            1,
-                            2,
-                        };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            {
+                                1,
+                                2,
+                            };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1,
-                            2,
-                            3,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1,
+                                2,
+                                3,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3661,37 +3661,37 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                        {
-                            1,
-                            2,
-                        };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                            {
+                                1,
+                                2,
+                            };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1,
-                            2,
-                            3,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1,
+                                2,
+                                3,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3700,35 +3700,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                            1,
-                            2
-                        };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                                1,
+                                2
+                            };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [
-                            1,
-                            2,
-                            3,
-                        ];
+                    void M()
+                    {
+                        List<int> c = [
+                                1,
+                                2,
+                                3,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3737,34 +3737,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                        {
-                            1, 2
-                        };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                            {
+                                1, 2
+                            };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1, 2, 3
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1, 2, 3
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3773,34 +3773,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                        {
-                            1, 2,
-                        };
-                    [|c.Add(|]3);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                            {
+                                1, 2,
+                            };
+                        [|c.Add(|]3);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1, 2, 3,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1, 2, 3,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3809,34 +3809,34 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() { 1, 2 };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() { 1, 2 };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1, 2,
-                        3 +
-                            4,
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1, 2,
+                            3 +
+                                4,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3845,35 +3845,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                    { 1, 2 };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                        { 1, 2 };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1, 2,
-                        3 +
-                            4,
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1, 2,
+                            3 +
+                                4,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3882,37 +3882,37 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                        1,
-                        2
-                    };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                            1,
+                            2
+                        };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [
-                        1,
-                        2,
-                        3 +
-                            4,
-                    ];
+                    void M()
+                    {
+                        List<int> c = [
+                            1,
+                            2,
+                            3 +
+                                4,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3921,35 +3921,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>() { 1, 2 };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>() { 1, 2 };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1, 2,
-                            3 +
-                                4,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1, 2,
+                                3 +
+                                    4,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3958,36 +3958,36 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        { 1, 2 };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            { 1, 2 };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1, 2,
-                            3 +
-                                4,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1, 2,
+                                3 +
+                                    4,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -3996,40 +3996,40 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [|new|] List<int>()
-                        {
-                            1,
-                            2,
-                        };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c =
+                            [|new|] List<int>()
+                            {
+                                1,
+                                2,
+                            };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1,
-                            2,
-                            3 +
-                                4,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1,
+                                2,
+                                3 +
+                                    4,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -4038,39 +4038,39 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>()
-                        {
-                            1,
-                            2,
-                        };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>()
+                            {
+                                1,
+                                2,
+                            };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                        [
-                            1,
-                            2,
-                            3 +
-                                4,
-                        ];
+                    void M()
+                    {
+                        List<int> c =
+                            [
+                                1,
+                                2,
+                                3 +
+                                    4,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -4079,37 +4079,37 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                            1,
-                            2
-                        };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                                1,
+                                2
+                            };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [
-                            1,
-                            2,
-                            3 +
-                                4,
-                        ];
+                    void M()
+                    {
+                        List<int> c = [
+                                1,
+                                2,
+                                3 +
+                                    4,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -4118,35 +4118,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                            1, 2
-                        };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                                1, 2
+                            };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [
-                            1, 2,
-                            3 +
-                                4,
-                        ];
+                    void M()
+                    {
+                        List<int> c = [
+                                1, 2,
+                                3 +
+                                    4,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -4155,35 +4155,35 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>() {
-                            1, 2,
-                        };
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>() {
+                                1, 2,
+                            };
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [
-                            1, 2,
-                            3 +
-                                4,
-                        ];
+                    void M()
+                    {
+                        List<int> c = [
+                                1, 2,
+                                3 +
+                                    4,
+                            ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -4192,33 +4192,33 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        3 +
-                            4,
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            3 +
+                                4,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -4227,37 +4227,37 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await TestInRegularAndScriptAsync(
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c = [|new|] List<int>();
-                    [|c.Add(|]1 +
-                        2);
-                    [|c.Add(|]3 +
-                        4);
+                    void M()
+                    {
+                        List<int> c = [|new|] List<int>();
+                        [|c.Add(|]1 +
+                            2);
+                        [|c.Add(|]3 +
+                            4);
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<int> c =
-                    [
-                        1 +
-                            2,
-                        3 +
-                            4,
-                    ];
+                    void M()
+                    {
+                        List<int> c =
+                        [
+                            1 +
+                                2,
+                            3 +
+                                4,
+                        ];
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -4297,14 +4297,14 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             FixedCode = """
                 using System;
                 using System.Collections.Generic;
-                
+
                 namespace N
                 {
                     class WellKnownDiagnosticTags
                     {
                         public static string Telemetry, EditAndContinue, Unnecessary, NotConfigurable;
                     }
-                
+
                     class C
                     {
                         private static readonly string s_enforceOnBuildNeverTag;

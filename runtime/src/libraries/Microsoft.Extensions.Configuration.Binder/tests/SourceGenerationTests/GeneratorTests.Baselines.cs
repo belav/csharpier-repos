@@ -158,32 +158,32 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Bind_Instance()
         {
             string source = """
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass configObj = new();
-                                config.Bind(configObj);
-                            }
-
-                            public class MyClass
-                            {
-                                public string? MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                                public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-                            }
-
-                            public class MyClass2 { }
+                            MyClass configObj = new();
+                            config.Bind(configObj);
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string? MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                            public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+                        }
+
+                        public class MyClass2 { }
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "Bind_Instance.generated.txt",
@@ -196,32 +196,32 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Bind_Instance_BinderOptions()
         {
             string source = """
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass configObj = new();
-                                config.Bind(configObj, options => { });
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                                public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-                            }
-
-                            public class MyClass2 { }
+                            MyClass configObj = new();
+                            config.Bind(configObj, options => { });
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                            public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+                        }
+
+                        public class MyClass2 { }
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "Bind_Instance_BinderOptions.generated.txt",
@@ -234,32 +234,32 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Bind_Key_Instance()
         {
             string source = """
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass configObj = new();
-                                config.Bind("key", configObj);
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                                public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-                            }
-
-                            public class MyClass2 { }
+                            MyClass configObj = new();
+                            config.Bind("key", configObj);
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                            public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+                        }
+
+                        public class MyClass2 { }
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "Bind_Key_Instance.generated.txt",
@@ -400,44 +400,44 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Get_T()
         {
             string source = """
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass configObj = config.Get<MyClass>();
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public int[] MyArray { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                            }
-
-                            public class MyClass2
-                            {
-                                public int MyInt { get; set; }
-                            }
-
-                            public class MyClass3
-                            {
-                                public int MyInt { get; set; }
-                            }
-
-                            public class MyClass4
-                            {
-                                public int MyInt { get; set; }
-                            }
+                            MyClass configObj = config.Get<MyClass>();
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public int[] MyArray { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                        }
+
+                        public class MyClass2
+                        {
+                            public int MyInt { get; set; }
+                        }
+
+                        public class MyClass3
+                        {
+                            public int MyInt { get; set; }
+                        }
+
+                        public class MyClass4
+                        {
+                            public int MyInt { get; set; }
+                        }
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "Get_T.generated.txt",
@@ -450,44 +450,44 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Get_T_BinderOptions()
         {
             string source = """
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass configObj = config.Get<MyClass>(binderOptions => { });
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public int[] MyArray { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                            }
-
-                            public class MyClass2
-                            {
-                                public int MyInt { get; set; }
-                            }
-
-                            public class MyClass3
-                            {
-                                public int MyInt { get; set; }
-                            }
-
-                            public class MyClass4
-                            {
-                                public int MyInt { get; set; }
-                            }
+                            MyClass configObj = config.Get<MyClass>(binderOptions => { });
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public int[] MyArray { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                        }
+
+                        public class MyClass2
+                        {
+                            public int MyInt { get; set; }
+                        }
+
+                        public class MyClass3
+                        {
+                            public int MyInt { get; set; }
+                        }
+
+                        public class MyClass4
+                        {
+                            public int MyInt { get; set; }
+                        }
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "Get_T_BinderOptions.generated.txt",
@@ -500,44 +500,44 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Get_TypeOf()
         {
             string source = """
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass2 configObj = (MyClass2)config.Get(typeof(MyClass2));
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public int[] MyArray { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                            }
-
-                            public class MyClass2
-                            {
-                                public int MyInt { get; set; }
-                            }
-
-                            public class MyClass3
-                            {
-                                public int MyInt { get; set; }
-                            }
-
-                            public class MyClass4
-                            {
-                                public int MyInt { get; set; }
-                            }
+                            MyClass2 configObj = (MyClass2)config.Get(typeof(MyClass2));
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public int[] MyArray { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                        }
+
+                        public class MyClass2
+                        {
+                            public int MyInt { get; set; }
+                        }
+
+                        public class MyClass3
+                        {
+                            public int MyInt { get; set; }
+                        }
+
+                        public class MyClass4
+                        {
+                            public int MyInt { get; set; }
+                        }
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "Get_TypeOf.generated.txt",
@@ -550,44 +550,44 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Get_TypeOf_BinderOptions()
         {
             string source = """
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                config.Get(typeof(MyClass2), binderOptions => { });
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public int[] MyArray { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                            }
-
-                            public class MyClass2
-                            {
-                                public int MyInt { get; set; }
-                            }
-
-                            public class MyClass3
-                            {
-                                public int MyInt { get; set; }
-                            }
-
-                            public class MyClass4
-                            {
-                                public int MyInt { get; set; }
-                            }
+                            config.Get(typeof(MyClass2), binderOptions => { });
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public int[] MyArray { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                        }
+
+                        public class MyClass2
+                        {
+                            public int MyInt { get; set; }
+                        }
+
+                        public class MyClass3
+                        {
+                            public int MyInt { get; set; }
+                        }
+
+                        public class MyClass4
+                        {
+                            public int MyInt { get; set; }
+                        }
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "Get_TypeOf_BinderOptions.generated.txt",
@@ -640,19 +640,19 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task GetValue_T_Key()
         {
             string source = """
-                        using Microsoft.Extensions.Configuration;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                config.GetValue<int>("key");
-                            }
+                            config.GetValue<int>("key");
                         }
-                    """;
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "GetValue_T_Key.generated.txt",
@@ -665,21 +665,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task GetValue_T_Key_DefaultValue()
         {
             string source = """
-                        using System.Collections.Generic;
-                        using System.Globalization;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using System.Globalization;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                config.GetValue<int>("key", 5);
-                            }
+                            config.GetValue<int>("key", 5);
                         }
-                    """;
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "GetValue_T_Key_DefaultValue.generated.txt",
@@ -692,19 +692,19 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task GetValue_TypeOf_Key()
         {
             string source = """
-                        using Microsoft.Extensions.Configuration;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                config.GetValue(typeof(bool?), "key");
-                            }
+                            config.GetValue(typeof(bool?), "key");
                         }
-                    """;
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "GetValue_TypeOf_Key.generated.txt",
@@ -717,20 +717,20 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task GetValue_TypeOf_Key_DefaultValue()
         {
             string source = """
-                        using System.Globalization;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Globalization;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                config.GetValue(typeof(CultureInfo), "key", CultureInfo.InvariantCulture);
-                            }
+                            config.GetValue(typeof(CultureInfo), "key", CultureInfo.InvariantCulture);
                         }
-                    """;
+                    }
+                """;
 
             await VerifyAgainstBaselineUsingFile(
                 "GetValue_TypeOf_Key_DefaultValue.generated.txt",
@@ -782,57 +782,57 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Primitives()
         {
             string source = """
-                        using System;
-                        using System.Globalization;
-                        using Microsoft.Extensions.Configuration;
+                using System;
+                using System.Globalization;
+                using Microsoft.Extensions.Configuration;
 
-                        public class Program
-                        {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                public class Program
+                {
+                    public static void Main()
+                    {
+                        ConfigurationBuilder configurationBuilder = new();
+                        IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass obj = new();
-                                config.Bind(obj);
-                            }
+                        MyClass obj = new();
+                        config.Bind(obj);
+                    }
 
-                            public class MyClass
-                            {
-                                public bool Prop0 { get; set; }
-                                public byte Prop1 { get; set; }
-                                public sbyte Prop2 { get; set; }
-                                public char Prop3 { get; set; }
-                                public double Prop4 { get; set; }
-                                public string Prop5 { get; set; }
-                                public int Prop6 { get; set; }
-                                public short Prop8 { get; set; }
-                                public long Prop9 { get; set; }
-                                public float Prop10 { get; set; }
-                                public ushort Prop13 { get; set; }
-                                public uint Prop14 { get; set; }
-                                public ulong Prop15 { get; set; }
-                                public object Prop16 { get; set; }
-                                public CultureInfo Prop17 { get; set; }
-                                public DateTime Prop19 { get; set; }
-                                public DateTimeOffset Prop20 { get; set; }
-                                public decimal Prop21 { get; set; }
-                                public TimeSpan Prop23 { get; set; }
-                                public Guid Prop24 { get; set; }
-                                public Uri Prop25 { get; set; }
-                                public Version Prop26 { get; set; }
-                                public DayOfWeek Prop27 { get; set; }
-                                public Int128 Prop7 { get; set; }
-                                public Half Prop11 { get; set; }
-                                public UInt128 Prop12 { get; set; }
-                                public DateOnly Prop18 { get; set; }
-                                public TimeOnly Prop22 { get; set; }
-                                public byte[] Prop28 { get; set; }
-                                public int Prop29 { get; set; }
-                                public DateTime Prop30 { get; set; }
-                            }
-                        }
-                        """;
+                    public class MyClass
+                    {
+                        public bool Prop0 { get; set; }
+                        public byte Prop1 { get; set; }
+                        public sbyte Prop2 { get; set; }
+                        public char Prop3 { get; set; }
+                        public double Prop4 { get; set; }
+                        public string Prop5 { get; set; }
+                        public int Prop6 { get; set; }
+                        public short Prop8 { get; set; }
+                        public long Prop9 { get; set; }
+                        public float Prop10 { get; set; }
+                        public ushort Prop13 { get; set; }
+                        public uint Prop14 { get; set; }
+                        public ulong Prop15 { get; set; }
+                        public object Prop16 { get; set; }
+                        public CultureInfo Prop17 { get; set; }
+                        public DateTime Prop19 { get; set; }
+                        public DateTimeOffset Prop20 { get; set; }
+                        public decimal Prop21 { get; set; }
+                        public TimeSpan Prop23 { get; set; }
+                        public Guid Prop24 { get; set; }
+                        public Uri Prop25 { get; set; }
+                        public Version Prop26 { get; set; }
+                        public DayOfWeek Prop27 { get; set; }
+                        public Int128 Prop7 { get; set; }
+                        public Half Prop11 { get; set; }
+                        public UInt128 Prop12 { get; set; }
+                        public DateOnly Prop18 { get; set; }
+                        public TimeOnly Prop22 { get; set; }
+                        public byte[] Prop28 { get; set; }
+                        public int Prop29 { get; set; }
+                        public DateTime Prop30 { get; set; }
+                    }
+                }
+                """;
 
             await VerifyAgainstBaselineUsingFile("Primitives.generated.txt", source);
         }
@@ -911,13 +911,13 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             string source = """
                 using System.Collections.Generic;
                 using Microsoft.Extensions.Configuration;
-                
+
                 public class Program
                 {
-                	public static void Main()
-                	{
-                		ConfigurationBuilder configurationBuilder = new();
-                		IConfiguration configuration = configurationBuilder.Build();
+                    public static void Main()
+                    {
+                        ConfigurationBuilder configurationBuilder = new();
+                        IConfiguration configuration = configurationBuilder.Build();
 
                         TypeWithNoMembers obj = new();
                         configuration.Bind(obj);

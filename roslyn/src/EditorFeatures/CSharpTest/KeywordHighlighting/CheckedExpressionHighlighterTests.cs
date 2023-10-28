@@ -22,26 +22,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        short x = short.MaxValue;
-                        short y = short.MaxValue;
-                        int z;
-                        try
+                        void M()
                         {
-                            z = {|Cursor:[|checked|]|}((short)(x + y));
-                        }
-                        catch (OverflowException e)
-                        {
-                            z = -1;
-                        }
+                            short x = short.MaxValue;
+                            short y = short.MaxValue;
+                            int z;
+                            try
+                            {
+                                z = {|Cursor:[|checked|]|}((short)(x + y));
+                            }
+                            catch (OverflowException e)
+                            {
+                                z = -1;
+                            }
 
-                        return z;
+                            return z;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -50,17 +50,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        short x = short.MaxValue;
-                        short y = short.MaxValue;
-                        int z = {|Cursor:[|unchecked|]|}((short)(x + y));
-                        return z;
+                        void M()
+                        {
+                            short x = short.MaxValue;
+                            short y = short.MaxValue;
+                            int z = {|Cursor:[|unchecked|]|}((short)(x + y));
+                            return z;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

@@ -25,11 +25,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     private const string s_testMarkup =
         """
 
-        static class Test
-        {
-            public static void M([System.Diagnostics.CodeAnalysis.StringSyntax("C#-test")] string code) { }
-        }
-        """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp;
+            static class Test
+            {
+                public static void M([System.Diagnostics.CodeAnalysis.StringSyntax("C#-test")] string code) { }
+            }
+            """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp;
 
     protected async Task TestEmbeddedCSharpAsync(
         string code,
@@ -105,10 +105,10 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-            }
-            """,
+                class D
+                {
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -123,11 +123,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                $$
-            }
-            """,
+                class D
+                {
+                    $$
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -144,10 +144,10 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            cla$$ss D
-            {
-            }
-            """,
+                cla$$ss D
+                {
+                }
+                """,
             testHost,
             Keyword("cla"),
             TestCodeMarkdown("$$"),
@@ -164,11 +164,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                [|System.Int32 i;|]
-            }
-            """,
+                class D
+                {
+                    [|System.Int32 i;|]
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -192,11 +192,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                {|Example:System.Int32 i;|}
-            }
-            """,
+                class D
+                {
+                    {|Example:System.Int32 i;|}
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -220,11 +220,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                [|System.Int32 i;
-            }
-            """,
+                class D
+                {
+                    [|System.Int32 i;
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -247,11 +247,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                System.Int32 i;|]
-            }
-            """,
+                class D
+                {
+                    System.Int32 i;|]
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -274,11 +274,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                {|Example:System.Int32 i;
-            }
-            """,
+                class D
+                {
+                    {|Example:System.Int32 i;
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -301,11 +301,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                System.Int32 i;|}
-            }
-            """,
+                class D
+                {
+                    System.Int32 i;|}
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -328,11 +328,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                {|Example System.Int32 i;|}
-            }
-            """,
+                class D
+                {
+                    {|Example System.Int32 i;|}
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -359,11 +359,11 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                Sys[|tem.In$$t3|]2 i;
-            }
-            """,
+                class D
+                {
+                    Sys[|tem.In$$t3|]2 i;
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -391,12 +391,12 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """
-            class D
-            {
-                // Embedded escapes not classified.
-                string s = "\r\n";
-            }
-            """,
+                class D
+                {
+                    // Embedded escapes not classified.
+                    string s = "\r\n";
+                }
+                """,
             testHost,
             Keyword("class"),
             TestCode(" "),
@@ -422,13 +422,13 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
         await TestEmbeddedCSharpAsync(
             """"
-            class D
-            {
-                string s = """
-                    Goo
-                    """;
-            }
-            """",
+                class D
+                {
+                    string s = """
+                        Goo
+                        """;
+                }
+                """",
             testHost,
             Keyword("class"),
             TestCode(" "),

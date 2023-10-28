@@ -29,23 +29,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberN
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = new { [||]this.GetType() };
+                        void M()
+                        {
+                            var v = new { [||]this.GetType() };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = new { {|Rename:Type|} = this.GetType() };
+                        void M()
+                        {
+                            var v = new { {|Rename:Type|} = this.GetType() };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -54,23 +54,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberN
         {
             await TestInRegularAndScript1Async(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = new { Type = 1, [||]this.GetType() };
+                        void M()
+                        {
+                            var v = new { Type = 1, [||]this.GetType() };
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var v = new { Type = 1, {|Rename:Type1|} = this.GetType() };
+                        void M()
+                        {
+                            var v = new { Type = 1, {|Rename:Type1|} = this.GetType() };
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -79,23 +79,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberN
         {
             await TestInRegularAndScript1Async(
                 """
-            class C
-            {
-                void M()
-                {
-                    var v = new { {|FixAllInDocument:|}new { this.GetType(), this.ToString() } };
-                }
-            }
-            """,
+                    class C
+                    {
+                        void M()
+                        {
+                            var v = new { {|FixAllInDocument:|}new { this.GetType(), this.ToString() } };
+                        }
+                    }
+                    """,
                 """
-            class C
-            {
-                void M()
-                {
-                    var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
-                }
-            }
-            """
+                    class C
+                    {
+                        void M()
+                        {
+                            var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
+                        }
+                    }
+                    """
             );
         }
 
@@ -104,23 +104,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberN
         {
             await TestInRegularAndScript1Async(
                 """
-            class C
-            {
-                void M()
-                {
-                    var v = new { new { {|FixAllInDocument:|}this.GetType(), this.ToString() } };
-                }
-            }
-            """,
+                    class C
+                    {
+                        void M()
+                        {
+                            var v = new { new { {|FixAllInDocument:|}this.GetType(), this.ToString() } };
+                        }
+                    }
+                    """,
                 """
-            class C
-            {
-                void M()
-                {
-                    var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
-                }
-            }
-            """
+                    class C
+                    {
+                        void M()
+                        {
+                            var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
+                        }
+                    }
+                    """
             );
         }
 
@@ -129,23 +129,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberN
         {
             await TestInRegularAndScript1Async(
                 """
-            class C
-            {
-                void M()
-                {
-                    var v = new { {|FixAllInDocument:|}new { this.GetType(), this.GetType() } };
-                }
-            }
-            """,
+                    class C
+                    {
+                        void M()
+                        {
+                            var v = new { {|FixAllInDocument:|}new { this.GetType(), this.GetType() } };
+                        }
+                    }
+                    """,
                 """
-            class C
-            {
-                void M()
-                {
-                    var v = new { Value = new { Type = this.GetType(), Type1 = this.GetType() } };
-                }
-            }
-            """
+                    class C
+                    {
+                        void M()
+                        {
+                            var v = new { Value = new { Type = this.GetType(), Type1 = this.GetType() } };
+                        }
+                    }
+                    """
             );
         }
     }

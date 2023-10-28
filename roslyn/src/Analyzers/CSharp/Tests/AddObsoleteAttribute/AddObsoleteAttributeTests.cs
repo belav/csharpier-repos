@@ -22,20 +22,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [System.Obsolete]
-                class Base {}
+                    [System.Obsolete]
+                    class Base {}
 
-                class Derived : {|CS0612:Base|} {
-                }
-                """,
+                    class Derived : {|CS0612:Base|} {
+                    }
+                    """,
                 """
-                [System.Obsolete]
-                class Base {}
+                    [System.Obsolete]
+                    class Base {}
 
-                [System.Obsolete]
-                class Derived : Base {
-                }
-                """
+                    [System.Obsolete]
+                    class Derived : Base {
+                    }
+                    """
             );
         }
 
@@ -44,20 +44,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [System.Obsolete("message")]
-                class Base {}
+                    [System.Obsolete("message")]
+                    class Base {}
 
-                class Derived : {|CS0618:Base|} {
-                }
-                """,
+                    class Derived : {|CS0618:Base|} {
+                    }
+                    """,
                 """
-                [System.Obsolete("message")]
-                class Base {}
+                    [System.Obsolete("message")]
+                    class Base {}
 
-                [System.Obsolete]
-                class Derived : Base {
-                }
-                """
+                    [System.Obsolete]
+                    class Derived : Base {
+                    }
+                    """
             );
         }
 
@@ -66,20 +66,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [System.Obsolete("message", error: false)]
-                class Base {}
+                    [System.Obsolete("message", error: false)]
+                    class Base {}
 
-                class Derived : {|CS0618:Base|} {
-                }
-                """,
+                    class Derived : {|CS0618:Base|} {
+                    }
+                    """,
                 """
-                [System.Obsolete("message", error: false)]
-                class Base {}
+                    [System.Obsolete("message", error: false)]
+                    class Base {}
 
-                [System.Obsolete]
-                class Derived : Base {
-                }
-                """
+                    [System.Obsolete]
+                    class Derived : Base {
+                    }
+                    """
             );
         }
 
@@ -101,22 +101,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
-                    int i = {|CS0612:Base|}.i;
-                }
-                """,
-                """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
                     [System.Obsolete]
-                    int i = Base.i;
-                }
+                    class Base { public static int i; }
+
+                    class Derived {
+                        int i = {|CS0612:Base|}.i;
+                    }
+                    """,
                 """
+                    [System.Obsolete]
+                    class Base { public static int i; }
+
+                    class Derived {
+                        [System.Obsolete]
+                        int i = Base.i;
+                    }
+                    """
             );
         }
 
@@ -125,26 +125,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
-                    void Goo() {
-                        int i = {|CS0612:Base|}.i;
-                    }
-                }
-                """,
-                """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
                     [System.Obsolete]
-                    void Goo() {
-                        int i = Base.i;
+                    class Base { public static int i; }
+
+                    class Derived {
+                        void Goo() {
+                            int i = {|CS0612:Base|}.i;
+                        }
                     }
-                }
+                    """,
                 """
+                    [System.Obsolete]
+                    class Base { public static int i; }
+
+                    class Derived {
+                        [System.Obsolete]
+                        void Goo() {
+                            int i = Base.i;
+                        }
+                    }
+                    """
             );
         }
 
@@ -153,26 +153,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Base { 
-                    [System.Obsolete]
-                    protected virtual void ObMethod() { }
-                }
+                    class Base {
+                        [System.Obsolete]
+                        protected virtual void ObMethod() { }
+                    }
 
-                class Derived : Base {
-                    protected override void {|CS0672:ObMethod|}() { }
-                }
-                """,
+                    class Derived : Base {
+                        protected override void {|CS0672:ObMethod|}() { }
+                    }
+                    """,
                 """
-                class Base { 
-                    [System.Obsolete]
-                    protected virtual void ObMethod() { }
-                }
+                    class Base {
+                        [System.Obsolete]
+                        protected virtual void ObMethod() { }
+                    }
 
-                class Derived : Base {
-                    [System.Obsolete]
-                    protected override void ObMethod() { }
-                }
-                """
+                    class Derived : Base {
+                        [System.Obsolete]
+                        protected override void ObMethod() { }
+                    }
+                    """
             );
         }
 
@@ -181,28 +181,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
-                    void Goo() {
-                        int i = {|CS0612:Base|}.i;
-                        int j = {|CS0612:Base|}.i;
-                    }
-                }
-                """,
-                """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
                     [System.Obsolete]
-                    void Goo() {
-                        int i = Base.i;
-                        int j = Base.i;
+                    class Base { public static int i; }
+
+                    class Derived {
+                        void Goo() {
+                            int i = {|CS0612:Base|}.i;
+                            int j = {|CS0612:Base|}.i;
+                        }
                     }
-                }
+                    """,
                 """
+                    [System.Obsolete]
+                    class Base { public static int i; }
+
+                    class Derived {
+                        [System.Obsolete]
+                        void Goo() {
+                            int i = Base.i;
+                            int j = Base.i;
+                        }
+                    }
+                    """
             );
         }
 
@@ -211,28 +211,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
-                    void Goo() {
-                        int i = {|CS0612:Base|}.i;
-                        int j = {|CS0612:Base|}.i;
-                    }
-                }
-                """,
-                """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
                     [System.Obsolete]
-                    void Goo() {
-                        int i = Base.i;
-                        int j = Base.i;
+                    class Base { public static int i; }
+
+                    class Derived {
+                        void Goo() {
+                            int i = {|CS0612:Base|}.i;
+                            int j = {|CS0612:Base|}.i;
+                        }
                     }
-                }
+                    """,
                 """
+                    [System.Obsolete]
+                    class Base { public static int i; }
+
+                    class Derived {
+                        [System.Obsolete]
+                        void Goo() {
+                            int i = Base.i;
+                            int j = Base.i;
+                        }
+                    }
+                    """
             );
         }
 
@@ -241,35 +241,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
-                    void Goo() {
-                        int i = {|CS0612:Base|}.i;
-                    }
-
-                    void Bar() {
-                        int j = {|CS0612:Base|}.i;
-                    }
-                }
-                """,
-                """
-                [System.Obsolete]
-                class Base { public static int i; }
-
-                class Derived {
                     [System.Obsolete]
-                    void Goo() {
-                        int i = Base.i;
-                    }
+                    class Base { public static int i; }
 
-                    [System.Obsolete]
-                    void Bar() {
-                        int j = Base.i;
+                    class Derived {
+                        void Goo() {
+                            int i = {|CS0612:Base|}.i;
+                        }
+
+                        void Bar() {
+                            int j = {|CS0612:Base|}.i;
+                        }
                     }
-                }
+                    """,
                 """
+                    [System.Obsolete]
+                    class Base { public static int i; }
+
+                    class Derived {
+                        [System.Obsolete]
+                        void Goo() {
+                            int i = Base.i;
+                        }
+
+                        [System.Obsolete]
+                        void Bar() {
+                            int j = Base.i;
+                        }
+                    }
+                    """
             );
         }
 
@@ -278,40 +278,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Collection : System.Collections.Generic.IEnumerable<int> {
-                    [System.Obsolete]
-                    public void Add(int i) { }
+                    class Collection : System.Collections.Generic.IEnumerable<int> {
+                        [System.Obsolete]
+                        public void Add(int i) { }
 
-                    public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
-                    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
-                }
-
-                class Derived {
-                    void Goo() {
-                        var c = new Collection {
-                            {|CS1064:1|}, {|CS1064:2|}, {|CS1064:3|}
-                        };
+                        public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
+                        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
                     }
-                }
-                """,
-                """
-                class Collection : System.Collections.Generic.IEnumerable<int> {
-                    [System.Obsolete]
-                    public void Add(int i) { }
 
-                    public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
-                    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
-                }
-
-                class Derived {
-                    [System.Obsolete]
-                    void Goo() {
-                        var c = new Collection {
-                            1, 2, 3
-                        };
+                    class Derived {
+                        void Goo() {
+                            var c = new Collection {
+                                {|CS1064:1|}, {|CS1064:2|}, {|CS1064:3|}
+                            };
+                        }
                     }
-                }
+                    """,
                 """
+                    class Collection : System.Collections.Generic.IEnumerable<int> {
+                        [System.Obsolete]
+                        public void Add(int i) { }
+
+                        public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
+                        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
+                    }
+
+                    class Derived {
+                        [System.Obsolete]
+                        void Goo() {
+                            var c = new Collection {
+                                1, 2, 3
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -320,40 +320,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Collection : System.Collections.Generic.IEnumerable<int> {
-                    [System.Obsolete("message")]
-                    public void Add(int i) { }
+                    class Collection : System.Collections.Generic.IEnumerable<int> {
+                        [System.Obsolete("message")]
+                        public void Add(int i) { }
 
-                    public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
-                    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
-                }
-
-                class Derived {
-                    void Goo() {
-                        var c = new Collection {
-                            {|CS1062:1|}, {|CS1062:2|}, {|CS1062:3|}
-                        };
+                        public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
+                        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
                     }
-                }
-                """,
-                """
-                class Collection : System.Collections.Generic.IEnumerable<int> {
-                    [System.Obsolete("message")]
-                    public void Add(int i) { }
 
-                    public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
-                    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
-                }
-
-                class Derived {
-                    [System.Obsolete]
-                    void Goo() {
-                        var c = new Collection {
-                            1, 2, 3
-                        };
+                    class Derived {
+                        void Goo() {
+                            var c = new Collection {
+                                {|CS1062:1|}, {|CS1062:2|}, {|CS1062:3|}
+                            };
+                        }
                     }
-                }
+                    """,
                 """
+                    class Collection : System.Collections.Generic.IEnumerable<int> {
+                        [System.Obsolete("message")]
+                        public void Add(int i) { }
+
+                        public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
+                        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
+                    }
+
+                    class Derived {
+                        [System.Obsolete]
+                        void Goo() {
+                            var c = new Collection {
+                                1, 2, 3
+                            };
+                        }
+                    }
+                    """
             );
         }
 
@@ -362,40 +362,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                class Collection : System.Collections.Generic.IEnumerable<int> {
-                    [System.Obsolete("message", error: false)]
-                    public void Add(int i) { }
+                    class Collection : System.Collections.Generic.IEnumerable<int> {
+                        [System.Obsolete("message", error: false)]
+                        public void Add(int i) { }
 
-                    public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
-                    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
-                }
-
-                class Derived {
-                    void Goo() {
-                        var c = new Collection {
-                            {|CS1062:1|}, {|CS1062:2|}, {|CS1062:3|}
-                        };
+                        public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
+                        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
                     }
-                }
-                """,
-                """
-                class Collection : System.Collections.Generic.IEnumerable<int> {
-                    [System.Obsolete("message", error: false)]
-                    public void Add(int i) { }
 
-                    public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
-                    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
-                }
-
-                class Derived {
-                    [System.Obsolete]
-                    void Goo() {
-                        var c = new Collection {
-                            1, 2, 3
-                        };
+                    class Derived {
+                        void Goo() {
+                            var c = new Collection {
+                                {|CS1062:1|}, {|CS1062:2|}, {|CS1062:3|}
+                            };
+                        }
                     }
-                }
+                    """,
                 """
+                    class Collection : System.Collections.Generic.IEnumerable<int> {
+                        [System.Obsolete("message", error: false)]
+                        public void Add(int i) { }
+
+                        public System.Collections.Generic.IEnumerator<int> GetEnumerator() => throw null;
+                        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw null;
+                    }
+
+                    class Derived {
+                        [System.Obsolete]
+                        void Goo() {
+                            var c = new Collection {
+                                1, 2, 3
+                            };
+                        }
+                    }
+                    """
             );
         }
 

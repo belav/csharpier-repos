@@ -55,22 +55,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
         {
             TestCopyPaste(
                 """
-                Debug.Assert(adjustment != 0, $"Indentation with[||]{|Copy:|} no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
+                    Debug.Assert(adjustment != 0, $"Indentation with[||]{|Copy:|} no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
 
-                """,
+                    """,
                 """
-                Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
+                    Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
 
-                """,
+                    """,
                 """
-                Debug.Assert(adjustment != 0, $"Indentation with no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
-                Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
-                
-                """,
-                """
-                Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
+                    Debug.Assert(adjustment != 0, $"Indentation with no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
+                    Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
 
-                """,
+                    """,
+                """
+                    Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
+
+                    """,
                 mockCopyPasteService: false
             );
         }

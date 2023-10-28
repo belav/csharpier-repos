@@ -35,7 +35,8 @@ extern alias MonoSecurity;
 using MX = Mono.Security.X509;
 #endif
 
-using System.Security.Permissions;using MX = MonoSecurity::Mono.Security.X509;
+using System.Security.Permissions;
+using MX = MonoSecurity::Mono.Security.X509;
 
 namespace System.Security.Cryptography.X509Certificates
 {

@@ -153,23 +153,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"\uD83D\uDC69";
+                    void M()
+                    {
+                        var v = [||]$"\uD83D\uDC69";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""👩""";
+                    void M()
+                    {
+                        var v = $"""👩""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -178,14 +178,14 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"\uD83D{0}\uDC69";
+                    void M()
+                    {
+                        var v = [||]$"\uD83D{0}\uDC69";
+                    }
                 }
-            }
-            """
+                """
         );
     }
 
@@ -290,23 +290,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"a";
+                    void M()
+                    {
+                        var v = [||]$"a";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""a""";
+                    void M()
+                    {
+                        var v = $"""a""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -315,23 +315,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{{";
+                    void M()
+                    {
+                        var v = [||]$"{{";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $$"""{""";
+                    void M()
+                    {
+                        var v = $$"""{""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -340,23 +340,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"}}";
+                    void M()
+                    {
+                        var v = [||]$"}}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $$"""}""";
+                    void M()
+                    {
+                        var v = $$"""}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -365,23 +365,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{{a{{";
+                    void M()
+                    {
+                        var v = [||]$"{{a{{";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $$"""{a{""";
+                    void M()
+                    {
+                        var v = $$"""{a{""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -390,23 +390,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{{a}}";
+                    void M()
+                    {
+                        var v = [||]$"{{a}}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $$"""{a}""";
+                    void M()
+                    {
+                        var v = $$"""{a}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -415,23 +415,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{{{{";
+                    void M()
+                    {
+                        var v = [||]$"{{{{";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $$$"""{{""";
+                    void M()
+                    {
+                        var v = $$$"""{{""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -440,23 +440,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"}}}}";
+                    void M()
+                    {
+                        var v = [||]$"}}}}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $$$"""}}""";
+                    void M()
+                    {
+                        var v = $$$"""}}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -465,23 +465,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{{}}}}";
+                    void M()
+                    {
+                        var v = [||]$"{{}}}}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $$$"""{}}""";
+                    void M()
+                    {
+                        var v = $$$"""{}}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -490,23 +490,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"a{0}b";
+                    void M()
+                    {
+                        var v = [||]$"a{0}b";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""a{0}b""";
+                    void M()
+                    {
+                        var v = $"""a{0}b""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -515,23 +515,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{0}";
+                    void M()
+                    {
+                        var v = [||]$"{0}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""{0}""";
+                    void M()
+                    {
+                        var v = $"""{0}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -540,23 +540,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{0:dddd}";
+                    void M()
+                    {
+                        var v = [||]$"{0:dddd}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""{0:dddd}""";
+                    void M()
+                    {
+                        var v = $"""{0:dddd}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -565,23 +565,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{0:\u0041}";
+                    void M()
+                    {
+                        var v = [||]$"{0:\u0041}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""{0:A}""";
+                    void M()
+                    {
+                        var v = $"""{0:A}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -590,23 +590,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{0}ab{1}";
+                    void M()
+                    {
+                        var v = [||]$"{0}ab{1}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""{0}ab{1}""";
+                    void M()
+                    {
+                        var v = $"""{0}ab{1}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -615,23 +615,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"{0}\"{1}";
+                    void M()
+                    {
+                        var v = [||]$"{0}\"{1}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""{0}"{1}""";
+                    void M()
+                    {
+                        var v = $"""{0}"{1}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -640,23 +640,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{0}""{1}";
+                    void M()
+                    {
+                        var v = [||]$@"{0}""{1}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""{0}"{1}""";
+                    void M()
+                    {
+                        var v = $"""{0}"{1}""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -665,29 +665,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{0 +
-                        1}""{1 +
-                        2}";
+                    void M()
+                    {
+                        var v = [||]$@"{0 +
+                            1}""{1 +
+                            2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 +
-                            1}"{1 +
-                            2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 +
+                                1}"{1 +
+                                2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -696,29 +696,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{0 +
-            1}""{1 +
-            2}";
+                    void M()
+                    {
+                        var v = [||]$@"{0 +
+                1}""{1 +
+                2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 +
-                        1}"{1 +
-                        2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 +
+                            1}"{1 +
+                            2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -727,29 +727,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"A{0 +
-                        1}""{1 +
-                        2}";
+                    void M()
+                    {
+                        var v = [||]$@"A{0 +
+                            1}""{1 +
+                            2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        A{0 +
-                            1}"{1 +
-                            2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            A{0 +
+                                1}"{1 +
+                                2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -758,29 +758,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{0 +
-                1}""{1 +
-                2}";
+                    void M()
+                    {
+                        var v = [||]$@"{0 +
+                    1}""{1 +
+                    2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 +
-                        1}"{1 +
-                        2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 +
+                            1}"{1 +
+                            2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -789,29 +789,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{0 +
-                    1}""{1 +
-                    2}";
+                    void M()
+                    {
+                        var v = [||]$@"{0 +
+                        1}""{1 +
+                        2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 +
-                        1}"{1 +
-                        2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 +
+                            1}"{1 +
+                            2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -820,29 +820,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{0 +
-                        1}""{1 +
-                        2}";
+                    void M()
+                    {
+                        var v = [||]$@"{0 +
+                            1}""{1 +
+                            2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 +
-                            1}"{1 +
-                            2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 +
+                                1}"{1 +
+                                2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -851,29 +851,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{0 +
-                            1}""{1 +
-                            2}";
+                    void M()
+                    {
+                        var v = [||]$@"{0 +
+                                1}""{1 +
+                                2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 +
-                                1}"{1 +
-                                2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 +
+                                    1}"{1 +
+                                    2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -882,29 +882,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{
-                        0 + 1}""{
-                        1 + 2}";
+                    void M()
+                    {
+                        var v = [||]$@"{
+                            0 + 1}""{
+                            1 + 2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {
-                            0 + 1}"{
-                            1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {
+                                0 + 1}"{
+                                1 + 2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -913,29 +913,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        {0 + 1}""
-                        {1 + 2}";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            {0 + 1}""
+                            {1 + 2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
+                    void M()
+                    {
+                        var v = $"""
 
-                                    {0 + 1}"
-                                    {1 + 2}
-                        """;
+                                        {0 + 1}"
+                                        {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -944,28 +944,28 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        {0 + 1}""
-                        {1 + 2}";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            {0 + 1}""
+                            {1 + 2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 + 1}"
-                        {1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 + 1}"
+                            {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -975,29 +975,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        {0 + 1}""
-                        {1 + 2}
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            {0 + 1}""
+                            {1 + 2}
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 + 1}"
-                        {1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 + 1}"
+                            {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -1007,28 +1007,28 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-            {0 + 1}""
-            {1 + 2}";
+                    void M()
+                    {
+                        var v = [||]$@"
+                {0 + 1}""
+                {1 + 2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 + 1}"
-                        {1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 + 1}"
+                            {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -1038,29 +1038,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-            {0 + 1}""
-            {1 + 2}
-            ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                {0 + 1}""
+                {1 + 2}
+                ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 + 1}"
-                        {1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 + 1}"
+                            {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -1070,30 +1070,30 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-            [||]$@"
-            {0 + 1}""
-            {1 + 2}";
+                    void M()
+                    {
+                        var v =
+                [||]$@"
+                {0 + 1}""
+                {1 + 2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-                        $"""
-                        {0 + 1}"
-                        {1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v =
+                            $"""
+                            {0 + 1}"
+                            {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -1103,31 +1103,31 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-            [||]$@"
-            {0 + 1}""
-            {1 + 2}
-            ";
+                    void M()
+                    {
+                        var v =
+                [||]$@"
+                {0 + 1}""
+                {1 + 2}
+                ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-                        $"""
-                        {0 + 1}"
-                        {1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v =
+                            $"""
+                            {0 + 1}"
+                            {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -1137,37 +1137,37 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-            [||]$@"{
-                0 + 1
-            }""
-            {
-                1 + 2
-            }";
-                }
-            }
-            """,
-            """"
-            public class C
-            {
-                void M()
+                    void M()
+                    {
+                        var v =
+                [||]$@"{
+                    0 + 1
+                }""
                 {
-                    var v =
-                        $"""
-                        {
-                            0 + 1
-                        }"
-                        {
-                            1 + 2
-                        }
-                        """;
+                    1 + 2
+                }";
+                    }
                 }
-            }
+                """,
             """"
+                public class C
+                {
+                    void M()
+                    {
+                        var v =
+                            $"""
+                            {
+                                0 + 1
+                            }"
+                            {
+                                1 + 2
+                            }
+                            """;
+                    }
+                }
+                """"
         );
     }
 
@@ -1176,29 +1176,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-            [||]$@"{0 + 1}""
-            {1 + 2}";
+                    void M()
+                    {
+                        var v =
+                [||]$@"{0 + 1}""
+                {1 + 2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-                        $"""
-                        {0 + 1}"
-                        {1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v =
+                            $"""
+                            {0 + 1}"
+                            {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1207,27 +1207,27 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"{0 + 1}""
-            {1 + 2}";
+                    void M()
+                    {
+                        var v = [||]$@"{0 + 1}""
+                {1 + 2}";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        {0 + 1}"
-                        {1 + 2}
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            {0 + 1}"
+                            {1 + 2}
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1236,23 +1236,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"a";
+                    void M()
+                    {
+                        var v = [||]@$"a";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""a""";
+                    void M()
+                    {
+                        var v = $"""a""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1261,23 +1261,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"a";
+                    void M()
+                    {
+                        var v = [||]$@"a";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""a""";
+                    void M()
+                    {
+                        var v = $"""a""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1286,11 +1286,11 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            var v = [||]$"a";
-            """,
+                var v = [||]$"a";
+                """,
             """"
-            var v = $"""a""";
-            """",
+                var v = $"""a""";
+                """",
             outputKind: OutputKind.ConsoleApplication
         );
     }
@@ -1300,23 +1300,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"goo\"bar";
+                    void M()
+                    {
+                        var v = [||]$"goo\"bar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""goo"bar""";
+                    void M()
+                    {
+                        var v = $"""goo"bar""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1325,23 +1325,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"goo""bar";
+                    void M()
+                    {
+                        var v = [||]@$"goo""bar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""goo"bar""";
+                    void M()
+                    {
+                        var v = $"""goo"bar""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1350,23 +1350,23 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"goo""bar";
+                    void M()
+                    {
+                        var v = [||]$@"goo""bar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""goo"bar""";
+                    void M()
+                    {
+                        var v = $"""goo"bar""";
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1375,25 +1375,25 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"\"goobar";
+                    void M()
+                    {
+                        var v = [||]$"\"goobar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        "goobar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            "goobar
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1402,25 +1402,25 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"""goobar";
+                    void M()
+                    {
+                        var v = [||]@$"""goobar";
+                    }
                 }
-            }
-            """",
+                """",
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        "goobar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            "goobar
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1429,25 +1429,25 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"""goobar";
+                    void M()
+                    {
+                        var v = [||]$@"""goobar";
+                    }
                 }
-            }
-            """",
+                """",
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        "goobar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            "goobar
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1456,25 +1456,25 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"goobar\"";
+                    void M()
+                    {
+                        var v = [||]$"goobar\"";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goobar"
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goobar"
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1483,25 +1483,25 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"goobar""";
+                    void M()
+                    {
+                        var v = [||]$@"goobar""";
+                    }
                 }
-            }
-            """",
+                """",
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goobar"
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goobar"
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1510,25 +1510,25 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"goobar""";
+                    void M()
+                    {
+                        var v = [||]@$"goobar""";
+                    }
                 }
-            }
-            """",
+                """",
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goobar"
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goobar"
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1537,26 +1537,26 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"goo\r\nbar";
+                    void M()
+                    {
+                        var v = [||]$"goo\r\nbar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goo
-                        bar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goo
+                            bar
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1565,27 +1565,27 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"goo
-            bar";
+                    void M()
+                    {
+                        var v = [||]$@"goo
+                bar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goo
-                        bar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goo
+                            bar
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1594,27 +1594,27 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"goo
-            bar";
+                    void M()
+                    {
+                        var v = [||]@$"goo
+                bar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goo
-                        bar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goo
+                            bar
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1623,27 +1623,27 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"\r\ngoobar\r\n";
+                    void M()
+                    {
+                        var v = [||]$"\r\ngoobar\r\n";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
+                    void M()
+                    {
+                        var v = $"""
 
-                        goobar
+                            goobar
 
-                        """;
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1652,29 +1652,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-            goobar
-            ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                goobar
+                ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
+                    void M()
+                    {
+                        var v = $"""
 
-                        goobar
+                            goobar
 
-                        """;
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1683,29 +1683,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"
-            goobar
-            ";
+                    void M()
+                    {
+                        var v = [||]@$"
+                goobar
+                ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
+                    void M()
+                    {
+                        var v = $"""
 
-                        goobar
+                            goobar
 
-                        """;
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1714,27 +1714,27 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"
-            goobar
-            ";
+                    void M()
+                    {
+                        var v = [||]@$"
+                goobar
+                ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goobar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goobar
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -1744,26 +1744,26 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$"goo\r\nbar";
+                    void M()
+                    {
+                        var v = [||]$"goo\r\nbar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goo
-                        bar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goo
+                            bar
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1772,30 +1772,30 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"
-            from x in y
-            where x > 0
-            select x";
+                    void M()
+                    {
+                        var v = [||]@$"
+                from x in y
+                where x > 0
+                select x";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -1805,14 +1805,14 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            var v = [||]$"goo\r\nbar";
-            """,
+                var v = [||]$"goo\r\nbar";
+                """,
             """"
-            var v = $"""
-                goo
-                bar
-                """;
-            """",
+                var v = $"""
+                    goo
+                    bar
+                    """;
+                """",
             outputKind: OutputKind.ConsoleApplication
         );
     }
@@ -1822,18 +1822,18 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            var v = [||]@$"
-            from x in y
-            where x > 0
-            select x";
-            """,
-            """"
-            var v = $"""
+                var v = [||]@$"
                 from x in y
                 where x > 0
-                select x
-                """;
-            """",
+                select x";
+                """,
+            """"
+                var v = $"""
+                    from x in y
+                    where x > 0
+                    select x
+                    """;
+                """",
             index: 1,
             outputKind: OutputKind.ConsoleApplication
         );
@@ -1844,27 +1844,27 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]@$"goo
-            bar";
+                    void M()
+                    {
+                        var v = [||]@$"goo
+                bar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        goo
-                        bar
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            goo
+                            bar
+                            """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1873,28 +1873,28 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-                            [||]$"goo\r\nbar";
+                    void M()
+                    {
+                        var v =
+                                [||]$"goo\r\nbar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-                            $"""
-                            goo
-                            bar
-                            """;
+                    void M()
+                    {
+                        var v =
+                                $"""
+                                goo
+                                bar
+                                """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1903,29 +1903,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-                            [||]@$"goo
-            bar";
+                    void M()
+                    {
+                        var v =
+                                [||]@$"goo
+                bar";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v =
-                            $"""
-                            goo
-                            bar
-                            """;
+                    void M()
+                    {
+                        var v =
+                                $"""
+                                goo
+                                bar
+                                """;
+                    }
                 }
-            }
-            """"
+                """"
         );
     }
 
@@ -1934,30 +1934,30 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        from x in y
-                        where x > 0
-                        select x";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            from x in y
+                            where x > 0
+                            select x";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -1967,31 +1967,31 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        from x in y
-                        where x > 0
-                        select x
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            from x in y
+                            where x > 0
+                            select x
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2001,31 +2001,31 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        from x in y
-                            where x > 0
-                            select x
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            from x in y
+                                where x > 0
+                                select x
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                            where x > 0
-                            select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                                where x > 0
+                                select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2035,31 +2035,31 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                            from x in y
-                        where x > 0
-                        select x
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                                from x in y
+                            where x > 0
+                            select x
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                            from x in y
-                        where x > 0
-                        select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                                from x in y
+                            where x > 0
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2069,35 +2069,35 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        from x in y
+                    void M()
+                    {
+                        var v = [||]$@"
+                            from x in y
 
-                        where x > 0
+                            where x > 0
 
-                        select x
-                        ";
+                            select x
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
 
-                        where x > 0
+                            where x > 0
 
-                        select x
-                        """;
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2107,30 +2107,30 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"from x in y
-                        where x > 0
-                        select x
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"from x in y
+                            where x > 0
+                            select x
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2140,29 +2140,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"from x in y
-                        where x > 0
-                        select x";
+                    void M()
+                    {
+                        var v = [||]$@"from x in y
+                            where x > 0
+                            select x";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2172,30 +2172,30 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"from x in y
-                        where x > 0
-                        select x  
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"from x in y
+                            where x > 0
+                            select x
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2205,29 +2205,29 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"from x in y
-                        where x > 0
-                        select x";
+                    void M()
+                    {
+                        var v = [||]$@"from x in y
+                            where x > 0
+                            select x";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2237,41 +2237,41 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"
-                                This needs stay indented
-                            "
-                        }
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"
+                                    This needs stay indented
+                                "
+                            }
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"
-                                This needs stay indented
-                            "
-                        }
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"
+                                    This needs stay indented
+                                "
+                            }
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2281,41 +2281,41 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"
-            This should not prevent dedentation
-                            "
-                        }
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"
+                This should not prevent dedentation
+                                "
+                            }
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"
-            This should not prevent dedentation
-                            "
-                        }
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"
+                This should not prevent dedentation
+                                "
+                            }
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2325,45 +2325,45 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"
-                                    
-                                The whitespace above/below me needs to stay
-                                    
-                            "
-                        }
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"
+
+                                    The whitespace above/below me needs to stay
+
+                                "
+                            }
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"
-                                    
-                                The whitespace above/below me needs to stay
-                                    
-                            "
-                        }
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"
+
+                                    The whitespace above/below me needs to stay
+
+                                "
+                            }
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2373,45 +2373,45 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"
-                    
-                The whitespace above/below me needs to stay
-                    
-                            "
-                        }
-                        ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"
+
+                    The whitespace above/below me needs to stay
+
+                                "
+                            }
+                            ";
+                    }
                 }
-            }
-            """,
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"
-                    
-                The whitespace above/below me needs to stay
-                    
-                            "
-                        }
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"
+
+                    The whitespace above/below me needs to stay
+
+                                "
+                            }
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2421,41 +2421,41 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-            from x in y
-            where x > 0
-            select x
-            {
-                @"
-                    This needs to stay put
-                "
-            }
-            ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                from x in y
+                where x > 0
+                select x
+                {
+                    @"
+                        This needs to stay put
+                    "
                 }
-            }
-            """,
+                ";
+                    }
+                }
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                @"
-                    This needs to stay put
-                "
-                        }
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                    @"
+                        This needs to stay put
+                    "
+                            }
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2465,41 +2465,41 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-            from x in y
-            where x > 0
-            select x
-            {
-            @"
-                This needs to stay put
-            "
-            }
-            ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                from x in y
+                where x > 0
+                select x
+                {
+                @"
+                    This needs to stay put
+                "
                 }
-            }
-            """,
+                ";
+                    }
+                }
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-            @"
-                This needs to stay put
-            "
-                        }
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                @"
+                    This needs to stay put
+                "
+                            }
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2509,37 +2509,37 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-            from x in y
-            where x > 0
-            select x
-            {
-            @"This can move"
-            }
-            ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                from x in y
+                where x > 0
+                select x
+                {
+                @"This can move"
                 }
-            }
-            """,
+                ";
+                    }
+                }
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                        @"This can move"
-                        }
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                            @"This can move"
+                            }
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }
@@ -2549,37 +2549,37 @@ public class ConvertInterpolatedStringToRawStringTests
     {
         await VerifyRefactoringAsync(
             """
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = [||]$@"
-            from x in y
-            where x > 0
-            select x
-            {
-                @"This can move"
-            }
-            ";
+                    void M()
+                    {
+                        var v = [||]$@"
+                from x in y
+                where x > 0
+                select x
+                {
+                    @"This can move"
                 }
-            }
-            """,
+                ";
+                    }
+                }
+                """,
             """"
-            public class C
-            {
-                void M()
+                public class C
                 {
-                    var v = $"""
-                        from x in y
-                        where x > 0
-                        select x
-                        {
-                            @"This can move"
-                        }
-                        """;
+                    void M()
+                    {
+                        var v = $"""
+                            from x in y
+                            where x > 0
+                            select x
+                            {
+                                @"This can move"
+                            }
+                            """;
+                    }
                 }
-            }
-            """",
+                """",
             index: 1
         );
     }

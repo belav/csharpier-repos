@@ -50,12 +50,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && (j && )
+                    class C {
+                        void Bar() {
+                            if ([||]i && (j && )
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -64,13 +64,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([|i|] && j) {
+                    class C {
+                        void Bar() {
+                            if ([|i|] && j) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -79,13 +79,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                class C {
-                    void Bar() {
-                        [||]if (i && j) {
+                    class C {
+                        void Bar() {
+                            [||]if (i && j) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -94,13 +94,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i) {
+                    class C {
+                        void Bar() {
+                            if ([||]i) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -109,14 +109,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && (j +
-                            k)) {
+                    class C {
+                        void Bar() {
+                            if ([||]i && (j +
+                                k)) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -125,14 +125,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && @"
-                        ") {
+                    class C {
+                        void Bar() {
+                            if ([||]i && @"
+                            ") {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -141,22 +141,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestEndOfLine(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && j) {
+                    class C {
+                        void Bar() {
+                            if ([||]i && j) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (i &&
-                            j) {
+                    class C {
+                        void Bar() {
+                            if (i &&
+                                j) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -165,22 +165,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestBeginningOfLine(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && j) {
+                    class C {
+                        void Bar() {
+                            if ([||]i && j) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (i
-                            && j) {
+                    class C {
+                        void Bar() {
+                            if (i
+                                && j) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -189,22 +189,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestEndOfLine(
                 """
-                class C {
-                    void Bar() {
-                        if (i[||] && j) {
+                    class C {
+                        void Bar() {
+                            if (i[||] && j) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (i &&
-                            j) {
+                    class C {
+                        void Bar() {
+                            if (i &&
+                                j) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -213,22 +213,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestEndOfLine(
                 """
-                class C {
-                    void Bar() {
-                        if (i [||]&& j) {
+                    class C {
+                        void Bar() {
+                            if (i [||]&& j) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (i &&
-                            j) {
+                    class C {
+                        void Bar() {
+                            if (i &&
+                                j) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -237,22 +237,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestEndOfLine(
                 """
-                class C {
-                    void Bar() {
-                        if (i &&[||] j) {
+                    class C {
+                        void Bar() {
+                            if (i &&[||] j) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (i &&
-                            j) {
+                    class C {
+                        void Bar() {
+                            if (i &&
+                                j) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -261,22 +261,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestEndOfLine(
                 """
-                class C {
-                    void Bar() {
-                        if (i && [||]j) {
+                    class C {
+                        void Bar() {
+                            if (i && [||]j) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (i &&
-                            j) {
+                    class C {
+                        void Bar() {
+                            if (i &&
+                                j) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -285,13 +285,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && j) {
+                    class C {
+                        void Bar() {
+                            if ([||]i && j) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 EndOfLine,
                 """
 class C {
@@ -310,13 +310,13 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && j) {
+                    class C {
+                        void Bar() {
+                            if ([||]i && j) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 BeginningOfLine,
                 """
 class C {
@@ -335,13 +335,13 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && j || k) {
+                    class C {
+                        void Bar() {
+                            if ([||]i && j || k) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 EndOfLine,
                 """
 class C {
@@ -361,13 +361,13 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i && j || k) {
+                    class C {
+                        void Bar() {
+                            if ([||]i && j || k) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 BeginningOfLine,
                 """
 class C {
@@ -387,16 +387,16 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if (
-                            [||]i   &&
-                                j
-                                 ||   k) {
+                    class C {
+                        void Bar() {
+                            if (
+                                [||]i   &&
+                                    j
+                                     ||   k) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 EndOfLine,
                 """
 class C {
@@ -426,16 +426,16 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if (
-                            [||]i   &&
-                                j
-                                 ||   k) {
+                    class C {
+                        void Bar() {
+                            if (
+                                [||]i   &&
+                                    j
+                                     ||   k) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 BeginningOfLine,
                 """
 class C {
@@ -465,31 +465,31 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]a &&
-                            b) {
+                    class C {
+                        void Bar() {
+                            if ([||]a &&
+                                b) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (a
-                            && b) {
+                    class C {
+                        void Bar() {
+                            if (a
+                                && b) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (a && b) {
+                    class C {
+                        void Bar() {
+                            if (a && b) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -498,14 +498,14 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]a
-                            && b) {
+                    class C {
+                        void Bar() {
+                            if ([||]a
+                                && b) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 EndOfLine,
                 """
 class C {
@@ -532,14 +532,14 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]a
-                            && b) {
+                    class C {
+                        void Bar() {
+                            if ([||]a
+                                && b) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 BeginningOfLine,
                 """
 class C {
@@ -557,12 +557,12 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Goo() {
-                        var v = [||]a && b && c;
+                    class C {
+                        void Goo() {
+                            var v = [||]a && b && c;
+                        }
                     }
-                }
-                """,
+                    """,
                 BeginningOfLine,
                 """
 class C {
@@ -590,12 +590,12 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Goo() {
-                        var v = [||]a && b && c;
+                    class C {
+                        void Goo() {
+                            var v = [||]a && b && c;
+                        }
                     }
-                }
-                """,
+                    """,
                 EndOfLine,
                 """
 class C {
@@ -623,10 +623,10 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    bool v = [||]a && b && c;
-                }
-                """,
+                    class C {
+                        bool v = [||]a && b && c;
+                    }
+                    """,
                 BeginningOfLine,
                 """
 class C {
@@ -650,10 +650,10 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    bool v = [||]a && b && c;
-                }
-                """,
+                    class C {
+                        bool v = [||]a && b && c;
+                    }
+                    """,
                 EndOfLine,
                 """
 class C {
@@ -677,12 +677,12 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        var goo = [||]"now" + "is" + "the" + "time";
+                    class C {
+                        void Bar() {
+                            var goo = [||]"now" + "is" + "the" + "time";
+                        }
                     }
-                }
-                """,
+                    """,
                 EndOfLine,
                 """
 class C {
@@ -712,12 +712,12 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    void Bar() {
-                        var goo = [||]"now" + "is" + "the" + "time";
+                    class C {
+                        void Bar() {
+                            var goo = [||]"now" + "is" + "the" + "time";
+                        }
                     }
-                }
-                """,
+                    """,
                 BeginningOfLine,
                 """
 class C {
@@ -747,22 +747,22 @@ class C {
         {
             await TestEndOfLine(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i is var _ && _ != null) {
+                    class C {
+                        void Bar() {
+                            if ([||]i is var _ && _ != null) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (i is var _ &&
-                            _ != null) {
+                    class C {
+                        void Bar() {
+                            if (i is var _ &&
+                                _ != null) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -771,22 +771,22 @@ class C {
         {
             await TestBeginningOfLine(
                 """
-                class C {
-                    void Bar() {
-                        if ([||]i is var _ && _ != null) {
+                    class C {
+                        void Bar() {
+                            if ([||]i is var _ && _ != null) {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C {
-                    void Bar() {
-                        if (i is var _
-                            && _ != null) {
+                    class C {
+                        void Bar() {
+                            if (i is var _
+                                && _ != null) {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -795,11 +795,11 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    bool v =
-                        [||]a && b && c;
-                }
-                """,
+                    class C {
+                        bool v =
+                            [||]a && b && c;
+                    }
+                    """,
                 BeginningOfLine,
                 """
 class C {
@@ -817,11 +817,11 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C {
-                    bool v =
-                        [||]a && b && c;
-                }
-                """,
+                    class C {
+                        bool v =
+                            [||]a && b && c;
+                    }
+                    """,
                 EndOfLine,
                 """
 class C {
@@ -839,11 +839,11 @@ class C {
         {
             await TestAllWrappingCasesAsync(
                 """
-                class C
-                {
-                    bool v = [||]a + b + c + d == x * y * z;
-                }
-                """,
+                    class C
+                    {
+                        bool v = [||]a + b + c + d == x * y * z;
+                    }
+                    """,
                 EndOfLine,
                 """
 class C

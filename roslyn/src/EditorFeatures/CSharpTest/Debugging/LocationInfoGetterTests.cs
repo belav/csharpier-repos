@@ -53,13 +53,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class Class
-                {
-                    public static void Meth$$od()
+                    class Class
                     {
+                        public static void Meth$$od()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 "Class.Method()",
                 0
             );
@@ -70,16 +70,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace Namespace
-                {
-                    class Class
+                    namespace Namespace
                     {
-                        void Method()
+                        class Class
                         {
-                        }$$
+                            void Method()
+                            {
+                            }$$
+                        }
                     }
-                }
-                """,
+                    """,
                 "Namespace.Class.Method()",
                 2
             );
@@ -92,15 +92,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             // See the associated WorkItem for details.
             await TestAsync(
                 """
-                namespace Namespace;
+                    namespace Namespace;
 
-                class Class
-                {
-                    void Method()
+                    class Class
                     {
-                    }$$
-                }
-                """,
+                        void Method()
+                        {
+                        }$$
+                    }
+                    """,
                 "Namespace.Class.Method()",
                 2
             );
@@ -111,16 +111,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace Namespace.Another
-                {
-                    class Class
+                    namespace Namespace.Another
                     {
-                        void Method()
+                        class Class
                         {
-                        }$$
+                            void Method()
+                            {
+                            }$$
+                        }
                     }
-                }
-                """,
+                    """,
                 "Namespace.Another.Class.Method()",
                 2
             );
@@ -131,19 +131,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace Namespace
-                {
-                    namespace Another
+                    namespace Namespace
                     {
-                        class Class
+                        namespace Another
                         {
-                            void Method()
+                            class Class
                             {
-                            }$$
+                                void Method()
+                                {
+                                }$$
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 "Namespace.Another.Class.Method()",
                 2
             );
@@ -154,16 +154,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class Outer
-                {
-                    class Inner
+                    class Outer
                     {
-                        void Quux()
-                        {$$
+                        class Inner
+                        {
+                            void Quux()
+                            {$$
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 "Outer.Inner.Quux()",
                 1
             );
@@ -174,17 +174,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class Class
-                {
-                    string Property
+                    class Class
                     {
-                        get
+                        string Property
                         {
-                            return null;$$
+                            get
+                            {
+                                return null;$$
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 "Class.Property",
                 4
             );
@@ -195,22 +195,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class Class
-                {
-                    string Property
+                    class Class
                     {
-                        get
+                        string Property
                         {
-                            return null;
-                        }
+                            get
+                            {
+                                return null;
+                            }
 
-                        set
-                        {
-                            string s = $$value;
+                            set
+                            {
+                                string s = $$value;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 "Class.Property",
                 9
             );
@@ -221,11 +221,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class Class
-                {
-                    int fi$$eld;
-                }
-                """,
+                    class Class
+                    {
+                        int fi$$eld;
+                    }
+                    """,
                 "Class.field",
                 0
             );
@@ -236,11 +236,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class Class
-                {
-                    Action<int> a = b => { in$$t c; };
-                }
-                """,
+                    class Class
+                    {
+                        Action<int> a = b => { in$$t c; };
+                    }
+                    """,
                 "Class.a",
                 0
             );
@@ -251,11 +251,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class Class
-                {
-                    int a1, a$$2;
-                }
-                """,
+                    class Class
+                    {
+                        int a1, a$$2;
+                    }
+                    """,
                 "Class.a2",
                 0
             );
@@ -266,14 +266,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1
-                {
-                    C1()
+                    class C1
                     {
+                        C1()
+                        {
 
-                    $$}
-                }
-                """,
+                        $$}
+                    }
+                    """,
                 "C1.C1()",
                 3
             );
@@ -284,13 +284,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1
-                {
-                    ~C1()
+                    class C1
                     {
-                    $$}
-                }
-                """,
+                        ~C1()
+                        {
+                        $$}
+                    }
+                    """,
                 "C1.~C1()",
                 2
             );
@@ -301,17 +301,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace N1
-                {
-                    class C1
+                    namespace N1
                     {
-                        public static int operator +(C1 x, C1 y)
+                        class C1
                         {
-                            $$return 42;
+                            public static int operator +(C1 x, C1 y)
+                            {
+                                $$return 42;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 "N1.C1.+(C1 x, C1 y)",
                 2
             ); // Old implementation reports "operator +" (rather than "+")...
@@ -322,20 +322,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace N1
-                {
-                    class C1
+                    namespace N1
                     {
-                        public static explicit operator N1.C2(N1.C1 x)
+                        class C1
                         {
-                            $$return null;
+                            public static explicit operator N1.C2(N1.C1 x)
+                            {
+                                $$return null;
+                            }
+                        }
+                        class C2
+                        {
                         }
                     }
-                    class C2
-                    {
-                    }
-                }
-                """,
+                    """,
                 "N1.C1.N1.C2(N1.C1 x)",
                 2
             ); // Old implementation reports "explicit operator N1.C2" (rather than "N1.C2")...
@@ -346,12 +346,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1
-                {
-                    delegate void D1();
-                    event D1 e1$$;
-                }
-                """,
+                    class C1
+                    {
+                        delegate void D1();
+                        event D1 e1$$;
+                    }
+                    """,
                 "C1.e1",
                 0
             );
@@ -362,17 +362,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                interface I1
-                {
-                    void M1();
-                }
-                class C1
-                {
-                    void I1.M1()
+                    interface I1
                     {
-                    $$}
-                }
-                """,
+                        void M1();
+                    }
+                    class C1
+                    {
+                        void I1.M1()
+                        {
+                        $$}
+                    }
+                    """,
                 "C1.M1()",
                 2
             );
@@ -383,17 +383,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1
-                {
-                    C1 this[int x]
+                    class C1
                     {
-                        get
+                        C1 this[int x]
                         {
-                            $$return null;
+                            get
+                            {
+                                $$return null;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 "C1.this[int x]",
                 4
             );
@@ -404,11 +404,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1
-                {
-                    void M1(params int[] x) { $$ }
-                }
-                """,
+                    class C1
+                    {
+                        void M1(params int[] x) { $$ }
+                    }
+                    """,
                 "C1.M1(params int[] x)",
                 0
             );
@@ -419,11 +419,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1
-                {
-                    void M1(__arglist) { $$ }
-                }
-                """,
+                    class C1
+                    {
+                        void M1(__arglist) { $$ }
+                    }
+                    """,
                 "C1.M1(__arglist)",
                 0
             ); // Old implementation does not show "__arglist"...
@@ -434,14 +434,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1
-                {
-                    void M1( ref int x, out int y )
+                    class C1
                     {
-                        $$y = x;
+                        void M1( ref int x, out int y )
+                        {
+                            $$y = x;
+                        }
                     }
-                }
-                """,
+                    """,
                 "C1.M1( ref int x, out int y )",
                 2
             ); // Old implementation did not show extra spaces around the parameters...
@@ -452,14 +452,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1
-                {
-                    void M1(int x =1)
+                    class C1
                     {
-                        $$y = x;
+                        void M1(int x =1)
+                        {
+                            $$y = x;
+                        }
                     }
-                }
-                """,
+                    """,
                 "C1.M1(int x =1)",
                 2
             );
@@ -470,13 +470,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                static class C1
-                {
-                    static void M1(this int x)
+                    static class C1
                     {
-                    }$$
-                }
-                """,
+                        static void M1(this int x)
+                        {
+                        }$$
+                    }
+                    """,
                 "C1.M1(this int x)",
                 2
             );
@@ -487,11 +487,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1<T, U>
-                {
-                    static void M1() { $$ }
-                }
-                """,
+                    class C1<T, U>
+                    {
+                        static void M1() { $$ }
+                    }
+                    """,
                 "C1.M1()",
                 0
             );
@@ -502,11 +502,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1<T, U>
-                {
-                    static void M1<V>() { $$ }
-                }
-                """,
+                    class C1<T, U>
+                    {
+                        static void M1<V>() { $$ }
+                    }
+                    """,
                 "C1.M1()",
                 0
             );
@@ -517,11 +517,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                class C1<T, U>
-                {
-                    static void M1<V>(C1<int, V> x, V y) { $$ }
-                }
-                """,
+                    class C1<T, U>
+                    {
+                        static void M1<V>(C1<int, V> x, V y) { $$ }
+                    }
+                    """,
                 "C1.M1(C1<int, V> x, V y)",
                 0
             );
@@ -532,13 +532,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                {
-                    class Class
                     {
-                        int a1, a$$2;
+                        class Class
+                        {
+                            int a1, a$$2;
+                        }
                     }
-                }
-                """,
+                    """,
                 "Class.a2",
                 0
             );
@@ -549,16 +549,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace
-                {
-                    class C1
+                    namespace
                     {
-                        int M1()
-                        $${
+                        class C1
+                        {
+                            int M1()
+                            $${
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 "?.C1.M1()",
                 1
             );
@@ -569,15 +569,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace N1
-                    class 
-                    {
-                        int M1()
-                        $${
+                    namespace N1
+                        class
+                        {
+                            int M1()
+                            $${
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 "N1.M1()",
                 1
             ); // Old implementation displayed "N1.?.M1", but we don't see a class declaration in the syntax tree...
@@ -588,16 +588,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace N1
-                {
-                    class C1
+                    namespace N1
                     {
-                        static void (ref int x)
+                        class C1
                         {
-                        $$}
+                            static void (ref int x)
+                            {
+                            $$}
+                        }
                     }
-                }
-                """,
+                    """,
                 "N1.C1",
                 4
             );
@@ -608,16 +608,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                namespace N1
-                {
-                    class C1
+                    namespace N1
                     {
-                        static void M1
+                        class C1
                         {
-                        $$}
+                            static void M1
+                            {
+                            $$}
+                        }
                     }
-                }
-                """,
+                    """,
                 "N1.C1.M1",
                 2
             );
@@ -628,8 +628,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                $$int f1;
-                """,
+                    $$int f1;
+                    """,
                 "f1",
                 0,
                 new CSharpParseOptions(kind: SourceCodeKind.Script)
@@ -641,10 +641,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                int M1(int x)
-                {
-                $$}
-                """,
+                    int M1(int x)
+                    {
+                    $$}
+                    """,
                 "M1(int x)",
                 2,
                 new CSharpParseOptions(kind: SourceCodeKind.Script)
@@ -656,8 +656,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         {
             await TestAsync(
                 """
-                $$System.Console.WriteLine("Hello")
-                """,
+                    $$System.Console.WriteLine("Hello")
+                    """,
                 null,
                 0,
                 new CSharpParseOptions(kind: SourceCodeKind.Script)

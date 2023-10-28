@@ -29,25 +29,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveInKeyword
         {
             await TestInRegularAndScript1Async(
                 """
-                class Class
-                {
-                    void M(int i) { }
-                    void N(int i)
+                    class Class
                     {
-                        M(in [|i|]);
+                        void M(int i) { }
+                        void N(int i)
+                        {
+                            M(in [|i|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void M(int i) { }
-                    void N(int i)
+                    class Class
                     {
-                        M(i);
+                        void M(int i) { }
+                        void N(int i)
+                        {
+                            M(i);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -56,25 +56,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveInKeyword
         {
             await TestInRegularAndScript1Async(
                 """
-                class Class
-                {
-                    void M(int i, string s) { }
-                    void N(int i, string s)
+                    class Class
                     {
-                        M(in [|i|], s);
+                        void M(int i, string s) { }
+                        void N(int i, string s)
+                        {
+                            M(in [|i|], s);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void M(int i, string s) { }
-                    void N(int i, string s)
+                    class Class
                     {
-                        M(i, s);
+                        void M(int i, string s) { }
+                        void N(int i, string s)
+                        {
+                            M(i, s);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -83,25 +83,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveInKeyword
         {
             await TestInRegularAndScript1Async(
                 """
-                class Class
-                {
-                    void M(int i, int j) { }
-                    void N(int i, int j)
+                    class Class
                     {
-                        M(in [|i|], in j);
+                        void M(int i, int j) { }
+                        void N(int i, int j)
+                        {
+                            M(in [|i|], in j);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void M(int i, int j) { }
-                    void N(int i, int j)
+                    class Class
                     {
-                        M(i, in j);
+                        void M(int i, int j) { }
+                        void N(int i, int j)
+                        {
+                            M(i, in j);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -110,25 +110,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveInKeyword
         {
             await TestInRegularAndScript1Async(
                 """
-                class Class
-                {
-                    void M(in int i, string s) { }
-                    void N(int i, string s)
+                    class Class
                     {
-                        M(in i, in [|s|]);
+                        void M(in int i, string s) { }
+                        void N(int i, string s)
+                        {
+                            M(in i, in [|s|]);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void M(in int i, string s) { }
-                    void N(int i, string s)
+                    class Class
                     {
-                        M(in i, s);
+                        void M(in int i, string s) { }
+                        void N(int i, string s)
+                        {
+                            M(in i, s);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -137,15 +137,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveInKeyword
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class Class
-                {
-                    void M(in int i) { }
-                    void N(int i)
+                    class Class
                     {
-                        M(in [|i|]);
+                        void M(in int i) { }
+                        void N(int i)
+                        {
+                            M(in [|i|]);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -187,51 +187,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveInKeyword
         {
             await TestInRegularAndScript1Async(
                 """
-                class Class
-                {
-                    void M1(int i) { }
-                    void M2(int i, string s) { }
-
-                    void N1(int i)
+                    class Class
                     {
-                        M1(in {|FixAllInDocument:i|});
-                    }
+                        void M1(int i) { }
+                        void M2(int i, string s) { }
 
-                    void N2(int i, string s)
-                    {
-                        M2(in i, in s);
-                    }
+                        void N1(int i)
+                        {
+                            M1(in {|FixAllInDocument:i|});
+                        }
 
-                    void N3(int i, string s)
-                    {
-                        M1(in i);
-                        M2(in i, in s);
+                        void N2(int i, string s)
+                        {
+                            M2(in i, in s);
+                        }
+
+                        void N3(int i, string s)
+                        {
+                            M1(in i);
+                            M2(in i, in s);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void M1(int i) { }
-                    void M2(int i, string s) { }
-
-                    void N1(int i)
+                    class Class
                     {
-                        M1(i);
-                    }
+                        void M1(int i) { }
+                        void M2(int i, string s) { }
 
-                    void N2(int i, string s)
-                    {
-                        M2(i, s);
-                    }
+                        void N1(int i)
+                        {
+                            M1(i);
+                        }
 
-                    void N3(int i, string s)
-                    {
-                        M1(i);
-                        M2(i, s);
+                        void N2(int i, string s)
+                        {
+                            M2(i, s);
+                        }
+
+                        void N3(int i, string s)
+                        {
+                            M1(i);
+                            M2(i, s);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -240,51 +240,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveInKeyword
         {
             await TestInRegularAndScript1Async(
                 """
-                class Class
-                {
-                    void M1(int i) { }
-                    void M2(in int i, string s) { }
-
-                    void N1(int i)
+                    class Class
                     {
-                        M1(in {|FixAllInDocument:i|});
-                    }
+                        void M1(int i) { }
+                        void M2(in int i, string s) { }
 
-                    void N2(int i, string s)
-                    {
-                        M2(in i, in s);
-                    }
+                        void N1(int i)
+                        {
+                            M1(in {|FixAllInDocument:i|});
+                        }
 
-                    void N3(int i, string s)
-                    {
-                        M1(in i);
-                        M2(in i, in s);
+                        void N2(int i, string s)
+                        {
+                            M2(in i, in s);
+                        }
+
+                        void N3(int i, string s)
+                        {
+                            M1(in i);
+                            M2(in i, in s);
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class Class
-                {
-                    void M1(int i) { }
-                    void M2(in int i, string s) { }
-
-                    void N1(int i)
+                    class Class
                     {
-                        M1(i);
-                    }
+                        void M1(int i) { }
+                        void M2(in int i, string s) { }
 
-                    void N2(int i, string s)
-                    {
-                        M2(in i, s);
-                    }
+                        void N1(int i)
+                        {
+                            M1(i);
+                        }
 
-                    void N3(int i, string s)
-                    {
-                        M1(i);
-                        M2(in i, s);
+                        void N2(int i, string s)
+                        {
+                            M2(in i, s);
+                        }
+
+                        void N3(int i, string s)
+                        {
+                            M1(i);
+                            M2(in i, s);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

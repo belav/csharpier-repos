@@ -29,14 +29,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This {0[||]} works", "test"); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("This {0[||]} works", "test");
+                        }
+                    }
+                    """
             );
         }
 
@@ -45,14 +45,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This {0[||]} {1} works", "test", "also"); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("This {0[||]} {1} works", "test", "also");
+                        }
+                    }
+                    """
             );
         }
 
@@ -61,14 +61,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This {0} {1[||]} works {2} ", "test", "also", "well"); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("This {0} {1[||]} works {2} ", "test", "also", "well");
+                        }
+                    }
+                    """
             );
         }
 
@@ -77,15 +77,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This {1} is {2} my {6[||]} test ", "teststring1", "teststring2",
-                            "teststring3", "teststring4", "teststring5", "teststring6", "teststring7");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("This {1} is {2} my {6[||]} test ", "teststring1", "teststring2",
+                                "teststring3", "teststring4", "teststring5", "teststring6", "teststring7");
+                        }
+                    }
+                    """
             );
         }
 
@@ -94,15 +94,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        object[] objectArray = { 1.25, "2", "teststring"};
-                        string.Format("This {0} {1} {2[||]} works", objectArray); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            object[] objectArray = { 1.25, "2", "teststring"};
+                            string.Format("This {0} {1} {2[||]} works", objectArray);
+                        }
+                    }
+                    """
             );
         }
 
@@ -111,15 +111,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        object[] objectArray = { 1.25, "2", "teststring"};
-                        string.Format("This {0} {1} {2[||]} works", objectArray, objectArray, objectArray, objectArray); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            object[] objectArray = { 1.25, "2", "teststring"};
+                            string.Format("This {0} {1} {2[||]} works", objectArray, objectArray, objectArray, objectArray);
+                        }
+                    }
+                    """
             );
         }
 
@@ -128,15 +128,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int[] intArray = {1, 2, 3};
-                        string.Format("This {0[||]} works", intArray); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            int[] intArray = {1, 2, 3};
+                            string.Format("This {0[||]} works", intArray);
+                        }
+                    }
+                    """
             );
         }
 
@@ -145,15 +145,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string[] stringArray = {"test1", "test2", "test3"};
-                        string.Format("This {0} {1} {2[||]} works", stringArray); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string[] stringArray = {"test1", "test2", "test3"};
+                            string.Format("This {0} {1} {2[||]} works", stringArray);
+                        }
+                    }
+                    """
             );
         }
 
@@ -162,14 +162,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This {0[||]} {1} {2} {3} works", new [] {"test1", "test2", "test3", "test4"}); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("This {0[||]} {1} {2} {3} works", new [] {"test1", "test2", "test3", "test4"});
+                        }
+                    }
+                    """
             );
         }
 
@@ -178,15 +178,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string[] stringArray = {"test1", "test2"};
-                        string.Format("This {0} {1} {2[||]} works", stringArray); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string[] stringArray = {"test1", "test2"};
+                            string.Format("This {0} {1} {2[||]} works", stringArray);
+                        }
+                    }
+                    """
             );
         }
 
@@ -195,15 +195,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0[||]:C2} per ounce", 2.45);
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0[||]:C2} per ounce", 2.45);
+                        }
+                    }
+                    """
             );
         }
 
@@ -212,15 +212,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0[||]:C2} per {1} ", 2.45, "ounce");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0[||]:C2} per {1} ", 2.45, "ounce");
+                        }
+                    }
+                    """
             );
         }
 
@@ -229,16 +229,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0} {[||]1} {2} ", 
-                            2.45, "per", "ounce");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0} {[||]1} {2} ",
+                                2.45, "per", "ounce");
+                        }
+                    }
+                    """
             );
         }
 
@@ -247,16 +247,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0} {1[||]} {2} {3} ", 
-                            2.45, "per", "ounce", "today only");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0} {1[||]} {2} {3} ",
+                                2.45, "per", "ounce", "today only");
+                        }
+                    }
+                    """
             );
         }
 
@@ -265,16 +265,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        object[] objectArray = { 1.25, "2", "teststring"};
-                        string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This {0} {1} {[||]2} works", objectArray); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            object[] objectArray = { 1.25, "2", "teststring"};
+                            string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This {0} {1} {[||]2} works", objectArray);
+                        }
+                    }
+                    """
             );
         }
 
@@ -283,14 +283,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("{0[||],6}", 34);
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("{0[||],6}", 34);
+                        }
+                    }
+                    """
             );
         }
 
@@ -299,14 +299,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("{[||]0:N0}", 34);
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("{[||]0:N0}", 34);
+                        }
+                    }
+                    """
             );
         }
 
@@ -315,14 +315,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("Test {0,[||]15:N0} output", 34);
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("Test {0,[||]15:N0} output", 34);
+                        }
+                    }
+                    """
             );
         }
 
@@ -331,14 +331,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("{0[||]} is my test case", "This");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("{0[||]} is my test case", "This");
+                        }
+                    }
+                    """
             );
         }
 
@@ -347,14 +347,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This is my {0[||]}", "test");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("This is my {0[||]}", "test");
+                        }
+                    }
+                    """
             );
         }
 
@@ -363,14 +363,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format(" {{ 2}} This {1[||]} is {2} {{ my {0} test }} ", "teststring1", "teststring2", "teststring3");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format(" {{ 2}} This {1[||]} is {2} {{ my {0} test }} ", "teststring1", "teststring2", "teststring3");
+                        }
+                    }
+                    """
             );
         }
 
@@ -379,14 +379,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("{{ 2}} This {1[||]} is {2} {{ my {0} test }} ", "teststring1", "teststring2", "teststring3");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format("{{ 2}} This {1[||]} is {2} {{ my {0} test }} ", "teststring1", "teststring2", "teststring3");
+                        }
+                    }
+                    """
             );
         }
 
@@ -395,14 +395,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format(" {{ 2}} This {1[||]} is {2} {{ my {0} test }}", "teststring1", "teststring2", "teststring3");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format(" {{ 2}} This {1[||]} is {2} {{ my {0} test }}", "teststring1", "teststring2", "teststring3");
+                        }
+                    }
+                    """
             );
         }
 
@@ -411,14 +411,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format(" {{{2}} This {1[||]} is {2} {{ my {0} test }}", "teststring1", "teststring2", "teststring3");
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format(" {{{2}} This {1[||]} is {2} {{ my {0} test }}", "teststring1", "teststring2", "teststring3");
+                        }
+                    }
+                    """
             );
         }
 
@@ -427,14 +427,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format(arg0: "test", arg1: "also", format: "This {0} {[||]1} works"); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format(arg0: "test", arg1: "also", format: "This {0} {[||]1} works");
+                        }
+                    }
+                    """
             );
         }
 
@@ -443,15 +443,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.Globalization;
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        string.Format(arg0: "test", provider: new CultureInfo("pt-BR", useUserOverride: false), format: "This {0[||]} works"); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format(arg0: "test", provider: new CultureInfo("pt-BR", useUserOverride: false), format: "This {0[||]} works");
+                        }
+                    }
+                    """
             );
         }
 
@@ -460,15 +460,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using stringAlias = System.String;
-                class Program
-                {
-                    static void Main(string[] args)
+                    using stringAlias = System.String;
+                    class Program
                     {
-                        stringAlias.Format("This {0[||]} works", "test"); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            stringAlias.Format("This {0[||]} works", "test");
+                        }
+                    }
+                    """
             );
         }
 
@@ -477,15 +477,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.IO;
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.IO;
+                    class Program
                     {
-                        Console.WriteLine(string.Format(format: "This {0[||]} works", arg0:"test")); 
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine(string.Format(format: "This {0[||]} works", arg0:"test"));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -494,15 +494,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format(@"This {0} 
-                {1} {2[||]} works", "multiple", "line", "test")); 
+                        static void Main(string[] args)
+                        {
+                            string.Format(@"This {0}
+                    {1} {2[||]} works", "multiple", "line", "test"));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -511,17 +511,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        var Name = "Peter";
-                        var Age = 30;
+                        static void Main(string[] args)
+                        {
+                            var Name = "Peter";
+                            var Age = 30;
 
-                        string.Format($"{Name,[||] 20} is {Age:D3} "); 
+                            string.Format($"{Name,[||] 20} is {Age:D3} ");
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -530,14 +530,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("[||]"); 
+                        static void Main(string[] args)
+                        {
+                            string.Format("[||]");
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -546,14 +546,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format([||]; 
+                        static void Main(string[] args)
+                        {
+                            string.Format([||];
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -562,14 +562,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format([||]); 
+                        static void Main(string[] args)
+                        {
+                            string.Format([||]);
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -578,14 +578,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("[||]"); 
+                        static void Main(string[] args)
+                        {
+                            string.Format("[||]");
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -594,15 +594,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using static System.String
-                class Program
-                {
-                    static void Main(string[] args)
+                    using static System.String
+                    class Program
                     {
-                        Format("[||]"); 
+                        static void Main(string[] args)
+                        {
+                            Format("[||]");
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -611,14 +611,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format( : "value"[||])); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format( : "value"[||]));
+                        }
+                    }
+                    """
             );
         }
 
@@ -627,14 +627,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format(format:"This [||] ", format:" test "); 
-                    }     
-                }
-                """
+                        static void Main(string[] args)
+                        {
+                            string.Format(format:"This [||] ", format:" test ");
+                        }
+                    }
+                    """
             );
         }
 
@@ -643,31 +643,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System;
-                using System.Collections;
-                using System.Collections.Generic;
-                using System.Text;
+                    using System;
+                    using System.Collections;
+                    using System.Collections.Generic;
+                    using System.Text;
 
-                namespace Generics_CSharp
-                {
-                    public class String<T> 
+                    namespace Generics_CSharp
                     {
-                        public void Format<T>(string teststr)
+                        public class String<T>
                         {
-                            Console.WriteLine(teststr);
+                            public void Format<T>(string teststr)
+                            {
+                                Console.WriteLine(teststr);
+                            }
+                        }
+
+                        class Generics
+                        {
+                            static void Main(string[] args)
+                            {
+                                String<int> testList = new String<int>();
+                                testList.Format<int>("Test[||]String");
+                            }
                         }
                     }
-
-                    class Generics
-                    {
-                        static void Main(string[] args)
-                        {
-                            String<int> testList = new String<int>();
-                            testList.Format<int>("Test[||]String");
-                        }
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -676,24 +676,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System;
+                    using System;
 
-                namespace System
-                {
-                    public class String
+                    namespace System
                     {
-                        public static String Format(string format, object arg0) { return new String(); }
+                        public class String
+                        {
+                            public static String Format(string format, object arg0) { return new String(); }
+                        }
                     }
-                }
 
-                class C
-                {
-                    static void Main(string[] args)
+                    class C
                     {
-                        Console.WriteLine(String.Format("test {[||]5} ", 1));
+                        static void Main(string[] args)
+                        {
+                            Console.WriteLine(String.Format("test {[||]5} ", 1));
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -728,7 +728,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                     static void Main(string[] args)
                     {
                         string.Format("This [|{1}|] is my test", "teststring1");
-                    }     
+                    }
                 }
                 """;
             var options = Option(
@@ -755,7 +755,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                     static void Main(string[] args)
                     {
                         string.Format("This [|{1}|] is my test", "teststring1");
-                    }     
+                    }
                 }
                 """;
             var options = Option(
@@ -772,14 +772,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This [|{1}|] is my test", "teststring1");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format("This [|{1}|] is my test", "teststring1");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -792,14 +792,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This [|{2}|] is my test", "teststring1", "teststring2");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format("This [|{2}|] is my test", "teststring1", "teststring2");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -812,14 +812,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This{0}{1}{2}[|{3}|] is my test", "teststring1", "teststring2", "teststring3");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format("This{0}{1}{2}[|{3}|] is my test", "teststring1", "teststring2", "teststring3");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -832,15 +832,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format("This{0}{1}{2}{3}[|{4}|] is my test", "teststring1", "teststring2", 
-                            "teststring3", "teststring4");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format("This{0}{1}{2}{3}[|{4}|] is my test", "teststring1", "teststring2",
+                                "teststring3", "teststring4");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -853,15 +853,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This [|{1}|] is my test", "teststring1");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This [|{1}|] is my test", "teststring1");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -874,15 +874,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This [|{2}|] is my test", "teststring1", "teststring2");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This [|{2}|] is my test", "teststring1", "teststring2");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -895,16 +895,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This{0}{1}{2}[|{3}|] is my test", "teststring1", 
-                            "teststring2", "teststring3");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This{0}{1}{2}[|{3}|] is my test", "teststring1",
+                                "teststring2", "teststring3");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -917,16 +917,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This{0}{1}{2}{3}[|{4}|] is my test", "teststring1", 
-                            "teststring2", "teststring3", "teststring4");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This{0}{1}{2}{3}[|{4}|] is my test", "teststring1",
+                                "teststring2", "teststring3", "teststring4");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -939,14 +939,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format( "[|{1}|]is my test", "teststring1");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format( "[|{1}|]is my test", "teststring1");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -959,14 +959,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format( "is my test [|{2}|]", "teststring1", "teststring2");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format( "is my test [|{2}|]", "teststring1", "teststring2");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -979,14 +979,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format( "}}is my test [|{2}|]", "teststring1", "teststring2");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format( "}}is my test [|{2}|]", "teststring1", "teststring2");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -999,14 +999,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format( "is my test [|{2}|]{{", "teststring1", "teststring2");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format( "is my test [|{2}|]{{", "teststring1", "teststring2");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1019,15 +1019,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        string.Format(arg0: "test", arg1: "also", format: "This {0} [|{2}|] works");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format(arg0: "test", arg1: "also", format: "This {0} [|{2}|] works");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1040,15 +1040,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                using System.Globalization; 
-                class Program
-                {
-                    static void Main(string[] args)
+                    using System.Globalization;
+                    class Program
                     {
-                        string.Format(arg0: "test", arg1: "also", format: "This {0} [|{2}|] works", provider: new CultureInfo("pt-BR", useUserOverride: false))
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            string.Format(arg0: "test", arg1: "also", format: "This {0} [|{2}|] works", provider: new CultureInfo("pt-BR", useUserOverride: false))
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1061,15 +1061,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                using static System.String
-                class Program
-                {
-                    static void Main(string[] args)
+                    using static System.String
+                    class Program
                     {
-                        Format("This {0} [|{2}|] squiggles", "test", "gets");
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            Format("This {0} [|{2}|] squiggles", "test", "gets");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1082,15 +1082,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             var input = """
                             < Workspace >
-                                < Project Language = "C#" AssemblyName="Assembly1" CommonReferencesNet45="true"> 
+                                < Project Language = "C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
                  <Document FilePath="CurrentDocument.cs"><![CDATA[
-                using System.Globalization; 
+                using System.Globalization;
                 class Program
                 {
                     static void Main(string[] args)
                     {
                         string.Format("This [|{1}|] is my test", "teststring1");
-                    }     
+                    }
                 }
                 ]]>
                         </Document>
@@ -1111,15 +1111,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        string.Format(@"This {0} 
-                {1} [|{3}|] works", "multiple", "line", "test")); 
+                        static void Main(string[] args)
+                        {
+                            string.Format(@"This {0}
+                    {1} [|{3}|] works", "multiple", "line", "test"));
+                        }
                     }
-                }
-                """,
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1132,15 +1132,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int[] intArray = {1, 2};
-                        string.Format("This {0} [|{1}|] {2} works", intArray); 
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            int[] intArray = {1, 2};
+                            string.Format("This {0} [|{1}|] {2} works", intArray);
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1153,15 +1153,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int[] intArray = {1, 2};
-                        string.Format("This {0} [|{1}|] {2} works", "TestString"); 
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            int[] intArray = {1, 2};
+                            string.Format("This {0} [|{1}|] {2} works", "TestString");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1174,15 +1174,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int[] intArray = {1, 2};
-                        string.Format("This {0} {1} [|{2}|] works", "TestString"); 
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            int[] intArray = {1, 2};
+                            string.Format("This {0} {1} [|{2}|] works", "TestString");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1195,15 +1195,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int[] intArray = {1, 2};
-                        string.Format("This {0} [|{2}|] {2} works", "TestString"); 
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            int[] intArray = {1, 2};
+                            string.Format("This {0} [|{2}|] {2} works", "TestString");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1216,15 +1216,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int[] intArray = {1, 2};
-                        string.Format("This {0} {2} [|{2}|] works", "TestString"); 
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            int[] intArray = {1, 2};
+                            string.Format("This {0} {2} [|{2}|] works", "TestString");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1237,15 +1237,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticInfoAsync(
                 """
-                class Program
-                {
-                    static void Main(string[] args)
+                    class Program
                     {
-                        int[] intArray = {1, 2};
-                        string.Format("This [|{}|] ", "TestString"); 
-                    }     
-                }
-                """,
+                        static void Main(string[] args)
+                        {
+                            int[] intArray = {1, 2};
+                            string.Format("This [|{}|] ", "TestString");
+                        }
+                    }
+                    """,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
@@ -1258,15 +1258,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         {
             await TestDiagnosticMissingAsync(
                 """
-                public class C
-                {
-                    public void M()
+                    public class C
                     {
-                        Forma[||]t();
-                        void Format() { }
+                        public void M()
+                        {
+                            Forma[||]t();
+                            void Format() { }
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

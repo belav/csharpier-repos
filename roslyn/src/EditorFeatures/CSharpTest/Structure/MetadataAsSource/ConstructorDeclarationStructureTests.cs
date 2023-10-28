@@ -23,11 +23,11 @@ public class ConstructorDeclarationStructureTests
     public async Task NoCommentsOrAttributes()
     {
         var code = """
-                class C
-                {
-                    $$C();
-                }
-                """;
+            class C
+            {
+                $$C();
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -36,12 +36,12 @@ public class ConstructorDeclarationStructureTests
     public async Task WithAttributes()
     {
         var code = """
-                class C
-                {
-                    {|hint:{|textspan:[Bar]
-                    |}$$C();|}
-                }
-                """;
+            class C
+            {
+                {|hint:{|textspan:[Bar]
+                |}$$C();|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -53,14 +53,14 @@ public class ConstructorDeclarationStructureTests
     public async Task WithCommentsAndAttributes()
     {
         var code = """
-                class C
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Bar]
-                    |}$$C();|}
-                }
-                """;
+            class C
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Bar]
+                |}$$C();|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -72,14 +72,14 @@ public class ConstructorDeclarationStructureTests
     public async Task WithCommentsAttributesAndModifiers()
     {
         var code = """
-                class C
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Bar]
-                    |}$$public C();|}
-                }
-                """;
+            class C
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Bar]
+                |}$$public C();|}
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -91,17 +91,17 @@ public class ConstructorDeclarationStructureTests
     public async Task TestConstructor10()
     {
         var code = """
-                class C
+            class C
+            {
+                $${|#0:public C(){|textspan:
                 {
-                    $${|#0:public C(){|textspan:
-                    {
-                    }|#0}
-                |}
-                    public C(int x)
-                    {
-                    }
+                }|#0}
+            |}
+                public C(int x)
+                {
                 }
-                """;
+            }
+            """;
 
         await VerifyBlockSpansAsync(
             code,

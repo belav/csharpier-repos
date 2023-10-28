@@ -23,33 +23,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [WpfTheory]
         [InlineData(
             """
-            public class C$$ {
-            }
-            """
+                public class C$$ {
+                }
+                """
         )]
         [InlineData(
             """
-            public class C $$[|{|]
-            [|}|]
-            """
+                public class C $$[|{|]
+                [|}|]
+                """
         )]
         [InlineData(
             """
-            public class C {$$
-            }
-            """
+                public class C {$$
+                }
+                """
         )]
         [InlineData(
             """
-            public class C {
-            $$}
-            """
+                public class C {
+                $$}
+                """
         )]
         [InlineData(
             """
-            public class C [|{|]
-            [|}|]$$
-            """
+                public class C [|{|]
+                [|}|]$$
+                """
         )]
         public async Task TestCurlies(string testCase)
         {
@@ -59,52 +59,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [WpfTheory]
         [InlineData(
             """
-            public class C $$[|{|]
-              public void Goo(){}
-            [|}|]
-            """
+                public class C $$[|{|]
+                  public void Goo(){}
+                [|}|]
+                """
         )]
         [InlineData(
             """
-            public class C {$$
-              public void Goo(){}
-            }
-            """
+                public class C {$$
+                  public void Goo(){}
+                }
+                """
         )]
         [InlineData(
             """
-            public class C {
-              public void Goo$$[|(|][|)|]{}
-            }
-            """
+                public class C {
+                  public void Goo$$[|(|][|)|]{}
+                }
+                """
         )]
         [InlineData(
             """
-            public class C {
-              public void Goo($$){}
-            }
-            """
+                public class C {
+                  public void Goo($$){}
+                }
+                """
         )]
         [InlineData(
             """
-            public class C {
-              public void Goo[|(|][|)|]$$[|{|][|}|]
-            }
-            """
+                public class C {
+                  public void Goo[|(|][|)|]$$[|{|][|}|]
+                }
+                """
         )]
         [InlineData(
             """
-            public class C {
-              public void Goo(){$$}
-            }
-            """
+                public class C {
+                  public void Goo(){$$}
+                }
+                """
         )]
         [InlineData(
             """
-            public class C {
-              public void Goo()[|{|][|}|]$$
-            }
-            """
+                public class C {
+                  public void Goo()[|{|][|}|]$$
+                }
+                """
         )]
         public async Task TestTouchingItems(string testCase)
         {
@@ -140,51 +140,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         {
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        bool a = b $$< c;
-                        bool d = e > f;
+                        void Goo()
+                        {
+                            bool a = b $$< c;
+                            bool d = e > f;
+                        }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        bool a = b <$$ c;
-                        bool d = e > f;
+                        void Goo()
+                        {
+                            bool a = b <$$ c;
+                            bool d = e > f;
+                        }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        bool a = b < c;
-                        bool d = e $$> f;
+                        void Goo()
+                        {
+                            bool a = b < c;
+                            bool d = e $$> f;
+                        }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        bool a = b < c;
-                        bool d = e >$$ f;
+                        void Goo()
+                        {
+                            bool a = b < c;
+                            bool d = e >$$ f;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -193,123 +193,123 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         {
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void M(int variable)
+                    class C
                     {
-                        switch $$[|(|]variable[|)|]
+                        void M(int variable)
                         {
-                            case 0:
-                                break;
+                            switch $$[|(|]variable[|)|]
+                            {
+                                case 0:
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void M(int variable)
+                    class C
                     {
-                        switch ($$variable)
+                        void M(int variable)
                         {
-                            case 0:
-                                break;
+                            switch ($$variable)
+                            {
+                                case 0:
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void M(int variable)
+                    class C
                     {
-                        switch (variable$$)
+                        void M(int variable)
                         {
-                            case 0:
-                                break;
+                            switch (variable$$)
+                            {
+                                case 0:
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void M(int variable)
+                    class C
                     {
-                        switch [|(|]variable[|)$$|]
+                        void M(int variable)
                         {
-                            case 0:
-                                break;
+                            switch [|(|]variable[|)$$|]
+                            {
+                                case 0:
+                                    break;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void M(int variable)
+                    class C
                     {
-                        switch (variable)
-                        $$[|{|]
-                            case 0:
-                                break;
-                        [|}|]
-                    }
-                }
-                """
-            );
-            await TestBraceHighlightingAsync(
-                """
-                class C
-                {
-                    void M(int variable)
-                    {
-                        switch (variable)
-                        {$$
-                            case 0:
-                                break;
+                        void M(int variable)
+                        {
+                            switch (variable)
+                            $$[|{|]
+                                case 0:
+                                    break;
+                            [|}|]
                         }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void M(int variable)
+                    class C
                     {
-                        switch (variable)
+                        void M(int variable)
                         {
-                            case 0:
-                                break;
-                        $$}
+                            switch (variable)
+                            {$$
+                                case 0:
+                                    break;
+                            }
+                        }
                     }
-                }
-                """
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    void M(int variable)
+                    class C
                     {
-                        switch (variable)
-                        [|{|]
-                            case 0:
-                                break;
-                        [|}$$|]
+                        void M(int variable)
+                        {
+                            switch (variable)
+                            {
+                                case 0:
+                                    break;
+                            $$}
+                        }
                     }
-                }
+                    """
+            );
+            await TestBraceHighlightingAsync(
                 """
+                    class C
+                    {
+                        void M(int variable)
+                        {
+                            switch (variable)
+                            [|{|]
+                                case 0:
+                                    break;
+                            [|}$$|]
+                        }
+                    }
+                    """
             );
         }
 
@@ -318,15 +318,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         {
             await TestBraceHighlightingAsync(
                 """
-                public class C [|{|]
-                [|}|]$$
-                """
+                    public class C [|{|]
+                    [|}|]$$
+                    """
             );
             await TestBraceHighlightingAsync(
                 """
-                public class C [|{|]
-                 void Goo(){}[|}|]$$
-                """
+                    public class C [|{|]
+                     void Goo(){}[|}|]$$
+                    """
             );
         }
 
@@ -335,20 +335,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         {
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    [|(|]int, int[|)$$|] x = (1, 2);
-                }
-                """,
+                    class C
+                    {
+                        [|(|]int, int[|)$$|] x = (1, 2);
+                    }
+                    """,
                 TestOptions.Regular
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    (int, int) x = [|(|]1, 2[|)$$|];
-                }
-                """,
+                    class C
+                    {
+                        (int, int) x = [|(|]1, 2[|)$$|];
+                    }
+                    """,
                 TestOptions.Regular
             );
         }
@@ -358,20 +358,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         {
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    ([|(|]int, int[|)$$|], string) x = ((1, 2), "hello";
-                }
-                """,
+                    class C
+                    {
+                        ([|(|]int, int[|)$$|], string) x = ((1, 2), "hello";
+                    }
+                    """,
                 TestOptions.Regular
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    ((int, int), string) x = ([|(|]1, 2[|)$$|], "hello";
-                }
-                """,
+                    class C
+                    {
+                        ((int, int), string) x = ([|(|]1, 2[|)$$|], "hello";
+                    }
+                    """,
                 TestOptions.Regular
             );
         }
@@ -381,20 +381,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         {
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    [|(|]Dictionary<int, string>, List<int>[|)$$|] x = (null, null);
-                }
-                """,
+                    class C
+                    {
+                        [|(|]Dictionary<int, string>, List<int>[|)$$|] x = (null, null);
+                    }
+                    """,
                 TestOptions.Regular
             );
             await TestBraceHighlightingAsync(
                 """
-                class C
-                {
-                    var x = [|(|]new Dictionary<int, string>(), new List<int>()[|)$$|];
-                }
-                """,
+                    class C
+                    {
+                        var x = [|(|]new Dictionary<int, string>(), new List<int>()[|)$$|];
+                    }
+                    """,
                 TestOptions.Regular
             );
         }

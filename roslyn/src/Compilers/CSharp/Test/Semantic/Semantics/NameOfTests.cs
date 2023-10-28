@@ -1188,7 +1188,7 @@ public class Program
                     public void Method1(int i) { }
                     public void Method2() { }
                     public static void Method2(int i) { }
-                
+
                     public static string StaticField =
                         nameof(Method1) +
                         nameof(Method2);
@@ -1299,7 +1299,7 @@ public class Program
                         nameof(Field.Field) +
                         nameof(Field.Event);
                 }
-                
+
                 public class C1
                 {
                     public int Property { get; }
@@ -1402,13 +1402,13 @@ public class Program
                     public C1 Property { get; }
                     public C1 Field;
                     public event System.Action Event;
-                
+
                     public static string StaticField =
                         nameof(Property.Method) +
                         nameof(Field.Method) +
                         nameof(Event.Invoke);
                 }
-                
+
                 public class C1
                 {
                     public void Method() { }

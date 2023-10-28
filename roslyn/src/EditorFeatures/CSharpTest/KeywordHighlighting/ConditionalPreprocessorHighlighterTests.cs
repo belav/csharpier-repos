@@ -22,32 +22,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-
-
-                        #define Debug
-                #undef Trace
-                    class PurchaseTransaction
-                    {
-                        void Commit()
+                        void M()
                         {
-                {|Cursor:[|#if|]|} Debug
-                            CheckConsistency();
-                #if Trace
-                                WriteToLog(this.ToString());
-                #else
-                            Exit();
-                #endif
-                [|#endif|]
-                            CommitHelper();
+
+
+                            #define Debug
+                    #undef Trace
+                        class PurchaseTransaction
+                        {
+                            void Commit()
+                            {
+                    {|Cursor:[|#if|]|} Debug
+                                CheckConsistency();
+                    #if Trace
+                                    WriteToLog(this.ToString());
+                    #else
+                                Exit();
+                    #endif
+                    [|#endif|]
+                                CommitHelper();
+                            }
                         }
                     }
-                }
-                }
-                """
+                    }
+                    """
             );
         }
 
@@ -56,32 +56,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-
-
-                        #define Debug
-                #undef Trace
-                    class PurchaseTransaction
-                    {
-                        void Commit()
+                        void M()
                         {
-                [|#if|] Debug
-                            CheckConsistency();
-                #if Trace
-                                WriteToLog(this.ToString());
-                #else
-                            Exit();
-                #endif
-                {|Cursor:[|#endif|]|}
-                            CommitHelper();
+
+
+                            #define Debug
+                    #undef Trace
+                        class PurchaseTransaction
+                        {
+                            void Commit()
+                            {
+                    [|#if|] Debug
+                                CheckConsistency();
+                    #if Trace
+                                    WriteToLog(this.ToString());
+                    #else
+                                Exit();
+                    #endif
+                    {|Cursor:[|#endif|]|}
+                                CommitHelper();
+                            }
                         }
                     }
-                }
-                }
-                """
+                    }
+                    """
             );
         }
 
@@ -90,32 +90,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-
-
-                        #define Debug
-                #undef Trace
-                    class PurchaseTransaction
-                    {
-                        void Commit()
+                        void M()
                         {
-                #if Debug
-                            CheckConsistency();
-                {|Cursor:[|#if|]|} Trace
-                                WriteToLog(this.ToString());
-                [|#else|]
-                            Exit();
-                [|#endif|]
-                #endif
-                            CommitHelper();
+
+
+                            #define Debug
+                    #undef Trace
+                        class PurchaseTransaction
+                        {
+                            void Commit()
+                            {
+                    #if Debug
+                                CheckConsistency();
+                    {|Cursor:[|#if|]|} Trace
+                                    WriteToLog(this.ToString());
+                    [|#else|]
+                                Exit();
+                    [|#endif|]
+                    #endif
+                                CommitHelper();
+                            }
                         }
                     }
-                }
-                }
-                """
+                    }
+                    """
             );
         }
 
@@ -124,32 +124,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-
-
-                        #define Debug
-                #undef Trace
-                    class PurchaseTransaction
-                    {
-                        void Commit()
+                        void M()
                         {
-                #if Debug
-                            CheckConsistency();
-                [|#if|] Trace
-                                WriteToLog(this.ToString());
-                {|Cursor:[|#else|]|}
-                            Exit();
-                [|#endif|]
-                #endif
-                            CommitHelper();
+
+
+                            #define Debug
+                    #undef Trace
+                        class PurchaseTransaction
+                        {
+                            void Commit()
+                            {
+                    #if Debug
+                                CheckConsistency();
+                    [|#if|] Trace
+                                    WriteToLog(this.ToString());
+                    {|Cursor:[|#else|]|}
+                                Exit();
+                    [|#endif|]
+                    #endif
+                                CommitHelper();
+                            }
                         }
                     }
-                }
-                }
-                """
+                    }
+                    """
             );
         }
 
@@ -158,32 +158,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-
-
-                        #define Debug
-                #undef Trace
-                    class PurchaseTransaction
-                    {
-                        void Commit()
+                        void M()
                         {
-                #if Debug
-                            CheckConsistency();
-                [|#if|] Trace
-                                WriteToLog(this.ToString());
-                [|#else|]
-                            Exit();
-                {|Cursor:[|#endif|]|}
-                #endif
-                            CommitHelper();
+
+
+                            #define Debug
+                    #undef Trace
+                        class PurchaseTransaction
+                        {
+                            void Commit()
+                            {
+                    #if Debug
+                                CheckConsistency();
+                    [|#if|] Trace
+                                    WriteToLog(this.ToString());
+                    [|#else|]
+                                Exit();
+                    {|Cursor:[|#endif|]|}
+                    #endif
+                                CommitHelper();
+                            }
                         }
                     }
-                }
-                }
-                """
+                    }
+                    """
             );
         }
 
@@ -192,23 +192,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                #define Goo1
-                #define Goo2
+                        void M()
+                        {
+                    #define Goo1
+                    #define Goo2
 
-                {|Cursor:[|#if|]|} Goo1
+                    {|Cursor:[|#if|]|} Goo1
 
-                [|#elif|] Goo2
+                    [|#elif|] Goo2
 
-                [|#else|]
+                    [|#else|]
 
-                [|#endif|]
+                    [|#endif|]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -217,23 +217,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                #define Goo1
-                #define Goo2
+                        void M()
+                        {
+                    #define Goo1
+                    #define Goo2
 
-                [|#if|] Goo1
+                    [|#if|] Goo1
 
-                {|Cursor:[|#elif|]|} Goo2
+                    {|Cursor:[|#elif|]|} Goo2
 
-                [|#else|]
+                    [|#else|]
 
-                [|#endif|]
+                    [|#endif|]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -242,23 +242,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                #define Goo1
-                #define Goo2
+                        void M()
+                        {
+                    #define Goo1
+                    #define Goo2
 
-                [|#if|] Goo1
+                    [|#if|] Goo1
 
-                [|#elif|] Goo2
+                    [|#elif|] Goo2
 
-                {|Cursor:[|#else|]|}
+                    {|Cursor:[|#else|]|}
 
-                [|#endif|]
+                    [|#endif|]
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -267,23 +267,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                #define Goo1
-                #define Goo2
+                        void M()
+                        {
+                    #define Goo1
+                    #define Goo2
 
-                [|#if|] Goo1
+                    [|#if|] Goo1
 
-                [|#elif|] Goo2
+                    [|#elif|] Goo2
 
-                [|#else|]
+                    [|#else|]
 
-                {|Cursor:[|#endif|]|}
+                    {|Cursor:[|#endif|]|}
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

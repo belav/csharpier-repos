@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                     /// <param name="a">Param a</param>
                     /// <param name="b">Param b</param>
                     public BaseClass(int a, int b) { }
-                } 
+                }
 
                 class Derived : BaseClass
                 {

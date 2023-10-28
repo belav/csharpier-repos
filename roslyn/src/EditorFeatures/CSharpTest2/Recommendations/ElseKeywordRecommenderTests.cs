@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """
+                    class C { }
+                    $$
+                    """
             );
         }
 
@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """
+                    System.Console.WriteLine();
+                    $$
+                    """
             );
         }
 
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """
+                    int i = 0;
+                    $$
+                    """
             );
         }
 
@@ -71,9 +71,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                #if $$
-                """
+                    class C {
+                    #if $$
+                    """
             );
         }
 
@@ -82,10 +82,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                #if GOO
-                #$$
-                dasd
-                """
+                    #if GOO
+                    #$$
+                    dasd
+                    """
             );
         }
 
@@ -113,9 +113,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                if (true)
-                $$
-                """
+                        if (true)
+                        $$
+                        """
                 )
             );
         }
@@ -512,9 +512,9 @@ else"
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                if (true)
-                    Console.WriteLine()$$; // Complete statement, but we're not at the end of it.
-                """
+                        if (true)
+                            Console.WriteLine()$$; // Complete statement, but we're not at the end of it.
+                        """
                 )
             );
         }
@@ -525,10 +525,10 @@ else"
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                if (true)
-                    Console.WriteLine();,
-                $$
-                """
+                        if (true)
+                            Console.WriteLine();,
+                        $$
+                        """
                 )
             );
         }

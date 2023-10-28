@@ -30,7 +30,6 @@ namespace System.Reflection
     using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
 #endif
 
-
     using MemberListType = System.RuntimeType.MemberListType;
 
     [Serializable]

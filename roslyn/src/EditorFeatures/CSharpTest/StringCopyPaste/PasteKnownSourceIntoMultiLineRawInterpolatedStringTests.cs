@@ -1063,7 +1063,7 @@ var x = $"""
                 pasteText: """
 
 
-                """,
+                    """,
                 """"
 var x = $"""
     [||]
@@ -1112,9 +1112,9 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                    
 
-                """,
+
+                    """,
                 """"
 var x = $"""
     [||]
@@ -1163,8 +1163,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                "
-                """,
+                    "
+                    """,
                 """"
 var x = $"""[||] """
 """",
@@ -1184,8 +1184,8 @@ var x = $""""[||] """
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""[||] """
 """",
@@ -1205,8 +1205,8 @@ var x = $""""""[||] """
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""
     "[||]
@@ -1230,8 +1230,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""
     "[||]"
@@ -1255,8 +1255,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""
     [||]"
@@ -1280,8 +1280,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """""
-                """"
-                """"",
+                    """"
+                    """"",
                 """"
 var x = $"""
     [||]
@@ -1328,8 +1328,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                "{{{
-                """,
+                    "{{{
+                    """,
                 """"
 var x = $"""
     [||]
@@ -1353,8 +1353,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """{{{
-                """",
+                    """{{{
+                    """",
                 """"
 var x = $"""
     [||]
@@ -1677,9 +1677,9 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
     [||]
@@ -1705,9 +1705,9 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
     goo[||]
@@ -1733,9 +1733,9 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
     goo[||]bar
@@ -1761,10 +1761,10 @@ def[||]bar
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
+                    abc
+                    def
 
-                """,
+                    """,
                 """"
 var x = $"""
     goo[||]bar
@@ -1792,10 +1792,10 @@ def
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                    def
-                ghi
-                """,
+                    abc
+                        def
+                    ghi
+                    """,
                 """"
 var x = $"""
     [||]
@@ -1823,10 +1823,10 @@ ghi[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                    def
-                ghi
-                """,
+                    abc
+                        def
+                    ghi
+                    """,
                 """"
 var x = $"""
           [||]
@@ -1854,10 +1854,10 @@ ghi[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                    def
-                    ghi
-                """,
+                    abc
+                        def
+                        ghi
+                    """,
                 """"
 var x = $"""
     [||]
@@ -1885,10 +1885,10 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                    abc
-                    def
-                    ghi
-                """,
+                        abc
+                        def
+                        ghi
+                    """,
                 """"
 var x = $"""
     [||]
@@ -1916,10 +1916,10 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                        abc
-                    def
-                    ghi
-                """,
+                            abc
+                        def
+                        ghi
+                    """,
                 """"
 var x = $"""
     [||]
@@ -1947,9 +1947,9 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
     [||]{|Selection:    |}
@@ -1975,10 +1975,10 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
+                    abc
+                    def
 
-                """,
+                    """,
                 """"
 var x = $"""
     [||]{|Selection:    |}
@@ -2006,9 +2006,9 @@ def
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
     [||]{|Selection:    |}  
@@ -2034,8 +2034,8 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                "bar
-                """,
+                    "bar
+                    """,
                 """"
 var x = $"""
     [||]goo
@@ -2059,8 +2059,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                ""
-                """,
+                    ""
+                    """,
                 """"
 var x = $"""
     [||]{|Selection:    |}
@@ -2084,8 +2084,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""
     [||]{|Selection:    |}
@@ -2130,7 +2130,7 @@ var x = $"""
                 pasteText: """
 
 
-                """,
+                    """,
                 """"
 var x = $"""
     [||]
@@ -2179,9 +2179,9 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                    
 
-                """,
+
+                    """,
                 """"
 var x = $"""
     [||]
@@ -2230,8 +2230,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                "
-                """,
+                    "
+                    """,
                 """"
 var x = $"""
     [||]
@@ -2255,8 +2255,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""
     [||]
@@ -2280,8 +2280,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""  
     [||]
@@ -2305,8 +2305,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""  
     "[||]
@@ -2330,8 +2330,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""  
     "[||]"  
@@ -2355,8 +2355,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""  
     [||]"
@@ -2380,8 +2380,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """""
-                """"
-                """"",
+                    """"
+                    """"",
                 """"
 var x = $"""
     [||]
@@ -2612,8 +2612,8 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """{{{
-                """",
+                    """{{{
+                    """",
                 """"
 var x = $"""
     [||]
@@ -2683,9 +2683,9 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
     [||]
@@ -2711,9 +2711,9 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
 [||]
@@ -2739,9 +2739,9 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""[||]
 
@@ -2768,9 +2768,9 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
     goo[||]
@@ -2796,9 +2796,9 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""
     goo[||]bar
@@ -2824,10 +2824,10 @@ def[||]bar
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
+                    abc
+                    def
 
-                """,
+                    """,
                 """"
 var x = $"""
     goo[||]bar
@@ -2855,10 +2855,10 @@ def
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                    def
-                ghi
-                """,
+                    abc
+                        def
+                    ghi
+                    """,
                 """"
 var x = $"""
     [||]
@@ -2886,10 +2886,10 @@ ghi[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                    def
-                    ghi
-                """,
+                    abc
+                        def
+                        ghi
+                    """,
                 """"
 var x = $"""
     [||]
@@ -2917,10 +2917,10 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                    abc
-                    def
-                    ghi
-                """,
+                        abc
+                        def
+                        ghi
+                    """,
                 """"
 var x = $"""
     [||]
@@ -2948,10 +2948,10 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                        abc
-                    def
-                    ghi
-                """,
+                            abc
+                        def
+                        ghi
+                    """,
                 """"
 var x = $"""
     [||]
@@ -2979,9 +2979,9 @@ var x = $"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""[||]{|Selection:
 
@@ -3005,10 +3005,10 @@ def[||]"""
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
+                    abc
+                    def
 
-                """,
+                    """,
                 """"
 var x = $"""[||]{|Selection:
 
@@ -3034,9 +3034,9 @@ def
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
+                    abc
+                    def
+                    """,
                 """"
 var x = $"""[||]{|Selection:
 
@@ -3084,8 +3084,8 @@ var x = $"""bar[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                ""
-                """,
+                    ""
+                    """,
                 """"
 var x = $"""[||]{|Selection:
 
@@ -3107,8 +3107,8 @@ var x = $"""""[||]"""
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
+                    """
+                    """",
                 """"
 var x = $"""[||]{|Selection:
 

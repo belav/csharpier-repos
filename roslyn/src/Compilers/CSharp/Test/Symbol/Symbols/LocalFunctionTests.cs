@@ -126,14 +126,14 @@ class C
         {
             CreateCompilation(
                     """
-                public class C
-                {
-                    public void M()
-                    {
-                        partial static void local() { }
-                    }
-                }
-                """
+                        public class C
+                        {
+                            public void M()
+                            {
+                                partial static void local() { }
+                            }
+                        }
+                        """
                 )
                 .VerifyDiagnostics(
                     // (5,9): error CS0103: The name 'partial' does not exist in the current context
@@ -157,14 +157,14 @@ class C
         {
             CreateCompilation(
                     """
-                public class C
-                {
-                    public void M()
-                    {
-                        static partial void local() { }
-                    }
-                }
-                """
+                        public class C
+                        {
+                            public void M()
+                            {
+                                static partial void local() { }
+                            }
+                        }
+                        """
                 )
                 .VerifyDiagnostics(
                     // (5,9): error CS0106: The modifier 'static' is not valid for this item
@@ -206,14 +206,14 @@ class C
         {
             CreateCompilation(
                     """
-                public class C
-                {
-                    public void M()
-                    {
-                        partial void local() { }
-                    }
-                }
-                """
+                        public class C
+                        {
+                            public void M()
+                            {
+                                partial void local() { }
+                            }
+                        }
+                        """
                 )
                 .VerifyDiagnostics(
                     // (4,6): error CS1513: } expected
@@ -239,37 +239,37 @@ class C
         {
             CreateCompilation(
                     """
-                using System;
+                        using System;
 
-                var c = new C();
-                LocalFunc();
-                NonStatic();
+                        var c = new C();
+                        LocalFunc();
+                        NonStatic();
 
-                static void LocalFunc()
-                {
-                    var x1 = c.MyExtension;
-                    var y1 = new Func<string>(c.MyExtension);
-                }
+                        static void LocalFunc()
+                        {
+                            var x1 = c.MyExtension;
+                            var y1 = new Func<string>(c.MyExtension);
+                        }
 
-                void NonStatic()
-                {
-                    Action f = static () =>
-                    {
-                        var x2 = c.MyExtension;
-                        var y2 = new Func<string>(c.MyExtension);
-                    };
-                }
+                        void NonStatic()
+                        {
+                            Action f = static () =>
+                            {
+                                var x2 = c.MyExtension;
+                                var y2 = new Func<string>(c.MyExtension);
+                            };
+                        }
 
-                public class C
-                {
-                }
+                        public class C
+                        {
+                        }
 
-                public static class Extensions
-                {
-                    public static string MyExtension(this C c)
-                        => string.Empty;
-                }
-                """
+                        public static class Extensions
+                        {
+                            public static string MyExtension(this C c)
+                                => string.Empty;
+                        }
+                        """
                 )
                 .VerifyDiagnostics(
                     // (9,14): error CS8421: A static local function cannot contain a reference to 'c'.
@@ -300,37 +300,37 @@ class C
         {
             CreateCompilation(
                     """
-                using System;
+                        using System;
 
-                var c = new C();
-                LocalFunc();
-                NonStatic();
+                        var c = new C();
+                        LocalFunc();
+                        NonStatic();
 
-                static void LocalFunc()
-                {
-                    var x1 = Extensions.MyExtension;
-                    var y1 = new Func<C, string>(Extensions.MyExtension);
-                }
+                        static void LocalFunc()
+                        {
+                            var x1 = Extensions.MyExtension;
+                            var y1 = new Func<C, string>(Extensions.MyExtension);
+                        }
 
-                void NonStatic()
-                {
-                    Action f = static () =>
-                    {
-                        var x2 = Extensions.MyExtension;
-                        var y2 = new Func<C, string>(Extensions.MyExtension);
-                    };
-                }
+                        void NonStatic()
+                        {
+                            Action f = static () =>
+                            {
+                                var x2 = Extensions.MyExtension;
+                                var y2 = new Func<C, string>(Extensions.MyExtension);
+                            };
+                        }
 
-                public class C
-                {
-                }
+                        public class C
+                        {
+                        }
 
-                public static class Extensions
-                {
-                    public static string MyExtension(this C c)
-                        => string.Empty;
-                }
-                """
+                        public static class Extensions
+                        {
+                            public static string MyExtension(this C c)
+                                => string.Empty;
+                        }
+                        """
                 )
                 .VerifyEmitDiagnostics();
         }
@@ -340,31 +340,31 @@ class C
         {
             CreateCompilation(
                     """
-                using System;
-                public class Base { }
+                        using System;
+                        public class Base { }
 
-                public class C : Base
-                {
-                    public void M()
-                    {
-                        LocalFunc();
-
-                        static void LocalFunc()
+                        public class C : Base
                         {
-                            var x1 = this.MyExtension;
-                            var x2 = new Func<string>(this.MyExtension);
-                            var y1 = base.MyExtension;
-                            var y2 = new Func<string>(base.MyExtension);
-                        }
-                    }
-                }
+                            public void M()
+                            {
+                                LocalFunc();
 
-                internal static class Extensions
-                {
-                    public static string MyExtension(this Base c)
-                        => string.Empty;
-                }
-                """
+                                static void LocalFunc()
+                                {
+                                    var x1 = this.MyExtension;
+                                    var x2 = new Func<string>(this.MyExtension);
+                                    var y1 = base.MyExtension;
+                                    var y2 = new Func<string>(base.MyExtension);
+                                }
+                            }
+                        }
+
+                        internal static class Extensions
+                        {
+                            public static string MyExtension(this Base c)
+                                => string.Empty;
+                        }
+                        """
                 )
                 .VerifyDiagnostics(
                     // (12,22): error CS8422: A static local function cannot contain a reference to 'this' or 'base'.
@@ -401,32 +401,32 @@ class C
         {
             CreateCompilation(
                     """
-                using System;
-                public class Base { }
+                        using System;
+                        public class Base { }
 
-                public class C : Base
-                {
-                    public void M()
-                    {
-                        NonStatic();
-                
-                        void NonStatic()
+                        public class C : Base
                         {
-                            Action f = static () =>
+                            public void M()
                             {
-                                var x1 = this.MyExtension;
-                                var x2 = new Func<string>(this.MyExtension);
-                            };
-                        }
-                    }
-                }
+                                NonStatic();
 
-                internal static class Extensions
-                {
-                    public static string MyExtension(this Base c)
-                        => string.Empty;
-                }
-                """
+                                void NonStatic()
+                                {
+                                    Action f = static () =>
+                                    {
+                                        var x1 = this.MyExtension;
+                                        var x2 = new Func<string>(this.MyExtension);
+                                    };
+                                }
+                            }
+                        }
+
+                        internal static class Extensions
+                        {
+                            public static string MyExtension(this Base c)
+                                => string.Empty;
+                        }
+                        """
                 )
                 .VerifyDiagnostics(
                     // (14,26): error CS8821: A static anonymous function cannot contain a reference to 'this' or 'base'.
@@ -445,32 +445,32 @@ class C
         {
             CreateCompilation(
                     """
-                using System;
-                public class Base { }
+                        using System;
+                        public class Base { }
 
-                public class C : Base
-                {
-                    public void M()
-                    {
-                        NonStatic();
-                
-                        void NonStatic()
+                        public class C : Base
                         {
-                            Action f = static () =>
+                            public void M()
                             {
-                                var x1 = base.MyExtension;
-                                var x2 = new Func<string>(base.MyExtension);
-                            };
-                        }
-                    }
-                }
+                                NonStatic();
 
-                internal static class Extensions
-                {
-                    public static string MyExtension(this Base c)
-                        => string.Empty;
-                }
-                """
+                                void NonStatic()
+                                {
+                                    Action f = static () =>
+                                    {
+                                        var x1 = base.MyExtension;
+                                        var x2 = new Func<string>(base.MyExtension);
+                                    };
+                                }
+                            }
+                        }
+
+                        internal static class Extensions
+                        {
+                            public static string MyExtension(this Base c)
+                                => string.Empty;
+                        }
+                        """
                 )
                 .VerifyDiagnostics(
                     // (14,31): error CS0117: 'Base' does not contain a definition for 'MyExtension'
@@ -491,23 +491,23 @@ class C
         {
             CreateCompilation(
                     """
-                using System;
+                        using System;
 
-                static class Extensions
-                {
-                    static void F()
-                    {
-                        LocalFunc();
-                        static void LocalFunc()
+                        static class Extensions
                         {
-                            var x = MyExtension;
-                            var y = new Func<object, string>(MyExtension);
+                            static void F()
+                            {
+                                LocalFunc();
+                                static void LocalFunc()
+                                {
+                                    var x = MyExtension;
+                                    var y = new Func<object, string>(MyExtension);
+                                }
+                            }
+                            static string MyExtension(this object o)
+                                => string.Empty;
                         }
-                    }
-                    static string MyExtension(this object o)
-                        => string.Empty;
-                }
-                """
+                        """
                 )
                 .VerifyEmitDiagnostics();
         }

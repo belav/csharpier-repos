@@ -37151,19 +37151,19 @@ True
             verifier.VerifyIL(
                 "C.M4",
                 """
-                {
-                  // Code size        9 (0x9)
-                  .maxstack  2
-                  .locals init (int V_0) //tempY
-                  IL_0000:  ldarg.1
-                  IL_0001:  ldarg.2
-                  IL_0002:  stloc.0
-                  IL_0003:  starg.s    V_2
-                  IL_0005:  ldloc.0
-                  IL_0006:  starg.s    V_1
-                  IL_0008:  ret
-                }
-                """
+                    {
+                      // Code size        9 (0x9)
+                      .maxstack  2
+                      .locals init (int V_0) //tempY
+                      IL_0000:  ldarg.1
+                      IL_0001:  ldarg.2
+                      IL_0002:  stloc.0
+                      IL_0003:  starg.s    V_2
+                      IL_0005:  ldloc.0
+                      IL_0006:  starg.s    V_1
+                      IL_0008:  ret
+                    }
+                    """
             );
         }
 
@@ -37200,58 +37200,58 @@ True
                 source,
                 options: TestOptions.ReleaseExe,
                 expectedOutput: """
-                (2, 1)
-                (2, 1)
-                """
+                    (2, 1)
+                    (2, 1)
+                    """
             );
 
             verifier.VerifyIL(
                 "C.M1",
                 """
-                {
-                  // Code size       26 (0x1a)
-                  .maxstack  2
-                  .locals init (int V_0)
-                  IL_0000:  ldarg.1
-                  IL_0001:  ldarg.0
-                  IL_0002:  stloc.0
-                  IL_0003:  ldloc.0
-                  IL_0004:  starg.s    V_1
-                  IL_0006:  dup
-                  IL_0007:  starg.s    V_0
-                  IL_0009:  ldloc.0
-                  IL_000a:  newobj     "System.ValueTuple<int, int>..ctor(int, int)"
-                  IL_000f:  box        "System.ValueTuple<int, int>"
-                  IL_0014:  call       "void System.Console.WriteLine(object)"
-                  IL_0019:  ret
-                }
-                """
+                    {
+                      // Code size       26 (0x1a)
+                      .maxstack  2
+                      .locals init (int V_0)
+                      IL_0000:  ldarg.1
+                      IL_0001:  ldarg.0
+                      IL_0002:  stloc.0
+                      IL_0003:  ldloc.0
+                      IL_0004:  starg.s    V_1
+                      IL_0006:  dup
+                      IL_0007:  starg.s    V_0
+                      IL_0009:  ldloc.0
+                      IL_000a:  newobj     "System.ValueTuple<int, int>..ctor(int, int)"
+                      IL_000f:  box        "System.ValueTuple<int, int>"
+                      IL_0014:  call       "void System.Console.WriteLine(object)"
+                      IL_0019:  ret
+                    }
+                    """
             );
 
             verifier.VerifyIL(
                 "C.M2",
                 """
-                {
-                  // Code size       28 (0x1c)
-                  .maxstack  2
-                  .locals init (int V_0, //tempY
-                                int V_1) //tempX
-                  IL_0000:  ldarg.1
-                  IL_0001:  stloc.0
-                  IL_0002:  ldarg.0
-                  IL_0003:  stloc.1
-                  IL_0004:  ldloc.1
-                  IL_0005:  starg.s    V_1
-                  IL_0007:  ldloc.0
-                  IL_0008:  starg.s    V_0
-                  IL_000a:  ldloc.0
-                  IL_000b:  ldloc.1
-                  IL_000c:  newobj     "System.ValueTuple<int, int>..ctor(int, int)"
-                  IL_0011:  box        "System.ValueTuple<int, int>"
-                  IL_0016:  call       "void System.Console.WriteLine(object)"
-                  IL_001b:  ret
-                }
-                """
+                    {
+                      // Code size       28 (0x1c)
+                      .maxstack  2
+                      .locals init (int V_0, //tempY
+                                    int V_1) //tempX
+                      IL_0000:  ldarg.1
+                      IL_0001:  stloc.0
+                      IL_0002:  ldarg.0
+                      IL_0003:  stloc.1
+                      IL_0004:  ldloc.1
+                      IL_0005:  starg.s    V_1
+                      IL_0007:  ldloc.0
+                      IL_0008:  starg.s    V_0
+                      IL_000a:  ldloc.0
+                      IL_000b:  ldloc.1
+                      IL_000c:  newobj     "System.ValueTuple<int, int>..ctor(int, int)"
+                      IL_0011:  box        "System.ValueTuple<int, int>"
+                      IL_0016:  call       "void System.Console.WriteLine(object)"
+                      IL_001b:  ret
+                    }
+                    """
             );
         }
 
@@ -37275,7 +37275,7 @@ True
                         (x, y)=(y, x);
                         Console.WriteLine((x,y,z));
                     }
-                    
+
                     // equivalent to:
                     public static void M2()
                     {
@@ -37287,7 +37287,7 @@ True
                         x = temp;
                         Console.WriteLine((x,y,z));
                     }
-                    
+
                     // a common manual swap in user code, reads the locals in a different order but observably the same
                     public static void M3()
                     {
@@ -37333,10 +37333,10 @@ True
                 source,
                 options: TestOptions.ReleaseExe,
                 expectedOutput: """
-                (2, 1, 3)
-                (2, 1, 3)
-                (2, 1, 3)
-                """
+                    (2, 1, 3)
+                    (2, 1, 3)
+                    (2, 1, 3)
+                    """
             );
             verifier.VerifyIL("C.M1", expectedIL);
             verifier.VerifyIL("C.M2", expectedIL);
@@ -37344,31 +37344,31 @@ True
             verifier.VerifyIL(
                 "C.M3",
                 """
-                {
-                  // Code size       29 (0x1d)
-                  .maxstack  3
-                  .locals init (int V_0, //x
-                                int V_1, //y
-                                int V_2) //z
-                  IL_0000:  ldc.i4.1
-                  IL_0001:  stloc.0
-                  IL_0002:  ldc.i4.2
-                  IL_0003:  stloc.1
-                  IL_0004:  ldc.i4.3
-                  IL_0005:  stloc.2
-                  IL_0006:  ldloc.0
-                  IL_0007:  ldloc.1
-                  IL_0008:  stloc.0
-                  IL_0009:  stloc.1
-                  IL_000a:  ldloc.0
-                  IL_000b:  ldloc.1
-                  IL_000c:  ldloc.2
-                  IL_000d:  newobj     "System.ValueTuple<int, int, int>..ctor(int, int, int)"
-                  IL_0012:  box        "System.ValueTuple<int, int, int>"
-                  IL_0017:  call       "void System.Console.WriteLine(object)"
-                  IL_001c:  ret
-                }
-                """
+                    {
+                      // Code size       29 (0x1d)
+                      .maxstack  3
+                      .locals init (int V_0, //x
+                                    int V_1, //y
+                                    int V_2) //z
+                      IL_0000:  ldc.i4.1
+                      IL_0001:  stloc.0
+                      IL_0002:  ldc.i4.2
+                      IL_0003:  stloc.1
+                      IL_0004:  ldc.i4.3
+                      IL_0005:  stloc.2
+                      IL_0006:  ldloc.0
+                      IL_0007:  ldloc.1
+                      IL_0008:  stloc.0
+                      IL_0009:  stloc.1
+                      IL_000a:  ldloc.0
+                      IL_000b:  ldloc.1
+                      IL_000c:  ldloc.2
+                      IL_000d:  newobj     "System.ValueTuple<int, int, int>..ctor(int, int, int)"
+                      IL_0012:  box        "System.ValueTuple<int, int, int>"
+                      IL_0017:  call       "void System.Console.WriteLine(object)"
+                      IL_001c:  ret
+                    }
+                    """
             );
         }
 
@@ -37445,19 +37445,19 @@ True
                 source,
                 options: TestOptions.ReleaseExe,
                 expectedOutput: """
-                Effect: 1
-                Effect: 2
-                (1, 2)
-                Effect: 1
-                Effect: 2
-                (1, 2)
-                Effect: 1
-                Effect: 2
-                (1, 2)
-                Effect: 1
-                Effect: 2
-                (1, 2)
-                """
+                    Effect: 1
+                    Effect: 2
+                    (1, 2)
+                    Effect: 1
+                    Effect: 2
+                    (1, 2)
+                    Effect: 1
+                    Effect: 2
+                    (1, 2)
+                    Effect: 1
+                    Effect: 2
+                    (1, 2)
+                    """
             );
 
             verifier.VerifyIL("C.M1", expectedIL);
@@ -37467,29 +37467,29 @@ True
             verifier.VerifyIL(
                 "C.M4",
                 """
-            {
-              // Code size       48 (0x30)
-              .maxstack  2
-              .locals init (int V_0, //x
-                            int V_1) //y
-              IL_0000:  ldc.i4.1
-              IL_0001:  call       "int C.Effect(int)"
-              IL_0006:  ldc.i4.2
-              IL_0007:  call       "int C.Effect(int)"
-              IL_000c:  call       "System.ValueTuple<int, int> System.ValueTuple.Create<int, int>(int, int)"
-              IL_0011:  dup
-              IL_0012:  ldfld      "int System.ValueTuple<int, int>.Item1"
-              IL_0017:  stloc.0
-              IL_0018:  ldfld      "int System.ValueTuple<int, int>.Item2"
-              IL_001d:  stloc.1
-              IL_001e:  ldloc.0
-              IL_001f:  ldloc.1
-              IL_0020:  newobj     "System.ValueTuple<int, int>..ctor(int, int)"
-              IL_0025:  box        "System.ValueTuple<int, int>"
-              IL_002a:  call       "void System.Console.WriteLine(object)"
-              IL_002f:  ret
-            }
-            """
+                    {
+                      // Code size       48 (0x30)
+                      .maxstack  2
+                      .locals init (int V_0, //x
+                                    int V_1) //y
+                      IL_0000:  ldc.i4.1
+                      IL_0001:  call       "int C.Effect(int)"
+                      IL_0006:  ldc.i4.2
+                      IL_0007:  call       "int C.Effect(int)"
+                      IL_000c:  call       "System.ValueTuple<int, int> System.ValueTuple.Create<int, int>(int, int)"
+                      IL_0011:  dup
+                      IL_0012:  ldfld      "int System.ValueTuple<int, int>.Item1"
+                      IL_0017:  stloc.0
+                      IL_0018:  ldfld      "int System.ValueTuple<int, int>.Item2"
+                      IL_001d:  stloc.1
+                      IL_001e:  ldloc.0
+                      IL_001f:  ldloc.1
+                      IL_0020:  newobj     "System.ValueTuple<int, int>..ctor(int, int)"
+                      IL_0025:  box        "System.ValueTuple<int, int>"
+                      IL_002a:  call       "void System.Console.WriteLine(object)"
+                      IL_002f:  ret
+                    }
+                    """
             );
         }
 
@@ -37740,11 +37740,11 @@ True
             var verifier = CompileAndVerify(
                 source,
                 expectedOutput: """
-                Conversion 1
-                Conversion 2
-                Conversion 3
-                (DestType { N = 1 }, DestType { N = 2 }, DestType { N = 3 })
-                """
+                    Conversion 1
+                    Conversion 2
+                    Conversion 3
+                    (DestType { N = 1 }, DestType { N = 2 }, DestType { N = 3 })
+                    """
             );
             verifier.VerifyIL("<top-level-statements-entry-point>", expectedIL);
 
@@ -37776,11 +37776,11 @@ True
             verifier = CompileAndVerify(
                 source,
                 expectedOutput: """
-                Conversion 1
-                Conversion 2
-                Conversion 3
-                (DestType { N = 1 }, DestType { N = 2 }, DestType { N = 3 })
-                """
+                    Conversion 1
+                    Conversion 2
+                    Conversion 3
+                    (DestType { N = 1 }, DestType { N = 2 }, DestType { N = 3 })
+                    """
             );
             verifier.VerifyIL("<top-level-statements-entry-point>", expectedIL);
         }

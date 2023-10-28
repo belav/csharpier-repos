@@ -24,13 +24,13 @@ public class SwitchStatementBenchmarks
         var builder = new StringBuilder();
         builder.AppendLine(
             """
-            class TestClass
-            {
-              int TestMethod(string arg)
-              {
-                switch (arg)
+                class TestClass
                 {
-            """
+                  int TestMethod(string arg)
+                  {
+                    switch (arg)
+                    {
+                """
         );
 
         for (var i = 0; i < switchCount; i++)
@@ -44,12 +44,12 @@ public class SwitchStatementBenchmarks
 
         builder.AppendLine(
             """
-                  default: return 0;
+                      default: return 0;
+                    }
+                  }
                 }
-              }
-            }
 
-            """
+                """
         );
 
         return builder.ToString();

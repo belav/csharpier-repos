@@ -70,29 +70,29 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
                 new DocumentWithInfo()
                 {
                     Text = """
-                    namespace Test
-                    {    
-                        partial class C
+                        namespace Test
                         {
+                            partial class C
+                            {
+                            }
                         }
-                    }
-                    """,
+                        """,
                     DocumentFilePath = @"Test\Folder\Path\C.cs",
                     DocumentName = "C.cs"
                 },
                 new DocumentWithInfo()
                 {
                     Text = """
-                    namespace Test
-                    {    
-                        partial class C
+                        namespace Test
                         {
-                            class Other
+                            partial class C
                             {
+                                class Other
+                                {
+                                }
                             }
                         }
-                    }
-                    """,
+                        """,
                     DocumentFilePath = @"Test\Folder\Path\C.Other.cs",
                     DocumentName = "C.Other.cs"
                 }
@@ -103,29 +103,29 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
                 new DocumentWithInfo()
                 {
                     Text = """
-                    namespace Test
-                    {    
-                        partial class C2
+                        namespace Test
                         {
+                            partial class C2
+                            {
+                            }
                         }
-                    }
-                    """,
+                        """,
                     DocumentFilePath = @"Test\Folder\Path\C2.cs",
                     DocumentName = "C2.cs"
                 },
                 new DocumentWithInfo()
                 {
                     Text = """
-                    namespace Test
-                    {    
-                        partial class C2
+                        namespace Test
                         {
-                            class Other
+                            partial class C2
                             {
+                                class Other
+                                {
+                                }
                             }
                         }
-                    }
-                    """,
+                        """,
                     DocumentFilePath = @"Test\Folder\Path\C.Other.cs",
                     DocumentName = "C.Other.cs"
                 }
@@ -138,13 +138,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
         public Task CSharp_RenameDocument_NoRenameNamespace() =>
             TestEmptyActionSet(
                 """
-            namespace Test.Path
-            {
-                class C
-                {
-                }
-            }
-            """,
+                    namespace Test.Path
+                    {
+                        class C
+                        {
+                        }
+                    }
+                    """,
                 documentPath: @"Test\Path\Document.cs",
                 documentName: @"Document.cs"
             );
@@ -153,21 +153,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
         public Task CSharp_RenameDocument_RenameNamespace() =>
             TestRenameDocument(
                 """
-            namespace Test.Path
-            {
-                class C
-                {
-                }
-            }
-            """,
+                    namespace Test.Path
+                    {
+                        class C
+                        {
+                        }
+                    }
+                    """,
                 """
-            namespace Test.Path.After.Test
-            {
-                class C
-                {
-                }
-            }
-            """,
+                    namespace Test.Path.After.Test
+                    {
+                        class C
+                        {
+                        }
+                    }
+                    """,
                 documentPath: @"Test\Path\Document.cs",
                 documentName: @"Document.cs",
                 newDocumentPath: @"Test\Path\After\Test\Document.cs"
@@ -177,35 +177,35 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
         public Task CSharp_RenameDocument_RenameMultipleNamespaces() =>
             TestRenameDocument(
                 """
-           namespace Test.Path
-           {
-               class C
-               {
-               }
-           }
+                    namespace Test.Path
+                    {
+                        class C
+                        {
+                        }
+                    }
 
-           namespace Test.Path
-           {
-               class C2
-               {
-               }
-           }
-           """,
+                    namespace Test.Path
+                    {
+                        class C2
+                        {
+                        }
+                    }
+                    """,
                 """
-           namespace Test.Path.After.Test
-           {
-               class C
-               {
-               }
-           }
+                    namespace Test.Path.After.Test
+                    {
+                        class C
+                        {
+                        }
+                    }
 
-           namespace Test.Path.After.Test
-           {
-               class C2
-               {
-               }
-           }
-           """,
+                    namespace Test.Path.After.Test
+                    {
+                        class C2
+                        {
+                        }
+                    }
+                    """,
                 documentPath: @"Test\Path\Document.cs",
                 documentName: @"Document.cs",
                 newDocumentPath: @"Test\Path\After\Test\Document.cs"
@@ -215,49 +215,49 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
         public Task CSharp_RenameDocument_RenameMultipleNamespaces2() =>
             TestRenameDocument(
                 """
-           namespace Test.Path
-           {
-               class C
-               {
-               }
-           }
+                    namespace Test.Path
+                    {
+                        class C
+                        {
+                        }
+                    }
 
-           namespace Test.Path
-           {
-               class C2
-               {
-               }
-           }
+                    namespace Test.Path
+                    {
+                        class C2
+                        {
+                        }
+                    }
 
-           namespace Other.Namespace
-           {
-               class C3
-               {
-               }
-           }
-           """,
+                    namespace Other.Namespace
+                    {
+                        class C3
+                        {
+                        }
+                    }
+                    """,
                 """
-           namespace Test.Path.After.Test
-           {
-               class C
-               {
-               }
-           }
+                    namespace Test.Path.After.Test
+                    {
+                        class C
+                        {
+                        }
+                    }
 
-           namespace Test.Path.After.Test
-           {
-               class C2
-               {
-               }
-           }
+                    namespace Test.Path.After.Test
+                    {
+                        class C2
+                        {
+                        }
+                    }
 
-           namespace Other.Namespace
-           {
-               class C3
-               {
-               }
-           }
-           """,
+                    namespace Other.Namespace
+                    {
+                        class C3
+                        {
+                        }
+                    }
+                    """,
                 documentPath: @"Test\Path\Document.cs",
                 documentName: @"Document.cs",
                 newDocumentPath: @"Test\Path\After\Test\Document.cs"
@@ -267,49 +267,49 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
         public Task CSharp_RenameDocument_RenameMultipleNamespaces3() =>
             TestRenameDocument(
                 """
-           namespace Test.Path
-           {
-               class C
-               {
-               }
-           }
+                    namespace Test.Path
+                    {
+                        class C
+                        {
+                        }
+                    }
 
-           namespace Other.Namespace
-           {
-               class C2
-               {
-               }
-           }
+                    namespace Other.Namespace
+                    {
+                        class C2
+                        {
+                        }
+                    }
 
-           namespace Test.Path
-           {
-               class C3
-               {
-               }
-           }
-           """,
+                    namespace Test.Path
+                    {
+                        class C3
+                        {
+                        }
+                    }
+                    """,
                 """
-           namespace Test.Path.After.Test
-           {
-               class C
-               {
-               }
-           }
+                    namespace Test.Path.After.Test
+                    {
+                        class C
+                        {
+                        }
+                    }
 
-           namespace Other.Namespace
-           {
-               class C2
-               {
-               }
-           }
+                    namespace Other.Namespace
+                    {
+                        class C2
+                        {
+                        }
+                    }
 
-           namespace Test.Path.After.Test
-           {
-               class C3
-               {
-               }
-           }
-           """,
+                    namespace Test.Path.After.Test
+                    {
+                        class C3
+                        {
+                        }
+                    }
+                    """,
                 documentPath: @"Test\Path\Document.cs",
                 documentName: @"Document.cs",
                 newDocumentPath: @"Test\Path\After\Test\Document.cs"
@@ -319,41 +319,41 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
         public Task CSharp_RenameDocument_RenameMultipleNamespaces_Nested() =>
             TestRenameDocument(
                 """
-    namespace Test.Path
-    {
-        class C
-        {
-        }
-    }
+                    namespace Test.Path
+                    {
+                        class C
+                        {
+                        }
+                    }
 
-    namespace Test
-    {
-        namespace Path
-        {
-            class C2
-            {
-            }
-        }
-    }
-    """,
+                    namespace Test
+                    {
+                        namespace Path
+                        {
+                            class C2
+                            {
+                            }
+                        }
+                    }
+                    """,
                 """
-    namespace Test.Path.After.Test
-    {
-        class C
-        {
-        }
-    }
+                    namespace Test.Path.After.Test
+                    {
+                        class C
+                        {
+                        }
+                    }
 
-    namespace Test
-    {
-        namespace Path
-        {
-            class C2
-            {
-            }
-        }
-    }
-    """,
+                    namespace Test
+                    {
+                        namespace Path
+                        {
+                            class C2
+                            {
+                            }
+                        }
+                    }
+                    """,
                 documentPath: @"Test\Path\Document.cs",
                 documentName: @"Document.cs",
                 newDocumentPath: @"Test\Path\After\Test\Document.cs"
@@ -363,21 +363,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
         public Task CSharp_RenameDocument_RenameNamespace2() =>
             TestRenameDocument(
                 """
-            namespace Test.Path
-            {
-                class C
-                {
-                }
-            }
-            """,
+                    namespace Test.Path
+                    {
+                        class C
+                        {
+                        }
+                    }
+                    """,
                 """
-            namespace Test
-            {
-                class C
-                {
-                }
-            }
-            """,
+                    namespace Test
+                    {
+                        class C
+                        {
+                        }
+                    }
+                    """,
                 documentPath: @"Test\Path\Document.cs",
                 documentName: @"Document.cs",
                 newDocumentPath: @"Test\Document.cs"
@@ -387,21 +387,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
         public Task CSharp_RenameDocument_RenameNamespaceAndClass() =>
             TestRenameDocument(
                 """
-            namespace Test.Path
-            {
-                class C
-                {
-                }
-            }
-            """,
+                    namespace Test.Path
+                    {
+                        class C
+                        {
+                        }
+                    }
+                    """,
                 """
-            namespace Test
-            {
-                class C2
-                {
-                }
-            }
-            """,
+                    namespace Test
+                    {
+                        class C2
+                        {
+                        }
+                    }
+                    """,
                 documentPath: @"Test\Path\C2.cs",
                 documentName: @"C.cs",
                 newDocumentName: @"C2",

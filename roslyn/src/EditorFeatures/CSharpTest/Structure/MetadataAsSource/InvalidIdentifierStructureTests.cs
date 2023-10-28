@@ -42,11 +42,11 @@ public class InvalidIdentifierStructureTests : AbstractSyntaxStructureProviderTe
     public async Task PrependedDollarSign()
     {
         var code = """
-                {|hint:$$class C{|textspan:
-                {
-                    public void $Invoke();
-                }|}|}
-                """;
+            {|hint:$$class C{|textspan:
+            {
+                public void $Invoke();
+            }|}|}
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -58,11 +58,11 @@ public class InvalidIdentifierStructureTests : AbstractSyntaxStructureProviderTe
     public async Task SymbolsAndPunctuation()
     {
         var code = """
-                {|hint:$$class C{|textspan:
-                {
-                    public void !#$%^&*(()_-+=|\}]{["':;?/>.<,~`();
-                }|}|}
-                """;
+            {|hint:$$class C{|textspan:
+            {
+                public void !#$%^&*(()_-+=|\}]{["':;?/>.<,~`();
+            }|}|}
+            """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -74,11 +74,11 @@ public class InvalidIdentifierStructureTests : AbstractSyntaxStructureProviderTe
     public async Task IdentifierThatLooksLikeCode()
     {
         var code = """
-                {|hint1:$$class C{|textspan1:
-                {
-                    public void }|}|} } {|hint2:public class CodeInjection{|textspan2:{ }|}|} {|textspan3:/* now everything is commented ();
-                }|}
-                """;
+            {|hint1:$$class C{|textspan1:
+            {
+                public void }|}|} } {|hint2:public class CodeInjection{|textspan2:{ }|}|} {|textspan3:/* now everything is commented ();
+            }|}
+            """;
 
         await VerifyBlockSpansAsync(
             code,

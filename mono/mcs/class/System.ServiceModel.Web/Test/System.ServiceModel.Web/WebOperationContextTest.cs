@@ -39,7 +39,6 @@ using NUnit.Framework;
 using System.ServiceModel.Syndication;
 #endif
 
-
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.ServiceModel.Web

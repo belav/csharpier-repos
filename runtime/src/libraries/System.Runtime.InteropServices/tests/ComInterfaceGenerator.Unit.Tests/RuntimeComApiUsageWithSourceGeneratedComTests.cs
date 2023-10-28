@@ -15,36 +15,36 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task SetComObjectData()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               public interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                public interface I
+                {
+                }
 
-               [GeneratedComClass]
-               public class C : I
-               {
-               }
+                [GeneratedComClass]
+                public class C : I
+                {
+                }
 
-               public static class Program
-               {
-                   public static void Foo(I i)
-                   {
-                       Marshal.SetComObjectData([|i|], new object(), new object());
-                   }
-                   public static void Foo(C c)
-                   {
-                       Marshal.SetComObjectData([|c|], new object(), new object());
-                   }
-                   public static void Foo(ComObject c)
-                   {
-                       Marshal.SetComObjectData([|c|], new object(), new object());
-                   }
-               }
-               """;
+                public static class Program
+                {
+                    public static void Foo(I i)
+                    {
+                        Marshal.SetComObjectData([|i|], new object(), new object());
+                    }
+                    public static void Foo(C c)
+                    {
+                        Marshal.SetComObjectData([|c|], new object(), new object());
+                    }
+                    public static void Foo(ComObject c)
+                    {
+                        Marshal.SetComObjectData([|c|], new object(), new object());
+                    }
+                }
+                """;
 
             await VerifyAnalyzerAsync(source);
         }
@@ -53,36 +53,36 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task GetComObjectData()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               public interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                public interface I
+                {
+                }
 
-               [GeneratedComClass]
-               public class C : I
-               {
-               }
+                [GeneratedComClass]
+                public class C : I
+                {
+                }
 
-               public static class Program
-               {
-                   public static void Foo(I i)
-                   {
-                       _ = Marshal.GetComObjectData([|i|], new object());
-                   }
-                   public static void Foo(C c)
-                   {
-                       _ = Marshal.GetComObjectData([|c|], new object());
-                   }
-                   public static void Foo(ComObject c)
-                   {
-                       _ = Marshal.GetComObjectData([|c|], new object());
-                   }
-               }
-               """;
+                public static class Program
+                {
+                    public static void Foo(I i)
+                    {
+                        _ = Marshal.GetComObjectData([|i|], new object());
+                    }
+                    public static void Foo(C c)
+                    {
+                        _ = Marshal.GetComObjectData([|c|], new object());
+                    }
+                    public static void Foo(ComObject c)
+                    {
+                        _ = Marshal.GetComObjectData([|c|], new object());
+                    }
+                }
+                """;
 
             await VerifyAnalyzerAsync(source);
         }
@@ -91,36 +91,36 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task ReleaseComObject()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               public interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                public interface I
+                {
+                }
 
-               [GeneratedComClass]
-               public class C : I
-               {
-               }
+                [GeneratedComClass]
+                public class C : I
+                {
+                }
 
-               public static class Program
-               {
-                   public static void Foo(I i)
-                   {
-                       _ = Marshal.ReleaseComObject([|i|]);
-                   }
-                   public static void Foo(C c)
-                   {
-                       _ = Marshal.ReleaseComObject([|c|]);
-                   }
-                   public static void Foo(ComObject c)
-                   {
-                       _ = Marshal.ReleaseComObject([|c|]);
-                   }
-               }
-               """;
+                public static class Program
+                {
+                    public static void Foo(I i)
+                    {
+                        _ = Marshal.ReleaseComObject([|i|]);
+                    }
+                    public static void Foo(C c)
+                    {
+                        _ = Marshal.ReleaseComObject([|c|]);
+                    }
+                    public static void Foo(ComObject c)
+                    {
+                        _ = Marshal.ReleaseComObject([|c|]);
+                    }
+                }
+                """;
 
             await VerifyAnalyzerAsync(source);
         }
@@ -129,36 +129,36 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task FinalReleaseComObject()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               public interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                public interface I
+                {
+                }
 
-               [GeneratedComClass]
-               public class C : I
-               {
-               }
+                [GeneratedComClass]
+                public class C : I
+                {
+                }
 
-               public static class Program
-               {
-                   public static void Foo(I i)
-                   {
-                       _ = Marshal.FinalReleaseComObject([|i|]);
-                   }
-                   public static void Foo(C c)
-                   {
-                       _ = Marshal.FinalReleaseComObject([|c|]);
-                   }
-                   public static void Foo(ComObject c)
-                   {
-                       _ = Marshal.FinalReleaseComObject([|c|]);
-                   }
-               }
-               """;
+                public static class Program
+                {
+                    public static void Foo(I i)
+                    {
+                        _ = Marshal.FinalReleaseComObject([|i|]);
+                    }
+                    public static void Foo(C c)
+                    {
+                        _ = Marshal.FinalReleaseComObject([|c|]);
+                    }
+                    public static void Foo(ComObject c)
+                    {
+                        _ = Marshal.FinalReleaseComObject([|c|]);
+                    }
+                }
+                """;
 
             await VerifyAnalyzerAsync(source);
         }
@@ -381,45 +381,45 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task GetComInterfaceForObject()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               public interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                public interface I
+                {
+                }
 
-               [GeneratedComClass]
-               public class C : I
-               {
-               }
+                [GeneratedComClass]
+                public class C : I
+                {
+                }
 
-               public static class Program
-               {
-                   public static void Foo(I i)
-                   {
-                       _ = Marshal.GetComInterfaceForObject([|i|], typeof([|I|]));
-                       _ = Marshal.GetComInterfaceForObject([|i|], typeof([|I|]), CustomQueryInterfaceMode.Allow);
-                       _ = Marshal.GetComInterfaceForObject<[|I|], [|I|]>([|i|]);
-                   }
+                public static class Program
+                {
+                    public static void Foo(I i)
+                    {
+                        _ = Marshal.GetComInterfaceForObject([|i|], typeof([|I|]));
+                        _ = Marshal.GetComInterfaceForObject([|i|], typeof([|I|]), CustomQueryInterfaceMode.Allow);
+                        _ = Marshal.GetComInterfaceForObject<[|I|], [|I|]>([|i|]);
+                    }
 
-                   public static void Foo(C c)
-                   {
-                       _ = Marshal.GetComInterfaceForObject([|c|], typeof([|C|]));
-                       _ = Marshal.GetComInterfaceForObject([|c|], typeof([|C|]), CustomQueryInterfaceMode.Allow);
-                       _ = Marshal.GetComInterfaceForObject<[|C|], [|C|]>([|c|]);
+                    public static void Foo(C c)
+                    {
+                        _ = Marshal.GetComInterfaceForObject([|c|], typeof([|C|]));
+                        _ = Marshal.GetComInterfaceForObject([|c|], typeof([|C|]), CustomQueryInterfaceMode.Allow);
+                        _ = Marshal.GetComInterfaceForObject<[|C|], [|C|]>([|c|]);
 
-                   }
+                    }
 
-                   public static void Foo(ComObject c)
-                   {
-                       _ = Marshal.GetComInterfaceForObject([|c|], typeof([|ComObject|]));
-                       _ = Marshal.GetComInterfaceForObject([|c|], typeof([|ComObject|]), CustomQueryInterfaceMode.Allow);
-                       _ = Marshal.GetComInterfaceForObject<[|ComObject|], [|ComObject|]>([|c|]);
-                   }
-               }
-               """;
+                    public static void Foo(ComObject c)
+                    {
+                        _ = Marshal.GetComInterfaceForObject([|c|], typeof([|ComObject|]));
+                        _ = Marshal.GetComInterfaceForObject([|c|], typeof([|ComObject|]), CustomQueryInterfaceMode.Allow);
+                        _ = Marshal.GetComInterfaceForObject<[|ComObject|], [|ComObject|]>([|c|]);
+                    }
+                }
+                """;
 
             await VerifyAnalyzerAsync(source);
         }
@@ -428,47 +428,47 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task CastsBetweenComImportAndGeneratedComTypes()
         {
             string source = """
-              using System.Runtime.InteropServices;
-              using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-              [GeneratedComInterface]
-              [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-              public interface I
-              {
-              }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                public interface I
+                {
+                }
 
-              [GeneratedComClass]
-              public class C : I
-              {
-              }
+                [GeneratedComClass]
+                public class C : I
+                {
+                }
 
-              [ComImport]
-              [Guid("0BADBF92-749A-44DB-9DA0-C8E2EEC783E2")]
-              public interface J
-              {
-              }
+                [ComImport]
+                [Guid("0BADBF92-749A-44DB-9DA0-C8E2EEC783E2")]
+                public interface J
+                {
+                }
 
-              public static class Program
-              {
-                  public static void Foo(I i)
-                  {
-                      J j = [|(J)i|];
-                      i = [|(I)j|];
-                  }
+                public static class Program
+                {
+                    public static void Foo(I i)
+                    {
+                        J j = [|(J)i|];
+                        i = [|(I)j|];
+                    }
 
-                  public static void Foo(C c)
-                  {
-                      J j = [|(J)c|];
-                      c = [|(C)j|];
-                  }
+                    public static void Foo(C c)
+                    {
+                        J j = [|(J)c|];
+                        c = [|(C)j|];
+                    }
 
-                  public static void Foo(ComObject c)
-                  {
-                      J j = [|(J)(object)c|];
-                      c = [|(ComObject)(object)j|];
-                  }
-              }
-              """;
+                    public static void Foo(ComObject c)
+                    {
+                        J j = [|(J)(object)c|];
+                        c = [|(ComObject)(object)j|];
+                    }
+                }
+                """;
 
             await VerifyAnalyzerAsync(source);
         }
@@ -509,47 +509,47 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task CastsBetweenComImportAndGeneratedComTypes_InteropEnabled_NoDiagnostic()
         {
             string source = """
-              using System.Runtime.InteropServices;
-              using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-              [GeneratedComInterface]
-              [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-              public interface I
-              {
-              }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                public interface I
+                {
+                }
 
-              [GeneratedComClass]
-              public class C : I
-              {
-              }
+                [GeneratedComClass]
+                public class C : I
+                {
+                }
 
-              [ComImport]
-              [Guid("0BADBF92-749A-44DB-9DA0-C8E2EEC783E2")]
-              public interface J
-              {
-              }
+                [ComImport]
+                [Guid("0BADBF92-749A-44DB-9DA0-C8E2EEC783E2")]
+                public interface J
+                {
+                }
 
-              public static class Program
-              {
-                  public static void Foo(I i)
-                  {
-                      J j = (J)i;
-                      i = (I)j;
-                  }
+                public static class Program
+                {
+                    public static void Foo(I i)
+                    {
+                        J j = (J)i;
+                        i = (I)j;
+                    }
 
-                  public static void Foo(C c)
-                  {
-                      J j = (J)c;
-                      c = (C)j;
-                  }
+                    public static void Foo(C c)
+                    {
+                        J j = (J)c;
+                        c = (C)j;
+                    }
 
-                  public static void Foo(ComObject c)
-                  {
-                      J j = (J)(object)c;
-                      c = (ComObject)(object)j;
-                  }
-              }
-              """;
+                    public static void Foo(ComObject c)
+                    {
+                        J j = (J)(object)c;
+                        c = (ComObject)(object)j;
+                    }
+                }
+                """;
 
             await VerifyAnalyzerInteropEnabledAsync(source);
         }
@@ -590,20 +590,20 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task SetNullToComImportField()
         {
             string source = """
-              using System.Runtime.InteropServices;
-              using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-              [ComImport]
-              [Guid("0BADBF92-749A-44DB-9DA0-C8E2EEC783E2")]
-              public interface J
-              {
-              }
+                [ComImport]
+                [Guid("0BADBF92-749A-44DB-9DA0-C8E2EEC783E2")]
+                public interface J
+                {
+                }
 
-              public class X
-              {
-                    public static J j = null;
-              }
-              """;
+                public class X
+                {
+                      public static J j = null;
+                }
+                """;
 
             await VerifyAnalyzerAsync(source);
         }
@@ -632,9 +632,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                         (
                             "/.editorconfig",
                             """
-                        is_global = true
-                        build_property.EnableGeneratedComInterfaceComImportInterop = true
-                        """
+                                is_global = true
+                                build_property.EnableGeneratedComInterfaceComImportInterop = true
+                                """
                         )
                     }
                 }

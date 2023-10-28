@@ -35,7 +35,6 @@ using DataContext = System.Data.Linq.DataContext;
 using DataContext = DbLinq.Data.Linq.DataContext;
 #endif
 
-
 using Data = DbLinq.Data;
 using IExecuteResult = System.Data.Linq.IExecuteResult;
 

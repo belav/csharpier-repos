@@ -22,22 +22,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    IEnumerable<int> Range(int min, int max)
+                    class C
                     {
-                        while (true)
+                        IEnumerable<int> Range(int min, int max)
                         {
-                            if (min >= max)
+                            while (true)
                             {
-                                {|Cursor:[|yield break|];|}
-                            }
+                                if (min >= max)
+                                {
+                                    {|Cursor:[|yield break|];|}
+                                }
 
-                            [|yield return|] min++;
+                                [|yield return|] min++;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -46,22 +46,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    IEnumerable<int> Range(int min, int max)
+                    class C
                     {
-                        while (true)
+                        IEnumerable<int> Range(int min, int max)
                         {
-                            if (min >= max)
+                            while (true)
                             {
-                                [|yield break|];
-                            }
+                                if (min >= max)
+                                {
+                                    [|yield break|];
+                                }
 
-                            {|Cursor:[|yield return|]|} min++;
+                                {|Cursor:[|yield return|]|} min++;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -70,22 +70,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    IEnumerable<int> Range(int min, int max)
+                    class C
                     {
-                        while (true)
+                        IEnumerable<int> Range(int min, int max)
                         {
-                            if (min >= max)
+                            while (true)
                             {
-                                yield break;
-                            }
+                                if (min >= max)
+                                {
+                                    yield break;
+                                }
 
-                            yield return {|Cursor:min++|};
+                                yield return {|Cursor:min++|};
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -94,22 +94,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    IEnumerable<int> Range(int min, int max)
+                    class C
                     {
-                        while (true)
+                        IEnumerable<int> Range(int min, int max)
                         {
-                            if (min >= max)
+                            while (true)
                             {
-                                [|yield break|];
-                            }
+                                if (min >= max)
+                                {
+                                    [|yield break|];
+                                }
 
-                            [|yield return|] min++;{|Cursor:|}
+                                [|yield return|] min++;{|Cursor:|}
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
     }

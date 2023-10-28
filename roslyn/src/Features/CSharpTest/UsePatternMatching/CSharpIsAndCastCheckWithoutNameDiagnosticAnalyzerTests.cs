@@ -36,25 +36,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return [||]obj is TestFile && ((TestFile)obj).i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return [||]obj is TestFile && ((TestFile)obj).i > 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return obj is TestFile {|Rename:file|} && file.i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return obj is TestFile {|Rename:file|} && file.i > 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -63,15 +63,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingAsync(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return [||]obj is TestFile && ((TestFile)obj).i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return [||]obj is TestFile && ((TestFile)obj).i > 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 parameters: new TestParameters(
                     parseOptions: CSharpParseOptions
                         .Default
@@ -85,21 +85,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
-                        => [||]obj is TestFile && ((TestFile)obj).i > 0;
-                }
-                """,
+                    class TestFile
+                    {
+                        int i;
+                        bool M(object obj)
+                            => [||]obj is TestFile && ((TestFile)obj).i > 0;
+                    }
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
-                        => obj is TestFile {|Rename:file|} && file.i > 0;
-                }
-                """
+                    class TestFile
+                    {
+                        int i;
+                        bool M(object obj)
+                            => obj is TestFile {|Rename:file|} && file.i > 0;
+                    }
+                    """
             );
         }
 
@@ -108,23 +108,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    static object obj;
+                    class TestFile
+                    {
+                        int i;
+                        static object obj;
 
-                    bool M = [||]obj is TestFile && ((TestFile)obj).i > 0;
-                }
-                """,
+                        bool M = [||]obj is TestFile && ((TestFile)obj).i > 0;
+                    }
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    static object obj;
+                    class TestFile
+                    {
+                        int i;
+                        static object obj;
 
-                    bool M = obj is TestFile {|Rename:file|} && file.i > 0;
-                }
-                """
+                        bool M = obj is TestFile {|Rename:file|} && file.i > 0;
+                    }
+                    """
             );
         }
 
@@ -133,31 +133,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                using System;
+                    using System;
 
-                class TestFile
-                {
-                    int i;
+                    class TestFile
+                    {
+                        int i;
 
-                    void Goo(Func<bool> f) { }
+                        void Goo(Func<bool> f) { }
 
-                    bool M(object obj)
-                        => Goo(() => [||]obj is TestFile && ((TestFile)obj).i > 0, () => obj is TestFile && ((TestFile)obj).i > 0);
-                }
-                """,
+                        bool M(object obj)
+                            => Goo(() => [||]obj is TestFile && ((TestFile)obj).i > 0, () => obj is TestFile && ((TestFile)obj).i > 0);
+                    }
+                    """,
                 """
-                using System;
+                    using System;
 
-                class TestFile
-                {
-                    int i;
+                    class TestFile
+                    {
+                        int i;
 
-                    void Goo(Func<bool> f) { }
+                        void Goo(Func<bool> f) { }
 
-                    bool M(object obj)
-                        => Goo(() => obj is TestFile {|Rename:file|} && file.i > 0, () => obj is TestFile && ((TestFile)obj).i > 0);
-                }
-                """
+                        bool M(object obj)
+                            => Goo(() => obj is TestFile {|Rename:file|} && file.i > 0, () => obj is TestFile && ((TestFile)obj).i > 0);
+                    }
+                    """
             );
         }
 
@@ -166,43 +166,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if ([||]obj is TestFile)
+                        int i;
+                        bool M(object obj)
                         {
-                            M(((TestFile)obj).i);
-                            M(((TestFile)obj).i);
-                        }
-                        else
-                        {
-                            M(((TestFile)obj).i);
-                            M(((TestFile)obj).i);
+                            if ([||]obj is TestFile)
+                            {
+                                M(((TestFile)obj).i);
+                                M(((TestFile)obj).i);
+                            }
+                            else
+                            {
+                                M(((TestFile)obj).i);
+                                M(((TestFile)obj).i);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if (obj is TestFile {|Rename:file|})
+                        int i;
+                        bool M(object obj)
                         {
-                            M(file.i);
-                            M(file.i);
-                        }
-                        else
-                        {
-                            M(((TestFile)obj).i);
-                            M(((TestFile)obj).i);
+                            if (obj is TestFile {|Rename:file|})
+                            {
+                                M(file.i);
+                                M(file.i);
+                            }
+                            else
+                            {
+                                M(((TestFile)obj).i);
+                                M(((TestFile)obj).i);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -211,43 +211,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if (!([||]obj is TestFile))
+                        int i;
+                        bool M(object obj)
                         {
-                            M(((TestFile)obj).i);
-                            M(((TestFile)obj).i);
-                        }
-                        else
-                        {
-                            M(((TestFile)obj).i);
-                            M(((TestFile)obj).i);
+                            if (!([||]obj is TestFile))
+                            {
+                                M(((TestFile)obj).i);
+                                M(((TestFile)obj).i);
+                            }
+                            else
+                            {
+                                M(((TestFile)obj).i);
+                                M(((TestFile)obj).i);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if (!(obj is TestFile {|Rename:file|}))
+                        int i;
+                        bool M(object obj)
                         {
-                            M(((TestFile)obj).i);
-                            M(((TestFile)obj).i);
-                        }
-                        else
-                        {
-                            M(file.i);
-                            M(file.i);
+                            if (!(obj is TestFile {|Rename:file|}))
+                            {
+                                M(((TestFile)obj).i);
+                                M(((TestFile)obj).i);
+                            }
+                            else
+                            {
+                                M(file.i);
+                                M(file.i);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -256,17 +256,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingAsync(
                 """
-                class TestFile
-                {
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if ([||]obj is TestFile)
+                        bool M(object obj)
                         {
-                            var file = (TestFile)obj;
+                            if ([||]obj is TestFile)
+                            {
+                                var file = (TestFile)obj;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -275,17 +275,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingAsync(
                 """
-                struct TestFile
-                {
-                    bool M(object obj)
+                    struct TestFile
                     {
-                        if ([||]obj is TestFile?)
+                        bool M(object obj)
                         {
-                            var i = ((TestFile?)obj).Value;
+                            if ([||]obj is TestFile?)
+                            {
+                                var i = ((TestFile?)obj).Value;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -294,25 +294,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return [||]M(null) is TestFile && ((TestFile)M(null)).i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return [||]M(null) is TestFile && ((TestFile)M(null)).i > 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return M(null) is TestFile {|Rename:file|} && file.i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return M(null) is TestFile {|Rename:file|} && file.i > 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -321,25 +321,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return [||]obj is TestFile && /*before*/ ((TestFile)obj) /*after*/.i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return [||]obj is TestFile && /*before*/ ((TestFile)obj) /*after*/.i > 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return obj is TestFile {|Rename:file|} && /*before*/ file /*after*/.i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return obj is TestFile {|Rename:file|} && /*before*/ file /*after*/.i > 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -348,25 +348,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return ((TestFile)obj).i > 0 && [||]obj is TestFile && ((TestFile)obj).i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return ((TestFile)obj).i > 0 && [||]obj is TestFile && ((TestFile)obj).i > 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return ((TestFile)obj).i > 0 && obj is TestFile {|Rename:file|} && file.i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return ((TestFile)obj).i > 0 && obj is TestFile {|Rename:file|} && file.i > 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -375,25 +375,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return [||]obj is int[] && ((int[])obj) > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return [||]obj is int[] && ((int[])obj) > 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        return obj is int[] {|Rename:v|} && v > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            return obj is int[] {|Rename:v|} && v > 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -402,27 +402,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        TestFile file = null;
-                        return [||]obj is TestFile && ((TestFile)obj).i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            TestFile file = null;
+                            return [||]obj is TestFile && ((TestFile)obj).i > 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        TestFile file = null;
-                        return obj is TestFile {|Rename:file1|} && file1.i > 0;
+                        int i;
+                        bool M(object obj)
+                        {
+                            TestFile file = null;
+                            return obj is TestFile {|Rename:file1|} && file1.i > 0;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -431,33 +431,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if ([||]obj is TestFile)
+                        int i;
+                        bool M(object obj)
                         {
-                            TestFile file = null;
-                            M(((TestFile)obj).i);
+                            if ([||]obj is TestFile)
+                            {
+                                TestFile file = null;
+                                M(((TestFile)obj).i);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if (obj is TestFile {|Rename:file1|})
+                        int i;
+                        bool M(object obj)
                         {
-                            TestFile file = null;
-                            M(file1.i);
+                            if (obj is TestFile {|Rename:file1|})
+                            {
+                                TestFile file = null;
+                                M(file1.i);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -466,33 +466,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if ([||]obj is TestFile)
+                        int i;
+                        bool M(object obj)
                         {
-                            var v = new { file = 0 };
-                            M(((TestFile)obj).i);
+                            if ([||]obj is TestFile)
+                            {
+                                var v = new { file = 0 };
+                                M(((TestFile)obj).i);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if (obj is TestFile {|Rename:file|})
+                        int i;
+                        bool M(object obj)
                         {
-                            var v = new { file = 0 };
-                            M(file.i);
+                            if (obj is TestFile {|Rename:file|})
+                            {
+                                var v = new { file = 0 };
+                                M(file.i);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -501,33 +501,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if ([||]obj is TestFile)
+                        int i;
+                        bool M(object obj)
                         {
-                            var v = (file: 0, x: 1);
-                            M(((TestFile)obj).i);
+                            if ([||]obj is TestFile)
+                            {
+                                var v = (file: 0, x: 1);
+                                M(((TestFile)obj).i);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj)
+                    class TestFile
                     {
-                        if (obj is TestFile {|Rename:file|})
+                        int i;
+                        bool M(object obj)
                         {
-                            var v = (file: 0, x: 1);
-                            M(file.i);
+                            if (obj is TestFile {|Rename:file|})
+                            {
+                                var v = (file: 0, x: 1);
+                                M(file.i);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -536,37 +536,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class X { public int file; }
+                    class X { public int file; }
 
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj, X x)
+                    class TestFile
                     {
-                        if ([||]obj is TestFile)
+                        int i;
+                        bool M(object obj, X x)
                         {
-                            var v = new { x.file };
-                            M(((TestFile)obj).i);
+                            if ([||]obj is TestFile)
+                            {
+                                var v = new { x.file };
+                                M(((TestFile)obj).i);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class X { public int file; }
+                    class X { public int file; }
 
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj, X x)
+                    class TestFile
                     {
-                        if (obj is TestFile {|Rename:file|})
+                        int i;
+                        bool M(object obj, X x)
                         {
-                            var v = new { x.file };
-                            M(file.i);
+                            if (obj is TestFile {|Rename:file|})
+                            {
+                                var v = new { x.file };
+                                M(file.i);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -575,37 +575,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestInRegularAndScript1Async(
                 """
-                class X { public int file; }
+                    class X { public int file; }
 
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj, X x)
+                    class TestFile
                     {
-                        if ([||]obj is TestFile)
+                        int i;
+                        bool M(object obj, X x)
                         {
-                            var v = (x.file, 0);
-                            M(((TestFile)obj).i);
+                            if ([||]obj is TestFile)
+                            {
+                                var v = (x.file, 0);
+                                M(((TestFile)obj).i);
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class X { public int file; }
+                    class X { public int file; }
 
-                class TestFile
-                {
-                    int i;
-                    bool M(object obj, X x)
+                    class TestFile
                     {
-                        if (obj is TestFile {|Rename:file|})
+                        int i;
+                        bool M(object obj, X x)
                         {
-                            var v = (x.file, 0);
-                            M(file.i);
+                            if (obj is TestFile {|Rename:file|})
+                            {
+                                var v = (x.file, 0);
+                                M(file.i);
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -614,24 +614,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestDiagnosticMissingAsync(
                 """
-                using System.Linq;
-                class Bar
-                {
-                    private void Foo()
+                    using System.Linq;
+                    class Bar
                     {
-                        var objects = new SpecificThingType[100];
-                        var d = from obj in objects
-                                let aGenericThing = obj.Prop
-                                where aGenericTh[||]ing is SpecificThingType
-                                let specificThing = (SpecificThingType)aGenericThing
-                                select (obj, specificThing);
+                        private void Foo()
+                        {
+                            var objects = new SpecificThingType[100];
+                            var d = from obj in objects
+                                    let aGenericThing = obj.Prop
+                                    where aGenericTh[||]ing is SpecificThingType
+                                    let specificThing = (SpecificThingType)aGenericThing
+                                    select (obj, specificThing);
+                        }
                     }
-                }
-                class SpecificThingType
-                {
-                    public SpecificThingType Prop { get; }
-                }
-                """
+                    class SpecificThingType
+                    {
+                        public SpecificThingType Prop { get; }
+                    }
+                    """
             );
         }
 
@@ -640,11 +640,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingAsync(
                 """
-                using System.Linq.Expressions;
+                    using System.Linq.Expressions;
 
-                object? o = null;
-                Expression<Func<bool>> test = () => [||]o is int && (int)o > 5;
-                """
+                    object? o = null;
+                    Expression<Func<bool>> test = () => [||]o is int && (int)o > 5;
+                    """
             );
         }
 
@@ -653,17 +653,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
             await TestMissingAsync(
                 """
-                using System.Linq.Expressions;
+                    using System.Linq.Expressions;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        object? o = null;
-                        Expression<Func<bool>> test = () => [||]o is int && (int)o > 5;
+                        void M()
+                        {
+                            object? o = null;
+                            Expression<Func<bool>> test = () => [||]o is int && (int)o > 5;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
     }

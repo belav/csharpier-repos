@@ -5885,14 +5885,14 @@ class C
         {
             var test = UsingTree(
                 """
-                class C
-                {
-                    void Goo(int i)
+                    class C
                     {
-                        [A]++i;
+                        void Goo(int i)
+                        {
+                            [A]++i;
+                        }
                     }
-                }
-                """,
+                    """,
                 // (5,14): error CS1002: ; expected
                 //         [A]++i;
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "i").WithLocation(5, 14)

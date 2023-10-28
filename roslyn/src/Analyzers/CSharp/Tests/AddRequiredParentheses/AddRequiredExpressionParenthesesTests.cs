@@ -47,23 +47,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + 2 $$* 3;
+                        void M()
+                        {
+                            int x = 1 + 2 $$* 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + (2 * 3);
+                        void M()
+                        {
+                            int x = 1 + (2 * 3);
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -73,14 +73,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$+ 2 * 3;
+                        void M()
+                        {
+                            int x = 1 $$+ 2 * 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -90,14 +90,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + 2 $$+ 3;
+                        void M()
+                        {
+                            int x = 1 + 2 $$+ 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -107,14 +107,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + 2 $$+ 3;
+                        void M()
+                        {
+                            int x = 1 + 2 $$+ 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireOtherBinaryParenthesesForClarity
             );
         }
@@ -124,14 +124,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + 2 $$* 3;
+                        void M()
+                        {
+                            int x = 1 + 2 $$* 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireOtherBinaryParenthesesForClarity
             );
         }
@@ -141,23 +141,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a $$> b == c;
+                        void M()
+                        {
+                            int x = a $$> b == c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (a > b) == c;
+                        void M()
+                        {
+                            int x = (a > b) == c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -167,23 +167,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a || b $$&& c;
+                        void M()
+                        {
+                            int x = a || b $$&& c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a || (b && c);
+                        void M()
+                        {
+                            int x = a || (b && c);
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -193,14 +193,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a $$|| b && c;
+                        void M()
+                        {
+                            int x = a $$|| b && c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -210,14 +210,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a || b $$|| c;
+                        void M()
+                        {
+                            int x = a || b $$|| c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -227,14 +227,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a || b $$|| c;
+                        void M()
+                        {
+                            int x = a || b $$|| c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireArithmeticBinaryParenthesesForClarity
             );
         }
@@ -244,14 +244,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a == b $$&& c == d;
+                        void M()
+                        {
+                            int x = a == b $$&& c == d;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -261,23 +261,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a || b $$&& c && d;
+                        void M()
+                        {
+                            int x = a || b $$&& c && d;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a || (b && c && d);
+                        void M()
+                        {
+                            int x = a || (b && c && d);
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -287,23 +287,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a || b && c $$&& d;
+                        void M()
+                        {
+                            int x = a || b && c $$&& d;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a || (b && c && d);
+                        void M()
+                        {
+                            int x = a || (b && c && d);
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -313,23 +313,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$+ 2 << 3;
+                        void M()
+                        {
+                            int x = 1 $$+ 2 << 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (1 + 2) << 3;
+                        void M()
+                        {
+                            int x = (1 + 2) << 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -339,23 +339,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$+ 2 << 3;
+                        void M()
+                        {
+                            int x = 1 $$+ 2 << 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (1 + 2) << 3;
+                        void M()
+                        {
+                            int x = (1 + 2) << 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireArithmeticBinaryParenthesesForClarity
             );
         }
@@ -365,14 +365,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$+ 2 << 3;
+                        void M()
+                        {
+                            int x = 1 $$+ 2 << 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireOtherBinaryParenthesesForClarity
             );
         }
@@ -382,14 +382,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$<< 2 << 3;
+                        void M()
+                        {
+                            int x = 1 $$<< 2 << 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -399,14 +399,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 << 2 $$<< 3;
+                        void M()
+                        {
+                            int x = 1 << 2 $$<< 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -416,14 +416,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$+ 2 == 2 + 3;
+                        void M()
+                        {
+                            int x = 1 $$+ 2 == 2 + 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireOtherBinaryParenthesesForClarity
             );
         }
@@ -433,14 +433,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + 2 == 2 $$+ 3;
+                        void M()
+                        {
+                            int x = 1 + 2 == 2 $$+ 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireOtherBinaryParenthesesForClarity
             );
         }
@@ -450,14 +450,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$+ 2 == 2 + 3;
+                        void M()
+                        {
+                            int x = 1 $$+ 2 == 2 + 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireRelationalBinaryParenthesesForClarity
             );
         }
@@ -467,14 +467,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + 2 == 2 $$+ 3;
+                        void M()
+                        {
+                            int x = 1 + 2 == 2 $$+ 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireRelationalBinaryParenthesesForClarity
             );
         }
@@ -484,14 +484,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a $$+ b ?? c;
+                        void M()
+                        {
+                            int x = a $$+ b ?? c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -501,14 +501,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a $$?? b ?? c;
+                        void M()
+                        {
+                            int x = a $$?? b ?? c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -518,14 +518,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a ?? b $$?? c;
+                        void M()
+                        {
+                            int x = a ?? b $$?? c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -535,23 +535,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$+ 2 & 3;
+                        void M()
+                        {
+                            int x = 1 $$+ 2 & 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (1 + 2) & 3;
+                        void M()
+                        {
+                            int x = (1 + 2) & 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -561,14 +561,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a $$| b | c;
+                        void M()
+                        {
+                            int x = a $$| b | c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -578,23 +578,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a | b $$& c;
+                        void M()
+                        {
+                            int x = a | b $$& c;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a | (b & c);
+                        void M()
+                        {
+                            int x = a | (b & c);
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -604,14 +604,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = a $$| b & c;
+                        void M()
+                        {
+                            int x = a $$| b & c;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -621,14 +621,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 $$== 2;
+                        void M()
+                        {
+                            int x = 1 $$== 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -638,14 +638,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M(int a)
+                    class C
                     {
-                        int x = a $$+= 2;
+                        void M(int a)
+                        {
+                            int x = a $$+= 2;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -655,14 +655,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M(bool x, bool y, bool z)
+                    class C
                     {
-                        x $$= y == z;
+                        void M(bool x, bool y, bool z)
+                        {
+                            x $$= y == z;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -672,14 +672,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M(bool x, bool y, bool z)
+                    class C
                     {
-                        x = y $$== z;
+                        void M(bool x, bool y, bool z)
+                        {
+                            x = y $$== z;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -689,14 +689,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$-y;
+                        void M()
+                        {
+                            int x = (int)$$-y;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -706,14 +706,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$-y;
+                        void M()
+                        {
+                            int x = (int)$$-y;
+                        }
                     }
-                }
-                """,
+                    """,
                 IgnoreAllParentheses
             );
         }
@@ -723,14 +723,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$-y;
+                        void M()
+                        {
+                            int x = (int)$$-y;
+                        }
                     }
-                }
-                """,
+                    """,
                 RemoveAllUnnecessaryParentheses
             );
         }
@@ -740,14 +740,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$+y;
+                        void M()
+                        {
+                            int x = (int)$$+y;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -757,14 +757,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$&y;
+                        void M()
+                        {
+                            int x = (int)$$&y;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -774,14 +774,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$*y;
+                        void M()
+                        {
+                            int x = (int)$$*y;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -791,14 +791,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$y;
+                        void M()
+                        {
+                            int x = (int)$$y;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -808,14 +808,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$y.z;
+                        void M()
+                        {
+                            int x = (int)$$y.z;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -825,14 +825,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$(y);
+                        void M()
+                        {
+                            int x = (int)$$(y);
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -842,14 +842,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = (int)$$!y;
+                        void M()
+                        {
+                            int x = (int)$$!y;
+                        }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -859,16 +859,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (0 {|FixAllInDocument:>=|} 3 * 2 + 4)
+                        void M()
                         {
+                            if (0 {|FixAllInDocument:>=|} 3 * 2 + 4)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -878,27 +878,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (3 * 2 + 4 >= 3 {|FixAllInDocument:*|} 2 + 4)
+                        void M()
                         {
+                            if (3 * 2 + 4 >= 3 {|FixAllInDocument:*|} 2 + 4)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if ((3 * 2) + 4 >= (3 * 2) + 4)
+                        void M()
                         {
+                            if ((3 * 2) + 4 >= (3 * 2) + 4)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 options: RequireAllParenthesesForClarity
             );
         }
@@ -908,16 +908,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (3 * 2 + 4 >= 3 * 2 {|FixAllInDocument:+|} 4)
+                        void M()
                         {
+                            if (3 * 2 + 4 >= 3 * 2 {|FixAllInDocument:+|} 4)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 RequireAllParenthesesForClarity
             );
         }
@@ -927,23 +927,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + 2 {|FixAllInDocument:*|} 3 == 1 + 2 * 3;
+                        void M()
+                        {
+                            int x = 1 + 2 {|FixAllInDocument:*|} 3 == 1 + 2 * 3;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        int x = 1 + (2 * 3) == 1 + (2 * 3);
+                        void M()
+                        {
+                            int x = 1 + (2 * 3) == 1 + (2 * 3);
+                        }
                     }
-                }
-                """,
+                    """,
                 options: RequireAllParenthesesForClarity
             );
         }

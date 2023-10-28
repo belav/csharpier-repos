@@ -115,16 +115,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 {
                     builder.AppendLine(
                         """
-                                            "a" => "b",
-                        """
+                                                "a" => "b",
+                            """
                     );
                 }
                 if (TransformCs)
                 {
                     builder.AppendLine(
                         """
-                                            "c" => "d",
-                        """
+                                                "c" => "d",
+                            """
                     );
                 }
                 builder.AppendLine(
@@ -633,25 +633,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
                 builder.Append(
                     """
-                            var provider = 
-                """
+                                    var provider =
+                        """
                 );
                 rootOperator.AppendTo(builder);
                 builder.AppendLine(
                     """
-                            ;
-                """
+                                    ;
+                        """
                 );
 
                 builder.Append(
                     """
-                            context.RegisterSourceOutput(provider, (context, text) =>
-                            {
-                                context.AddSource(text.Path, text.GetText()!.ToString());
-                            });
-                        }
-                    }
-                """
+                                    context.RegisterSourceOutput(provider, (context, text) =>
+                                    {
+                                        context.AddSource(text.Path, text.GetText()!.ToString());
+                                    });
+                                }
+                            }
+                        """
                 );
 
                 _output.WriteLine(builder.ToString());

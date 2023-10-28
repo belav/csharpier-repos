@@ -108,21 +108,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData(" # load \"$$", true)]
         [InlineData(
             """
-            # load "$$"
-            """,
+                # load "$$"
+                """,
             true
         )]
         [InlineData(" # load \"\"$$", true)]
         [InlineData(
             """
-            $$ # load ""
-            """,
+                $$ # load ""
+                """,
             false
         )]
         [InlineData(
             """
-            # load $$""
-            """,
+                # load $$""
+                """,
             false
         )]
         public void ShouldTriggerCompletion(string textWithPositionMarker, bool expectedResult)

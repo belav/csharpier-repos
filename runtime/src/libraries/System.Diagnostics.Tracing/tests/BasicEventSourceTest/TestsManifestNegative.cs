@@ -15,7 +15,6 @@ using Microsoft.Diagnostics.Tracing;
 using System.Diagnostics.Tracing;
 #endif
 
-
 using Sdt = SdtEventSources;
 
 namespace BasicEventSourceTests

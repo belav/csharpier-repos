@@ -25,14 +25,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeGeneration
 
             using var workspace = TestWorkspace.CreateCSharp(
                 """
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return "a";
+                        string M()
+                        {
+                            return "a";
+                        }
                     }
-                }
-                """
+                    """
             );
 
             var solution = workspace.CurrentSolution;
@@ -61,14 +61,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeGeneration
 
             using var workspace = TestWorkspace.CreateCSharp(
                 """
-                class C
-                {
-                    string M()
+                    class C
                     {
-                        return "a";
+                        string M()
+                        {
+                            return "a";
+                        }
                     }
-                }
-                """
+                    """
             );
 
             var solution = workspace.CurrentSolution;

@@ -404,14 +404,14 @@ namespace Wasm.Build.Tests
             File.WriteAllText(
                 Path.Combine(_projectDir, "Directory.Build.targets"),
                 """
-                <Project>
-                  <Target Name="PrintRuntimePackPath" BeforeTargets="Build">
-                      <Message Text="** MicrosoftNetCoreAppRuntimePackDir : '@(ResolvedRuntimePack -> '%(PackageDirectory)')'" Importance="High" Condition="@(ResolvedRuntimePack->Count()) > 0" />
-                  </Target>
+                    <Project>
+                      <Target Name="PrintRuntimePackPath" BeforeTargets="Build">
+                          <Message Text="** MicrosoftNetCoreAppRuntimePackDir : '@(ResolvedRuntimePack -> '%(PackageDirectory)')'" Importance="High" Condition="@(ResolvedRuntimePack->Count()) > 0" />
+                      </Target>
 
-                  <Import Project="WasmOverridePacks.targets" />
-                </Project>
-                """
+                      <Import Project="WasmOverridePacks.targets" />
+                    </Project>
+                    """
             );
 
             new DotNetCommand(s_buildEnv, _testOutput, useDefaultArgs: false)

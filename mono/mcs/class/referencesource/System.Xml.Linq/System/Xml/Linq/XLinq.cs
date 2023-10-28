@@ -15,7 +15,6 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 #endif // !SILVERLIGHT
 
-
 using CultureInfo = System.Globalization.CultureInfo;
 
 [module: SuppressMessage(

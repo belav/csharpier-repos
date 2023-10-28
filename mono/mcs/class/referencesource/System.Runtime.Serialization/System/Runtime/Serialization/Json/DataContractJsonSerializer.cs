@@ -17,7 +17,6 @@ namespace System.Runtime.Serialization.Json
     using System.ServiceModel;
 #endif
 
-
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract

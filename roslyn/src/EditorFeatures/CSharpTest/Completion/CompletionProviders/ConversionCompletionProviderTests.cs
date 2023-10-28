@@ -31,20 +31,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var castCompletionItem = (
                 await GetCompletionItemsAsync(
                     """
-                public class C
-                {
-                    public static explicit operator float(C c) => 0;
-                }
+                        public class C
+                        {
+                            public static explicit operator float(C c) => 0;
+                        }
 
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
-                }
-                """,
+                        public class Program
+                        {
+                            public static void Main()
+                            {
+                                var c = new C();
+                                c.$$
+                            }
+                        }
+                        """,
                     SourceCodeKind.Regular
                 )
             ).Single();
@@ -84,19 +84,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             // User may want to type a floating point literal.
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static explicit operator float(C c) => 0;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        1.$$
+                        public static explicit operator float(C c) => 0;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            1.$$
+                        }
+                    }
+                    """,
                 SourceCodeKind.Regular
             );
         }
@@ -106,20 +106,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemExistsAsync(
                 """
-                public class C
-                {
-                    public static explicit operator float(C c) => 0;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public static explicit operator float(C c) => 0;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """,
                 "float",
                 displayTextPrefix: "(",
                 displayTextSuffix: ")",
@@ -133,21 +133,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemExistsAsync(
                 """
-                public class C
-                {
-                    public void fly() { }
-                    public static explicit operator float(C c) => 0;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.fl$$
+                        public void fly() { }
+                        public static explicit operator float(C c) => 0;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.fl$$
+                        }
+                    }
+                    """,
                 "float",
                 displayTextPrefix: "(",
                 displayTextSuffix: ")",
@@ -165,8 +165,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("c$$", false)]
         [InlineData(
             """
-            "c.$$
-            """,
+                "c.$$
+                """,
             false
         )]
         [InlineData("c?.$$", true)]
@@ -219,19 +219,19 @@ public class Program
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static explicit operator float(C c) => 0;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        C.$$
+                        public static explicit operator float(C c) => 0;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -240,20 +240,20 @@ public class Program
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static explicit operator float(C c) => 0;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        var name = nameof(c.$$
+                        public static explicit operator float(C c) => 0;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            var name = nameof(c.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -318,25 +318,25 @@ namespace N1
         {
             var items = await GetCompletionItemsAsync(
                 """
-                public class C
-                {
-                    public static explicit operator float(C c) => 0;
-                    public static explicit operator int(C c) => 0;
-
-                    public static explicit operator C(float f) => new C();
-                    public static implicit operator C(string s) => new C();
-                    public static implicit operator string(C c) => ";
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public static explicit operator float(C c) => 0;
+                        public static explicit operator int(C c) => 0;
+
+                        public static explicit operator C(float f) => new C();
+                        public static implicit operator C(string s) => new C();
+                        public static implicit operator string(C c) => ";
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """,
                 SourceCodeKind.Regular
             );
             Assert.Collection(
@@ -351,20 +351,20 @@ namespace N1
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static bool op_Explicit(C c) => false;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public static bool op_Explicit(C c) => false;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -373,20 +373,20 @@ namespace N1
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static explicit operator int() => 0;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public static explicit operator int() => 0;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -395,23 +395,23 @@ namespace N1
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public static explicit operator C(D d) => null;
-                }
-                public class D
-                {
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var d = new D();
-                        d.$$
+                        public static explicit operator C(D d) => null;
                     }
-                }
-                """
+                    public class D
+                    {
+                    }
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var d = new D();
+                            d.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -421,18 +421,18 @@ namespace N1
             // Lifted conversion https://docs.microsoft.com/hu-hu/dotnet/csharp/language-reference/language-specification/conversions#lifted-conversion-operators
             await VerifyItemExistsAsync(
                 """
-                public struct S {
-                    public static explicit operator int(S _) => 0;
-                }
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        S? s = null;
-                        s.$$
+                    public struct S {
+                        public static explicit operator int(S _) => 0;
                     }
-                }
-                """,
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            S? s = null;
+                            s.$$
+                        }
+                    }
+                    """,
                 "int?",
                 displayTextPrefix: "(",
                 displayTextSuffix: ")",
@@ -470,9 +470,9 @@ namespace N1
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
                 expectedDescriptionOrNull: """
-                S.explicit operator int(S value)
-                Explicit conversion of S to int.
-                """
+                    S.explicit operator int(S value)
+                    Explicit conversion of S to int.
+                    """
             );
         }
 
@@ -505,9 +505,9 @@ namespace N1
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
                 expectedDescriptionOrNull: """
-                S.explicit operator int?(S? value)
-                Explicit conversion of S to int.
-                """
+                    S.explicit operator int?(S? value)
+                    Explicit conversion of S to int.
+                    """
             );
         }
 
@@ -642,16 +642,16 @@ public class Program
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#explicit-enumeration-conversions
             var items = await GetCompletionItemsAsync(
                 """
-                public enum E { One }
-                public class Program
-                {
-                    public static void Main()
+                    public enum E { One }
+                    public class Program
                     {
-                        var e = E.One;
-                        e.$$
+                        public static void Main()
+                        {
+                            var e = E.One;
+                            e.$$
+                        }
                     }
-                }
-                """,
+                    """,
                 SourceCodeKind.Regular
             );
             var expected = new[]
@@ -797,21 +797,21 @@ public class Program
             // Base class lookup rule: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#processing-of-user-defined-explicit-conversions
             await VerifyItemExistsAsync(
                 """
-                public class Base {
-                    public static explicit operator int(Base b) => 0;
-                }
-                public class Derived: Base
-                {
-                }
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        var d = new Derived();
-                        var i = d.$$
+                    public class Base {
+                        public static explicit operator int(Base b) => 0;
                     }
-                }
-                """,
+                    public class Derived: Base
+                    {
+                    }
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var d = new Derived();
+                            var i = d.$$
+                        }
+                    }
+                    """,
                 "int",
                 displayTextPrefix: "(",
                 displayTextSuffix: ")",
@@ -1028,21 +1028,21 @@ public class Program
         {
             await VerifyNoItemsExistAsync(
                 """
-                public struct S {
-                    public static explicit operator int(S s) => 0;
-                }
-                public class Program
-                {
-                    public static void Main()
+                    public struct S {
+                        public static explicit operator int(S s) => 0;
+                    }
+                    public class Program
                     {
-                        unsafe{
-                            var s = new S();
-                            S* p = &s;
-                            var i = p->$$;
+                        public static void Main()
+                        {
+                            unsafe{
+                                var s = new S();
+                                S* p = &s;
+                                var i = p->$$;
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
     }

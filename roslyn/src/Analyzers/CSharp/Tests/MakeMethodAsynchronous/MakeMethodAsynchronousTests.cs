@@ -141,9 +141,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
                 using System;
                 using System.Threading.Tasks;
 
-                class Program 
+                class Program
                 {
-                    public static void Test() 
+                    public static void Test()
                     {
                         [|await Task.Delay(1);|]
                     }
@@ -154,9 +154,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
                 using System;
                 using System.Threading.Tasks;
 
-                class Program 
+                class Program
                 {
-                    public static async Task TestAsync() 
+                    public static async Task TestAsync()
                     {
                         await Task.Delay(1);
                     }
@@ -172,9 +172,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
                 using System;
                 using System.Threading.Tasks;
 
-                class Program 
+                class Program
                 {
-                    Task Test() 
+                    Task Test()
                     {
                         [|await Task.Delay(1);|]
                     }
@@ -185,9 +185,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
                 using System;
                 using System.Threading.Tasks;
 
-                class Program 
+                class Program
                 {
-                    async Task Test() 
+                    async Task Test()
                     {
                         await Task.Delay(1);
                     }
@@ -558,31 +558,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             var initial =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    IEnumerable<int> Test()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return 1;
-                        [|await Task.Delay(1);|]
+                        IEnumerable<int> Test()
+                        {
+                            yield return 1;
+                            [|await Task.Delay(1);|]
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
 
             var expected =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    async IAsyncEnumerable<int> TestAsync()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return 1;
-                        await Task.Delay(1);
+                        async IAsyncEnumerable<int> TestAsync()
+                        {
+                            yield return 1;
+                            await Task.Delay(1);
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
             await TestInRegularAndScriptAsync(initial, expected);
         }
 
@@ -725,31 +725,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             var initial =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    IEnumerator<int> Test()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return 1;
-                        [|await Task.Delay(1);|]
+                        IEnumerator<int> Test()
+                        {
+                            yield return 1;
+                            [|await Task.Delay(1);|]
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
 
             var expected =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    async IAsyncEnumerator<int> TestAsync()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return 1;
-                        await Task.Delay(1);
+                        async IAsyncEnumerator<int> TestAsync()
+                        {
+                            yield return 1;
+                            await Task.Delay(1);
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
             await TestInRegularAndScriptAsync(initial, expected);
         }
 
@@ -758,37 +758,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             var initial =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    void M()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        IEnumerator<int> Test()
+                        void M()
                         {
-                            yield return 1;
-                            [|await Task.Delay(1);|]
+                            IEnumerator<int> Test()
+                            {
+                                yield return 1;
+                                [|await Task.Delay(1);|]
+                            }
                         }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
 
             var expected =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    void M()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        async IAsyncEnumerator<int> TestAsync()
+                        void M()
                         {
-                            yield return 1;
-                            await Task.Delay(1);
+                            async IAsyncEnumerator<int> TestAsync()
+                            {
+                                yield return 1;
+                                await Task.Delay(1);
+                            }
                         }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
             await TestInRegularAndScriptAsync(initial, expected);
         }
 
@@ -797,31 +797,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             var initial =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    IAsyncEnumerable<int> Test()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return 1;
-                        [|await Task.Delay(1);|]
+                        IAsyncEnumerable<int> Test()
+                        {
+                            yield return 1;
+                            [|await Task.Delay(1);|]
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
 
             var expected =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    async IAsyncEnumerable<int> Test()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return 1;
-                        await Task.Delay(1);
+                        async IAsyncEnumerable<int> Test()
+                        {
+                            yield return 1;
+                            await Task.Delay(1);
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
             await TestInRegularAndScriptAsync(initial, expected);
         }
 
@@ -830,31 +830,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             var initial =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    IAsyncEnumerator<int> Test()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return 1;
-                        [|await Task.Delay(1);|]
+                        IAsyncEnumerator<int> Test()
+                        {
+                            yield return 1;
+                            [|await Task.Delay(1);|]
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
 
             var expected =
                 """
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    async IAsyncEnumerator<int> Test()
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return 1;
-                        await Task.Delay(1);
+                        async IAsyncEnumerator<int> Test()
+                        {
+                            yield return 1;
+                            await Task.Delay(1);
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
             await TestInRegularAndScriptAsync(initial, expected);
         }
 
@@ -877,35 +877,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private async void method()
+                    class Program
                     {
-                        string content = await Task<String>.Run(delegate () {
-                            [|await Task.Delay(1000)|];
-                            return "Test";
-                        });
+                        private async void method()
+                        {
+                            string content = await Task<String>.Run(delegate () {
+                                [|await Task.Delay(1000)|];
+                                return "Test";
+                            });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private async void method()
+                    class Program
                     {
-                        string content = await Task<String>.Run(async delegate () {
-                            await Task.Delay(1000);
-                            return "Test";
-                        });
+                        private async void method()
+                        {
+                            string content = await Task<String>.Run(async delegate () {
+                                await Task.Delay(1000);
+                                return "Test";
+                            });
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -914,35 +914,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private void method()
+                    class Program
                     {
-                        string content = await Task<String>.Run(delegate () {
-                            [|await Task.Delay(1000)|];
-                            return "Test";
-                        });
+                        private void method()
+                        {
+                            string content = await Task<String>.Run(delegate () {
+                                [|await Task.Delay(1000)|];
+                                return "Test";
+                            });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private void method()
+                    class Program
                     {
-                        string content = await Task<String>.Run(async delegate () {
-                            await Task.Delay(1000);
-                            return "Test";
-                        });
+                        private void method()
+                        {
+                            string content = await Task<String>.Run(async delegate () {
+                                await Task.Delay(1000);
+                                return "Test";
+                            });
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -951,35 +951,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private void method()
+                    class Program
                     {
-                        string content = await Task<String>.Run(delegate () {
-                            [|await Task.Delay(1000)|];
-                            return "Test";
-                        });
+                        private void method()
+                        {
+                            string content = await Task<String>.Run(delegate () {
+                                [|await Task.Delay(1000)|];
+                                return "Test";
+                            });
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
-                using System.Threading.Tasks;
+                    using System;
+                    using System.Threading.Tasks;
 
-                class Program
-                {
-                    private void method()
+                    class Program
                     {
-                        string content = await Task<String>.Run(async delegate () {
-                            await Task.Delay(1000);
-                            return "Test";
-                        });
+                        private void method()
+                        {
+                            string content = await Task<String>.Run(async delegate () {
+                                await Task.Delay(1000);
+                                return "Test";
+                            });
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -988,22 +988,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    static async void Main()
+                    class C
                     {
-                        try
+                        static async void Main()
                         {
-                            [|await|] await Task.Delay(100);
-                        }
-                        finally
-                        {
+                            try
+                            {
+                                [|await|] await Task.Delay(100);
+                            }
+                            finally
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1021,9 +1021,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
                     }
                 }
 
-                class Program 
+                class Program
                 {
-                    ValueTask<int> Test() 
+                    ValueTask<int> Test()
                     {
                         [|await Task.Delay(1);|]
                     }
@@ -1040,9 +1040,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
                     }
                 }
 
-                class Program 
+                class Program
                 {
-                    async ValueTask<int> Test() 
+                    async ValueTask<int> Test()
                     {
                         await Task.Delay(1);
                     }
@@ -1064,9 +1064,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
                     }
                 }
 
-                class Program 
+                class Program
                 {
-                    ValueTask Test() 
+                    ValueTask Test()
                     {
                         [|await Task.Delay(1);|]
                     }
@@ -1083,9 +1083,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
                     }
                 }
 
-                class Program 
+                class Program
                 {
-                    async ValueTask Test() 
+                    async ValueTask Test()
                     {
                         await Task.Delay(1);
                     }
@@ -1099,43 +1099,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public void M1()
+                    class C
                     {
-                        void M2()
+                        public void M1()
                         {
-                            [|await M3Async();|]
+                            void M2()
+                            {
+                                [|await M3Async();|]
+                            }
+                        }
+
+                        async Task<int> M3Async()
+                        {
+                            return 1;
                         }
                     }
-
-                    async Task<int> M3Async()
-                    {
-                        return 1;
-                    }
-                }
-                """,
+                    """,
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public void M1()
+                    class C
                     {
-                        async Task M2Async()
+                        public void M1()
                         {
-                            await M3Async();
+                            async Task M2Async()
+                            {
+                                await M3Async();
+                            }
+                        }
+
+                        async Task<int> M3Async()
+                        {
+                            return 1;
                         }
                     }
-
-                    async Task<int> M3Async()
-                    {
-                        return 1;
-                    }
-                }
-                """
+                    """
             );
         }
 
@@ -1145,43 +1145,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodAsynchronous
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public void M1()
+                    class C
                     {
-                        void M2()
+                        public void M1()
                         {
-                            [|await M3Async();|]
+                            void M2()
+                            {
+                                [|await M3Async();|]
+                            }
+                        }
+
+                        async Task<int> M3Async()
+                        {
+                            return 1;
                         }
                     }
-
-                    async Task<int> M3Async()
-                    {
-                        return 1;
-                    }
-                }
-                """,
+                    """,
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    public void M1()
+                    class C
                     {
-                        async void M2()
+                        public void M1()
                         {
-                            await M3Async();
+                            async void M2()
+                            {
+                                await M3Async();
+                            }
+                        }
+
+                        async Task<int> M3Async()
+                        {
+                            return 1;
                         }
                     }
-
-                    async Task<int> M3Async()
-                    {
-                        return 1;
-                    }
-                }
-                """,
+                    """,
                 index: 1
             );
         }
@@ -1295,29 +1295,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|await using (var x = new object())|]
+                        void M()
                         {
+                            [|await using (var x = new object())|]
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    async Task MAsync()
+                    class C
                     {
-                        await using (var x = new object())
+                        async Task MAsync()
                         {
+                            await using (var x = new object())
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1326,16 +1326,16 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|using (var x = new object())|]
+                        void M()
                         {
+                            [|using (var x = new object())|]
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1344,29 +1344,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|await foreach (var n in new int[] { })|]
+                        void M()
                         {
+                            [|await foreach (var n in new int[] { })|]
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    async Task MAsync()
+                    class C
                     {
-                        await foreach (var n in new int[] { })
+                        async Task MAsync()
                         {
+                            await foreach (var n in new int[] { })
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1375,16 +1375,16 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|foreach (var n in new int[] { })|]
+                        void M()
                         {
+                            [|foreach (var n in new int[] { })|]
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1393,29 +1393,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|await foreach (var (a, b) in new(int, int)[] { })|]
+                        void M()
                         {
+                            [|await foreach (var (a, b) in new(int, int)[] { })|]
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                using System.Threading.Tasks;
+                    using System.Threading.Tasks;
 
-                class C
-                {
-                    async Task MAsync()
+                    class C
                     {
-                        await foreach (var (a, b) in new(int, int)[] { })
+                        async Task MAsync()
                         {
+                            await foreach (var (a, b) in new(int, int)[] { })
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1424,16 +1424,16 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|foreach (var (a, b) in new(int, int)[] { })|]
+                        void M()
                         {
+                            [|foreach (var (a, b) in new(int, int)[] { })|]
+                            {
+                            }
                         }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1442,29 +1442,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
-                using System.Threading.Tasks;
-                class C
-                {
-                    string? M()
+                    #nullable enable
+                    using System.Threading.Tasks;
+                    class C
                     {
-                        [|await Task.Delay(1);|]
-                        return null;
+                        string? M()
+                        {
+                            [|await Task.Delay(1);|]
+                            return null;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                #nullable enable
-                using System.Threading.Tasks;
-                class C
-                {
-                    async Task<string?> MAsync()
+                    #nullable enable
+                    using System.Threading.Tasks;
+                    class C
                     {
-                        await Task.Delay(1);
-                        return null;
+                        async Task<string?> MAsync()
+                        {
+                            await Task.Delay(1);
+                            return null;
+                        }
                     }
-                }
-                """
+                    """
             );
         }
 
@@ -1473,33 +1473,33 @@ class C
         {
             var initial =
                 """
-                #nullable enable
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    IEnumerable<string?> Test()
+                    #nullable enable
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return string.Empty;
-                        [|await Task.Delay(1);|]
+                        IEnumerable<string?> Test()
+                        {
+                            yield return string.Empty;
+                            [|await Task.Delay(1);|]
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
 
             var expected =
                 """
-                #nullable enable
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    async IAsyncEnumerable<string?> TestAsync()
+                    #nullable enable
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return string.Empty;
-                        await Task.Delay(1);
+                        async IAsyncEnumerable<string?> TestAsync()
+                        {
+                            yield return string.Empty;
+                            await Task.Delay(1);
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
             await TestInRegularAndScriptAsync(initial, expected);
         }
 
@@ -1508,33 +1508,33 @@ class C
         {
             var initial =
                 """
-                #nullable enable
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    IEnumerator<string?> Test()
+                    #nullable enable
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return string.Empty;
-                        [|await Task.Delay(1);|]
+                        IEnumerator<string?> Test()
+                        {
+                            yield return string.Empty;
+                            [|await Task.Delay(1);|]
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
 
             var expected =
                 """
-                #nullable enable
-                using System.Threading.Tasks;
-                using System.Collections.Generic;
-                class Program
-                {
-                    async IAsyncEnumerator<string?> TestAsync()
+                    #nullable enable
+                    using System.Threading.Tasks;
+                    using System.Collections.Generic;
+                    class Program
                     {
-                        yield return string.Empty;
-                        await Task.Delay(1);
+                        async IAsyncEnumerator<string?> TestAsync()
+                        {
+                            yield return string.Empty;
+                            await Task.Delay(1);
+                        }
                     }
-                }
-                """ + IAsyncEnumerable;
+                    """ + IAsyncEnumerable;
             await TestInRegularAndScriptAsync(initial, expected);
         }
 

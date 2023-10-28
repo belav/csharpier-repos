@@ -25,20 +25,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemExistsAsync(
                 """
-                public class C
-                {
-                    public int this[int i] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public int this[int i] => i;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """,
                 "this",
                 displayTextSuffix: "[]",
                 matchingFilters: new List<CompletionFilter> { FilterSet.PropertyFilter }
@@ -50,14 +50,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyItemExistsAsync(
                 """
-                public class Program
-                {
-                    public static void Main(string s)
+                    public class Program
                     {
-                        s.$$
+                        public static void Main(string s)
+                        {
+                            s.$$
+                        }
                     }
-                }
-                """,
+                    """,
                 "this",
                 displayTextSuffix: "[]",
                 matchingFilters: new List<CompletionFilter> { FilterSet.PropertyFilter }
@@ -69,19 +69,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public int this[int i] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        C.$$
+                        public int this[int i] => i;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -90,20 +90,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class C
-                {
-                    public int this[int i] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        var name = nameof(c.$$
+                        public int this[int i] => i;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            var name = nameof(c.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -112,36 +112,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                public class C
-                {
-                    public int this[int i] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public int this[int i] => i;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """,
                 "this",
                 """
-                public class C
-                {
-                    public int this[int i] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c[$$]
+                        public int this[int i] => i;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c[$$]
+                        }
+                    }
+                    """
             );
         }
 
@@ -150,36 +150,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                public class C
-                {
-                    public int this[int x, int y] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public int this[int x, int y] => i;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """,
                 "this",
                 """
-                public class C
-                {
-                    public int this[int x, int y] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c[$$]
+                        public int this[int x, int y] => i;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c[$$]
+                        }
+                    }
+                    """
             );
         }
 
@@ -282,32 +282,32 @@ public class Program
         {
             await VerifyItemExistsAsync(
                 """
-                public class C
-                {
-                    /// <summary>
-                    /// Returns the index <paramref name="i"/>
-                    /// </summary>
-                    /// <param name="i">The index</param>
-                    /// <returns>Returns the index <paramref name="i"/></returns>
-                    public int this[int i] => i;
-
-                    /// <summary>
-                    /// Returns 1
-                    /// </summary>
-                    /// <param name="i">The index</param>
-                    /// <returns>Returns 1</returns>
-                    public int this[string s] => 1;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        /// <summary>
+                        /// Returns the index <paramref name="i"/>
+                        /// </summary>
+                        /// <param name="i">The index</param>
+                        /// <returns>Returns the index <paramref name="i"/></returns>
+                        public int this[int i] => i;
+
+                        /// <summary>
+                        /// Returns 1
+                        /// </summary>
+                        /// <param name="i">The index</param>
+                        /// <returns>Returns 1</returns>
+                        public int this[string s] => 1;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """,
                 "this",
                 displayTextSuffix: "[]",
                 expectedDescriptionOrNull: @$"int C.this[int i] {{ get; }} (+ 1 {FeaturesResources.overload})
@@ -320,23 +320,23 @@ Returns the index i"
         {
             await VerifyItemExistsAsync(
                 """
-                public class Base
-                {
-                    public int this[int i] => i;
-                }
-                public class Derived : Base
-                {
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class Base
                     {
-                        var d = new Derived();
-                        d.$$
+                        public int this[int i] => i;
                     }
-                }
-                """,
+                    public class Derived : Base
+                    {
+                    }
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var d = new Derived();
+                            d.$$
+                        }
+                    }
+                    """,
                 "this",
                 displayTextSuffix: "[]"
             );
@@ -347,23 +347,23 @@ Returns the index i"
         {
             await VerifyNoItemsExistAsync(
                 """
-                public class Base
-                {
-                    protected int this[int i] => i;
-                }
-                public class Derived : Base
-                {
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class Base
                     {
-                        var d = new Derived();
-                        d.$$
+                        protected int this[int i] => i;
                     }
-                }
-                """
+                    public class Derived : Base
+                    {
+                    }
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var d = new Derived();
+                            d.$$
+                        }
+                    }
+                    """
             );
         }
 
@@ -372,15 +372,15 @@ Returns the index i"
         {
             await VerifyItemExistsAsync(
                 """
-                public class Program
-                {
-                    public static void Main()
+                    public class Program
                     {
-                        var s = "Test";
-                        s.$$
+                        public static void Main()
+                        {
+                            var s = "Test";
+                            s.$$
+                        }
                     }
-                }
-                """,
+                    """,
                 "this",
                 displayTextSuffix: "[]"
             );
@@ -528,40 +528,40 @@ Returns the index i"
         {
             await VerifyCustomCommitProviderAsync(
                 """
-                #nullable enable
+                    #nullable enable
 
-                public class C
-                {
-                    public int this[int i] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        C? c = null;
-                        var i = c!.$$
+                        public int this[int i] => i;
                     }
-                }
-                """,
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C? c = null;
+                            var i = c!.$$
+                        }
+                    }
+                    """,
                 "this",
                 """
-                #nullable enable
+                    #nullable enable
 
-                public class C
-                {
-                    public int this[int i] => i;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+                    public class C
                     {
-                        C? c = null;
-                        var i = c![$$]
+                        public int this[int i] => i;
                     }
-                }
-                """
+
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            C? c = null;
+                            var i = c![$$]
+                        }
+                    }
+                    """
             );
         }
     }

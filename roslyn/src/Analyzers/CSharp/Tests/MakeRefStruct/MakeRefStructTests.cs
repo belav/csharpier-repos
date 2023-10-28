@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
             using System;
             namespace System
             {
-                public readonly ref struct Span<T> 
+                public readonly ref struct Span<T>
                 {
                     unsafe public Span(void* pointer, int length) { }
                 }
@@ -50,19 +50,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                struct S
-                {
-                    Span<int>[||] m;
-                }
-                """
+                    struct S
+                    {
+                        Span<int>[||] m;
+                    }
+                    """
             );
             var expected = CreateTestSource(
                 """
-                ref struct S
-                {
-                    Span<int> m;
-                }
-                """
+                    ref struct S
+                    {
+                        Span<int> m;
+                    }
+                    """
             );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
@@ -72,11 +72,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                record struct S
-                {
-                    Span<int>[||] m;
-                }
-                """
+                    record struct S
+                    {
+                        Span<int>[||] m;
+                    }
+                    """
             );
             await TestMissingInRegularAndScriptAsync(
                 text,
@@ -91,14 +91,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                struct S
-                {
-                    class C
+                    struct S
                     {
-                        Span<int>[||] m;
+                        class C
+                        {
+                            Span<int>[||] m;
+                        }
                     }
-                }
-                """
+                    """
             );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
@@ -109,11 +109,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
             // Note: does not compile
             var text = CreateTestSource(
                 """
-                ref struct S
-                {
-                    static Span<int>[||] m;
-                }
-                """
+                    ref struct S
+                    {
+                        static Span<int>[||] m;
+                    }
+                    """
             );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
@@ -123,20 +123,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                struct S
-                {
-                    static Span<int>[||] m;
-                }
-                """
+                    struct S
+                    {
+                        static Span<int>[||] m;
+                    }
+                    """
             );
             // Note: still does not compile after fix
             var expected = CreateTestSource(
                 """
-                ref struct S
-                {
-                    static Span<int> m;
-                }
-                """
+                    ref struct S
+                    {
+                        static Span<int> m;
+                    }
+                    """
             );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
@@ -146,19 +146,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                struct S
-                {
-                    Span<int>[||] M { get; }
-                }
-                """
+                    struct S
+                    {
+                        Span<int>[||] M { get; }
+                    }
+                    """
             );
             var expected = CreateTestSource(
                 """
-                ref struct S
-                {
-                    Span<int> M { get; }
-                }
-                """
+                    ref struct S
+                    {
+                        Span<int> M { get; }
+                    }
+                    """
             );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
@@ -169,14 +169,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
             // Note: does not compile
             var text = CreateTestSource(
                 """
-                struct S
-                {
-                    class C
+                    struct S
                     {
-                        Span<int>[||] M { get; }
+                        class C
+                        {
+                            Span<int>[||] M { get; }
+                        }
                     }
-                }
-                """
+                    """
             );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
@@ -187,11 +187,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
             // Note: does not compile
             var text = CreateTestSource(
                 """
-                ref struct S
-                {
-                    static Span<int>[||] M { get; }
-                }
-                """
+                    ref struct S
+                    {
+                        static Span<int>[||] M { get; }
+                    }
+                    """
             );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
@@ -201,20 +201,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                struct S
-                {
-                    static Span<int>[||] M { get; }
-                }
-                """
+                    struct S
+                    {
+                        static Span<int>[||] M { get; }
+                    }
+                    """
             );
             // Note: still does not compile after fix
             var expected = CreateTestSource(
                 """
-                ref struct S
-                {
-                    static Span<int> M { get; }
-                }
-                """
+                    ref struct S
+                    {
+                        static Span<int> M { get; }
+                    }
+                    """
             );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
@@ -224,15 +224,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                ref partial struct S
-                {
-                }
+                    ref partial struct S
+                    {
+                    }
 
-                struct S
-                {
-                    Span<int>[||] M { get; }
-                }
-                """
+                    struct S
+                    {
+                        Span<int>[||] M { get; }
+                    }
+                    """
             );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
@@ -242,27 +242,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                partial struct S
-                {
-                }
+                    partial struct S
+                    {
+                    }
 
-                partial struct S
-                {
-                    Span<int>[||] M { get; }
-                }
-                """
+                    partial struct S
+                    {
+                        Span<int>[||] M { get; }
+                    }
+                    """
             );
             var expected = CreateTestSource(
                 """
-                partial struct S
-                {
-                }
+                    partial struct S
+                    {
+                    }
 
-                ref partial struct S
-                {
-                    Span<int>[||] M { get; }
-                }
-                """
+                    ref partial struct S
+                    {
+                        Span<int>[||] M { get; }
+                    }
+                    """
             );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
@@ -272,27 +272,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         {
             var text = CreateTestSource(
                 """
-                partial struct S
-                {
-                }
+                    partial struct S
+                    {
+                    }
 
-                readonly partial struct S
-                {
-                    Span<int>[||] M { get; }
-                }
-                """
+                    readonly partial struct S
+                    {
+                        Span<int>[||] M { get; }
+                    }
+                    """
             );
             var expected = CreateTestSource(
                 """
-                partial struct S
-                {
-                }
+                    partial struct S
+                    {
+                    }
 
-                readonly ref partial struct S
-                {
-                    Span<int>[||] M { get; }
-                }
-                """
+                    readonly ref partial struct S
+                    {
+                        Span<int>[||] M { get; }
+                    }
+                    """
             );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }

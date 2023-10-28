@@ -583,7 +583,7 @@ class Program
                 class C
                 {
                     private class Inner
-                    {   
+                    {
                     }
                 }
 
@@ -609,7 +609,7 @@ class Program
                 class C
                 {
                     public void Z()
-                    {   
+                    {
                     }
                 }
 
@@ -749,7 +749,7 @@ class Program
             var markup = """
                 class C
                 {
-                    void goo(E first, E second) 
+                    void goo(E first, E second)
                     {
                         goo(first: E.a, $$
                     }

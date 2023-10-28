@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SimplifyMethod
 
             var expected = """
                 // This is a file header
-                
+
                 namespace test
                 {
                     public partial class MyComponent

@@ -1353,7 +1353,7 @@ public {record} R(MyClass $$
                 {
                     void Do()
                     {
-                        (System.Array array, System.Action $$ 
+                        (System.Array array, System.Action $$
                     }
                 }
                 """;
@@ -1622,13 +1622,13 @@ public {record} R(MyClass $$
         {
             var markup =
                 """
-                using System;
+                    using System;
 
-                class Test
-                {
-                    void M(Span<Test> $$) { }
-                }
-                """ + Span;
+                    class Test
+                    {
+                        void M(Span<Test> $$) { }
+                    }
+                    """ + Span;
             await VerifyItemExistsAsync(markup, "tests");
         }
 
@@ -1714,18 +1714,18 @@ public {record} R(MyClass $$
         {
             var markup =
                 """
-                using System.Collections.Generic;
+                    using System.Collections.Generic;
 
-                class MyClass
-                {
-                    public void M(MyOwnCollection<MyClass> $$) { }
-                }
+                    class MyClass
+                    {
+                        public void M(MyOwnCollection<MyClass> $$) { }
+                    }
 
 
-                class MyOwnCollection<T> : IAsyncEnumerable<T>
-                {
-                }
-                """ + IAsyncEnumerable;
+                    class MyOwnCollection<T> : IAsyncEnumerable<T>
+                    {
+                    }
+                    """ + IAsyncEnumerable;
             await VerifyItemExistsAsync(markup, "myClasses");
         }
 
@@ -2691,7 +2691,7 @@ public {record} R(MyClass $$
 
                     void M()
                     {
-                        ClassB classB = new ClassB(); 
+                        ClassB classB = new ClassB();
                     }
 
                     void M2()

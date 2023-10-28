@@ -22,32 +22,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    object a;
-                    a = $$b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                void M(bool b)
-                {
-                    object a;
-                    if (b)
+                    void M(bool b)
                     {
-                        a = (long)0;
-                    }
-                    else
-                    {
-                        a = 1L;
+                        object a;
+                        a = $$b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    void M(bool b)
+                    {
+                        object a;
+                        if (b)
+                        {
+                            a = (long)0;
+                        }
+                        else
+                        {
+                            a = 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -56,32 +56,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    object a;
-                    $$a = b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                void M(bool b)
-                {
-                    object a;
-                    if (b)
+                    void M(bool b)
                     {
-                        a = (long)0;
-                    }
-                    else
-                    {
-                        a = 1L;
+                        object a;
+                        $$a = b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    void M(bool b)
+                    {
+                        object a;
+                        if (b)
+                        {
+                            a = (long)0;
+                        }
+                        else
+                        {
+                            a = 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -90,32 +90,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    long a;
-                    a = $$b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                void M(bool b)
-                {
-                    long a;
-                    if (b)
+                    void M(bool b)
                     {
-                        a = 0;
-                    }
-                    else
-                    {
-                        a = 1L;
+                        long a;
+                        a = $$b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    void M(bool b)
+                    {
+                        long a;
+                        if (b)
+                        {
+                            a = 0;
+                        }
+                        else
+                        {
+                            a = 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -124,36 +124,36 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            #nullable enable
+                #nullable enable
 
-            public class C
-            {
-                private C? y, z;
-                void M(bool b, ref C? x)
+                public class C
                 {
-                    x = ref ($$b ? ref y : ref z);
-                }
-            }
-            """,
-            """
-            #nullable enable
-
-            public class C
-            {
-                private C? y, z;
-                void M(bool b, ref C? x)
-                {
-                    if (b)
+                    private C? y, z;
+                    void M(bool b, ref C? x)
                     {
-                        x = ref (y);
-                    }
-                    else
-                    {
-                        x = ref (z);
+                        x = ref ($$b ? ref y : ref z);
                     }
                 }
-            }
+                """,
             """
+                #nullable enable
+
+                public class C
+                {
+                    private C? y, z;
+                    void M(bool b, ref C? x)
+                    {
+                        if (b)
+                        {
+                            x = ref (y);
+                        }
+                        else
+                        {
+                            x = ref (z);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -162,30 +162,30 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    _ = $$b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                void M(bool b)
-                {
-                    if (b)
+                    void M(bool b)
                     {
-                        _ = (long)0;
-                    }
-                    else
-                    {
-                        _ = 1L;
+                        _ = $$b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    void M(bool b)
+                    {
+                        if (b)
+                        {
+                            _ = (long)0;
+                        }
+                        else
+                        {
+                            _ = 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -197,22 +197,22 @@ public class ReplaceConditionalWithStatementsTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
             TestCode = """
-            bool b = true;
-            long a;
-            a = $$b ? 0 : 1L;
-            """,
+                bool b = true;
+                long a;
+                a = $$b ? 0 : 1L;
+                """,
             FixedCode = """
-            bool b = true;
-            long a;
-            if (b)
-            {
-                a = 0;
-            }
-            else
-            {
-                a = 1L;
-            }
-            """
+                bool b = true;
+                long a;
+                if (b)
+                {
+                    a = 0;
+                }
+                else
+                {
+                    a = 1L;
+                }
+                """
         }.RunAsync();
     }
 
@@ -224,22 +224,22 @@ public class ReplaceConditionalWithStatementsTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
             TestCode = """
-            bool b = true;
-            long a;
-            $$a = b ? 0 : 1L;
-            """,
+                bool b = true;
+                long a;
+                $$a = b ? 0 : 1L;
+                """,
             FixedCode = """
-            bool b = true;
-            long a;
-            if (b)
-            {
-                a = 0;
-            }
-            else
-            {
-                a = 1L;
-            }
-            """
+                bool b = true;
+                long a;
+                if (b)
+                {
+                    a = 0;
+                }
+                else
+                {
+                    a = 1L;
+                }
+                """
         }.RunAsync();
     }
 
@@ -281,32 +281,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    int a = 0;
-                    a += $$b ? 1 : 2;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                void M(bool b)
-                {
-                    int a = 0;
-                    if (b)
+                    void M(bool b)
                     {
-                        a += 1;
-                    }
-                    else
-                    {
-                        a += 2;
+                        int a = 0;
+                        a += $$b ? 1 : 2;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    void M(bool b)
+                    {
+                        int a = 0;
+                        if (b)
+                        {
+                            a += 1;
+                        }
+                        else
+                        {
+                            a += 2;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -317,44 +317,44 @@ public class ReplaceConditionalWithStatementsTests
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
             TestCode = """
-            record X(int A);
-            class C
-            {
-                void M(bool b, X x)
+                record X(int A);
+                class C
                 {
-                    x = x with { A = $$b ? 1 : 2 };
+                    void M(bool b, X x)
+                    {
+                        x = x with { A = $$b ? 1 : 2 };
+                    }
                 }
-            }
-            namespace System.Runtime.CompilerServices
-            {
-                public sealed class IsExternalInit
+                namespace System.Runtime.CompilerServices
                 {
+                    public sealed class IsExternalInit
+                    {
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            record X(int A);
-            class C
-            {
-                void M(bool b, X x)
+                record X(int A);
+                class C
                 {
-                    if (b)
+                    void M(bool b, X x)
                     {
-                        x = x with { A = 1 };
-                    }
-                    else
-                    {
-                        x = x with { A = 2 };
+                        if (b)
+                        {
+                            x = x with { A = 1 };
+                        }
+                        else
+                        {
+                            x = x with { A = 2 };
+                        }
                     }
                 }
-            }
-            namespace System.Runtime.CompilerServices
-            {
-                public sealed class IsExternalInit
+                namespace System.Runtime.CompilerServices
                 {
+                    public sealed class IsExternalInit
+                    {
+                    }
                 }
-            }
-            """
+                """
         }.RunAsync();
     }
 
@@ -363,31 +363,31 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    object a = $$b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                void M(bool b)
-                {
-                    object a;
-                    if (b)
+                    void M(bool b)
                     {
-                        a = (long)0;
-                    }
-                    else
-                    {
-                        a = 1L;
+                        object a = $$b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    void M(bool b)
+                    {
+                        object a;
+                        if (b)
+                        {
+                            a = (long)0;
+                        }
+                        else
+                        {
+                            a = 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -396,31 +396,31 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    $$object a = b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                void M(bool b)
-                {
-                    object a;
-                    if (b)
+                    void M(bool b)
                     {
-                        a = (long)0;
-                    }
-                    else
-                    {
-                        a = 1L;
+                        $$object a = b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    void M(bool b)
+                    {
+                        object a;
+                        if (b)
+                        {
+                            a = (long)0;
+                        }
+                        else
+                        {
+                            a = 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -429,31 +429,31 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                void M(bool b)
+                class C
                 {
-                    var a = $$b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                void M(bool b)
-                {
-                    long a;
-                    if (b)
+                    void M(bool b)
                     {
-                        a = 0;
-                    }
-                    else
-                    {
-                        a = 1L;
+                        var a = $$b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    void M(bool b)
+                    {
+                        long a;
+                        if (b)
+                        {
+                            a = 0;
+                        }
+                        else
+                        {
+                            a = 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -462,37 +462,37 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    int v = N(N($$b ? 42 : throw new Exception()));
-                }
+                    void M(bool b)
+                    {
+                        int v = N(N($$b ? 42 : throw new Exception()));
+                    }
 
-                int N(int v) => v;
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b)
-                {
-                    int v;
-                    if (b)
-                    {
-                        v = N(N(42));
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
+                    int N(int v) => v;
                 }
-            
-                int N(int v) => v;
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b)
+                    {
+                        int v;
+                        if (b)
+                        {
+                            v = N(N(42));
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+
+                    int N(int v) => v;
+                }
+                """
         );
     }
 
@@ -504,22 +504,22 @@ public class ReplaceConditionalWithStatementsTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
             TestCode = """
-            bool b = true;
-            object a = $$b ? 0 : 1L;
-            """,
+                bool b = true;
+                object a = $$b ? 0 : 1L;
+                """,
             FixedCode = """
-            bool b = true;
-            object a;
+                bool b = true;
+                object a;
 
-            if (b)
-            {
-                a = (long)0;
-            }
-            else
-            {
-                a = 1L;
-            }
-            """
+                if (b)
+                {
+                    a = (long)0;
+                }
+                else
+                {
+                    a = 1L;
+                }
+                """
         }.RunAsync();
     }
 
@@ -531,22 +531,22 @@ public class ReplaceConditionalWithStatementsTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
             TestCode = """
-            bool b = true;
-            $$object a = b ? 0 : 1L;
-            """,
+                bool b = true;
+                $$object a = b ? 0 : 1L;
+                """,
             FixedCode = """
-            bool b = true;
-            object a;
+                bool b = true;
+                object a;
 
-            if (b)
-            {
-                a = (long)0;
-            }
-            else
-            {
-                a = 1L;
-            }
-            """
+                if (b)
+                {
+                    a = (long)0;
+                }
+                else
+                {
+                    a = 1L;
+                }
+                """
         }.RunAsync();
     }
 
@@ -558,22 +558,22 @@ public class ReplaceConditionalWithStatementsTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
             TestCode = """
-            bool b = true;
-            var a = $$b ? 0 : 1L;
-            """,
+                bool b = true;
+                var a = $$b ? 0 : 1L;
+                """,
             FixedCode = """
-            bool b = true;
-            long a;
+                bool b = true;
+                long a;
 
-            if (b)
-            {
-                a = 0;
-            }
-            else
-            {
-                a = 1L;
-            }
-            """
+                if (b)
+                {
+                    a = 0;
+                }
+                else
+                {
+                    a = 1L;
+                }
+                """
         }.RunAsync();
     }
 
@@ -582,30 +582,30 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                object M(bool b)
+                class C
                 {
-                    return $$b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                object M(bool b)
-                {
-                    if (b)
+                    object M(bool b)
                     {
-                        return (long)0;
-                    }
-                    else
-                    {
-                        return 1L;
+                        return $$b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    object M(bool b)
+                    {
+                        if (b)
+                        {
+                            return (long)0;
+                        }
+                        else
+                        {
+                            return 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -614,30 +614,30 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                object M(bool b)
+                class C
                 {
-                    $$return b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                object M(bool b)
-                {
-                    if (b)
+                    object M(bool b)
                     {
-                        return (long)0;
-                    }
-                    else
-                    {
-                        return 1L;
+                        $$return b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    object M(bool b)
+                    {
+                        if (b)
+                        {
+                            return (long)0;
+                        }
+                        else
+                        {
+                            return 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -646,30 +646,30 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            class C
-            {
-                long M(bool b)
+                class C
                 {
-                    return $$b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            class C
-            {
-                long M(bool b)
-                {
-                    if (b)
+                    long M(bool b)
                     {
-                        return 0;
-                    }
-                    else
-                    {
-                        return 1L;
+                        return $$b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                class C
+                {
+                    long M(bool b)
+                    {
+                        if (b)
+                        {
+                            return 0;
+                        }
+                        else
+                        {
+                            return 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -678,32 +678,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    Console.WriteLine($$b ? 0 : 1L);
-                }
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b)
-                {
-                    if (b)
+                    void M(bool b)
                     {
-                        Console.WriteLine((long)0);
-                    }
-                    else
-                    {
-                        Console.WriteLine(1L);
+                        Console.WriteLine($$b ? 0 : 1L);
                     }
                 }
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b)
+                    {
+                        if (b)
+                        {
+                            Console.WriteLine((long)0);
+                        }
+                        else
+                        {
+                            Console.WriteLine(1L);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -712,32 +712,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b, bool c)
+                using System;
+                class C
                 {
-                    Console.WriteLine($$b ? c ? 0 : 1 : c ? 2 : 3);
-                }
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b, bool c)
-                {
-                    if (b)
+                    void M(bool b, bool c)
                     {
-                        Console.WriteLine(c ? 0 : 1);
-                    }
-                    else
-                    {
-                        Console.WriteLine(c ? 2 : 3);
+                        Console.WriteLine($$b ? c ? 0 : 1 : c ? 2 : 3);
                     }
                 }
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b, bool c)
+                    {
+                        if (b)
+                        {
+                            Console.WriteLine(c ? 0 : 1);
+                        }
+                        else
+                        {
+                            Console.WriteLine(c ? 2 : 3);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -746,32 +746,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b, bool c)
+                using System;
+                class C
                 {
-                    Console.WriteLine(b ? $$c ? 0 : 1 : c ? 2 : 3);
-                }
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b, bool c)
-                {
-                    if (c)
+                    void M(bool b, bool c)
                     {
-                        Console.WriteLine(b ? 0 : c ? 2 : 3);
-                    }
-                    else
-                    {
-                        Console.WriteLine(b ? 1 : c ? 2 : 3);
+                        Console.WriteLine(b ? $$c ? 0 : 1 : c ? 2 : 3);
                     }
                 }
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b, bool c)
+                    {
+                        if (c)
+                        {
+                            Console.WriteLine(b ? 0 : c ? 2 : 3);
+                        }
+                        else
+                        {
+                            Console.WriteLine(b ? 1 : c ? 2 : 3);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -780,32 +780,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b, bool c)
+                using System;
+                class C
                 {
-                    Console.WriteLine(b ? c ? 0 : 1 : $$c ? 2 : 3);
-                }
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b, bool c)
-                {
-                    if (c)
+                    void M(bool b, bool c)
                     {
-                        Console.WriteLine(b ? c ? 0 : 1 : 2);
-                    }
-                    else
-                    {
-                        Console.WriteLine(b ? c ? 0 : 1 : 3);
+                        Console.WriteLine(b ? c ? 0 : 1 : $$c ? 2 : 3);
                     }
                 }
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b, bool c)
+                    {
+                        if (c)
+                        {
+                            Console.WriteLine(b ? c ? 0 : 1 : 2);
+                        }
+                        else
+                        {
+                            Console.WriteLine(b ? c ? 0 : 1 : 3);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -814,36 +814,36 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    F($$b ? (int)42 : (int?)null);
-                }
+                    void M(bool b)
+                    {
+                        F($$b ? (int)42 : (int?)null);
+                    }
 
-                void F<T>(T value) => Console.WriteLine(typeof(T));
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        F((int?)(int)42);
-                    }
-                    else
-                    {
-                        F((int?)null);
-                    }
+                    void F<T>(T value) => Console.WriteLine(typeof(T));
                 }
-            
-                void F<T>(T value) => Console.WriteLine(typeof(T));
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b)
+                    {
+                        if (b)
+                        {
+                            F((int?)(int)42);
+                        }
+                        else
+                        {
+                            F((int?)null);
+                        }
+                    }
+
+                    void F<T>(T value) => Console.WriteLine(typeof(T));
+                }
+                """
         );
     }
 
@@ -852,37 +852,37 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    F($$b ? new X() : new());
-                }
+                    void M(bool b)
+                    {
+                        F($$b ? new X() : new());
+                    }
 
-                void F(object value) => Console.WriteLine(value.GetType());
-            }
-            class X { }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        F(new X());
-                    }
-                    else
-                    {
-                        F((X)new());
-                    }
+                    void F(object value) => Console.WriteLine(value.GetType());
                 }
-            
-                void F(object value) => Console.WriteLine(value.GetType());
-            }
+                class X { }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b)
+                    {
+                        if (b)
+                        {
+                            F(new X());
+                        }
+                        else
+                        {
+                            F((X)new());
+                        }
+                    }
+
+                    void F(object value) => Console.WriteLine(value.GetType());
+                }
+                """
         );
     }
 
@@ -891,32 +891,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    $$Console.WriteLine(b ? 0 : 1L);
-                }
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b)
-                {
-                    if (b)
+                    void M(bool b)
                     {
-                        Console.WriteLine((long)0);
-                    }
-                    else
-                    {
-                        Console.WriteLine(1L);
+                        $$Console.WriteLine(b ? 0 : 1L);
                     }
                 }
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b)
+                    {
+                        if (b)
+                        {
+                            Console.WriteLine((long)0);
+                        }
+                        else
+                        {
+                            Console.WriteLine(1L);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -925,32 +925,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    Console.WriteLine(b ? "" : "", $$b ? 0 : 1L);
-                }
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b)
-                {
-                    if (b)
+                    void M(bool b)
                     {
-                        Console.WriteLine(b ? "" : "", (long)0);
-                    }
-                    else
-                    {
-                        Console.WriteLine(b ? "" : "", 1L);
+                        Console.WriteLine(b ? "" : "", $$b ? 0 : 1L);
                     }
                 }
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b)
+                    {
+                        if (b)
+                        {
+                            Console.WriteLine(b ? "" : "", (long)0);
+                        }
+                        else
+                        {
+                            Console.WriteLine(b ? "" : "", 1L);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -959,34 +959,34 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                bool M(bool b)
+                using System;
+                class C
                 {
-                    M(M(M($$b ? true : false)));
-                    return default;
+                    bool M(bool b)
+                    {
+                        M(M(M($$b ? true : false)));
+                        return default;
+                    }
                 }
-            }
-            """,
+                """,
             """
-            using System;
-            class C
-            {
-                bool M(bool b)
+                using System;
+                class C
                 {
-                    if (b)
+                    bool M(bool b)
                     {
-                        M(M(M(true)));
+                        if (b)
+                        {
+                            M(M(M(true)));
+                        }
+                        else
+                        {
+                            M(M(M(false)));
+                        }
+                        return default;
                     }
-                    else
-                    {
-                        M(M(M(false)));
-                    }
-                    return default;
                 }
-            }
-            """
+                """
         );
     }
 
@@ -995,34 +995,34 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            using System.Threading.Tasks;
-            class C
-            {
-                async void M(bool b, Task x, Task y)
+                using System;
+                using System.Threading.Tasks;
+                class C
                 {
-                    await ($$b ? x : y);
-                }
-            }
-            """,
-            """
-            using System;
-            using System.Threading.Tasks;
-            class C
-            {
-                async void M(bool b, Task x, Task y)
-                {
-                    if (b)
+                    async void M(bool b, Task x, Task y)
                     {
-                        await (x);
-                    }
-                    else
-                    {
-                        await (y);
+                        await ($$b ? x : y);
                     }
                 }
-            }
+                """,
             """
+                using System;
+                using System.Threading.Tasks;
+                class C
+                {
+                    async void M(bool b, Task x, Task y)
+                    {
+                        if (b)
+                        {
+                            await (x);
+                        }
+                        else
+                        {
+                            await (y);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -1031,34 +1031,34 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            using System.Threading.Tasks;
-            class C
-            {
-                async void M(bool b, Task x, Task y)
+                using System;
+                using System.Threading.Tasks;
+                class C
                 {
-                    $$await (b ? x : y);
-                }
-            }
-            """,
-            """
-            using System;
-            using System.Threading.Tasks;
-            class C
-            {
-                async void M(bool b, Task x, Task y)
-                {
-                    if (b)
+                    async void M(bool b, Task x, Task y)
                     {
-                        await (x);
-                    }
-                    else
-                    {
-                        await (y);
+                        $$await (b ? x : y);
                     }
                 }
-            }
+                """,
             """
+                using System;
+                using System.Threading.Tasks;
+                class C
+                {
+                    async void M(bool b, Task x, Task y)
+                    {
+                        if (b)
+                        {
+                            await (x);
+                        }
+                        else
+                        {
+                            await (y);
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -1067,32 +1067,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    throw $$b ? new Exception("x") : new Exception("y");
-                }
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b)
-                {
-                    if (b)
+                    void M(bool b)
                     {
-                        throw new Exception("x");
-                    }
-                    else
-                    {
-                        throw new Exception("y");
+                        throw $$b ? new Exception("x") : new Exception("y");
                     }
                 }
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b)
+                    {
+                        if (b)
+                        {
+                            throw new Exception("x");
+                        }
+                        else
+                        {
+                            throw new Exception("y");
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -1101,32 +1101,32 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    $$throw b ? new Exception("x") : new Exception("y");
-                }
-            }
-            """,
-            """
-            using System;
-            class C
-            {
-                void M(bool b)
-                {
-                    if (b)
+                    void M(bool b)
                     {
-                        throw new Exception("x");
-                    }
-                    else
-                    {
-                        throw new Exception("y");
+                        $$throw b ? new Exception("x") : new Exception("y");
                     }
                 }
-            }
+                """,
             """
+                using System;
+                class C
+                {
+                    void M(bool b)
+                    {
+                        if (b)
+                        {
+                            throw new Exception("x");
+                        }
+                        else
+                        {
+                            throw new Exception("y");
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -1135,36 +1135,36 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                int M(bool b)
+                using System;
+                class C
                 {
-                    return N(N($$b ? 42 : throw new Exception()));
-                }
+                    int M(bool b)
+                    {
+                        return N(N($$b ? 42 : throw new Exception()));
+                    }
 
-                int N(int v) => v;
-            }
-            """,
+                    int N(int v) => v;
+                }
+                """,
             """
-            using System;
-            class C
-            {
-                int M(bool b)
+                using System;
+                class C
                 {
-                    if (b)
+                    int M(bool b)
                     {
-                        return N(N(42));
+                        if (b)
+                        {
+                            return N(N(42));
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
                     }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
 
-                int N(int v) => v;
-            }
-            """
+                    int N(int v) => v;
+                }
+                """
         );
     }
 
@@ -1173,37 +1173,37 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    int v = N(N($$b ? 42 : throw new Exception()));
-                }
+                    void M(bool b)
+                    {
+                        int v = N(N($$b ? 42 : throw new Exception()));
+                    }
 
-                int N(int v) => v;
-            }
-            """,
+                    int N(int v) => v;
+                }
+                """,
             """
-            using System;
-            class C
-            {
-                void M(bool b)
+                using System;
+                class C
                 {
-                    int v;
-                    if (b)
+                    void M(bool b)
                     {
-                        v = N(N(42));
+                        int v;
+                        if (b)
+                        {
+                            v = N(N(42));
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
                     }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
 
-                int N(int v) => v;
-            }
-            """
+                    int N(int v) => v;
+                }
+                """
         );
     }
 
@@ -1212,34 +1212,34 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            using System.Collections.Generic;
-            class C
-            {
-                IEnumerable<object> M(bool b)
+                using System;
+                using System.Collections.Generic;
+                class C
                 {
-                    yield return $$b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            using System;
-            using System.Collections.Generic;
-            class C
-            {
-                IEnumerable<object> M(bool b)
-                {
-                    if (b)
+                    IEnumerable<object> M(bool b)
                     {
-                        yield return (long)0;
-                    }
-                    else
-                    {
-                        yield return 1L;
+                        yield return $$b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                using System;
+                using System.Collections.Generic;
+                class C
+                {
+                    IEnumerable<object> M(bool b)
+                    {
+                        if (b)
+                        {
+                            yield return (long)0;
+                        }
+                        else
+                        {
+                            yield return 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 
@@ -1248,34 +1248,34 @@ public class ReplaceConditionalWithStatementsTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-            using System;
-            using System.Collections.Generic;
-            class C
-            {
-                IEnumerable<object> M(bool b)
+                using System;
+                using System.Collections.Generic;
+                class C
                 {
-                    $$yield return b ? 0 : 1L;
-                }
-            }
-            """,
-            """
-            using System;
-            using System.Collections.Generic;
-            class C
-            {
-                IEnumerable<object> M(bool b)
-                {
-                    if (b)
+                    IEnumerable<object> M(bool b)
                     {
-                        yield return (long)0;
-                    }
-                    else
-                    {
-                        yield return 1L;
+                        $$yield return b ? 0 : 1L;
                     }
                 }
-            }
+                """,
             """
+                using System;
+                using System.Collections.Generic;
+                class C
+                {
+                    IEnumerable<object> M(bool b)
+                    {
+                        if (b)
+                        {
+                            yield return (long)0;
+                        }
+                        else
+                        {
+                            yield return 1L;
+                        }
+                    }
+                }
+                """
         );
     }
 }

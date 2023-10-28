@@ -57,10 +57,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
-                class Goo
-                {
-                }
-                """,
+                    class Goo
+                    {
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Goo")).Single(
@@ -86,16 +86,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     class Bar
-     {
-         internal class DogBed
-         {
-         }
-     }
- }
- """,
+                    class Goo
+                    {
+                        class Bar
+                        {
+                            internal class DogBed
+                            {
+                            }
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("DogBed")).Single(
@@ -121,19 +121,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     class Bar
-     {
-         class DogBed
-         {
-             public void Method()
-             {
-             }
-         }
-     }
- }
- """,
+                    class Goo
+                    {
+                        class Bar
+                        {
+                            class DogBed
+                            {
+                                public void Method()
+                                {
+                                }
+                            }
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Method")).Single();
@@ -161,12 +161,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- using System.Collections;
+                    using System.Collections;
 
- class Goo<T> where T : IEnumerable
- {
- }
- """,
+                    class Goo<T> where T : IEnumerable
+                    {
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Goo")).Single(
@@ -195,15 +195,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- using System;
+                    using System;
 
- class Goo<U>
- {
-     public void Bar<T>(T item) where T : IComparable<T>
-     {
-     }
- }
- """,
+                    class Goo<U>
+                    {
+                        public void Bar<T>(T item) where T : IComparable<T>
+                        {
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Bar")).Single();
@@ -228,16 +228,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- public partial class Goo
- {
-     int a;
- }
+                    public partial class Goo
+                    {
+                        int a;
+                    }
 
- partial class Goo
- {
-     int b;
- }
- """,
+                    partial class Goo
+                    {
+                        int b;
+                    }
+                    """,
                 async w =>
                 {
                     var expecteditem1 = new NavigateToItem(
@@ -266,10 +266,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- using System;
+                    using System;
 
- Class Program { FileStyleUriParser f; }
- """,
+                    Class Program { FileStyleUriParser f; }
+                    """,
                 async w =>
                 {
                     var items = await _aggregator.GetItemsAsync("FileStyleUriParser");
@@ -286,13 +286,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- namespace Bar
- {
-     class Goo
-     {
-     }
- }
- """,
+                    namespace Bar
+                    {
+                        class Goo
+                        {
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Goo")).Single(
@@ -318,10 +318,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- struct Bar
- {
- }
- """,
+                    struct Bar
+                    {
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("B")).Single(
@@ -347,13 +347,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- enum Colors
- {
-     Red,
-     Green,
-     Blue
- }
- """,
+                    enum Colors
+                    {
+                        Red,
+                        Green,
+                        Blue
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Colors")).Single(
@@ -379,13 +379,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- enum Colors
- {
-     Red,
-     Green,
-     Blue
- }
- """,
+                    enum Colors
+                    {
+                        Red,
+                        Green,
+                        Blue
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("R")).Single();
@@ -409,11 +409,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     const int bar = 7;
- }
- """,
+                    class Goo
+                    {
+                        const int bar = 7;
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("ba")).Single();
@@ -437,11 +437,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     string @string;
- }
- """,
+                    class Goo
+                    {
+                        string @string;
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("string")).Single();
@@ -529,11 +529,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     int Bar { get; set; }
- }
- """,
+                    class Goo
+                    {
+                        int Bar { get; set; }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("B")).Single();
@@ -562,11 +562,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     void DoSomething();
- }
- """,
+                    class Goo
+                    {
+                        void DoSomething();
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("DS")).Single();
@@ -591,13 +591,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     void DoSomething(int a, string b)
-     {
-     }
- }
- """,
+                    class Goo
+                    {
+                        void DoSomething(int a, string b)
+                        {
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("DS")).Single();
@@ -622,13 +622,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     public Goo()
-     {
-     }
- }
- """,
+                    class Goo
+                    {
+                        public Goo()
+                        {
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Goo")).Single(
@@ -655,13 +655,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     public Goo(int i)
-     {
-     }
- }
- """,
+                    class Goo
+                    {
+                        public Goo(int i)
+                        {
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Goo")).Single(
@@ -688,13 +688,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class Goo
- {
-     static Goo()
-     {
-     }
- }
- """,
+                    class Goo
+                    {
+                        static Goo()
+                        {
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Goo")).Single(
@@ -752,11 +752,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- partial class Goo
- {
-     partial void Bar();
- }
- """,
+                    partial class Goo
+                    {
+                        partial void Bar();
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("Bar")).Single();
@@ -831,10 +831,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- public interface IGoo
- {
- }
- """,
+                    public interface IGoo
+                    {
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("IG")).Single();
@@ -858,11 +858,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- namespace Goo
- {
-     delegate void DoStuff();
- }
- """,
+                    namespace Goo
+                    {
+                        delegate void DoStuff();
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("DoStuff")).Single(
@@ -888,13 +888,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- using System;
+                    using System;
 
- class Goo
- {
-     Func<int, int> sqr = x => x * x;
- }
- """,
+                    class Goo
+                    {
+                        Func<int, int> sqr = x => x * x;
+                    }
+                    """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("sqr")).Single();
@@ -919,24 +919,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- class C1
- {
-     C1(int i)
-     {
-     }
- }
+                    class C1
+                    {
+                        C1(int i)
+                        {
+                        }
+                    }
 
- class C2
- {
-     C2(float f)
-     {
-     }
+                    class C2
+                    {
+                        C2(float f)
+                        {
+                        }
 
-     static C2()
-     {
-     }
- }
- """,
+                        static C2()
+                        {
+                        }
+                    }
+                    """,
                 async w =>
                 {
                     var expecteditems = new List<NavigateToItem>
@@ -1003,10 +1003,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 testHost,
                 composition,
                 """
- public class Goo
- {
- }
- """,
+                    public class Goo
+                    {
+                    }
+                    """,
                 async w =>
                 {
                     // Do one set of queries

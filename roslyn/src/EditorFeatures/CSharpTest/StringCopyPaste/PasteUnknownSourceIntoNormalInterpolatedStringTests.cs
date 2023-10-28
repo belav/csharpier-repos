@@ -18,11 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\n",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"\n[||]"
-                """,
+                    var x = $"\n[||]"
+                    """,
                 afterUndo: "var x = $\"\n[||]\""
             );
         }
@@ -34,17 +34,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 pasteText: """
 
 
-                """,
+                    """,
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"\r\n[||]"
-                """,
+                    var x = $"\r\n[||]"
+                    """,
                 afterUndo: """
-                var x = $"
-                [||]"
-                """
+                    var x = $"
+                    [||]"
+                    """
             );
         }
 
@@ -54,11 +54,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\t",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"\t[||]"
-                """,
+                    var x = $"\t[||]"
+                    """,
                 afterUndo: "var x = $\"\t[||]\""
             );
         }
@@ -69,14 +69,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """'""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"'[||]"
-                """,
+                    var x = $"'[||]"
+                    """,
                 afterUndo: """
-                var x = $"[||]"
-                """
+                    var x = $"[||]"
+                    """
             );
         }
 
@@ -85,17 +85,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
         {
             TestPasteUnknownSource(
                 pasteText: """
-                "
-                """,
+                    "
+                    """,
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"\"[||]"
-                """,
+                    var x = $"\"[||]"
+                    """,
                 afterUndo: """
-                var x = $""[||]"
-                """
+                    var x = $""[||]"
+                    """
             );
         }
 
@@ -105,11 +105,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\t\"\"\t",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"\t\"\"\t[||]"
-                """,
+                    var x = $"\t\"\"\t[||]"
+                    """,
                 afterUndo: "var x = $\"\t\"\"\t[||]\""
             );
         }
@@ -120,14 +120,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """abc""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"abc[||]"
-                """,
+                    var x = $"abc[||]"
+                    """,
                 afterUndo: """
-                var x = $"[||]"
-                """
+                    var x = $"[||]"
+                    """
             );
         }
 
@@ -137,14 +137,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"{{[||]"
-                """,
+                    var x = $"{{[||]"
+                    """,
                 afterUndo: """
-                var x = $"{[||]"
-                """
+                    var x = $"{[||]"
+                    """
             );
         }
 
@@ -154,14 +154,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{{""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"{{[||]"
-                """,
+                    var x = $"{{[||]"
+                    """,
                 afterUndo: """
-                var x = $"[||]"
-                """
+                    var x = $"[||]"
+                    """
             );
         }
 
@@ -171,14 +171,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{{0""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"{{0[||]"
-                """,
+                    var x = $"{{0[||]"
+                    """,
                 afterUndo: """
-                var x = $"[||]"
-                """
+                    var x = $"[||]"
+                    """
             );
         }
 
@@ -188,14 +188,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"}}[||]"
-                """,
+                    var x = $"}}[||]"
+                    """,
                 afterUndo: """
-                var x = $"}[||]"
-                """
+                    var x = $"}[||]"
+                    """
             );
         }
 
@@ -205,14 +205,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}}""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"}}[||]"
-                """,
+                    var x = $"}}[||]"
+                    """,
                 afterUndo: """
-                var x = $"[||]"
-                """
+                    var x = $"[||]"
+                    """
             );
         }
 
@@ -222,14 +222,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}}0""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"}}0[||]"
-                """,
+                    var x = $"}}0[||]"
+                    """,
                 afterUndo: """
-                var x = $"[||]"
-                """
+                    var x = $"[||]"
+                    """
             );
         }
 
@@ -239,14 +239,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """x{0}y""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"x{0}y[||]"
-                """,
+                    var x = $"x{0}y[||]"
+                    """,
                 afterUndo: """
-                var x = $"[||]"
-                """
+                    var x = $"[||]"
+                    """
             );
         }
 
@@ -256,14 +256,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """x{{0}}y""",
                 """
-                var x = $"[||]"
-                """,
+                    var x = $"[||]"
+                    """,
                 """
-                var x = $"x{{0}}y[||]"
-                """,
+                    var x = $"x{{0}}y[||]"
+                    """,
                 afterUndo: """
-                var x = $"[||]"
-                """
+                    var x = $"[||]"
+                    """
             );
         }
 
@@ -277,11 +277,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\n",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"\n[||]{0}"
-                """,
+                    var x = $"\n[||]{0}"
+                    """,
                 afterUndo: "var x = $\"\n[||]{0}\""
             );
         }
@@ -293,17 +293,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 pasteText: """
 
 
-                """,
+                    """,
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"\r\n[||]{0}"
-                """,
+                    var x = $"\r\n[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"
-                [||]{0}"
-                """
+                    var x = $"
+                    [||]{0}"
+                    """
             );
         }
 
@@ -313,11 +313,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\t",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"\t[||]{0}"
-                """,
+                    var x = $"\t[||]{0}"
+                    """,
                 afterUndo: "var x = $\"\t[||]{0}\""
             );
         }
@@ -328,14 +328,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """'""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"'[||]{0}"
-                """,
+                    var x = $"'[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"[||]{0}"
-                """
+                    var x = $"[||]{0}"
+                    """
             );
         }
 
@@ -344,17 +344,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
         {
             TestPasteUnknownSource(
                 pasteText: """
-                "
-                """,
+                    "
+                    """,
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"\"[||]{0}"
-                """,
+                    var x = $"\"[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $""[||]{0}"
-                """
+                    var x = $""[||]{0}"
+                    """
             );
         }
 
@@ -364,11 +364,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\t\"\"\t",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"\t\"\"\t[||]{0}"
-                """,
+                    var x = $"\t\"\"\t[||]{0}"
+                    """,
                 afterUndo: "var x = $\"\t\"\"\t[||]{0}\""
             );
         }
@@ -379,14 +379,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """abc""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"abc[||]{0}"
-                """,
+                    var x = $"abc[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"[||]{0}"
-                """
+                    var x = $"[||]{0}"
+                    """
             );
         }
 
@@ -396,14 +396,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"{{[||]{0}"
-                """,
+                    var x = $"{{[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"{[||]{0}"
-                """
+                    var x = $"{[||]{0}"
+                    """
             );
         }
 
@@ -413,14 +413,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{{""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"{{[||]{0}"
-                """,
+                    var x = $"{{[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"[||]{0}"
-                """
+                    var x = $"[||]{0}"
+                    """
             );
         }
 
@@ -430,14 +430,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{{0""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"{{0[||]{0}"
-                """,
+                    var x = $"{{0[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"[||]{0}"
-                """
+                    var x = $"[||]{0}"
+                    """
             );
         }
 
@@ -447,14 +447,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"}}[||]{0}"
-                """,
+                    var x = $"}}[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"}[||]{0}"
-                """
+                    var x = $"}[||]{0}"
+                    """
             );
         }
 
@@ -464,14 +464,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}}""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"}}[||]{0}"
-                """,
+                    var x = $"}}[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"[||]{0}"
-                """
+                    var x = $"[||]{0}"
+                    """
             );
         }
 
@@ -481,14 +481,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}}0""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"}}0[||]{0}"
-                """,
+                    var x = $"}}0[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"[||]{0}"
-                """
+                    var x = $"[||]{0}"
+                    """
             );
         }
 
@@ -498,14 +498,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """x{0}y""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"x{0}y[||]{0}"
-                """,
+                    var x = $"x{0}y[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"[||]{0}"
-                """
+                    var x = $"[||]{0}"
+                    """
             );
         }
 
@@ -515,14 +515,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """x{{0}}y""",
                 """
-                var x = $"[||]{0}"
-                """,
+                    var x = $"[||]{0}"
+                    """,
                 """
-                var x = $"x{{0}}y[||]{0}"
-                """,
+                    var x = $"x{{0}}y[||]{0}"
+                    """,
                 afterUndo: """
-                var x = $"[||]{0}"
-                """
+                    var x = $"[||]{0}"
+                    """
             );
         }
 
@@ -536,11 +536,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\n",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}\n[||]"
-                """,
+                    var x = $"{0}\n[||]"
+                    """,
                 afterUndo: "var x = $\"{0}\n[||]\""
             );
         }
@@ -552,17 +552,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 pasteText: """
 
 
-                """,
+                    """,
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}\r\n[||]"
-                """,
+                    var x = $"{0}\r\n[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}
-                [||]"
-                """
+                    var x = $"{0}
+                    [||]"
+                    """
             );
         }
 
@@ -572,11 +572,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\t",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}\t[||]"
-                """,
+                    var x = $"{0}\t[||]"
+                    """,
                 afterUndo: "var x = $\"{0}\t[||]\""
             );
         }
@@ -587,14 +587,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """'""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}'[||]"
-                """,
+                    var x = $"{0}'[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}[||]"
-                """
+                    var x = $"{0}[||]"
+                    """
             );
         }
 
@@ -603,17 +603,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
         {
             TestPasteUnknownSource(
                 pasteText: """
-                "
-                """,
+                    "
+                    """,
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}\"[||]"
-                """,
+                    var x = $"{0}\"[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}"[||]"
-                """
+                    var x = $"{0}"[||]"
+                    """
             );
         }
 
@@ -623,11 +623,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: "\t\"\"\t",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}\t\"\"\t[||]"
-                """,
+                    var x = $"{0}\t\"\"\t[||]"
+                    """,
                 afterUndo: "var x = $\"{0}\t\"\"\t[||]\""
             );
         }
@@ -638,14 +638,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """abc""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}abc[||]"
-                """,
+                    var x = $"{0}abc[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}[||]"
-                """
+                    var x = $"{0}[||]"
+                    """
             );
         }
 
@@ -655,14 +655,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}{{[||]"
-                """,
+                    var x = $"{0}{{[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}{[||]"
-                """
+                    var x = $"{0}{[||]"
+                    """
             );
         }
 
@@ -672,14 +672,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{{""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}{{[||]"
-                """,
+                    var x = $"{0}{{[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}[||]"
-                """
+                    var x = $"{0}[||]"
+                    """
             );
         }
 
@@ -689,14 +689,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """{{0""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}{{0[||]"
-                """,
+                    var x = $"{0}{{0[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}[||]"
-                """
+                    var x = $"{0}[||]"
+                    """
             );
         }
 
@@ -706,14 +706,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}}}[||]"
-                """,
+                    var x = $"{0}}}[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}}[||]"
-                """
+                    var x = $"{0}}[||]"
+                    """
             );
         }
 
@@ -723,14 +723,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}}""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}}}[||]"
-                """,
+                    var x = $"{0}}}[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}[||]"
-                """
+                    var x = $"{0}[||]"
+                    """
             );
         }
 
@@ -740,14 +740,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """}}0""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}}}0[||]"
-                """,
+                    var x = $"{0}}}0[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}[||]"
-                """
+                    var x = $"{0}[||]"
+                    """
             );
         }
 
@@ -757,14 +757,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """x{0}y""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}x{0}y[||]"
-                """,
+                    var x = $"{0}x{0}y[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}[||]"
-                """
+                    var x = $"{0}[||]"
+                    """
             );
         }
 
@@ -774,14 +774,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestPasteUnknownSource(
                 pasteText: """x{{0}}y""",
                 """
-                var x = $"{0}[||]"
-                """,
+                    var x = $"{0}[||]"
+                    """,
                 """
-                var x = $"{0}x{{0}}y[||]"
-                """,
+                    var x = $"{0}x{{0}}y[||]"
+                    """,
                 afterUndo: """
-                var x = $"{0}[||]"
-                """
+                    var x = $"{0}[||]"
+                    """
             );
         }
 

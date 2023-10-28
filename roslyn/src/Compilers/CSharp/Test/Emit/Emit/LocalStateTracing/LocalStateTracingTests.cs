@@ -162,17 +162,17 @@ namespace Microsoft.CodeAnalysis.Runtime
         private static readonly Verification s_verification = Verification.Fails with
         {
             ILVerifyMessage = """
-            [LogMethodEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x9 }
-            [LogLambdaEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x9 }
-            [LogStateMachineMethodEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x8 }
-            [LogStateMachineLambdaEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x8 }
-            [Entry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0xbc }
-            [MemoryToString]: Unmanaged pointers are not a verifiable type. { Offset = 0x5 }
-            [LogLocalStore]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
-            [LogLocalStoreUnmanaged]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
-            [LogParameterStore]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
-            [LogParameterStoreUnmanaged]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
-            """
+                [LogMethodEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x9 }
+                [LogLambdaEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x9 }
+                [LogStateMachineMethodEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x8 }
+                [LogStateMachineLambdaEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x8 }
+                [Entry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0xbc }
+                [MemoryToString]: Unmanaged pointers are not a verifiable type. { Offset = 0x5 }
+                [LogLocalStore]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
+                [LogLocalStoreUnmanaged]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
+                [LogParameterStore]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
+                [LogParameterStoreUnmanaged]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
+                """
         };
 
         private CompilationVerifier CompileAndVerify(
@@ -263,9 +263,9 @@ class C
                         s_verification.ILVerifyMessage
                         + Environment.NewLine
                         + """
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    """
+                            [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                            [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                            """
                 },
                 targetFramework: s_targetFramework
             );
@@ -391,9 +391,9 @@ class C
                         s_verification.ILVerifyMessage
                         + Environment.NewLine
                         + """
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    """
+                            [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                            [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                            """
                 },
                 targetFramework: s_targetFramework
             );
@@ -3220,8 +3220,8 @@ unsafe class C
             var verifier = CompileAndVerify(
                 source,
                 ilVerifyMessage: """
-                [F]: ImportCalli not implemented
-                """
+                    [F]: ImportCalli not implemented
+                    """
             );
 
             verifier.VerifyMethodBody(
