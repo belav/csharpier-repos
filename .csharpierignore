@@ -242,6 +242,15 @@
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/WriteTest.cs 
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/ReadTests_Join.cs 
 
+# donno
+/mono/mcs/class/referencesource/mscorlib/system/resources/looselylinkedresourcereference.cs
+/mono/mcs/class/System/Mono.Net.Security/MonoSslServerAuthenticationOptions.cs
+/mono/mcs/class/System/Mono.Net.Security/MonoTlsStream.cs
+/mono/mcs/class/System/Mono.Net.Security/MonoSslAuthenticationOptions.cs
+/mono/mcs/class/referencesource/mscorlib/system/runtime/serialization/formatters/isoapmessage.cs
+/mono/mcs/class/referencesource/mscorlib/system/diagnostics/eventing/TraceLogging/FieldMetadata.cs
+
+
 # funky #if in usings
 /mono/mcs/class/System/Mono.AppleTls/X509CertificateImplApple.cs
 /mono/mcs/class/System/Mono.Net.Security/MonoSslClientAuthenticationOptions.cs
