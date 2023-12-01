@@ -8,6 +8,70 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     protected override string StoreName
         => "JsonQueryAdHocTest";
 
+    #region 32310
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task Contains_on_nested_collection_with_init_only_navigation(bool async)
+    {
+        var contextFactory = await InitializeAsync<MyContext32310>(seed: Seed32310);
+        await using var context = contextFactory.CreateContext();
+
+        var query = context.Pubs
+            .Where(u => u.Visits.DaysVisited.Contains(new DateOnly(2023, 1, 1)));
+
+        var result = async
+            ? await query.FirstOrDefaultAsync()!
+            : query.FirstOrDefault()!;
+
+        Assert.Equal("FBI", result.Name);
+        Assert.Equal(new DateOnly(2023, 1, 1), result.Visits.DaysVisited.Single());
+    }
+
+    protected virtual void Seed32310(MyContext32310 context)
+    {
+        var user = new Pub32310
+        {
+            Name = "FBI",
+            Visits = new Visits32310
+            {
+                LocationTag = "tag",
+                DaysVisited = new List<DateOnly> { new(2023, 1, 1) }
+            }
+        };
+
+        context.Add(user);
+        context.SaveChanges();
+    }
+
+    protected class MyContext32310 : DbContext
+    {
+        public MyContext32310(DbContextOptions options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Pub32310> Pubs => Set<Pub32310>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+            => modelBuilder.Entity<Pub32310>(b => { b.OwnsOne(e => e.Visits).ToJson(); });
+    }
+
+    public class Pub32310
+    {
+        public int Id { get; set; }
+        public required string Name { get; set; }
+        public Visits32310 Visits { get; set; } = null!;
+    }
+
+    public class Visits32310
+    {
+        public string LocationTag { get; set; }
+        public required List<DateOnly> DaysVisited { get; init; }
+    }
+
+    #endregion
+
     #region 29219
 
     [ConditionalTheory]
@@ -549,6 +613,76 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
             DoB = doB;
         }
 
+        public DateTime DoB { get; set; }
+    }
+
+    #endregion
+
+    #region TrickyBuffering
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task Tricky_buffering_basic(bool async)
+    {
+        var contextFactory = await InitializeAsync<MyContextTrickyBuffering>(
+            seed: SeedTrickyBuffering);
+
+        using (var context = contextFactory.CreateContext())
+        {
+            var query = context.Entities;
+
+            var result = async
+                ? await query.ToListAsync()
+                : query.ToList();
+
+            Assert.Equal(1, result.Count);
+            Assert.Equal("r1", result[0].Reference.Name);
+            Assert.Equal(7, result[0].Reference.Number);
+            Assert.Equal(new DateTime(2000, 1, 1), result[0].Reference.NestedReference.DoB);
+            Assert.Equal(2, result[0].Reference.NestedCollection.Count);
+        }
+    }
+
+    protected abstract void SeedTrickyBuffering(MyContextTrickyBuffering ctx);
+
+    protected class MyContextTrickyBuffering : DbContext
+    {
+        public MyContextTrickyBuffering(DbContextOptions options)
+            : base(options)
+        {
+        }
+
+        public DbSet<MyEntityTrickyBuffering> Entities { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MyEntityTrickyBuffering>().Property(x => x.Id).ValueGeneratedNever();
+            modelBuilder.Entity<MyEntityTrickyBuffering>().OwnsOne(
+                x => x.Reference, b =>
+                {
+                    b.ToJson();
+                    b.OwnsOne(x => x.NestedReference);
+                    b.OwnsMany(x => x.NestedCollection);
+                });
+        }
+    }
+
+    public class MyEntityTrickyBuffering
+    {
+        public int Id { get; set; }
+        public MyJsonEntityTrickyBuffering Reference { get; set; }
+    }
+
+    public class MyJsonEntityTrickyBuffering
+    {
+        public string Name { get; set; }
+        public int Number { get; set; }
+        public MyJsonEntityJunkInJsonNested NestedReference { get; set; }
+        public List<MyJsonEntityJunkInJsonNested> NestedCollection { get; set; }
+    }
+
+    public class MyJsonEntityTrickyBufferingNested
+    {
         public DateTime DoB { get; set; }
     }
 

@@ -141,6 +141,39 @@ CREATE TABLE [People] (
 """);
     }
 
+    public override async Task Create_table_with_json_column()
+    {
+        await base.Create_table_with_json_column();
+
+        AssertSql(
+            """
+CREATE TABLE [Entity] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [OwnedCollection] nvarchar(max) NULL,
+    [OwnedReference] nvarchar(max) NULL,
+    [OwnedRequiredReference] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
+);
+""");
+    }
+
+    public override async Task Create_table_with_json_column_explicit_json_column_names()
+    {
+        await base.Create_table_with_json_column_explicit_json_column_names();
+
+        AssertSql(
+            """
+CREATE TABLE [Entity] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [json_collection] nvarchar(max) NULL,
+    [json_reference] nvarchar(max) NULL,
+    CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
+);
+""");
+    }
+
     [ConditionalFact]
     public virtual async Task Create_table_with_sparse_column()
     {
@@ -420,6 +453,24 @@ EXEC sp_rename N'[People]', N'Persons';
             //
             """
 ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
+""");
+    }
+
+    public override async Task Rename_table_with_json_column()
+    {
+        await base.Rename_table_with_json_column();
+
+        AssertSql(
+            """
+ALTER TABLE [Entities] DROP CONSTRAINT [PK_Entities];
+""",
+            //
+            """
+EXEC sp_rename N'[Entities]', N'NewEntities';
+""",
+            //
+            """
+ALTER TABLE [NewEntities] ADD CONSTRAINT [PK_NewEntities] PRIMARY KEY ([Id]);
 """);
     }
 
@@ -708,6 +759,24 @@ ALTER TABLE [People] ADD [RowVersion] rowversion NOT NULL;
         AssertSql(
             """
 ALTER TABLE [People] ADD [Sum] int NOT NULL DEFAULT (1 + 2);
+""");
+    }
+
+    public override async Task Add_json_columns_to_existing_table()
+    {
+        await base.Add_json_columns_to_existing_table();
+
+        AssertSql(
+            """
+ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
+""",
+            //
+            """
+ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
+""",
+            //
+            """
+ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT N'{}';
 """);
     }
 
@@ -1314,6 +1383,150 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) NULL;
 """);
     }
 
+    public override async Task Convert_json_entities_to_regular_owned()
+    {
+        await base.Convert_json_entities_to_regular_owned();
+
+        AssertSql(
+            """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedCollection');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Entity] DROP COLUMN [OwnedCollection];
+""",
+            //
+            """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
+""",
+            //
+            """
+ALTER TABLE [Entity] ADD [OwnedReference_Date] datetime2 NULL;
+""",
+            //
+            """
+ALTER TABLE [Entity] ADD [OwnedReference_NestedReference_Number] int NULL;
+""",
+            //
+            """
+CREATE TABLE [Entity_NestedCollection] (
+    [OwnedEntityId] int NOT NULL,
+    [Id] int NOT NULL IDENTITY,
+    [Number2] int NOT NULL,
+    CONSTRAINT [PK_Entity_NestedCollection] PRIMARY KEY ([OwnedEntityId], [Id]),
+    CONSTRAINT [FK_Entity_NestedCollection_Entity_OwnedEntityId] FOREIGN KEY ([OwnedEntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
+);
+""",
+//
+            """
+CREATE TABLE [Entity_OwnedCollection] (
+    [EntityId] int NOT NULL,
+    [Id] int NOT NULL IDENTITY,
+    [Date2] datetime2 NOT NULL,
+    [NestedReference2_Number3] int NULL,
+    CONSTRAINT [PK_Entity_OwnedCollection] PRIMARY KEY ([EntityId], [Id]),
+    CONSTRAINT [FK_Entity_OwnedCollection_Entity_EntityId] FOREIGN KEY ([EntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
+);
+""",
+            //
+            """
+CREATE TABLE [Entity_OwnedCollection_NestedCollection2] (
+    [Owned2EntityId] int NOT NULL,
+    [Owned2Id] int NOT NULL,
+    [Id] int NOT NULL IDENTITY,
+    [Number4] int NOT NULL,
+    CONSTRAINT [PK_Entity_OwnedCollection_NestedCollection2] PRIMARY KEY ([Owned2EntityId], [Owned2Id], [Id]),
+    CONSTRAINT [FK_Entity_OwnedCollection_NestedCollection2_Entity_OwnedCollection_Owned2EntityId_Owned2Id] FOREIGN KEY ([Owned2EntityId], [Owned2Id]) REFERENCES [Entity_OwnedCollection] ([EntityId], [Id]) ON DELETE CASCADE
+);
+""");
+    }
+
+    public override async Task Convert_regular_owned_entities_to_json()
+    {
+        await base.Convert_regular_owned_entities_to_json();
+
+        AssertSql(
+            """
+DROP TABLE [Entity_NestedCollection];
+""",
+            //
+            """
+DROP TABLE [Entity_OwnedCollection_NestedCollection2];
+""",
+            //
+            """
+DROP TABLE [Entity_OwnedCollection];
+""",
+            //
+            """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference_Date');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Entity] DROP COLUMN [OwnedReference_Date];
+""",
+            //
+            """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference_NestedReference_Number');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Entity] DROP COLUMN [OwnedReference_NestedReference_Number];
+""",
+            //
+            """
+ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
+""",
+            //
+            """
+ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
+""");
+    }
+
+    public override async Task Convert_string_column_to_a_json_column_containing_reference()
+    {
+        await base.Convert_string_column_to_a_json_column_containing_reference();
+
+        AssertSql();
+    }
+
+    public override async Task Convert_string_column_to_a_json_column_containing_required_reference()
+    {
+        await base.Convert_string_column_to_a_json_column_containing_required_reference();
+
+        AssertSql(
+            """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'Name');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
+UPDATE [Entity] SET [Name] = N'{}' WHERE [Name] IS NULL;
+ALTER TABLE [Entity] ALTER COLUMN [Name] nvarchar(max) NOT NULL;
+ALTER TABLE [Entity] ADD DEFAULT N'{}' FOR [Name];
+""");
+    }
+
+    public override async Task Convert_string_column_to_a_json_column_containing_collection()
+    {
+        await base.Convert_string_column_to_a_json_column_containing_collection();
+
+        AssertSql();
+    }
+
     [ConditionalFact]
     public virtual async Task Alter_column_make_required_with_index_with_included_properties()
     {
@@ -1660,6 +1873,32 @@ ALTER TABLE [People] DROP COLUMN [X];
 """);
     }
 
+    public override async Task Drop_json_columns_from_existing_table()
+    {
+        await base.Drop_json_columns_from_existing_table();
+
+        AssertSql(
+            """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedCollection');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Entity] DROP COLUMN [OwnedCollection];
+""",
+            //
+            """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
+""");
+    }
+
     public override async Task Rename_column()
     {
         await base.Rename_column();
@@ -1667,6 +1906,20 @@ ALTER TABLE [People] DROP COLUMN [X];
         AssertSql(
             """
 EXEC sp_rename N'[People].[SomeColumn]', N'SomeOtherColumn', N'COLUMN';
+""");
+    }
+
+    public override async Task Rename_json_column()
+    {
+        await base.Rename_json_column();
+
+        AssertSql(
+            """
+EXEC sp_rename N'[Entity].[json_reference]', N'new_json_reference', N'COLUMN';
+""",
+            //
+            """
+EXEC sp_rename N'[Entity].[json_collection]', N'new_json_collection', N'COLUMN';
 """);
     }
 
@@ -6638,6 +6891,980 @@ EXEC sp_rename N'[Customer].[Name]', N'FullName', N'COLUMN';
     }
 
     [ConditionalFact]
+    public virtual async Task Convert_regular_column_of_temporal_table_from_nullable_to_non_nullable()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+
+                    // adding data to make sure default for null value can be applied correctly
+                    e.HasData(
+                        new { Id = 1, IsVip = (bool?)true },
+                        new { Id = 2, IsVip = (bool?)false },
+                        new { Id = 3, IsVip = (bool?)null });
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<bool?>("IsVip");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<bool>("IsVip");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("IsVip", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'IsVip');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
+UPDATE [Customer] SET [IsVip] = CAST(0 AS bit) WHERE [IsVip] IS NULL;
+ALTER TABLE [Customer] ALTER COLUMN [IsVip] bit NOT NULL;
+ALTER TABLE [Customer] ADD DEFAULT CAST(0 AS bit) FOR [IsVip];
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'IsVip');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+UPDATE [HistoryTable] SET [IsVip] = CAST(0 AS bit) WHERE [IsVip] IS NULL;
+ALTER TABLE [HistoryTable] ALTER COLUMN [IsVip] bit NOT NULL;
+ALTER TABLE [HistoryTable] ADD DEFAULT CAST(0 AS bit) FOR [IsVip];
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Create_temporal_table_with_computed_column()
+    {
+        await Test(
+            builder => { },
+            builder => { },
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.Property<int>("Number");
+                    e.Property<int?>("NumberPlusFive").HasComputedColumnSql("Number + 5 PERSISTED");
+                    e.HasKey("Id");
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Number", c.Name),
+                    c => Assert.Equal("NumberPlusFive", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'CREATE TABLE [Customer] (
+    [Id] int NOT NULL IDENTITY,
+    [End] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+    [Number] int NOT NULL,
+    [NumberPlusFive] AS Number + 5 PERSISTED,
+    [Start] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+    CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
+    PERIOD FOR SYSTEM_TIME([Start], [End])
+) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[HistoryTable]))');
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Add_nullable_computed_column_to_temporal_table()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => { },
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("IdPlusFive", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+ALTER TABLE [Customer] ADD [IdPlusFive] AS Id + 5 PERSISTED;
+""",
+                //
+                """
+ALTER TABLE [HistoryTable] ADD [IdPlusFive] int NULL;
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Add_non_nullable_computed_column_to_temporal_table()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => { },
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Five").HasComputedColumnSql("5 PERSISTED");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Five", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+ALTER TABLE [Customer] ADD [Five] AS 5 PERSISTED;
+""",
+                //
+                """
+ALTER TABLE [HistoryTable] ADD [Five] int NOT NULL DEFAULT 0;
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Remove_computed_column_from_temporal_table()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+                }),
+            builder => { },
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'IdPlusFive');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customer] DROP COLUMN [IdPlusFive];
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'IdPlusFive');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [HistoryTable] DROP COLUMN [IdPlusFive];
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Alter_computed_column_sql_on_temporal_table()
+    {
+        var message = (await Assert.ThrowsAsync<NotSupportedException>(() => Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 10 PERSISTED");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("IdPlusFive", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            }))).Message;
+
+        Assert.Equal(
+            SqlServerStrings.TemporalMigrationModifyingComputedColumnNotSupported("IdPlusFive", "Customer"),
+            message);
+    }
+
+    [ConditionalFact]
+    public virtual async Task Add_column_on_temporal_table_with_computed_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Number");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("IdPlusFive", c.Name),
+                    c => Assert.Equal("Number", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customer] ADD [Number] int NOT NULL DEFAULT 0;
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Remove_column_on_temporal_table_with_computed_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Number");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("IdPlusFive", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'Number');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customer] DROP COLUMN [Number];
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [HistoryTable] DROP COLUMN [Number];
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Rename_column_on_temporal_table_with_computed_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Number");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("RenamedNumber");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("IdPlusFive", c.Name),
+                    c => Assert.Equal("RenamedNumber", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+EXEC sp_rename N'[Customer].[Number]', N'RenamedNumber', N'COLUMN';
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Add_sparse_column_to_temporal_table()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => { },
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("MyColumn").IsSparse();
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("MyColumn", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+IF EXISTS (SELECT 1 FROM [sys].[tables] [t] INNER JOIN [sys].[partitions] [p] ON [t].[object_id] = [p].[object_id] WHERE [t].[name] = 'HistoryTable' AND data_compression <> 0)
+EXEC(N'ALTER TABLE [HistoryTable] REBUILD PARTITION = ALL WITH (DATA_COMPRESSION = NONE);');
+""",
+                //
+                """
+ALTER TABLE [Customer] ADD [MyColumn] int SPARSE NULL;
+""",
+                //
+                """
+ALTER TABLE [HistoryTable] ADD [MyColumn] int SPARSE NULL;
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Add_sparse_column_to_temporal_table_with_custom_schemas()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable("Customers", "mySchema",
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable", "myHistorySchema");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => { },
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("MyColumn").IsSparse();
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+                Assert.Equal("mySchema", table.Schema);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("myHistorySchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("MyColumn", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+IF EXISTS (SELECT 1 FROM [sys].[tables] [t] INNER JOIN [sys].[partitions] [p] ON [t].[object_id] = [p].[object_id] WHERE [t].[name] = 'HistoryTable' AND [t].[schema_id] = schema_id('myHistorySchema') AND data_compression <> 0)
+EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] REBUILD PARTITION = ALL WITH (DATA_COMPRESSION = NONE);');
+""",
+                //
+                """
+ALTER TABLE [mySchema].[Customers] ADD [MyColumn] int SPARSE NULL;
+""",
+                //
+                """
+ALTER TABLE [myHistorySchema].[HistoryTable] ADD [MyColumn] int SPARSE NULL;
+""",
+                //
+                """
+ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Convert_regular_column_of_temporal_table_to_sparse()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                    e.HasData(
+                        new { MyColumn = 1 },
+                        new { MyColumn = 2 },
+                        new { MyColumn = (int?)null },
+                        new { MyColumn = (int?)null });
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("MyColumn");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("MyColumn").IsSparse();
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("MyColumn", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+IF EXISTS (SELECT 1 FROM [sys].[tables] [t] INNER JOIN [sys].[partitions] [p] ON [t].[object_id] = [p].[object_id] WHERE [t].[name] = 'HistoryTable' AND data_compression <> 0)
+EXEC(N'ALTER TABLE [HistoryTable] REBUILD PARTITION = ALL WITH (DATA_COMPRESSION = NONE);');
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'MyColumn');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customer] ALTER COLUMN [MyColumn] int SPARSE NULL;
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'MyColumn');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [HistoryTable] ALTER COLUMN [MyColumn] int SPARSE NULL;
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Convert_sparse_column_of_temporal_table_to_regular()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+
+                    e.ToTable(
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                    e.HasData(
+                        new { MyColumn = 1 },
+                        new { MyColumn = 2 },
+                        new { MyColumn = (int?)null },
+                        new { MyColumn = (int?)null });
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("MyColumn").IsSparse();
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int?>("MyColumn");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customer", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("MyColumn", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'MyColumn');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customer] ALTER COLUMN [MyColumn] int NULL;
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Convert_regular_table_with_sparse_column_to_temporal()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<int?>("MyColumn").IsSparse();
+                    e.HasData(
+                        new { MyColumn = 1 },
+                        new { MyColumn = 2 },
+                        new { MyColumn = (int?)null },
+                        new { MyColumn = (int?)null });
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.ToTable("Customers");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.ToTable(
+                        "Customers",
+                        tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("MyColumn", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+""",
+                //
+                """
+ALTER TABLE [Customers] ALTER COLUMN [Start] ADD HIDDEN
+""",
+                //
+                """
+ALTER TABLE [Customers] ALTER COLUMN [End] ADD HIDDEN
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
     public virtual async Task Create_temporal_table_with_comments()
     {
         await Test(
@@ -8107,357 +9334,44 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
     }
 
     [ConditionalFact]
-    public virtual async Task Create_table_with_json_column()
-    {
-        await Test(
-            builder => { },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-
-                        e.OwnsOne(
-                            "Owned", "OwnedRequiredReference", o =>
-                            {
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.Navigation("OwnedRequiredReference").IsRequired();
-                    });
-            },
-            model =>
-            {
-                var table = Assert.Single(model.Tables);
-                Assert.Equal("Entity", table.Name);
-
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name),
-                    c =>
-                    {
-                        Assert.Equal("OwnedCollection", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    },
-                    c =>
-                    {
-                        Assert.Equal("OwnedReference", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                        Assert.True(c.IsNullable);
-                    },
-                    c =>
-                    {
-                        Assert.Equal("OwnedRequiredReference", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                        Assert.False(c.IsNullable);
-                    });
-                Assert.Same(
-                    table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
-
-        AssertSql(
-            """
-CREATE TABLE [Entity] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [OwnedCollection] nvarchar(max) NULL,
-    [OwnedReference] nvarchar(max) NULL,
-    [OwnedRequiredReference] nvarchar(max) NOT NULL,
-    CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
-);
-""");
-    }
-
-    [ConditionalFact]
-    public virtual async Task Create_table_with_json_column_explicit_json_column_names()
-    {
-        await Test(
-            builder => { },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned", "json_reference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "json_reference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "json_collection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-                    });
-            },
-            model =>
-            {
-                var table = Assert.Single(model.Tables);
-                Assert.Equal("Entity", table.Name);
-
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name),
-                    c =>
-                    {
-                        Assert.Equal("json_collection", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    },
-                    c =>
-                    {
-                        Assert.Equal("json_reference", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    });
-                Assert.Same(
-                    table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
-
-        AssertSql(
-            """
-CREATE TABLE [Entity] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [json_collection] nvarchar(max) NULL,
-    [json_reference] nvarchar(max) NULL,
-    CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
-);
-""");
-    }
-
-    [ConditionalFact]
-    public virtual async Task Add_json_columns_to_existing_table()
+    public virtual async Task Convert_from_temporal_table_with_minimal_configuration_to_explicit_one_noop()
     {
         await Test(
             builder => builder.Entity(
-                "Entity", e =>
+                "Customer", e =>
                 {
                     e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
                     e.Property<string>("Name");
+                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable("Customers", tb => tb.IsTemporal());
                 }),
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsOne(
-                            "Owned", "OwnedRequiredReference", o =>
-                            {
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.Navigation("OwnedRequiredReference").IsRequired();
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-                    });
-            },
-            model =>
-            {
-                var table = Assert.Single(model.Tables);
-                Assert.Equal("Entity", table.Name);
-
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name),
-                    c =>
-                    {
-                        Assert.Equal("OwnedCollection", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    },
-                    c =>
-                    {
-                        Assert.Equal("OwnedReference", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                        Assert.True(c.IsNullable);
-                    },
-                    c =>
-                    {
-                        Assert.Equal("OwnedRequiredReference", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                        Assert.False(c.IsNullable);
-                    });
-                Assert.Same(
-                    table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
-
-        AssertSql(
-            """
-ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
-""",
-            //
-            """
-ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
-""",
-            //
-            """
-ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT N'';
-""");
-    }
-
-    [ConditionalFact]
-    public virtual async Task Remove_json_columns_from_existing_table()
-    {
-        await Test(
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-                    });
-            },
             builder => builder.Entity(
-                "Entity", e =>
+                "Customer", e =>
                 {
                     e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
                     e.Property<string>("Name");
+                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("CustomersHistory");
+                                ttb.HasPeriodStart("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd");
+                            }));
                 }),
             model =>
             {
                 var table = Assert.Single(model.Tables);
-                Assert.Equal("Entity", table.Name);
+                Assert.Equal("Customers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("PeriodStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("PeriodEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
 
                 Assert.Collection(
                     table.Columns,
@@ -8466,768 +9380,1282 @@ ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
                     Assert.Single(table.PrimaryKey!.Columns));
-            });
-
-        AssertSql(
-            """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedCollection');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedCollection];
-""",
-            //
-            """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
-""");
-    }
-
-    [ConditionalFact]
-    public virtual async Task Rename_json_column()
-    {
-        await Test(
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson("json_reference");
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("json_collection");
-                            });
-                    });
-            },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson("new_json_reference");
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("new_json_collection");
-                            });
-                    });
-            },
-            model =>
-            {
-                var table = Assert.Single(model.Tables);
-                Assert.Equal("Entity", table.Name);
-
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name),
-                    c =>
-                    {
-                        Assert.Equal("new_json_collection", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    },
-                    c =>
-                    {
-                        Assert.Equal("new_json_reference", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    });
-                Assert.Same(
-                    table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
-
-        AssertSql(
-            """
-EXEC sp_rename N'[Entity].[json_reference]', N'new_json_reference', N'COLUMN';
-""",
-            //
-            """
-EXEC sp_rename N'[Entity].[json_collection]', N'new_json_collection', N'COLUMN';
-""");
-    }
-
-    [ConditionalFact]
-    public virtual async Task Rename_table_with_json_column()
-    {
-        await Test(
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.ToTable("Entities");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-                    });
-            },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.ToTable("NewEntities");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-                    });
-            },
-            model =>
-            {
-                var table = Assert.Single(model.Tables);
-                Assert.Equal("NewEntities", table.Name);
-
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name),
-                    c =>
-                    {
-                        Assert.Equal("OwnedCollection", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    },
-                    c =>
-                    {
-                        Assert.Equal("OwnedReference", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    });
-                Assert.Same(
-                    table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
-
-        AssertSql(
-            """
-ALTER TABLE [Entities] DROP CONSTRAINT [PK_Entities];
-""",
-            //
-            """
-EXEC sp_rename N'[Entities]', N'NewEntities';
-""",
-            //
-            """
-ALTER TABLE [NewEntities] ADD CONSTRAINT [PK_NewEntities] PRIMARY KEY ([Id]);
-""");
-    }
-
-    [ConditionalFact]
-    public virtual async Task Convert_regular_owned_entities_to_json()
-    {
-        await Test(
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                            });
-                    });
-            },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-                    });
-            },
-            model =>
-            {
-                var table = Assert.Single(model.Tables);
-                Assert.Equal("Entity", table.Name);
-
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name),
-                    c =>
-                    {
-                        Assert.Equal("OwnedCollection", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    },
-                    c =>
-                    {
-                        Assert.Equal("OwnedReference", c.Name);
-                        Assert.Equal("nvarchar(max)", c.StoreType);
-                    });
-                Assert.Same(
-                    table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
-
-        AssertSql(
-            """
-DROP TABLE [Entity_NestedCollection];
-""",
-            //
-            """
-DROP TABLE [Entity_OwnedCollection_NestedCollection2];
-""",
-            //
-            """
-DROP TABLE [Entity_OwnedCollection];
-""",
-            //
-            """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference_Date');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedReference_Date];
-""",
-            //
-            """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference_NestedReference_Number');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedReference_NestedReference_Number];
-""",
-            //
-            """
-ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
-""",
-            //
-            """
-ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
-""");
-    }
-
-    [ConditionalFact]
-    public virtual async Task Convert_json_entities_to_regular_owned()
-    {
-        await Test(
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-                    });
-            },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                            });
-                    });
-            },
-            model =>
-            {
-                Assert.Equal(4, model.Tables.Count());
-            });
-
-        AssertSql(
-            """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedCollection');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedCollection];
-""",
-            //
-            """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
-""",
-            //
-            """
-ALTER TABLE [Entity] ADD [OwnedReference_Date] datetime2 NULL;
-""",
-            //
-            """
-ALTER TABLE [Entity] ADD [OwnedReference_NestedReference_Number] int NULL;
-""",
-            //
-            """
-CREATE TABLE [Entity_NestedCollection] (
-    [OwnedEntityId] int NOT NULL,
-    [Id] int NOT NULL IDENTITY,
-    [Number2] int NOT NULL,
-    CONSTRAINT [PK_Entity_NestedCollection] PRIMARY KEY ([OwnedEntityId], [Id]),
-    CONSTRAINT [FK_Entity_NestedCollection_Entity_OwnedEntityId] FOREIGN KEY ([OwnedEntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
-);
-""",
-//
-            """
-CREATE TABLE [Entity_OwnedCollection] (
-    [EntityId] int NOT NULL,
-    [Id] int NOT NULL IDENTITY,
-    [Date2] datetime2 NOT NULL,
-    [NestedReference2_Number3] int NULL,
-    CONSTRAINT [PK_Entity_OwnedCollection] PRIMARY KEY ([EntityId], [Id]),
-    CONSTRAINT [FK_Entity_OwnedCollection_Entity_EntityId] FOREIGN KEY ([EntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
-);
-""",
-            //
-            """
-CREATE TABLE [Entity_OwnedCollection_NestedCollection2] (
-    [Owned2EntityId] int NOT NULL,
-    [Owned2Id] int NOT NULL,
-    [Id] int NOT NULL IDENTITY,
-    [Number4] int NOT NULL,
-    CONSTRAINT [PK_Entity_OwnedCollection_NestedCollection2] PRIMARY KEY ([Owned2EntityId], [Owned2Id], [Id]),
-    CONSTRAINT [FK_Entity_OwnedCollection_NestedCollection2_Entity_OwnedCollection_Owned2EntityId_Owned2Id] FOREIGN KEY ([Owned2EntityId], [Owned2Id]) REFERENCES [Entity_OwnedCollection] ([EntityId], [Id]) ON DELETE CASCADE
-);
-""");
-    }
-
-    [ConditionalFact]
-    public virtual async Task Convert_string_column_to_a_json_column_containing_reference()
-    {
-        await Test(
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    });
-            },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.ToJson("Name");
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                            });
-                    });
-            },
-            model =>
-            {
-                var table = model.Tables.Single();
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
             });
 
         AssertSql();
     }
 
     [ConditionalFact]
-    public virtual async Task Convert_string_column_to_a_json_column_containing_required_reference()
+    public virtual async Task Convert_from_temporal_table_with_explicit_configuration_to_minimal_one_noop()
     {
         await Test(
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    });
-            },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
                             {
-                                o.ToJson("Name");
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                            });
-
-                        e.Navigation("OwnedReference").IsRequired();
-                    });
-            },
+                                ttb.UseHistoryTable("CustomersHistory");
+                                ttb.HasPeriodStart("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable("Customers", tb => tb.IsTemporal());
+                }),
             model =>
             {
-                var table = model.Tables.Single();
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("PeriodStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("PeriodEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql();
+    }
+
+    [ConditionalFact]
+    public virtual async Task Convert_from_temporal_table_with_minimal_configuration_to_explicit_one()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable("Customers", tb => tb.IsTemporal());
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
             });
 
         AssertSql(
-            """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
-UPDATE [Entity] SET [Name] = N'' WHERE [Name] IS NULL;
-ALTER TABLE [Entity] ALTER COLUMN [Name] nvarchar(max) NOT NULL;
-ALTER TABLE [Entity] ADD DEFAULT N'' FOR [Name];
+"""
+EXEC sp_rename N'[Customers].[PeriodStart]', N'Start', N'COLUMN';
+""",
+                //
+                """
+EXEC sp_rename N'[Customers].[PeriodEnd]', N'End', N'COLUMN';
+""",
+                //
+                """
+EXEC sp_rename N'[CustomersHistory]', N'HistoryTable';
 """);
     }
 
     [ConditionalFact]
-    public virtual async Task Convert_string_column_to_a_json_column_containing_collection()
+    public virtual async Task Change_names_of_period_columns_in_temporal_table()
     {
         await Test(
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    });
-            },
-            builder =>
-            {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
                             {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("Name");
-                            });
-                    });
-            },
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("PeriodStart");
+                                ttb.HasPeriodEnd("PeriodEnd");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<DateTime>("ValidFrom").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("ValidTo").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("ValidFrom");
+                                ttb.HasPeriodEnd("ValidTo");
+                            }));
+                }),
             model =>
             {
-                var table = model.Tables.Single();
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("ValidFrom", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("ValidTo", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
             });
 
-        AssertSql();
+        AssertSql(
+"""
+EXEC sp_rename N'[Customers].[PeriodStart]', N'ValidFrom', N'COLUMN';
+""",
+                //
+                """
+EXEC sp_rename N'[Customers].[PeriodEnd]', N'ValidTo', N'COLUMN';
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_to_temporal_and_add_new_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable("Customers");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("Number", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+""",
+                //
+                """
+ALTER TABLE [Customers] ALTER COLUMN [Start] ADD HIDDEN
+""",
+                //
+                """
+ALTER TABLE [Customers] ALTER COLUMN [End] ADD HIDDEN
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_to_temporal_and_remove_existing_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable("Customers");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customers] DROP COLUMN [Number];
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+""",
+                //
+                """
+ALTER TABLE [Customers] ALTER COLUMN [Start] ADD HIDDEN
+""",
+                //
+                """
+ALTER TABLE [Customers] ALTER COLUMN [End] ADD HIDDEN
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_to_temporal_and_rename_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable("Customers");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("NewNumber");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("NewNumber", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+EXEC sp_rename N'[Customers].[Number]', N'NewNumber', N'COLUMN';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+""",
+                //
+                """
+ALTER TABLE [Customers] ALTER COLUMN [Start] ADD HIDDEN
+""",
+                //
+                """
+ALTER TABLE [Customers] ALTER COLUMN [End] ADD HIDDEN
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_from_temporal_and_add_new_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.Property<string>("Name");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                        ttb =>
+                        {
+                            ttb.UseHistoryTable("HistoryTable");
+                            ttb.HasPeriodStart("Start");
+                            ttb.HasPeriodEnd("End");
+                        }));
+
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable("Customers");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("Number", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customers] DROP COLUMN [End];
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Start');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Customers] DROP COLUMN [Start];
+""",
+                //
+                """
+DROP TABLE [HistoryTable];
+""",
+                //
+                """
+ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_from_temporal_and_remove_existing_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable("Customers");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customers] DROP COLUMN [End];
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Customers] DROP COLUMN [Number];
+""",
+                //
+                """
+DECLARE @var2 sysname;
+SELECT @var2 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
+IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var2 + '];');
+ALTER TABLE [HistoryTable] DROP COLUMN [Number];
+""",
+                //
+                """
+DECLARE @var3 sysname;
+SELECT @var3 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Start');
+IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var3 + '];');
+ALTER TABLE [Customers] DROP COLUMN [Start];
+""",
+                //
+                """
+DROP TABLE [HistoryTable];
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_from_temporal_and_rename_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("NewNumber");
+                    e.ToTable("Customers");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("Customers", table.Name);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("NewNumber", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customers] DROP COLUMN [End];
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Start');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Customers] DROP COLUMN [Start];
+""",
+                //
+                """
+EXEC sp_rename N'[Customers].[Number]', N'NewNumber', N'COLUMN';
+""",
+                //
+                """
+DROP TABLE [HistoryTable];
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_to_temporal_rename_table_and_add_new_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable("Customers");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable(
+                        "NewCustomers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("NewCustomers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("Number", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+""",
+                //
+                """
+EXEC sp_rename N'[Customers]', N'NewCustomers';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [Number] int NOT NULL DEFAULT 0;
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ALTER COLUMN [Start] ADD HIDDEN
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ALTER COLUMN [End] ADD HIDDEN
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_to_temporal_rename_table_and_remove_existing_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable("Customers");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable(
+                        "NewCustomers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("NewCustomers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customers] DROP COLUMN [Number];
+""",
+                //
+                """
+EXEC sp_rename N'[Customers]', N'NewCustomers';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ALTER COLUMN [Start] ADD HIDDEN
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ALTER COLUMN [End] ADD HIDDEN
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_to_temporal_rename_table_and_rename_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable("Customers");
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("NewNumber");
+                    e.ToTable(
+                        "NewCustomers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("NewCustomers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("NewNumber", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+""",
+                //
+                """
+EXEC sp_rename N'[Customers]', N'NewCustomers';
+""",
+                //
+                """
+EXEC sp_rename N'[NewCustomers].[Number]', N'NewNumber', N'COLUMN';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ALTER COLUMN [Start] ADD HIDDEN
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ALTER COLUMN [End] ADD HIDDEN
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_from_temporal_rename_table_and_add_new_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable("NewCustomers");
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("NewCustomers", table.Name);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("Number", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+""",
+                //
+                """
+ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customers] DROP COLUMN [End];
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Start');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Customers] DROP COLUMN [Start];
+""",
+                //
+                """
+EXEC sp_rename N'[Customers]', N'NewCustomers';
+""",
+                //
+                """
+DROP TABLE [HistoryTable];
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [Number] int NOT NULL DEFAULT 0;
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_rename_table_rename_history_table_and_add_new_column()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable(
+                        "NewCustomers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("NewHistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            model =>
+            {
+                var table = Assert.Single(model.Tables);
+                Assert.Equal("NewCustomers", table.Name);
+                Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
+                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal("NewHistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+
+                Assert.Collection(
+                    table.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("Number", c.Name));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(table.PrimaryKey!.Columns));
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+""",
+                //
+                """
+EXEC sp_rename N'[Customers]', N'NewCustomers';
+""",
+                //
+                """
+EXEC sp_rename N'[HistoryTable]', N'NewHistoryTable';
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD [Number] int NOT NULL DEFAULT 0;
+""",
+                //
+                """
+ALTER TABLE [NewHistoryTable] ADD [Number] int NOT NULL DEFAULT 0;
+""",
+                //
+                """
+ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
+""",
+                //
+                """
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[NewHistoryTable]))')
+""");
+    }
+
+    [ConditionalFact]
+    public virtual async Task Temporal_multiop_convert_from_temporal_create_another_table_with_same_name_as_history_table()
+    {
+        await Test(
+            builder => builder.Entity(
+                "Customer", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Number");
+                    e.ToTable(
+                        "Customers", tb => tb.IsTemporal(
+                            ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable");
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            }));
+                }),
+            builder =>
+            {
+                builder.Entity(
+                    "Customer", e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable("Customers");
+                    });
+
+                builder.Entity(
+                    "History", e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable("HistoryTable");
+                    });
+            },
+            model =>
+            {
+                var customersTable = Assert.Single(model.Tables.Where(t => t.Name == "Customers"));
+                var historyTable = Assert.Single(model.Tables.Where(t => t.Name == "HistoryTable"));
+
+                Assert.Collection(
+                    customersTable.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("Number", c.Name));
+                Assert.Same(
+                    customersTable.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(customersTable.PrimaryKey!.Columns));
+
+                Assert.Collection(
+                    historyTable.Columns,
+                    c => Assert.Equal("Id", c.Name),
+                    c => Assert.Equal("Name", c.Name),
+                    c => Assert.Equal("Number", c.Name));
+                Assert.Same(
+                    historyTable.Columns.Single(c => c.Name == "Id"),
+                    Assert.Single(historyTable.PrimaryKey!.Columns));
+
+            });
+
+        AssertSql(
+"""
+ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+""",
+                //
+                """
+ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
+""",
+                //
+                """
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Customers] DROP COLUMN [End];
+""",
+                //
+                """
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Start');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Customers] DROP COLUMN [Start];
+""",
+                //
+                """
+DROP TABLE [HistoryTable];
+""",
+                //
+                """
+CREATE TABLE [HistoryTable] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [Number] int NOT NULL,
+    CONSTRAINT [PK_HistoryTable] PRIMARY KEY ([Id])
+);
+""");
     }
 
     protected override string NonDefaultCollation

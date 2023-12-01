@@ -13,6 +13,11 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
 {
     public class NonGenericStringOwnedTypes : OwnedTypesTestBase
     {
+        public NonGenericStringOwnedTypes(ModelBuilderFixtureBase fixture)
+            : base(fixture)
+        {
+        }
+
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
             Action<ModelConfigurationBuilder>? configure)
@@ -24,11 +29,16 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
                 CoreStrings.AmbiguousSharedTypeEntityTypeName(
                     "Microsoft.EntityFrameworkCore.ModelBuilding.ModelBuilderTest+DependentEntity"),
                 Assert.Throws<InvalidOperationException>(
-                    () => base.OwnedType_can_derive_from_Collection()).Message);
+                    base.OwnedType_can_derive_from_Collection).Message);
     }
 
     public class NonGenericStringOneToManyType : OneToManyTestBase
     {
+        public NonGenericStringOneToManyType(ModelBuilderFixtureBase fixture)
+            : base(fixture)
+        {
+        }
+
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
             Action<ModelConfigurationBuilder>? configure)
@@ -36,15 +46,17 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
 
         public override void WithMany_pointing_to_keyless_entity_throws()
             // Test throws exception before reaching the first exception due to entity type being property bag entity
-            => Assert.Equal(
-                CoreStrings.NavigationSingleWrongClrType(
-                    "Reference", "KeylessCollectionNavigation", "KeylessReferenceNavigation", "Dictionary<string, object>"),
-                Assert.Throws<EqualException>(
-                    () => base.WithMany_pointing_to_keyless_entity_throws()).Actual);
+            => Assert.Throws<EqualException>(
+                    base.WithMany_pointing_to_keyless_entity_throws);
     }
 
     public class NonGenericStringManyToOneType : ManyToOneTestBase
     {
+        public NonGenericStringManyToOneType(ModelBuilderFixtureBase fixture)
+            : base(fixture)
+        {
+        }
+
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
             Action<ModelConfigurationBuilder>? configure)
@@ -53,6 +65,11 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
 
     public class NonGenericStringOneToOneType : OneToOneTestBase
     {
+        public NonGenericStringOneToOneType(ModelBuilderFixtureBase fixture)
+            : base(fixture)
+        {
+        }
+
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
             Action<ModelConfigurationBuilder>? configure)

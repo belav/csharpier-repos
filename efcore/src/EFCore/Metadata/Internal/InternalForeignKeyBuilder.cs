@@ -1129,8 +1129,7 @@ public class InternalForeignKeyBuilder : AnnotatableBuilder<ForeignKey, Internal
         var newOwnership = newEntityType.GetForeignKeys().SingleOrDefault(fk => fk.IsOwnership);
         if (newOwnership == null)
         {
-            Check.DebugAssert(Metadata.IsInModel, "Metadata isn't in the model");
-            return Metadata.Builder;
+            return Metadata.IsInModel ? Metadata.Builder : null;
         }
 
         Check.DebugAssert(!Metadata.IsInModel, "Metadata is in the model");
@@ -1449,6 +1448,25 @@ public class InternalForeignKeyBuilder : AnnotatableBuilder<ForeignKey, Internal
         EntityType principalEntityType,
         EntityType dependentEntityType,
         ConfigurationSource? configurationSource)
+        => CanSetEntityTypes(
+            principalEntityType,
+            dependentEntityType,
+            configurationSource,
+            out _,
+            out _);
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public virtual bool CanSetEntityTypes(
+        EntityType principalEntityType,
+        EntityType dependentEntityType,
+        ConfigurationSource? configurationSource,
+        out bool shouldResetToPrincipal,
+        out bool shouldResetToDependent)
         => CanSetRelatedTypes(
             principalEntityType,
             dependentEntityType,
@@ -1458,8 +1476,8 @@ public class InternalForeignKeyBuilder : AnnotatableBuilder<ForeignKey, Internal
             configurationSource,
             shouldThrow: false,
             out _,
-            out _,
-            out _,
+            out shouldResetToPrincipal,
+            out shouldResetToDependent,
             out _,
             out _,
             out _);
@@ -2922,11 +2940,6 @@ public class InternalForeignKeyBuilder : AnnotatableBuilder<ForeignKey, Internal
                 ConfigurationSource.Convention)!;
         }
 
-        foreach (var removedForeignKey in removedForeignKeys)
-        {
-            Metadata.DeclaringEntityType.Model.ConventionDispatcher.Tracker.Update(removedForeignKey, newRelationshipBuilder.Metadata);
-        }
-
         if (tempIndex?.IsInModel == true)
         {
             dependentEntityType.RemoveIndex(tempIndex.Properties);
@@ -2935,6 +2948,16 @@ public class InternalForeignKeyBuilder : AnnotatableBuilder<ForeignKey, Internal
         if (keyTempIndex?.IsInModel == true)
         {
             keyTempIndex.DeclaringEntityType.RemoveIndex(keyTempIndex.Properties);
+        }
+
+        if (newRelationshipBuilder == null)
+        {
+            return null;
+        }
+
+        foreach (var removedForeignKey in removedForeignKeys)
+        {
+            Metadata.DeclaringEntityType.Model.ConventionDispatcher.Tracker.Update(removedForeignKey, newRelationshipBuilder.Metadata);
         }
 
         return newRelationshipBuilder;

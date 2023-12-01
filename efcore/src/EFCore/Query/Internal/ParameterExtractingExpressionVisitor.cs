@@ -176,6 +176,48 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
+    protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
+    {
+        // If this is a call to EF.Constant(), or EF.Parameter(), then examine the operand; it it's isn't evaluatable (i.e. contains a
+        // reference to a database table), throw immediately. Otherwise, evaluate the operand (either as a constant or as a parameter) and
+        // return that.
+        if (methodCallExpression.Method.DeclaringType == typeof(EF))
+        {
+            switch (methodCallExpression.Method.Name)
+            {
+                case nameof(EF.Constant):
+                {
+                    var operand = methodCallExpression.Arguments[0];
+                    if (!_evaluatableExpressions.TryGetValue(operand, out _))
+                    {
+                        throw new InvalidOperationException(CoreStrings.EFConstantWithNonEvaluableArgument);
+                    }
+
+                    return Evaluate(operand, generateParameter: false);
+                }
+
+                case nameof(EF.Parameter):
+                {
+                    var operand = methodCallExpression.Arguments[0];
+                    if (!_evaluatableExpressions.TryGetValue(operand, out _))
+                    {
+                        throw new InvalidOperationException(CoreStrings.EFConstantWithNonEvaluableArgument);
+                    }
+
+                    return Evaluate(operand, generateParameter: true);
+                }
+            }
+        }
+
+        return base.VisitMethodCall(methodCallExpression);
+    }
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
     protected override Expression VisitBinary(BinaryExpression binaryExpression)
     {
         switch (binaryExpression.NodeType)
@@ -654,6 +696,16 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
                 case ExpressionType.Extension:
                     preferNoEvaluation = false;
                     return expression.CanReduce && IsEvaluatableNodeType(expression.ReduceAndCheck(), out preferNoEvaluation);
+
+                // Identify a call to EF.Constant(), and flag that as non-evaluable.
+                // This is important to prevent a larger subtree containing EF.Constant from being evaluated, i.e. to make sure that
+                // the EF.Function argument is present in the tree as its own, constant node.
+                case ExpressionType.Call
+                    when expression is MethodCallExpression { Method: var method }
+                    && method.DeclaringType == typeof(EF)
+                    && method.Name is nameof(EF.Constant) or nameof(EF.Parameter):
+                    preferNoEvaluation = true;
+                    return false;
 
                 default:
                     preferNoEvaluation = false;

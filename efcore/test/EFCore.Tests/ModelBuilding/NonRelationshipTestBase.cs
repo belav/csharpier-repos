@@ -3,6 +3,7 @@
 
 #nullable enable
 
+using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Dynamic;
@@ -16,6 +17,11 @@ public abstract partial class ModelBuilderTest
 {
     public abstract class NonRelationshipTestBase : ModelBuilderTestBase
     {
+        public NonRelationshipTestBase(ModelBuilderFixtureBase fixture)
+            : base(fixture)
+        {
+        }
+
         [ConditionalFact]
         public void Can_set_model_annotation()
         {
@@ -453,8 +459,7 @@ public abstract partial class ModelBuilderTest
             var modelBuilder = CreateModelBuilder(
                 c =>
                     c.Conventions.Replace<DbSetFindingConvention>(
-                        s =>
-                            new TestDbSetFindingConvention(s.GetService<ProviderConventionSetBuilderDependencies>()!)));
+                        s => new TestDbSetFindingConvention(s.GetService<ProviderConventionSetBuilderDependencies>()!)));
 
             var model = modelBuilder.FinalizeModel();
 
@@ -658,8 +663,7 @@ public abstract partial class ModelBuilderTest
                         CreateModelBuilder().Entity<Quarks>(
                             b =>
                             {
-                                b.HasAlternateKey(
-                                    e => new { e.Down });
+                                b.HasAlternateKey(e => new { e.Down });
                                 b.Property(e => e.Down).IsRequired(false);
                             })).Message);
 
@@ -1138,16 +1142,10 @@ public abstract partial class ModelBuilderTest
         public virtual void Value_converter_configured_on_non_nullable_type_is_applied()
         {
             var modelBuilder = CreateModelBuilder(
-                c =>
-                {
-                    c.Properties<int>().HaveConversion<NumberToStringConverter<int>, CustomValueComparer<int>>();
-                });
+                c => c.Properties<int>().HaveConversion<NumberToStringConverter<int>, CustomValueComparer<int>>());
 
             modelBuilder.Entity<Quarks>(
-                b =>
-                {
-                    b.Property<int?>("Wierd");
-                });
+                b => b.Property<int?>("Wierd"));
 
             var model = modelBuilder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(Quarks))!;
@@ -1429,10 +1427,10 @@ public abstract partial class ModelBuilderTest
                 {
                     b.Property(e => e.Up).HasSentinel(1);
                     b.Property(e => e.Down).HasSentinel("100");
-                    b.Property<int>("Charm").HasSentinel(-1);
-                    b.Property<string>("Strange").HasSentinel("-1");
+                    b.Property<int>("Charm").HasSentinel((sbyte)-1);
+                    b.Property<string>("Strange").HasSentinel("");
                     b.Property<int>("Top").HasSentinel(77);
-                    b.Property<string>("Bottom").HasSentinel("100");
+                    b.Property<string>("Bottom").HasSentinel(null);
                 });
 
             var model = modelBuilder.FinalizeModel();
@@ -1442,9 +1440,37 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(1, entityType.FindProperty("Up")!.Sentinel);
             Assert.Equal("100", entityType.FindProperty("Down")!.Sentinel);
             Assert.Equal(-1, entityType.FindProperty("Charm")!.Sentinel);
-            Assert.Equal("-1", entityType.FindProperty("Strange")!.Sentinel);
+            Assert.Equal("", entityType.FindProperty("Strange")!.Sentinel);
             Assert.Equal(77, entityType.FindProperty("Top")!.Sentinel);
-            Assert.Equal("100", entityType.FindProperty("Bottom")!.Sentinel);
+            Assert.Null(entityType.FindProperty("Bottom")!.Sentinel);
+        }
+
+        [ConditionalFact]
+        public virtual void Setting_sentinel_throws_for_null_on_nonnullable()
+        {
+            var modelBuilder = CreateModelBuilder();
+
+            modelBuilder.Entity<Quarks>(
+                b =>
+                {
+                    b.Property<int>("Top").Metadata.Sentinel = 77D;
+                    b.Property<int>("Charm").Metadata.Sentinel = EnumerablePartitionerOptions.NoBuffering;
+                    Assert.Equal(CoreStrings.IncompatibleSentinelValue("null", nameof(Quarks), nameof(Quarks.Up), "int"),
+                        Assert.Throws<InvalidOperationException>(() => b.Property(e => e.Up).Metadata.Sentinel = null).Message);
+                });
+        }
+
+        [ConditionalFact]
+        public virtual void Setting_sentinel_throws_for_noncompatible()
+        {
+            var modelBuilder = CreateModelBuilder();
+
+            modelBuilder.Entity<Quarks>(
+                b =>
+                {
+                    Assert.Equal(CoreStrings.IncompatibleSentinelValue("System.Byte[]", nameof(Quarks), nameof(Quarks.Up), "int"),
+                        Assert.Throws<InvalidOperationException>(() => b.Property(e => e.Up).Metadata.Sentinel = new byte[0]).Message);
+                });
         }
 
         [ConditionalFact]
@@ -1860,7 +1886,7 @@ public abstract partial class ModelBuilderTest
                 .ValueGeneratedOnUpdate()
                 .IsUnicode()
                 .HasMaxLength(100)
-                .HasSentinel(null)
+                .HasSentinel(0)
                 .HasPrecision(10, 1)
                 .HasValueGenerator<CustomValueGenerator>()
                 .HasValueGenerator(typeof(CustomValueGenerator))
@@ -1920,6 +1946,7 @@ public abstract partial class ModelBuilderTest
             entityBuilder.HasIndex(ix => ix.Id, "Descending").IsDescending();
 
             var model = modelBuilder.FinalizeModel();
+            AssertEqual(modelBuilder.Model, model);
 
             var entityType = model.FindEntityType(typeof(Customer))!;
             var idProperty = entityType.FindProperty(nameof(Customer.Id))!;
@@ -1972,7 +1999,7 @@ public abstract partial class ModelBuilderTest
             entityBuilder.Property<int>("Id");
 
             Assert.NotNull(entityType.FindPrimaryKey());
-            AssertEqual(new[] { "Id" }, entityType.FindPrimaryKey()!.Properties.Select(p => p.Name));
+            Assert.Equal(new[] { "Id" }, entityType.FindPrimaryKey()!.Properties.Select(p => p.Name));
         }
 
         [ConditionalFact]
@@ -2535,8 +2562,7 @@ public abstract partial class ModelBuilderTest
                         CreateModelBuilder().Entity<CollectionQuarks>(
                             b =>
                             {
-                                b.HasAlternateKey(
-                                    e => new { e.Down });
+                                b.HasAlternateKey(e => new { e.Down });
                                 b.PrimitiveCollection(e => e.Down).IsRequired(false);
                             })).Message);
 
@@ -2756,24 +2782,24 @@ public abstract partial class ModelBuilderTest
             modelBuilder.Entity<CollectionQuarks>(
                 b =>
                 {
-                    b.PrimitiveCollection(e => e.Up).HasSentinel(1);
-                    b.PrimitiveCollection(e => e.Down).HasSentinel("100");
-                    b.PrimitiveCollection<int[]>("Charm").HasSentinel(-1);
-                    b.PrimitiveCollection<List<string>>("Strange").HasSentinel("-1");
-                    b.PrimitiveCollection<int[]>("Top").HasSentinel(77);
-                    b.PrimitiveCollection<List<string>>("Bottom").HasSentinel("100");
+                    b.PrimitiveCollection(e => e.Up).HasSentinel(null);
+                    b.PrimitiveCollection(e => e.Down).HasSentinel(new ObservableCollection<string>());
+                    b.PrimitiveCollection<int[]>("Charm").HasSentinel(new int[0]);
+                    b.PrimitiveCollection<List<string>>("Strange").HasSentinel(new List<string> { });
+                    b.PrimitiveCollection<int[]>("Top").HasSentinel([77]);
+                    b.PrimitiveCollection<List<string>>("Bottom").HasSentinel(new List<string> { "" });
                 });
 
             var model = modelBuilder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(CollectionQuarks))!;
 
             Assert.Equal(0, entityType.FindProperty(nameof(CollectionQuarks.Id))!.Sentinel);
-            Assert.Equal(1, entityType.FindProperty("Up")!.Sentinel);
-            Assert.Equal("100", entityType.FindProperty("Down")!.Sentinel);
-            Assert.Equal(-1, entityType.FindProperty("Charm")!.Sentinel);
-            Assert.Equal("-1", entityType.FindProperty("Strange")!.Sentinel);
-            Assert.Equal(77, entityType.FindProperty("Top")!.Sentinel);
-            Assert.Equal("100", entityType.FindProperty("Bottom")!.Sentinel);
+            Assert.Null(entityType.FindProperty("Up")!.Sentinel);
+            Assert.Equal(new ObservableCollection<string>(), entityType.FindProperty("Down")!.Sentinel);
+            Assert.Equal(new int[0], entityType.FindProperty("Charm")!.Sentinel);
+            Assert.Equal(new List<string> { }, entityType.FindProperty("Strange")!.Sentinel);
+            Assert.Equal(new int[] { 77 }, entityType.FindProperty("Top")!.Sentinel);
+            Assert.Equal(new List<string> { "" }, entityType.FindProperty("Bottom")!.Sentinel);
         }
 
         [ConditionalFact]
@@ -2935,7 +2961,7 @@ public abstract partial class ModelBuilderTest
             entityBuilder.PrimitiveCollection<List<int>>("Id");
 
             Assert.NotNull(entityType.FindPrimaryKey());
-            AssertEqual(new[] { "Id" }, entityType.FindPrimaryKey()!.Properties.Select(p => p.Name));
+            Assert.Equal(new[] { "Id" }, entityType.FindPrimaryKey()!.Properties.Select(p => p.Name));
         }
 
         [ConditionalFact]
@@ -2994,19 +3020,21 @@ public abstract partial class ModelBuilderTest
                 {
                     b.PrimitiveCollection(e => e.CollectionCompanyId);
                     b.HasAlternateKey(e => e.CollectionCompanyId);
+                    b.HasAlternateKey(e => e.CollectionId);
+                    b.HasKey(e => e.Id);
                 });
 
-            var entity = modelBuilder.Model.FindEntityType(typeof(EntityWithFields))!;
-            var properties = entity.GetProperties();
-            Assert.Single(properties);
-            var property = properties.Single();
-            Assert.Equal(nameof(EntityWithFields.CollectionCompanyId), property.Name);
+            var model = modelBuilder.FinalizeModel();
+            AssertEqual(modelBuilder.Model, model);
+
+            var entity = model.FindEntityType(typeof(EntityWithFields))!;
+            var property = entity.FindProperty(nameof(EntityWithFields.CollectionCompanyId))!;
             Assert.Null(property.PropertyInfo);
             Assert.NotNull(property.FieldInfo);
             Assert.NotNull(property.GetElementType());
             var keys = entity.GetKeys();
-            var key = Assert.Single(keys);
-            Assert.Equal(properties, key.Properties);
+            Assert.Equal(3, keys.Count());
+            Assert.Single(keys.Where(k => k.Properties.All(p => p == property)));
         }
 
         [ConditionalFact]

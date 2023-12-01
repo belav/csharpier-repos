@@ -117,8 +117,7 @@ WHERE "o"."OrderID" = 11077 AND acos(CAST("o"."Discount" AS REAL)) > 1.0
     {
         await AssertQuery(
             async,
-            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Acosh(od.Discount + 1) > 0),
-            entryCount: 13);
+            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Acosh(od.Discount + 1) > 0));
 
         AssertSql(
             """
@@ -146,8 +145,7 @@ WHERE "o"."OrderID" = 11077 AND asin(CAST("o"."Discount" AS REAL)) > 0.0
     {
         await AssertQuery(
             async,
-            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Asinh(od.Discount) > 0),
-            entryCount: 13);
+            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Asinh(od.Discount) > 0));
 
         AssertSql(
             """
@@ -187,8 +185,7 @@ WHERE "o"."OrderID" = 11077 AND atan2(CAST("o"."Discount" AS REAL), 1.0) > 0.0
     {
         await AssertQuery(
             async,
-            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Atanh(od.Discount) > 0),
-            entryCount: 13);
+            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Atanh(od.Discount) > 0));
 
         AssertSql(
             """
@@ -231,8 +228,7 @@ WHERE "o"."OrderID" = 11077 AND cos(CAST("o"."Discount" AS REAL)) > 0.0
     {
         await AssertQuery(
             async,
-            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Cosh(od.Discount) > 0),
-            entryCount: 25);
+            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Cosh(od.Discount) > 0));
 
         AssertSql(
             """
@@ -287,8 +283,7 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log(7.0, CAST("o"."Discou
     {
         await AssertQuery(
             async,
-            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077 && od.Discount > 0).Where(od => Math.Log2(od.Discount) < 0),
-            entryCount: 13);
+            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077 && od.Discount > 0).Where(od => Math.Log2(od.Discount) < 0));
 
         AssertSql(
             """
@@ -382,8 +377,7 @@ WHERE "o"."OrderID" = 11077 AND sin(CAST("o"."Discount" AS REAL)) > 0.0
     {
         await AssertQuery(
             async,
-            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Sinh(od.Discount) > 0),
-            entryCount: 13);
+            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Sinh(od.Discount) > 0));
 
         AssertSql(
             """
@@ -423,8 +417,7 @@ WHERE "o"."OrderID" = 11077 AND tan(CAST("o"."Discount" AS REAL)) > 0.0
     {
         await AssertQuery(
             async,
-            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Tanh(od.Discount) > 0),
-            entryCount: 13);
+            ss => ss.Set<OrderDetail>().Where(od => od.OrderID == 11077).Where(od => Math.Tanh(od.Discount) > 0));
 
         AssertSql(
             """
@@ -719,11 +712,11 @@ WHERE "c"."ContactName" LIKE 'M%'
 
         AssertSql(
             """
-@__pattern_0_rewritten='M%' (Size = 2)
+@__pattern_0_startswith='M%' (Size = 2)
 
 SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
 FROM "Customers" AS "c"
-WHERE "c"."ContactName" LIKE @__pattern_0_rewritten ESCAPE '\'
+WHERE "c"."ContactName" LIKE @__pattern_0_startswith ESCAPE '\'
 """);
     }
 
@@ -781,11 +774,11 @@ WHERE "c"."ContactName" LIKE '%b'
 
         AssertSql(
             """
-@__pattern_0_rewritten='%b' (Size = 2)
+@__pattern_0_endswith='%b' (Size = 2)
 
 SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
 FROM "Customers" AS "c"
-WHERE "c"."ContactName" LIKE @__pattern_0_rewritten ESCAPE '\'
+WHERE "c"."ContactName" LIKE @__pattern_0_endswith ESCAPE '\'
 """);
     }
 
@@ -1203,6 +1196,30 @@ WHERE "o"."OrderID" = 11077 AND min("o"."OrderID", "o"."ProductID") = "o"."Produ
 """);
     }
 
+    public override async Task Where_math_min_nested(bool async)
+    {
+        await base.Where_math_min_nested(async);
+
+        AssertSql(
+            """
+SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+FROM "Order Details" AS "o"
+WHERE "o"."OrderID" = 11077 AND min("o"."OrderID", "o"."ProductID", 99999) = "o"."ProductID"
+""");
+    }
+
+    public override async Task Where_math_min_nested_twice(bool async)
+    {
+        await base.Where_math_min_nested_twice(async);
+
+        AssertSql(
+            """
+SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+FROM "Order Details" AS "o"
+WHERE "o"."OrderID" = 11077 AND min(99999, "o"."OrderID", 99998, "o"."ProductID") = "o"."ProductID"
+""");
+    }
+
     public override async Task Where_math_max(bool async)
     {
         await base.Where_math_max(async);
@@ -1212,6 +1229,30 @@ WHERE "o"."OrderID" = 11077 AND min("o"."OrderID", "o"."ProductID") = "o"."Produ
 SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
 FROM "Order Details" AS "o"
 WHERE "o"."OrderID" = 11077 AND max("o"."OrderID", "o"."ProductID") = "o"."OrderID"
+""");
+    }
+
+    public override async Task Where_math_max_nested(bool async)
+    {
+        await base.Where_math_max_nested(async);
+
+        AssertSql(
+            """
+SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+FROM "Order Details" AS "o"
+WHERE "o"."OrderID" = 11077 AND max("o"."OrderID", "o"."ProductID", 1) = "o"."OrderID"
+""");
+    }
+
+    public override async Task Where_math_max_nested_twice(bool async)
+    {
+        await base.Where_math_max_nested_twice(async);
+
+        AssertSql(
+            """
+SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+FROM "Order Details" AS "o"
+WHERE "o"."OrderID" = 11077 AND max(1, "o"."OrderID", 2, "o"."ProductID") = "o"."OrderID"
 """);
     }
 
@@ -1377,8 +1418,7 @@ WHERE 'ALFKI' REGEXP "c"."CustomerID"
     {
         await AssertQuery(
             async,
-            ss => ss.Set<Customer>().Where(o => !Regex.IsMatch(o.CustomerID, "^[^T]")),
-            entryCount: 6);
+            ss => ss.Set<Customer>().Where(o => !Regex.IsMatch(o.CustomerID, "^[^T]")));
 
         AssertSql(
             """

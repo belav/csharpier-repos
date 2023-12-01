@@ -12,6 +12,278 @@ public class SimpleQuerySqlServerTest : SimpleQueryRelationalTestBase
     protected override ITestStoreFactory TestStoreFactory
         => SqlServerTestStoreFactory.Instance;
 
+
+    #region 27427
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task Muliple_occurrences_of_FromSql_in_group_by_aggregate(bool async)
+    {
+        var contextFactory = await InitializeAsync<Context27427>();
+        using var context = contextFactory.CreateContext();
+        var query = context.DemoEntities
+            .FromSqlRaw("SELECT * FROM DemoEntities WHERE Id = {0}", new SqlParameter { Value = 1 })
+            .Select(e => e.Id);
+
+        var query2 = context.DemoEntities
+            .Where(e => query.Contains(e.Id))
+            .GroupBy(e => e.Id)
+            .Select(g => new { g.Key, Aggregate = g.Count() });
+
+        if (async)
+        {
+            await query2.ToListAsync();
+        }
+        else
+        {
+            query2.ToList();
+        }
+
+        AssertSql(
+            """
+p0='1'
+
+SELECT [d].[Id] AS [Key], COUNT(*) AS [Aggregate]
+FROM [DemoEntities] AS [d]
+WHERE [d].[Id] IN (
+    SELECT [m].[Id]
+    FROM (
+        SELECT * FROM DemoEntities WHERE Id = @p0
+    ) AS [m]
+)
+GROUP BY [d].[Id]
+""");
+    }
+
+    protected class Context27427 : DbContext
+    {
+        public Context27427(DbContextOptions options)
+            : base(options)
+        {
+        }
+
+        public DbSet<DemoEntity> DemoEntities { get; set; }
+    }
+
+    protected class DemoEntity
+    {
+        public int Id { get; set; }
+    }
+
+    #endregion
+
+    #region 30478
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task TemporalAsOf_with_json_basic_query(bool async)
+    {
+        var contextFactory = await InitializeAsync<Context30478>(seed: x => x.Seed());
+        using var context = contextFactory.CreateContext();
+        var query = context.Entities.TemporalAsOf(new DateTime(2010, 1, 1));
+
+        var result = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        Assert.Equal(2, result.Count);
+        Assert.True(result.All(x => x.Reference != null));
+        Assert.True(result.All(x => x.Collection.Count > 0));
+
+        AssertSql(
+"""
+SELECT [e].[Id], [e].[Name], [e].[PeriodEnd], [e].[PeriodStart], [e].[Collection], [e].[Reference]
+FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
+""");
+    }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task TemporalAll_with_json_basic_query(bool async)
+    {
+        var contextFactory = await InitializeAsync<Context30478>(seed: x => x.Seed());
+        using var context = contextFactory.CreateContext();
+        var query = context.Entities.TemporalAll();
+
+        var result = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        Assert.Equal(2, result.Count);
+        Assert.True(result.All(x => x.Reference != null));
+        Assert.True(result.All(x => x.Collection.Count > 0));
+
+        AssertSql(
+"""
+SELECT [e].[Id], [e].[Name], [e].[PeriodEnd], [e].[PeriodStart], [e].[Collection], [e].[Reference]
+FROM [Entities] FOR SYSTEM_TIME ALL AS [e]
+""");
+    }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task TemporalAsOf_project_json_entity_reference(bool async)
+    {
+        var contextFactory = await InitializeAsync<Context30478>(seed: x => x.Seed());
+        using var context = contextFactory.CreateContext();
+        var query = context.Entities.TemporalAsOf(new DateTime(2010, 1, 1)).Select(x => x.Reference);
+
+        var result = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        Assert.Equal(2, result.Count);
+        Assert.True(result.All(x => x != null));
+
+        AssertSql(
+"""
+SELECT [e].[Reference], [e].[Id]
+FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
+""");
+    }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task TemporalAsOf_project_json_entity_collection(bool async)
+    {
+        var contextFactory = await InitializeAsync<Context30478>(seed: x => x.Seed());
+        using var context = contextFactory.CreateContext();
+        var query = context.Entities.TemporalAsOf(new DateTime(2010, 1, 1)).Select(x => x.Collection);
+
+        var result = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        Assert.Equal(2, result.Count);
+        Assert.True(result.All(x => x.Count > 0));
+
+        AssertSql(
+"""
+SELECT [e].[Collection], [e].[Id]
+FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
+""");
+    }
+
+    protected class Context30478 : DbContext
+    {
+        public Context30478(DbContextOptions options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Entity30478> Entities { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Entity30478>().Property(x => x.Id).ValueGeneratedNever();
+            modelBuilder.Entity<Entity30478>().ToTable("Entities", tb => tb.IsTemporal());
+            modelBuilder.Entity<Entity30478>().OwnsOne(x => x.Reference, nb =>
+            {
+                nb.ToJson();
+                nb.OwnsOne(x => x.Nested);
+            });
+
+            modelBuilder.Entity<Entity30478>().OwnsMany(x => x.Collection, nb =>
+            {
+                nb.ToJson();
+                nb.OwnsOne(x => x.Nested);
+            });
+        }
+
+        public void Seed()
+        {
+            var e1 = new Entity30478
+            {
+                Id = 1,
+                Name = "e1",
+                Reference = new Json30478
+                {
+                    Name = "r1",
+                    Nested = new JsonNested30478 { Number = 1 }
+                },
+                Collection = new List<Json30478>
+                {
+                    new Json30478
+                    {
+                        Name = "c11",
+                        Nested = new JsonNested30478 { Number = 11 }
+                    },
+                    new Json30478
+                    {
+                        Name = "c12",
+                        Nested = new JsonNested30478 { Number = 12 }
+                    },
+                    new Json30478
+                    {
+                        Name = "c13",
+                        Nested = new JsonNested30478 { Number = 12 }
+                    }
+                }
+            };
+
+            var e2 = new Entity30478
+            {
+                Id = 2,
+                Name = "e2",
+                Reference = new Json30478
+                {
+                    Name = "r2",
+                    Nested = new JsonNested30478 { Number = 2 }
+                },
+                Collection = new List<Json30478>
+                {
+                    new Json30478
+                    {
+                        Name = "c21",
+                        Nested = new JsonNested30478 { Number = 21 }
+                    },
+                    new Json30478
+                    {
+                        Name = "c22",
+                        Nested = new JsonNested30478 { Number = 22 }
+                    },
+                }
+            };
+
+            AddRange(e1, e2);
+            SaveChanges();
+
+            RemoveRange(e1, e2);
+            SaveChanges();
+
+
+            Database.ExecuteSqlRaw($"ALTER TABLE [Entities] SET (SYSTEM_VERSIONING = OFF)");
+            Database.ExecuteSqlRaw($"ALTER TABLE [Entities] DROP PERIOD FOR SYSTEM_TIME");
+
+            Database.ExecuteSqlRaw($"UPDATE [EntitiesHistory] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'");
+            Database.ExecuteSqlRaw($"UPDATE [EntitiesHistory] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'");
+
+            Database.ExecuteSqlRaw($"ALTER TABLE [Entities] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])");
+            Database.ExecuteSqlRaw($"ALTER TABLE [Entities] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[EntitiesHistory]))");
+        }
+    }
+
+    protected class Entity30478
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Json30478 Reference { get; set; }
+        public List<Json30478> Collection { get; set; }
+    }
+
+    protected class Json30478
+    {
+        public string Name { get; set; }
+        public JsonNested30478 Nested { get; set; }
+    }
+
+    protected class JsonNested30478
+    {
+        public int Number { get; set; }
+    }
+
+    #endregion
+
     public override async Task Multiple_nested_reference_navigations(bool async)
     {
         await base.Multiple_nested_reference_navigations(async);
@@ -537,58 +809,23 @@ WHERE [t].[Species] LIKE N'F%'
 """);
     }
 
-    [ConditionalTheory]
-    [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Muliple_occurrences_of_FromSql_in_group_by_aggregate(bool async)
+    public override async Task Filter_on_nested_DTO_with_interface_gets_simplified_correctly(bool async)
     {
-        var contextFactory = await InitializeAsync<Context27427>();
-        using var context = contextFactory.CreateContext();
-        var query = context.DemoEntities
-            .FromSqlRaw("SELECT * FROM DemoEntities WHERE Id = {0}", new SqlParameter { Value = 1 })
-            .Select(e => e.Id);
-
-        var query2 = context.DemoEntities
-            .Where(e => query.Contains(e.Id))
-            .GroupBy(e => e.Id)
-            .Select(g => new { g.Key, Aggregate = g.Count() });
-
-        if (async)
-        {
-            await query2.ToListAsync();
-        }
-        else
-        {
-            query2.ToList();
-        }
+        await base.Filter_on_nested_DTO_with_interface_gets_simplified_correctly(async);
 
         AssertSql(
-            """
-p0='1'
-
-SELECT [d].[Id] AS [Key], COUNT(*) AS [Aggregate]
-FROM [DemoEntities] AS [d]
-WHERE [d].[Id] IN (
-    SELECT [m].[Id]
-    FROM (
-        SELECT * FROM DemoEntities WHERE Id = @p0
-    ) AS [m]
-)
-GROUP BY [d].[Id]
+"""
+SELECT [c].[Id], [c].[CompanyId], CASE
+    WHEN [c0].[Id] IS NOT NULL THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END, [c0].[Id], [c0].[CompanyName], [c0].[CountryId], [c1].[Id], [c1].[CountryName]
+FROM [Customers] AS [c]
+LEFT JOIN [Companies] AS [c0] ON [c].[CompanyId] = [c0].[Id]
+LEFT JOIN [Countries] AS [c1] ON [c0].[CountryId] = [c1].[Id]
+WHERE CASE
+    WHEN [c0].[Id] IS NOT NULL THEN [c1].[CountryName]
+    ELSE NULL
+END = N'COUNTRY'
 """);
-    }
-
-    protected class Context27427 : DbContext
-    {
-        public Context27427(DbContextOptions options)
-            : base(options)
-        {
-        }
-
-        public DbSet<DemoEntity> DemoEntities { get; set; }
-    }
-
-    protected class DemoEntity
-    {
-        public int Id { get; set; }
     }
 }

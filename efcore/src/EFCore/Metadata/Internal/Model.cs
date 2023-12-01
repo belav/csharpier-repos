@@ -51,9 +51,10 @@ public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Model()
+    public Model(Guid? modelId = null)
         : this(new ConventionSet())
     {
+        ModelId = modelId ?? Guid.NewGuid();
     }
 
     /// <summary>
@@ -75,6 +76,7 @@ public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRu
         _modelFinalizedConventions = conventions.ModelFinalizedConventions;
         Builder = builder;
         Configuration = modelConfiguration;
+        ModelId = Guid.NewGuid();
         dispatcher.OnModelInitialized(builder);
     }
 
@@ -452,6 +454,14 @@ public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRu
             ? result.Concat(existingTypes.Types)
             : result;
     }
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public virtual Guid ModelId { get; set; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1086,7 +1096,6 @@ public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRu
         ConventionDispatcher.AssertNoScope();
 
         var finalizedModel = (IModel)ConventionDispatcher.OnModelFinalizing(Builder).Metadata;
-
         if (finalizedModel is Model model)
         {
             finalizedModel = model.MakeReadonly();

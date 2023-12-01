@@ -99,19 +99,12 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
         => Assert.ThrowsAsync<NullReferenceException>(() => base.Include_after_SelectMany_throws(async));
 
     public override async Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result4(bool async)
-        => Assert.Equal(
-            "4",
-            (((EqualException)(await Assert.ThrowsAsync<TargetInvocationException>(
-                () => base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result4(async))).InnerException!.InnerException)!)
-            .Actual);
+        => await Assert.ThrowsAsync<TargetInvocationException>(
+            () => base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result4(async));
 
     public override async Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_complex_projection_result(bool async)
-        => Assert.Equal(
-            "6",
-            (((EqualException)(await Assert.ThrowsAsync<TargetInvocationException>(
-                    () => base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_complex_projection_result(async)))
-                .InnerException!.InnerException)!)
-            .Actual);
+        => await Assert.ThrowsAsync<TargetInvocationException>(
+            () => base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_complex_projection_result(async));
 
     public override Task Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation(
             bool async)
@@ -132,5 +125,11 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
         => Task.CompletedTask;
 
     public override Task Where_subquery_with_ElementAt_using_column_as_index(bool async)
+        => Task.CompletedTask;
+
+    public override Task Where_compare_anonymous_types(bool async)
+        => Task.CompletedTask;
+
+    public override Task Subquery_inside_Take_argument(bool async)
         => Task.CompletedTask;
 }

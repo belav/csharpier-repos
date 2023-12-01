@@ -47,11 +47,24 @@ public class JsonNullableStructCollectionReaderWriter<TCollection, TConcreteColl
             collection.Clear();
         }
 
-        while (manager.CurrentReader.TokenType != JsonTokenType.EndArray)
+        if (manager.CurrentReader.TokenType == JsonTokenType.None)
         {
             manager.MoveNext();
+        }
 
-            switch (manager.CurrentReader.TokenType)
+        var tokenType = manager.CurrentReader.TokenType;
+        if (tokenType != JsonTokenType.StartArray)
+        {
+            throw new InvalidOperationException(
+                CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
+        }
+
+        while (tokenType != JsonTokenType.EndArray)
+        {
+            manager.MoveNext();
+            tokenType = manager.CurrentReader.TokenType;
+
+            switch (tokenType)
             {
                 case JsonTokenType.String:
                 case JsonTokenType.Number:
@@ -62,6 +75,17 @@ public class JsonNullableStructCollectionReaderWriter<TCollection, TConcreteColl
                 case JsonTokenType.Null:
                     collection.Add(null);
                     break;
+                case JsonTokenType.EndArray:
+                case JsonTokenType.Comment:
+                    break;
+                case JsonTokenType.None: // Explicitly listing all states that we throw for
+                case JsonTokenType.StartObject:
+                case JsonTokenType.EndObject:
+                case JsonTokenType.StartArray:
+                case JsonTokenType.PropertyName:
+                default:
+                    throw new InvalidOperationException(
+                        CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
             }
         }
 

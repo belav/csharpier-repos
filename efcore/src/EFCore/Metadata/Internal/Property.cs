@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Storage.Json;
@@ -23,6 +24,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     private object? _sentinel;
     private ValueGenerated? _valueGenerated;
     private CoreTypeMapping? _typeMapping;
+    private IComparer<IUpdateEntry>? _currentValueComparer;
 
     private ConfigurationSource? _typeConfigurationSource;
     private ConfigurationSource? _isNullableConfigurationSource;
@@ -62,7 +64,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     public virtual InternalPropertyBuilder Builder
     {
         [DebuggerStepThrough]
-        get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+        get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(Name));
     }
 
     /// <summary>
@@ -573,6 +575,32 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         EnsureMutable();
 
         _sentinel = sentinel;
+        if (sentinel == null)
+        {
+            if (!ClrType.IsNullableType())
+            {
+                throw new InvalidOperationException(
+                    CoreStrings.IncompatibleSentinelValue(
+                        "null", DeclaringType.DisplayName(), Name, ClrType.ShortDisplayName()));
+            }
+        }
+        else
+        {
+            var valueType = sentinel.GetType();
+            if (!ClrType.UnwrapNullableType().IsAssignableFrom(valueType))
+            {
+                try
+                {
+                    _sentinel = Convert.ChangeType(sentinel, ClrType, CultureInfo.InvariantCulture);
+                }
+                catch (Exception)
+                {
+                    throw new InvalidOperationException(
+                        CoreStrings.IncompatibleSentinelValue(
+                            sentinel, DeclaringType.DisplayName(), Name, ClrType.ShortDisplayName()));
+                }
+            }
+        }
 
         _sentinelConfigurationSource = configurationSource.Max(_sentinelConfigurationSource);
 
@@ -935,6 +963,20 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     /// </summary>
     public virtual ConfigurationSource? GetTypeMappingConfigurationSource()
         => _typeMappingConfigurationSource;
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public virtual IComparer<IUpdateEntry> CurrentValueComparer
+        => NonCapturingLazyInitializer.EnsureInitialized(
+            ref _currentValueComparer, this, static property =>
+            {
+                property.EnsureReadOnly();
+                return new CurrentValueComparerFactory().Create(property);
+            });
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1308,7 +1350,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IEnumerable<Key> GetContainingKeys()
-        => Keys ?? Enumerable.Empty<Key>();
+        => Keys?.OrderBy(k => k.Properties, PropertyListComparer.Instance) ?? Enumerable.Empty<Key>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1334,7 +1376,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IEnumerable<ForeignKey> GetContainingForeignKeys()
-        => ForeignKeys ?? Enumerable.Empty<ForeignKey>();
+        => ForeignKeys?.OrderBy(fk => fk.Properties, PropertyListComparer.Instance) ?? Enumerable.Empty<ForeignKey>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1360,7 +1402,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IEnumerable<Index> GetContainingIndexes()
-        => Indexes ?? Enumerable.Empty<Index>();
+        => Indexes?.OrderBy(i => i.Properties, PropertyListComparer.Instance) ?? Enumerable.Empty<Index>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1870,6 +1912,16 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         => SetProviderClrType(
             providerClrType,
             fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    [DebuggerStepThrough]
+    IComparer<IUpdateEntry> IProperty.GetCurrentValueComparer()
+        => CurrentValueComparer;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -213,12 +213,9 @@ public static class RelationalForeignKeyExtensions
     {
         var entityType = foreignKey.DeclaringEntityType;
         var primaryKey = entityType.FindPrimaryKey();
-        if (primaryKey == null || entityType.IsMappedToJson())
-        {
-            return false;
-        }
-
-        if (!foreignKey.PrincipalKey.IsPrimaryKey()
+        if (primaryKey == null
+            || entityType.IsMappedToJson()
+            || !foreignKey.PrincipalKey.IsPrimaryKey()
             || foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
             || !foreignKey.Properties.SequenceEqual(primaryKey.Properties)
             || !IsMapped(foreignKey, storeObject))
@@ -273,7 +270,7 @@ public static class RelationalForeignKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IConventionForeignKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IForeignKey" /> that is mapped to the same constraint in a shared table-like object.
     ///     </para>
     ///     <para>
     ///         This method is typically used by database providers (and other extensions). It is generally

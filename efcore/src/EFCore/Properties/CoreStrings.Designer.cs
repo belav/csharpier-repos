@@ -131,7 +131,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 attribute, type, propertyName);
 
         /// <summary>
-        ///     Cycle detected while auto-including navigations: {cycleNavigations}. To fix this issue, either don't configure at least one navigation in the cycle as auto included in `OnModelCreating` or call 'IgnoreAutoInclude' method on the query.
+        ///     Cycle detected while auto-including navigations: {cycleNavigations}. To fix this issue, either don't configure at least one navigation in the cycle as auto included in 'OnModelCreating' or call 'IgnoreAutoInclude' method on the query.
         /// </summary>
         public static string AutoIncludeNavigationCycle(object? cycleNavigations)
             => string.Format(
@@ -393,7 +393,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 entityType, derivedType);
 
         /// <summary>
-        ///     The entity type '{entityType}' cannot be configured as owned because it has already been configured as a non-owned. If you want to override previous configuration first remove the entity type from the model by calling 'Ignore'.  See https://aka.ms/efcore-docs-owned for more information and examples.
+        ///     The entity type '{entityType}' cannot be configured as owned because it has already been configured as a non-owned. If the entity type should be owned remove the 'Entity&lt;{entityType}&gt;()' call if possible, or otherwise remove the entity type from the model by calling 'Ignore'. See https://aka.ms/efcore-docs-owned for more information and examples.
         /// </summary>
         public static string ClashingNonOwnedEntityType(object? entityType)
             => string.Format(
@@ -417,7 +417,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 entityType, derivedType);
 
         /// <summary>
-        ///     The entity type '{entityType}' cannot be configured as non-owned because it has already been configured as a owned. Use the nested builder in `OwnsOne` or `OwnsMany` on the owner entity type builder to further configure this type. If you want to override previous configuration first remove the entity type from the model by calling 'Ignore'. See https://aka.ms/efcore-docs-owned for more information and examples.
+        ///     The entity type '{entityType}' cannot be configured as non-owned because it has already been configured as a owned. Use the nested builder in 'OwnsOne' or 'OwnsMany' on the owner entity type builder to further configure this type. If the entity type shouldn't be owned and you are unable to remove the 'OwnsOne' or 'OwnsMany' call you can remove the entity type from the model by calling 'Ignore'. See https://aka.ms/efcore-docs-owned for more information and examples.
         /// </summary>
         public static string ClashingOwnedEntityType(object? entityType)
             => string.Format(
@@ -781,7 +781,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 dependentEntityType, principalEntityType, entityType);
 
         /// <summary>
-        ///     Unable to set a base type for entity type '{entityType}' because it has been configured as keyless.
+        ///     Unable to set a base type for entity type '{entityType}' because it has been configured as keyless. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.
         /// </summary>
         public static string DerivedEntityCannotBeKeyless(object? entityType)
             => string.Format(
@@ -805,7 +805,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 baseEntityType, derivedEntityType, ownedEntityType, nonOwnedEntityType);
 
         /// <summary>
-        ///     '{derivedType}' cannot be configured as keyless because it is a derived type; the root type '{rootType}' must be configured as keyless instead. If you did not intend for '{rootType}' to be included in the model, ensure that it is not referenced by a DbSet property on your context, referenced in a configuration call to ModelBuilder in 'OnModelCreating', or referenced from a navigation on a type that is included in the model.
+        ///     '{derivedType}' cannot be configured as keyless because it is a derived type; the root type '{rootType}' must be configured as keyless instead. If you did not intend for '{rootType}' to be included in the model, ensure that it is not referenced by a DbSet property on your context, referenced in a configuration call to ModelBuilder in 'OnModelCreating', or referenced from a navigation on a type that is included in the model. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.
         /// </summary>
         public static string DerivedEntityTypeHasNoKey(object? derivedType, object? rootType)
             => string.Format(
@@ -965,6 +965,30 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 trigger, entityType, conflictingEntityType);
 
         /// <summary>
+        ///     The EF.Constant&lt;T&gt; method may only be used within Entity Framework LINQ queries.
+        /// </summary>
+        public static string EFConstantInvoked
+            => GetString("EFConstantInvoked");
+
+        /// <summary>
+        ///     The EF.Constant&lt;T&gt; method may only be used with an argument that can be evaluated client-side and does not contain any reference to database-side entities.
+        /// </summary>
+        public static string EFConstantWithNonEvaluableArgument
+            => GetString("EFConstantWithNonEvaluableArgument");
+
+        /// <summary>
+        ///     The EF.Parameter&lt;T&gt; method may only be used within Entity Framework LINQ queries.
+        /// </summary>
+        public static string EFParameterInvoked
+            => GetString("EFParameterInvoked");
+
+        /// <summary>
+        ///     The EF.Parameter&lt;T&gt; method may only be used with an argument that can be evaluated client-side and does not contain any reference to database-side entities.
+        /// </summary>
+        public static string EFParameterWithNonEvaluableArgument
+            => GetString("EFParameterWithNonEvaluableArgument");
+
+        /// <summary>
         ///     Complex type '{complexType}' has no properties defines. Configure at least one property or don't include this type in the model.
         /// </summary>
         public static string EmptyComplexType(object? complexType)
@@ -981,7 +1005,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 comparisonOperator, entityType);
 
         /// <summary>
-        ///     Cannot translate the '{comparisonOperator}' on an expression of entity type '{entityType}' because it is a keyless entity. Consider using entity properties instead.
+        ///     Cannot translate the '{comparisonOperator}' on an expression of entity type '{entityType}' because it is a keyless entity. Consider using entity properties instead. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.
         /// </summary>
         public static string EntityEqualityOnKeylessEntityNotSupported(object? comparisonOperator, object? entityType)
             => string.Format(
@@ -1334,6 +1358,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 navigationName, inverseNavigationName);
 
         /// <summary>
+        ///     The sentinel value '{sentinel}' is not assignable to the property '{entityType}.{property}' of type '{type}'.
+        /// </summary>
+        public static string IncompatibleSentinelValue(object? sentinel, object? entityType, object? property, object? type)
+            => string.Format(
+                GetString("IncompatibleSentinelValue", nameof(sentinel), nameof(entityType), nameof(property), nameof(type)),
+                sentinel, entityType, property, type);
+
+        /// <summary>
         ///     Incompatible sources used for set operation.
         /// </summary>
         public static string IncompatibleSourcesForSetOperation
@@ -1512,7 +1544,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 replaceService, useInternalServiceProvider);
 
         /// <summary>
-        ///     The invoked method cannot be used for the entity type '{entityType}' because it does not have a primary key.
+        ///     The invoked method cannot be used for the entity type '{entityType}' because it does not have a primary key. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.
         /// </summary>
         public static string InvalidSetKeylessOperation(object? entityType)
             => string.Format(
@@ -1620,6 +1652,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </summary>
         public static string IQueryableProviderNotAsync
             => GetString("IQueryableProviderNotAsync");
+
+        /// <summary>
+        ///     Invalid token type: '{tokenType}'.
+        /// </summary>
+        public static string JsonReaderInvalidTokenType(object? tokenType)
+            => string.Format(
+                GetString("JsonReaderInvalidTokenType", nameof(tokenType)),
+                tokenType);
 
         /// <summary>
         ///     The derived type '{derivedType}' cannot have the [Key] attribute on property '{property}' since primary keys may only be declared on the root type. Move the property '{property}' to '{rootType}' or remove '{rootType}' from the model by using [NotMapped] attribute or calling 'EntityTypeBuilder.Ignore' on the base type in 'OnModelCreating'.
@@ -1920,7 +1960,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 navigation, entityType, clrType, targetType);
 
         /// <summary>
-        ///     The navigation '{navigation}' cannot be added because it targets the keyless entity type '{entityType}'. Navigations can only target entity types with keys.
+        ///     The navigation '{navigation}' cannot be added because it targets the keyless entity type '{entityType}'. Navigations can only target entity types with keys. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.
         /// </summary>
         public static string NavigationToKeylessType(object? navigation, object? entityType)
             => string.Format(
@@ -1960,7 +2000,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 entityType);
 
         /// <summary>
-        ///     The entity type '{entityType}' is part of a hierarchy, but does not have a discriminator value configured.
+        ///     The entity type '{entityType}' has a discriminator property, but does not have a discriminator value configured.
         /// </summary>
         public static string NoDiscriminatorValue(object? entityType)
             => string.Format(
@@ -2184,10 +2224,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 type, property);
 
         /// <summary>
-        ///     The object has been removed from the model.
+        ///     The object '{name}' has been removed from the model.
         /// </summary>
-        public static string ObjectRemovedFromModel
-            => GetString("ObjectRemovedFromModel");
+        public static string ObjectRemovedFromModel(object? name)
+            => string.Format(
+                GetString("ObjectRemovedFromModel", nameof(name)),
+                name);
 
         /// <summary>
         ///     Options extension of type '{optionsExtension}' not found.
@@ -2290,7 +2332,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 dependentEntityType, principalEntityType, entityType);
 
         /// <summary>
-        ///     The keyless entity type '{entityType}' cannot be on the principal end of the relationship between '{firstNavigationSpecification}' and '{secondNavigationSpecification}'. The principal entity type must have a key.
+        ///     The keyless entity type '{entityType}' cannot be on the principal end of the relationship between '{firstNavigationSpecification}' and '{secondNavigationSpecification}'. The principal entity type must have a key. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.
         /// </summary>
         public static string PrincipalKeylessType(object? entityType, object? firstNavigationSpecification, object? secondNavigationSpecification)
             => string.Format(
