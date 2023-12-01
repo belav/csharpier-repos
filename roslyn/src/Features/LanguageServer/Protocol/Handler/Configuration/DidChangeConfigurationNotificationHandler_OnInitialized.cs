@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
                         methodName: Methods.ClientRegisterCapabilityName,
                         @params: new RegistrationParams()
                         {
-                            Registrations = [
+                            Registrations =
+                            [
                                 new Registration
                                 {
                                     Id = _registrationId.ToString(),

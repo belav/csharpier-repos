@@ -174,7 +174,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                             CodeDescription = ProtocolConversions.HelpLinkToCodeDescription(
                                 d.GetHelpLinkUri()
                             ),
-                            Projects = [
+                            Projects =
+                            [
                                 new VSDiagnosticProjectInformation
                                 {
                                     ProjectIdentifier = project.Id.Id.ToString(),

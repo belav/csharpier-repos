@@ -179,7 +179,8 @@ internal sealed class CodeLensHandler
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments = [
+                    Arguments =
+                    [
                         new RunTestsParams(
                             textDocumentIdentifier,
                             range,
@@ -197,7 +198,8 @@ internal sealed class CodeLensHandler
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments = [
+                    Arguments =
+                    [
                         new RunTestsParams(
                             textDocumentIdentifier,
                             range,
@@ -223,7 +225,8 @@ internal sealed class CodeLensHandler
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments = [
+                    Arguments =
+                    [
                         new RunTestsParams(
                             textDocumentIdentifier,
                             range,
@@ -241,7 +244,8 @@ internal sealed class CodeLensHandler
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments = [
+                    Arguments =
+                    [
                         new RunTestsParams(
                             textDocumentIdentifier,
                             range,

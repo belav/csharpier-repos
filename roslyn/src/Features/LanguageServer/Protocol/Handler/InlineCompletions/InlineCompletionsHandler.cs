@@ -178,7 +178,8 @@ internal partial class InlineCompletionsHandler
 
         return new VSInternalInlineCompletionList
         {
-            Items = [
+            Items =
+            [
                 new VSInternalInlineCompletionItem
                 {
                     Range = ProtocolConversions.TextSpanToRange(wordOnLeft.Value, sourceText),
