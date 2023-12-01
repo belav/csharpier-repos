@@ -446,7 +446,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 new[] { baseSource },
                 modules: [module1, module1],
                 methodVersions: [1, 1],
-                flags: [
+                flags:
+                [
                     ActiveStatementFlags.MethodUpToDate | ActiveStatementFlags.NonLeafFrame, // F1
                     ActiveStatementFlags.MethodUpToDate | ActiveStatementFlags.LeafFrame, // F2
                 ]
@@ -642,7 +643,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 new[] { markedSourceV1 },
                 modules: [module1, module1, module1, module1],
                 methodVersions: [2, 2, 1, 1], // method F3 and F4 were not remapped
-                flags: [
+                flags:
+                [
                     ActiveStatementFlags.MethodUpToDate | ActiveStatementFlags.NonLeafFrame, // F1
                     ActiveStatementFlags.MethodUpToDate | ActiveStatementFlags.NonLeafFrame, // F2
                     ActiveStatementFlags.None | ActiveStatementFlags.NonLeafFrame, // F3
@@ -929,7 +931,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 markedSources,
                 methodRowIds: [1, 2],
                 ilOffsets: [1, 1],
-                flags: [
+                flags:
+                [
                     ActiveStatementFlags.NonLeafFrame
                         | ActiveStatementFlags.NonUserCode
                         | ActiveStatementFlags.PartiallyExecuted

@@ -82,7 +82,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             else
             {
                 Assert.NotNull(clientProvider);
-                clientProvider!.AdditionalRemoteParts = [
+                clientProvider!.AdditionalRemoteParts =
+                [
                     typeof(MockEditAndContinueWorkspaceService)
                 ];
                 clientProvider!.ExcludedRemoteParts = [typeof(EditAndContinueService)];

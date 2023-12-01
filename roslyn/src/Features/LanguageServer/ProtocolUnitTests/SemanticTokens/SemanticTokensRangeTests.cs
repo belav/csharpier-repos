@@ -51,7 +51,8 @@ static class C { }
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                               | Modifier
                     0,
                     0,
@@ -87,7 +88,8 @@ static class C { }
             }
             else
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                               | Modifier
                     0,
                     0,
@@ -203,7 +205,8 @@ var z = 1;
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                               | Modifier
                     12,
                     0,
@@ -249,7 +252,8 @@ var z = 1;
             }
             else
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                               | Modifier
                     12,
                     0,
@@ -337,7 +341,8 @@ static class C { }
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                               | Modifier
                     1,
                     0,
@@ -368,7 +373,8 @@ static class C { }
             }
             else
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                               | Modifier
                     1,
                     0,
@@ -443,7 +449,8 @@ three */ }
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                               | Modifier
                     0,
                     0,
@@ -484,7 +491,8 @@ three */ }
             }
             else
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                               | Modifier
                     0,
                     0,
@@ -574,7 +582,8 @@ three"";
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                                         | Modifier
                     0,
                     0,
@@ -670,7 +679,8 @@ three"";
             }
             else
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                                         | Modifier
                     0,
                     0,
@@ -815,7 +825,8 @@ class C
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                                         | Modifier
                     0,
                     0,
@@ -976,7 +987,8 @@ class C
             }
             else
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                                         | Modifier
                     0,
                     0,
@@ -1185,7 +1197,8 @@ class C
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                                         | Modifier
                     0,
                     0,
@@ -1376,7 +1389,8 @@ class C
             }
             else
             {
-                expectedResults.Data = [
+                expectedResults.Data =
+                [
                     // Line | Char | Len | Token type                                                                         | Modifier
                     0,
                     0,

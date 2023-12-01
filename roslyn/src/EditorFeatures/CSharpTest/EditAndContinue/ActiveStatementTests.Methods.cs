@@ -56,7 +56,8 @@ class C
                 [
                     DocumentResults(
                         active,
-                        diagnostics: [
+                        diagnostics:
+                        [
                             Diagnostic(
                                 RudeEditKind.DeleteActiveStatement,
                                 "class C",
@@ -96,7 +97,8 @@ class C
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.ChangingNameOrSignatureOfActiveMember,
                         "static void Boo(int a)",
@@ -312,7 +314,8 @@ class C
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "static void Swap<T>(T lhs, T rhs)",
@@ -640,7 +643,8 @@ class C
                 [
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcA1, srcA2),
-                        semanticEdits: [
+                        semanticEdits:
+                        [
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart,
@@ -650,7 +654,8 @@ class C
                     ),
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcB1, srcB2),
-                        semanticEdits: [
+                        semanticEdits:
+                        [
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart,
@@ -677,7 +682,8 @@ class C
                 [
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcA1, srcA2),
-                        diagnostics: [
+                        diagnostics:
+                        [
                             Diagnostic(
                                 RudeEditKind.DeleteActiveStatement,
                                 "char x",
@@ -711,7 +717,8 @@ class C
                     ),
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcB1, srcB2),
-                        diagnostics: [
+                        diagnostics:
+                        [
                             Diagnostic(
                                 RudeEditKind.DeleteActiveStatement,
                                 "byte x",
@@ -1078,7 +1085,8 @@ class C<T>
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "set",
@@ -1205,7 +1213,8 @@ class C<T>
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "get",
@@ -1333,7 +1342,8 @@ class C<T>
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "set",
@@ -1456,7 +1466,8 @@ class C<T>
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "get",

@@ -577,7 +577,8 @@ class C<T>
 
             edits.VerifyLineEdits(
                 Array.Empty<SequencePointUpdates>(),
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "/******//*edit*/",
@@ -623,7 +624,8 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(
                 Array.Empty<SequencePointUpdates>(),
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "/******/",
@@ -740,7 +742,8 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(
                 Array.Empty<SequencePointUpdates>(),
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.StackAllocUpdate,
                         "stackalloc bool[64]",
@@ -791,7 +794,8 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(
                 Array.Empty<SequencePointUpdates>(),
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.StackAllocUpdate,
                         "stackalloc bool[64]",
@@ -1338,7 +1342,8 @@ class C<T>
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(
                 Array.Empty<SequencePointUpdates>(),
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "base",
@@ -1586,7 +1591,8 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(
                 Array.Empty<SequencePointUpdates>(),
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(RudeEditKind.Move, "static int Bar = 2", FeaturesResources.field)
                 ]
             );
@@ -1904,7 +1910,8 @@ class C<T>
 
             edits.VerifyLineEdits(
                 Array.Empty<SequencePointUpdates>(),
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "/**/",
@@ -2837,7 +2844,8 @@ class C { static void F<T>() { } }";
 
             edits.VerifyLineEdits(
                 Array.Empty<SequencePointUpdates>(),
-                diagnostics: [
+                diagnostics:
+                [
                     Diagnostic(
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "{",

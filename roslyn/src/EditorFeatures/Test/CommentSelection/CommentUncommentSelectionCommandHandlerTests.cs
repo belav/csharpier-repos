@@ -191,7 +191,8 @@ class Goo
                 expectedSelectedSpans: new[] { new Span(0, 39) }
             );
 
-            expectedChanges = [
+            expectedChanges =
+            [
                 new TextChange(new TextSpan(0, 0), "//"),
                 new TextChange(new TextSpan(11, 0), "//"),
                 new TextChange(new TextSpan(16, 0), "//"),

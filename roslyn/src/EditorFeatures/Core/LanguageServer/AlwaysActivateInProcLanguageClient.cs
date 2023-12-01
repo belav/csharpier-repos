@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                         SupportsMultipleContextsDiagnostics = true
                     };
                 serverCapabilities.DiagnosticProvider ??= new();
-                serverCapabilities.DiagnosticProvider.DiagnosticKinds = [
+                serverCapabilities.DiagnosticProvider.DiagnosticKinds =
+                [
                     // Support a specialized requests dedicated to task-list items.  This way the client can ask just
                     // for these, independently of other diagnostics.  They can also throttle themselves to not ask if
                     // the task list would not be visible.
