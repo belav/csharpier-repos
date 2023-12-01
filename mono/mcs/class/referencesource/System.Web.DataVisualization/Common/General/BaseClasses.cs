@@ -6,11 +6,11 @@
 // @owner=alexgor, deliant, victark
 
 using System;
-using System.Text;
-using System.Globalization;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Text;
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting
@@ -18,19 +18,24 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-
     /// <summary>
-    /// ChartElement is the most basic element of the chart element hierarchy. 
+    /// ChartElement is the most basic element of the chart element hierarchy.
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public abstract class ChartElement : IChartElement, IDisposable
     {
         #region Member variables
 
-        private IChartElement  _parent = null;
+        private IChartElement _parent = null;
         private CommonElements _common = null;
         private object _tag = null;
 
@@ -48,10 +53,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This property may be used to store additional data with this chart element.
         /// </remarks>
         [
-        Browsable(false),
-        DefaultValue(null),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        Utilities.SerializationVisibilityAttribute(Utilities.SerializationVisibility.Hidden)
+            Browsable(false),
+            DefaultValue(null),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            Utilities.SerializationVisibilityAttribute(Utilities.SerializationVisibility.Hidden)
         ]
         public object Tag
         {
@@ -83,10 +88,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 return _common;
             }
-            set
-            {
-                _common = value;
-            }
+            set { _common = value; }
         }
 
         /// <summary>
@@ -111,9 +113,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartElement"/> class.
         /// </summary>
-        protected ChartElement()
-        {
-        }
+        protected ChartElement() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartElement"/> class.
@@ -131,7 +131,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Invalidates this chart element.
         /// </summary>
-        internal virtual void Invalidate() 
+        internal virtual void Invalidate()
         {
             if (_parent != null)
                 _parent.Invalidate();
@@ -155,7 +155,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         CommonElements IChartElement.Common
         {
-            get{ return this.Common; }
+            get { return this.Common; }
         }
 
         #endregion
@@ -166,14 +166,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         /// <summary>
         /// Performs freeing, releasing, or resetting managed resources.
         /// </summary>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]        
+        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
         public void Dispose()
         {
             this.Dispose(true);
@@ -249,15 +247,20 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         #endregion
-
     }
-    
+
     /// <summary>
     /// ChartNamedElement is a base class for most chart elements. Series, ChartAreas, Legends and other chart elements have a Name and reuse the unique name generation and validation logic provided by the ChartNamedElementCollection.
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public abstract class ChartNamedElement : ChartElement
     {
@@ -274,22 +277,31 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <value>The name.</value>
         [DefaultValue("")]
-        public virtual string Name 
+        public virtual string Name
         {
             get { return _name; }
-            set 
+            set
             {
                 if (_name != value)
                 {
                     if (Parent is INameController)
                     {
                         INameController nameController = Parent as INameController;
-                        
+
                         if (!nameController.IsUniqueName(value))
-                            throw new ArgumentException(SR.ExceptionNameAlreadyExistsInCollection(value, nameController.GetType().Name));
-                        
+                            throw new ArgumentException(
+                                SR.ExceptionNameAlreadyExistsInCollection(
+                                    value,
+                                    nameController.GetType().Name
+                                )
+                            );
+
                         // Fire the name change events in case when the old name is not empty
-                        NameReferenceChangedEventArgs args = new NameReferenceChangedEventArgs(this, _name, value);
+                        NameReferenceChangedEventArgs args = new NameReferenceChangedEventArgs(
+                            this,
+                            _name,
+                            value
+                        );
                         nameController.OnNameReferenceChanging(args);
                         _name = value;
                         nameController.OnNameReferenceChanged(args);
@@ -311,9 +323,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Initializes a new instance of the <see cref="ChartNamedElement"/> class.
         /// </summary>
         protected ChartNamedElement()
-            : base()
-        { 
-        }
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartNamedElement"/> class.
@@ -330,7 +340,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="parent">The parent chart element.</param>
         /// <param name="name">The name of the new chart element.</param>
-        internal ChartNamedElement(IChartElement parent, string name) : base(parent)
+        internal ChartNamedElement(IChartElement parent, string name)
+            : base(parent)
         {
             _name = name;
         }
@@ -350,11 +361,9 @@ namespace System.Web.UI.DataVisualization.Charting
             string typeName = GetType().Name;
             return (string.IsNullOrEmpty(_name)) ? typeName : typeName + '-' + _name;
         }
-        
+
         #endregion
-
     }
-
 
     /// <summary>
     /// NameReferenceChanged events help chart maintain referencial integrity.
@@ -385,13 +394,21 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
 
         #region Constructor
-        public NameReferenceChangedEventArgs(ChartNamedElement oldElement, ChartNamedElement newElement)
+        public NameReferenceChangedEventArgs(
+            ChartNamedElement oldElement,
+            ChartNamedElement newElement
+        )
         {
             _oldElement = oldElement;
-            _oldName = oldElement!=null ? oldElement.Name : string.Empty;
-            _newName = newElement!=null ? newElement.Name : string.Empty;
+            _oldName = oldElement != null ? oldElement.Name : string.Empty;
+            _newName = newElement != null ? newElement.Name : string.Empty;
         }
-        public NameReferenceChangedEventArgs(ChartNamedElement oldElement, string oldName, string newName)
+
+        public NameReferenceChangedEventArgs(
+            ChartNamedElement oldElement,
+            string oldName,
+            string newName
+        )
         {
             _oldElement = oldElement;
             _oldName = oldName;
@@ -399,5 +416,4 @@ namespace System.Web.UI.DataVisualization.Charting
         }
         #endregion
     }
-
 }

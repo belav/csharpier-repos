@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UsePrimaryConstructo
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUsePrimaryConstructorDiagnosticAnalyzer,
-    CSharpUsePrimaryConstructorCodeFixProvider>;
+    CSharpUsePrimaryConstructorCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUsePrimaryConstructor)]
 public partial class UsePrimaryConstructorTests

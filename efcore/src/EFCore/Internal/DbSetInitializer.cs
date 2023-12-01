@@ -20,9 +20,7 @@ public class DbSetInitializer : IDbSetInitializer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public DbSetInitializer(
-        IDbSetFinder setFinder,
-        IDbSetSource setSource)
+    public DbSetInitializer(IDbSetFinder setFinder, IDbSetSource setSource)
     {
         _setFinder = setFinder;
         _setSource = setSource;
@@ -38,9 +36,9 @@ public class DbSetInitializer : IDbSetInitializer
     {
         foreach (var setInfo in _setFinder.FindSets(context.GetType()).Where(p => p.Setter != null))
         {
-            setInfo.Setter!.SetClrValue(
-                context,
-                ((IDbSetCache)context).GetOrAddSet(_setSource, setInfo.Type));
+            setInfo
+                .Setter!
+                .SetClrValue(context, ((IDbSetCache)context).GetOrAddSet(_setSource, setInfo.Type));
         }
     }
 }

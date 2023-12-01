@@ -6,9 +6,9 @@
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.Completion.Providers;
+using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class PartialMethodCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(PartialMethodCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(PartialMethodCompletionProvider);
 
         [Fact]
         public async Task NoPartialMethods1()
@@ -422,7 +422,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -449,7 +453,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -476,7 +484,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(T bar)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(T bar)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -503,7 +515,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(T bar)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(T bar)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -530,7 +546,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -557,7 +577,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -590,7 +614,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -623,7 +651,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -650,7 +682,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [Fact]
@@ -750,7 +786,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578078")]
@@ -782,7 +822,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578078")]
@@ -814,7 +858,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Goo()", expectedCodeAfterCommit, commitChar: '(');
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Goo()",
+                expectedCodeAfterCommit,
+                commitChar: '('
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/965677")]
@@ -890,9 +939,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var workspace = workspaceFixture.Target.GetWorkspace(GetComposition());
-            workspace.GlobalOptions.SetGlobalOption(
-                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
-                new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent));
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    new CodeStyleOption2<ExpressionBodyPreference>(
+                        ExpressionBodyPreference.WhenPossible,
+                        NotificationOption2.Silent
+                    )
+                );
 
             var text = """
                 using System;
@@ -901,8 +956,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     partial void Foo();
                     partial $$
                 }
-                """
-;
+                """;
 
             var expected = """
                 using System;
@@ -911,8 +965,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     partial void Foo();
                     partial void Foo() => throw new NotImplementedException();$$
                 }
-                """
-;
+                """;
 
             await VerifyCustomCommitProviderAsync(text, "Foo()", expected);
         }
@@ -923,9 +976,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var workspace = workspaceFixture.Target.GetWorkspace(GetComposition());
-            workspace.GlobalOptions.SetGlobalOption(
-                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
-                new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent));
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    new CodeStyleOption2<ExpressionBodyPreference>(
+                        ExpressionBodyPreference.WhenPossible,
+                        NotificationOption2.Silent
+                    )
+                );
 
             var text = """
                 using System;
@@ -934,8 +993,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     public partial void Foo();
                     partial $$
                 }
-                """
-;
+                """;
 
             var expected = """
                 using System;
@@ -944,8 +1002,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     public partial void Foo();
                     public partial void Foo() => throw new NotImplementedException();$$
                 }
-                """
-;
+                """;
 
             await VerifyCustomCommitProviderAsync(text, "Foo()", expected);
         }

@@ -3,12 +3,11 @@
 //------------------------------------------------------------
 namespace System.Workflow.Activities.Design
 {
-
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Drawing;
     using System.Data;
+    using System.Drawing;
     using System.Text;
     using System.Windows.Forms;
 
@@ -27,7 +26,7 @@ namespace System.Workflow.Activities.Design
             set
             {
                 item = value;
-                ServiceOperationListItem listItem = (ServiceOperationListItem) value;
+                ServiceOperationListItem listItem = (ServiceOperationListItem)value;
                 this.operationNameLabel.Text = listItem.Name;
                 if (listItem.ImplementingActivities.Count > 0)
                 {
@@ -42,7 +41,6 @@ namespace System.Workflow.Activities.Design
 
         public override void UpdateView()
         {
-
             bool focused = (this.DrawItemState & DrawItemState.Focus) == DrawItemState.Focus;
             bool selected = (this.DrawItemState & DrawItemState.Selected) == DrawItemState.Selected;
             this.Height = this.operationNameLabel.Height;
@@ -71,6 +69,5 @@ namespace System.Workflow.Activities.Design
             }
             base.UpdateView();
         }
-
     }
 }

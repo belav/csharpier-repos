@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Moq.Matchers
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class AnyMatcher : IMatcher
@@ -31,7 +30,6 @@ namespace Moq.Matchers
     {
         public static AnyMatcher Instance { get; } = new AnyMatcher();
 
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                 private AnyMatcher()
@@ -52,9 +50,7 @@ namespace Moq.Matchers
         After:
                 AnyMatcher()
         */
-        AnyMatcher()
-        {
-        }
+        AnyMatcher() { }
 
         public bool Matches(object argument, Type parameterType) => true;
 

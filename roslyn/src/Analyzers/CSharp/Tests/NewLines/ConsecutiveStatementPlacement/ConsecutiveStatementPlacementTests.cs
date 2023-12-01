@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveStatementPlacement;
+using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement;
 using Xunit;
@@ -13,15 +13,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
 {
     using Verify = CSharpCodeFixVerifier<
         CSharpConsecutiveStatementPlacementDiagnosticAnalyzer,
-        ConsecutiveStatementPlacementCodeFixProvider>;
+        ConsecutiveStatementPlacementCodeFixProvider
+    >;
 
     public class ConsecutiveStatementPlacementTests
     {
         [Fact]
         public async Task TestNotAfterPropertyBlock()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     int X { get; }
@@ -33,15 +33,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterMethodBlock()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void X() { }
@@ -53,15 +58,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnSingleLine()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -75,15 +85,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnSingleLineWithComment()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -97,15 +112,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnMultipleLinesWithCommentBetween1()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -122,15 +142,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnMultipleLinesWithCommentBetween2()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -147,15 +172,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsWithSingleBlankLines()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -173,15 +203,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsWithSingleBlankLinesWithSpaces()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -199,15 +234,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsWithMultipleBlankLines()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -225,15 +265,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnMultipleLinesWithPPDirectiveBetween1()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -251,15 +296,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotBetweenBlockAndElseClause()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -278,15 +328,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotBetweenBlockAndOuterBlocker()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -304,15 +359,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotBetweenBlockAndCase()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -334,7 +394,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -368,7 +434,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     }
                 }
                 """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -392,7 +464,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -426,7 +504,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     }
                 }
                 """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -460,7 +544,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     }
                 }
                 """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -490,7 +580,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     }
                 }
                 """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -528,7 +624,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     }
                 }
                 """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -571,7 +673,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     }
                 }
                 """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -942,7 +1050,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -1131,7 +1245,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     }
                 }
                 """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
     }

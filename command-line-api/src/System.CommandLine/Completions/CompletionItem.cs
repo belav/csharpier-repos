@@ -24,7 +24,8 @@ namespace System.CommandLine.Completions
             string? sortText = null,
             string? insertText = null,
             string? documentation = null,
-            string? detail = null)
+            string? detail = null
+        )
         {
             Label = label ?? throw new ArgumentNullException(nameof(label));
             Kind = kind ?? throw new ArgumentException(nameof(kind));

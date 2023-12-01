@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpAsAndMemberAccessDiagnosticAnalyzer,
-        CSharpAsAndMemberAccessCodeFixProvider>;
+        CSharpAsAndMemberAccessCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternMatchingForAsAndMemberAccess)]
     public partial class CSharpAsAndMemberAccessTests

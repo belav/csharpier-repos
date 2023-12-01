@@ -1353,7 +1353,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         output.AppendLine();
                     }
                     """;
-                await TestExtractMethodAsync(code, expected, parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script));
+                await TestExtractMethodAsync(
+                    code,
+                    expected,
+                    parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             }
 
             [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544920")]
@@ -2076,7 +2080,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/3147")]
         public async Task HandleFormattableStringTargetTyping1()
         {
-            const string code = CodeSnippets.FormattableStringType + """
+            const string code =
+                CodeSnippets.FormattableStringType
+                + """
                 namespace N
                 {
                     using System;
@@ -2091,7 +2097,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                 }
                 """;
 
-            const string expected = CodeSnippets.FormattableStringType + """
+            const string expected =
+                CodeSnippets.FormattableStringType
+                + """
                 namespace N
                 {
                     using System;

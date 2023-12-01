@@ -15,7 +15,14 @@ namespace System.Configuration
         private readonly string _settingKey;
         private readonly object _newValue;
 
-        public SettingChangingEventArgs(string settingName, string settingClass, string settingKey, object newValue, bool cancel) : base(cancel)
+        public SettingChangingEventArgs(
+            string settingName,
+            string settingClass,
+            string settingKey,
+            object newValue,
+            bool cancel
+        )
+            : base(cancel)
         {
             _settingName = settingName;
             _settingClass = settingClass;
@@ -25,34 +32,22 @@ namespace System.Configuration
 
         public object NewValue
         {
-            get
-            {
-                return _newValue;
-            }
+            get { return _newValue; }
         }
 
         public string SettingClass
         {
-            get
-            {
-                return _settingClass;
-            }
+            get { return _settingClass; }
         }
 
         public string SettingName
         {
-            get
-            {
-                return _settingName;
-            }
+            get { return _settingName; }
         }
 
         public string SettingKey
         {
-            get
-            {
-                return _settingKey;
-            }
+            get { return _settingKey; }
         }
     }
 }

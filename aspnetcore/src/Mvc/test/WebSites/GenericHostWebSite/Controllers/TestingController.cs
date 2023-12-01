@@ -23,7 +23,8 @@ public class TestingController : Controller
     public IActionResult RedirectHandler(
         [FromRoute] int value,
         [FromBody] Number number,
-        [FromHeader(Name = "X-Pass-Thru")] string passThruValue)
+        [FromHeader(Name = "X-Pass-Thru")] string passThruValue
+    )
     {
         Response.Headers.Add("X-Pass-Thru", passThruValue);
         if (value < number.Value)
@@ -31,7 +32,8 @@ public class TestingController : Controller
             return RedirectToActionPreserveMethod(
                 nameof(RedirectHandler),
                 "Testing",
-                new { value = value + 1 });
+                new { value = value + 1 }
+            );
         }
 
         return Ok(new RedirectHandlerResponse { Url = value, Body = number.Value });
@@ -99,9 +101,12 @@ public class TestingController : Controller
     [HttpGet("Testing/AntiforgerySimulator/{value}")]
     public IActionResult AntiforgerySimulator([FromRoute] int value)
     {
-        Response.Cookies.Append(
-            "AntiforgerySimulator",
-            $"Cookie-{value.ToString(CultureInfo.InvariantCulture)}");
+        Response
+            .Cookies
+            .Append(
+                "AntiforgerySimulator",
+                $"Cookie-{value.ToString(CultureInfo.InvariantCulture)}"
+            );
 
         return Ok();
     }
@@ -121,7 +126,9 @@ public class TestingController : Controller
         }
 
         TempData["Value"] = value + 1;
-        Response.Cookies.Append("Message", $"Value-{(value + 1).ToString(CultureInfo.InvariantCulture)}");
+        Response
+            .Cookies
+            .Append("Message", $"Value-{(value + 1).ToString(CultureInfo.InvariantCulture)}");
 
         return RedirectToAction(nameof(PostRedirectGetGet));
     }
@@ -129,11 +136,13 @@ public class TestingController : Controller
     [HttpGet("Testing/PostRedirectGet/Get/{value}")]
     public IActionResult PostRedirectGetGet([FromRoute] int value)
     {
-        return Ok(new PostRedirectGetGetResponse
-        {
-            TempDataValue = (int)TempData["Value"],
-            CookieValue = Request.Cookies["Message"]
-        });
+        return Ok(
+            new PostRedirectGetGetResponse
+            {
+                TempDataValue = (int)TempData["Value"],
+                CookieValue = Request.Cookies["Message"]
+            }
+        );
     }
 
     [HttpPut("Testing/Put/{value}")]
@@ -141,7 +150,11 @@ public class TestingController : Controller
     {
         if (value < 5)
         {
-            return RedirectToActionPermanentPreserveMethod(nameof(PutNoBody), "Testing", new { value = value + 1 });
+            return RedirectToActionPermanentPreserveMethod(
+                nameof(PutNoBody),
+                "Testing",
+                new { value = value + 1 }
+            );
         }
         else
         {

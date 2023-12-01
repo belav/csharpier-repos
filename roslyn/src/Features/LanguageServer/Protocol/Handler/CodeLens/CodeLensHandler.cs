@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeLens;
 
 [ExportCSharpVisualBasicStatelessLspService(typeof(CodeLensHandler)), Shared]
 [Method(LSP.Methods.TextDocumentCodeLensName)]
-internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.CodeLensParams, LSP.CodeLens[]?>
+internal sealed class CodeLensHandler
+    : ILspServiceDocumentRequestHandler<LSP.CodeLensParams, LSP.CodeLens[]?>
 {
     public const string RunTestsCommandIdentifier = "dotnet.test.run";
 
@@ -41,14 +42,24 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
 
     public bool RequiresLSPSolution => true;
 
-    public LSP.TextDocumentIdentifier GetTextDocumentIdentifier(LSP.CodeLensParams request)
-        => request.TextDocument;
+    public LSP.TextDocumentIdentifier GetTextDocumentIdentifier(LSP.CodeLensParams request) =>
+        request.TextDocument;
 
-    public async Task<LSP.CodeLens[]?> HandleRequestAsync(LSP.CodeLensParams request, RequestContext context, CancellationToken cancellationToken)
+    public async Task<LSP.CodeLens[]?> HandleRequestAsync(
+        LSP.CodeLensParams request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         var document = context.GetRequiredDocument();
-        var referencesCodeLensEnabled = _globalOptionService.GetOption(LspOptionsStorage.LspEnableReferencesCodeLens, document.Project.Language);
-        var testsCodeLensEnabled = _globalOptionService.GetOption(LspOptionsStorage.LspEnableTestsCodeLens, document.Project.Language);
+        var referencesCodeLensEnabled = _globalOptionService.GetOption(
+            LspOptionsStorage.LspEnableReferencesCodeLens,
+            document.Project.Language
+        );
+        var testsCodeLensEnabled = _globalOptionService.GetOption(
+            LspOptionsStorage.LspEnableTestsCodeLens,
+            document.Project.Language
+        );
 
         if (!referencesCodeLensEnabled && !testsCodeLensEnabled)
         {
@@ -57,7 +68,9 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
         }
 
         var codeLensMemberFinder = document.GetRequiredLanguageService<ICodeLensMemberFinder>();
-        var members = await codeLensMemberFinder.GetCodeLensMembersAsync(document, cancellationToken).ConfigureAwait(false);
+        var members = await codeLensMemberFinder
+            .GetCodeLensMembersAsync(document, cancellationToken)
+            .ConfigureAwait(false);
 
         if (members.IsEmpty)
         {
@@ -69,10 +82,21 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
 
         if (referencesCodeLensEnabled)
         {
-            await AddReferencesCodeLensAsync(codeLenses, members, document, text, request.TextDocument, cancellationToken).ConfigureAwait(false);
+            await AddReferencesCodeLensAsync(
+                    codeLenses,
+                    members,
+                    document,
+                    text,
+                    request.TextDocument,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        if (!_globalOptionService.GetOption(LspOptionsStorage.LspUsingDevkitFeatures) && testsCodeLensEnabled)
+        if (
+            !_globalOptionService.GetOption(LspOptionsStorage.LspUsingDevkitFeatures)
+            && testsCodeLensEnabled
+        )
         {
             // Only return test codelenses if we're not using devkit.
             AddTestCodeLens(codeLenses, members, document, text, request.TextDocument);
@@ -87,9 +111,12 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
         Document document,
         SourceText text,
         LSP.TextDocumentIdentifier textDocumentIdentifier,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var syntaxVersion = await document.GetSyntaxVersionAsync(cancellationToken).ConfigureAwait(false);
+        var syntaxVersion = await document
+            .GetSyntaxVersionAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         for (var i = 0; i < members.Length; i++)
         {
@@ -112,7 +139,8 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
         ImmutableArray<CodeLensMember> members,
         Document document,
         SourceText text,
-        LSP.TextDocumentIdentifier textDocumentIdentifier)
+        LSP.TextDocumentIdentifier textDocumentIdentifier
+    )
     {
         var testMethodFinder = document.GetLanguageService<ITestMethodFinder>();
         // The service is not implemented for all languages.
@@ -134,7 +162,9 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
 
         // Find any test container members based on the test method members we found (e.g. find the class containing the test methods).
         var testContainerNodes = testMethodMembers.Select(member => member.Node.Parent);
-        var testContainerMembers = members.Where(member => testContainerNodes.Contains(member.Node));
+        var testContainerMembers = members.Where(
+            member => testContainerNodes.Contains(member.Node)
+        );
 
         // Create code lenses for all test methods.
 
@@ -149,7 +179,10 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments = [new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: false, runSettingsPath)],
+                    Arguments =
+                    [
+                        new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: false, runSettingsPath)
+                    ],
                     Title = FeaturesResources.Run_Test
                 }
             };
@@ -160,7 +193,10 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments = [new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: true, runSettingsPath)],
+                    Arguments =
+                    [
+                        new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: true, runSettingsPath)
+                    ],
                     Title = FeaturesResources.Debug_Test
                 }
             };
@@ -179,7 +215,10 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments = [new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: false, runSettingsPath)],
+                    Arguments =
+                    [
+                        new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: false, runSettingsPath)
+                    ],
                     Title = FeaturesResources.Run_All_Tests
                 }
             };
@@ -190,7 +229,10 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments = [new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: true, runSettingsPath)],
+                    Arguments =
+                    [
+                        new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: true, runSettingsPath)
+                    ],
                     Title = FeaturesResources.Debug_All_Tests
                 }
             };
@@ -200,4 +242,3 @@ internal sealed class CodeLensHandler : ILspServiceDocumentRequestHandler<LSP.Co
         }
     }
 }
-

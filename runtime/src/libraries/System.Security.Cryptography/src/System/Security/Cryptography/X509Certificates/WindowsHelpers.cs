@@ -47,7 +47,9 @@ namespace Internal.Cryptography
                     }
                 }
 
-                SafeLocalAllocHandle safeLocalAllocHandle = SafeLocalAllocHandle.Create(allocationSize);
+                SafeLocalAllocHandle safeLocalAllocHandle = SafeLocalAllocHandle.Create(
+                    allocationSize
+                );
                 byte** pOidPointers = (byte**)(safeLocalAllocHandle.DangerousGetHandle());
                 byte* pOidContents = (byte*)(pOidPointers + oidStrings.Length);
 
@@ -57,7 +59,9 @@ namespace Internal.Cryptography
 
                     pOidPointers[i] = pOidContents;
 
-                    int bytesWritten = Encoding.ASCII.GetBytes(oidString, new Span<byte>(pOidContents, oidString.Length));
+                    int bytesWritten = Encoding
+                        .ASCII
+                        .GetBytes(oidString, new Span<byte>(pOidContents, oidString.Length));
                     Debug.Assert(bytesWritten == oidString.Length);
 
                     pOidContents[oidString.Length] = 0;
@@ -74,27 +78,43 @@ namespace Internal.Cryptography
             return Encoding.ASCII.GetBytes(oid.Value!);
         }
 
-        public unsafe delegate void DecodedObjectReceiver(void* pvDecodedObject, int cbDecodedObject);
-        public unsafe delegate TResult DecodedObjectReceiver<TResult>(void* pvDecodedObject, int cbDecodedObject);
-        public unsafe delegate TResult DecodedObjectReceiver<TState, TResult>(void* pvDecodedObject, int cbDecodedObject, TState state);
+        public unsafe delegate void DecodedObjectReceiver(
+            void* pvDecodedObject,
+            int cbDecodedObject
+        );
+        public unsafe delegate TResult DecodedObjectReceiver<TResult>(
+            void* pvDecodedObject,
+            int cbDecodedObject
+        );
+        public unsafe delegate TResult DecodedObjectReceiver<TState, TResult>(
+            void* pvDecodedObject,
+            int cbDecodedObject,
+            TState state
+        );
 
         public static TResult DecodeObject<TResult>(
             this byte[] encoded,
             CryptDecodeObjectStructType lpszStructType,
-            DecodedObjectReceiver<TResult> receiver)
+            DecodedObjectReceiver<TResult> receiver
+        )
         {
             unsafe
             {
                 int cb = 0;
 
-                if (!Interop.crypt32.CryptDecodeObjectPointer(
-                    Interop.Crypt32.CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    encoded.Length,
-                    Interop.Crypt32.CryptDecodeObjectFlags.None,
-                    null,
-                    ref cb))
+                if (
+                    !Interop
+                        .crypt32
+                        .CryptDecodeObjectPointer(
+                            Interop.Crypt32.CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            encoded.Length,
+                            Interop.Crypt32.CryptDecodeObjectFlags.None,
+                            null,
+                            ref cb
+                        )
+                )
                 {
                     throw Marshal.GetLastPInvokeError().ToCryptographicException();
                 }
@@ -109,14 +129,19 @@ namespace Internal.Cryptography
 
                 fixed (byte* pDecoded = decoded)
                 {
-                    if (!Interop.crypt32.CryptDecodeObjectPointer(
-                        Interop.Crypt32.CertEncodingType.All,
-                        lpszStructType,
-                        encoded,
-                        encoded.Length,
-                        Interop.Crypt32.CryptDecodeObjectFlags.None,
-                        pDecoded,
-                        ref cb))
+                    if (
+                        !Interop
+                            .crypt32
+                            .CryptDecodeObjectPointer(
+                                Interop.Crypt32.CertEncodingType.All,
+                                lpszStructType,
+                                encoded,
+                                encoded.Length,
+                                Interop.Crypt32.CryptDecodeObjectFlags.None,
+                                pDecoded,
+                                ref cb
+                            )
+                    )
                     {
                         throw Marshal.GetLastPInvokeError().ToCryptographicException();
                     }
@@ -129,18 +154,24 @@ namespace Internal.Cryptography
         public static unsafe TResult DecodeObject<TResult>(
             this byte[] encoded,
             string lpszStructType,
-            DecodedObjectReceiver<TResult> receiver)
+            DecodedObjectReceiver<TResult> receiver
+        )
         {
             int cb = 0;
 
-            if (!Interop.Crypt32.CryptDecodeObjectPointer(
-                Interop.Crypt32.CertEncodingType.All,
-                lpszStructType,
-                encoded,
-                encoded.Length,
-                Interop.Crypt32.CryptDecodeObjectFlags.None,
-                null,
-                ref cb))
+            if (
+                !Interop
+                    .Crypt32
+                    .CryptDecodeObjectPointer(
+                        Interop.Crypt32.CertEncodingType.All,
+                        lpszStructType,
+                        encoded,
+                        encoded.Length,
+                        Interop.Crypt32.CryptDecodeObjectFlags.None,
+                        null,
+                        ref cb
+                    )
+            )
             {
                 throw Marshal.GetLastPInvokeError().ToCryptographicException();
             }
@@ -155,14 +186,19 @@ namespace Internal.Cryptography
 
             fixed (byte* pDecoded = decoded)
             {
-                if (!Interop.Crypt32.CryptDecodeObjectPointer(
-                    Interop.Crypt32.CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    encoded.Length,
-                    Interop.Crypt32.CryptDecodeObjectFlags.None,
-                    pDecoded,
-                    ref cb))
+                if (
+                    !Interop
+                        .Crypt32
+                        .CryptDecodeObjectPointer(
+                            Interop.Crypt32.CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            encoded.Length,
+                            Interop.Crypt32.CryptDecodeObjectFlags.None,
+                            pDecoded,
+                            ref cb
+                        )
+                )
                 {
                     throw Marshal.GetLastPInvokeError().ToCryptographicException();
                 }
@@ -176,17 +212,23 @@ namespace Internal.Cryptography
             CryptDecodeObjectStructType lpszStructType,
             TState state,
             DecodedObjectReceiver<TState, TResult> receiver,
-            out TResult? result)
+            out TResult? result
+        )
         {
             int cb = 0;
 
-            if (!Interop.crypt32.CryptDecodeObjectPointer(
-                Interop.Crypt32.CertEncodingType.All,
-                lpszStructType,
-                encoded,
-                Interop.Crypt32.CryptDecodeObjectFlags.None,
-                null,
-                ref cb))
+            if (
+                !Interop
+                    .crypt32
+                    .CryptDecodeObjectPointer(
+                        Interop.Crypt32.CertEncodingType.All,
+                        lpszStructType,
+                        encoded,
+                        Interop.Crypt32.CryptDecodeObjectFlags.None,
+                        null,
+                        ref cb
+                    )
+            )
             {
                 result = default;
                 return false;
@@ -202,13 +244,18 @@ namespace Internal.Cryptography
 
             fixed (byte* pDecoded = decoded)
             {
-                if (!Interop.crypt32.CryptDecodeObjectPointer(
-                    Interop.Crypt32.CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    Interop.Crypt32.CryptDecodeObjectFlags.None,
-                    pDecoded,
-                    ref cb))
+                if (
+                    !Interop
+                        .crypt32
+                        .CryptDecodeObjectPointer(
+                            Interop.Crypt32.CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            Interop.Crypt32.CryptDecodeObjectFlags.None,
+                            pDecoded,
+                            ref cb
+                        )
+                )
                 {
                     result = default;
                     return false;

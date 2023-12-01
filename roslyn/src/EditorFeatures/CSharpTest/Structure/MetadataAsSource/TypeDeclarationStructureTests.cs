@@ -13,10 +13,13 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource;
 
 [Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
-public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<TypeDeclarationSyntax>
+public class TypeDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<TypeDeclarationSyntax>
 {
     protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new TypeDeclarationStructureProvider();
+
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new TypeDeclarationStructureProvider();
 
     [Fact]
     public async Task NoCommentsOrAttributes()
@@ -28,8 +31,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -44,9 +49,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|#0}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -62,9 +69,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|#0}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47889")]
@@ -80,9 +89,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|#0}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -98,9 +109,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|#0}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -114,9 +127,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|#0}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -133,8 +148,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|#0}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

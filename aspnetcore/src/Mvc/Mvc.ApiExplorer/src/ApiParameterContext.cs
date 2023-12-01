@@ -12,7 +12,8 @@ internal sealed class ApiParameterContext
     public ApiParameterContext(
         IModelMetadataProvider metadataProvider,
         ControllerActionDescriptor actionDescriptor,
-        IReadOnlyList<TemplatePart> routeParameters)
+        IReadOnlyList<TemplatePart> routeParameters
+    )
     {
         MetadataProvider = metadataProvider;
         ActionDescriptor = actionDescriptor;

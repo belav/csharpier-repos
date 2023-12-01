@@ -7,17 +7,14 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class TPTGearsOfWarQueryRelationalFixture : GearsOfWarQueryFixtureBase
 {
-    protected override string StoreName
-        => "TPTGearsOfWarQueryTest";
+    protected override string StoreName => "TPTGearsOfWarQueryTest";
 
-    public new RelationalTestStore TestStore
-        => (RelationalTestStore)base.TestStore;
+    public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected override bool ShouldLogCategory(string logCategory)
-        => logCategory == DbLoggerCategory.Query.Name;
+    protected override bool ShouldLogCategory(string logCategory) =>
+        logCategory == DbLoggerCategory.Query.Name;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
@@ -29,7 +26,8 @@ public abstract class TPTGearsOfWarQueryRelationalFixture : GearsOfWarQueryFixtu
 
         modelBuilder.Entity<LocustCommander>().ToTable("LocustCommanders");
 
-        modelBuilder.Entity<Squad>()
+        modelBuilder
+            .Entity<Squad>()
             .HasMany(s => s.Members)
             .WithOne(g => g.Squad)
             .HasForeignKey(g => g.SquadId)

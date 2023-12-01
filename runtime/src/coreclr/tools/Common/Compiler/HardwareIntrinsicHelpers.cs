@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.JitInterface;
 using Internal.TypeSystem;
 
@@ -16,10 +15,18 @@ namespace ILCompiler
         /// </summary>
         public static bool IsHardwareIntrinsic(MethodDesc method)
         {
-            return !string.IsNullOrEmpty(InstructionSetSupport.GetHardwareIntrinsicId(method.Context.Target.Architecture, method.OwningType));
+            return !string.IsNullOrEmpty(
+                InstructionSetSupport.GetHardwareIntrinsicId(
+                    method.Context.Target.Architecture,
+                    method.OwningType
+                )
+            );
         }
 
-        public static void AddRuntimeRequiredIsaFlagsToBuilder(InstructionSetSupportBuilder builder, int flags)
+        public static void AddRuntimeRequiredIsaFlagsToBuilder(
+            InstructionSetSupportBuilder builder,
+            int flags
+        )
         {
             switch (builder.Architecture)
             {
@@ -135,7 +142,8 @@ namespace ILCompiler
                 return instructionSet switch
                 {
                     // Optional ISAs - only available via opt-in or opportunistic light-up
-                    InstructionSet.X64_AES => Aes,
+                    InstructionSet.X64_AES
+                        => Aes,
                     InstructionSet.X64_AES_X64 => Aes,
                     InstructionSet.X64_PCLMULQDQ => Pclmulqdq,
                     InstructionSet.X64_PCLMULQDQ_X64 => Pclmulqdq,
@@ -189,7 +197,8 @@ namespace ILCompiler
                     InstructionSet.X64_X86Serialize_X64 => Serialize,
 
                     // Baseline ISAs - they're always available
-                    InstructionSet.X64_SSE => 0,
+                    InstructionSet.X64_SSE
+                        => 0,
                     InstructionSet.X64_SSE_X64 => 0,
                     InstructionSet.X64_SSE2 => 0,
                     InstructionSet.X64_SSE2_X64 => 0,
@@ -198,11 +207,15 @@ namespace ILCompiler
                     InstructionSet.X64_X86Base_X64 => 0,
 
                     // Vector<T> Sizes
-                    InstructionSet.X64_VectorT128 => VectorT128,
+                    InstructionSet.X64_VectorT128
+                        => VectorT128,
                     InstructionSet.X64_VectorT256 => VectorT256,
                     InstructionSet.X64_VectorT512 => VectorT512,
 
-                    _ => throw new NotSupportedException(((InstructionSet_X64)instructionSet).ToString())
+                    _
+                        => throw new NotSupportedException(
+                            ((InstructionSet_X64)instructionSet).ToString()
+                        )
                 };
             }
         }
@@ -253,15 +266,16 @@ namespace ILCompiler
             {
                 return instructionSet switch
                 {
-
                     // Baseline ISAs - they're always available
-                    InstructionSet.ARM64_ArmBase => 0,
+                    InstructionSet.ARM64_ArmBase
+                        => 0,
                     InstructionSet.ARM64_ArmBase_Arm64 => 0,
                     InstructionSet.ARM64_AdvSimd => AdvSimd,
                     InstructionSet.ARM64_AdvSimd_Arm64 => AdvSimd,
 
                     // Optional ISAs - only available via opt-in or opportunistic light-up
-                    InstructionSet.ARM64_Aes => Aes,
+                    InstructionSet.ARM64_Aes
+                        => Aes,
                     InstructionSet.ARM64_Aes_Arm64 => Aes,
                     InstructionSet.ARM64_Crc32 => Crc32,
                     InstructionSet.ARM64_Crc32_Arm64 => Crc32,
@@ -280,9 +294,13 @@ namespace ILCompiler
                     InstructionSet.ARM64_Sve_Arm64 => Sve,
 
                     // Vector<T> Sizes
-                    InstructionSet.ARM64_VectorT128 => VectorT128,
+                    InstructionSet.ARM64_VectorT128
+                        => VectorT128,
 
-                    _ => throw new NotSupportedException(((InstructionSet_ARM64)instructionSet).ToString())
+                    _
+                        => throw new NotSupportedException(
+                            ((InstructionSet_ARM64)instructionSet).ToString()
+                        )
                 };
             }
         }

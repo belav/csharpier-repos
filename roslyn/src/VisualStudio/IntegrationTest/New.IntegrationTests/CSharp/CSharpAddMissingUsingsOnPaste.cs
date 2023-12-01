@@ -23,9 +23,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     public class CSharpAddMissingUsingsOnPaste : AbstractEditorTest
     {
         public CSharpAddMissingUsingsOnPaste()
-            : base(nameof(CSharpAddMissingUsingsOnPaste))
-        {
-        }
+            : base(nameof(CSharpAddMissingUsingsOnPaste)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
@@ -33,12 +31,19 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task VerifyDisabled()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(project, "Example.cs", contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
-");
-            await SetUpEditorAsync(@"
+"
+                );
+            await SetUpEditorAsync(
+                @"
 using System;
 
 class Program
@@ -48,14 +53,30 @@ class Program
     }
 
     $$
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
 
-            var globalOptions = await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(HangMitigatingCancellationToken);
-            globalOptions.SetGlobalOption(AddImportOnPasteOptionsStorage.AddImportsOnPaste, LanguageNames.CSharp, false);
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
+                    HangMitigatingCancellationToken
+                );
+            globalOptions.SetGlobalOption(
+                AddImportOnPasteOptionsStorage.AddImportsOnPaste,
+                LanguageNames.CSharp,
+                false
+            );
 
-            await TestServices.Editor.PasteAsync(@"Task DoThingAsync() => Task.CompletedTask;", HangMitigatingCancellationToken);
+            await TestServices
+                .Editor
+                .PasteAsync(
+                    @"Task DoThingAsync() => Task.CompletedTask;",
+                    HangMitigatingCancellationToken
+                );
 
-            AssertEx.EqualOrDiff(@"
+            AssertEx.EqualOrDiff(
+                @"
 using System;
 
 class Program
@@ -65,24 +86,29 @@ class Program
     }
 
     Task DoThingAsync() => Task.CompletedTask;
-}", await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken));
+}",
+                await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
+            );
         }
 
         [IdeFact]
         public async Task VerifyAddImportsOnPaste()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Example.cs",
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken);
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             await SetUpEditorAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -94,17 +120,33 @@ class Program
     $$
 }
 ",
-                HangMitigatingCancellationToken);
+                HangMitigatingCancellationToken
+            );
 
-            await using var telemetry = await TestServices.Telemetry.EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken);
+            await using var telemetry = await TestServices
+                .Telemetry
+                .EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken);
 
-            var globalOptions = await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(HangMitigatingCancellationToken);
-            globalOptions.SetGlobalOption(AddImportOnPasteOptionsStorage.AddImportsOnPaste, LanguageNames.CSharp, true);
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
+                    HangMitigatingCancellationToken
+                );
+            globalOptions.SetGlobalOption(
+                AddImportOnPasteOptionsStorage.AddImportsOnPaste,
+                LanguageNames.CSharp,
+                true
+            );
 
-            await TestServices.Editor.PasteAsync(@"Task DoThingAsync() => Task.CompletedTask;", HangMitigatingCancellationToken);
+            await TestServices
+                .Editor
+                .PasteAsync(
+                    @"Task DoThingAsync() => Task.CompletedTask;",
+                    HangMitigatingCancellationToken
+                );
 
             AssertEx.EqualOrDiff(
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -117,20 +159,31 @@ class Program
     Task DoThingAsync() => Task.CompletedTask;
 }
 ",
-                await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken));
-            await telemetry.VerifyFiredAsync(["vs/ide/vbcs/commandhandler/paste/importsonpaste"], HangMitigatingCancellationToken);
+                await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
+            );
+            await telemetry.VerifyFiredAsync(
+                ["vs/ide/vbcs/commandhandler/paste/importsonpaste"],
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task VerifyIndentation()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(project, "Example.cs", contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
-");
-            await SetUpEditorAsync(@"
+"
+                );
+            await SetUpEditorAsync(
+                @"
 namespace MyNs
 {
     using System;
@@ -143,14 +196,30 @@ namespace MyNs
 
         $$
     }
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
 
-            var globalOptions = await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(HangMitigatingCancellationToken);
-            globalOptions.SetGlobalOption(AddImportOnPasteOptionsStorage.AddImportsOnPaste, LanguageNames.CSharp, true);
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
+                    HangMitigatingCancellationToken
+                );
+            globalOptions.SetGlobalOption(
+                AddImportOnPasteOptionsStorage.AddImportsOnPaste,
+                LanguageNames.CSharp,
+                true
+            );
 
-            await TestServices.Editor.PasteAsync(@"Task DoThingAsync() => Task.CompletedTask;", HangMitigatingCancellationToken);
+            await TestServices
+                .Editor
+                .PasteAsync(
+                    @"Task DoThingAsync() => Task.CompletedTask;",
+                    HangMitigatingCancellationToken
+                );
 
-            AssertEx.EqualOrDiff(@"
+            AssertEx.EqualOrDiff(
+                @"
 namespace MyNs
 {
     using System;
@@ -164,7 +233,9 @@ namespace MyNs
 
         Task DoThingAsync() => Task.CompletedTask;
     }
-}", await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken));
+}",
+                await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
+            );
         }
     }
 }

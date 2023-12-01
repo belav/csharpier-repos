@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 using KestrelHttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
@@ -24,7 +24,8 @@ public class SocketTransportTests : LoggedTestBase
     [Fact]
     public async Task SocketTransportExposesSocketsFeature()
     {
-        var builder = TransportSelector.GetHostBuilder()
+        var builder = TransportSelector
+            .GetHostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder

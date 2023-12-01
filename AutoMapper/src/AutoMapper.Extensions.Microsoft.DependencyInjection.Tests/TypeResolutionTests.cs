@@ -27,7 +27,12 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         [Fact]
         public void ShouldConfigureProfiles()
         {
-            _provider.GetService<IConfigurationProvider>().Internal().GetAllTypeMaps().Count.ShouldBe(4);
+            _provider
+                .GetService<IConfigurationProvider>()
+                .Internal()
+                .GetAllTypeMaps()
+                .Count
+                .ShouldBe(4);
         }
 
         [Fact]
@@ -64,7 +69,11 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         public void ShouldResolveGenericTypeConverter()
         {
             _provider.GetService<EnumDescriptorTypeConverter<ConsoleColor>>().ShouldNotBeNull();
-            _provider.GetService<IMapper>().Map<EnumDescriptor<ConsoleColor>>(ConsoleColor.Green).Value.ShouldBe(int.MaxValue);
+            _provider
+                .GetService<IMapper>()
+                .Map<EnumDescriptor<ConsoleColor>>(ConsoleColor.Green)
+                .Value
+                .ShouldBe(int.MaxValue);
         }
 
         [Fact]

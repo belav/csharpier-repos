@@ -13,7 +13,9 @@ namespace System.Web.Mvc.Html.Test
         public void PartialWithViewName()
         {
             // Arrange
-            RenderPartialExtensionsTest.SpyHtmlHelper helper = RenderPartialExtensionsTest.SpyHtmlHelper.Create();
+            RenderPartialExtensionsTest.SpyHtmlHelper helper = RenderPartialExtensionsTest
+                .SpyHtmlHelper
+                .Create();
 
             // Act
             MvcHtmlString result = helper.Partial("partial-view");
@@ -31,7 +33,9 @@ namespace System.Web.Mvc.Html.Test
         public void PartialWithViewNameAndViewData()
         {
             // Arrange
-            RenderPartialExtensionsTest.SpyHtmlHelper helper = RenderPartialExtensionsTest.SpyHtmlHelper.Create();
+            RenderPartialExtensionsTest.SpyHtmlHelper helper = RenderPartialExtensionsTest
+                .SpyHtmlHelper
+                .Create();
             ViewDataDictionary viewData = new ViewDataDictionary();
 
             // Act
@@ -50,7 +54,9 @@ namespace System.Web.Mvc.Html.Test
         public void PartialWithViewNameAndModel()
         {
             // Arrange
-            RenderPartialExtensionsTest.SpyHtmlHelper helper = RenderPartialExtensionsTest.SpyHtmlHelper.Create();
+            RenderPartialExtensionsTest.SpyHtmlHelper helper = RenderPartialExtensionsTest
+                .SpyHtmlHelper
+                .Create();
             object model = new object();
 
             // Act
@@ -69,7 +75,9 @@ namespace System.Web.Mvc.Html.Test
         public void PartialWithViewNameAndModelAndViewData()
         {
             // Arrange
-            RenderPartialExtensionsTest.SpyHtmlHelper helper = RenderPartialExtensionsTest.SpyHtmlHelper.Create();
+            RenderPartialExtensionsTest.SpyHtmlHelper helper = RenderPartialExtensionsTest
+                .SpyHtmlHelper
+                .Create();
             object model = new object();
             ViewDataDictionary viewData = new ViewDataDictionary();
 

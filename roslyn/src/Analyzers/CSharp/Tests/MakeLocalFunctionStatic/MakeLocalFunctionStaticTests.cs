@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics;
 using Microsoft.CodeAnalysis.Test.Utilities;
@@ -17,18 +17,26 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
 {
-    public partial class MakeLocalFunctionStaticTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class MakeLocalFunctionStaticTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public MakeLocalFunctionStaticTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new MakeLocalFunctionStaticDiagnosticAnalyzer(), new MakeLocalFunctionStaticCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new MakeLocalFunctionStaticDiagnosticAnalyzer(),
+                new MakeLocalFunctionStaticCodeFixProvider()
+            );
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
-        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp8);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestAboveCSharp8()
@@ -62,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                     }
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseSimpleUsingStatement)]
@@ -83,9 +92,14 @@ parseOptions: CSharp8ParseOptions);
                     }
                 }
                 """,
-new TestParameters(
-    parseOptions: CSharp8ParseOptions,
-    options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOption2.FalseWithSilentEnforcement)));
+                new TestParameters(
+                    parseOptions: CSharp8ParseOptions,
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOption2.FalseWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -105,7 +119,9 @@ new TestParameters(
                         }
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -125,7 +141,9 @@ new TestParameters(
                         }
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp72ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -145,7 +163,9 @@ new TestParameters(
                         }
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -166,7 +186,9 @@ new TestParameters(
                         }
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -203,7 +225,8 @@ new TestParameters(
                     }
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -213,7 +236,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterSemicolon(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -226,7 +249,7 @@ class C
         }}
     }}
 }}",
-"""
+                """
 using System;
 
 class C
@@ -242,7 +265,8 @@ class C
     }
 }
 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -252,7 +276,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterOpenBrace(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -264,7 +288,7 @@ class C
         }}
     }}
 }}",
-"""
+                """
 using System;
 
 class C
@@ -278,7 +302,8 @@ class C
     }
 }
 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -288,7 +313,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterLocalFunction(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -304,7 +329,7 @@ class C
         }}
     }}
 }}",
-"""
+                """
 using System;
 
 class C
@@ -323,7 +348,8 @@ class C
     }
 }
 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -333,7 +359,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterExpressionBodyLocalFunction(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -343,7 +369,7 @@ class C
         int [||]fibonacci(int n) => n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
     }}
 }}",
-"""
+                """
 using System;
 
 class C
@@ -356,7 +382,8 @@ class C
     }
 }
 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -366,7 +393,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaAfterComment(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -379,7 +406,7 @@ class C
         }}
     }}
 }}",
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -392,7 +419,8 @@ class C
         }}
     }}
 }}",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -401,7 +429,7 @@ parseOptions: CSharp8ParseOptions);
         public async Task TestLeadingTriviaBeforeComment(string leadingTrivia)
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -414,7 +442,7 @@ class C
         }}
     }}
 }}",
-$@"using System;
+                $@"using System;
 
 class C
 {{
@@ -427,7 +455,8 @@ class C
         }}
     }}
 }}",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -452,7 +481,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -497,7 +528,8 @@ parseOptions: CSharp8ParseOptions);
                     }
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -542,39 +574,46 @@ parseOptions: CSharp8ParseOptions);
                     }
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/53179")]
         public async Task TestLocalFunctionAsTopLevelStatement()
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 void [||]A()
                 {
                 }
-                """, """
+                """,
+                """
                 static void A()
                 {
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         [WorkItem("https://github.com/dotnet/roslyn/issues/59286")]
         public async Task TestUnsafeLocalFunction()
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 unsafe void [||]A()
                 {
                 }
-                """, """
+                """,
+                """
                 static unsafe void A()
                 {
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
     }
 }

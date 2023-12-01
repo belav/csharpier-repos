@@ -12,9 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class DestructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
+public class DestructorDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new DestructorDeclarationStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new DestructorDeclarationStructureProvider();
 
     [Fact]
     public async Task TestDestructor()
@@ -28,8 +30,10 @@ public class DestructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStruc
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -46,9 +50,11 @@ public class DestructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStruc
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("span1", "// Goo ...", autoCollapse: true),
-            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]

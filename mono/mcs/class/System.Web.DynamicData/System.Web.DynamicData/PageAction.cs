@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,12 +38,27 @@ using System.Web.Caching;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public static class PageAction
-	{
-		public static string Edit { get { return "Edit"; } }
-		public static string Details { get { return "Details"; } }
-		public static string Insert { get { return "Insert"; } }
-		public static string List { get { return "List"; } }
-	}
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public static class PageAction
+    {
+        public static string Edit
+        {
+            get { return "Edit"; }
+        }
+        public static string Details
+        {
+            get { return "Details"; }
+        }
+        public static string Insert
+        {
+            get { return "Insert"; }
+        }
+        public static string List
+        {
+            get { return "List"; }
+        }
+    }
 }

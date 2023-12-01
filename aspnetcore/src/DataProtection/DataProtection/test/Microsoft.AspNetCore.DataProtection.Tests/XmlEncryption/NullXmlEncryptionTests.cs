@@ -14,7 +14,9 @@ public class NullXmlEncryptionTests
         var decryptor = new NullXmlDecryptor();
 
         // Act
-        var retVal = decryptor.Decrypt(XElement.Parse("<unencryptedKey><theElement /></unencryptedKey>"));
+        var retVal = decryptor.Decrypt(
+            XElement.Parse("<unencryptedKey><theElement /></unencryptedKey>")
+        );
 
         // Assert
         XmlAssert.Equal("<theElement />", retVal);

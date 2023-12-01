@@ -9,11 +9,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     internal partial class ActiveStatementTaggerProvider
     {
-        private sealed class EventSource(ITextBuffer subjectBuffer) : AbstractWorkspaceTrackingTaggerEventSource(subjectBuffer)
+        private sealed class EventSource(ITextBuffer subjectBuffer)
+            : AbstractWorkspaceTrackingTaggerEventSource(subjectBuffer)
         {
             protected override void ConnectToWorkspace(Workspace workspace)
             {
-                var trackingService = workspace.Services.GetService<IActiveStatementTrackingService>();
+                var trackingService = workspace
+                    .Services
+                    .GetService<IActiveStatementTrackingService>();
                 if (trackingService != null)
                 {
                     trackingService.TrackingChanged += RaiseChanged;
@@ -23,7 +26,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             protected override void DisconnectFromWorkspace(Workspace workspace)
             {
-                var trackingService = workspace.Services.GetService<IActiveStatementTrackingService>();
+                var trackingService = workspace
+                    .Services
+                    .GetService<IActiveStatementTrackingService>();
                 if (trackingService != null)
                 {
                     trackingService.TrackingChanged -= RaiseChanged;

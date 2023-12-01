@@ -4,14 +4,18 @@
 
 using System.Collections.Immutable;
 using System.Threading;
-using Microsoft.CodeAnalysis.Completion.Providers;
 using Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery;
+using Microsoft.CodeAnalysis.Completion.Providers;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class NotNullKeywordRecommender : IKeywordRecommender<CSharpSyntaxContext>
     {
-        public ImmutableArray<RecommendedKeyword> RecommendKeywords(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        public ImmutableArray<RecommendedKeyword> RecommendKeywords(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             return context.SyntaxTree.IsTypeParameterConstraintContext(position, context.LeftToken)
                 ? ImmutableArray.Create(new RecommendedKeyword("notnull"))

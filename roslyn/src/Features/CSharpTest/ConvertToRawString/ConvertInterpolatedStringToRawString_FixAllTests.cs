@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp.ConvertToRawString;
+using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
     [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
     public class ConvertInterpolatedStringToRawString_FixAllTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ConvertStringToRawStringCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ConvertStringToRawStringCodeRefactoringProvider();
 
         [Fact]
         public async Task FixAllInDocument_SingleLine()
@@ -105,14 +107,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 select x2";
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument_MultiLine()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 void M()
@@ -154,7 +157,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 }
             }
             """,
-            """"
+                """"
             class C
             {
                 void M()
@@ -213,14 +216,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         """;
                 }
             }
-            """");
+            """"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument_MultiLineWithoutLeadingWhitespace()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 void M()
@@ -262,7 +266,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 }
             }
             """,
-            """"
+                """"
             class C
             {
                 void M()
@@ -317,14 +321,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         """;
                 }
             }
-            """", index: 1);
+            """",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task FixAllInProject()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             <Workspace>
                 <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document>
@@ -362,7 +368,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 </Project>
             </Workspace>
             """,
-            """"
+                """"
             <Workspace>
                 <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document>
@@ -399,14 +405,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                     </Document>
                 </Project>
             </Workspace>
-            """");
+            """"
+            );
         }
 
         [Fact]
         public async Task FixAllInSolution()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             <Workspace>
                 <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document>
@@ -444,7 +451,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 </Project>
             </Workspace>
             """,
-            """"
+                """"
             <Workspace>
                 <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document>
@@ -481,14 +488,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                     </Document>
                 </Project>
             </Workspace>
-            """");
+            """"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingMember()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 void M()
@@ -513,7 +521,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 }
             }
             """,
-            """"
+                """"
             class C
             {
                 void M()
@@ -537,14 +545,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                     var singleLine2 = @$"goo""bar";
                 }
             }
-            """");
+            """"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingType()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             partial class C
             {
                 void M()
@@ -578,7 +587,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 }
             }
             """,
-            """"
+                """"
             partial class C
             {
                 void M()
@@ -611,14 +620,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                     var singleLine2 = $"""goo"bar""";
                 }
             }
-            """");
+            """"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingType_AcrossFiles()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             <Workspace>
                 <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document>
@@ -671,7 +681,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 </Project>
             </Workspace>
             """,
-            """"
+                """"
             <Workspace>
                 <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document>
@@ -723,7 +733,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                     </Document>
                 </Project>
             </Workspace>
-            """");
+            """"
+            );
         }
 
         [Fact]
@@ -764,7 +775,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                     }
                 }
                 """",
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
 
         [Fact]
@@ -803,7 +815,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                     }
                 }
                 """",
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
 
         [Fact]
@@ -845,8 +858,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1,
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                """",
+                index: 1,
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
 
         [Fact]
@@ -886,8 +901,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1,
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                """",
+                index: 1,
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
 
         [Fact]
@@ -931,8 +948,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1,
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                """",
+                index: 1,
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
 
         [Fact]
@@ -974,8 +993,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1,
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                """",
+                index: 1,
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
 
         [Fact]
@@ -1021,8 +1042,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1,
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                """",
+                index: 1,
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
 
         [Fact]
@@ -1066,8 +1089,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1,
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                """",
+                index: 1,
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
 
         [Fact]
@@ -1111,8 +1136,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """);
                     }
                 }
-                """", index: 1,
-                new TestParameters(treatPositionIndicatorsAsCode: true));
+                """",
+                index: 1,
+                new TestParameters(treatPositionIndicatorsAsCode: true)
+            );
         }
     }
 }

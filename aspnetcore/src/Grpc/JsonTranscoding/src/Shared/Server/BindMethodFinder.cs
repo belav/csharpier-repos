@@ -52,12 +52,15 @@ internal static class BindMethodFinder
             {
                 // Bind method will be public and static
                 // Two parameters: ServiceBinderBase and the service type
-                return bindServiceMethod.BindType.GetMethod(
-                    bindServiceMethod.BindMethodName,
-                    BindMethodBindingFlags,
-                    binder: null,
-                    new[] { typeof(ServiceBinderBase), currentServiceType },
-                    Array.Empty<ParameterModifier>());
+                return bindServiceMethod
+                    .BindType
+                    .GetMethod(
+                        bindServiceMethod.BindMethodName,
+                        BindMethodBindingFlags,
+                        binder: null,
+                        new[] { typeof(ServiceBinderBase), currentServiceType },
+                        Array.Empty<ParameterModifier>()
+                    );
             }
         } while ((currentServiceType = currentServiceType.BaseType) != null);
 
@@ -82,7 +85,8 @@ internal static class BindMethodFinder
             BindMethodBindingFlags,
             binder: null,
             new[] { typeof(ServiceBinderBase), baseType },
-            Array.Empty<ParameterModifier>());
+            Array.Empty<ParameterModifier>()
+        );
     }
 
     private static Type? GetServiceBaseType(Type serviceImplementation)

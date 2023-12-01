@@ -7,19 +7,25 @@ using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Extensions;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeFixes.GenerateMember;
 using Microsoft.CodeAnalysis.CodeGeneration;
-using Microsoft.CodeAnalysis.CSharp.Extensions;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.GenerateType;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateType
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.GenerateType), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.GenerateType
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.GenerateVariable)]
     internal class GenerateTypeCodeFixProvider : AbstractGenerateMemberCodeFixProvider
     {
@@ -33,17 +39,36 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateType
         private const string CS0616 = nameof(CS0616); // error CS0616: 'x' is not an attribute class
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateTypeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateTypeCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(CS0103, CS0117, CS0234, CS0246, CS0305, CS0308, CS0426, CS0616, IDEDiagnosticIds.UnboundIdentifierId); }
+            get
+            {
+                return ImmutableArray.Create(
+                    CS0103,
+                    CS0117,
+                    CS0234,
+                    CS0246,
+                    CS0305,
+                    CS0308,
+                    CS0426,
+                    CS0616,
+                    IDEDiagnosticIds.UnboundIdentifierId
+                );
+            }
         }
 
-        protected override bool IsCandidate(SyntaxNode node, SyntaxToken token, Diagnostic diagnostic)
+        protected override bool IsCandidate(
+            SyntaxNode node,
+            SyntaxToken token,
+            Diagnostic diagnostic
+        )
         {
             switch (node)
             {
@@ -58,11 +83,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateType
             return false;
         }
 
-        protected override SyntaxNode? GetTargetNode(SyntaxNode node)
-            => ((ExpressionSyntax)node).GetRightmostName();
+        protected override SyntaxNode? GetTargetNode(SyntaxNode node) =>
+            ((ExpressionSyntax)node).GetRightmostName();
 
         protected override Task<ImmutableArray<CodeAction>> GetCodeActionsAsync(
-            Document document, SyntaxNode node, CleanCodeGenerationOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode node,
+            CleanCodeGenerationOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetRequiredLanguageService<IGenerateTypeService>();
             return service.GenerateTypeAsync(document, node, fallbackOptions, cancellationToken);

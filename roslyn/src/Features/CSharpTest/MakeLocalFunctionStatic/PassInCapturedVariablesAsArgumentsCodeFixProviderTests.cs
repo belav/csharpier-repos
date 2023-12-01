@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics;
 using Microsoft.CodeAnalysis.Test.Utilities;
@@ -16,18 +16,22 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
-    public class PassInCapturedVariablesAsArgumentsCodeFixProviderTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class PassInCapturedVariablesAsArgumentsCodeFixProviderTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public PassInCapturedVariablesAsArgumentsCodeFixProviderTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new PassInCapturedVariablesAsArgumentsCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new PassInCapturedVariablesAsArgumentsCodeFixProvider());
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
-        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp8);
 
         [Fact]
         public async Task TestMissingInCSharp7()
@@ -46,7 +50,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }        
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp72ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact]
@@ -66,7 +72,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }        
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38734")]
@@ -104,7 +112,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -139,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                     }  
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -175,7 +186,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -211,8 +224,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """
-, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -250,8 +264,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """
-, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -289,7 +304,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -325,7 +342,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -363,8 +382,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """
-, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -402,8 +422,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """
-, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -438,7 +459,8 @@ parseOptions: CSharp8ParseOptions);
                     }  
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -475,7 +497,8 @@ parseOptions: CSharp8ParseOptions);
                     }  
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -535,8 +558,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
     }
 }
-

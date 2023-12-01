@@ -23,13 +23,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.LegacySolutionEvents
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UnitTestingLegacySolutionEventsListener()
-        {
-        }
+        public UnitTestingLegacySolutionEventsListener() { }
 
         private static IUnitTestingWorkCoordinator? GetCoordinator(Solution solution)
         {
-            var service = solution.Services.GetService<IUnitTestingSolutionCrawlerRegistrationService>();
+            var service = solution
+                .Services
+                .GetService<IUnitTestingSolutionCrawlerRegistrationService>();
             if (service == null)
                 return null;
 
@@ -45,7 +45,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.LegacySolutionEvents
             return service.HasRegisteredAnalyzerProviders;
         }
 
-        public ValueTask OnWorkspaceChangedAsync(WorkspaceChangeEventArgs args, CancellationToken cancellationToken)
+        public ValueTask OnWorkspaceChangedAsync(
+            WorkspaceChangeEventArgs args,
+            CancellationToken cancellationToken
+        )
         {
             var coordinator = GetCoordinator(args.NewSolution);
             coordinator?.OnWorkspaceChanged(args);

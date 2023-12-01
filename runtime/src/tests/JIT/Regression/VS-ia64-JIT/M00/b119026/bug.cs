@@ -15,7 +15,7 @@ public class test
     {
         int exitCode = -1;
         short i16 = -1;
-        uint u32 = (uint) i16;
+        uint u32 = (uint)i16;
 
         Console.WriteLine(u32);
 
@@ -31,7 +31,7 @@ public class test
         }
 
         si16 = -1;
-        su32 = (uint) si16;
+        su32 = (uint)si16;
 
         Console.WriteLine(su32);
 

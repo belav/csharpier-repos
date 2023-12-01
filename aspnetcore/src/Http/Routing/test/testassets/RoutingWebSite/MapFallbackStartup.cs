@@ -15,15 +15,20 @@ public class MapFallbackStartup
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapFallback("/prefix/{*path:nonfile}", (context) =>
-            {
-                return context.Response.WriteAsync("FallbackCustomPattern");
-            });
+            endpoints.MapFallback(
+                "/prefix/{*path:nonfile}",
+                (context) =>
+                {
+                    return context.Response.WriteAsync("FallbackCustomPattern");
+                }
+            );
 
-            endpoints.MapFallback((context) =>
-            {
-                return context.Response.WriteAsync("FallbackDefaultPattern");
-            });
+            endpoints.MapFallback(
+                (context) =>
+                {
+                    return context.Response.WriteAsync("FallbackDefaultPattern");
+                }
+            );
 
             endpoints.MapHello("/helloworld", "World");
         });

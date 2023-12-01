@@ -27,7 +27,10 @@ namespace System.Web.Http
         {
             HttpControllerContext controllerContext = ContextUtil.CreateControllerContext();
             HttpActionDescriptor actionDescriptor = new Mock<HttpActionDescriptor>().Object;
-            HttpActionContext actionContext = new HttpActionContext(controllerContext, actionDescriptor);
+            HttpActionContext actionContext = new HttpActionContext(
+                controllerContext,
+                actionDescriptor
+            );
 
             Assert.Same(controllerContext, actionContext.ControllerContext);
             Assert.Same(actionDescriptor, actionContext.ActionDescriptor);
@@ -42,7 +45,8 @@ namespace System.Web.Http
         {
             Assert.ThrowsArgumentNull(
                 () => new HttpActionContext(null, new Mock<HttpActionDescriptor>().Object),
-                "controllerContext");
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -50,29 +54,36 @@ namespace System.Web.Http
         {
             Assert.ThrowsArgumentNull(
                 () => new HttpActionContext(ContextUtil.CreateControllerContext(), null),
-                "actionDescriptor");
+                "actionDescriptor"
+            );
         }
 
         [Fact]
         public void ControllerContext_Property()
         {
-            Assert.Reflection.Property<HttpActionContext, HttpControllerContext>(
-                instance: new HttpActionContext(),
-                propertyGetter: ac => ac.ControllerContext,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: ContextUtil.CreateControllerContext());
+            Assert
+                .Reflection
+                .Property<HttpActionContext, HttpControllerContext>(
+                    instance: new HttpActionContext(),
+                    propertyGetter: ac => ac.ControllerContext,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: ContextUtil.CreateControllerContext()
+                );
         }
 
         [Fact]
         public void ActionDescriptor_Property()
         {
-            Assert.Reflection.Property<HttpActionContext, HttpActionDescriptor>(
-                instance: new HttpActionContext(),
-                propertyGetter: ac => ac.ActionDescriptor,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: new Mock<HttpActionDescriptor>().Object);
+            Assert
+                .Reflection
+                .Property<HttpActionContext, HttpActionDescriptor>(
+                    instance: new HttpActionContext(),
+                    propertyGetter: ac => ac.ActionDescriptor,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: new Mock<HttpActionDescriptor>().Object
+                );
         }
 
         [Fact]

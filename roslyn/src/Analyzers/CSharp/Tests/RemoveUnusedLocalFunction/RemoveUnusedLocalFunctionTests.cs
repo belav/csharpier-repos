@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.RemoveUnusedLocalFunction;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics;
 using Microsoft.CodeAnalysis.Test.Utilities;
@@ -16,15 +16,15 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFunction
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedLocalFunction)]
-    public partial class RemoveUnusedLocalFunctionTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class RemoveUnusedLocalFunctionTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnusedLocalFunctionTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpRemoveUnusedLocalFunctionCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpRemoveUnusedLocalFunctionCodeFixProvider());
 
         [Fact]
         public async Task RemoveUnusedLocalFunction()
@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -117,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -140,18 +144,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44272")]
         public async Task TopLevelStatement()
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 void [|local()|] { }
                 """,
                 """
 
-                """, TestOptions.Regular);
+                """,
+                TestOptions.Regular
+            );
         }
     }
 }

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Test.Helpers;
 
 namespace Microsoft.AspNetCore.Components.Forms;
@@ -20,7 +20,9 @@ public class InputRadioTest
             InnerContent = RadioButtonsWithoutGroup(null)
         };
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => RenderAndGetTestInputComponentAsync(rootComponent));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => RenderAndGetTestInputComponentAsync(rootComponent)
+        );
         Assert.Contains($"must have an ancestor", ex.Message);
     }
 
@@ -30,16 +32,16 @@ public class InputRadioTest
         var model = new TestModel();
         var rootComponent = new TestInputRadioHostComponent<TestEnum>
         {
-            EditContext = new EditContext(model)
-            {
-                ShouldUseFieldIdentifiers = false,
-            },
+            EditContext = new EditContext(model) { ShouldUseFieldIdentifiers = false, },
             InnerContent = RadioButtonsWithGroup(null, () => model.TestEnum)
         };
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
 
-        Assert.All(inputRadioComponents, inputRadio => Assert.True(Guid.TryParseExact(inputRadio.GroupName, "N", out _)));
+        Assert.All(
+            inputRadioComponents,
+            inputRadio => Assert.True(Guid.TryParseExact(inputRadio.GroupName, "N", out _))
+        );
     }
 
     [Fact]
@@ -55,7 +57,10 @@ public class InputRadioTest
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
 
-        Assert.All(inputRadioComponents, inputRadio => Assert.Equal(groupName, inputRadio.GroupName));
+        Assert.All(
+            inputRadioComponents,
+            inputRadio => Assert.Equal(groupName, inputRadio.GroupName)
+        );
     }
 
     [Fact]
@@ -73,42 +78,56 @@ public class InputRadioTest
         Assert.All(inputRadioComponents, inputRadio => Assert.NotNull(inputRadio.Element));
     }
 
-    private static RenderFragment RadioButtonsWithoutGroup(string name) => (builder) =>
-    {
-        foreach (var selectedValue in (TestEnum[])Enum.GetValues(typeof(TestEnum)))
+    private static RenderFragment RadioButtonsWithoutGroup(string name) =>
+        (builder) =>
         {
-            builder.OpenComponent<TestInputRadio>(0);
-            builder.AddComponentParameter(1, "Name", name);
-            builder.AddComponentParameter(2, "Value", selectedValue);
-            builder.CloseComponent();
-        }
-    };
-
-    private static RenderFragment RadioButtonsWithGroup(string name, Expression<Func<TestEnum>> valueExpression) => (builder) =>
-    {
-        builder.OpenComponent<InputRadioGroup<TestEnum>>(0);
-        builder.AddComponentParameter(1, "Name", name);
-        builder.AddComponentParameter(2, "ValueExpression", valueExpression);
-        builder.AddComponentParameter(2, "ChildContent", new RenderFragment((childBuilder) =>
-        {
-            foreach (var value in (TestEnum[])Enum.GetValues(typeof(TestEnum)))
+            foreach (var selectedValue in (TestEnum[])Enum.GetValues(typeof(TestEnum)))
             {
-                childBuilder.OpenComponent<TestInputRadio>(0);
-                childBuilder.AddComponentParameter(1, "Value", value);
-                childBuilder.CloseComponent();
+                builder.OpenComponent<TestInputRadio>(0);
+                builder.AddComponentParameter(1, "Name", name);
+                builder.AddComponentParameter(2, "Value", selectedValue);
+                builder.CloseComponent();
             }
-        }));
+        };
 
-        builder.CloseComponent();
-    };
+    private static RenderFragment RadioButtonsWithGroup(
+        string name,
+        Expression<Func<TestEnum>> valueExpression
+    ) =>
+        (builder) =>
+        {
+            builder.OpenComponent<InputRadioGroup<TestEnum>>(0);
+            builder.AddComponentParameter(1, "Name", name);
+            builder.AddComponentParameter(2, "ValueExpression", valueExpression);
+            builder.AddComponentParameter(
+                2,
+                "ChildContent",
+                new RenderFragment(
+                    (childBuilder) =>
+                    {
+                        foreach (var value in (TestEnum[])Enum.GetValues(typeof(TestEnum)))
+                        {
+                            childBuilder.OpenComponent<TestInputRadio>(0);
+                            childBuilder.AddComponentParameter(1, "Value", value);
+                            childBuilder.CloseComponent();
+                        }
+                    }
+                )
+            );
 
-    private static IEnumerable<TestInputRadio> FindInputRadioComponents(CapturedBatch batch)
-        => batch.ReferenceFrames
-                .Where(f => f.FrameType == RenderTreeFrameType.Component)
-                .Select(f => f.Component)
-                .OfType<TestInputRadio>();
+            builder.CloseComponent();
+        };
 
-    private static async Task<IEnumerable<TestInputRadio>> RenderAndGetTestInputComponentAsync(TestInputRadioHostComponent<TestEnum> rootComponent)
+    private static IEnumerable<TestInputRadio> FindInputRadioComponents(CapturedBatch batch) =>
+        batch
+            .ReferenceFrames
+            .Where(f => f.FrameType == RenderTreeFrameType.Component)
+            .Select(f => f.Component)
+            .OfType<TestInputRadio>();
+
+    private static async Task<IEnumerable<TestInputRadio>> RenderAndGetTestInputComponentAsync(
+        TestInputRadioHostComponent<TestEnum> rootComponent
+    )
     {
         var testRenderer = new TestRenderer();
         var componentId = testRenderer.AssignRootComponentId(rootComponent);

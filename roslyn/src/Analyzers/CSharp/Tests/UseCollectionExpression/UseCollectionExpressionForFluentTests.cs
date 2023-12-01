@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCollectionExpress
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseCollectionExpressionForFluentDiagnosticAnalyzer,
-    CSharpUseCollectionExpressionForFluentCodeFixProvider>;
+    CSharpUseCollectionExpressionForFluentCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionExpression)]
 public class UseCollectionExpressionForFluentTests
@@ -869,7 +870,8 @@ public class UseCollectionExpressionForFluentTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
+            TestCode =
+                """
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
@@ -882,7 +884,8 @@ public class UseCollectionExpressionForFluentTests
                     }
                 }
                 """ + singleArgConcat,
-            FixedCode = """
+            FixedCode =
+                """
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
@@ -1994,10 +1997,7 @@ public class UseCollectionExpressionForFluentTests
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 
@@ -2030,10 +2030,7 @@ public class UseCollectionExpressionForFluentTests
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 
@@ -2057,7 +2054,8 @@ public class UseCollectionExpressionForFluentTests
             FixedState =
             {
                 Sources =
-                { """
+                {
+                    """
                     using System.Linq;
                     using System.Collections.Generic;
                 
@@ -2073,7 +2071,11 @@ public class UseCollectionExpressionForFluentTests
                 ExpectedDiagnostics =
                 {
                     // /0/Test0.cs(8,51): info IDE0305: Collection initialization can be simplified
-                    VerifyCS.Diagnostic().WithSpan(8, 51, 8, 57).WithSpan(8, 33, 8, 59).WithSeverity(DiagnosticSeverity.Info),
+                    VerifyCS
+                        .Diagnostic()
+                        .WithSpan(8, 51, 8, 57)
+                        .WithSpan(8, 33, 8, 59)
+                        .WithSeverity(DiagnosticSeverity.Info),
                 }
             },
             LanguageVersion = LanguageVersion.CSharp12,

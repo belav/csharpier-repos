@@ -79,7 +79,9 @@ namespace System.Data.OleDb.Tests
             Assert.False(new OleDbCommand().Parameters.GetEnumerator().MoveNext());
 
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Add(0));
-            Assert.Throws<ArgumentNullException>(() => new OleDbCommand().Parameters.AddRange(null));
+            Assert.Throws<ArgumentNullException>(
+                () => new OleDbCommand().Parameters.AddRange(null)
+            );
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Insert(0, 0));
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Remove(0));
 
@@ -106,7 +108,9 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void Ctor_InvalidOleDbType_Throws()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new OleDbParameter(name: "ParameterName", dataType: (OleDbType)500));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new OleDbParameter(name: "ParameterName", dataType: (OleDbType)500)
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
@@ -148,8 +152,18 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void PrecisionAndScale_Success()
         {
-            var oleDbParameter = new OleDbParameter(default, default, default, default, default, precision: default, scale: default,
-                srcColumn: default, srcVersion: DataRowVersion.Default, value: default);
+            var oleDbParameter = new OleDbParameter(
+                default,
+                default,
+                default,
+                default,
+                default,
+                precision: default,
+                scale: default,
+                srcColumn: default,
+                srcVersion: DataRowVersion.Default,
+                value: default
+            );
             Assert.Equal(default(byte), oleDbParameter.Precision);
             Assert.Equal(default(byte), oleDbParameter.Scale);
 
@@ -174,7 +188,9 @@ namespace System.Data.OleDb.Tests
         public void Size_InvalidSizeValue_Throws()
         {
             Assert.Throws<ArgumentException>(() => new OleDbParameter(default, default, size: -2));
-            Assert.Throws<ArgumentException>(() => new OleDbParameter(default, default, size: -2, srcColumn: default));
+            Assert.Throws<ArgumentException>(
+                () => new OleDbParameter(default, default, size: -2, srcColumn: default)
+            );
 
             var oleDbParameter = new OleDbParameter();
             Assert.Equal(0, oleDbParameter.Size);
@@ -186,44 +202,91 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void ParameterDirection_InvalidEnumValue_Throws()
         {
-            var oleDbParameter = new OleDbParameter(default, default, default, (ParameterDirection)0,
-                default, default, default, default, DataRowVersion.Original, default);
+            var oleDbParameter = new OleDbParameter(
+                default,
+                default,
+                default,
+                (ParameterDirection)0,
+                default,
+                default,
+                default,
+                default,
+                DataRowVersion.Original,
+                default
+            );
             Assert.Equal(ParameterDirection.Input, oleDbParameter.Direction);
 
             oleDbParameter.Direction = ParameterDirection.InputOutput;
             Assert.Equal(ParameterDirection.InputOutput, oleDbParameter.Direction);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => oleDbParameter.Direction = (ParameterDirection)0);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => oleDbParameter.Direction = (ParameterDirection)0
+            );
         }
 
         [ConditionalTheory(Helpers.IsDriverAvailable)]
         [MemberData(nameof(ParameterDirections))]
         public void ParameterDirection_Success(ParameterDirection direction)
         {
-            var oleDbParameter = new OleDbParameter(default, default, default, direction,
-                default, default, default, DataRowVersion.Original, default, default);
+            var oleDbParameter = new OleDbParameter(
+                default,
+                default,
+                default,
+                direction,
+                default,
+                default,
+                default,
+                DataRowVersion.Original,
+                default,
+                default
+            );
             Assert.Equal(direction, oleDbParameter.Direction);
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void SourceVersion_InvalidEnumValue_Throws()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new OleDbParameter(default, default, default, default,
-                default, default, default, default, (DataRowVersion)0, default));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    new OleDbParameter(
+                        default,
+                        default,
+                        default,
+                        default,
+                        default,
+                        default,
+                        default,
+                        default,
+                        (DataRowVersion)0,
+                        default
+                    )
+            );
 
             var oleDbParameter = new OleDbParameter();
             oleDbParameter.SourceVersion = DataRowVersion.Proposed;
             Assert.Equal(DataRowVersion.Proposed, oleDbParameter.SourceVersion);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => oleDbParameter.SourceVersion = (DataRowVersion)0);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => oleDbParameter.SourceVersion = (DataRowVersion)0
+            );
         }
 
         [ConditionalTheory(Helpers.IsDriverAvailable)]
         [MemberData(nameof(DataRowVersions))]
         public void SourceVersion_Success(DataRowVersion dataRowVersion)
         {
-            var oleDbParameter = new OleDbParameter(default, default, default, default,
-                default, default, default, dataRowVersion, default, default);
+            var oleDbParameter = new OleDbParameter(
+                default,
+                default,
+                default,
+                default,
+                default,
+                default,
+                default,
+                dataRowVersion,
+                default,
+                default
+            );
             Assert.Equal(dataRowVersion, oleDbParameter.SourceVersion);
         }
 

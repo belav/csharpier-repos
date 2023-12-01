@@ -4,26 +4,33 @@
 
 using System;
 using System.Composition;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.LanguageServices;
 using Microsoft.CodeAnalysis.CSharp.Features.EmbeddedLanguages;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageServices;
 using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.JsonDetection), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.JsonDetection
+        ),
+        Shared
+    ]
     internal class CSharpJsonDetectionCodeFixProvider : AbstractJsonDetectionCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpJsonDetectionCodeFixProvider()
-            : base(CSharpEmbeddedLanguagesProvider.Info)
-        {
-        }
+            : base(CSharpEmbeddedLanguagesProvider.Info) { }
 
-        protected override void AddComment(SyntaxEditor editor, SyntaxToken stringLiteral, string commentContents)
-            => EmbeddedLanguageUtilities.AddComment(editor, stringLiteral, commentContents);
+        protected override void AddComment(
+            SyntaxEditor editor,
+            SyntaxToken stringLiteral,
+            string commentContents
+        ) => EmbeddedLanguageUtilities.AddComment(editor, stringLiteral, commentContents);
     }
 }

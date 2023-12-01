@@ -21,16 +21,23 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         {
             var original = CreateCompilation(
                 @"System.Console.WriteLine(""I'm using top-level statements!"");",
-                options: TestOptions.DebugExe);
+                options: TestOptions.DebugExe
+            );
             original.VerifyDiagnostics();
 
-            var originalBytes = original.EmitToArray(new EmitOptions(debugInformationFormat: DebugInformationFormat.Embedded));
+            var originalBytes = original.EmitToArray(
+                new EmitOptions(debugInformationFormat: DebugInformationFormat.Embedded)
+            );
             var originalPeReader = new PEReader(originalBytes);
             var originalPdbReader = originalPeReader.GetEmbeddedPdbMetadataReader()!;
             var factory = LoggerFactory.Create(configure => { });
             var logger = factory.CreateLogger("Test");
 
-            var optionsReader = new CompilationOptionsReader(logger, originalPdbReader, originalPeReader);
+            var optionsReader = new CompilationOptionsReader(
+                logger,
+                originalPdbReader,
+                originalPeReader
+            );
             var compilationFactory = CompilationFactory.Create("test.exe", optionsReader);
 
             var sources = original
@@ -38,7 +45,10 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 .Select(x => compilationFactory.CreateSyntaxTree(x.FilePath, x.GetText()))
                 .ToImmutableArray();
             var references = original.References.ToImmutableArray();
-            var rebuild = compilationFactory.CreateCompilation(sources, original.References.ToImmutableArray());
+            var rebuild = compilationFactory.CreateCompilation(
+                sources,
+                original.References.ToImmutableArray()
+            );
             rebuild.VerifyEmitDiagnostics();
         }
     }

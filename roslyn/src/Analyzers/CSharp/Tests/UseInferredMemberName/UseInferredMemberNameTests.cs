@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.UseInferredMemberName;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics;
 using Microsoft.CodeAnalysis.Test.Utilities;
@@ -16,18 +16,23 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseInferredMemberName)]
-    public class UseInferredMemberNameTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class UseInferredMemberNameTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseInferredMemberNameTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseInferredMemberNameDiagnosticAnalyzer(), new CSharpUseInferredMemberNameCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseInferredMemberNameDiagnosticAnalyzer(),
+                new CSharpUseInferredMemberNameCodeFixProvider()
+            );
 
-        private static readonly CSharpParseOptions s_parseOptions =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
+        private static readonly CSharpParseOptions s_parseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.Latest);
 
         [Fact]
         public async Task TestInferredTupleName()
@@ -52,7 +57,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
                         var t = (a, 2);
                     }
                 }
-                """, parseOptions: s_parseOptions);
+                """,
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24480")]
@@ -68,7 +75,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
                         (int, int, string) t = ([||]alice: alice, alice, null);
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: s_parseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: s_parseOptions)
+            );
         }
 
         [Fact]
@@ -84,7 +93,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
                         var t = (1, [||]a: a);
                     }
                 }
-                """, count: 0, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+                """,
+                count: 0,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)
+                )
+            );
         }
 
         [Fact]
@@ -100,7 +114,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
                         var t = (1, [||]a: a);
                     }
                 }
-                """, count: 0, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7)));
+                """,
+                count: 0,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7)
+                )
+            );
         }
 
         [Fact]
@@ -128,7 +147,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
                         var t = ( /*before*/  /*middle*/ a /*after*/, /*before*/  /*middle*/ b /*after*/);
                     }
                 }
-                """, parseOptions: s_parseOptions);
+                """,
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
@@ -154,7 +175,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
                         var t = new { a, 2 };
                     }
                 }
-                """, parseOptions: s_parseOptions);
+                """,
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24480")]
@@ -170,7 +193,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
                         var t = new { [||]alice=alice, alice };
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: s_parseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: s_parseOptions)
+            );
         }
 
         [Fact]
@@ -198,7 +223,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
                         var t = new { /*before*/  /*middle*/ a /*after*/, /*before*/  /*middle*/ b /*after*/ };
                     }
                 }
-                """, parseOptions: s_parseOptions);
+                """,
+                parseOptions: s_parseOptions
+            );
         }
     }
 }

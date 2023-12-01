@@ -21,8 +21,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 /// </remarks>
 public class WarningsConfiguration
 {
-    private ImmutableSortedDictionary<int, (WarningBehavior? Behavior, LogLevel? Level)> _explicitBehaviors
-        = ImmutableSortedDictionary<int, (WarningBehavior? Behavior, LogLevel? Level)>.Empty;
+    private ImmutableSortedDictionary<
+        int,
+        (WarningBehavior? Behavior, LogLevel? Level)
+    > _explicitBehaviors = ImmutableSortedDictionary<
+        int,
+        (WarningBehavior? Behavior, LogLevel? Level)
+    >.Empty;
 
     private WarningBehavior _defaultBehavior = WarningBehavior.Log;
 
@@ -31,9 +36,7 @@ public class WarningsConfiguration
     /// <summary>
     ///     Creates a new, empty configuration, with all options set to their defaults.
     /// </summary>
-    public WarningsConfiguration()
-    {
-    }
+    public WarningsConfiguration() { }
 
     /// <summary>
     ///     Called by a derived class constructor when implementing the <see cref="Clone" /> method.
@@ -49,14 +52,12 @@ public class WarningsConfiguration
     ///     Override this method in a derived class to ensure that any clone created is also of that class.
     /// </summary>
     /// <returns>A clone of this instance, which can be modified before being returned as immutable.</returns>
-    protected virtual WarningsConfiguration Clone()
-        => new(this);
+    protected virtual WarningsConfiguration Clone() => new(this);
 
     /// <summary>
     ///     The option set from the <see cref="DefaultBehavior" /> method.
     /// </summary>
-    public virtual WarningBehavior DefaultBehavior
-        => _defaultBehavior;
+    public virtual WarningBehavior DefaultBehavior => _defaultBehavior;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -87,11 +88,15 @@ public class WarningsConfiguration
     /// <returns>A new instance with the behaviors set.</returns>
     public virtual WarningsConfiguration WithExplicit(
         IEnumerable<EventId> eventIds,
-        WarningBehavior warningBehavior)
+        WarningBehavior warningBehavior
+    )
     {
         var clone = Clone();
 
-        var builder = ImmutableSortedDictionary.CreateBuilder<int, (WarningBehavior? Behavior, LogLevel? Level)>();
+        var builder = ImmutableSortedDictionary.CreateBuilder<
+            int,
+            (WarningBehavior? Behavior, LogLevel? Level)
+        >();
         builder.AddRange(clone._explicitBehaviors);
         foreach (var eventId in eventIds)
         {
@@ -119,11 +124,15 @@ public class WarningsConfiguration
     /// <param name="eventsAndLevels">The event IDs and corresponding log levels to set.</param>
     /// <returns>A new instance with the behaviors set.</returns>
     public virtual WarningsConfiguration WithExplicit(
-        IEnumerable<(EventId Id, LogLevel Level)> eventsAndLevels)
+        IEnumerable<(EventId Id, LogLevel Level)> eventsAndLevels
+    )
     {
         var clone = Clone();
 
-        var builder = ImmutableSortedDictionary.CreateBuilder<int, (WarningBehavior? Behavior, LogLevel? Level)>();
+        var builder = ImmutableSortedDictionary.CreateBuilder<
+            int,
+            (WarningBehavior? Behavior, LogLevel? Level)
+        >();
         builder.AddRange(clone._explicitBehaviors);
 
         foreach (var (id, level) in eventsAndLevels)
@@ -140,8 +149,8 @@ public class WarningsConfiguration
     ///     Gets the <see cref="WarningBehavior" /> set for the given event ID, or <see langword="null" />
     ///     if no explicit behavior has been set.
     /// </summary>
-    public virtual WarningBehavior? GetBehavior(EventId eventId)
-        => _explicitBehaviors.TryGetValue(eventId.Id, out var warningBehavior)
+    public virtual WarningBehavior? GetBehavior(EventId eventId) =>
+        _explicitBehaviors.TryGetValue(eventId.Id, out var warningBehavior)
             ? warningBehavior.Behavior
             : null;
 
@@ -150,8 +159,8 @@ public class WarningsConfiguration
     ///     if no explicit behavior has been set.
     /// </summary>
     /// <returns>The <see cref="LogLevel" /> set for the given event ID.</returns>
-    public virtual LogLevel? GetLevel(EventId eventId)
-        => _explicitBehaviors.TryGetValue(eventId.Id, out var warningBehavior)
+    public virtual LogLevel? GetLevel(EventId eventId) =>
+        _explicitBehaviors.TryGetValue(eventId.Id, out var warningBehavior)
             ? warningBehavior.Level
             : null;
 
@@ -163,8 +172,11 @@ public class WarningsConfiguration
     /// <param name="eventId">The event ID for which the behavior should be set.</param>
     /// <param name="warningBehavior">The behavior to set.</param>
     /// <returns>A new instance with the behavior set, or this instance if a behavior was already set.</returns>
-    public virtual WarningsConfiguration TryWithExplicit(EventId eventId, WarningBehavior warningBehavior)
-        => _explicitBehaviors.ContainsKey(eventId.Id)
+    public virtual WarningsConfiguration TryWithExplicit(
+        EventId eventId,
+        WarningBehavior warningBehavior
+    ) =>
+        _explicitBehaviors.ContainsKey(eventId.Id)
             ? this
             : WithExplicit(new[] { eventId }, warningBehavior);
 
@@ -174,10 +186,10 @@ public class WarningsConfiguration
     /// </summary>
     /// <param name="other">The other configuration object.</param>
     /// <returns>A value indicating whether all of the options that require a new service provider are the same.</returns>
-    public virtual bool ShouldUseSameServiceProvider(WarningsConfiguration other)
-        => _defaultBehavior == other._defaultBehavior
-            && _explicitBehaviors.Count == other._explicitBehaviors.Count
-            && _explicitBehaviors.SequenceEqual(other._explicitBehaviors);
+    public virtual bool ShouldUseSameServiceProvider(WarningsConfiguration other) =>
+        _defaultBehavior == other._defaultBehavior
+        && _explicitBehaviors.Count == other._explicitBehaviors.Count
+        && _explicitBehaviors.SequenceEqual(other._explicitBehaviors);
 
     /// <summary>
     ///     Returns a hash code created from any options that would cause a new <see cref="IServiceProvider" />

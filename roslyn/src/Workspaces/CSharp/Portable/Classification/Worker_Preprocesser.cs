@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Classification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Classification
 {
@@ -128,9 +128,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (node is ParenthesizedExpressionSyntax parenExpression)
             {
                 // (true)
-                AddClassification(parenExpression.OpenParenToken, ClassificationTypeNames.Punctuation);
+                AddClassification(
+                    parenExpression.OpenParenToken,
+                    ClassificationTypeNames.Punctuation
+                );
                 ClassifyPreprocessorExpression(parenExpression.Expression);
-                AddClassification(parenExpression.CloseParenToken, ClassificationTypeNames.Punctuation);
+                AddClassification(
+                    parenExpression.CloseParenToken,
+                    ClassificationTypeNames.Punctuation
+                );
             }
             else if (node is PrefixUnaryExpressionSyntax prefixExpression)
             {
@@ -293,7 +299,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             AddClassification(node.HashToken, ClassificationTypeNames.PreprocessorKeyword);
             AddClassification(node.PragmaKeyword, ClassificationTypeNames.PreprocessorKeyword);
             AddClassification(node.WarningKeyword, ClassificationTypeNames.PreprocessorKeyword);
-            AddClassification(node.DisableOrRestoreKeyword, ClassificationTypeNames.PreprocessorKeyword);
+            AddClassification(
+                node.DisableOrRestoreKeyword,
+                ClassificationTypeNames.PreprocessorKeyword
+            );
 
             foreach (var nodeOrToken in node.ErrorCodes.GetWithSeparators())
             {

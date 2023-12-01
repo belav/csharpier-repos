@@ -87,7 +87,11 @@ public class EndToEndBenchmarks
         destination.Flush();
     }
 
-    static Task WriteInRandomChunks(ReadOnlyMemory<byte> source, PipeWriter destination, CancellationToken cancellationToken)
+    static Task WriteInRandomChunks(
+        ReadOnlyMemory<byte> source,
+        PipeWriter destination,
+        CancellationToken cancellationToken
+    )
     {
         var value = source.Span;
         var rand = Random.Shared;
@@ -103,7 +107,11 @@ public class EndToEndBenchmarks
         return destination.FlushAsync(cancellationToken).AsTask();
     }
 
-    static async Task WriteInRandomChunksAsync(ReadOnlyMemory<byte> value, Stream destination, CancellationToken cancellationToken)
+    static async Task WriteInRandomChunksAsync(
+        ReadOnlyMemory<byte> value,
+        Stream destination,
+        CancellationToken cancellationToken
+    )
     {
         var rand = Random.Shared;
         while (!value.IsEmpty)
@@ -119,15 +127,32 @@ public class EndToEndBenchmarks
     public async Task StreamSync()
     {
         ReadOnlySequence<byte> body;
-        using (var oc = new OutputCacheStream(Stream.Null, _options.MaximumBodySize, StreamUtilities.BodySegmentSize, _noop))
+        using (
+            var oc = new OutputCacheStream(
+                Stream.Null,
+                _options.MaximumBodySize,
+                StreamUtilities.BodySegmentSize,
+                _noop
+            )
+        )
         {
             WriteInRandomChunks(Payload.Span, oc);
             body = oc.GetCachedResponseBody();
         }
-        var entry = new OutputCacheEntry(DateTimeOffset.UtcNow, StatusCodes.Status200OK)
-            .CopyHeadersFrom(_headers);
+        var entry = new OutputCacheEntry(
+            DateTimeOffset.UtcNow,
+            StatusCodes.Status200OK
+        ).CopyHeadersFrom(_headers);
         entry.SetBody(body, recycleBuffers: true);
-        await OutputCacheEntryFormatter.StoreAsync(Key, entry, _tags, _options.DefaultExpirationTimeSpan, _store, NullLogger.Instance, CancellationToken.None);
+        await OutputCacheEntryFormatter.StoreAsync(
+            Key,
+            entry,
+            _tags,
+            _options.DefaultExpirationTimeSpan,
+            _store,
+            NullLogger.Instance,
+            CancellationToken.None
+        );
         entry.Dispose();
     }
 
@@ -135,15 +160,32 @@ public class EndToEndBenchmarks
     public async Task StreamAsync()
     {
         ReadOnlySequence<byte> body;
-        using (var oc = new OutputCacheStream(Stream.Null, _options.MaximumBodySize, StreamUtilities.BodySegmentSize, _noop))
+        using (
+            var oc = new OutputCacheStream(
+                Stream.Null,
+                _options.MaximumBodySize,
+                StreamUtilities.BodySegmentSize,
+                _noop
+            )
+        )
         {
             await WriteInRandomChunksAsync(Payload, oc, CancellationToken.None);
             body = oc.GetCachedResponseBody();
         }
-        var entry = new OutputCacheEntry(DateTimeOffset.UtcNow, StatusCodes.Status200OK)
-            .CopyHeadersFrom(_headers);
+        var entry = new OutputCacheEntry(
+            DateTimeOffset.UtcNow,
+            StatusCodes.Status200OK
+        ).CopyHeadersFrom(_headers);
         entry.SetBody(body, recycleBuffers: true);
-        await OutputCacheEntryFormatter.StoreAsync(Key, entry, _tags, _options.DefaultExpirationTimeSpan, _store, NullLogger.Instance, CancellationToken.None);
+        await OutputCacheEntryFormatter.StoreAsync(
+            Key,
+            entry,
+            _tags,
+            _options.DefaultExpirationTimeSpan,
+            _store,
+            NullLogger.Instance,
+            CancellationToken.None
+        );
         entry.Dispose();
     }
 
@@ -151,16 +193,33 @@ public class EndToEndBenchmarks
     public async Task WriterAsync()
     {
         ReadOnlySequence<byte> body;
-        using (var oc = new OutputCacheStream(Stream.Null, _options.MaximumBodySize, StreamUtilities.BodySegmentSize, _noop))
+        using (
+            var oc = new OutputCacheStream(
+                Stream.Null,
+                _options.MaximumBodySize,
+                StreamUtilities.BodySegmentSize,
+                _noop
+            )
+        )
         {
             var pipe = PipeWriter.Create(oc, new StreamPipeWriterOptions(leaveOpen: true));
             await WriteInRandomChunks(Payload, pipe, CancellationToken.None);
             body = oc.GetCachedResponseBody();
         }
-        var entry = new OutputCacheEntry(DateTimeOffset.UtcNow, StatusCodes.Status200OK)
-            .CopyHeadersFrom(_headers);
+        var entry = new OutputCacheEntry(
+            DateTimeOffset.UtcNow,
+            StatusCodes.Status200OK
+        ).CopyHeadersFrom(_headers);
         entry.SetBody(body, recycleBuffers: true);
-        await OutputCacheEntryFormatter.StoreAsync(Key, entry, _tags, _options.DefaultExpirationTimeSpan, _store, NullLogger.Instance, CancellationToken.None);
+        await OutputCacheEntryFormatter.StoreAsync(
+            Key,
+            entry,
+            _tags,
+            _options.DefaultExpirationTimeSpan,
+            _store,
+            NullLogger.Instance,
+            CancellationToken.None
+        );
         entry.Dispose();
     }
 
@@ -236,11 +295,18 @@ public class EndToEndBenchmarks
     {
         private readonly string _key;
         private byte[]? _payload;
+
         public DummyStore(string key) => _key = key;
 
-        ValueTask IOutputCacheStore.EvictByTagAsync(string tag, CancellationToken cancellationToken) => default;
+        ValueTask IOutputCacheStore.EvictByTagAsync(
+            string tag,
+            CancellationToken cancellationToken
+        ) => default;
 
-        ValueTask<byte[]?> IOutputCacheStore.GetAsync(string key, CancellationToken cancellationToken)
+        ValueTask<byte[]?> IOutputCacheStore.GetAsync(
+            string key,
+            CancellationToken cancellationToken
+        )
         {
             if (key != _key)
             {
@@ -249,7 +315,13 @@ public class EndToEndBenchmarks
             return new(_payload);
         }
 
-        ValueTask IOutputCacheStore.SetAsync(string key, byte[]? value, string[]? tags, TimeSpan validFor, CancellationToken cancellationToken)
+        ValueTask IOutputCacheStore.SetAsync(
+            string key,
+            byte[]? value,
+            string[]? tags,
+            TimeSpan validFor,
+            CancellationToken cancellationToken
+        )
         {
             if (key != _key)
             {
@@ -273,14 +345,25 @@ public class EndToEndBenchmarks
                 ArrayPool<byte>.Shared.Return(arr);
             }
         }
+
         byte[] _buffer;
+
         public NullPipeWriter(int size) => _buffer = ArrayPool<byte>.Shared.Rent(size);
+
         public override void Advance(int bytes) { }
+
         public override Span<byte> GetSpan(int sizeHint = 0) => _buffer;
+
         public override Memory<byte> GetMemory(int sizeHint = 0) => _buffer;
+
         public override void Complete(Exception? exception = null) { }
+
         public override void CancelPendingFlush() { }
+
         public override ValueTask CompleteAsync(Exception? exception = null) => default;
-        public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default) => default;
+
+        public override ValueTask<FlushResult> FlushAsync(
+            CancellationToken cancellationToken = default
+        ) => default;
     }
 }

@@ -5,46 +5,80 @@
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.MakeLocalFunctionStatic), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.MakeLocalFunctionStatic
+        ),
+        Shared
+    ]
     internal sealed class MakeLocalFunctionStaticCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public MakeLocalFunctionStaticCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public MakeLocalFunctionStaticCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, textSpan, cancellationToken) = context;
 
-            var syntaxTree = (await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false))!;
-            if (!MakeLocalFunctionStaticHelper.IsStaticLocalFunctionSupported(syntaxTree.Options.LanguageVersion()))
+            var syntaxTree = (
+                await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false)
+            )!;
+            if (
+                !MakeLocalFunctionStaticHelper.IsStaticLocalFunctionSupported(
+                    syntaxTree.Options.LanguageVersion()
+                )
+            )
                 return;
 
-            var localFunction = await context.TryGetRelevantNodeAsync<LocalFunctionStatementSyntax>().ConfigureAwait(false);
+            var localFunction = await context
+                .TryGetRelevantNodeAsync<LocalFunctionStatementSyntax>()
+                .ConfigureAwait(false);
             if (localFunction == null)
                 return;
 
             if (localFunction.Modifiers.Any(SyntaxKind.StaticKeyword))
                 return;
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            if (MakeLocalFunctionStaticHelper.CanMakeLocalFunctionStaticByRefactoringCaptures(localFunction, semanticModel, out var captures))
+            if (
+                MakeLocalFunctionStaticHelper.CanMakeLocalFunctionStaticByRefactoringCaptures(
+                    localFunction,
+                    semanticModel,
+                    out var captures
+                )
+            )
             {
-                context.RegisterRefactoring(CodeAction.Create(
-                    CSharpAnalyzersResources.Make_local_function_static,
-                    cancellationToken => MakeLocalFunctionStaticCodeFixHelper.MakeLocalFunctionStaticAsync(document, localFunction, captures, context.Options, cancellationToken),
-                    nameof(CSharpAnalyzersResources.Make_local_function_static)));
+                context.RegisterRefactoring(
+                    CodeAction.Create(
+                        CSharpAnalyzersResources.Make_local_function_static,
+                        cancellationToken =>
+                            MakeLocalFunctionStaticCodeFixHelper.MakeLocalFunctionStaticAsync(
+                                document,
+                                localFunction,
+                                captures,
+                                context.Options,
+                                cancellationToken
+                            ),
+                        nameof(CSharpAnalyzersResources.Make_local_function_static)
+                    )
+                );
             }
         }
     }

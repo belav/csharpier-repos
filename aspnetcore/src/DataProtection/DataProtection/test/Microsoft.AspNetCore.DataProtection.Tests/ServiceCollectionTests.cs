@@ -12,10 +12,7 @@ public class ServiceCollectionTests
     [Fact]
     public void AddsOptions()
     {
-        var services = new ServiceCollection()
-            .AddDataProtection()
-            .Services
-            .BuildServiceProvider();
+        var services = new ServiceCollection().AddDataProtection().Services.BuildServiceProvider();
 
         Assert.NotNull(services.GetService<IOptions<DataProtectionOptions>>());
     }
@@ -37,15 +34,14 @@ public class ServiceCollectionTests
 
         Assert.Equal(
             services1.GetRequiredService<ILoggerFactory>().GetType(),
-            services2.GetRequiredService<ILoggerFactory>().GetType());
+            services2.GetRequiredService<ILoggerFactory>().GetType()
+        );
     }
 
     [Fact]
     public void CanResolveAllRegisteredServices()
     {
-        var serviceCollection = new ServiceCollection()
-            .AddDataProtection()
-            .Services;
+        var serviceCollection = new ServiceCollection().AddDataProtection().Services;
         var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
         Assert.Null(services.GetService<ILoggerFactory>());

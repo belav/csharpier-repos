@@ -6,8 +6,8 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp.CodeRefactorings.AddMissingImports;
+using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
@@ -23,14 +23,22 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
     [Trait(Traits.Feature, Traits.Features.AddMissingImports)]
     public class CSharpAddMissingImportsRefactoringProviderTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        )
         {
             var testWorkspace = (TestWorkspace)workspace;
-            var pasteTrackingService = testWorkspace.ExportProvider.GetExportedValue<PasteTrackingService>();
+            var pasteTrackingService = testWorkspace
+                .ExportProvider
+                .GetExportedValue<PasteTrackingService>();
             return new CSharpAddMissingImportsRefactoringProvider(pasteTrackingService);
         }
 
-        protected override void InitializeWorkspace(TestWorkspace workspace, TestParameters parameters)
+        protected override void InitializeWorkspace(
+            TestWorkspace workspace,
+            TestParameters parameters
+        )
         {
             // Treat the span being tested as the pasted span
             var hostDocument = workspace.Documents.First();
@@ -38,25 +46,32 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
             if (!pastedTextSpan.IsEmpty)
             {
-                var pasteTrackingService = workspace.ExportProvider.GetExportedValue<PasteTrackingService>();
+                var pasteTrackingService = workspace
+                    .ExportProvider
+                    .GetExportedValue<PasteTrackingService>();
 
                 // This tests the paste tracking service's resiliancy to failing when multiple pasted spans are
                 // registered consecutively and that the last registered span wins.
                 pasteTrackingService.RegisterPastedTextSpan(hostDocument.GetTextBuffer(), default);
-                pasteTrackingService.RegisterPastedTextSpan(hostDocument.GetTextBuffer(), pastedTextSpan);
+                pasteTrackingService.RegisterPastedTextSpan(
+                    hostDocument.GetTextBuffer(),
+                    pastedTextSpan
+                );
             }
         }
 
         private Task TestInRegularAndScriptAsync(
-            string initialMarkup, string expectedMarkup,
-            bool placeSystemNamespaceFirst, bool separateImportDirectiveGroups)
+            string initialMarkup,
+            string expectedMarkup,
+            bool placeSystemNamespaceFirst,
+            bool separateImportDirectiveGroups
+        )
         {
-            var options =
-                new OptionsCollection(GetLanguage())
-                {
-                    { GenerationOptions.PlaceSystemNamespaceFirst, placeSystemNamespaceFirst },
-                    { GenerationOptions.SeparateImportDirectiveGroups, separateImportDirectiveGroups },
-                };
+            var options = new OptionsCollection(GetLanguage())
+            {
+                { GenerationOptions.PlaceSystemNamespaceFirst, placeSystemNamespaceFirst },
+                { GenerationOptions.SeparateImportDirectiveGroups, separateImportDirectiveGroups },
+            };
             return TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: options);
         }
 
@@ -137,7 +152,12 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, placeSystemNamespaceFirst: true, separateImportDirectiveGroups: false);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                placeSystemNamespaceFirst: true,
+                separateImportDirectiveGroups: false
+            );
         }
 
         [WpfFact]
@@ -185,7 +205,12 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, placeSystemNamespaceFirst: false, separateImportDirectiveGroups: false);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                placeSystemNamespaceFirst: false,
+                separateImportDirectiveGroups: false
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/pull/42221")]
@@ -234,7 +259,12 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, placeSystemNamespaceFirst: false, separateImportDirectiveGroups: true);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                placeSystemNamespaceFirst: false,
+                separateImportDirectiveGroups: true
+            );
         }
 
         [WpfFact]
@@ -385,7 +415,12 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, placeSystemNamespaceFirst: false, separateImportDirectiveGroups: false);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                placeSystemNamespaceFirst: false,
+                separateImportDirectiveGroups: false
+            );
         }
     }
 }

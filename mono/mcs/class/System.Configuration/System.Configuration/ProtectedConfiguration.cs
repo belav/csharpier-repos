@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,39 +26,47 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
+using System.Xml;
 
 namespace System.Configuration
 {
-	public static class ProtectedConfiguration
-	{
-		public const string DataProtectionProviderName = "DataProtectionConfigurationProvider";
-		public const string ProtectedDataSectionName = "configProtectedData";
-		public const string RsaProviderName = "RsaProtectedConfigurationProvider";
+    public static class ProtectedConfiguration
+    {
+        public const string DataProtectionProviderName = "DataProtectionConfigurationProvider";
+        public const string ProtectedDataSectionName = "configProtectedData";
+        public const string RsaProviderName = "RsaProtectedConfigurationProvider";
 
-		public static string DefaultProvider {
-			get { return Section.DefaultProvider; }
-		}
+        public static string DefaultProvider
+        {
+            get { return Section.DefaultProvider; }
+        }
 
-		public static ProtectedConfigurationProviderCollection Providers {
-			get { return Section.GetAllProviders(); }
-		}
+        public static ProtectedConfigurationProviderCollection Providers
+        {
+            get { return Section.GetAllProviders(); }
+        }
 
-		internal static ProtectedConfigurationSection Section {
-			get { return (ProtectedConfigurationSection)ConfigurationManager.GetSection ("configProtectedData"); }
-		}
+        internal static ProtectedConfigurationSection Section
+        {
+            get
+            {
+                return (ProtectedConfigurationSection)
+                    ConfigurationManager.GetSection("configProtectedData");
+            }
+        }
 
-		internal static ProtectedConfigurationProvider GetProvider (string name, bool throwOnError)
-		{
-			ProtectedConfigurationProvider p = Providers[name];
+        internal static ProtectedConfigurationProvider GetProvider(string name, bool throwOnError)
+        {
+            ProtectedConfigurationProvider p = Providers[name];
 
-			if (p == null && throwOnError)
-				throw new Exception (String.Format ("The protection provider '{0}' was not found.", name));
+            if (p == null && throwOnError)
+                throw new Exception(
+                    String.Format("The protection provider '{0}' was not found.", name)
+                );
 
-			return p;
-		}
-	}
-
+            return p;
+        }
+    }
 }

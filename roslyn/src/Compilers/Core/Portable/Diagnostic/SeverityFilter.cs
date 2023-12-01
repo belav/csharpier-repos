@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             };
         }
 
-        internal static DiagnosticSeverity GetMinimumUnfilteredSeverity(this SeverityFilter severityFilter)
+        internal static DiagnosticSeverity GetMinimumUnfilteredSeverity(
+            this SeverityFilter severityFilter
+        )
         {
             if (!severityFilter.Contains(ReportDiagnostic.Hidden))
             {

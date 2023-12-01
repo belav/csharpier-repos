@@ -14,18 +14,24 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [Export(typeof(IVSTypeScriptStreamingFindUsagesPresenterAccessor)), Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class VSTypeScriptStreamingFindUsagesPresenterAccessor(IStreamingFindUsagesPresenter underlyingObject) : IVSTypeScriptStreamingFindUsagesPresenterAccessor
+    internal sealed class VSTypeScriptStreamingFindUsagesPresenterAccessor(
+        IStreamingFindUsagesPresenter underlyingObject
+    ) : IVSTypeScriptStreamingFindUsagesPresenterAccessor
     {
         private readonly IStreamingFindUsagesPresenter _underlyingObject = underlyingObject;
 
-        public (IVSTypeScriptFindUsagesContext context, CancellationToken cancellationToken) StartSearch(
-            string title, bool supportsReferences)
+        public (
+            IVSTypeScriptFindUsagesContext context,
+            CancellationToken cancellationToken
+        ) StartSearch(string title, bool supportsReferences)
         {
-            var (context, cancellationToken) = _underlyingObject.StartSearch(title, supportsReferences);
+            var (context, cancellationToken) = _underlyingObject.StartSearch(
+                title,
+                supportsReferences
+            );
             return (new VSTypeScriptFindUsagesContext(context), cancellationToken);
         }
 
-        public void ClearAll()
-            => _underlyingObject.ClearAll();
+        public void ClearAll() => _underlyingObject.ClearAll();
     }
 }

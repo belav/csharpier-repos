@@ -3,22 +3,20 @@
 using System;
 using Xunit;
 
-public class xa {
-
-  [Fact]
-  public static int TestEntryPoint() {
-
-    try {
-
-      x.doX(null);
-
-    } catch(NullReferenceException) {
-	//Expected
-        return 100;
+public class xa
+{
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        try
+        {
+            x.doX(null);
+        }
+        catch (NullReferenceException)
+        {
+            //Expected
+            return 100;
+        }
+        return 0;
     }
-    return 0;
-  }
-
 }
-
-  

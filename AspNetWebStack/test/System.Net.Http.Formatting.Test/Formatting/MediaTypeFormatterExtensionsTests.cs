@@ -14,28 +14,55 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(typeof(MediaTypeFormatterExtensions), TypeAssert.TypeProperties.IsPublicVisibleClass | TypeAssert.TypeProperties.IsStatic);
+            Assert
+                .Type
+                .HasProperties(
+                    typeof(MediaTypeFormatterExtensions),
+                    TypeAssert.TypeProperties.IsPublicVisibleClass
+                        | TypeAssert.TypeProperties.IsStatic
+                );
         }
 
         [Fact]
         public void AddQueryStringMappingThrowsWithNullThis()
         {
             MediaTypeFormatter formatter = null;
-            Assert.ThrowsArgumentNull(() => formatter.AddQueryStringMapping("name", "value", new MediaTypeHeaderValue("application/xml")), "formatter");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    formatter.AddQueryStringMapping(
+                        "name",
+                        "value",
+                        new MediaTypeHeaderValue("application/xml")
+                    ),
+                "formatter"
+            );
         }
 
         [Fact]
         public void AddQueryStringMapping1ThrowsWithNullThis()
         {
             MediaTypeFormatter formatter = null;
-            Assert.ThrowsArgumentNull(() => formatter.AddQueryStringMapping("name", "value", "application/xml"), "formatter");
+            Assert.ThrowsArgumentNull(
+                () => formatter.AddQueryStringMapping("name", "value", "application/xml"),
+                "formatter"
+            );
         }
 
         [Fact]
         public void AddRequestHeaderMappingThrowsWithNullThis()
         {
             MediaTypeFormatter formatter = null;
-            Assert.ThrowsArgumentNull(() => formatter.AddRequestHeaderMapping("name", "value", StringComparison.CurrentCulture, true, new MediaTypeHeaderValue("application/xml")), "formatter");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    formatter.AddRequestHeaderMapping(
+                        "name",
+                        "value",
+                        StringComparison.CurrentCulture,
+                        true,
+                        new MediaTypeHeaderValue("application/xml")
+                    ),
+                "formatter"
+            );
         }
 
         [Fact]
@@ -43,8 +70,16 @@ namespace System.Net.Http.Formatting
         {
             MediaTypeFormatter formatter = new MockMediaTypeFormatter();
             Assert.Empty(formatter.MediaTypeMappings);
-            formatter.AddRequestHeaderMapping("name", "value", StringComparison.CurrentCulture, true, new MediaTypeHeaderValue("application/xml"));
-            IEnumerable<RequestHeaderMapping> mappings = formatter.MediaTypeMappings.OfType<RequestHeaderMapping>();
+            formatter.AddRequestHeaderMapping(
+                "name",
+                "value",
+                StringComparison.CurrentCulture,
+                true,
+                new MediaTypeHeaderValue("application/xml")
+            );
+            IEnumerable<RequestHeaderMapping> mappings = formatter
+                .MediaTypeMappings
+                .OfType<RequestHeaderMapping>();
             RequestHeaderMapping mapping = Assert.Single(mappings);
             Assert.Equal("name", mapping.HeaderName);
             Assert.Equal("value", mapping.HeaderValue);
@@ -57,7 +92,17 @@ namespace System.Net.Http.Formatting
         public void AddRequestHeaderMapping1ThrowsWithNullThis()
         {
             MediaTypeFormatter formatter = null;
-            Assert.ThrowsArgumentNull(() => formatter.AddRequestHeaderMapping("name", "value", StringComparison.CurrentCulture, true, "application/xml"), "formatter");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    formatter.AddRequestHeaderMapping(
+                        "name",
+                        "value",
+                        StringComparison.CurrentCulture,
+                        true,
+                        "application/xml"
+                    ),
+                "formatter"
+            );
         }
 
         [Fact]
@@ -65,8 +110,16 @@ namespace System.Net.Http.Formatting
         {
             MediaTypeFormatter formatter = new MockMediaTypeFormatter();
             Assert.Empty(formatter.MediaTypeMappings);
-            formatter.AddRequestHeaderMapping("name", "value", StringComparison.CurrentCulture, true, "application/xml");
-            IEnumerable<RequestHeaderMapping> mappings = formatter.MediaTypeMappings.OfType<RequestHeaderMapping>();
+            formatter.AddRequestHeaderMapping(
+                "name",
+                "value",
+                StringComparison.CurrentCulture,
+                true,
+                "application/xml"
+            );
+            IEnumerable<RequestHeaderMapping> mappings = formatter
+                .MediaTypeMappings
+                .OfType<RequestHeaderMapping>();
             RequestHeaderMapping mapping = Assert.Single(mappings);
             Assert.Equal("name", mapping.HeaderName);
             Assert.Equal("value", mapping.HeaderValue);

@@ -1,28 +1,30 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapMessage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
-    using System.Web.Services;
-    using System.Xml.Serialization;
+namespace System.Web.Services.Protocols
+{
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.IO;
     using System.ComponentModel;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
     using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Web.Services;
     using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
     /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    public abstract class SoapMessage {
+    public abstract class SoapMessage
+    {
         SoapMessageStage stage;
         SoapHeaderCollection headers = new SoapHeaderCollection();
         Stream stream;
@@ -34,11 +36,13 @@ namespace System.Web.Services.Protocols {
 
         internal SoapMessage() { }
 
-        internal void SetParameterValues(object[] parameterValues) {
+        internal void SetParameterValues(object[] parameterValues)
+        {
             this.parameterValues = parameterValues;
         }
 
-        internal object[] GetParameterValues() {
+        internal object[] GetParameterValues()
+        {
             return parameterValues;
         }
 
@@ -46,18 +50,20 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public abstract bool OneWay {
-            get;
-        }
+        public abstract bool OneWay { get; }
 
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.GetInParameterValue"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object GetInParameterValue(int index) {
+        public object GetInParameterValue(int index)
+        {
             EnsureInStage();
             EnsureNoException();
-            if (index < 0 || index >= parameterValues.Length) throw new IndexOutOfRangeException(Res.GetString(Res.indexMustBeBetweenAnd0Inclusive, parameterValues.Length));
+            if (index < 0 || index >= parameterValues.Length)
+                throw new IndexOutOfRangeException(
+                    Res.GetString(Res.indexMustBeBetweenAnd0Inclusive, parameterValues.Length)
+                );
             return parameterValues[index];
         }
 
@@ -65,15 +71,22 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object GetOutParameterValue(int index) {
+        public object GetOutParameterValue(int index)
+        {
             EnsureOutStage();
             EnsureNoException();
-            if (!MethodInfo.IsVoid) {
+            if (!MethodInfo.IsVoid)
+            {
                 if (index == int.MaxValue)
-                    throw new IndexOutOfRangeException(Res.GetString(Res.indexMustBeBetweenAnd0Inclusive, parameterValues.Length));
+                    throw new IndexOutOfRangeException(
+                        Res.GetString(Res.indexMustBeBetweenAnd0Inclusive, parameterValues.Length)
+                    );
                 index++;
             }
-            if (index < 0 || index >= parameterValues.Length) throw new IndexOutOfRangeException(Res.GetString(Res.indexMustBeBetweenAnd0Inclusive, parameterValues.Length));
+            if (index < 0 || index >= parameterValues.Length)
+                throw new IndexOutOfRangeException(
+                    Res.GetString(Res.indexMustBeBetweenAnd0Inclusive, parameterValues.Length)
+                );
             return parameterValues[index];
         }
 
@@ -81,10 +94,12 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object GetReturnValue() {
+        public object GetReturnValue()
+        {
             EnsureOutStage();
             EnsureNoException();
-            if (MethodInfo.IsVoid) throw new InvalidOperationException(Res.GetString(Res.WebNoReturnValue));
+            if (MethodInfo.IsVoid)
+                throw new InvalidOperationException(Res.GetString(Res.WebNoReturnValue));
             return parameterValues[0];
         }
 
@@ -93,21 +108,28 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         protected abstract void EnsureOutStage();
+
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.EnsureInStage"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         protected abstract void EnsureInStage();
 
-        void EnsureNoException() {
-            if (exception != null) throw new InvalidOperationException(Res.GetString(Res.WebCannotAccessValue), exception);
+        void EnsureNoException()
+        {
+            if (exception != null)
+                throw new InvalidOperationException(
+                    Res.GetString(Res.WebCannotAccessValue),
+                    exception
+                );
         }
 
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.Exception"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapException Exception {
+        public SoapException Exception
+        {
             get { return exception; }
             set { exception = value; }
         }
@@ -116,9 +138,7 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public abstract LogicalMethodInfo MethodInfo {
-            get;
-        }
+        public abstract LogicalMethodInfo MethodInfo { get; }
 
         /*
         internal abstract SoapReflectedExtension[] Extensions {
@@ -134,20 +154,27 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected void EnsureStage(SoapMessageStage stage) {
-            if ((this.stage & stage) == 0) throw new InvalidOperationException(Res.GetString(Res.WebCannotAccessValueStage, this.stage.ToString()));
+        protected void EnsureStage(SoapMessageStage stage)
+        {
+            if ((this.stage & stage) == 0)
+                throw new InvalidOperationException(
+                    Res.GetString(Res.WebCannotAccessValueStage, this.stage.ToString())
+                );
         }
 
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.Headers"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapHeaderCollection Headers {
+        public SoapHeaderCollection Headers
+        {
             get { return headers; }
         }
 
-        internal void SetStream(Stream stream) {
-            if (extensionStream != null) {
+        internal void SetStream(Stream stream)
+        {
+            if (extensionStream != null)
+            {
                 extensionStream.SetInnerStream(stream);
                 extensionStream.SetStreamReady();
                 // The extension stream should now be referenced by either this.stream
@@ -158,7 +185,8 @@ namespace System.Web.Services.Protocols {
                 this.stream = stream;
         }
 
-        internal void SetExtensionStream(SoapExtensionStream extensionStream) {
+        internal void SetExtensionStream(SoapExtensionStream extensionStream)
+        {
             this.extensionStream = extensionStream;
             this.stream = extensionStream;
         }
@@ -167,7 +195,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Stream Stream {
+        public Stream Stream
+        {
             get { return stream; }
         }
 
@@ -175,26 +204,46 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ContentType {
-            get { EnsureStage(SoapMessageStage.BeforeSerialize | SoapMessageStage.BeforeDeserialize); return contentType; }
-            set { EnsureStage(SoapMessageStage.BeforeSerialize | SoapMessageStage.BeforeDeserialize); contentType = value; }
+        public string ContentType
+        {
+            get
+            {
+                EnsureStage(SoapMessageStage.BeforeSerialize | SoapMessageStage.BeforeDeserialize);
+                return contentType;
+            }
+            set
+            {
+                EnsureStage(SoapMessageStage.BeforeSerialize | SoapMessageStage.BeforeDeserialize);
+                contentType = value;
+            }
         }
 
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.ContentEncoding"]/*' />
-        public string ContentEncoding {
-            get { EnsureStage(SoapMessageStage.BeforeSerialize | SoapMessageStage.BeforeDeserialize); return contentEncoding; }
-            set { EnsureStage(SoapMessageStage.BeforeSerialize | SoapMessageStage.BeforeDeserialize); contentEncoding = value; }
+        public string ContentEncoding
+        {
+            get
+            {
+                EnsureStage(SoapMessageStage.BeforeSerialize | SoapMessageStage.BeforeDeserialize);
+                return contentEncoding;
+            }
+            set
+            {
+                EnsureStage(SoapMessageStage.BeforeSerialize | SoapMessageStage.BeforeDeserialize);
+                contentEncoding = value;
+            }
         }
 
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.Stage"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapMessageStage Stage {
+        public SoapMessageStage Stage
+        {
             get { return stage; }
         }
 
-        internal void SetStage(SoapMessageStage stage) {
+        internal void SetStage(SoapMessageStage stage)
+        {
             this.stage = stage;
         }
 
@@ -202,72 +251,102 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public abstract string Url {
-            get;
-        }
+        public abstract string Url { get; }
 
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.Action"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public abstract string Action {
-            get;
-        }
+        public abstract string Action { get; }
 
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.SoapVersion"]/*' />
         [ComVisible(false)]
         [DefaultValue(SoapProtocolVersion.Default)]
-        public virtual SoapProtocolVersion SoapVersion {
+        public virtual SoapProtocolVersion SoapVersion
+        {
             get { return SoapProtocolVersion.Default; }
         }
 
-        internal static SoapExtension[] InitializeExtensions(SoapReflectedExtension[] reflectedExtensions, object[] extensionInitializers) {
+        internal static SoapExtension[] InitializeExtensions(
+            SoapReflectedExtension[] reflectedExtensions,
+            object[] extensionInitializers
+        )
+        {
             if (reflectedExtensions == null)
                 return null;
             SoapExtension[] extensions = new SoapExtension[reflectedExtensions.Length];
-            for (int i = 0; i < extensions.Length; i++) {
+            for (int i = 0; i < extensions.Length; i++)
+            {
                 extensions[i] = reflectedExtensions[i].CreateInstance(extensionInitializers[i]);
             }
             return extensions;
         }
 
-        internal void InitExtensionStreamChain(SoapExtension[] extensions) {
+        internal void InitExtensionStreamChain(SoapExtension[] extensions)
+        {
             if (extensions == null)
                 return;
-            for (int i = 0; i < extensions.Length; i++) {
+            for (int i = 0; i < extensions.Length; i++)
+            {
                 stream = extensions[i].ChainStream(stream);
             }
         }
 
-        internal void RunExtensions(SoapExtension[] extensions, bool throwOnException) {
+        internal void RunExtensions(SoapExtension[] extensions, bool throwOnException)
+        {
             if (extensions == null)
                 return;
 
-            TraceMethod caller = Tracing.On ? new TraceMethod(this, "RunExtensions", extensions, throwOnException) : null;
+            TraceMethod caller = Tracing.On
+                ? new TraceMethod(this, "RunExtensions", extensions, throwOnException)
+                : null;
 
             // Higher priority extensions (earlier in the list) run earlier for deserialization stages,
             // and later for serialization stages
-            if ((stage & (SoapMessageStage.BeforeDeserialize | SoapMessageStage.AfterDeserialize)) != 0) {
-                for (int i = 0; i < extensions.Length; i++) {
-                    if (Tracing.On) Tracing.Enter("SoapExtension", caller, new TraceMethod(extensions[i], "ProcessMessage", stage));
+            if (
+                (stage & (SoapMessageStage.BeforeDeserialize | SoapMessageStage.AfterDeserialize))
+                != 0
+            )
+            {
+                for (int i = 0; i < extensions.Length; i++)
+                {
+                    if (Tracing.On)
+                        Tracing.Enter(
+                            "SoapExtension",
+                            caller,
+                            new TraceMethod(extensions[i], "ProcessMessage", stage)
+                        );
                     extensions[i].ProcessMessage(this);
-                    if (Tracing.On) Tracing.Exit("SoapExtension", caller);
-                    if (Exception != null) {
+                    if (Tracing.On)
+                        Tracing.Exit("SoapExtension", caller);
+                    if (Exception != null)
+                    {
                         if (throwOnException)
                             throw Exception;
-                        if (Tracing.On) Tracing.ExceptionIgnore(TraceEventType.Warning, caller, Exception);
+                        if (Tracing.On)
+                            Tracing.ExceptionIgnore(TraceEventType.Warning, caller, Exception);
                     }
                 }
             }
-            else {
-                for (int i = extensions.Length - 1; i >= 0; i--) {
-                    if (Tracing.On) Tracing.Enter("SoapExtension", caller, new TraceMethod(extensions[i], "ProcessMessage", stage));
+            else
+            {
+                for (int i = extensions.Length - 1; i >= 0; i--)
+                {
+                    if (Tracing.On)
+                        Tracing.Enter(
+                            "SoapExtension",
+                            caller,
+                            new TraceMethod(extensions[i], "ProcessMessage", stage)
+                        );
                     extensions[i].ProcessMessage(this);
-                    if (Tracing.On) Tracing.Exit("SoapExtension", caller);
-                    if (Exception != null) {
+                    if (Tracing.On)
+                        Tracing.Exit("SoapExtension", caller);
+                    if (Exception != null)
+                    {
                         if (throwOnException)
                             throw Exception;
-                        if (Tracing.On) Tracing.ExceptionIgnore(TraceEventType.Warning, caller, Exception);
+                        if (Tracing.On)
+                            Tracing.ExceptionIgnore(TraceEventType.Warning, caller, Exception);
                     }
                 }
             }

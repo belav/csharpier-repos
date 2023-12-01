@@ -9,9 +9,7 @@ internal sealed class NullRouter : IRouter
 {
     public static readonly IRouter Instance = new NullRouter();
 
-    private NullRouter()
-    {
-    }
+    private NullRouter() { }
 
     public VirtualPathData? GetVirtualPath(VirtualPathContext context)
     {

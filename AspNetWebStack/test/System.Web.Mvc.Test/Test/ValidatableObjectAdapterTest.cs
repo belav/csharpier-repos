@@ -20,13 +20,16 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => 42, typeof(IValidatableObject));
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => 42, typeof(IValidatableObject));
             var validator = new ValidatableObjectAdapter(metadata, context);
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => validator.Validate(null),
-                "The model object inside the metadata claimed to be compatible with System.ComponentModel.DataAnnotations.IValidatableObject, but was actually System.Int32.");
+                "The model object inside the metadata claimed to be compatible with System.ComponentModel.DataAnnotations.IValidatableObject, but was actually System.Int32."
+            );
         }
 
         [Fact]
@@ -35,10 +38,13 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
             ValidationContext validationContext = null;
-            validatable.Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
+            validatable
+                .Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
                 .Callback<ValidationContext>(vc => validationContext = vc)
                 .Returns(Enumerable.Empty<ValidationResult>())
                 .Verifiable();
@@ -58,9 +64,12 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
-            validatable.Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
+            validatable
+                .Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
                 .Returns(Enumerable.Empty<ValidationResult>());
 
             // Act
@@ -76,9 +85,12 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
-            validatable.Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
+            validatable
+                .Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
                 .Returns(new ValidationResult[] { new ValidationResult("Error Message") });
 
             // Act
@@ -95,14 +107,19 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
-            validatable.Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
-                .Returns(new ValidationResult[]
-                {
-                    new ValidationResult("Error Message 1"),
-                    new ValidationResult("Error Message 2")
-                });
+            validatable
+                .Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
+                .Returns(
+                    new ValidationResult[]
+                    {
+                        new ValidationResult("Error Message 1"),
+                        new ValidationResult("Error Message 2")
+                    }
+                );
 
             // Act
             ModelValidationResult[] results = validator.Validate(null).ToArray();
@@ -119,10 +136,18 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
-            validatable.Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
-                .Returns(new[] { new ValidationResult("Error Message", new[] { "Property1", "Property2" }) })
+            validatable
+                .Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
+                .Returns(
+                    new[]
+                    {
+                        new ValidationResult("Error Message", new[] { "Property1", "Property2" })
+                    }
+                )
                 .Verifiable();
 
             // Act
@@ -142,7 +167,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(IValidatableObject));
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => null, typeof(IValidatableObject));
             var validator = new ValidatableObjectAdapter(metadata, context);
 
             // Act
@@ -158,9 +185,12 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
-            validatable.Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
+            validatable
+                .Setup(vo => vo.Validate(It.IsAny<ValidationContext>()))
                 .Returns(new[] { ValidationResult.Success })
                 .Verifiable();
 

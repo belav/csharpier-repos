@@ -43,7 +43,11 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(10, 10, 9)]
         [InlineData(70, 70, 69)]
         [InlineData(70, 0, 63)] // 0 (or default) max depth is treated as 64
-        public static void WriteCyclicFail(int objectHierarchyDepth, int maxDepth, int expectedPathDepth)
+        public static void WriteCyclicFail(
+            int objectHierarchyDepth,
+            int maxDepth,
+            int expectedPathDepth
+        )
         {
             int effectiveMaxDepth = maxDepth == 0 ? 64 : maxDepth;
             var rootObj = new TestClassWithCycle("root");
@@ -51,16 +55,23 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions();
             options.MaxDepth = maxDepth;
-            JsonException ex = Assert.Throws<JsonException>(() => JsonSerializer.Serialize(rootObj, options));
+            JsonException ex = Assert.Throws<JsonException>(
+                () => JsonSerializer.Serialize(rootObj, options)
+            );
 
             // Exception should contain the path and MaxDepth.
             // Since the last Parent property is null, the serializer moves onto the Children property.
-            string expectedPath = "$" + string.Concat(Enumerable.Repeat(".Parent", expectedPathDepth));
+            string expectedPath =
+                "$" + string.Concat(Enumerable.Repeat(".Parent", expectedPathDepth));
             Assert.Contains(expectedPath, ex.Path);
             Assert.Contains(effectiveMaxDepth.ToString(), ex.Message);
         }
 
-        private static TestClassWithCycle CreateObjectHierarchy(int i, int max, TestClassWithCycle previous)
+        private static TestClassWithCycle CreateObjectHierarchy(
+            int i,
+            int max,
+            TestClassWithCycle previous
+        )
         {
             if (i == max)
             {
@@ -75,7 +86,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void SimpleTypeCycle()
         {
-            TestClassWithArrayOfElementsOfTheSameClass obj = new TestClassWithArrayOfElementsOfTheSameClass();
+            TestClassWithArrayOfElementsOfTheSameClass obj =
+                new TestClassWithArrayOfElementsOfTheSameClass();
 
             // A cycle in just Types (not data) is allowed.
             string json = JsonSerializer.Serialize(obj);
@@ -140,7 +152,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             public IList<Child2> Child2IList { get; set; } = new List<Child2>();
             public List<Child2> Child2List { get; set; } = new List<Child2>();
-            public Dictionary<string, Child2> Child2Dictionary { get; set; } = new Dictionary<string, Child2>();
+            public Dictionary<string, Child2> Child2Dictionary { get; set; } =
+                new Dictionary<string, Child2>();
             public Child2 Child2 { get; set; }
         }
 

@@ -12,13 +12,24 @@ using System.Security;
 using System.Text;
 using System.Xml;
 
-
 namespace System.Xml
 {
     public interface IXmlTextReaderInitializer
     {
-        void SetInput(byte[] buffer, int offset, int count, Encoding? encoding, XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose);
-        void SetInput(Stream stream, Encoding? encoding, XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose);
+        void SetInput(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        );
+        void SetInput(
+            Stream stream,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        );
     }
 
     internal sealed class XmlUTF8TextReader : XmlBaseReader, IXmlLineInfo, IXmlTextReaderInitializer
@@ -32,6 +43,7 @@ namespace System.Xml
         private bool _buffered;
         private int _maxBytesPerRead;
         private static ReadOnlySpan<byte> CharTypeMap => // 256
+
             [
                 /*  0 (.) */
                          CharType.None,
@@ -553,23 +565,46 @@ namespace System.Xml
             _localName = new StringHandle(BufferReader);
         }
 
-        public void SetInput(byte[] buffer, int offset, int count, Encoding? encoding, XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose)
+        public void SetInput(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             ArgumentNullException.ThrowIfNull(buffer);
 
             ArgumentOutOfRangeException.ThrowIfNegative(offset);
             if (offset > buffer.Length)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, buffer.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (count > buffer.Length - offset)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                );
             MoveToInitial(quotas, onClose);
-            ArraySegment<byte> seg = EncodingStreamWrapper.ProcessBuffer(buffer, offset, count, encoding);
+            ArraySegment<byte> seg = EncodingStreamWrapper.ProcessBuffer(
+                buffer,
+                offset,
+                count,
+                encoding
+            );
             BufferReader.SetBuffer(seg.Array!, seg.Offset, seg.Count, null, null);
             _buffered = true;
         }
 
-        public void SetInput(Stream stream, Encoding? encoding, XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose)
+        public void SetInput(
+            Stream stream,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             ArgumentNullException.ThrowIfNull(stream);
 
@@ -579,7 +614,10 @@ namespace System.Xml
             _buffered = false;
         }
 
-        private void MoveToInitial(XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose)
+        private void MoveToInitial(
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             MoveToInitial(quotas);
             _maxBytesPerRead = quotas.MaxBytesPerRead;
@@ -597,7 +635,10 @@ namespace System.Xml
 
         private void SkipWhitespace()
         {
-            while (!BufferReader.EndOfFile && (CharTypeMap[BufferReader.GetByte()] & CharType.Whitespace) != 0)
+            while (
+                !BufferReader.EndOfFile
+                && (CharTypeMap[BufferReader.GetByte()] & CharType.Whitespace) != 0
+            )
                 BufferReader.SkipByte();
         }
 
@@ -607,11 +648,13 @@ namespace System.Xml
                 BufferElement();
             int offset;
             byte[] buffer = BufferReader.GetBuffer(5, out offset);
-            if (buffer[offset + 0] != (byte)'?' ||
-                buffer[offset + 1] != (byte)'x' ||
-                buffer[offset + 2] != (byte)'m' ||
-                buffer[offset + 3] != (byte)'l' ||
-                (CharTypeMap[buffer[offset + 4]] & CharType.Whitespace) == 0)
+            if (
+                buffer[offset + 0] != (byte)'?'
+                || buffer[offset + 1] != (byte)'x'
+                || buffer[offset + 2] != (byte)'m'
+                || buffer[offset + 3] != (byte)'l'
+                || (CharTypeMap[buffer[offset + 4]] & CharType.Whitespace) == 0
+            )
             {
                 XmlExceptionHelper.ThrowProcessingInstructionNotSupported(this);
             }
@@ -640,10 +683,13 @@ namespace System.Xml
             }
 
             buffer = BufferReader.GetBuffer(2, out offset);
-            if (buffer[offset + 0] != (byte)'?' ||
-                buffer[offset + 1] != (byte)'>')
+            if (buffer[offset + 0] != (byte)'?' || buffer[offset + 1] != (byte)'>')
             {
-                XmlExceptionHelper.ThrowTokenExpected(this, "?>", Encoding.UTF8.GetString(buffer, offset, 2));
+                XmlExceptionHelper.ThrowTokenExpected(
+                    this,
+                    "?>",
+                    Encoding.UTF8.GetString(buffer, offset, 2)
+                );
             }
             BufferReader.Advance(2);
             XmlDeclarationNode declarationNode = MoveToDeclaration();
@@ -748,7 +794,9 @@ namespace System.Xml
         {
             ReadOnlySpan<byte> charTypeMap = XmlUTF8TextReader.CharTypeMap;
             int textOffset = offset;
-            while (offset < offsetMax && (charTypeMap[buffer[offset]] & CharType.AttributeText) != 0)
+            while (
+                offset < offsetMax && (charTypeMap[buffer[offset]] & CharType.AttributeText) != 0
+            )
                 offset++;
             return offset - textOffset;
         }
@@ -767,7 +815,11 @@ namespace System.Xml
                 {
                     SkipWhitespace();
                     if (BufferReader.GetByte() != '=')
-                        XmlExceptionHelper.ThrowTokenExpected(this, "=", (char)BufferReader.GetByte());
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            "=",
+                            (char)BufferReader.GetByte()
+                        );
                 }
                 BufferReader.SkipByte();
                 byte quoteChar = BufferReader.GetByte();
@@ -776,14 +828,19 @@ namespace System.Xml
                     SkipWhitespace();
                     quoteChar = BufferReader.GetByte();
                     if (quoteChar != '"' && quoteChar != '\'')
-                        XmlExceptionHelper.ThrowTokenExpected(this, "\"", (char)BufferReader.GetByte());
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            "\"",
+                            (char)BufferReader.GetByte()
+                        );
                 }
                 BufferReader.SkipByte();
                 bool escaped = false;
                 int valueOffset = BufferReader.Offset;
                 while (true)
                 {
-                    int offset, offsetMax;
+                    int offset,
+                        offsetMax;
                     byte[] buffer = BufferReader.GetBuffer(out offset, out offsetMax);
                     int length = ReadAttributeText(buffer, offset, offsetMax);
                     BufferReader.Advance(length);
@@ -810,7 +867,11 @@ namespace System.Xml
                     }
                     else
                     {
-                        XmlExceptionHelper.ThrowTokenExpected(this, ((char)quoteChar).ToString(), (char)ch);
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            ((char)quoteChar).ToString(),
+                            (char)ch
+                        );
                     }
                 }
                 int valueLength = BufferReader.Offset - valueOffset;
@@ -835,7 +896,13 @@ namespace System.Xml
                     attributeNode = AddXmlAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode.Value.SetValue((escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8), valueOffset, valueLength);
+                    attributeNode
+                        .Value
+                        .SetValue(
+                            (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
+                            valueOffset,
+                            valueLength
+                        );
                     FixXmlAttribute(attributeNode);
                 }
                 else
@@ -843,7 +910,13 @@ namespace System.Xml
                     attributeNode = AddAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode.Value.SetValue((escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8), valueOffset, valueLength);
+                    attributeNode
+                        .Value
+                        .SetValue(
+                            (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
+                            valueOffset,
+                            valueLength
+                        );
                 }
 
                 attributeNode.QuoteChar = (char)quoteChar;
@@ -863,7 +936,10 @@ namespace System.Xml
                     break;
 
                 if (!space)
-                    XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlSpaceBetweenAttributes));
+                    XmlExceptionHelper.ThrowXmlException(
+                        this,
+                        new XmlException(SR.XmlSpaceBetweenAttributes)
+                    );
             }
 
             if (_buffered && (BufferReader.Offset - startOffset) > _maxBytesPerRead)
@@ -878,7 +954,10 @@ namespace System.Xml
         {
             Debug.Assert(buffer[offset] == 0xEF, "buffer[offset] MUST be 0xEF.");
 
-            if (buffer[offset + 1] == 0xBF && (buffer[offset + 2] == 0xBE || buffer[offset + 2] == 0xBF))
+            if (
+                buffer[offset + 1] == 0xBF
+                && (buffer[offset + 2] == 0xBE || buffer[offset + 2] == 0xBF)
+            )
             {
                 // 0xFFFE : 0xEF 0xBF 0xBE
                 // 0xFFFF : 0xEF 0xBF 0xBF
@@ -984,7 +1063,13 @@ namespace System.Xml
                 if (buffer[offset + i] != buffer[nameOffset + i])
                 {
                     ReadQualifiedName(_prefix, _localName);
-                    XmlExceptionHelper.ThrowTagMismatch(this, elementNode.Prefix.GetString(), elementNode.LocalName.GetString(), _prefix.GetString(), _localName.GetString());
+                    XmlExceptionHelper.ThrowTagMismatch(
+                        this,
+                        elementNode.Prefix.GetString(),
+                        elementNode.LocalName.GetString(),
+                        _prefix.GetString(),
+                        _localName.GetString()
+                    );
                 }
             }
             BufferReader.Advance(nameLength);
@@ -1027,12 +1112,14 @@ namespace System.Xml
 
                 int offset;
                 byte[] buffer = BufferReader.GetBuffer(3, out offset);
-                if (buffer[offset + 0] == (byte)'-' &&
-                    buffer[offset + 1] == (byte)'-')
+                if (buffer[offset + 0] == (byte)'-' && buffer[offset + 1] == (byte)'-')
                 {
                     if (buffer[offset + 2] == (byte)'>')
                         break;
-                    XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlInvalidCommentChars));
+                    XmlExceptionHelper.ThrowXmlException(
+                        this,
+                        new XmlException(SR.XmlInvalidCommentChars)
+                    );
                 }
                 BufferReader.SkipByte();
             }
@@ -1045,15 +1132,21 @@ namespace System.Xml
         {
             int offset;
             byte[] buffer = BufferReader.GetBuffer(7, out offset);
-            if (buffer[offset + 0] != (byte)'[' ||
-                buffer[offset + 1] != (byte)'C' ||
-                buffer[offset + 2] != (byte)'D' ||
-                buffer[offset + 3] != (byte)'A' ||
-                buffer[offset + 4] != (byte)'T' ||
-                buffer[offset + 5] != (byte)'A' ||
-                buffer[offset + 6] != (byte)'[')
+            if (
+                buffer[offset + 0] != (byte)'['
+                || buffer[offset + 1] != (byte)'C'
+                || buffer[offset + 2] != (byte)'D'
+                || buffer[offset + 3] != (byte)'A'
+                || buffer[offset + 4] != (byte)'T'
+                || buffer[offset + 5] != (byte)'A'
+                || buffer[offset + 6] != (byte)'['
+            )
             {
-                XmlExceptionHelper.ThrowTokenExpected(this, "[CDATA[", Encoding.UTF8.GetString(buffer, offset, 7));
+                XmlExceptionHelper.ThrowTokenExpected(
+                    this,
+                    "[CDATA[",
+                    Encoding.UTF8.GetString(buffer, offset, 7)
+                );
             }
             BufferReader.Advance(7);
             int cdataOffset = BufferReader.Offset;
@@ -1072,9 +1165,11 @@ namespace System.Xml
                         BufferReader.SkipByte();
                 }
                 buffer = BufferReader.GetBuffer(3, out offset);
-                if (buffer[offset + 0] == (byte)']' &&
-                    buffer[offset + 1] == (byte)']' &&
-                    buffer[offset + 2] == (byte)'>')
+                if (
+                    buffer[offset + 0] == (byte)']'
+                    && buffer[offset + 1] == (byte)']'
+                    && buffer[offset + 2] == (byte)'>'
+                )
                     break;
                 BufferReader.SkipByte();
             }
@@ -1097,7 +1192,6 @@ namespace System.Xml
             BufferReader.Advance(charEntityLength);
             return ch;
         }
-
 
         private void ReadWhitespace()
         {
@@ -1126,7 +1220,10 @@ namespace System.Xml
         {
             ReadOnlySpan<byte> charTypeMap = XmlUTF8TextReader.CharTypeMap;
             int wsOffset = offset;
-            while (offset < offsetMax && (charTypeMap[buffer[offset]] & CharType.SpecialWhitespace) != 0)
+            while (
+                offset < offsetMax
+                && (charTypeMap[buffer[offset]] & CharType.SpecialWhitespace) != 0
+            )
                 offset++;
             return offset - wsOffset;
         }
@@ -1146,7 +1243,10 @@ namespace System.Xml
             ReadOnlySpan<byte> charTypeMap = XmlUTF8TextReader.CharTypeMap;
             int textOffset = offset;
 
-            while (offset < offsetMax && ((charTypeMap[buffer[offset]] & CharType.Text) != 0 || buffer[offset] == 0xEF))
+            while (
+                offset < offsetMax
+                && ((charTypeMap[buffer[offset]] & CharType.Text) != 0 || buffer[offset] == 0xEF)
+            )
             {
                 if (buffer[offset] != 0xEF)
                 {
@@ -1165,7 +1265,10 @@ namespace System.Xml
                         }
                         else
                         {
-                            XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlInvalidFFFE));
+                            XmlExceptionHelper.ThrowXmlException(
+                                this,
+                                new XmlException(SR.XmlInvalidFFFE)
+                            );
                         }
                     }
                     else
@@ -1205,8 +1308,7 @@ namespace System.Xml
                 do
                 {
                     length--;
-                }
-                while (length > 0 && (buffer[offset + length] & 0xC0) != 0xC0);
+                } while (length > 0 && (buffer[offset + length] & 0xC0) != 0xC0);
                 // Couldn't find the lead char
                 if (length == 0)
                     return originalLength; // Invalid utf8 sequence - can't break
@@ -1261,7 +1363,12 @@ namespace System.Xml
             }
             BufferReader.Advance(length);
 
-            if (offset < offsetMax - 1 - length && (buffer[offset + length] == (byte)'<' && buffer[offset + length + 1] != (byte)'!'))
+            if (
+                offset < offsetMax - 1 - length
+                && (
+                    buffer[offset + length] == (byte)'<' && buffer[offset + length + 1] != (byte)'!'
+                )
+            )
             {
                 MoveToAtomicText().Value.SetValue(ValueHandleType.UTF8, offset, length);
             }
@@ -1323,7 +1430,10 @@ namespace System.Xml
                     else
                     {
                         if (OutsideRootElement)
-                            XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlCDATAInvalidAtTopLevel));
+                            XmlExceptionHelper.ThrowXmlException(
+                                this,
+                                new XmlException(SR.XmlCDATAInvalidAtTopLevel)
+                            );
 
                         ReadCData();
                     }
@@ -1362,17 +1472,19 @@ namespace System.Xml
             {
                 int offset;
                 byte[] buffer = BufferReader.GetBuffer(3, out offset);
-                if (buffer[offset + 0] == (byte)']' &&
-                    buffer[offset + 1] == (byte)']' &&
-                    buffer[offset + 2] == (byte)'>')
+                if (
+                    buffer[offset + 0] == (byte)']'
+                    && buffer[offset + 1] == (byte)']'
+                    && buffer[offset + 2] == (byte)'>'
+                )
                 {
                     XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlCloseCData));
                 }
 
                 BufferReader.SkipByte();
-                MoveToComplexText().Value.SetCharValue(']');  // Need to get past the ']' and keep going.
+                MoveToComplexText().Value.SetCharValue(']'); // Need to get past the ']' and keep going.
             }
-            else if (ch == 0xEF)  // Watch for invalid characters 0xfffe and 0xffff
+            else if (ch == 0xEF) // Watch for invalid characters 0xfffe and 0xffff
             {
                 ReadText(true);
             }

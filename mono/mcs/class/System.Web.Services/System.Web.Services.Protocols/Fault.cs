@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.Fault.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,203 +29,238 @@
 //
 
 using System;
+using System.Collections;
+using System.Globalization;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Text;
-using System.Collections;
-using System.Globalization;
 
 namespace System.Web.Services.Protocols
 {
-	internal class Fault
-	{
-		static XmlSerializer serializer;
-		
-		static Fault ()
-		{
-			serializer = new FaultSerializer ();
-		}
+    internal class Fault
+    {
+        static XmlSerializer serializer;
 
-		public Fault () {}
-		
-		public Fault (SoapException ex) 
-		{
-			faultcode = ex.Code;
-			faultstring = ex.Message;
-			faultactor = ex.Actor;
-			detail = ex.Detail;
-		}
+        static Fault()
+        {
+            serializer = new FaultSerializer();
+        }
 
-		[XmlElement (Namespace="")]
-		public XmlQualifiedName faultcode;
-		
-		[XmlElement (Namespace="")]
-		public string faultstring;
-		
-		[XmlElement (Namespace="")]
-		public string faultactor;
-		
-		[SoapIgnore]
-		public XmlNode detail;
-		
-		public static XmlSerializer Serializer
-		{
-			get { return serializer; }
-		}
-	}
+        public Fault() { }
 
-	internal class FaultSerializer : XmlSerializer 
-	{
-		protected override void Serialize (object o, XmlSerializationWriter writer)
-		{
-			FaultWriter xsWriter = writer as FaultWriter;
-			xsWriter.WriteRoot_Fault (o);
-		}
-		
-		protected override object Deserialize (XmlSerializationReader reader)
-		{
-			FaultReader xsReader = reader as FaultReader;
-			return xsReader.ReadRoot_Fault ();
-		}
-		
-		protected override XmlSerializationWriter CreateWriter ()
-		{
-			return new FaultWriter ();
-		}
-		
-		protected override XmlSerializationReader CreateReader ()
-		{
-			return new FaultReader ();
-		}
-	}	
-	
-	internal class FaultReader : XmlSerializationReader
-	{
-		public object ReadRoot_Fault ()
-		{
-			Reader.MoveToContent();
-			if (Reader.LocalName != "Fault" || Reader.NamespaceURI != WebServiceHelper.SoapEnvelopeNamespace)
-				throw CreateUnknownNodeException();
-			return ReadObject_Fault (true, true);
-		}
+        public Fault(SoapException ex)
+        {
+            faultcode = ex.Code;
+            faultstring = ex.Message;
+            faultactor = ex.Actor;
+            detail = ex.Detail;
+        }
 
-		public System.Web.Services.Protocols.Fault ReadObject_Fault (bool isNullable, bool checkType)
-		{
-			System.Web.Services.Protocols.Fault ob = null;
-			if (isNullable && ReadNull()) return null;
+        [XmlElement(Namespace = "")]
+        public XmlQualifiedName faultcode;
 
-			if (checkType) 
-			{
-				System.Xml.XmlQualifiedName t = GetXsiType();
-				if (t != null) 
-				{
-					if (t.Name != "Fault" || t.Namespace != WebServiceHelper.SoapEnvelopeNamespace)
-						throw CreateUnknownTypeException(t);
-				}
-			}
+        [XmlElement(Namespace = "")]
+        public string faultstring;
 
-			ob = new System.Web.Services.Protocols.Fault ();
+        [XmlElement(Namespace = "")]
+        public string faultactor;
 
-			Reader.MoveToElement();
+        [SoapIgnore]
+        public XmlNode detail;
 
-			while (Reader.MoveToNextAttribute())
-			{
-				if (IsXmlnsAttribute (Reader.Name)) {
-				}
-				else {
-					UnknownNode (ob);
-				}
-			}
+        public static XmlSerializer Serializer
+        {
+            get { return serializer; }
+        }
+    }
 
-			Reader.MoveToElement();
-			if (Reader.IsEmptyElement) {
-				Reader.Skip ();
-				return ob;
-			}
+    internal class FaultSerializer : XmlSerializer
+    {
+        protected override void Serialize(object o, XmlSerializationWriter writer)
+        {
+            FaultWriter xsWriter = writer as FaultWriter;
+            xsWriter.WriteRoot_Fault(o);
+        }
 
-			Reader.ReadStartElement();
-			Reader.MoveToContent();
+        protected override object Deserialize(XmlSerializationReader reader)
+        {
+            FaultReader xsReader = reader as FaultReader;
+            return xsReader.ReadRoot_Fault();
+        }
 
-			bool b0=false, b1=false, b2=false, b3=false;
+        protected override XmlSerializationWriter CreateWriter()
+        {
+            return new FaultWriter();
+        }
 
-			while (Reader.NodeType != System.Xml.XmlNodeType.EndElement) 
-			{
-				if (Reader.NodeType == System.Xml.XmlNodeType.Element) {
-					if (Reader.NamespaceURI == string.Empty || Reader.NamespaceURI == WebServiceHelper.SoapEnvelopeNamespace) {
-						if (Reader.LocalName == "faultcode" && !b0) {
-							b0 = true;
-							ob.@faultcode = ReadElementQualifiedName ();
-						} else if (Reader.LocalName == "faultstring" && !b1) {
-							b1 = true;
-							ob.@faultstring = Reader.ReadElementString ();
-						} else if (Reader.LocalName == "detail" && !b3) {
-							b3 = true;
-							ob.@detail = ReadXmlNode (false);
-						} else if (Reader.LocalName == "faultactor" && !b2) {
-							b2 = true;
-							ob.@faultactor = Reader.ReadElementString ();
-						} else {
-							UnknownNode (ob);
-						}
-					} else {
-						UnknownNode (ob);
-					}
-				} else
-					UnknownNode(ob);
+        protected override XmlSerializationReader CreateReader()
+        {
+            return new FaultReader();
+        }
+    }
 
-				Reader.MoveToContent();
-			}
+    internal class FaultReader : XmlSerializationReader
+    {
+        public object ReadRoot_Fault()
+        {
+            Reader.MoveToContent();
+            if (
+                Reader.LocalName != "Fault"
+                || Reader.NamespaceURI != WebServiceHelper.SoapEnvelopeNamespace
+            )
+                throw CreateUnknownNodeException();
+            return ReadObject_Fault(true, true);
+        }
 
-			ReadEndElement();
+        public System.Web.Services.Protocols.Fault ReadObject_Fault(bool isNullable, bool checkType)
+        {
+            System.Web.Services.Protocols.Fault ob = null;
+            if (isNullable && ReadNull())
+                return null;
 
-			return ob;
-		}
+            if (checkType)
+            {
+                System.Xml.XmlQualifiedName t = GetXsiType();
+                if (t != null)
+                {
+                    if (t.Name != "Fault" || t.Namespace != WebServiceHelper.SoapEnvelopeNamespace)
+                        throw CreateUnknownTypeException(t);
+                }
+            }
 
-		protected override void InitCallbacks ()
-		{
-		}
+            ob = new System.Web.Services.Protocols.Fault();
 
-		protected override void InitIDs ()
-		{
-		}
-	}
+            Reader.MoveToElement();
 
-	internal class FaultWriter : XmlSerializationWriter
-	{
-		public void WriteRoot_Fault (object o)
-		{
-			WriteStartDocument ();
-			System.Web.Services.Protocols.Fault ob = (System.Web.Services.Protocols.Fault) o;
-			TopLevelElement ();
-			WriteObject_Fault (ob, "Fault", WebServiceHelper.SoapEnvelopeNamespace, true, false, true);
-		}
+            while (Reader.MoveToNextAttribute())
+            {
+                if (IsXmlnsAttribute(Reader.Name)) { }
+                else
+                {
+                    UnknownNode(ob);
+                }
+            }
 
-		void WriteObject_Fault (System.Web.Services.Protocols.Fault ob, string element, string namesp, bool isNullable, bool needType, bool writeWrappingElem)
-		{
-			if (ob == null)
-			{
-				if (isNullable)
-					WriteNullTagLiteral(element, namesp);
-				return;
-			}
+            Reader.MoveToElement();
+            if (Reader.IsEmptyElement)
+            {
+                Reader.Skip();
+                return ob;
+            }
 
-			if (writeWrappingElem) {
-				WriteStartElement (element, namesp, ob);
-			}
+            Reader.ReadStartElement();
+            Reader.MoveToContent();
 
-			if (needType) WriteXsiType ("Fault", WebServiceHelper.SoapEnvelopeNamespace);
+            bool b0 = false,
+                b1 = false,
+                b2 = false,
+                b3 = false;
 
-			WriteElementQualifiedName ("faultcode", "", ob.@faultcode);
-			WriteElementString ("faultstring", "", ob.@faultstring);
-			WriteElementString ("faultactor", "", ob.@faultactor);
-			WriteElementLiteral (ob.@detail, "detail", "", false, false);
-			if (writeWrappingElem) WriteEndElement (ob);
-		}
+            while (Reader.NodeType != System.Xml.XmlNodeType.EndElement)
+            {
+                if (Reader.NodeType == System.Xml.XmlNodeType.Element)
+                {
+                    if (
+                        Reader.NamespaceURI == string.Empty
+                        || Reader.NamespaceURI == WebServiceHelper.SoapEnvelopeNamespace
+                    )
+                    {
+                        if (Reader.LocalName == "faultcode" && !b0)
+                        {
+                            b0 = true;
+                            ob.@faultcode = ReadElementQualifiedName();
+                        }
+                        else if (Reader.LocalName == "faultstring" && !b1)
+                        {
+                            b1 = true;
+                            ob.@faultstring = Reader.ReadElementString();
+                        }
+                        else if (Reader.LocalName == "detail" && !b3)
+                        {
+                            b3 = true;
+                            ob.@detail = ReadXmlNode(false);
+                        }
+                        else if (Reader.LocalName == "faultactor" && !b2)
+                        {
+                            b2 = true;
+                            ob.@faultactor = Reader.ReadElementString();
+                        }
+                        else
+                        {
+                            UnknownNode(ob);
+                        }
+                    }
+                    else
+                    {
+                        UnknownNode(ob);
+                    }
+                }
+                else
+                    UnknownNode(ob);
 
-		protected override void InitCallbacks ()
-		{
-		}
-	}
+                Reader.MoveToContent();
+            }
+
+            ReadEndElement();
+
+            return ob;
+        }
+
+        protected override void InitCallbacks() { }
+
+        protected override void InitIDs() { }
+    }
+
+    internal class FaultWriter : XmlSerializationWriter
+    {
+        public void WriteRoot_Fault(object o)
+        {
+            WriteStartDocument();
+            System.Web.Services.Protocols.Fault ob = (System.Web.Services.Protocols.Fault)o;
+            TopLevelElement();
+            WriteObject_Fault(
+                ob,
+                "Fault",
+                WebServiceHelper.SoapEnvelopeNamespace,
+                true,
+                false,
+                true
+            );
+        }
+
+        void WriteObject_Fault(
+            System.Web.Services.Protocols.Fault ob,
+            string element,
+            string namesp,
+            bool isNullable,
+            bool needType,
+            bool writeWrappingElem
+        )
+        {
+            if (ob == null)
+            {
+                if (isNullable)
+                    WriteNullTagLiteral(element, namesp);
+                return;
+            }
+
+            if (writeWrappingElem)
+            {
+                WriteStartElement(element, namesp, ob);
+            }
+
+            if (needType)
+                WriteXsiType("Fault", WebServiceHelper.SoapEnvelopeNamespace);
+
+            WriteElementQualifiedName("faultcode", "", ob.@faultcode);
+            WriteElementString("faultstring", "", ob.@faultstring);
+            WriteElementString("faultactor", "", ob.@faultactor);
+            WriteElementLiteral(ob.@detail, "detail", "", false, false);
+            if (writeWrappingElem)
+                WriteEndElement(ob);
+        }
+
+        protected override void InitCallbacks() { }
+    }
 }
-

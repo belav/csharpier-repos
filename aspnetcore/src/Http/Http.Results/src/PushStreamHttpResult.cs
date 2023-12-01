@@ -22,9 +22,7 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
     /// <param name="streamWriterCallback">The stream writer callback.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     internal PushStreamHttpResult(Func<Stream, Task> streamWriterCallback, string? contentType)
-        : this(streamWriterCallback, contentType, fileDownloadName: null)
-    {
-    }
+        : this(streamWriterCallback, contentType, fileDownloadName: null) { }
 
     /// <summary>
     /// Creates a new <see cref="PushStreamHttpResult"/> instance with
@@ -37,10 +35,10 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
     internal PushStreamHttpResult(
         Func<Stream, Task> streamWriterCallback,
         string? contentType,
-        string? fileDownloadName)
+        string? fileDownloadName
+    )
         : this(streamWriterCallback, contentType, fileDownloadName, enableRangeProcessing: false)
-    {
-    }
+    { }
 
     /// <summary>
     /// Creates a new <see cref="PushStreamHttpResult"/> instance with the provided values.
@@ -57,7 +55,8 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
         string? fileDownloadName,
         bool enableRangeProcessing,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
+        EntityTagHeaderValue? entityTag = null
+    )
     {
         _streamWriterCallback = streamWriterCallback;
         ContentType = contentType ?? "application/octet-stream";
@@ -104,7 +103,9 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.PushStreamResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.PushStreamResult"
+        );
 
         var (range, rangeLength, completed) = HttpResultsHelper.WriteResultAsFileCore(
             httpContext,
@@ -114,10 +115,9 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
             ContentType,
             EnableRangeProcessing,
             LastModified,
-            EntityTag);
+            EntityTag
+        );
 
-        return completed ?
-            Task.CompletedTask :
-            _streamWriterCallback(httpContext.Response.Body);
+        return completed ? Task.CompletedTask : _streamWriterCallback(httpContext.Response.Body);
     }
 }

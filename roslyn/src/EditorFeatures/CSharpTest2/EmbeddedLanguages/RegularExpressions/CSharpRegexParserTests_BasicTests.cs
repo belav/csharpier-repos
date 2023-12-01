@@ -16,9 +16,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         [Fact]
         public void TestEmpty()
         {
-            Test("""
+            Test(
+                """
                 ""
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -28,15 +30,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[0..0)" Text="" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOneWhitespace_IgnorePatternWhitespace()
         {
-            Test("""
+            Test(
+                """
                 " "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -50,15 +56,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..10)" Text=" " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestTwoWhitespace_IgnorePatternWhitespace()
         {
-            Test("""
+            Test(
+                """
                 "  "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -72,15 +82,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="  " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestEmptyParenComment()
         {
-            Test("""
+            Test(
+                """
                 "(?#)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -94,15 +108,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?#)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestSimpleParenComment()
         {
-            Test("""
+            Test(
+                """
                 "(?# )"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -116,15 +134,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?# )" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnterminatedParenComment1()
         {
-            Test("""
+            Test(
+                """
                 "(?#"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -141,15 +163,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(?#" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnterminatedParenComment2()
         {
-            Test("""
+            Test(
+                """
                 "(?# "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -166,15 +192,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?# " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestMultipleComments1()
         {
-            Test("""
+            Test(
+                """
                 "(?#)(?#)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -189,15 +219,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?#)(?#)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestMultipleComments2()
         {
-            Test("""
+            Test(
+                """
                 "(?#)(?#)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -212,15 +246,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?#)(?#)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestMultipleComments3()
         {
-            Test("""
+            Test(
+                """
                 "(?#) (?#)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -241,15 +279,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?#) (?#)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestMultipleComments4()
         {
-            Test("""
+            Test(
+                """
                 "(?#) (?#)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence />
@@ -265,15 +307,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?#) (?#)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestDoNotTreatAsCommentAfterEscapeInCharacterClass1()
         {
-            Test("""
+            Test(
+                """
                 @"[a\p{Lu}(?#)b]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -303,15 +349,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..24)" Text="[a\p{Lu}(?#)b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestDoNotTreatAsCommentAfterEscapeInCharacterClass2()
         {
-            Test("""
+            Test(
+                """
                 @"[a\0(?#)b]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -338,15 +388,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[a\0(?#)b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestDoNotTreatAsCommentAfterEscapeInCharacterClass3()
         {
-            Test("""
+            Test(
+                """
                 @"[a\a(?#)b]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -373,15 +427,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[a\a(?#)b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestDoNotTreatAsCommentAfterEscapeInCharacterClass4()
         {
-            Test("""
+            Test(
+                """
                 @"[a\x00(?#)b]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -409,15 +467,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..22)" Text="[a\x00(?#)b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestDoNotTreatAsCommentAfterEscapeInCharacterClass5()
         {
-            Test("""
+            Test(
+                """
                 @"[a\u0000(?#)b]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -445,15 +507,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..24)" Text="[a\u0000(?#)b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestDoNotTreatAsCommentAfterEscapeInCharacterClass6()
         {
-            Test("""
+            Test(
+                """
                 @"[a\](?#)b]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -480,15 +546,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[a\](?#)b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOpenQuestion1()
         {
-            Test("""
+            Test(
+                """
                 "(?"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -513,15 +583,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="(?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOpenQuestion2()
         {
-            Test("""
+            Test(
+                """
                 "(?"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -546,15 +620,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="(?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestOpenQuestion3()
         {
-            Test("""
+            Test(
+                """
                 "(? "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -582,15 +660,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(? " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOpenQuestion4()
         {
-            Test("""
+            Test(
+                """
                 "(? "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -619,15 +701,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(? " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestSimpleOptionsNode1()
         {
-            Test("""
+            Test(
+                """
                 "(?i)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -644,15 +730,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?i)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestSimpleOptionsNode2()
         {
-            Test("""
+            Test(
+                """
                 "(?im)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -669,15 +759,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?im)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestSimpleOptionsNode3()
         {
-            Test("""
+            Test(
+                """
                 "(?im-x)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -694,15 +788,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?im-x)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestSimpleOptionsNode4()
         {
-            Test("""
+            Test(
+                """
                 "(?im-x+n)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -719,15 +817,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?im-x+n)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOptionThatDoesNotChangeWhitespaceScanning()
         {
-            Test("""
+            Test(
+                """
                 "(?i) "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -747,15 +849,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?i) " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOptionThatDoesChangeWhitespaceScanning()
         {
-            Test("""
+            Test(
+                """
                 "(?x) "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -776,15 +882,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?x) " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOptionThatDoesChangeWhitespaceScanning2()
         {
-            Test("""
+            Test(
+                """
                 " (?x) "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -808,15 +918,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text=" (?x) " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOptionThatDoesChangeWhitespaceScanning3()
         {
-            Test("""
+            Test(
+                """
                 " (?-x) "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -839,15 +953,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text=" (?-x) " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestOptionRestoredWhenGroupPops()
         {
-            Test("""
+            Test(
+                """
                 " ( (?-x) ) "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -884,15 +1002,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..19)" Text="( (?-x) )" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNestedOptionGroup1()
         {
-            Test("""
+            Test(
+                """
                 " (?-x:) "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -918,15 +1040,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text=" (?-x:) " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNestedOptionGroup2()
         {
-            Test("""
+            Test(
+                """
                 " (?-x: ) "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -956,15 +1082,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text=" (?-x: ) " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNestedOptionGroup3()
         {
-            Test("""
+            Test(
+                """
                 " (?-x: (?+x: ) ) "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1008,15 +1138,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..26)" Text=" (?-x: (?+x: ) ) " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestIncompleteOptionsGroup1()
         {
-            Test("""
+            Test(
+                """
                 "(?-x"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1036,15 +1170,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?-x" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestIncompleteOptionsGroup2()
         {
-            Test("""
+            Test(
+                """
                 "(?-x "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1067,15 +1205,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?-x " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestIncorrectOptionsGroup3()
         {
-            Test("""
+            Test(
+                """
                 "(?-x :"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1098,15 +1240,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?-x :" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestIncorrectOptionsGroup4()
         {
-            Test("""
+            Test(
+                """
                 "(?-x )"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1133,15 +1279,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?-x )" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestIncorrectOptionsGroup5()
         {
-            Test("""
+            Test(
+                """
                 "(?-x :)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1168,15 +1318,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?-x :)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestCloseParen()
         {
-            Test("""
+            Test(
+                """
                 ")"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1193,15 +1347,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..10)" Text=")" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestSingleChar()
         {
-            Test("""
+            Test(
+                """
                 "a"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1215,15 +1373,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..10)" Text="a" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestTwoCharsChar()
         {
-            Test("""
+            Test(
+                """
                 "ab"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1237,15 +1399,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="ab" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestAsteriskQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a*"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1262,15 +1428,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="a*" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestAsteriskQuestionQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a*?"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1290,15 +1460,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="a*?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPlusQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a+"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1315,15 +1489,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="a+" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPlusQuestionQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a+?"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1343,15 +1521,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="a+?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestQuestionQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a?"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1368,15 +1550,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="a?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestQuestionQuestionQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a??"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1396,15 +1582,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="a??" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestEmptySimpleGroup()
         {
-            Test("""
+            Test(
+                """
                 "()"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1421,15 +1611,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..11)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestGroupWithSingleElement()
         {
-            Test("""
+            Test(
+                """
                 "(a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1450,15 +1644,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..12)" Text="(a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestGroupWithMissingCloseParen()
         {
-            Test("""
+            Test(
+                """
                 "("
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1478,15 +1676,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..10)" Text="(" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestGroupWithElementWithMissingCloseParen()
         {
-            Test("""
+            Test(
+                """
                 "(a"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1510,15 +1712,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..11)" Text="(a" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void JustBar()
         {
-            Test("""
+            Test(
+                """
                 "|"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1532,15 +1738,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..10)" Text="|" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void SpaceBar()
         {
-            Test("""
+            Test(
+                """
                 " |"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1558,15 +1768,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text=" |" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void BarSpace()
         {
-            Test("""
+            Test(
+                """
                 "| "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1584,15 +1798,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="| " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void SpaceBarSpace()
         {
-            Test("""
+            Test(
+                """
                 " | "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1614,15 +1832,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text=" | " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void JustBar_IgnoreWhitespace()
         {
-            Test("""
+            Test(
+                """
                 "|"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1636,15 +1858,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..10)" Text="|" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void SpaceBar_IgnoreWhitespace()
         {
-            Test("""
+            Test(
+                """
                 " |"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1661,15 +1887,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text=" |" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void BarSpace_IgnoreWhitespace()
         {
-            Test("""
+            Test(
+                """
                 "| "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1687,15 +1917,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="| " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void SpaceBarSpace_IgnoreWhitespace()
         {
-            Test("""
+            Test(
+                """
                 " | "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1716,15 +1950,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text=" | " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void DoubleBar()
         {
-            Test("""
+            Test(
+                """
                 "||"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Alternation>
@@ -1742,15 +1980,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="||" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void BarInGroup()
         {
-            Test("""
+            Test(
+                """
                 "(|)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1771,15 +2013,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..12)" Text="(|)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestExactNumericQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a{0}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1798,15 +2044,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="a{0}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOpenRangeNumericQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a{0,}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1826,15 +2076,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="a{0,}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestClosedRangeNumericQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a{0,1}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1855,15 +2109,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="a{0,1}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestLargeExactRangeNumericQuantifier1()
         {
-            Test("""
+            Test(
+                """
                 "a{2147483647}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1882,15 +2140,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..22)" Text="a{2147483647}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, runSubTreeTests: false, allowOutOfMemory: true);
+                """,
+                RegexOptions.None,
+                runSubTreeTests: false,
+                allowOutOfMemory: true
+            );
         }
 
         [Fact]
         public void TestLargeExactRangeNumericQuantifier2()
         {
-            Test("""
+            Test(
+                """
                 "a{2147483648}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1912,15 +2176,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..22)" Text="a{2147483648}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, runSubTreeTests: false);
+                """,
+                RegexOptions.None,
+                runSubTreeTests: false
+            );
         }
 
         [Fact]
         public void TestLargeOpenRangeNumericQuantifier1()
         {
-            Test("""
+            Test(
+                """
                 "a{2147483647,}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1940,15 +2209,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..23)" Text="a{2147483647,}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, runSubTreeTests: false, allowOutOfMemory: true);
+                """,
+                RegexOptions.None,
+                runSubTreeTests: false,
+                allowOutOfMemory: true
+            );
         }
 
         [Fact]
         public void TestLargeOpenRangeNumericQuantifier2()
         {
-            Test("""
+            Test(
+                """
                 "a{2147483648,}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -1971,15 +2246,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..23)" Text="a{2147483648,}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, runSubTreeTests: false);
+                """,
+                RegexOptions.None,
+                runSubTreeTests: false
+            );
         }
 
         [Fact]
         public void TestLargeClosedRangeNumericQuantifier1()
         {
-            Test("""
+            Test(
+                """
                 "a{0,2147483647}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2000,15 +2280,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..24)" Text="a{0,2147483647}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, runSubTreeTests: false);
+                """,
+                RegexOptions.None,
+                runSubTreeTests: false
+            );
         }
 
         [Fact]
         public void TestLargeClosedRangeNumericQuantifier2()
         {
-            Test("""
+            Test(
+                """
                 "a{0,2147483648}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2032,15 +2317,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..24)" Text="a{0,2147483648}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, runSubTreeTests: false);
+                """,
+                RegexOptions.None,
+                runSubTreeTests: false
+            );
         }
 
         [Fact]
         public void TestBadMinMaxClosedRangeNumericQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a{1,0}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2064,15 +2354,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="a{1,0}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestLazyExactNumericQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a{0}?"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2094,15 +2388,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="a{0}?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestLazyOpenNumericQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a{0,}?"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2125,15 +2423,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="a{0,}?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestLazyClosedNumericQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a{0,1}?"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2157,15 +2459,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="a{0,1}?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestIncompleteNumericQuantifier1()
         {
-            Test("""
+            Test(
+                """
                 "a{"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2179,15 +2485,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="a{" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestIncompleteNumericQuantifier2()
         {
-            Test("""
+            Test(
+                """
                 "a{0"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2201,15 +2511,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="a{0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestIncompleteNumericQuantifier3()
         {
-            Test("""
+            Test(
+                """
                 "a{0,"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2223,15 +2537,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="a{0," />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestIncompleteNumericQuantifier4()
         {
-            Test("""
+            Test(
+                """
                 "a{0,1"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2245,15 +2563,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="a{0,1" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNotNumericQuantifier1()
         {
-            Test("""
+            Test(
+                """
                 "a{0 }"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2273,15 +2595,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="a{0 }" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNotNumericQuantifier2()
         {
-            Test("""
+            Test(
+                """
                 "a{0, }"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2301,15 +2627,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="a{0, }" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNotNumericQuantifier3()
         {
-            Test("""
+            Test(
+                """
                 "a{0 ,}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2329,15 +2659,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="a{0 ,}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNotNumericQuantifier4()
         {
-            Test("""
+            Test(
+                """
                 "a{0 ,1}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2357,15 +2691,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="a{0 ,1}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNotNumericQuantifier5()
         {
-            Test("""
+            Test(
+                """
                 "a{0, 1}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2385,15 +2723,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="a{0, 1}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNotNumericQuantifier6()
         {
-            Test("""
+            Test(
+                """
                 "a{0,1 }"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2413,15 +2755,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="a{0,1 }" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41425")]
         public void TestLegalOpenCloseBrace1()
         {
-            Test("""
+            Test(
+                """
                 @"{}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2435,15 +2781,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="{}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41425")]
         public void TestLegalOpenCloseBrace2()
         {
-            Test("""
+            Test(
+                """
                 @"{1, 2}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2457,15 +2807,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="{1, 2}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41425")]
         public void TestDanglingNumericQuantifier1()
         {
-            Test("""
+            Test(
+                """
                 @"{1}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2485,15 +2839,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="{1}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41425")]
         public void TestDanglingNumericQuantifier2()
         {
-            Test("""
+            Test(
+                """
                 @"{1,2}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2513,15 +2871,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="{1,2}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestLazyQuantifierDueToIgnoredWhitespace()
         {
-            Test("""
+            Test(
+                """
                 "a* ?"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2544,15 +2906,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="a* ?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNonLazyQuantifierDueToNonIgnoredWhitespace()
         {
-            Test("""
+            Test(
+                """
                 "a* ?"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2575,15 +2941,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="a* ?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestAsteriskQuantifierAtStart()
         {
-            Test("""
+            Test(
+                """
                 "*"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2600,15 +2970,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..10)" Text="*" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestAsteriskQuantifierAtStartOfGroup()
         {
-            Test("""
+            Test(
+                """
                 "(*)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2632,15 +3006,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..12)" Text="(*)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestAsteriskQuantifierAfterQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a**"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2663,15 +3041,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="a**" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPlusQuantifierAtStart()
         {
-            Test("""
+            Test(
+                """
                 "+"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2688,15 +3070,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..10)" Text="+" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPlusQuantifierAtStartOfGroup()
         {
-            Test("""
+            Test(
+                """
                 "(+)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2720,15 +3106,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..12)" Text="(+)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPlusQuantifierAfterQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a*+"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2751,15 +3141,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="a*+" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestQuestionQuantifierAtStart()
         {
-            Test("""
+            Test(
+                """
                 "?"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2776,15 +3170,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..10)" Text="?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestQuestionQuantifierAtStartOfGroup()
         {
-            Test("""
+            Test(
+                """
                 "(?)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2807,15 +3205,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(?)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestQuestionQuantifierAfterQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a*??"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2841,15 +3243,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="a*??" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNumericQuantifierAtStart()
         {
-            Test("""
+            Test(
+                """
                 "{0}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2869,15 +3275,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="{0}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNumericQuantifierAtStartOfGroup()
         {
-            Test("""
+            Test(
+                """
                 "({0})"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2904,15 +3314,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..14)" Text="({0})" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNumericQuantifierAfterQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a*{0}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2938,15 +3352,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="a*{0}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNonNumericQuantifierAtStart()
         {
-            Test("""
+            Test(
+                """
                 "{0"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2960,15 +3378,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="{0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNonNumericQuantifierAtStartOfGroup()
         {
-            Test("""
+            Test(
+                """
                 "({0)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -2989,15 +3411,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..13)" Text="({0)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNonNumericQuantifierAfterQuantifier()
         {
-            Test("""
+            Test(
+                """
                 "a*{0"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3017,15 +3443,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="a*{0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestEscapeAtEnd1()
         {
-            Test("""
+            Test(
+                """
                 @"\"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3043,15 +3473,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..11)" Text="\" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestEscapeAtEnd2()
         {
-            Test("""
+            Test(
+                """
                 "\\"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3069,15 +3503,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..11)" Text="\\" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestSimpleEscape()
         {
-            Test("""
+            Test(
+                """
                 @"\w"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3092,15 +3530,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\w" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPrimaryEscapes1()
         {
-            Test("""
+            Test(
+                """
                 @"\b\B\A\G\Z\z\w\W\s\W\s\S\d\D"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3167,15 +3609,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..38)" Text="\b\B\A\G\Z\z\w\W\s\W\s\S\d\D" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\c"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3194,15 +3640,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\c" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\c<"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3224,15 +3674,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c&lt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\ca"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3248,15 +3702,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\ca" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\cA"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3272,15 +3730,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\cA" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\c A"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3302,15 +3764,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\c A" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\c(a)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3339,15 +3805,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[12..15)" Text="(a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\c>"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3369,15 +3839,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\c?"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3399,15 +3873,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c?" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape9()
         {
-            Test("""
+            Test(
+                """
                 @"\c@"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3423,15 +3901,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c@" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape10()
         {
-            Test("""
+            Test(
+                """
                 @"\c^"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3447,15 +3929,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c^" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape11()
         {
-            Test("""
+            Test(
+                """
                 @"\c_"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3471,15 +3957,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c_" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape12()
         {
-            Test("""
+            Test(
+                """
                 @"\c`"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3501,15 +3991,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c`" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape13()
         {
-            Test("""
+            Test(
+                """
                 @"\c{"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3531,15 +4025,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c{" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape14()
         {
-            Test("""
+            Test(
+                """
                 @"\ca"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3555,15 +4053,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\ca" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape15()
         {
-            Test("""
+            Test(
+                """
                 @"\cA"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3579,15 +4081,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\cA" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape16()
         {
-            Test("""
+            Test(
+                """
                 @"\cz"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3603,15 +4109,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\cz" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape17()
         {
-            Test("""
+            Test(
+                """
                 @"\cZ"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3627,15 +4137,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\cZ" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape18()
         {
-            Test("""
+            Test(
+                """
                 @"\c\"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3651,15 +4165,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c\" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestControlEscape19()
         {
-            Test("""
+            Test(
+                """
                 @"\c]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3675,15 +4193,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\c]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnknownEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\m"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3701,15 +4223,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\m" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\x"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3728,15 +4254,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\x" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\x "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3758,15 +4288,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\x " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\x0"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3785,15 +4319,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\x0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\x0 "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3815,15 +4353,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\x0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\x00"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3839,15 +4381,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\x00" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\x00 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3866,15 +4412,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\x00 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\x000"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3893,15 +4443,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\x000" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\xff"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3917,15 +4471,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\xff" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape9()
         {
-            Test("""
+            Test(
+                """
                 @"\xFF"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3941,15 +4499,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\xFF" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape10()
         {
-            Test("""
+            Test(
+                """
                 @"\xfF"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3965,15 +4527,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\xfF" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape11()
         {
-            Test("""
+            Test(
+                """
                 @"\xfff"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -3992,15 +4558,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\xfff" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestHexEscape12()
         {
-            Test("""
+            Test(
+                """
                 @"\xgg"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4022,15 +4592,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\xgg" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnknownEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\m "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4051,15 +4625,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\m " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\u"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4078,15 +4656,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\u" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\u0"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4105,15 +4687,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\u0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\u00"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4132,15 +4718,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\u00" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\u000"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4159,15 +4749,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\u000" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\u0000"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4183,15 +4777,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\u0000" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\u0000 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4210,15 +4808,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="\u0000 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\u "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4240,15 +4842,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\u " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\u0 "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4270,15 +4876,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\u0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestUnicodeEscape9()
         {
-            Test("""
+            Test(
+                """
                 @"\ugggg"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4300,15 +4910,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\ugggg" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\0"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4323,15 +4937,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\0 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4349,15 +4967,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\00"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4372,15 +4994,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\00" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\00 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4398,15 +5024,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\00 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\000"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4421,15 +5051,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\000" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\000 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4447,15 +5081,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\000 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\0000"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4473,15 +5111,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\0000" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\0000 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4499,15 +5141,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\0000 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape9()
         {
-            Test("""
+            Test(
+                """
                 @"\7"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4525,15 +5171,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\7" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape10()
         {
-            Test("""
+            Test(
+                """
                 @"\78"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4551,15 +5201,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\78" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscape11()
         {
-            Test("""
+            Test(
+                """
                 @"\8"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4577,15 +5231,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\8" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestOctalEscapeEcmascript1()
         {
-            Test("""
+            Test(
+                """
                 @"\40"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4600,15 +5258,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\40" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestOctalEscapeEcmascript2()
         {
-            Test("""
+            Test(
+                """
                 @"\401"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4626,15 +5288,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\401" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestOctalEscapeEcmascript3()
         {
-            Test("""
+            Test(
+                """
                 @"\37"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4649,15 +5315,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\37" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestOctalEscapeEcmascript4()
         {
-            Test("""
+            Test(
+                """
                 @"\371"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4672,15 +5342,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\371" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestOctalEscapeEcmascript5()
         {
-            Test("""
+            Test(
+                """
                 @"\0000"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4698,15 +5372,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\0000" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\k"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4724,15 +5402,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\k" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\k "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4753,15 +5435,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\k " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\k<"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4782,15 +5468,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\k&lt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\k< "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4811,15 +5501,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\k&lt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4840,15 +5534,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\k&lt;0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0 "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4869,15 +5567,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\k&lt;0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0>"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4895,15 +5597,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\k&lt;0&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4924,15 +5630,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\k&lt;0&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape9()
         {
-            Test("""
+            Test(
+                """
                 @"\k<00> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4953,15 +5663,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="\k&lt;00&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape10()
         {
-            Test("""
+            Test(
+                """
                 @"\k<a> "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -4985,15 +5699,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\k&lt;a&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEscape11()
         {
-            Test("""
+            Test(
+                """
                 @"(?<a>)\k<a> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5025,15 +5743,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureEcmaEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\k"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5051,15 +5773,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\k" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureEcmaEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\k "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5080,15 +5806,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\k " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureEcmaEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\k<"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5109,15 +5839,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\k&lt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureEcmaEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\k< "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5135,15 +5869,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\k&lt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureEcmaEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5161,15 +5899,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\k&lt;0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureEcmaEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5187,15 +5929,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\k&lt;0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureEcmaEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0>"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5213,15 +5959,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\k&lt;0&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureEcmaEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5242,15 +5992,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\k&lt;0&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\k'"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5271,15 +6025,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\k'" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\k' "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5300,15 +6058,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\k' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\k'0"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5329,15 +6091,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\k'0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\k'0 "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5358,15 +6124,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\k'0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\k'0'"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5384,15 +6154,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\k'0'" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\k'0' "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5413,15 +6187,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\k'0' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape9()
         {
-            Test("""
+            Test(
+                """
                 @"\k'00' "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5442,15 +6220,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="\k'00' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape10()
         {
-            Test("""
+            Test(
+                """
                 @"\k'a' "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5474,15 +6256,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\k'a' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureQuoteEscape11()
         {
-            Test("""
+            Test(
+                """
                 @"(?<a>)\k'a' "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5514,15 +6300,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureWrongQuote1()
         {
-            Test("""
+            Test(
+                """
                 @"\k<0' "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5543,15 +6333,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\k&lt;0' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestKCaptureWrongQuote2()
         {
-            Test("""
+            Test(
+                """
                 @"\k'0> "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5572,15 +6366,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\k'0&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5598,15 +6396,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..11)" Text="\" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\ "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5621,15 +6423,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\ " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\<"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5644,15 +6450,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\&lt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\< "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5670,15 +6480,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\&lt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\<0"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5696,15 +6510,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\&lt;0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\<0 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5722,15 +6540,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\&lt;0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\<0>"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5747,15 +6569,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\&lt;0&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\<0> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5775,15 +6601,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\&lt;0&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape9()
         {
-            Test("""
+            Test(
+                """
                 @"\<00> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5803,15 +6633,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\&lt;00&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape10()
         {
-            Test("""
+            Test(
+                """
                 @"\<a> "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5834,15 +6668,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\&lt;a&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEscape11()
         {
-            Test("""
+            Test(
+                """
                 @"(?<a>)\<a> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5873,15 +6711,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureEcmaEscape1()
         {
-            Test("""
+            Test(
+                """
                 @"\"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5899,15 +6741,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..11)" Text="\" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCaptureEcmaEscape2()
         {
-            Test("""
+            Test(
+                """
                 @"\ "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5922,15 +6768,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\ " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCaptureEcmaEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\<"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5945,15 +6795,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\&lt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCaptureEcmaEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\< "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5971,15 +6825,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\&lt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCaptureEcmaEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\<0"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -5997,15 +6855,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\&lt;0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCaptureEcmaEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\<0 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6023,15 +6885,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\&lt;0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCaptureEcmaEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\<0>"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6048,15 +6914,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\&lt;0&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCaptureEcmaEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\<0> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6076,15 +6946,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\&lt;0&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape3()
         {
-            Test("""
+            Test(
+                """
                 @"\'"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6099,15 +6973,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\'" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape4()
         {
-            Test("""
+            Test(
+                """
                 @"\' "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6125,15 +7003,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape5()
         {
-            Test("""
+            Test(
+                """
                 @"\'0"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6151,15 +7033,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\'0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape6()
         {
-            Test("""
+            Test(
+                """
                 @"\'0 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6177,15 +7063,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\'0 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape7()
         {
-            Test("""
+            Test(
+                """
                 @"\'0'"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6202,15 +7092,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="\'0'" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape8()
         {
-            Test("""
+            Test(
+                """
                 @"\'0' "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6230,15 +7124,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\'0' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape9()
         {
-            Test("""
+            Test(
+                """
                 @"\'00' "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6258,15 +7156,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="\'00' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape10()
         {
-            Test("""
+            Test(
+                """
                 @"\'a' "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6289,15 +7191,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\'a' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureQuoteEscape11()
         {
-            Test("""
+            Test(
+                """
                 @"(?<a>)\'a' "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6328,15 +7234,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureWrongQuote1()
         {
-            Test("""
+            Test(
+                """
                 @"\<0' "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6354,15 +7264,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\&lt;0' " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureWrongQuote2()
         {
-            Test("""
+            Test(
+                """
                 @"\'0> "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6380,15 +7294,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="\'0&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestDefinedCategoryEscape()
         {
-            Test("""
+            Test(
+                """
                 "\\p{Cc}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6406,15 +7324,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="\\p{Cc}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestDefinedCategoryEscapeWithSpaces1()
         {
-            Test("""
+            Test(
+                """
                 "\\p{ Cc }"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6435,15 +7357,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="\\p{ Cc }" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestDefinedCategoryEscapeWithSpaces2()
         {
-            Test("""
+            Test(
+                """
                 "\\p{ Cc }"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6476,15 +7402,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="\\p{ Cc }" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestDefinedCategoryEscapeWithSpaces3()
         {
-            Test("""
+            Test(
+                """
                 "\\p {Cc}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6508,15 +7438,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="\\p {Cc}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestUndefinedCategoryEscape()
         {
-            Test("""
+            Test(
+                """
                 "\\p{xxx}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6537,15 +7471,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="\\p{xxx}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestTooShortCategoryEscape1()
         {
-            Test("""
+            Test(
+                """
                 "\\p"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6563,15 +7501,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="\\p" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestTooShortCategoryEscape2()
         {
-            Test("""
+            Test(
+                """
                 "\\p{"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6592,15 +7534,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="\\p{" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestTooShortCategoryEscape3()
         {
-            Test("""
+            Test(
+                """
                 "\\p{}"
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6621,15 +7567,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="\\p{}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestTooShortCategoryEscape4()
         {
-            Test("""
+            Test(
+                """
                 "\\p{} "
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6650,15 +7600,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="\\p{} " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestTooShortCategoryEscape5()
         {
-            Test("""
+            Test(
+                """
                 "\\p {} "
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6679,15 +7633,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="\\p {} " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestTooShortCategoryEscape6()
         {
-            Test("""
+            Test(
+                """
                 "\\p{Cc "
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6708,15 +7666,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="\\p{Cc " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCategoryNameWithDash()
         {
-            Test("""
+            Test(
+                """
                 "\\p{IsArabicPresentationForms-A}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6734,15 +7696,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..41)" Text="\\p{IsArabicPresentationForms-A}" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNonCapturingGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?:)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6760,15 +7726,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?:)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNonCapturingGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?:a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6790,15 +7760,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?:a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNonCapturingGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?:"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6819,15 +7793,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(?:" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNonCapturingGrouping4()
         {
-            Test("""
+            Test(
+                """
                 "(?: "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6852,15 +7830,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?: " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestPositiveLookaheadGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?=)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6878,15 +7860,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?=)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPositiveLookaheadGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?=a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6908,15 +7894,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?=a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPositiveLookaheadGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?="
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6937,15 +7927,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(?=" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPositiveLookaheadGrouping4()
         {
-            Test("""
+            Test(
+                """
                 "(?= "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6970,15 +7964,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?= " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNegativeLookaheadGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?!)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -6996,15 +7994,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?!)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNegativeLookaheadGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?!a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7026,15 +8028,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?!a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNegativeLookaheadGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?!"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7055,15 +8061,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(?!" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNegativeLookaheadGrouping4()
         {
-            Test("""
+            Test(
+                """
                 "(?! "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7088,15 +8098,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?! " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestAtomicGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7114,15 +8128,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestAtomicGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?>a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7144,15 +8162,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?&gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestAtomicGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?>"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7173,15 +8195,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(?&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestAtomicGrouping4()
         {
-            Test("""
+            Test(
+                """
                 "(?> "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7206,15 +8232,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?&gt; " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestPositiveLookbehindGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?<=)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7233,15 +8263,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?&lt;=)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPositiveLookbehindGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?<=a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7264,15 +8298,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?&lt;=a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPositiveLookbehindGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?<="
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7294,15 +8332,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?&lt;=" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestPositiveLookbehindGrouping4()
         {
-            Test("""
+            Test(
+                """
                 "(?<= "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7328,15 +8370,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?&lt;= " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNegativeLookbehindGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?<!)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7355,15 +8401,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?&lt;!)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNegativeLookbehindGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?<!a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7386,15 +8436,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?&lt;!a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNegativeLookbehindGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?<!"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7416,15 +8470,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?&lt;!" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNegativeLookbehindGrouping4()
         {
-            Test("""
+            Test(
+                """
                 "(?<! "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7450,15 +8508,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?&lt;! " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture1()
         {
-            Test("""
+            Test(
+                """
                 "(?<"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7482,15 +8544,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(?&lt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture2()
         {
-            Test("""
+            Test(
+                """
                 "(?<>"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7514,15 +8580,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?&lt;&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture3()
         {
-            Test("""
+            Test(
+                """
                 "(?<a"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7548,15 +8618,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..13)" Text="(?&lt;a" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture4()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7581,15 +8655,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..14)" Text="(?&lt;a&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture5()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>a"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7618,15 +8696,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;a" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture6()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7652,15 +8734,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..16)" Text="(?&lt;a&gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture7()
         {
-            Test("""
+            Test(
+                """
                 "(?<a >a)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7689,15 +8775,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..17)" Text="(?&lt;a &gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNamedCapture8()
         {
-            Test("""
+            Test(
+                """
                 "(?<a >a)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7729,15 +8819,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..17)" Text="(?&lt;a &gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture9()
         {
-            Test("""
+            Test(
+                """
                 "(?< a>a)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7764,15 +8858,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?&lt; a&gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNamedCapture10()
         {
-            Test("""
+            Test(
+                """
                 "(?< a>a)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7802,15 +8900,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?&lt; a&gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture11()
         {
-            Test("""
+            Test(
+                """
                 "(?< a >a)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7837,15 +8939,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?&lt; a &gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNamedCapture12()
         {
-            Test("""
+            Test(
+                """
                 "(?< a >a)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7881,15 +8987,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?&lt; a &gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedCapture13()
         {
-            Test("""
+            Test(
+                """
                 "(?<ab>a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7915,15 +9025,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="ab" Span="[9..17)" Text="(?&lt;ab&gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestZeroNumberCapture()
         {
-            Test("""
+            Test(
+                """
                 "(?<0>a)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7950,15 +9064,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?&lt;0&gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNumericNumberCapture1()
         {
-            Test("""
+            Test(
+                """
                 "(?<1>a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -7983,15 +9101,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNumericNumberCapture2()
         {
-            Test("""
+            Test(
+                """
                 "(?<10>a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8016,15 +9138,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="10" Span="[9..17)" Text="(?&lt;10&gt;a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNumericNumberCapture3()
         {
-            Test("""
+            Test(
+                """
                 "(?<1>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8045,15 +9171,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..15)" Text="(?&lt;1&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNumericNumberCapture4()
         {
-            Test("""
+            Test(
+                """
                 "(?<1> )"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8078,15 +9208,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt; )" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNumericNumberCapture6()
         {
-            Test("""
+            Test(
+                """
                 "(?<1> )"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8110,15 +9244,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt; )" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?<-"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8144,15 +9282,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?&lt;-" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8178,15 +9321,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?&lt;-0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8211,15 +9359,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?&lt;-0)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping4()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0>"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8244,15 +9397,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?&lt;-0&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping5()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8274,15 +9432,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?&lt;-0&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping6()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0 >)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8314,15 +9477,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?&lt;-0 &gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping7()
         {
-            Test("""
+            Test(
+                """
                 "(?<- 0 >)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8360,15 +9528,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?&lt;- 0 &gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping8()
         {
-            Test("""
+            Test(
+                """
                 "(?<- 0>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8400,15 +9573,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?&lt;- 0&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping9()
         {
-            Test("""
+            Test(
+                """
                 "(?<-00>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8430,15 +9608,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?&lt;-00&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping10()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8466,15 +9649,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..14)" Text="(?&lt;a-" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping11()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-0"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8502,15 +9690,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..15)" Text="(?&lt;a-0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping12()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-0)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8537,15 +9730,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..16)" Text="(?&lt;a-0)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping13()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-0>"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8572,15 +9770,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..16)" Text="(?&lt;a-0&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping14()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-0>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8604,15 +9807,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping15()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-0 >)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8646,15 +9854,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..18)" Text="(?&lt;a-0 &gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping16()
         {
-            Test("""
+            Test(
+                """
                 "(?<a- 0 >)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8694,15 +9907,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..19)" Text="(?&lt;a- 0 &gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping17()
         {
-            Test("""
+            Test(
+                """
                 "(?<a- 0>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8736,15 +9954,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..18)" Text="(?&lt;a- 0&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGrouping18()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-00>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8768,15 +9991,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..18)" Text="(?&lt;a-00&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingUndefinedReference1()
         {
-            Test("""
+            Test(
+                """
                 "(?<-1>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8801,15 +10029,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?&lt;-1&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingDefinedReferenceBehind()
         {
-            Test("""
+            Test(
+                """
                 "()(?<-1>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8837,15 +10070,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[9..11)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingDefinedReferenceAhead()
         {
-            Test("""
+            Test(
+                """
                 "(?<-1>)()"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8873,15 +10111,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[16..18)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingNamedReferenceBehind()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>)(?<-a>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8914,15 +10157,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingNamedReferenceAhead()
         {
-            Test("""
+            Test(
+                """
                 "(?<-a>)(?<a>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8955,15 +10203,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[16..22)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingNumberedReferenceBehind()
         {
-            Test("""
+            Test(
+                """
                 "(?<4>)(?<-4>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -8995,15 +10248,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="4" Span="[9..15)" Text="(?&lt;4&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingNumberedReferenceAhead()
         {
-            Test("""
+            Test(
+                """
                 "(?<-4>)(?<4>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9035,15 +10293,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="4" Span="[16..22)" Text="(?&lt;4&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumberedExists()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>)(?<b>)(?<-1>)(?<-2>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9098,15 +10361,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="b" Span="[15..21)" Text="(?&lt;b&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers()
         {
-            Test("""
+            Test(
+                """
                 "()()(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9176,15 +10444,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[11..13)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers1()
         {
-            Test("""
+            Test(
+                """
                 "()(?<a>)(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9259,15 +10532,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[11..17)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers2()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>)()(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9342,15 +10620,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers3()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>)(?<b>)(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9430,15 +10713,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="b" Span="[15..21)" Text="(?&lt;b&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers4()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()()"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9508,15 +10796,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[39..41)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers5_1()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()(?"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9593,15 +10886,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[37..39)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers5()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()(?<a>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9676,15 +10974,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[39..45)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers6()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)()"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9759,15 +11062,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[37..43)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers7_1()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)(?"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9849,15 +11157,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[37..43)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestBalancingGroupingAutoNumbers7()
         {
-            Test("""
+            Test(
+                """
                 "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)(?<b>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9937,15 +11250,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="b" Span="[43..49)" Text="(?&lt;b&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestReferenceToBalancingGroupCaptureName1()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-0>)(?<b-a>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -9982,15 +11300,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="b" Span="[17..25)" Text="(?&lt;b-a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestReferenceToBalancingGroupCaptureName2()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-0>)(?<-a>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10025,15 +11348,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestReferenceToSameBalancingGroup()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-a>)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10057,15 +11385,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..17)" Text="(?&lt;a-a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestQuoteNamedCapture()
         {
-            Test("""
+            Test(
+                """
                 "(?'a')"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10087,15 +11420,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..15)" Text="(?'a')" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestQuoteBalancingCapture1()
         {
-            Test("""
+            Test(
+                """
                 "(?'-0')"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10117,15 +11454,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?'-0')" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestQuoteBalancingCapture2()
         {
-            Test("""
+            Test(
+                """
                 "(?'a-0')"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10149,15 +11491,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..17)" Text="(?'a-0')" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestMismatchedOpenCloseCapture1()
         {
-            Test("""
+            Test(
+                """
                 "(?<a-0')"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10188,15 +11535,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0')" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestMismatchedOpenCloseCapture2()
         {
-            Test("""
+            Test(
+                """
                 "(?'a-0>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10227,15 +11579,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..17)" Text="(?'a-0&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace, allowIndexOutOfRange: true);
+                """,
+                RegexOptions.IgnorePatternWhitespace,
+                allowIndexOutOfRange: true
+            );
         }
 
         [Fact]
         public void TestConditionalCapture1()
         {
-            Test("""
+            Test(
+                """
                 "(?("
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10260,15 +11617,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..12)" Text="(?(" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture2()
         {
-            Test("""
+            Test(
+                """
                 "(?(0"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10292,15 +11653,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..13)" Text="(?(0" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture3()
         {
-            Test("""
+            Test(
+                """
                 "(?(0)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10323,15 +11688,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?(0)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture4()
         {
-            Test("""
+            Test(
+                """
                 "(?(0))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10351,15 +11720,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?(0))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture5()
         {
-            Test("""
+            Test(
+                """
                 "(?(0)a)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10383,15 +11756,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?(0)a)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture6()
         {
-            Test("""
+            Test(
+                """
                 "(?(0)a|)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10419,15 +11796,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?(0)a|)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture7()
         {
-            Test("""
+            Test(
+                """
                 "(?(0)a|b)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10459,15 +11840,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?(0)a|b)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture8()
         {
-            Test("""
+            Test(
+                """
                 "(?(0)a|b|)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10506,15 +11891,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..19)" Text="(?(0)a|b|)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture9()
         {
-            Test("""
+            Test(
+                """
                 "(?(0)a|b|c)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10557,15 +11946,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..20)" Text="(?(0)a|b|c)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture10()
         {
-            Test("""
+            Test(
+                """
                 "(?(0 )"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10591,15 +11984,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?(0 )" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture11()
         {
-            Test("""
+            Test(
+                """
                 "(?(1))"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10622,15 +12019,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?(1))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture12()
         {
-            Test("""
+            Test(
+                """
                 "(?(00))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10650,15 +12051,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?(00))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture13()
         {
-            Test("""
+            Test(
+                """
                 "(?(0)a|b|c|d)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10710,15 +12115,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..22)" Text="(?(0)a|b|c|d)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestConditionalCapture14()
         {
-            Test("""
+            Test(
+                """
                 "(?(0)a|b|c|d|e)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10779,15 +12188,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..24)" Text="(?(0)a|b|c|d|e)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedConditionalCapture1()
         {
-            Test("""
+            Test(
+                """
                 "(?(a))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10813,15 +12226,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?(a))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedConditionalCapture2()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>)(?(a))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10852,15 +12269,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedConditionalCapture3()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>)(?(a ))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10900,15 +12321,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNamedConditionalCapture4()
         {
-            Test("""
+            Test(
+                """
                 "(?<a>)(?( a))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10948,15 +12373,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestNestedGroupsInConditionalGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?(()a()))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -10994,15 +12423,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[15..17)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNestedGroupsInConditionalGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?((?<x>)a(?<y>)))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11050,15 +12483,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="y" Span="[19..25)" Text="(?&lt;y&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptureInConditionalGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?(?'"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11089,15 +12526,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?(?'" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestCaptureInConditionalGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?(?'x'))"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11126,15 +12567,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?(?'x'))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestCommentInConditionalGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?(?#"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11170,15 +12615,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?(?#" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestCommentInConditionalGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?(?#)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11214,15 +12663,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?(?#)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestCommentInConditionalGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?(?#))"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11258,15 +12711,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?(?#))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestAngleCaptureInConditionalGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?(?<"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11297,15 +12754,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..14)" Text="(?(?&lt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestAngleCaptureInConditionalGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?(?<a"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11336,15 +12797,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..15)" Text="(?(?&lt;a" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestAngleCaptureInConditionalGrouping3()
         {
-            Test("""
+            Test(
+                """
                 "(?(?<a>"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11374,15 +12839,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..16)" Text="(?(?&lt;a&gt;" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestAngleCaptureInConditionalGrouping4()
         {
-            Test("""
+            Test(
+                """
                 "(?(?<a>)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11412,15 +12881,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?(?&lt;a&gt;)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestAngleCaptureInConditionalGrouping5()
         {
-            Test("""
+            Test(
+                """
                 "(?(?<a>))"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11449,15 +12922,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..18)" Text="(?(?&lt;a&gt;))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestLookbehindAssertionInConditionalGrouping1()
         {
-            Test("""
+            Test(
+                """
                 "(?(?<=))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11482,15 +12959,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?(?&lt;=))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestLookbehindAssertionInConditionalGrouping2()
         {
-            Test("""
+            Test(
+                """
                 "(?(?<!))"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11515,15 +12996,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[9..17)" Text="(?(?&lt;!))" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnorePatternWhitespace);
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
         }
 
         [Fact]
         public void TestBackreference1()
         {
-            Test("""
+            Test(
+                """
                 @"\1"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11541,15 +13026,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\1" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestBackreference2()
         {
-            Test("""
+            Test(
+                """
                 @"\1 "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11570,15 +13059,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\1 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestBackreference3()
         {
-            Test("""
+            Test(
+                """
                 @"()\1"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11599,15 +13092,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestBackreference4()
         {
-            Test("""
+            Test(
+                """
                 @"()\1 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11631,15 +13128,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestBackreference5()
         {
-            Test("""
+            Test(
+                """
                 @"()\10 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11663,15 +13164,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestEcmascriptBackreference1()
         {
-            Test("""
+            Test(
+                """
                 @"\1"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11686,15 +13191,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="\1" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestEcmascriptBackreference2()
         {
-            Test("""
+            Test(
+                """
                 @"\1 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11712,15 +13221,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="\1 " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestEcmascriptBackreference3()
         {
-            Test("""
+            Test(
+                """
                 @"()\1"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11741,15 +13254,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestEcmaBackreference4()
         {
-            Test("""
+            Test(
+                """
                 @"()\1 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11773,15 +13290,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestEcmascriptBackreference5()
         {
-            Test("""
+            Test(
+                """
                 @"()\10 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11805,15 +13326,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestEcmascriptBackreference6()
         {
-            Test("""
+            Test(
+                """
                 @"()()()()()()()()()()\10 "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11891,15 +13416,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="10" Span="[28..30)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ECMAScript);
+                """,
+                RegexOptions.ECMAScript
+            );
         }
 
         [Fact]
         public void TestCharacterClass1()
         {
-            Test("""
+            Test(
+                """
                 @"["
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11918,15 +13447,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..11)" Text="[" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass2()
         {
-            Test("""
+            Test(
+                """
                 @"[ "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11949,15 +13482,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="[ " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass3()
         {
-            Test("""
+            Test(
+                """
                 @"[]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -11980,15 +13517,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..12)" Text="[]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass4()
         {
-            Test("""
+            Test(
+                """
                 @"[] "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12011,15 +13552,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="[] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass5()
         {
-            Test("""
+            Test(
+                """
                 @"[a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12039,15 +13584,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="[a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass6()
         {
-            Test("""
+            Test(
+                """
                 @"[a] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12070,15 +13619,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="[a] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass7()
         {
-            Test("""
+            Test(
+                """
                 @"[a-"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12107,15 +13660,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="[a-" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass8()
         {
-            Test("""
+            Test(
+                """
                 @"[a- "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12145,15 +13702,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="[a- " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass9()
         {
-            Test("""
+            Test(
+                """
                 @"[a-]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12173,15 +13734,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="[a-]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass10()
         {
-            Test("""
+            Test(
+                """
                 @"[a-] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12204,15 +13769,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[a-] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass11()
         {
-            Test("""
+            Test(
+                """
                 @"[a-b]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12238,15 +13807,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[a-b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass12()
         {
-            Test("""
+            Test(
+                """
                 @"[a-b] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12275,15 +13848,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[a-b] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass13()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[b]] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12318,15 +13895,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[a-[b]] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass14()
         {
-            Test("""
+            Test(
+                """
                 @"[a-b-[c]] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12367,15 +13948,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[a-b-[c]] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass15()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[b]-c] "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12416,15 +14001,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[a-[b]-c] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass16()
         {
-            Test("""
+            Test(
+                """
                 @"[[a]-b] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12447,15 +14036,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[[a]-b] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass17()
         {
-            Test("""
+            Test(
+                """
                 @"[[a]-[b]] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12490,15 +14083,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[[a]-[b]] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass18()
         {
-            Test("""
+            Test(
+                """
                 @"[\w-a] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12525,15 +14122,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[\w-a] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass19()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\w] "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12566,15 +14167,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[a-\w] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass20()
         {
-            Test("""
+            Test(
+                """
                 @"[\p{llll}-a] "
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12607,15 +14212,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..23)" Text="[\p{llll}-a] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass21()
         {
-            Test("""
+            Test(
+                """
                 @"[\p{Lu}-a] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12645,15 +14254,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..21)" Text="[\p{Lu}-a] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass22()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\p{Lu}] "
-                """, $$"""
+                """,
+                $$"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12689,15 +14302,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..21)" Text="[a-\p{Lu}] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass23()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[:Ll:]] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12732,15 +14349,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..21)" Text="[a-[:Ll:]] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass24()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[:Ll]] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12775,15 +14396,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[a-[:Ll]] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass25()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[:"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12818,15 +14443,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[a-[:" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass26()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[:L"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12861,15 +14490,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[a-[:L" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass27()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[:L:"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12904,15 +14537,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[a-[:L:" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass28()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[:L:]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12947,15 +14584,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[a-[:L:]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass29()
         {
-            Test("""
+            Test(
+                """
                 @"[\-]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -12976,15 +14617,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="[\-]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass30()
         {
-            Test("""
+            Test(
+                """
                 @"[a-b-c] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13016,15 +14661,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[a-b-c] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass31()
         {
-            Test("""
+            Test(
+                """
                 @"[-b-c] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13056,15 +14705,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[-b-c] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass32()
         {
-            Test("""
+            Test(
+                """
                 @"[-[b] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13087,15 +14740,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[-[b] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass33()
         {
-            Test("""
+            Test(
+                """
                 @"[-[b]] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13118,15 +14775,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[-[b]] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass34()
         {
-            Test("""
+            Test(
+                """
                 @"[--b "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13158,15 +14819,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[--b " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass35()
         {
-            Test("""
+            Test(
+                """
                 @"[--b] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13195,15 +14860,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[--b] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass36()
         {
-            Test("""
+            Test(
+                """
                 @"[--[b "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13238,15 +14907,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[--[b " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass37()
         {
-            Test("""
+            Test(
+                """
                 @"[--[b] "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13285,15 +14958,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[--[b] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass38()
         {
-            Test("""
+            Test(
+                """
                 @"[--[b]] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13328,15 +15005,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[--[b]] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass39()
         {
-            Test("""
+            Test(
+                """
                 @"[a--[b "
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13369,15 +15050,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[a--[b " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass40()
         {
-            Test("""
+            Test(
+                """
                 @"[,--[a] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13409,15 +15094,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[,--[a] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass41()
         {
-            Test("""
+            Test(
+                """
                 @"[,--[a]] "
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13449,15 +15138,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[,--[a]] " />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass42()
         {
-            Test("""
+            Test(
+                """
                 @"[\s-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13481,15 +15174,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[\s-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass43()
         {
-            Test("""
+            Test(
+                """
                 @"[\p{Lu}-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13516,15 +15213,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[\p{Lu}-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClass44()
         {
-            Test("""
+            Test(
+                """
                 @"[\p{Lu}-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13551,15 +15252,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[\p{Lu}-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestNegatedCharacterClass1()
         {
-            Test("""
+            Test(
+                """
                 @"[a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13579,15 +15284,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..13)" Text="[a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange1()
         {
-            Test("""
+            Test(
+                """
                 @"[\c<-\c>]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13627,15 +15336,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\c&lt;-\c&gt;]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange2()
         {
-            Test("""
+            Test(
+                """
                 @"[\c>-\c<]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13675,15 +15388,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\c&gt;-\c&lt;]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange3()
         {
-            Test("""
+            Test(
+                """
                 @"[\c>-a]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13717,15 +15434,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[\c&gt;-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange4()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\c>]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13759,15 +15480,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[a-\c&gt;]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange5()
         {
-            Test("""
+            Test(
+                """
                 @"[a--]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13796,15 +15521,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[a--]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange6()
         {
-            Test("""
+            Test(
+                """
                 @"[--a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13830,15 +15559,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[--a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange7()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\-]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13868,15 +15601,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[a-\-]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange8()
         {
-            Test("""
+            Test(
+                """
                 @"[\--a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13900,15 +15638,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[\--a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange9()
         {
-            Test("""
+            Test(
+                """
                 @"[\0-\1]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13936,15 +15678,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[\0-\1]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange10()
         {
-            Test("""
+            Test(
+                """
                 @"[\1-\0]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -13975,15 +15721,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[\1-\0]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange11()
         {
-            Test("""
+            Test(
+                """
                 @"[\0-\01]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14011,15 +15761,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\0-\01]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange12()
         {
-            Test("""
+            Test(
+                """
                 @"[\01-\0]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14050,15 +15804,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\01-\0]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange13()
         {
-            Test("""
+            Test(
+                """
                 @"[[:x:]-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14084,15 +15842,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[[:x:]-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange14()
         {
-            Test("""
+            Test(
+                """
                 @"[a-[:x:]]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14124,15 +15886,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[a-[:x:]]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange15()
         {
-            Test("""
+            Test(
+                """
                 @"[\0-\ca]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14161,15 +15927,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\0-\ca]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange16()
         {
-            Test("""
+            Test(
+                """
                 @"[\ca-\0]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14201,15 +15971,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\ca-\0]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange17()
         {
-            Test("""
+            Test(
+                """
                 @"[\ca-\cA]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14239,15 +16013,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\ca-\cA]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange18()
         {
-            Test("""
+            Test(
+                """
                 @"[\cA-\ca]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14277,15 +16055,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\cA-\ca]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange19()
         {
-            Test("""
+            Test(
+                """
                 @"[\u0-\u1]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14319,15 +16101,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\u0-\u1]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange20()
         {
-            Test("""
+            Test(
+                """
                 @"[\u1-\u0]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14361,15 +16147,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\u1-\u0]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange21()
         {
-            Test("""
+            Test(
+                """
                 @"[\u0000-\u0000]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14399,15 +16189,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..25)" Text="[\u0000-\u0000]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange22()
         {
-            Test("""
+            Test(
+                """
                 @"[\u0000-\u0001]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14437,15 +16231,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..25)" Text="[\u0000-\u0001]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange23()
         {
-            Test("""
+            Test(
+                """
                 @"[\u0001-\u0000]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14478,15 +16276,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..25)" Text="[\u0001-\u0000]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange24()
         {
-            Test("""
+            Test(
+                """
                 @"[\u0001-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14514,15 +16316,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[\u0001-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange25()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\u0001]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14553,15 +16359,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[a-\u0001]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange26()
         {
-            Test("""
+            Test(
+                """
                 @"[a-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14587,15 +16397,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[a-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange27()
         {
-            Test("""
+            Test(
+                """
                 @"[a-A]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14624,15 +16438,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[a-A]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange28()
         {
-            Test("""
+            Test(
+                """
                 @"[A-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14658,15 +16476,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[A-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange29()
         {
-            Test("""
+            Test(
+                """
                 @"[a-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14692,15 +16514,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[a-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnoreCase);
+                """,
+                RegexOptions.IgnoreCase
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange30()
         {
-            Test("""
+            Test(
+                """
                 @"[a-A]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14729,15 +16555,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[a-A]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnoreCase);
+                """,
+                RegexOptions.IgnoreCase
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange31()
         {
-            Test("""
+            Test(
+                """
                 @"[A-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14763,15 +16593,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..15)" Text="[A-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.IgnoreCase);
+                """,
+                RegexOptions.IgnoreCase
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange32()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\x61]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14799,15 +16633,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[a-\x61]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange33()
         {
-            Test("""
+            Test(
+                """
                 @"[\x61-a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14835,15 +16673,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\x61-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange34()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\x60]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14874,15 +16716,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[a-\x60]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange35()
         {
-            Test("""
+            Test(
+                """
                 @"[\x62-a]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14913,15 +16759,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\x62-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange36()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\x62]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14949,15 +16799,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[a-\x62]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange37()
         {
-            Test("""
+            Test(
+                """
                 @"[\x62-a]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -14988,15 +16842,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\x62-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange38()
         {
-            Test("""
+            Test(
+                """
                 @"[\3-\cc]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15025,15 +16883,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\3-\cc]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange39()
         {
-            Test("""
+            Test(
+                """
                 @"[\cc-\3]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15062,15 +16924,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\cc-\3]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange40()
         {
-            Test("""
+            Test(
+                """
                 @"[\2-\cc]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15099,15 +16965,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\2-\cc]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange41()
         {
-            Test("""
+            Test(
+                """
                 @"[\cc-\2]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15139,15 +17009,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\cc-\2]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange42()
         {
-            Test("""
+            Test(
+                """
                 @"[\4-\cc]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15179,15 +17053,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\4-\cc]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange43()
         {
-            Test("""
+            Test(
+                """
                 @"[\cc-\4]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15216,15 +17094,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[\cc-\4]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange44()
         {
-            Test("""
+            Test(
+                """
                 @"[\ca-\cb]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15254,15 +17136,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\ca-\cb]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange45()
         {
-            Test("""
+            Test(
+                """
                 @"[\ca-\cB]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15292,15 +17178,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\ca-\cB]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange46()
         {
-            Test("""
+            Test(
+                """
                 @"[\cA-\cb]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15330,15 +17220,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\cA-\cb]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange47()
         {
-            Test("""
+            Test(
+                """
                 @"[\cA-\cB]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15368,15 +17262,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\cA-\cB]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange48()
         {
-            Test("""
+            Test(
+                """
                 @"[\cb-\ca]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15409,15 +17307,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\cb-\ca]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange49()
         {
-            Test("""
+            Test(
+                """
                 @"[\cb-\cA]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15450,15 +17352,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\cb-\cA]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange50()
         {
-            Test("""
+            Test(
+                """
                 @"[\cB-\ca]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15491,15 +17397,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\cB-\ca]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange51()
         {
-            Test("""
+            Test(
+                """
                 @"[\cB-\cA]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15532,15 +17442,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[\cB-\cA]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange52()
         {
-            Test("""
+            Test(
+                """
                 @"[\--a]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15564,15 +17478,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[\--a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange53()
         {
-            Test("""
+            Test(
+                """
                 @"[\--#]"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15596,15 +17514,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[\--#]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange54()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\-]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15634,15 +17556,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="[a-\-]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange55()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\-b]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15675,15 +17602,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[a-\-b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange56()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\-\-b]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15720,15 +17652,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[a-\-\-b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange57()
         {
-            Test("""
+            Test(
+                """
                 @"[b-\-a]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15761,15 +17698,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..17)" Text="[b-\-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange58()
         {
-            Test("""
+            Test(
+                """
                 @"[b-\-\-a]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15806,15 +17748,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[b-\-\-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange59()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\-\D]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15848,15 +17795,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[a-\-\D]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange60()
         {
-            Test("""
+            Test(
+                """
                 @"[a-\-\-\D]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15894,15 +17846,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..20)" Text="[a-\-\-\D]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange61()
         {
-            Test("""
+            Test(
+                """
                 @"[a -\-\b]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15936,15 +17893,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..19)" Text="[a -\-\b]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCharacterClassRange62()
         {
-            Test("""
+            Test(
+                """
                 @"[ab-\-a]"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -15980,15 +17942,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..18)" Text="[ab-\-a]" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None, allowDiagnosticsMismatch: true);
+                """,
+                RegexOptions.None,
+                allowDiagnosticsMismatch: true
+            );
         }
 
         [Fact]
         public void TestCaptures1()
         {
-            Test("""
+            Test(
+                """
                 @"()\1"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16009,15 +17976,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures2()
         {
-            Test("""
+            Test(
+                """
                 @"()\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16041,15 +18012,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures3()
         {
-            Test("""
+            Test(
+                """
                 @"()()\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16076,15 +18051,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[12..14)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures4()
         {
-            Test("""
+            Test(
+                """
                 @"()\1"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16107,15 +18086,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="()\1" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures5()
         {
-            Test("""
+            Test(
+                """
                 @"()\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16138,15 +18121,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..14)" Text="()\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures6()
         {
-            Test("""
+            Test(
+                """
                 @"()()\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16174,15 +18161,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..16)" Text="()()\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures7()
         {
-            Test("""
+            Test(
+                """
                 @"()()(?n)\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16219,15 +18210,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[12..14)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures8()
         {
-            Test("""
+            Test(
+                """
                 @"()(?n)()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16266,15 +18261,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[10..12)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures9()
         {
-            Test("""
+            Test(
+                """
                 @"(?n)()()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16313,15 +18312,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..22)" Text="(?n)()()\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures10()
         {
-            Test("""
+            Test(
+                """
                 @"()()(?n)\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16360,15 +18363,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..22)" Text="()()(?n)\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures11()
         {
-            Test("""
+            Test(
+                """
                 @"()(?n)()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16407,15 +18414,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..22)" Text="()(?n)()\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures12()
         {
-            Test("""
+            Test(
+                """
                 @"(?n)()()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16454,15 +18465,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..22)" Text="(?n)()()\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures13()
         {
-            Test("""
+            Test(
+                """
                 @"()()(?-n)\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16499,15 +18514,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[12..14)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures14()
         {
-            Test("""
+            Test(
+                """
                 @"()(?-n)()\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16544,15 +18563,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[17..19)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures15()
         {
-            Test("""
+            Test(
+                """
                 @"(?-n)()()\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16589,15 +18612,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[17..19)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures16()
         {
-            Test("""
+            Test(
+                """
                 @"()()(?-n)\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16636,15 +18663,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..23)" Text="()()(?-n)\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures17()
         {
-            Test("""
+            Test(
+                """
                 @"()(?-n)()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16683,15 +18714,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[17..19)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures18()
         {
-            Test("""
+            Test(
+                """
                 @"(?-n)()()\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16728,15 +18763,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[17..19)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures19()
         {
-            Test("""
+            Test(
+                """
                 @"()()(?n:\1\2)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16776,15 +18815,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[12..14)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures20()
         {
-            Test("""
+            Test(
+                """
                 @"()()(?n:\1\2)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16826,15 +18869,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..23)" Text="()()(?n:\1\2)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures21()
         {
-            Test("""
+            Test(
+                """
                 @"()()(?-n:\1\2)"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16874,15 +18921,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[12..14)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures22()
         {
-            Test("""
+            Test(
+                """
                 @"()()(?-n:\1\2)"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16924,15 +18975,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..24)" Text="()()(?-n:\1\2)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures23()
         {
-            Test("""
+            Test(
+                """
                 @"(?n:)()()\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -16971,15 +19026,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[17..19)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures24()
         {
-            Test("""
+            Test(
+                """
                 @"(?n:)()()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17020,15 +19079,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..23)" Text="(?n:)()()\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures25()
         {
-            Test("""
+            Test(
+                """
                 @"(?-n:)()()\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17067,15 +19130,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[18..20)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures26()
         {
-            Test("""
+            Test(
+                """
                 @"(?-n:)()()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17116,15 +19183,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..24)" Text="(?-n:)()()\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures27()
         {
-            Test("""
+            Test(
+                """
                 @"(?n)(?-n)()()\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17167,15 +19238,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[21..23)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures28()
         {
-            Test("""
+            Test(
+                """
                 @"(?n)(?-n)()()\1\2"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17218,15 +19293,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[21..23)" Text="()" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestCaptures29()
         {
-            Test("""
+            Test(
+                """
                 @"(?-n)(?n)()()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17271,15 +19350,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..27)" Text="(?-n)(?n)()()\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestCaptures30()
         {
-            Test("""
+            Test(
+                """
                 @"(?-n)(?n)()()\1\2"
-                """, $"""
+                """,
+                $"""
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17324,15 +19407,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..27)" Text="(?-n)(?n)()()\1\2" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.ExplicitCapture);
+                """,
+                RegexOptions.ExplicitCapture
+            );
         }
 
         [Fact]
         public void TestComplex1()
         {
-            Test($"""
+            Test(
+                $"""
                 @"{And(".*[0-9].*[0-9].*", ".*[A-Z].*[A-Z].*", Not(".*(01|12).*"))}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17599,15 +19686,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[56..63)" Text="(01|12)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestComplex2()
         {
-            Test($"""
+            Test(
+                $"""
                 @"{And(".*a.*", ".*b.*")}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17694,15 +19785,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[19..26)" Text="(.*b.*)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestComplex3()
         {
-            Test($"""
+            Test(
+                $"""
                 @"{And(".*[a-z].*", ".*[A-Z].*", ".*[0-9].*", ".{2,4}")}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -17928,16 +20023,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="1" Span="[49..57)" Text="(.{2,4})" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestComplex4()
         {
-            Test($"""
+            Test(
+                $"""
                 @"{And(".*[a-z].*", ".*[A-Z].*", ".*[0-9].*", ".{4,8}",
                         Not(".*(01|12|23|34|45|56|67|78|89).*"))}"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -18333,7 +20432,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="2" Span="[65..93)" Text="(01|12|23|34|45|56|67|78|89)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
@@ -18347,11 +20448,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             var Not_countDown = Not(".*(987|876|765|654|543|432|321|210).*");
             var length = "[!-~]{8,12}";
             var contains_first_P_and_then_r = ".*X.*r.*";
-            var all = And(twoLower, twoUpper, threeDigits, oneSpecial, Not_countUp, Not_countDown, length, contains_first_P_and_then_r);
+            var all = And(
+                twoLower,
+                twoUpper,
+                threeDigits,
+                oneSpecial,
+                Not_countUp,
+                Not_countDown,
+                length,
+                contains_first_P_and_then_r
+            );
 
-            Test($"""
+            Test(
+                $"""
                 @"\b{all}\b"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -19178,15 +21290,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="3" Span="[251..261)" Text="(.*X.*r.*)" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
 
         [Fact]
         public void TestComplex6()
         {
-            Test("""
+            Test(
+                """
                 @"pa[5\$s]{2}w[o0]rd$"
-                """, """
+                """,
+                """
                 <Tree>
                   <CompilationUnit>
                     <Sequence>
@@ -19239,7 +21355,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     <Capture Name="0" Span="[10..29)" Text="pa[5\$s]{2}w[o0]rd$" />
                   </Captures>
                 </Tree>
-                """, RegexOptions.None);
+                """,
+                RegexOptions.None
+            );
         }
     }
 }

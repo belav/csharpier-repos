@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.IntegrationTesting;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
@@ -12,9 +12,9 @@ public sealed class SkipIfDebugAttribute : Attribute, ITestCondition
 {
     public bool IsMet =>
 #if DEBUG
-            false;
+        false;
 #else
-            true;
+        true;
 #endif
 
     public string SkipReason => "Test cannot be run in Debug mode.";

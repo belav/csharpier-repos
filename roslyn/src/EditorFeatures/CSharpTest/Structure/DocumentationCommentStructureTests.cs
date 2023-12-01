@@ -13,9 +13,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStructureTests<DocumentationCommentTriviaSyntax>
+public class DocumentationCommentStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<DocumentationCommentTriviaSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new DocumentationCommentStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new DocumentationCommentStructureProvider();
 
     [Fact]
     public async Task TestDocumentationCommentWithoutSummaryTag1()
@@ -30,8 +32,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// XML doc comment ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// XML doc comment ...", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -48,8 +52,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/** Block comment ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/** Block comment ...", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -62,8 +68,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <param name=\"tree\"></param> ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <param name=\"tree\"></param> ...", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -78,25 +86,32 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary> Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <summary> Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestDocumentationCommentWithLongBannerText()
     {
-        var code = """
+        var code =
+            """
                 {|span:/// $$<summary>
                 ///
-                """ + new string('x', 240) + """
+                """
+            + new string('x', 240)
+            + """
                 /// </summary>|}
                 class Class3
                 {
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary> " + new string('x', 106) + " ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <summary> " + new string('x', 106) + " ...", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -111,8 +126,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/** <summary> Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/** <summary> Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -127,8 +144,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary> Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <summary> Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -143,8 +162,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/** <summary> Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/** <summary> Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -157,8 +178,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary>Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <summary>Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -171,8 +194,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/** <summary>Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/** <summary>Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -185,8 +210,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary>Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <summary>Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -199,8 +226,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/** <summary>Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/** <summary>Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -216,8 +245,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary> Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <summary> Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -234,8 +265,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary> Hello C#!", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <summary> Hello C#!", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/2129")]
@@ -252,8 +285,14 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary> Summary with SeeClass, SeeAlsoClass, null, T, t, and not-supported.", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region(
+                "span",
+                "/// <summary> Summary with SeeClass, SeeAlsoClass, null, T, t, and not-supported.",
+                autoCollapse: true
+            )
+        );
     }
 
     [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems?id=402822")]
@@ -272,8 +311,10 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary> The main entrypoint for Program.", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "/// <summary> The main entrypoint for Program.", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20679")]
@@ -292,7 +333,13 @@ public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStruct
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/// <summary> Initializes a new instance of the Class1 class.", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region(
+                "span",
+                "/// <summary> Initializes a new instance of the Class1 class.",
+                autoCollapse: true
+            )
+        );
     }
 }

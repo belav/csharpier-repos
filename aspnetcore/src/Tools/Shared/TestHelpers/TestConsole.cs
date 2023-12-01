@@ -55,9 +55,7 @@ public class TestConsole : IConsole
         return args;
     }
 
-    public void ResetColor()
-    {
-    }
+    public void ResetColor() { }
 
     public string GetOutput()
     {

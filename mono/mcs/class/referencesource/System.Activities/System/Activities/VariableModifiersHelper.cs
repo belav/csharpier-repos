@@ -12,8 +12,13 @@ namespace System.Activities
     {
         static bool IsDefined(VariableModifiers modifiers)
         {
-            return (modifiers == VariableModifiers.None ||
-                ((modifiers & (VariableModifiers.Mapped | VariableModifiers.ReadOnly)) == modifiers));
+            return (
+                modifiers == VariableModifiers.None
+                || (
+                    (modifiers & (VariableModifiers.Mapped | VariableModifiers.ReadOnly))
+                    == modifiers
+                )
+            );
         }
 
         public static bool IsReadOnly(VariableModifiers modifiers)
@@ -30,8 +35,15 @@ namespace System.Activities
         {
             if (!IsDefined(modifiers))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidEnumArgumentException(argumentName, (int)modifiers, typeof(VariableModifiers)));
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidEnumArgumentException(
+                            argumentName,
+                            (int)modifiers,
+                            typeof(VariableModifiers)
+                        )
+                    );
             }
         }
     }

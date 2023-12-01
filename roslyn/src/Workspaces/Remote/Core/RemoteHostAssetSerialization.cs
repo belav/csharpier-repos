@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SolutionReplicationContext context,
             Checksum solutionChecksum,
             ImmutableArray<Checksum> checksums,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken);
 
@@ -54,7 +55,13 @@ namespace Microsoft.CodeAnalysis.Remote
 
             return;
 
-            static void WriteAsset(ObjectWriter writer, ISerializerService serializer, SolutionReplicationContext context, object asset, CancellationToken cancellationToken)
+            static void WriteAsset(
+                ObjectWriter writer,
+                ISerializerService serializer,
+                SolutionReplicationContext context,
+                object asset,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfNull(asset);
                 var kind = asset.GetWellKnownSynchronizationKind();
@@ -65,7 +72,12 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public static ValueTask<ImmutableArray<object>> ReadDataAsync(
-            PipeReader pipeReader, Checksum solutionChecksum, int objectCount, ISerializerService serializerService, CancellationToken cancellationToken)
+            PipeReader pipeReader,
+            Checksum solutionChecksum,
+            int objectCount,
+            ISerializerService serializerService,
+            CancellationToken cancellationToken
+        )
         {
             // Suppress ExecutionContext flow for asynchronous operations operate on the pipe. In addition to avoiding
             // ExecutionContext allocations, this clears the LogicalCallContext and avoids the need to clone data set by
@@ -74,17 +86,42 @@ namespace Microsoft.CodeAnalysis.Remote
             // ⚠ DO NOT AWAIT INSIDE THE USING. The Dispose method that restores ExecutionContext flow must run on the
             // same thread where SuppressFlow was originally run.
             using var _ = FlowControlHelper.TrySuppressFlow();
-            return ReadDataSuppressedFlowAsync(pipeReader, solutionChecksum, objectCount, serializerService, cancellationToken);
+            return ReadDataSuppressedFlowAsync(
+                pipeReader,
+                solutionChecksum,
+                objectCount,
+                serializerService,
+                cancellationToken
+            );
 
             static async ValueTask<ImmutableArray<object>> ReadDataSuppressedFlowAsync(
-                PipeReader pipeReader, Checksum solutionChecksum, int objectCount, ISerializerService serializerService, CancellationToken cancellationToken)
+                PipeReader pipeReader,
+                Checksum solutionChecksum,
+                int objectCount,
+                ISerializerService serializerService,
+                CancellationToken cancellationToken
+            )
             {
-                using var stream = await pipeReader.AsPrebufferedStreamAsync(cancellationToken).ConfigureAwait(false);
-                return ReadData(stream, solutionChecksum, objectCount, serializerService, cancellationToken);
+                using var stream = await pipeReader
+                    .AsPrebufferedStreamAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                return ReadData(
+                    stream,
+                    solutionChecksum,
+                    objectCount,
+                    serializerService,
+                    cancellationToken
+                );
             }
         }
 
-        public static ImmutableArray<object> ReadData(Stream stream, Checksum solutionChecksum, int objectCount, ISerializerService serializerService, CancellationToken cancellationToken)
+        public static ImmutableArray<object> ReadData(
+            Stream stream,
+            Checksum solutionChecksum,
+            int objectCount,
+            ISerializerService serializerService,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<object>.GetInstance(objectCount, out var results);
 

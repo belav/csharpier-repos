@@ -52,9 +52,16 @@ namespace System.DirectoryServices.ActiveDirectory
 
             for (int i = 0; i < count; i++)
             {
-                addr = IntPtr.Add(info, sizeof(int) * 2 + i * Marshal.SizeOf(typeof(DS_REPL_NEIGHBOR)));
+                addr = IntPtr.Add(
+                    info,
+                    sizeof(int) * 2 + i * Marshal.SizeOf(typeof(DS_REPL_NEIGHBOR))
+                );
 
-                ReplicationNeighbor managedNeighbor = new ReplicationNeighbor(addr, _server, _nameTable);
+                ReplicationNeighbor managedNeighbor = new ReplicationNeighbor(
+                    addr,
+                    _server,
+                    _nameTable
+                );
 
                 Add(managedNeighbor);
             }

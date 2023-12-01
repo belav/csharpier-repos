@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// this test verifies that there is no deadlock when we do pumping inside a class constructor 
+// this test verifies that there is no deadlock when we do pumping inside a class constructor
 // from an STA thread.
 
 
@@ -16,7 +16,7 @@ public class MyWaitForPendingFinalizersClass
 
         // Wait for all finalizers to complete before continuing.
         // This is essentially a way to pump in CLR since we are suspending the
-        // current thread until the thread processing the finalization queue has 
+        // current thread until the thread processing the finalization queue has
         // emptied that queue.
         // For more info on this see cbrumme's blogg posting on Pumping in the CLR.
         GC.WaitForPendingFinalizers();
@@ -37,6 +37,7 @@ public class Test_pumpFromCctor
 {
     // We can increase this number to fill up more memory.
     const int numMfos = 10;
+
     // We can increase this number to cause more
     // post-finalization work to be done.
     const int maxIterations = 10;
@@ -64,7 +65,7 @@ public class Test_pumpFromCctor
             Console.WriteLine("Doing some post-finalize work");
         }
 
-        // if we got to this point, the test passed since no deadlock happened 
+        // if we got to this point, the test passed since no deadlock happened
         // inside MyWaitForPendingFinalizersClass class constructor.
     }
 }

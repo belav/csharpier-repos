@@ -1,16 +1,16 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-namespace System.Runtime.CompilerServices 
+namespace System.Runtime.CompilerServices
 {
     using System;
 
     [AttributeUsage(AttributeTargets.Field)]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class AccessedThroughPropertyAttribute : Attribute
     {
         private readonly string propertyName;
@@ -20,13 +20,9 @@ namespace System.Runtime.CompilerServices
             this.propertyName = propertyName;
         }
 
-        public string PropertyName 
+        public string PropertyName
         {
-            get 
-            {
-                return propertyName;
-            }
+            get { return propertyName; }
         }
     }
 }
-

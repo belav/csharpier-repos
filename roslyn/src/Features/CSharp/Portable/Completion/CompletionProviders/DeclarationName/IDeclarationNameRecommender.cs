@@ -5,8 +5,8 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery;
+using Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
 {
@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             Document document,
             CSharpSyntaxContext context,
             NameDeclarationInfo nameInfo,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

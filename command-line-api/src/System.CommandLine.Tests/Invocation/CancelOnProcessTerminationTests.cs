@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.CommandLine.Invocation;
-using FluentAssertions;
 using System.CommandLine.Tests.Utility;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 using Process = System.Diagnostics.Process;
 
@@ -35,7 +35,11 @@ namespace System.CommandLine.Tests.Invocation
             // Same for macOS, where RemoteExecutor does not support getting application arguments.
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                await StartKillAndVerify(new[] { "--infiniteDelay", "false" }, Signals.SIGINT, GracefulExitCode);
+                await StartKillAndVerify(
+                    new[] { "--infiniteDelay", "false" },
+                    Signals.SIGINT,
+                    GracefulExitCode
+                );
             }
         }
 
@@ -44,16 +48,17 @@ namespace System.CommandLine.Tests.Invocation
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                await StartKillAndVerify(new[] { "--infiniteDelay", "true" }, Signals.SIGTERM, SIGTERM_EXIT_CODE);
+                await StartKillAndVerify(
+                    new[] { "--infiniteDelay", "true" },
+                    Signals.SIGTERM,
+                    SIGTERM_EXIT_CODE
+                );
             }
         }
 
         private static Task<int> Program(string[] args)
         {
-            CliRootCommand command = new ()
-            {
-                InfiniteDelayOption
-            };
+            CliRootCommand command = new() { InfiniteDelayOption };
             command.Action = new CustomCliAction();
 
             return new CliConfiguration(command)
@@ -64,7 +69,10 @@ namespace System.CommandLine.Tests.Invocation
 
         private sealed class CustomCliAction : AsynchronousCliAction
         {
-            public override async Task<int> InvokeAsync(ParseResult context, CancellationToken cancellationToken = default)
+            public override async Task<int> InvokeAsync(
+                ParseResult context,
+                CancellationToken cancellationToken = default
+            )
             {
                 Console.WriteLine(ChildProcessWaiting);
 
@@ -74,7 +82,9 @@ namespace System.CommandLine.Tests.Invocation
                 {
                     // Passing CancellationToken.None here is an example of bad pattern
                     // and reason why we need a timeout on termination processing.
-                    CancellationToken token = infiniteDelay ? CancellationToken.None : cancellationToken;
+                    CancellationToken token = infiniteDelay
+                        ? CancellationToken.None
+                        : cancellationToken;
                     await Task.Delay(Timeout.InfiniteTimeSpan, token);
 
                     return 0;
@@ -91,7 +101,8 @@ namespace System.CommandLine.Tests.Invocation
             using RemoteExecution program = RemoteExecutor.Execute(
                 Program,
                 args,
-                new ProcessStartInfo { RedirectStandardOutput = true });
+                new ProcessStartInfo { RedirectStandardOutput = true }
+            );
 
             Process process = program.Process;
 
@@ -110,7 +121,7 @@ namespace System.CommandLine.Tests.Invocation
 
             // Verify the process exit code
             process.ExitCode.Should().Be(expectedExitCode);
-            
+
             [DllImport("libc", SetLastError = true)]
             static extern int kill(int pid, int sig);
         }

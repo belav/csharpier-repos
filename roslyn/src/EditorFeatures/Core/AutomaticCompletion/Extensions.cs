@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
         /// create caret preserving edit transaction with automatic code change undo merging policy
         /// </summary>
         public static CaretPreservingEditTransaction CreateEditTransaction(
-            this ITextView view, string description, ITextUndoHistoryRegistry registry, IEditorOperationsFactoryService service)
+            this ITextView view,
+            string description,
+            ITextUndoHistoryRegistry registry,
+            IEditorOperationsFactoryService service
+        )
         {
             return new CaretPreservingEditTransaction(description, view, registry, service)
             {
@@ -26,11 +30,13 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
             };
         }
 
-        public static SnapshotPoint? GetCaretPosition(this IBraceCompletionSession session)
-            => GetCaretPoint(session, session.SubjectBuffer);
+        public static SnapshotPoint? GetCaretPosition(this IBraceCompletionSession session) =>
+            GetCaretPoint(session, session.SubjectBuffer);
 
         // get the caret position within the given buffer
-        private static SnapshotPoint? GetCaretPoint(this IBraceCompletionSession session, ITextBuffer buffer)
-            => session.TextView.Caret.Position.Point.GetPoint(buffer, PositionAffinity.Predecessor);
+        private static SnapshotPoint? GetCaretPoint(
+            this IBraceCompletionSession session,
+            ITextBuffer buffer
+        ) => session.TextView.Caret.Position.Point.GetPoint(buffer, PositionAffinity.Predecessor);
     }
 }

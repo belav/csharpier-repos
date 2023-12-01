@@ -15,8 +15,13 @@ namespace System.Threading
     {
         private const int SpinSleep0Threshold = 10;
 
-        public LowLevelLifoSemaphore(int initialSignalCount, int maximumSignalCount, int spinCount, Action onWait)
-            : base (initialSignalCount, maximumSignalCount, spinCount, onWait)
+        public LowLevelLifoSemaphore(
+            int initialSignalCount,
+            int maximumSignalCount,
+            int spinCount,
+            Action onWait
+        )
+            : base(initialSignalCount, maximumSignalCount, spinCount, onWait)
         {
             Create(maximumSignalCount);
         }
@@ -53,7 +58,9 @@ namespace System.Threading
                     }
                 }
 
-                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                Counts countsBeforeUpdate = _separated
+                    ._counts
+                    .InterlockedCompareExchange(newCounts, counts);
                 if (countsBeforeUpdate == counts)
                 {
                     if (counts.SignalCount != 0)
@@ -93,7 +100,9 @@ namespace System.Threading
                     newCounts.DecrementSignalCount();
                     newCounts.DecrementSpinnerCount();
 
-                    Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                    Counts countsBeforeUpdate = _separated
+                        ._counts
+                        .InterlockedCompareExchange(newCounts, counts);
                     if (countsBeforeUpdate == counts)
                     {
                         return true;
@@ -118,7 +127,9 @@ namespace System.Threading
                     newCounts.IncrementWaiterCount();
                 }
 
-                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                Counts countsBeforeUpdate = _separated
+                    ._counts
+                    .InterlockedCompareExchange(newCounts, counts);
                 if (countsBeforeUpdate == counts)
                 {
                     return counts.SignalCount != 0 || WaitForSignal(timeoutMs);
@@ -164,7 +175,9 @@ namespace System.Threading
                         newCounts.DecrementCountOfWaitersSignaledToWake();
                     }
 
-                    Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                    Counts countsBeforeUpdate = _separated
+                        ._counts
+                        .InterlockedCompareExchange(newCounts, counts);
                     if (countsBeforeUpdate == counts)
                     {
                         if (counts.SignalCount != 0)
@@ -175,7 +188,8 @@ namespace System.Threading
                     }
 
                     counts = countsBeforeUpdate;
-                    if (timeoutMs != -1) {
+                    if (timeoutMs != -1)
+                    {
                         int waitMs = endWaitTicks - startWaitTicks;
                         if (waitMs >= 0 && waitMs < timeoutMs)
                             timeoutMs -= waitMs;

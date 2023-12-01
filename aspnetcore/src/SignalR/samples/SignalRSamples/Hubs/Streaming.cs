@@ -20,9 +20,10 @@ public class Streaming : Hub
 
     public ChannelReader<int> ObservableCounter(int count, double delay)
     {
-        var observable = Observable.Interval(TimeSpan.FromMilliseconds(delay))
-                         .Select((_, index) => index)
-                         .Take(count);
+        var observable = Observable
+            .Interval(TimeSpan.FromMilliseconds(delay))
+            .Select((_, index) => index)
+            .Take(count);
 
         return observable.AsChannelReader(Context.ConnectionAborted);
     }

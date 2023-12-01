@@ -18,18 +18,22 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             Compilation = compilation;
         }
 
-        public MetadataReference ResolveMetadataReference(MetadataReferenceInfo metadataReferenceInfo) =>
+        public MetadataReference ResolveMetadataReference(
+            MetadataReferenceInfo metadataReferenceInfo
+        ) =>
             Compilation
                 .References
-                .Single(x =>
-                    x.GetModuleVersionId() == metadataReferenceInfo.ModuleVersionId &&
-                    x.Properties.Aliases.SingleOrDefault() == metadataReferenceInfo.ExternAlias);
+                .Single(
+                    x =>
+                        x.GetModuleVersionId() == metadataReferenceInfo.ModuleVersionId
+                        && x.Properties.Aliases.SingleOrDefault()
+                            == metadataReferenceInfo.ExternAlias
+                );
 
         public SourceText ResolveSourceText(SourceTextInfo sourceTextInfo) =>
             Compilation
                 .SyntaxTrees
                 .Select(x => x.GetText())
                 .Single(x => x.GetChecksum().SequenceEqual(sourceTextInfo.Hash));
-
     }
 }

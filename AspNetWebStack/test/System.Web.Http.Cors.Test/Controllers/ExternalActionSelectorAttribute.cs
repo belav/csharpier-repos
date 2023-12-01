@@ -9,9 +9,14 @@ namespace System.Web.Http.Cors.Test.Controllers
 {
     public class ExternalActionSelectorAttribute : Attribute, IControllerConfiguration
     {
-        public void Initialize(HttpControllerSettings controllerSettings, HttpControllerDescriptor controllerDescriptor)
+        public void Initialize(
+            HttpControllerSettings controllerSettings,
+            HttpControllerDescriptor controllerDescriptor
+        )
         {
-            controllerSettings.Services.Replace(typeof(IHttpActionSelector), new ExternalActionSelector());
+            controllerSettings
+                .Services
+                .Replace(typeof(IHttpActionSelector), new ExternalActionSelector());
         }
 
         private class ExternalActionSelector : IHttpActionSelector
@@ -27,7 +32,9 @@ namespace System.Web.Http.Cors.Test.Controllers
                 return new ReflectedHttpActionDescriptor(controllerDescriptor, action.Method);
             }
 
-            public ILookup<string, HttpActionDescriptor> GetActionMapping(HttpControllerDescriptor controllerDescriptor)
+            public ILookup<string, HttpActionDescriptor> GetActionMapping(
+                HttpControllerDescriptor controllerDescriptor
+            )
             {
                 List<HttpActionDescriptor> descriptors = new List<HttpActionDescriptor>();
                 return descriptors.ToLookup(d => d.ActionName);

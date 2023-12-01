@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.InitializeParameter;
 using Microsoft.CodeAnalysis.CSharp.Shared.Extensions;
+using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Testing;
@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -144,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47030")]
@@ -368,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -439,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     partial void M(string s);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -508,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         _s = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -526,7 +531,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -561,7 +567,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -582,7 +590,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"#nullable enable
+                FixedCode =
+                    @$"#nullable enable
 
 using System;
 
@@ -610,7 +619,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -645,7 +656,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -671,7 +683,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -690,7 +704,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -716,7 +731,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -735,7 +752,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -766,7 +784,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -810,7 +830,9 @@ class C
                 }
                 """,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -854,7 +876,9 @@ class C
                 }
                 """,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -887,7 +911,8 @@ class C
                         S = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -968,7 +993,11 @@ class C
                 """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferThrowExpression, false, NotificationOption2.Silent }
+                    {
+                        CSharpCodeStyleOptions.PreferThrowExpression,
+                        false,
+                        NotificationOption2.Silent
+                    }
                 }
             }.RunAsync();
         }
@@ -998,7 +1027,8 @@ class C
                     public C(string s)
                         => S = s ?? throw new ArgumentNullException(nameof(s));
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1037,7 +1067,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1080,7 +1111,10 @@ class C
                 """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement }
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                        CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                    }
                 }
             }.RunAsync();
         }
@@ -1122,7 +1156,8 @@ class C
 
                     private int Init() => 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1162,7 +1197,8 @@ class C
 
                     private int Init() => 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1202,7 +1238,8 @@ class C
                         int GetValue() => 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1242,7 +1279,8 @@ class C
                         void NoValue() { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1279,7 +1317,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1316,7 +1355,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1519,7 +1559,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1552,7 +1593,8 @@ class C
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1588,7 +1630,8 @@ class C
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1622,7 +1665,8 @@ class C
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1658,7 +1702,8 @@ class C
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1755,7 +1800,8 @@ class C
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1791,7 +1837,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1872,7 +1919,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = $@"using System;
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1908,7 +1956,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = $@"using System;
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1925,7 +1974,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_string_IsNullOrWhiteSpace_check)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_string_IsNullOrWhiteSpace_check
+                )
             }.RunAsync();
         }
 
@@ -1945,7 +1996,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = $@"using System;
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1999,7 +2051,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class Program
 {{
@@ -2019,7 +2072,10 @@ class Program
                 CodeActionEquivalenceKey = nameof(FeaturesResources.Add_string_IsNullOrEmpty_check),
                 Options =
                 {
-                    { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, CodeStyleOption2.FalseWithSuggestionEnforcement }
+                    {
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
                 }
             }.RunAsync();
         }
@@ -2054,7 +2110,13 @@ class Program
                 """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferBraces, new CodeStyleOption2<PreferBracesPreference>((PreferBracesPreference)preferBraces, NotificationOption2.Silent) },
+                    {
+                        CSharpCodeStyleOptions.PreferBraces,
+                        new CodeStyleOption2<PreferBracesPreference>(
+                            (PreferBracesPreference)preferBraces,
+                            NotificationOption2.Silent
+                        )
+                    },
                 }
             }.RunAsync();
         }
@@ -2072,15 +2134,21 @@ class Program
                     public C(string s[||])
                 }
                 """,
-                ExpectedDiagnostics = {
+                ExpectedDiagnostics =
+                {
                     // /0/Test0.cs(6,12): error CS0501: 'C.C(string)' must declare a body because it is not marked abstract, extern, or partial
-                    DiagnosticResult.CompilerError("CS0501").WithLocation(5, 12).WithArguments("C.C(string)"),
+                    DiagnosticResult
+                        .CompilerError("CS0501")
+                        .WithLocation(5, 12)
+                        .WithArguments("C.C(string)"),
                     // /0/Test0.cs(6,23): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithLocation(5, 23),
                 },
                 FixedState =
                 {
-                    Sources = { """
+                    Sources =
+                    {
+                        """
                         using System;
 
                         class C
@@ -2093,7 +2161,8 @@ class Program
                                 }
                             }
                         }
-                        """ },
+                        """
+                    },
                     InheritanceMode = StateInheritanceMode.Explicit
                 }
             }.RunAsync();
@@ -2133,7 +2202,8 @@ class Program
                             .Count();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21501")]
@@ -2170,7 +2240,8 @@ class Program
                             .Count(); /* Bar */
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21501")]
@@ -2251,7 +2322,8 @@ class Program
                             .Count();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29190")]
@@ -2281,7 +2353,8 @@ class Program
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29333")]
@@ -2298,7 +2371,9 @@ class Program
                     }
                 }
                 """;
-            await VerifyCS.VerifyRefactoringAsync(code,
+            await VerifyCS.VerifyRefactoringAsync(
+                code,
+
                 [
                     // /0/Test0.cs(7,12): error CS0103: The name 'x' does not exist in the current context
                     DiagnosticResult.CompilerError("CS0103").WithSpan(7, 12, 7, 13).WithArguments("x"),
@@ -2308,7 +2383,9 @@ class Program
                     DiagnosticResult.CompilerError("CS1026").WithSpan(7, 13, 7, 13),
                     // /0/Test0.cs(7,13): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithSpan(7, 13, 7, 13),
-                ], code);
+                ],
+                code
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41824")]
@@ -2355,7 +2432,8 @@ class Program
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52385")]
@@ -2591,7 +2669,8 @@ class Program
                     }
                 }
                 """,
-                FixedCode = $@"using System;
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -2631,7 +2710,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2648,7 +2728,7 @@ class C
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
-                    { CSharpCodeStyleOptions.PreferBraces, PreferBracesPreference.WhenMultiline},
+                    { CSharpCodeStyleOptions.PreferBraces, PreferBracesPreference.WhenMultiline },
                     { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, false },
                 },
                 CodeActionIndex = 1,
@@ -2671,7 +2751,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2713,7 +2794,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2752,7 +2834,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2791,7 +2874,8 @@ class C
                     }
                 }
                 """,
-                FixedCode = @$"using System;
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2853,7 +2937,9 @@ class C
                     { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, true },
                 },
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -2969,7 +3055,8 @@ class C
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38093")]
         public async Task TestReadBeforeAssignment()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
+            await VerifyCS.VerifyRefactoringAsync(
+                """
                 using System;
                 using System.IO;
 
@@ -2983,7 +3070,8 @@ class C
 
                     public Stream OutStream { get; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 using System.IO;
 
@@ -3002,13 +3090,15 @@ class C
 
                     public Stream OutStream { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41140")]
         public async Task TestAfterComma1()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
+            await VerifyCS.VerifyRefactoringAsync(
+                """
                 using System;
 
                 class C
@@ -3019,7 +3109,8 @@ class C
 
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -3033,13 +3124,15 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41140")]
         public async Task TestAfterComma2()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
+            await VerifyCS.VerifyRefactoringAsync(
+                """
                 using System;
 
                 class C
@@ -3051,7 +3144,8 @@ class C
 
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -3066,7 +3160,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

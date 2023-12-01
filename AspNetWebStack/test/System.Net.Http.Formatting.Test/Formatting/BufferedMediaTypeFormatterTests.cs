@@ -12,14 +12,22 @@ using Microsoft.TestCommon;
 
 namespace System.Net.Http.Formatting
 {
-    public class BufferedMediaTypeFormatterTests : MediaTypeFormatterTestBase<MockBufferedMediaTypeFormatter>
+    public class BufferedMediaTypeFormatterTests
+        : MediaTypeFormatterTestBase<MockBufferedMediaTypeFormatter>
     {
         private const string ExpectedSupportedMediaType = "text/test";
-        private const string TestData = "Hello World Hello World Hello World Hello World Hello World Hello World";
+        private const string TestData =
+            "Hello World Hello World Hello World Hello World Hello World Hello World";
 
         public override IEnumerable<MediaTypeHeaderValue> ExpectedSupportedMediaTypes
         {
-            get { return new List<MediaTypeHeaderValue> { new MediaTypeHeaderValue(ExpectedSupportedMediaType) }; }
+            get
+            {
+                return new List<MediaTypeHeaderValue>
+                {
+                    new MediaTypeHeaderValue(ExpectedSupportedMediaType)
+                };
+            }
         }
 
         public override IEnumerable<Encoding> ExpectedSupportedEncodings
@@ -29,7 +37,14 @@ namespace System.Net.Http.Formatting
 
         public override byte[] ExpectedSampleTypeByteRepresentation
         {
-            get { return ExpectedSupportedEncodings.ElementAt(0).GetBytes("System.Net.Http.Formatting.MediaTypeFormatterTestBase`1+SampleType[System.Net.Http.Formatting.MockBufferedMediaTypeFormatter]"); }
+            get
+            {
+                return ExpectedSupportedEncodings
+                    .ElementAt(0)
+                    .GetBytes(
+                        "System.Net.Http.Formatting.MediaTypeFormatterTestBase`1+SampleType[System.Net.Http.Formatting.MockBufferedMediaTypeFormatter]"
+                    );
+            }
         }
 
         [Fact]
@@ -40,7 +55,9 @@ namespace System.Net.Http.Formatting
                 BufferSize = 512
             };
 
-            MockBufferedMediaTypeFormatter derivedFormatter = new MockBufferedMediaTypeFormatter(formatter);
+            MockBufferedMediaTypeFormatter derivedFormatter = new MockBufferedMediaTypeFormatter(
+                formatter
+            );
 
             Assert.Equal(formatter.BufferSize, derivedFormatter.BufferSize);
         }
@@ -48,15 +65,18 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void BufferSize_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new MockBufferedMediaTypeFormatter(),
-                c => c.BufferSize,
-                expectedDefaultValue: 16 * 1024,
-                minLegalValue: 0,
-                illegalLowerValue: -1,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 1024);
+            Assert
+                .Reflection
+                .IntegerProperty(
+                    new MockBufferedMediaTypeFormatter(),
+                    c => c.BufferSize,
+                    expectedDefaultValue: 16 * 1024,
+                    minLegalValue: 0,
+                    illegalLowerValue: -1,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 1024
+                );
         }
 
         [Fact]
@@ -64,7 +84,16 @@ namespace System.Net.Http.Formatting
         {
             BufferedMediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
             Assert.ThrowsArgumentNull(
-                () => formatter.WriteToStreamAsync(null, new object(), new MemoryStream(), null, null), "type");
+                () =>
+                    formatter.WriteToStreamAsync(
+                        null,
+                        new object(),
+                        new MemoryStream(),
+                        null,
+                        null
+                    ),
+                "type"
+            );
         }
 
         [Fact]
@@ -72,21 +101,29 @@ namespace System.Net.Http.Formatting
         {
             BufferedMediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
             Assert.ThrowsArgumentNull(
-                () => formatter.WriteToStreamAsync(typeof(object), new object(), null, null, null), "writeStream");
+                () => formatter.WriteToStreamAsync(typeof(object), new object(), null, null, null),
+                "writeStream"
+            );
         }
 
         [Fact]
         public void ReadFromStreamAsync_WhenTypeParamterIsNull_ThrowsException()
         {
             BufferedMediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
-            Assert.ThrowsArgumentNull(() => formatter.ReadFromStreamAsync(null, new MemoryStream(), null, null), "type");
+            Assert.ThrowsArgumentNull(
+                () => formatter.ReadFromStreamAsync(null, new MemoryStream(), null, null),
+                "type"
+            );
         }
 
         [Fact]
         public void ReadFromStreamAsync_WhenStreamParamterIsNull_ThrowsException()
         {
             BufferedMediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
-            Assert.ThrowsArgumentNull(() => formatter.ReadFromStreamAsync(typeof(object), null, null, null), "readStream");
+            Assert.ThrowsArgumentNull(
+                () => formatter.ReadFromStreamAsync(typeof(object), null, null, null),
+                "readStream"
+            );
         }
 
         [Fact]
@@ -114,30 +151,65 @@ namespace System.Net.Http.Formatting
             MemoryStream input = new MemoryStream(expectedBytes);
 
             // Act. Call the async signature.
-            object result = await formatter.ReadFromStreamAsync(TestData.GetType(), input, null, null);
+            object result = await formatter.ReadFromStreamAsync(
+                TestData.GetType(),
+                input,
+                null,
+                null
+            );
 
             // Assert
             Assert.Equal(TestData, result);
         }
 
-        public override Task ReadFromStreamAsync_UsesCorrectCharacterEncoding(string content, string encoding, bool isDefaultEncoding)
+        public override Task ReadFromStreamAsync_UsesCorrectCharacterEncoding(
+            string content,
+            string encoding,
+            bool isDefaultEncoding
+        )
         {
             // Arrange
             MediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
-            string mediaType = string.Format("{0}; charset={1}", ExpectedSupportedMediaType, encoding);
+            string mediaType = string.Format(
+                "{0}; charset={1}",
+                ExpectedSupportedMediaType,
+                encoding
+            );
 
             // Act & assert
-            return ReadFromStreamAsync_UsesCorrectCharacterEncodingHelper(formatter, content, content, mediaType, encoding, isDefaultEncoding);
+            return ReadFromStreamAsync_UsesCorrectCharacterEncodingHelper(
+                formatter,
+                content,
+                content,
+                mediaType,
+                encoding,
+                isDefaultEncoding
+            );
         }
 
-        public override Task WriteToStreamAsync_UsesCorrectCharacterEncoding(string content, string encoding, bool isDefaultEncoding)
+        public override Task WriteToStreamAsync_UsesCorrectCharacterEncoding(
+            string content,
+            string encoding,
+            bool isDefaultEncoding
+        )
         {
             // Arrange
             MediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
-            string mediaType = string.Format("{0}; charset={1}", ExpectedSupportedMediaType, encoding);
+            string mediaType = string.Format(
+                "{0}; charset={1}",
+                ExpectedSupportedMediaType,
+                encoding
+            );
 
             // Act & assert
-            return WriteToStreamAsync_UsesCorrectCharacterEncodingHelper(formatter, content, content, mediaType, encoding, isDefaultEncoding);
+            return WriteToStreamAsync_UsesCorrectCharacterEncodingHelper(
+                formatter,
+                content,
+                content,
+                mediaType,
+                encoding,
+                isDefaultEncoding
+            );
         }
 
         [Fact]
@@ -182,14 +254,20 @@ namespace System.Net.Http.Formatting
             SupportedMediaTypes.Add(new MediaTypeHeaderValue(SupportedMediaType));
 
             // Set default supported character encodings
-            SupportedEncodings.Add(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true));
-            SupportedEncodings.Add(new UnicodeEncoding(bigEndian: false, byteOrderMark: true, throwOnInvalidBytes: true));
+            SupportedEncodings.Add(
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true)
+            );
+            SupportedEncodings.Add(
+                new UnicodeEncoding(
+                    bigEndian: false,
+                    byteOrderMark: true,
+                    throwOnInvalidBytes: true
+                )
+            );
         }
 
         public MockBufferedMediaTypeFormatter(MockBufferedMediaTypeFormatter formatter)
-            : base(formatter)
-        {
-        }
+            : base(formatter) { }
 
         public override bool CanReadType(Type type)
         {
@@ -201,7 +279,12 @@ namespace System.Net.Http.Formatting
             return true;
         }
 
-        public override object ReadFromStream(Type type, Stream stream, HttpContent content, IFormatterLogger formatterLogger)
+        public override object ReadFromStream(
+            Type type,
+            Stream stream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             object result = null;
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
@@ -220,7 +303,12 @@ namespace System.Net.Http.Formatting
             return result;
         }
 
-        public override void WriteToStream(Type type, object value, Stream stream, HttpContent content)
+        public override void WriteToStream(
+            Type type,
+            object value,
+            Stream stream,
+            HttpContent content
+        )
         {
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
             Encoding effectiveEncoding = SelectCharacterEncoding(contentHeaders);
