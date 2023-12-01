@@ -1436,7 +1436,6 @@ namespace System.Buffers.Text
 
         // Pre-computing this table using a custom string(s_characters) and GenerateDecodingMapAndVerify (found in tests)
         private static ReadOnlySpan<sbyte> DecodingMap =>
-
             [
                 -1,
                 -1,

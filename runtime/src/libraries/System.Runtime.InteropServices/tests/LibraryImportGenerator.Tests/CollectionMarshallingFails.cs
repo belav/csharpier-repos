@@ -358,8 +358,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 FillRangeArrayMarshaller.Marshaller.UnmarshallingFailsIndex = throwOn;
                 // FillRangeArray will fill 0-9
-                FillRangeArrayMarshaller.Marshaller.ExpectedFreedValues =
-                [
+                FillRangeArrayMarshaller.Marshaller.ExpectedFreedValues = [
                     0,
                     1,
                     2,
@@ -378,8 +377,7 @@ namespace LibraryImportGenerator.IntegrationTests
             }
             FillRangeArrayMarshaller.Marshaller.UnmarshallingFailsIndex = -1;
             // FillRangeArray will fill 0-9
-            FillRangeArrayMarshaller.Marshaller.ExpectedFreedValues =
-            [
+            FillRangeArrayMarshaller.Marshaller.ExpectedFreedValues = [
                 0,
                 1,
                 2,

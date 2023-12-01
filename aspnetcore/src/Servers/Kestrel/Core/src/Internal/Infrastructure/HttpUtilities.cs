@@ -587,7 +587,6 @@ internal static partial class HttpUtilities
         }
 
         static ReadOnlySpan<HttpMethod> Methods() =>
-
             [
                 HttpMethod.None,
                 HttpMethod.None,

@@ -164,16 +164,9 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper)
             Range = caret.Range,
             Context = new CodeActionContext
             {
-                Diagnostics =
-                [
-                    new LSP.Diagnostic
-                    {
-                        Code = AddImportDiagnosticIds.CS0103
-                    },
-                    new LSP.Diagnostic
-                    {
-                        Code = "SomeCode"
-                    }
+                Diagnostics = [
+                    new LSP.Diagnostic { Code = AddImportDiagnosticIds.CS0103 },
+                    new LSP.Diagnostic { Code = "SomeCode" }
                 ]
             }
         };
@@ -210,8 +203,7 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper)
             Range = caret.Range,
             Context = new CodeActionContext
             {
-                Diagnostics =
-                [
+                Diagnostics = [
                     new LSP.Diagnostic
                     {
                         // async method lack of await.
@@ -291,8 +283,7 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper)
             Range = caret.Range,
             Context = new CodeActionContext
             {
-                Diagnostics =
-                [
+                Diagnostics = [
                     new LSP.Diagnostic
                     {
                         // async method lack of await.

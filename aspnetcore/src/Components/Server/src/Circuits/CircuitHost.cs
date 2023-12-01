@@ -981,8 +981,7 @@ internal partial class CircuitHost : IAsyncDisposable
                         }
 
                         // Retrieve the circuit handlers at this point.
-                        _circuitHandlers =
-                        [
+                        _circuitHandlers = [
                             .. _scope.ServiceProvider.GetServices<CircuitHandler>().OrderBy(h => h.Order)
                         ];
                         await OnCircuitOpenedAsync(cancellation);

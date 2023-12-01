@@ -1287,7 +1287,6 @@ namespace System.Globalization
         }
 
         private static ReadOnlySpan<bool> HighCharTable => // 0x80
-
             [
                 true, /* 0x0, 0x0 */
                 true, /* 0x1, .*/

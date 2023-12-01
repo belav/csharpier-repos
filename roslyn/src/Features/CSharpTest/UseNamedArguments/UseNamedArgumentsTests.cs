@@ -107,8 +107,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
                 TestCode = initialMarkup,
                 FixedCode = @"class C { void M(int arg1, int arg2) => M(1, arg2: 2); }",
                 LanguageVersion = LanguageVersion.CSharp7_2,
-                ExactActionSetOffered =
-                [
+                ExactActionSetOffered = [
                     string.Format(FeaturesResources.Add_argument_name_0, "arg2")
                 ],
             }.RunAsync();
@@ -697,8 +696,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
                 TestCode = initialMarkup,
                 FixedCode =
                     @"class C { void M(int arg1, int arg2, int arg3) => M(1, arg2: 2, arg3: 3); }",
-                ExactActionSetOffered =
-                [
+                ExactActionSetOffered = [
                     string.Format(FeaturesResources.Add_argument_name_0, "arg2")
                 ],
             }.RunAsync();

@@ -17,7 +17,6 @@ public class BlazorTemplateTest : LoggedTest
     public ProjectFactoryFixture ProjectFactory { get; set; }
 
     public static TheoryData<string[]> ArgsData() =>
-
         [
             [],
             [ArgConstants.UseProgramMain],
@@ -29,7 +28,12 @@ public class BlazorTemplateTest : LoggedTest
             [ArgConstants.GlobalInteractivity],
             [ArgConstants.GlobalInteractivity, ArgConstants.WebAssemblyInteractivity],
             [ArgConstants.GlobalInteractivity, ArgConstants.AutoInteractivity],
-            [ArgConstants.NoInteractivity, ArgConstants.UseProgramMain, ArgConstants.NoHttps, ArgConstants.Empty],
+            [
+                ArgConstants.NoInteractivity,
+                ArgConstants.UseProgramMain,
+                ArgConstants.NoHttps,
+                ArgConstants.Empty
+            ],
         ];
 
     [ConditionalTheory]

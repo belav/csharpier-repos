@@ -1255,7 +1255,6 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             solution = AddProject(
                 solution,
                 LanguageNames.CSharp,
-
                 [
                     "class CS { }",
                     "class CS2 { }",
@@ -1270,7 +1269,6 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             solution = AddProject(
                 solution,
                 LanguageNames.VisualBasic,
-
                 [
                     "Class VB\r\nEnd Class",
                     "Class VB2\r\nEnd Class",

@@ -142,8 +142,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                     {
                         CommandIdentifier = CompleteComplexEditCommand,
                         Title = nameof(CompleteComplexEditCommand),
-                        Arguments =
-                        [
+                        Arguments = [
                             textDocumentIdentifier.Uri,
                             textEdit,
                             isSnippetString,

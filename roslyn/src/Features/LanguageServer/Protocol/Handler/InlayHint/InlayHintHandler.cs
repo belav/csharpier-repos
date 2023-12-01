@@ -94,7 +94,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
                         hint.ReplacementTextChange.Value,
                         text
                     );
-                    textEdits =  [textEdit];
+                    textEdits = [textEdit];
                 }
 
                 var inlayHint = new LSP.InlayHint

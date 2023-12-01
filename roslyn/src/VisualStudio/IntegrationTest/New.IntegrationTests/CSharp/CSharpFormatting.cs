@@ -416,7 +416,6 @@ class C
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -457,7 +456,6 @@ indent_size = 2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -490,7 +488,6 @@ indent_size = 2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,

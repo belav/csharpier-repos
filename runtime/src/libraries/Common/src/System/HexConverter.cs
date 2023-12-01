@@ -527,7 +527,6 @@ namespace System
 
         /// <summary>Map from an ASCII char to its hex value, e.g. arr['b'] == 11. 0xFF means it's not a hex digit.</summary>
         public static ReadOnlySpan<byte> CharToHexLookup =>
-
             [
                 0xFF,
                 0xFF,
@@ -784,7 +783,7 @@ namespace System
                 0xFF,
                 0xFF,
                 0xFF,
-                0xFF  // 255
+                0xFF // 255
             ];
     }
 }

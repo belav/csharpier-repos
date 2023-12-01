@@ -21,7 +21,6 @@ namespace System.Text.Json
         // non-zero = allowed, 0 = disallowed
         public const int LastAsciiCharacter = 0x7F;
         private static ReadOnlySpan<byte> AllowList => // byte.MaxValue + 1
-
             [
                 0,
                 0,
@@ -152,7 +151,7 @@ namespace System.Text.Json
                 1,
                 0, // U+0070..U+007F
                 // Also include the ranges from U+0080 to U+00FF for performance to avoid UTF8 code from checking boundary.
-            0,
+                0,
                 0,
                 0,
                 0,

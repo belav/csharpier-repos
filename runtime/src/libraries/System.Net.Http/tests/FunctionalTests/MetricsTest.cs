@@ -1217,8 +1217,7 @@ namespace System.Net.Http.Functional.Tests
                     VerifyRequestDuration(
                         m,
                         uri,
-                        acceptedErrorTypes:
-                        [
+                        acceptedErrorTypes: [
                             typeof(TaskCanceledException).FullName,
                             "response_ended"
                         ]

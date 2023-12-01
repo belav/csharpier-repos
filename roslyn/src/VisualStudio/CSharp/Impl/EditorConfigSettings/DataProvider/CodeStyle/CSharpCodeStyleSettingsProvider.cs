@@ -116,13 +116,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
                 CSharpVSResources.Preferred_using_directive_placement,
                 options,
                 updater,
-                enumValues:
-                [
+                enumValues: [
                     AddImportPlacement.InsideNamespace,
                     AddImportPlacement.OutsideNamespace
                 ],
-                valueDescriptions:
-                [
+                valueDescriptions: [
                     CSharpVSResources.Inside_namespace,
                     CSharpVSResources.Outside_namespace
                 ]
@@ -195,14 +193,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
                 ServicesVSResources.Prefer_braces,
                 options,
                 updater,
-                enumValues:
-                [
+                enumValues: [
                     PreferBracesPreference.Always,
                     PreferBracesPreference.None,
                     PreferBracesPreference.WhenMultiline
                 ],
-                valueDescriptions:
-                [
+                valueDescriptions: [
                     ServicesVSResources.Yes,
                     ServicesVSResources.No,
                     CSharpVSResources.When_on_multiple_lines
@@ -214,8 +210,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
                 ServicesVSResources.Namespace_declarations,
                 options,
                 updater,
-                enumValues:
-                [
+                enumValues: [
                     NamespaceDeclarationPreference.BlockScoped,
                     NamespaceDeclarationPreference.FileScoped
                 ],

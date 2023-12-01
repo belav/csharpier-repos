@@ -119,7 +119,6 @@ namespace System.Globalization
         private const int MaxHebrewYear = HebrewYearOf1AD + LastGregorianTableYear; // == 5999
 
         private static ReadOnlySpan<byte> HebrewTable =>
-
             [
                 7,
                 3,
@@ -1436,7 +1435,7 @@ namespace System.Globalization
                 24,
                 6, // 2235
                 6,
-                1    // 2240 (Hebrew year: 6000)
+                1 // 2240 (Hebrew year: 6000)
             ];
 
         private const int MaxMonthPlusOne = 14;
@@ -1444,7 +1443,6 @@ namespace System.Globalization
         // The lunar calendar has 6 different variations of month lengths
         // within a year.
         private static ReadOnlySpan<byte> LunarMonthLen =>
-
             [
                 0,
                 00,

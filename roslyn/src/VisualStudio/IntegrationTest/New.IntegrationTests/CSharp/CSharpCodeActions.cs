@@ -330,7 +330,6 @@ class C
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -363,7 +362,6 @@ csharp_style_expression_bodied_properties = true:warning
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -406,7 +404,6 @@ csharp_style_expression_bodied_properties = true:warning
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -735,7 +732,6 @@ public class P2 { }",
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.EventHookup,
@@ -830,7 +826,6 @@ namespace NS
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.EventHookup,
@@ -1104,7 +1099,6 @@ class C
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1161,7 +1155,6 @@ class C
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1217,7 +1210,6 @@ class C
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1256,7 +1248,6 @@ dotnet_diagnostic.CS0168.severity = ",
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1271,7 +1262,6 @@ dotnet_diagnostic.CS0168.severity = ",
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1355,7 +1345,6 @@ class C2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1378,7 +1367,6 @@ class C2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1418,7 +1406,6 @@ dotnet_diagnostic.IDE0059.severity = error",
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1450,7 +1437,6 @@ dotnet_diagnostic.IDE0059.severity = none",
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1589,7 +1575,6 @@ class OtherType
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1777,7 +1762,6 @@ class OtherType2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -1875,7 +1859,6 @@ class C2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -2031,7 +2014,6 @@ class C2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -2085,7 +2067,6 @@ public class Program
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.EventHookup,
@@ -2154,7 +2135,6 @@ public class Program
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,

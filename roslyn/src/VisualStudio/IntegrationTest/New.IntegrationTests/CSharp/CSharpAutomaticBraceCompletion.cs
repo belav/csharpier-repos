@@ -921,7 +921,6 @@ class Bar<U>
             await TestServices
                 .Input
                 .SendWithoutActivateAsync(
-
                     [
                         VirtualKeyCode.TAB,
                         VirtualKeyCode.TAB,

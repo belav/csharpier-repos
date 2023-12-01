@@ -925,7 +925,7 @@ namespace System
                         9, // Red,
                         13, // Magenta,
                         11, // Yellow,
-                        15  // White
+                        15 // White
                     ];
 
                     int ansiCode = consoleColorToAnsiCode[ccValue] % maxColors;

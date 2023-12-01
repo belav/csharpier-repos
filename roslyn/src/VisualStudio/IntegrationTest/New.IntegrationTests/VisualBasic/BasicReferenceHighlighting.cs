@@ -62,7 +62,6 @@ End Class";
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -106,7 +105,6 @@ End Class";
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,

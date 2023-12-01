@@ -636,11 +636,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         // a = new List<T>(); or var a = new List<T>();
                         // foreach(...)
                         variableLocal = variableExpression;
-                        nodesBeforeLocal =
-                        [
-                            parentStatement.ReplaceNode(invocationExpression, initializer.WithAdditionalAnnotations(Simplifier.Annotation))
+                        nodesBeforeLocal = [
+                            parentStatement.ReplaceNode(
+                                invocationExpression,
+                                initializer.WithAdditionalAnnotations(Simplifier.Annotation)
+                            )
                         ];
-                        nodesAfterLocal =  [];
+                        nodesAfterLocal = [];
                     }
                     else
                     {
@@ -659,9 +661,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                 generateTypeFromExpression: false
                             )
                         };
-                        nodesAfterLocal =
-                        [
-                            parentStatement.ReplaceNode(invocationExpression, variableLocal.WithAdditionalAnnotations(Simplifier.Annotation))
+                        nodesAfterLocal = [
+                            parentStatement.ReplaceNode(
+                                invocationExpression,
+                                variableLocal.WithAdditionalAnnotations(Simplifier.Annotation)
+                            )
                         ];
                     }
                 }

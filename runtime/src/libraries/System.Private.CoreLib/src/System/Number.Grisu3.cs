@@ -35,7 +35,6 @@ namespace System
             private const int MinimalTargetExponent = -60;
 
             private static ReadOnlySpan<short> CachedPowersBinaryExponent =>
-
                 [
                     -1220,
                     -1193,
@@ -127,7 +126,6 @@ namespace System
                 ];
 
             private static ReadOnlySpan<short> CachedPowersDecimalExponent =>
-
                 [
                     CachedPowersMinDecimalExponent,
                     -340,
@@ -219,7 +217,6 @@ namespace System
                 ];
 
             private static ReadOnlySpan<ulong> CachedPowersSignificand =>
-
                 [
                     0xFA8FD5A0081C0288,
                     0xBAAEE17FA23EBF76,
@@ -311,7 +308,6 @@ namespace System
                 ];
 
             private static ReadOnlySpan<uint> SmallPowersOfTen =>
-
                 [
                     1, // 10^0
                     10, // 10^1

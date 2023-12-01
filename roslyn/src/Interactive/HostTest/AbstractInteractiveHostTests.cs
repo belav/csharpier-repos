@@ -178,7 +178,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
 
         public void ClearOutput()
         {
-            _outputReadPosition =  [0, 0];
+            _outputReadPosition = [0, 0];
             _synchronizedOutput.Clear();
             _synchronizedErrorOutput.Clear();
         }

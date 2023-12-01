@@ -19,7 +19,6 @@ namespace System.Collections.Tests
         public static void PriorityQueue_DijkstraSmokeTest()
         {
             var graph = new Graph(
-
                 [
                     [new Edge(1, 7), new Edge(2, 9), new Edge(5, 14)],
                     [new Edge(0, 7), new Edge(2, 10), new Edge(3, 15)],

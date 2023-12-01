@@ -19,7 +19,6 @@ namespace System.Security.Cryptography
     internal static partial class CapiHelper
     {
         private static ReadOnlySpan<byte> RgbPubKey =>
-
             [
                 0x06,
                 0x02,

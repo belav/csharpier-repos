@@ -282,7 +282,7 @@ class Program
             {
                 TextDocument = new LSP.TextDocumentClientCapabilities
                 {
-                    Hover = new LSP.HoverSetting { ContentFormat =  [LSP.MarkupKind.Markdown] }
+                    Hover = new LSP.HoverSetting { ContentFormat = [LSP.MarkupKind.Markdown] }
                 }
             };
             await using var testLspServer = await CreateTestLspServerAsync(
@@ -424,7 +424,7 @@ Remarks are cool too.
             {
                 TextDocument = new LSP.TextDocumentClientCapabilities
                 {
-                    Hover = new LSP.HoverSetting { ContentFormat =  [LSP.MarkupKind.Markdown] }
+                    Hover = new LSP.HoverSetting { ContentFormat = [LSP.MarkupKind.Markdown] }
                 }
             };
             await using var testLspServer = await CreateTestLspServerAsync(
@@ -477,7 +477,7 @@ _italic\_ \*\*text\*\*_
             {
                 TextDocument = new LSP.TextDocumentClientCapabilities
                 {
-                    Hover = new LSP.HoverSetting { ContentFormat =  [LSP.MarkupKind.Markdown] }
+                    Hover = new LSP.HoverSetting { ContentFormat = [LSP.MarkupKind.Markdown] }
                 }
             };
             await using var testLspServer = await CreateTestLspServerAsync(
@@ -518,7 +518,7 @@ class C
             {
                 TextDocument = new LSP.TextDocumentClientCapabilities
                 {
-                    Hover = new LSP.HoverSetting { ContentFormat =  [LSP.MarkupKind.Markdown] }
+                    Hover = new LSP.HoverSetting { ContentFormat = [LSP.MarkupKind.Markdown] }
                 }
             };
             await using var testLspServer = await CreateTestLspServerAsync(

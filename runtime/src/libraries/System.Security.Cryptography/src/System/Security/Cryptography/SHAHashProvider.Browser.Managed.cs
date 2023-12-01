@@ -250,7 +250,6 @@ namespace System.Security.Cryptography
             }
 
             private static ReadOnlySpan<uint> _K =>
-
                 [
                     0x428a2f98,
                     0x71374491,
@@ -598,7 +597,6 @@ namespace System.Security.Cryptography
             }
 
             private static ReadOnlySpan<ulong> _K =>
-
                 [
                     0x428a2f98d728ae22,
                     0x7137449123ef65cd,
@@ -972,7 +970,6 @@ namespace System.Security.Cryptography
             }
 
             private static ReadOnlySpan<ulong> _K =>
-
                 [
                     0x428a2f98d728ae22,
                     0x7137449123ef65cd,

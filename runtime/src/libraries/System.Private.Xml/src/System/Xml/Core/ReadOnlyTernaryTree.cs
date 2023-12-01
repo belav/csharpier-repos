@@ -49,7 +49,6 @@ namespace System.Xml
         }
 
         private static ReadOnlySpan<byte> HtmlElements =>
-
             [
                 73,
                 4,
@@ -1265,7 +1264,6 @@ namespace System.Xml
                 64,
             ];
         private static ReadOnlySpan<byte> HtmlAttributes =>
-
             [
                 72,
                 5,

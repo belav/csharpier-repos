@@ -51,10 +51,9 @@ static class C { }
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                               | Modifier
-                       0,
+                    0,
                     0,
                     10,
                     tokenTypeToIndex[SemanticTokenTypes.Comment],
@@ -88,10 +87,9 @@ static class C { }
             }
             else
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                               | Modifier
-                       0,
+                    0,
                     0,
                     10,
                     tokenTypeToIndex[SemanticTokenTypes.Comment],
@@ -205,10 +203,9 @@ var z = 1;
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                               | Modifier
-                       12,
+                    12,
                     0,
                     3,
                     tokenTypeToIndex[ClassificationTypeNames.Keyword],
@@ -252,10 +249,9 @@ var z = 1;
             }
             else
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                               | Modifier
-                       12,
+                    12,
                     0,
                     3,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -341,10 +337,9 @@ static class C { }
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                               | Modifier
-                       1,
+                    1,
                     0,
                     6,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -373,10 +368,9 @@ static class C { }
             }
             else
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                               | Modifier
-                       1,
+                    1,
                     0,
                     6,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -449,10 +443,9 @@ three */ }
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                               | Modifier
-                       0,
+                    0,
                     0,
                     5,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -491,10 +484,9 @@ three */ }
             }
             else
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                               | Modifier
-                       0,
+                    0,
                     0,
                     5,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -582,10 +574,9 @@ three"";
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                                         | Modifier
-                       0,
+                    0,
                     0,
                     5,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -679,10 +670,9 @@ three"";
             }
             else
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                                         | Modifier
-                       0,
+                    0,
                     0,
                     5,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -825,10 +815,9 @@ class C
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                                         | Modifier
-                       0,
+                    0,
                     0,
                     5,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -987,10 +976,9 @@ class C
             }
             else
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                                         | Modifier
-                       0,
+                    0,
                     0,
                     5,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -1197,10 +1185,9 @@ class C
             var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
             if (isVS)
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                                         | Modifier
-                       0,
+                    0,
                     0,
                     5,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],
@@ -1389,10 +1376,9 @@ class C
             }
             else
             {
-                expectedResults.Data =
-                [
+                expectedResults.Data = [
                     // Line | Char | Len | Token type                                                                         | Modifier
-                       0,
+                    0,
                     0,
                     5,
                     tokenTypeToIndex[SemanticTokenTypes.Keyword],

@@ -4675,7 +4675,6 @@ static class E2
             );
 
             Assert.Equal(
-
                 [
                     "void System.Object.M<System.Object>()",
                     "void System.Object.M<System.Object>(System.Object ignored)"

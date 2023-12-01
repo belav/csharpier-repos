@@ -79,7 +79,6 @@ class C
             );
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {
@@ -97,7 +96,6 @@ class C
             await TestServices
                 .Input
                 .SendAsync(
-
                     [
                         VirtualKeyCode.HOME,
                         (VirtualKeyCode.END, VirtualKeyCode.SHIFT),
@@ -120,7 +118,6 @@ class C
             Assert.Equal("Jagged MultiDimensional Array", signature.CurrentParameter.Documentation);
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {
@@ -193,7 +190,6 @@ class C
             Assert.Equal("", signature.CurrentParameter.Documentation);
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {
@@ -261,7 +257,6 @@ class C
             Assert.Equal("", signature.CurrentParameter.Documentation);
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {

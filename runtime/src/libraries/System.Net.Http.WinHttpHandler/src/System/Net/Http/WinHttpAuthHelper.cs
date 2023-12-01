@@ -36,7 +36,6 @@ namespace System.Net.Http
         ];
 
         private static ReadOnlySpan<uint> AuthSchemePriorityOrder =>
-
             [
                 Interop.WinHttp.WINHTTP_AUTH_SCHEME_NEGOTIATE,
                 Interop.WinHttp.WINHTTP_AUTH_SCHEME_NTLM,

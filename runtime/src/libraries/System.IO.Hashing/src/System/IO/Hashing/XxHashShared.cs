@@ -36,7 +36,6 @@ namespace System.IO.Hashing
         /// <summary>The default secret for when no seed is provided.</summary>
         /// <remarks>This is the same as a custom secret derived from a seed of 0.</remarks>
         public static ReadOnlySpan<byte> DefaultSecret =>
-
             [
                 0xb8,
                 0xfe,

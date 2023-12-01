@@ -91,7 +91,6 @@ End Class
             );
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {
@@ -130,7 +129,6 @@ End Class
             Assert.Equal("Param 1 of type T1", signature.CurrentParameter.Documentation);
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {
@@ -192,7 +190,6 @@ End Class",
             Assert.Equal("Type Parameter", signature.CurrentParameter.Documentation);
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {
@@ -234,7 +231,6 @@ End Class",
             Assert.Equal("", signature.CurrentParameter.Documentation);
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {
@@ -337,7 +333,6 @@ Class C
             Assert.Equal("Jagged MultiDimensional Array", signature.CurrentParameter.Documentation);
             Assert.Collection(
                 signature.Parameters,
-
                 [
                     parameter =>
                     {

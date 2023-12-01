@@ -72,7 +72,6 @@ End Class",
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,

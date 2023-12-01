@@ -111,9 +111,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             VerifySemantics(
                 [editScript],
                 TargetFramework.NetStandard20,
-
                 [
-                    new DocumentAnalysisResultsDescription(semanticEdits: expectedSemanticEdits, lineEdits: expectedLineEdits, diagnostics: expectedDiagnostics)
+                    new DocumentAnalysisResultsDescription(
+                        semanticEdits: expectedSemanticEdits,
+                        lineEdits: expectedLineEdits,
+                        diagnostics: expectedDiagnostics
+                    )
                 ],
                 capabilities
             );

@@ -14,10 +14,9 @@ namespace System.Xml
         private const int uuidLength = 45;
 
         private static ReadOnlySpan<short> Char2val =>
-
             [
                 /*    0-15 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -34,7 +33,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   16-31 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -51,7 +50,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   32-47 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -68,7 +67,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   48-63 */
-                              0x000,
+                0x000,
                 0x010,
                 0x020,
                 0x030,
@@ -85,7 +84,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   64-79 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -102,7 +101,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   80-95 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -119,7 +118,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*  96-111 */
-                              0x100,
+                0x100,
                 0x0A0,
                 0x0B0,
                 0x0C0,
@@ -136,7 +135,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /* 112-127 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -153,7 +152,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*    0-15 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -170,7 +169,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   16-31 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -187,7 +186,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   32-47 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -204,7 +203,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   48-63 */
-                              0x000,
+                0x000,
                 0x001,
                 0x002,
                 0x003,
@@ -221,7 +220,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   64-79 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -238,7 +237,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*   80-95 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,
@@ -255,7 +254,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /*  96-111 */
-                              0x100,
+                0x100,
                 0x00A,
                 0x00B,
                 0x00C,
@@ -272,7 +271,7 @@ namespace System.Xml
                 0x100,
                 0x100,
                 /* 112-127 */
-                              0x100,
+                0x100,
                 0x100,
                 0x100,
                 0x100,

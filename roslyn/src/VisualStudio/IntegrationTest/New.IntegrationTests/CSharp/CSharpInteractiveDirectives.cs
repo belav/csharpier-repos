@@ -29,7 +29,6 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     .GetCompletionItemsAsync(HangMitigatingCancellationToken)
             ).SelectAsArray(item => item.DisplayText);
             Assert.All(
-
                 [
                     "cls",
                     "help",
@@ -76,7 +75,6 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     .GetCompletionItemsAsync(HangMitigatingCancellationToken)
             ).SelectAsArray(item => item.DisplayText);
             Assert.All(
-
                 [
                     "elif",
                     "else",

@@ -34,7 +34,7 @@ internal sealed class HostedServiceExecutor
             }
             catch (Exception ex)
             {
-                exceptions ??=  [];
+                exceptions ??= [];
                 exceptions.Add(ex);
             }
         }

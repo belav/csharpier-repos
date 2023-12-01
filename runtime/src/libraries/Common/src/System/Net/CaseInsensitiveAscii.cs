@@ -12,7 +12,6 @@ namespace System.Net
         // ASCII char ToLower table
         internal static readonly CaseInsensitiveAscii StaticInstance = new CaseInsensitiveAscii();
         internal static ReadOnlySpan<byte> AsciiToLower =>
-
             [
                 0,
                 1,

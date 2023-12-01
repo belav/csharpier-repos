@@ -37,7 +37,6 @@ namespace System.Reflection.Metadata.Ecma335
         internal const uint InvalidTokenType = uint.MaxValue;
 
         internal static ReadOnlySpan<uint> TagToTokenTypeArray =>
-
             [
                 TokenTypeIds.MethodDef,
                 TokenTypeIds.FieldDef,

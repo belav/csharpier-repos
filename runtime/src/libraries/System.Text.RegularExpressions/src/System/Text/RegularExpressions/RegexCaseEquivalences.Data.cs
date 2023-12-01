@@ -10,7 +10,6 @@ namespace System.Text.RegularExpressions
         // IF YOU NEED TO UPDATE UNICODE VERSION FOLLOW THE GUIDE AT src/libraries/System.Private.CoreLib/Tools/GenUnicodeProp/Updating-Unicode-Versions.md
 
         private static ReadOnlySpan<char> EquivalenceCasingValues => // 2336
-
             [
                 '\u0041',
                 '\u0061',
@@ -2351,7 +2350,6 @@ namespace System.Text.RegularExpressions
             ];
 
         private static ReadOnlySpan<ushort> EquivalenceFirstLevelLookup => // 64
-
             [
                 0x0000,
                 0x0400,
@@ -2420,7 +2418,6 @@ namespace System.Text.RegularExpressions
             ];
 
         private static ReadOnlySpan<ushort> EquivalenceCasingMap => // 10240
-
             [
                 0xffff,
                 0xffff,

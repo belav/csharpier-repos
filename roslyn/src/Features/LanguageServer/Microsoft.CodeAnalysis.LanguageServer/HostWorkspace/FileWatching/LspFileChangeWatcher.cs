@@ -259,8 +259,7 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
 
             var registrationParams = new RegistrationParams()
             {
-                Registrations =
-                [
+                Registrations = [
                     new Registration
                     {
                         Id = _id,
@@ -305,13 +304,12 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
                     {
                         var unregistrationParams = new UnregistrationParamsWithMisspelling()
                         {
-                            Unregistrations =
-                            [
+                            Unregistrations = [
                                 new Unregistration()
-                        {
-                            Id = _id,
-                            Method = "workspace/didChangeWatchedFiles"
-                        }
+                                {
+                                    Id = _id,
+                                    Method = "workspace/didChangeWatchedFiles"
+                                }
                             ]
                         };
 

@@ -8,7 +8,6 @@ namespace System.Security.Cryptography.X509Certificates
         private sealed class AppleCertificateExporter : UnixExportProvider
         {
             private static ReadOnlySpan<byte> EmptyPkcs7 =>
-
                 [
                     0x30,
                     0x23,

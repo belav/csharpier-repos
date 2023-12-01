@@ -19,10 +19,9 @@ namespace System.Xml
         private static volatile Type?[] s_tokenTypeMap = null!;
 
         private static ReadOnlySpan<byte> XsdKatmaiTimeScaleToValueLengthMap => // 8
-
             [
                 // length scale
-            3, // 0
+                3, // 0
                 3, // 1
                 3, // 2
                 4, // 3

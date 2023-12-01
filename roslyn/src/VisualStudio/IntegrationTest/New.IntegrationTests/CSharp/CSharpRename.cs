@@ -927,7 +927,6 @@ class Program
             await TestServices
                 .Input
                 .SendWithoutActivateAsync(
-
                     [
                         VirtualKeyCode.HOME,
                         VirtualKeyCode.DELETE,

@@ -916,7 +916,6 @@ namespace System.Text
         ////////////////////////////////////////////////////////////////////////////
 
         private static ReadOnlySpan<int> UnicodeToIndicChar =>
-
             [
                 0x02a1, // U+0901 : Devanagari Sign Candrabindu
                 0x02a2, // U+0902 : Devanagari Sign Anusvara
@@ -2052,7 +2051,7 @@ namespace System.Text
                 0x09f7, // U+0d6c : Malayalam Digit Six
                 0x09f8, // U+0d6d : Malayalam Digit Seven
                 0x09f9, // U+0d6e : Malayalam Digit Eight
-                0x09fa   // U+0d6f : Malayalam Digit Nine
+                0x09fa // U+0d6f : Malayalam Digit Nine
             ];
 
         ////////////////////////////////////////////////////////////////////////////
@@ -2062,12 +2061,11 @@ namespace System.Text
         // the value of the second Indic byte when applicable.
         ////////////////////////////////////////////////////////////////////////////
         private static ReadOnlySpan<byte> SecondIndicByte =>
-
             [
                 0x00,
                 0xe9,
                 0xb8, // U+0952 == 0xf0_0xb8
-                0xbf              // U+0970 == 0xf0_0xbf
+                0xbf // U+0970 == 0xf0_0xbf
             ];
 
         ////////////////////////////////////////////////////////////////////////////
@@ -2078,7 +2076,6 @@ namespace System.Text
         // (1st char, 2nd char) and there are 10 tables (1 for each code page "font")
         ////////////////////////////////////////////////////////////////////////////
         private static ReadOnlySpan<int> IndicMappingIndex =>
-
             [
                 -1, //  0 DEF 0X40 Default        // Not a real code page
                 -1, //  1 RMN 0X41 Roman          // Transliteration not supported
@@ -2091,7 +2088,7 @@ namespace System.Text
                 5, //  8 KND 0X48 Kannada
                 6, //  9 MLM 0X49 Malayalam
                 7, // 10 GJR 0X4A Gujarati
-                8         // 11 PNJ 0X4B Punjabi (Gurmukhi)
+                8 // 11 PNJ 0X4B Punjabi (Gurmukhi)
             ];
 
         ////////////////////////////////////////////////////////////////////////////

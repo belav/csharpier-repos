@@ -340,7 +340,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                         Uri = uri
                     };
                     textDocumentEdits.Add(
-                        new TextDocumentEdit { TextDocument = documentIdentifier, Edits =  [edit] }
+                        new TextDocumentEdit { TextDocument = documentIdentifier, Edits = [edit] }
                     );
                 }
             }

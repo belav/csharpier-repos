@@ -164,7 +164,6 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,

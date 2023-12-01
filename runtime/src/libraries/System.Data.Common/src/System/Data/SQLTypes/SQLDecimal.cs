@@ -72,7 +72,6 @@ namespace System.Data.SqlTypes
 
         // Array of multipliers for lAdjust and Ceiling/Floor.
         private static ReadOnlySpan<uint> RgulShiftBase => // 9
-
             [
                 10,
                 10 * 10,
@@ -133,7 +132,6 @@ namespace System.Data.SqlTypes
 
         #region DecimalHelperTable
         private static ReadOnlySpan<uint> DecimalHelpersLo =>
-
             [
                 0x0000000a, // precision:2, value:10
                 0x00000064, // precision:3, value:100
@@ -176,7 +174,6 @@ namespace System.Data.SqlTypes
             ];
 
         private static ReadOnlySpan<uint> DecimalHelpersMid =>
-
             [
                 0x00000000, // precision:2, value:10
                 0x00000000, // precision:3, value:100
@@ -219,7 +216,6 @@ namespace System.Data.SqlTypes
             ];
 
         private static ReadOnlySpan<uint> DecimalHelpersHi =>
-
             [
                 0x00000000, // precision:2, value:10
                 0x00000000, // precision:3, value:100
@@ -262,7 +258,6 @@ namespace System.Data.SqlTypes
             ];
 
         private static ReadOnlySpan<uint> DecimalHelpersHiHi =>
-
             [
                 0x00000000, // precision:2, value:10
                 0x00000000, // precision:3, value:100
@@ -1953,7 +1948,6 @@ namespace System.Data.SqlTypes
         //    20-28          3
         //    29-38          4
         private static ReadOnlySpan<byte> RgCLenFromPrec =>
-
             [
                 1,
                 1,

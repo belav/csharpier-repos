@@ -51,7 +51,6 @@ class C
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -91,7 +90,6 @@ class C
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -135,7 +133,6 @@ class C
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -177,7 +174,6 @@ class Program2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -203,7 +199,6 @@ class Program2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -214,14 +209,12 @@ class Program2
                     HangMitigatingCancellationToken
                 );
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
-            expectedContents =
-            [
+            expectedContents = [
                 "(Compiler) Class1.cs(7, 13): error CS0128: A local variable or function named 'aa' is already defined in this scope",
             ];
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -247,11 +240,10 @@ class Program2
                 .Input
                 .SendAsync(VirtualKeyCode.DELETE, HangMitigatingCancellationToken);
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
-            expectedContents =  [];
+            expectedContents = [];
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -293,7 +285,6 @@ class Program2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -317,14 +308,12 @@ class Program2
                 .PlaceCaretAsync("a = aa", charsOffset: -1, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync("a", HangMitigatingCancellationToken);
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
-            expectedContents =
-            [
+            expectedContents = [
                 "(Compiler) Class1.cs(7, 13): error CS0128: A local variable or function named 'aa' is already defined in this scope",
             ];
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,
@@ -364,7 +353,6 @@ class Program2
             await TestServices
                 .Workspace
                 .WaitForAllAsyncOperationsAsync(
-
                     [
                         FeatureAttribute.Workspace,
                         FeatureAttribute.SolutionCrawlerLegacy,

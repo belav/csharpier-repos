@@ -48,7 +48,7 @@ internal sealed class CodeLensResolveHandler
         {
             Title = string.Format(FeaturesResources._0_references_unquoted, "-"),
             CommandIdentifier = ClientReferencesCommand,
-            Arguments =  [resolveData.TextDocument.Uri, request.Range.Start]
+            Arguments = [resolveData.TextDocument.Uri, request.Range.Start]
         };
 
         // If the request is for an older version of the document, return a request with '- references'
@@ -86,7 +86,7 @@ internal sealed class CodeLensResolveHandler
             {
                 Title = referenceCount.Value.GetDescription(),
                 CommandIdentifier = ClientReferencesCommand,
-                Arguments =  [resolveData.TextDocument.Uri, request.Range.Start,],
+                Arguments = [resolveData.TextDocument.Uri, request.Range.Start,],
             };
         }
 

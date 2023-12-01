@@ -2373,10 +2373,12 @@ class Program
                 """;
             await VerifyCS.VerifyRefactoringAsync(
                 code,
-
                 [
                     // /0/Test0.cs(7,12): error CS0103: The name 'x' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithSpan(7, 12, 7, 13).WithArguments("x"),
+                    DiagnosticResult
+                        .CompilerError("CS0103")
+                        .WithSpan(7, 12, 7, 13)
+                        .WithArguments("x"),
                     // /0/Test0.cs(7,13): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(7, 13, 7, 13),
                     // /0/Test0.cs(7,13): error CS1026: ) expected

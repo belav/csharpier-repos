@@ -7,106 +7,106 @@ namespace System.Text
     {
         // Best fit for ASCII, and since it works for ASCII, we use it for latin1 as well.
         private static ReadOnlySpan<char> ArrayCharBestFit =>
-
             [
                 // The first many are in case you wanted to use this for ASCIIEncoding, which we don't need to do any more.
-//          (char)0x00a0, (char)0x0020,    // No-Break Space -> Space
-//          (char)0x00a1, (char)0x0021,    // Inverted Exclamation Mark -> !
-//          (char)0x00a2, (char)0x0063,    // Cent Sign -> c
-//          (char)0x00a3, (char)0x003f,    // Pound Sign
-//          (char)0x00a4, (char)0x0024,    // Currency Sign -> $
-//          (char)0x00a5, (char)0x0059,    // Yen Sign -> Y
-//          (char)0x00a6, (char)0x007c,    // Broken Bar -> |
-//          (char)0x00a7, (char)0x003f,    // Section Sign
-//          (char)0x00a8, (char)0x003f,    // Diaeresis
-//          (char)0x00a9, (char)0x0043,    // Copyright Sign -> C
-//          (char)0x00aa, (char)0x0061,    // Feminine Ordinal Indicator -> a
-//          (char)0x00ab, (char)0x003c,    // Left-Pointing Double Angle Quotation Mark -> <
-//          (char)0x00ac, (char)0x003f,    // Not Sign
-//          (char)0x00ad, (char)0x002d,    // Soft Hyphen -> -
-//          (char)0x00ae, (char)0x0052,    // Registered Sign -> R
-//          (char)0x00af, (char)0x003f,    // Macron
-//          (char)0x00b0, (char)0x003f,    // Degree Sign
-//          (char)0x00b1, (char)0x003f,    // Plus-Minus Sign
-//          (char)0x00b2, (char)0x0032,    // Superscript Two -> 2
-//          (char)0x00b3, (char)0x0033,    // Superscript Three -> 3
-//          (char)0x00b4, (char)0x003f,    // Acute Accent
-//          (char)0x00b5, (char)0x003f,    // Micro Sign
-//          (char)0x00b6, (char)0x003f,    // Pilcrow Sign
-//          (char)0x00b7, (char)0x002e,    // Middle Dot -> .
-//          (char)0x00b8, (char)0x002c,    // Cedilla -> ,
-//          (char)0x00b9, (char)0x0031,    // Superscript One -> 1
-//          (char)0x00ba, (char)0x006f,    // Masculine Ordinal Indicator -> o
-//          (char)0x00bb, (char)0x003e,    // Right-Pointing Double Angle Quotation Mark -> >
-//          (char)0x00bc, (char)0x003f,    // Vulgar Fraction One Quarter
-//          (char)0x00bd, (char)0x003f,    // Vulgar Fraction One Half
-//          (char)0x00be, (char)0x003f,    // Vulgar Fraction Three Quarters
-//          (char)0x00bf, (char)0x003f,    // Inverted Question Mark
-//          (char)0x00c0, (char)0x0041,    // Latin Capital Letter A With Grave -> A
-//          (char)0x00c1, (char)0x0041,    // Latin Capital Letter A With Acute -> A
-//          (char)0x00c2, (char)0x0041,    // Latin Capital Letter A With Circumflex -> A
-//          (char)0x00c3, (char)0x0041,    // Latin Capital Letter A With Tilde -> A
-//          (char)0x00c4, (char)0x0041,    // Latin Capital Letter A With Diaeresis -> A
-//          (char)0x00c5, (char)0x0041,    // Latin Capital Letter A With Ring Above -> A
-//          (char)0x00c6, (char)0x0041,    // Latin Capital Ligature Ae -> A
-//          (char)0x00c7, (char)0x0043,    // Latin Capital Letter C With Cedilla -> C
-//          (char)0x00c8, (char)0x0045,    // Latin Capital Letter E With Grave -> E
-//          (char)0x00c9, (char)0x0045,    // Latin Capital Letter E With Acute -> E
-//          (char)0x00ca, (char)0x0045,    // Latin Capital Letter E With Circumflex -> E
-//          (char)0x00cb, (char)0x0045,    // Latin Capital Letter E With Diaeresis -> E
-//          (char)0x00cc, (char)0x0049,    // Latin Capital Letter I With Grave -> I
-//          (char)0x00cd, (char)0x0049,    // Latin Capital Letter I With Acute -> I
-//          (char)0x00ce, (char)0x0049,    // Latin Capital Letter I With Circumflex -> I
-//          (char)0x00cf, (char)0x0049,    // Latin Capital Letter I With Diaeresis -> I
-//          (char)0x00d0, (char)0x0044,    // Latin Capital Letter Eth -> D
-//          (char)0x00d1, (char)0x004e,    // Latin Capital Letter N With Tilde -> N
-//          (char)0x00d2, (char)0x004f,    // Latin Capital Letter O With Grave -> O
-//          (char)0x00d3, (char)0x004f,    // Latin Capital Letter O With Acute -> O
-//          (char)0x00d4, (char)0x004f,    // Latin Capital Letter O With Circumflex -> O
-//          (char)0x00d5, (char)0x004f,    // Latin Capital Letter O With Tilde -> O
-//          (char)0x00d6, (char)0x004f,    // Latin Capital Letter O With Diaeresis -> O
-//          (char)0x00d7, (char)0x003f,    // Multiplication Sign
-//          (char)0x00d8, (char)0x004f,    // Latin Capital Letter O With Stroke -> O
-//          (char)0x00d9, (char)0x0055,    // Latin Capital Letter U With Grave -> U
-//          (char)0x00da, (char)0x0055,    // Latin Capital Letter U With Acute -> U
-//          (char)0x00db, (char)0x0055,    // Latin Capital Letter U With Circumflex -> U
-//          (char)0x00dc, (char)0x0055,    // Latin Capital Letter U With Diaeresis -> U
-//          (char)0x00dd, (char)0x0059,    // Latin Capital Letter Y With Acute -> Y
-//          (char)0x00de, (char)0x003f,    // Latin Capital Letter Thorn
-//          (char)0x00df, (char)0x003f,    // Latin Small Letter Sharp S
-//          (char)0x00e0, (char)0x0061,    // Latin Small Letter A With Grave -> a
-//          (char)0x00e1, (char)0x0061,    // Latin Small Letter A With Acute -> a
-//          (char)0x00e2, (char)0x0061,    // Latin Small Letter A With Circumflex -> a
-//          (char)0x00e3, (char)0x0061,    // Latin Small Letter A With Tilde -> a
-//          (char)0x00e4, (char)0x0061,    // Latin Small Letter A With Diaeresis -> a
-//          (char)0x00e5, (char)0x0061,    // Latin Small Letter A With Ring Above -> a
-//          (char)0x00e6, (char)0x0061,    // Latin Small Ligature Ae -> a
-//          (char)0x00e7, (char)0x0063,    // Latin Small Letter C With Cedilla -> c
-//          (char)0x00e8, (char)0x0065,    // Latin Small Letter E With Grave -> e
-//          (char)0x00e9, (char)0x0065,    // Latin Small Letter E With Acute -> e
-//          (char)0x00ea, (char)0x0065,    // Latin Small Letter E With Circumflex -> e
-//          (char)0x00eb, (char)0x0065,    // Latin Small Letter E With Diaeresis -> e
-//          (char)0x00ec, (char)0x0069,    // Latin Small Letter I With Grave -> i
-//          (char)0x00ed, (char)0x0069,    // Latin Small Letter I With Acute -> i
-//          (char)0x00ee, (char)0x0069,    // Latin Small Letter I With Circumflex -> i
-//          (char)0x00ef, (char)0x0069,    // Latin Small Letter I With Diaeresis -> i
-//          (char)0x00f0, (char)0x003f,    // Latin Small Letter Eth
-//          (char)0x00f1, (char)0x006e,    // Latin Small Letter N With Tilde -> n
-//          (char)0x00f2, (char)0x006f,    // Latin Small Letter O With Grave -> o
-//          (char)0x00f3, (char)0x006f,    // Latin Small Letter O With Acute -> o
-//          (char)0x00f4, (char)0x006f,    // Latin Small Letter O With Circumflex -> o
-//          (char)0x00f5, (char)0x006f,    // Latin Small Letter O With Tilde -> o
-//          (char)0x00f6, (char)0x006f,    // Latin Small Letter O With Diaeresis -> o
-//          (char)0x00f7, (char)0x003f,    // Division Sign
-//          (char)0x00f8, (char)0x006f,    // Latin Small Letter O With Stroke -> o
-//          (char)0x00f9, (char)0x0075,    // Latin Small Letter U With Grave -> u
-//          (char)0x00fa, (char)0x0075,    // Latin Small Letter U With Acute -> u
-//          (char)0x00fb, (char)0x0075,    // Latin Small Letter U With Circumflex -> u
-//          (char)0x00fc, (char)0x0075,    // Latin Small Letter U With Diaeresis -> u
-//          (char)0x00fd, (char)0x0079,    // Latin Small Letter Y With Acute -> y
-//          (char)0x00fe, (char)0x003f,    // Latin Small Letter Thorn
-//          (char)0x00ff, (char)0x0079,    // Latin Small Letter Y With Diaeresis -> y
-            (char)0x0100,
+                //          (char)0x00a0, (char)0x0020,    // No-Break Space -> Space
+                //          (char)0x00a1, (char)0x0021,    // Inverted Exclamation Mark -> !
+                //          (char)0x00a2, (char)0x0063,    // Cent Sign -> c
+                //          (char)0x00a3, (char)0x003f,    // Pound Sign
+                //          (char)0x00a4, (char)0x0024,    // Currency Sign -> $
+                //          (char)0x00a5, (char)0x0059,    // Yen Sign -> Y
+                //          (char)0x00a6, (char)0x007c,    // Broken Bar -> |
+                //          (char)0x00a7, (char)0x003f,    // Section Sign
+                //          (char)0x00a8, (char)0x003f,    // Diaeresis
+                //          (char)0x00a9, (char)0x0043,    // Copyright Sign -> C
+                //          (char)0x00aa, (char)0x0061,    // Feminine Ordinal Indicator -> a
+                //          (char)0x00ab, (char)0x003c,    // Left-Pointing Double Angle Quotation Mark -> <
+                //          (char)0x00ac, (char)0x003f,    // Not Sign
+                //          (char)0x00ad, (char)0x002d,    // Soft Hyphen -> -
+                //          (char)0x00ae, (char)0x0052,    // Registered Sign -> R
+                //          (char)0x00af, (char)0x003f,    // Macron
+                //          (char)0x00b0, (char)0x003f,    // Degree Sign
+                //          (char)0x00b1, (char)0x003f,    // Plus-Minus Sign
+                //          (char)0x00b2, (char)0x0032,    // Superscript Two -> 2
+                //          (char)0x00b3, (char)0x0033,    // Superscript Three -> 3
+                //          (char)0x00b4, (char)0x003f,    // Acute Accent
+                //          (char)0x00b5, (char)0x003f,    // Micro Sign
+                //          (char)0x00b6, (char)0x003f,    // Pilcrow Sign
+                //          (char)0x00b7, (char)0x002e,    // Middle Dot -> .
+                //          (char)0x00b8, (char)0x002c,    // Cedilla -> ,
+                //          (char)0x00b9, (char)0x0031,    // Superscript One -> 1
+                //          (char)0x00ba, (char)0x006f,    // Masculine Ordinal Indicator -> o
+                //          (char)0x00bb, (char)0x003e,    // Right-Pointing Double Angle Quotation Mark -> >
+                //          (char)0x00bc, (char)0x003f,    // Vulgar Fraction One Quarter
+                //          (char)0x00bd, (char)0x003f,    // Vulgar Fraction One Half
+                //          (char)0x00be, (char)0x003f,    // Vulgar Fraction Three Quarters
+                //          (char)0x00bf, (char)0x003f,    // Inverted Question Mark
+                //          (char)0x00c0, (char)0x0041,    // Latin Capital Letter A With Grave -> A
+                //          (char)0x00c1, (char)0x0041,    // Latin Capital Letter A With Acute -> A
+                //          (char)0x00c2, (char)0x0041,    // Latin Capital Letter A With Circumflex -> A
+                //          (char)0x00c3, (char)0x0041,    // Latin Capital Letter A With Tilde -> A
+                //          (char)0x00c4, (char)0x0041,    // Latin Capital Letter A With Diaeresis -> A
+                //          (char)0x00c5, (char)0x0041,    // Latin Capital Letter A With Ring Above -> A
+                //          (char)0x00c6, (char)0x0041,    // Latin Capital Ligature Ae -> A
+                //          (char)0x00c7, (char)0x0043,    // Latin Capital Letter C With Cedilla -> C
+                //          (char)0x00c8, (char)0x0045,    // Latin Capital Letter E With Grave -> E
+                //          (char)0x00c9, (char)0x0045,    // Latin Capital Letter E With Acute -> E
+                //          (char)0x00ca, (char)0x0045,    // Latin Capital Letter E With Circumflex -> E
+                //          (char)0x00cb, (char)0x0045,    // Latin Capital Letter E With Diaeresis -> E
+                //          (char)0x00cc, (char)0x0049,    // Latin Capital Letter I With Grave -> I
+                //          (char)0x00cd, (char)0x0049,    // Latin Capital Letter I With Acute -> I
+                //          (char)0x00ce, (char)0x0049,    // Latin Capital Letter I With Circumflex -> I
+                //          (char)0x00cf, (char)0x0049,    // Latin Capital Letter I With Diaeresis -> I
+                //          (char)0x00d0, (char)0x0044,    // Latin Capital Letter Eth -> D
+                //          (char)0x00d1, (char)0x004e,    // Latin Capital Letter N With Tilde -> N
+                //          (char)0x00d2, (char)0x004f,    // Latin Capital Letter O With Grave -> O
+                //          (char)0x00d3, (char)0x004f,    // Latin Capital Letter O With Acute -> O
+                //          (char)0x00d4, (char)0x004f,    // Latin Capital Letter O With Circumflex -> O
+                //          (char)0x00d5, (char)0x004f,    // Latin Capital Letter O With Tilde -> O
+                //          (char)0x00d6, (char)0x004f,    // Latin Capital Letter O With Diaeresis -> O
+                //          (char)0x00d7, (char)0x003f,    // Multiplication Sign
+                //          (char)0x00d8, (char)0x004f,    // Latin Capital Letter O With Stroke -> O
+                //          (char)0x00d9, (char)0x0055,    // Latin Capital Letter U With Grave -> U
+                //          (char)0x00da, (char)0x0055,    // Latin Capital Letter U With Acute -> U
+                //          (char)0x00db, (char)0x0055,    // Latin Capital Letter U With Circumflex -> U
+                //          (char)0x00dc, (char)0x0055,    // Latin Capital Letter U With Diaeresis -> U
+                //          (char)0x00dd, (char)0x0059,    // Latin Capital Letter Y With Acute -> Y
+                //          (char)0x00de, (char)0x003f,    // Latin Capital Letter Thorn
+                //          (char)0x00df, (char)0x003f,    // Latin Small Letter Sharp S
+                //          (char)0x00e0, (char)0x0061,    // Latin Small Letter A With Grave -> a
+                //          (char)0x00e1, (char)0x0061,    // Latin Small Letter A With Acute -> a
+                //          (char)0x00e2, (char)0x0061,    // Latin Small Letter A With Circumflex -> a
+                //          (char)0x00e3, (char)0x0061,    // Latin Small Letter A With Tilde -> a
+                //          (char)0x00e4, (char)0x0061,    // Latin Small Letter A With Diaeresis -> a
+                //          (char)0x00e5, (char)0x0061,    // Latin Small Letter A With Ring Above -> a
+                //          (char)0x00e6, (char)0x0061,    // Latin Small Ligature Ae -> a
+                //          (char)0x00e7, (char)0x0063,    // Latin Small Letter C With Cedilla -> c
+                //          (char)0x00e8, (char)0x0065,    // Latin Small Letter E With Grave -> e
+                //          (char)0x00e9, (char)0x0065,    // Latin Small Letter E With Acute -> e
+                //          (char)0x00ea, (char)0x0065,    // Latin Small Letter E With Circumflex -> e
+                //          (char)0x00eb, (char)0x0065,    // Latin Small Letter E With Diaeresis -> e
+                //          (char)0x00ec, (char)0x0069,    // Latin Small Letter I With Grave -> i
+                //          (char)0x00ed, (char)0x0069,    // Latin Small Letter I With Acute -> i
+                //          (char)0x00ee, (char)0x0069,    // Latin Small Letter I With Circumflex -> i
+                //          (char)0x00ef, (char)0x0069,    // Latin Small Letter I With Diaeresis -> i
+                //          (char)0x00f0, (char)0x003f,    // Latin Small Letter Eth
+                //          (char)0x00f1, (char)0x006e,    // Latin Small Letter N With Tilde -> n
+                //          (char)0x00f2, (char)0x006f,    // Latin Small Letter O With Grave -> o
+                //          (char)0x00f3, (char)0x006f,    // Latin Small Letter O With Acute -> o
+                //          (char)0x00f4, (char)0x006f,    // Latin Small Letter O With Circumflex -> o
+                //          (char)0x00f5, (char)0x006f,    // Latin Small Letter O With Tilde -> o
+                //          (char)0x00f6, (char)0x006f,    // Latin Small Letter O With Diaeresis -> o
+                //          (char)0x00f7, (char)0x003f,    // Division Sign
+                //          (char)0x00f8, (char)0x006f,    // Latin Small Letter O With Stroke -> o
+                //          (char)0x00f9, (char)0x0075,    // Latin Small Letter U With Grave -> u
+                //          (char)0x00fa, (char)0x0075,    // Latin Small Letter U With Acute -> u
+                //          (char)0x00fb, (char)0x0075,    // Latin Small Letter U With Circumflex -> u
+                //          (char)0x00fc, (char)0x0075,    // Latin Small Letter U With Diaeresis -> u
+                //          (char)0x00fd, (char)0x0079,    // Latin Small Letter Y With Acute -> y
+                //          (char)0x00fe, (char)0x003f,    // Latin Small Letter Thorn
+                //          (char)0x00ff, (char)0x0079,    // Latin Small Letter Y With Diaeresis -> y
+                (char)
+                    0x0100,
                 (char)0x0041, // Latin Capital Letter A With Macron -> A
                 (char)0x0101,
                 (char)0x0061, // Latin Small Letter A With Macron -> a
@@ -709,7 +709,7 @@ namespace System.Text
                 (char)0xff5d,
                 (char)0x007d, // Fullwidth Right Curly Bracket -> }
                 (char)0xff5e,
-                (char)0x007e     // Fullwidth Tilde -> ~
+                (char)0x007e // Fullwidth Tilde -> ~
             ];
     }
 }

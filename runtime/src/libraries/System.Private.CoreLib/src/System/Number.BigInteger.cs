@@ -35,7 +35,6 @@ namespace System
             private const int MaxBlockCount = (MaxBits + (BitsPerBlock - 1)) / BitsPerBlock;
 
             private static ReadOnlySpan<uint> Pow10UInt32Table =>
-
                 [
                     1, // 10^0
                     10, // 10^1
@@ -46,12 +45,11 @@ namespace System
                     1000000, // 10^6
                     10000000, // 10^7
                     // These last two are accessed only by MultiplyPow10.
-                100000000, // 10^8
-                    1000000000  // 10^9
+                    100000000, // 10^8
+                    1000000000 // 10^9
                 ];
 
             private static ReadOnlySpan<int> Pow10BigNumTableIndices =>
-
                 [
                     0, // 10^8
                     2, // 10^16
@@ -64,23 +62,22 @@ namespace System
                 ];
 
             private static ReadOnlySpan<uint> Pow10BigNumTable =>
-
                 [
                     // 10^8
-                1, // _length
+                    1, // _length
                     100000000, // _blocks
                     // 10^16
-                2, // _length
+                    2, // _length
                     0x6FC10000, // _blocks
                     0x002386F2,
                     // 10^32
-                4, // _length
+                    4, // _length
                     0x00000000, // _blocks
                     0x85ACEF81,
                     0x2D6D415B,
                     0x000004EE,
                     // 10^64
-                7, // _length
+                    7, // _length
                     0x00000000, // _blocks
                     0x00000000,
                     0xBF6A1F01,
@@ -89,7 +86,7 @@ namespace System
                     0xE93FF9F4,
                     0x00184F03,
                     // 10^128
-                14, // _length
+                    14, // _length
                     0x00000000, // _blocks
                     0x00000000,
                     0x00000000,
@@ -105,7 +102,7 @@ namespace System
                     0xE91F2603,
                     0x0000024E,
                     // 10^256
-                27, // _length
+                    27, // _length
                     0x00000000, // _blocks
                     0x00000000,
                     0x00000000,
@@ -134,7 +131,7 @@ namespace System
                     0x5FDCEFCE,
                     0x000553F7,
                     // 10^512
-                54, // _length
+                    54, // _length
                     0x00000000, // _blocks
                     0x00000000,
                     0x00000000,
@@ -190,7 +187,7 @@ namespace System
                     0x633415D4,
                     0x0000001C,
                     // 10^1024
-                107, // _length
+                    107, // _length
                     0x00000000, // _blocks
                     0x00000000,
                     0x00000000,
@@ -299,7 +296,7 @@ namespace System
                     0xD9D61A05,
                     0x00000325,
                     // 9 Trailing blocks to ensure MaxBlockCount
-                0x00000000,
+                    0x00000000,
                     0x00000000,
                     0x00000000,
                     0x00000000,

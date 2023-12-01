@@ -53,11 +53,17 @@ class C
 
             EditAndContinueValidation.VerifySemantics(
                 new[] { edits },
-
                 [
                     DocumentResults(
                         active,
-                        diagnostics: [Diagnostic(RudeEditKind.DeleteActiveStatement, "class C", DeletedSymbolDisplay(FeaturesResources.method, "C.Goo(int)"))])
+                        diagnostics: [
+                            Diagnostic(
+                                RudeEditKind.DeleteActiveStatement,
+                                "class C",
+                                DeletedSymbolDisplay(FeaturesResources.method, "C.Goo(int)")
+                            )
+                        ]
+                    )
                 ]
             );
         }
@@ -90,9 +96,12 @@ class C
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics:
-                [
-                    Diagnostic(RudeEditKind.ChangingNameOrSignatureOfActiveMember, "static void Boo(int a)", GetResource("method"))
+                diagnostics: [
+                    Diagnostic(
+                        RudeEditKind.ChangingNameOrSignatureOfActiveMember,
+                        "static void Boo(int a)",
+                        GetResource("method")
+                    )
                 ]
             );
         }
@@ -303,9 +312,12 @@ class C
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics:
-                [
-                    Diagnostic(RudeEditKind.UpdatingGenericNotSupportedByRuntime, "static void Swap<T>(T lhs, T rhs)", GetResource("method"))
+                diagnostics: [
+                    Diagnostic(
+                        RudeEditKind.UpdatingGenericNotSupportedByRuntime,
+                        "static void Swap<T>(T lhs, T rhs)",
+                        GetResource("method")
+                    )
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -582,9 +594,12 @@ class C
             EditAndContinueValidation.VerifySemantics(
                 GetTopEdits(src1, src2),
                 active,
-
                 [
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart, partialType: "C")
+                    SemanticEdit(
+                        SemanticEditKind.Update,
+                        c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart,
+                        partialType: "C"
+                    )
                 ],
                 capabilities: EditAndContinueCapabilities.ChangeCustomAttributes
             );
@@ -622,14 +637,28 @@ class C
 
             EditAndContinueValidation.VerifySemantics(
                 [GetTopEdits(srcA1, srcA2), GetTopEdits(srcB1, srcB2)],
-
                 [
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcA1, srcA2),
-                        semanticEdits: [SemanticEdit(SemanticEditKind.Update, c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart, partialType: "C")]),
+                        semanticEdits: [
+                            SemanticEdit(
+                                SemanticEditKind.Update,
+                                c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart,
+                                partialType: "C"
+                            )
+                        ]
+                    ),
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcB1, srcB2),
-                        semanticEdits: [SemanticEdit(SemanticEditKind.Update, c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart, partialType: "C", syntaxMap: syntaxMapB)]),
+                        semanticEdits: [
+                            SemanticEdit(
+                                SemanticEditKind.Update,
+                                c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart,
+                                partialType: "C",
+                                syntaxMap: syntaxMapB
+                            )
+                        ]
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.ChangeCustomAttributes
             );
@@ -645,14 +674,21 @@ class C
 
             EditAndContinueValidation.VerifySemantics(
                 new[] { GetTopEdits(srcA1, srcA2), GetTopEdits(srcB1, srcB2) },
-
                 [
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcA1, srcA2),
-                        diagnostics: [Diagnostic(RudeEditKind.DeleteActiveStatement, "char x", GetResource("method"))]),
+                        diagnostics: [
+                            Diagnostic(
+                                RudeEditKind.DeleteActiveStatement,
+                                "char x",
+                                GetResource("method")
+                            )
+                        ]
+                    ),
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcB1, srcB2),
-                        diagnostics: [])
+                        diagnostics: []
+                    )
                 ],
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
             );
@@ -668,14 +704,21 @@ class C
 
             EditAndContinueValidation.VerifySemantics(
                 new[] { GetTopEdits(srcA1, srcA2), GetTopEdits(srcB1, srcB2) },
-
                 [
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcA1, srcA2),
-                        diagnostics: []),
+                        diagnostics: []
+                    ),
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcB1, srcB2),
-                        diagnostics: [Diagnostic(RudeEditKind.DeleteActiveStatement, "byte x", GetResource("method"))])
+                        diagnostics: [
+                            Diagnostic(
+                                RudeEditKind.DeleteActiveStatement,
+                                "byte x",
+                                GetResource("method")
+                            )
+                        ]
+                    )
                 ],
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
             );
@@ -1035,9 +1078,12 @@ class C<T>
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics:
-                [
-                    Diagnostic(RudeEditKind.UpdatingGenericNotSupportedByRuntime, "set", GetResource("indexer setter"))
+                diagnostics: [
+                    Diagnostic(
+                        RudeEditKind.UpdatingGenericNotSupportedByRuntime,
+                        "set",
+                        GetResource("indexer setter")
+                    )
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1159,9 +1205,12 @@ class C<T>
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics:
-                [
-                    Diagnostic(RudeEditKind.UpdatingGenericNotSupportedByRuntime, "get", GetResource("indexer getter"))
+                diagnostics: [
+                    Diagnostic(
+                        RudeEditKind.UpdatingGenericNotSupportedByRuntime,
+                        "get",
+                        GetResource("indexer getter")
+                    )
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1284,9 +1333,12 @@ class C<T>
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics:
-                [
-                    Diagnostic(RudeEditKind.UpdatingGenericNotSupportedByRuntime, "set", GetResource("indexer setter"))
+                diagnostics: [
+                    Diagnostic(
+                        RudeEditKind.UpdatingGenericNotSupportedByRuntime,
+                        "set",
+                        GetResource("indexer setter")
+                    )
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1404,9 +1456,12 @@ class C<T>
 
             edits.VerifySemanticDiagnostics(
                 active,
-                diagnostics:
-                [
-                    Diagnostic(RudeEditKind.UpdatingGenericNotSupportedByRuntime, "get", GetResource("indexer getter"))
+                diagnostics: [
+                    Diagnostic(
+                        RudeEditKind.UpdatingGenericNotSupportedByRuntime,
+                        "get",
+                        GetResource("indexer getter")
+                    )
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );

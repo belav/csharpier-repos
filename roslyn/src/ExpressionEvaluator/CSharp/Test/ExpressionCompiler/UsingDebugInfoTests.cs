@@ -804,9 +804,11 @@ namespace N
                         {
                             methodToken,
                             new MethodDebugInfoBytes.Builder(
-
                                 [
-                                    new[] { "TSystem.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" }
+                                    new[]
+                                    {
+                                        "TSystem.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                                    }
                                 ],
                                 suppressUsingInfo: true
                             )

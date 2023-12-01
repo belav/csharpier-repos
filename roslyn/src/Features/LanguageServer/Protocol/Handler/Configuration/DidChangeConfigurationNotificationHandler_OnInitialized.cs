@@ -24,9 +24,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
                         methodName: Methods.ClientRegisterCapabilityName,
                         @params: new RegistrationParams()
                         {
-                            Registrations =
-                            [
-                                new Registration { Id = _registrationId.ToString(), Method = Methods.WorkspaceDidChangeConfigurationName, RegisterOptions = null }
+                            Registrations = [
+                                new Registration
+                                {
+                                    Id = _registrationId.ToString(),
+                                    Method = Methods.WorkspaceDidChangeConfigurationName,
+                                    RegisterOptions = null
+                                }
                             ]
                         },
                         cancellationToken

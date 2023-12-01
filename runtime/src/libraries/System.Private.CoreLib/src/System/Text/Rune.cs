@@ -44,7 +44,6 @@ namespace System.Text
         // - 0x20 bit is reserved for future use
         // - bottom 5 bits are the UnicodeCategory of the character
         private static ReadOnlySpan<byte> AsciiCharInfo =>
-
             [
                 0x0E,
                 0x0E,

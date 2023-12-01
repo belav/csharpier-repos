@@ -1299,7 +1299,6 @@ namespace System.Xml.Schema
         // for 'block' and 'final' attribute values
         //
         private static ReadOnlySpan<int> DerivationMethodValues =>
-
             [
                 (int)XmlSchemaDerivationMethod.Substitution,
                 (int)XmlSchemaDerivationMethod.Extension,

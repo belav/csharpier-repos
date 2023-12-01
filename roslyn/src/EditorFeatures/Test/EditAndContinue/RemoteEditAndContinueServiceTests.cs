@@ -82,11 +82,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             else
             {
                 Assert.NotNull(clientProvider);
-                clientProvider!.AdditionalRemoteParts =
-                [
+                clientProvider!.AdditionalRemoteParts = [
                     typeof(MockEditAndContinueWorkspaceService)
                 ];
-                clientProvider!.ExcludedRemoteParts =  [typeof(EditAndContinueService)];
+                clientProvider!.ExcludedRemoteParts = [typeof(EditAndContinueService)];
 
                 var client = await InProcRemoteHostClient.GetTestClientAsync(localWorkspace);
                 var remoteWorkspace = client.TestData.WorkspaceManager.GetWorkspace();

@@ -67,7 +67,7 @@ internal class RazorDynamicFileInfoProvider : IDynamicFileInfoProvider
 
         var requestParams = new ProvideDynamicFileParams
         {
-            RazorFiles =  [ProtocolConversions.CreateAbsoluteUri(filePath)]
+            RazorFiles = [ProtocolConversions.CreateAbsoluteUri(filePath)]
         };
 
         Contract.ThrowIfNull(
@@ -114,7 +114,7 @@ internal class RazorDynamicFileInfoProvider : IDynamicFileInfoProvider
     {
         var notificationParams = new RemoveDynamicFileParams
         {
-            RazorFiles =  [ProtocolConversions.CreateAbsoluteUri(filePath)]
+            RazorFiles = [ProtocolConversions.CreateAbsoluteUri(filePath)]
         };
 
         Contract.ThrowIfNull(

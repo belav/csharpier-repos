@@ -153,10 +153,12 @@ namespace N
             testState.VerifyRoot(
                 root,
                 "N.C.Goo()",
-
                 [
                     string.Format(EditorFeaturesResources.Calls_To_0, "Goo"),
-                    string.Format(EditorFeaturesResources.Calls_To_Interface_Implementation_0, "N.I.Goo()")
+                    string.Format(
+                        EditorFeaturesResources.Calls_To_Interface_Implementation_0,
+                        "N.I.Goo()"
+                    )
                 ]
             );
             testState.VerifyResult(
@@ -208,7 +210,6 @@ namespace N
             testState.VerifyRoot(
                 root,
                 "N.C.Goo()",
-
                 [
                     string.Format(EditorFeaturesResources.Calls_To_0, "Goo"),
                     EditorFeaturesResources.Calls_To_Overrides
@@ -256,7 +257,6 @@ namespace N
             testState.VerifyRoot(
                 root,
                 "N.D.Goo()",
-
                 [
                     string.Format(EditorFeaturesResources.Calls_To_0, "Goo"),
                     string.Format(EditorFeaturesResources.Calls_To_Base_Member_0, "N.C.Goo()")
@@ -511,7 +511,6 @@ namespace N
             testState.VerifyRoot(
                 root,
                 "N.I.Goo()",
-
                 [
                     string.Format(EditorFeaturesResources.Calls_To_0, "Goo"),
                     string.Format(EditorFeaturesResources.Implements_0, "Goo")
@@ -577,7 +576,6 @@ namespace N
             testState.VerifyRoot(
                 root,
                 "N.C.Goo()",
-
                 [
                     string.Format(EditorFeaturesResources.Calls_To_0, "Goo"),
                     EditorFeaturesResources.Overrides_
@@ -611,7 +609,6 @@ class Derived : Base
             testState.VerifyRoot(
                 root,
                 "Base.M()",
-
                 [
                     string.Format(EditorFeaturesResources.Calls_To_0, "M"),
                     EditorFeaturesResources.Overrides_,

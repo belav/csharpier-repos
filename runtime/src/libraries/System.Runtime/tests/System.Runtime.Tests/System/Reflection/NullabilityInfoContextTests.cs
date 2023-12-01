@@ -3204,13 +3204,15 @@ namespace System.Reflection.Tests
                 ],
 
                 [
-                    (GenericMethodDisallow<int>)ClassWithGenericMethods_Disallow.GenericNotNullMethod,
+                    (GenericMethodDisallow<int>)
+                        ClassWithGenericMethods_Disallow.GenericNotNullMethod,
                     NullabilityState.NotNull,
                     NullabilityState.NotNull
                 ],
 
                 [
-                    (GenericMethodDisallow<object>)ClassWithGenericMethods_Disallow.GenericNotNullMethod,
+                    (GenericMethodDisallow<object>)
+                        ClassWithGenericMethods_Disallow.GenericNotNullMethod,
                     NullabilityState.NotNull,
                     NullabilityState.NotNull
                 ],

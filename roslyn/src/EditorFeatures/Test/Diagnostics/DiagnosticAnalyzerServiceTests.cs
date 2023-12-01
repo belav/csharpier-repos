@@ -1253,11 +1253,11 @@ class A
             if (isSourceGenerated)
             {
                 files = Array.Empty<string>();
-                sourceGeneratedFiles =  [code];
+                sourceGeneratedFiles = [code];
             }
             else
             {
-                files =  [code];
+                files = [code];
                 sourceGeneratedFiles = Array.Empty<string>();
             }
 

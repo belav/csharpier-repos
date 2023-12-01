@@ -629,7 +629,6 @@ C<string>.div<bool>(10, 0)
             var script = Temp.CreateFile(extension: ".csx").WriteAllText("WriteLine(42);");
 
             var runner = CreateRunner(
-
                 [
                     GacFileResolver.IsAvailable ? null : "/r:System.Console",
                     "/u:System.Console;Alpha.Beta",
@@ -803,7 +802,6 @@ Print(new C4());
                 );
 
             var runner = CreateRunner(
-
                 [
                     "/r:4.dll",
                     $"/lib:{dir1.Path}",

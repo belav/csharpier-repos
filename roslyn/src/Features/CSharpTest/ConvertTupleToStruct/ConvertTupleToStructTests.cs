@@ -2916,8 +2916,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 expected,
                 options: PreferImplicitTypeWithInfo(),
                 testHost: host,
-                actions:
-                [
+                actions: [
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type,
                 ]
@@ -3002,8 +3001,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 expected,
                 options: PreferImplicitTypeWithInfo(),
                 testHost: host,
-                actions:
-                [
+                actions: [
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type,
                 ]
@@ -3113,8 +3111,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 equivalenceKey: Scope.ContainingType.ToString(),
                 options: PreferImplicitTypeWithInfo(),
                 testHost: host,
-                actions:
-                [
+                actions: [
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type
                 ]
@@ -3217,8 +3214,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 equivalenceKey: Scope.ContainingType.ToString(),
                 options: PreferImplicitTypeWithInfo(),
                 testHost: host,
-                actions:
-                [
+                actions: [
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type
                 ]

@@ -15,7 +15,6 @@ namespace System.Security.Cryptography.Asn1
             [0x30, 0x09, 0x06, 0x05, 0x2B, 0x0E, 0x03, 0x02, 0x1A, 0x05, 0x00];
 
         private static ReadOnlySpan<byte> DefaultMaskGenFunc =>
-
             [
                 0x30,
                 0x16,
@@ -44,7 +43,6 @@ namespace System.Security.Cryptography.Asn1
             ];
 
         private static ReadOnlySpan<byte> DefaultPSourceFunc =>
-
             [
                 0x30,
                 0x0D,

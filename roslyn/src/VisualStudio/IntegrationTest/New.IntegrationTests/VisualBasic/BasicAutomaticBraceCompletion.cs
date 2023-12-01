@@ -440,7 +440,6 @@ End Class",
             await TestServices
                 .Input
                 .SendWithoutActivateAsync(
-
                     [
                         "Dim y = {New C([dim",
                         VirtualKeyCode.ESCAPE,
@@ -474,7 +473,6 @@ End Class",
             await TestServices
                 .Input
                 .SendWithoutActivateAsync(
-
                     [
                         "Dim y = {New C([dim",
                         VirtualKeyCode.ESCAPE,

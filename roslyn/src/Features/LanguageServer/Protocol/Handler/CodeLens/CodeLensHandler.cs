@@ -179,9 +179,13 @@ internal sealed class CodeLensHandler
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments =
-                    [
-                        new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: false, runSettingsPath)
+                    Arguments = [
+                        new RunTestsParams(
+                            textDocumentIdentifier,
+                            range,
+                            AttachDebugger: false,
+                            runSettingsPath
+                        )
                     ],
                     Title = FeaturesResources.Run_Test
                 }
@@ -193,9 +197,13 @@ internal sealed class CodeLensHandler
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments =
-                    [
-                        new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: true, runSettingsPath)
+                    Arguments = [
+                        new RunTestsParams(
+                            textDocumentIdentifier,
+                            range,
+                            AttachDebugger: true,
+                            runSettingsPath
+                        )
                     ],
                     Title = FeaturesResources.Debug_Test
                 }
@@ -215,9 +223,13 @@ internal sealed class CodeLensHandler
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments =
-                    [
-                        new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: false, runSettingsPath)
+                    Arguments = [
+                        new RunTestsParams(
+                            textDocumentIdentifier,
+                            range,
+                            AttachDebugger: false,
+                            runSettingsPath
+                        )
                     ],
                     Title = FeaturesResources.Run_All_Tests
                 }
@@ -229,9 +241,13 @@ internal sealed class CodeLensHandler
                 Command = new LSP.Command
                 {
                     CommandIdentifier = RunTestsCommandIdentifier,
-                    Arguments =
-                    [
-                        new RunTestsParams(textDocumentIdentifier, range, AttachDebugger: true, runSettingsPath)
+                    Arguments = [
+                        new RunTestsParams(
+                            textDocumentIdentifier,
+                            range,
+                            AttachDebugger: true,
+                            runSettingsPath
+                        )
                     ],
                     Title = FeaturesResources.Debug_All_Tests
                 }

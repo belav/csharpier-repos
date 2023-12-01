@@ -82,7 +82,7 @@ class A
                             {
                                 CompletionListSetting = new LSP.CompletionListSetting
                                 {
-                                    ItemDefaults =  ["editRange"],
+                                    ItemDefaults = ["editRange"],
                                 }
                             }
                         }
