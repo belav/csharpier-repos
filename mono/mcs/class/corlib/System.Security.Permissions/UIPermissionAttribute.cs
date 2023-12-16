@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,44 +28,51 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public sealed class UIPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        // Fields
+        private UIPermissionClipboard clipboard;
+        private UIPermissionWindow window;
 
-	[ComVisible (true)]
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-			 AttributeTargets.Struct | AttributeTargets.Constructor |
-			 AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-	[Serializable]
-	public sealed class UIPermissionAttribute : CodeAccessSecurityAttribute	{
+        // Constructor
+        public UIPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
-		// Fields
-		private UIPermissionClipboard clipboard;
-		private UIPermissionWindow window;
-		
-		// Constructor
-		public UIPermissionAttribute (SecurityAction action) : base (action)
-		{
-		}
-		
-		// Properties
-		public UIPermissionClipboard Clipboard {
-			get { return clipboard; }
-			set { clipboard = value; }
-		}
+        // Properties
+        public UIPermissionClipboard Clipboard
+        {
+            get { return clipboard; }
+            set { clipboard = value; }
+        }
 
-		public UIPermissionWindow Window {
-			get { return window; }
-			set { window = value; }
-		}
+        public UIPermissionWindow Window
+        {
+            get { return window; }
+            set { window = value; }
+        }
 
-		// Methods
-		public override IPermission CreatePermission ()
-		{
-			UIPermission perm = null;
-			if (this.Unrestricted)
-				perm = new UIPermission (PermissionState.Unrestricted);
-			else
-				perm = new UIPermission (window, clipboard);
-			return perm;
-		}
-	}
+        // Methods
+        public override IPermission CreatePermission()
+        {
+            UIPermission perm = null;
+            if (this.Unrestricted)
+                perm = new UIPermission(PermissionState.Unrestricted);
+            else
+                perm = new UIPermission(window, clipboard);
+            return perm;
+        }
+    }
 }

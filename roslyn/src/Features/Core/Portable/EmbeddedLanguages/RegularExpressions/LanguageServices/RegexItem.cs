@@ -9,7 +9,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
     internal partial class RegexEmbeddedCompletionProvider
     {
         private readonly struct RegexItem(
-            string displayText, string inlineDescription, string fullDescription, CompletionChange change)
+            string displayText,
+            string inlineDescription,
+            string fullDescription,
+            CompletionChange change
+        )
         {
             public readonly string DisplayText = displayText;
             public readonly string InlineDescription = inlineDescription;

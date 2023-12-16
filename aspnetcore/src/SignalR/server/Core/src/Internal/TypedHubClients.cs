@@ -12,7 +12,8 @@ internal sealed class TypedHubClients<T> : IHubCallerClients<T>
         _hubClients = dynamicContext;
     }
 
-    public T Client(string connectionId) => TypedClientBuilder<T>.Build(_hubClients.Client(connectionId));
+    public T Client(string connectionId) =>
+        TypedClientBuilder<T>.Build(_hubClients.Client(connectionId));
 
     public T All => TypedClientBuilder<T>.Build(_hubClients.All);
 
@@ -20,7 +21,8 @@ internal sealed class TypedHubClients<T> : IHubCallerClients<T>
 
     public T Others => TypedClientBuilder<T>.Build(_hubClients.Others);
 
-    public T AllExcept(IReadOnlyList<string> excludedConnectionIds) => TypedClientBuilder<T>.Build(_hubClients.AllExcept(excludedConnectionIds));
+    public T AllExcept(IReadOnlyList<string> excludedConnectionIds) =>
+        TypedClientBuilder<T>.Build(_hubClients.AllExcept(excludedConnectionIds));
 
     public T Group(string groupName)
     {
@@ -29,7 +31,9 @@ internal sealed class TypedHubClients<T> : IHubCallerClients<T>
 
     public T GroupExcept(string groupName, IReadOnlyList<string> excludedConnectionIds)
     {
-        return TypedClientBuilder<T>.Build(_hubClients.GroupExcept(groupName, excludedConnectionIds));
+        return TypedClientBuilder<T>.Build(
+            _hubClients.GroupExcept(groupName, excludedConnectionIds)
+        );
     }
 
     public T Clients(IReadOnlyList<string> connectionIds)

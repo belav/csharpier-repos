@@ -17,32 +17,43 @@ namespace System.Web.Mvc.Test
         public void ConstructorGuards()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(null, typeof(object));
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(null, typeof(object));
             ControllerContext context = new ControllerContext();
             RequiredAttribute attribute = new RequiredAttribute();
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => new DataAnnotationsModelValidator(null, context, attribute),
-                "metadata");
+                "metadata"
+            );
             Assert.ThrowsArgumentNull(
                 () => new DataAnnotationsModelValidator(metadata, null, attribute),
-                "controllerContext");
+                "controllerContext"
+            );
             Assert.ThrowsArgumentNull(
                 () => new DataAnnotationsModelValidator(metadata, context, null),
-                "attribute");
+                "attribute"
+            );
         }
 
         [Fact]
         public void ValuesSet()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             RequiredAttribute attribute = new RequiredAttribute();
 
             // Act
-            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(metadata, context, attribute);
+            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(
+                metadata,
+                context,
+                attribute
+            );
 
             // Assert
             Assert.Same(attribute, validator.Attribute);
@@ -56,11 +67,15 @@ namespace System.Web.Mvc.Test
                 return new TheoryDataSet<ModelMetadata, string>
                 {
                     {
-                        ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length"),
+                        ModelMetadataProviders
+                            .Current
+                            .GetMetadataForProperty(() => 15, typeof(string), "Length"),
                         "Length"
                     },
                     {
-                        ModelMetadataProviders.Current.GetMetadataForType(() => new object(), typeof(SampleModel)),
+                        ModelMetadataProviders
+                            .Current
+                            .GetMetadataForType(() => new object(), typeof(SampleModel)),
                         "SampleModel"
                     }
                 };
@@ -69,21 +84,35 @@ namespace System.Web.Mvc.Test
 
         [Theory]
         [PropertyData("ValidateSetsMemberNamePropertyDataSet")]
-        public void ValidateSetsMemberNamePropertyOfValidationContextForProperties(ModelMetadata metadata, string expectedMemberName)
+        public void ValidateSetsMemberNamePropertyOfValidationContextForProperties(
+            ModelMetadata metadata,
+            string expectedMemberName
+        )
         {
             // Arrange
             metadata.DisplayName = "Some-random-name";
             ControllerContext context = new ControllerContext();
             var attribute = new Mock<ValidationAttribute> { CallBase = true };
-            attribute.Protected()
-                     .Setup<ValidationResult>("IsValid", ItExpr.IsAny<object>(), ItExpr.IsAny<ValidationContext>())
-                     .Callback((object o, ValidationContext validationContext) =>
-                     {
-                         Assert.Equal(expectedMemberName, validationContext.MemberName);
-                     })
-                     .Returns(ValidationResult.Success)
-                     .Verifiable();
-            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(metadata, context, attribute.Object);
+            attribute
+                .Protected()
+                .Setup<ValidationResult>(
+                    "IsValid",
+                    ItExpr.IsAny<object>(),
+                    ItExpr.IsAny<ValidationContext>()
+                )
+                .Callback(
+                    (object o, ValidationContext validationContext) =>
+                    {
+                        Assert.Equal(expectedMemberName, validationContext.MemberName);
+                    }
+                )
+                .Returns(ValidationResult.Success)
+                .Verifiable();
+            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(
+                metadata,
+                context,
+                attribute.Object
+            );
 
             // Act
             IEnumerable<ModelValidationResult> results = validator.Validate(container: null);
@@ -97,12 +126,18 @@ namespace System.Web.Mvc.Test
         public void NoClientRulesByDefault()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             RequiredAttribute attribute = new RequiredAttribute();
 
             // Act
-            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(metadata, context, attribute);
+            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(
+                metadata,
+                context,
+                attribute
+            );
 
             // Assert
             Assert.Empty(validator.GetClientValidationRules());
@@ -112,11 +147,17 @@ namespace System.Web.Mvc.Test
         public void ValidateWithIsValidTrue()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute.Setup(a => a.IsValid(metadata.Model)).Returns(true);
-            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(metadata, context, attribute.Object);
+            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(
+                metadata,
+                context,
+                attribute.Object
+            );
 
             // Act
             IEnumerable<ModelValidationResult> result = validator.Validate(null);
@@ -129,11 +170,17 @@ namespace System.Web.Mvc.Test
         public void ValidateWithIsValidFalse()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute.Setup(a => a.IsValid(metadata.Model)).Returns(false);
-            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(metadata, context, attribute.Object);
+            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(
+                metadata,
+                context,
+                attribute.Object
+            );
 
             // Act
             IEnumerable<ModelValidationResult> result = validator.Validate(null);
@@ -148,13 +195,24 @@ namespace System.Web.Mvc.Test
         public void ValidatateWithValidationResultSuccess()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
-            attribute.Protected()
-                .Setup<ValidationResult>("IsValid", ItExpr.IsAny<object>(), ItExpr.IsAny<ValidationContext>())
+            attribute
+                .Protected()
+                .Setup<ValidationResult>(
+                    "IsValid",
+                    ItExpr.IsAny<object>(),
+                    ItExpr.IsAny<ValidationContext>()
+                )
                 .Returns(ValidationResult.Success);
-            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(metadata, context, attribute.Object);
+            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(
+                metadata,
+                context,
+                attribute.Object
+            );
 
             // Act
             IEnumerable<ModelValidationResult> result = validator.Validate(null);
@@ -168,12 +226,19 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             const string errorMessage = "Some error message";
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
-            attribute.Protected()
-                     .Setup<ValidationResult>("IsValid", ItExpr.IsAny<object>(), ItExpr.IsAny<ValidationContext>())
-                     .Returns(new ValidationResult(errorMessage, memberNames: null));
+            attribute
+                .Protected()
+                .Setup<ValidationResult>(
+                    "IsValid",
+                    ItExpr.IsAny<object>(),
+                    ItExpr.IsAny<ValidationContext>()
+                )
+                .Returns(new ValidationResult(errorMessage, memberNames: null));
             var validator = new DataAnnotationsModelValidator(metadata, context, attribute.Object);
 
             // Act
@@ -190,12 +255,19 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             const string errorMessage = "A different error message";
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(() => new object(), typeof(object));
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => new object(), typeof(object));
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
-            attribute.Protected()
-                     .Setup<ValidationResult>("IsValid", ItExpr.IsAny<object>(), ItExpr.IsAny<ValidationContext>())
-                     .Returns(new ValidationResult(errorMessage, new[] { "FirstName" }));
+            attribute
+                .Protected()
+                .Setup<ValidationResult>(
+                    "IsValid",
+                    ItExpr.IsAny<object>(),
+                    ItExpr.IsAny<ValidationContext>()
+                )
+                .Returns(new ValidationResult(errorMessage, new[] { "FirstName" }));
             var validator = new DataAnnotationsModelValidator(metadata, context, attribute.Object);
 
             // Act
@@ -211,13 +283,24 @@ namespace System.Web.Mvc.Test
         public void ValidateReturnsMemberNameIfItIsDifferentFromDisplayName()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(() => new SampleModel(), typeof(SampleModel));
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => new SampleModel(), typeof(SampleModel));
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
-            attribute.Protected()
-                     .Setup<ValidationResult>("IsValid", ItExpr.IsAny<object>(), ItExpr.IsAny<ValidationContext>())
-                     .Returns(new ValidationResult("Name error", new[] { "Name" }));
-            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(metadata, context, attribute.Object);
+            attribute
+                .Protected()
+                .Setup<ValidationResult>(
+                    "IsValid",
+                    ItExpr.IsAny<object>(),
+                    ItExpr.IsAny<ValidationContext>()
+                )
+                .Returns(new ValidationResult("Name error", new[] { "Name" }));
+            DataAnnotationsModelValidator validator = new DataAnnotationsModelValidator(
+                metadata,
+                context,
+                attribute.Object
+            );
 
             // Act
             IEnumerable<ModelValidationResult> results = validator.Validate(container: null);
@@ -231,13 +314,33 @@ namespace System.Web.Mvc.Test
         public void IsRequiredTests()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
 
             // Act & Assert
-            Assert.False(new DataAnnotationsModelValidator(metadata, context, new RangeAttribute(10, 20)).IsRequired);
-            Assert.True(new DataAnnotationsModelValidator(metadata, context, new RequiredAttribute()).IsRequired);
-            Assert.True(new DataAnnotationsModelValidator(metadata, context, new DerivedRequiredAttribute()).IsRequired);
+            Assert.False(
+                new DataAnnotationsModelValidator(
+                    metadata,
+                    context,
+                    new RangeAttribute(10, 20)
+                ).IsRequired
+            );
+            Assert.True(
+                new DataAnnotationsModelValidator(
+                    metadata,
+                    context,
+                    new RequiredAttribute()
+                ).IsRequired
+            );
+            Assert.True(
+                new DataAnnotationsModelValidator(
+                    metadata,
+                    context,
+                    new DerivedRequiredAttribute()
+                ).IsRequired
+            );
         }
 
         [Fact]
@@ -246,9 +349,12 @@ namespace System.Web.Mvc.Test
             // Arrange
             var expected = new ModelClientValidationStringLengthRule("Error", 1, 10);
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(string));
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => null, typeof(string));
             var attribute = new Mock<ValidationAttribute> { CallBase = true };
-            attribute.As<IClientValidatable>()
+            attribute
+                .As<IClientValidatable>()
                 .Setup(cv => cv.GetClientValidationRules(metadata, context))
                 .Returns(new[] { expected })
                 .Verifiable();
@@ -262,9 +368,7 @@ namespace System.Web.Mvc.Test
             Assert.Same(expected, actual);
         }
 
-        class DerivedRequiredAttribute : RequiredAttribute
-        {
-        }
+        class DerivedRequiredAttribute : RequiredAttribute { }
 
         class SampleModel
         {

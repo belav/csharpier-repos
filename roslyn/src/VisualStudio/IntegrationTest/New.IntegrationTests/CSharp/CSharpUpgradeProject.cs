@@ -19,19 +19,36 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         private async Task InvokeFixAsync(string version, CancellationToken cancellationToken)
         {
-            await TestServices.Editor.SetTextAsync(@$"
+            await TestServices
+                .Editor
+                .SetTextAsync(
+                    @$"
 #error version:{version}
-", cancellationToken);
+",
+                    cancellationToken
+                );
             await TestServices.Editor.ActivateAsync(cancellationToken);
 
-            await TestServices.Editor.PlaceCaretAsync($"version:{version}", charsOffset: 0, cancellationToken);
+            await TestServices
+                .Editor
+                .PlaceCaretAsync($"version:{version}", charsOffset: 0, cancellationToken);
 
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
-            await using (var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(HangMitigatingCancellationToken))
+            await using (
+                var fileChangeRestorer = await TestServices
+                    .Shell
+                    .PauseFileChangesAsync(HangMitigatingCancellationToken)
+            )
             {
                 await TestServices.Editor.InvokeCodeActionListAsync(cancellationToken);
-                await TestServices.EditorVerifier.CodeActionAsync($"Upgrade this project to C# language version '{version}'", applyFix: true, cancellationToken: cancellationToken);
+                await TestServices
+                    .EditorVerifier
+                    .CodeActionAsync(
+                        $"Upgrade this project to C# language version '{version}'",
+                        applyFix: true,
+                        cancellationToken: cancellationToken
+                    );
             }
         }
 
@@ -40,12 +57,27 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var project = ProjectName;
 
-            await TestServices.SolutionExplorer.CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddProjectAsync(project, WellKnownProjectTemplates.CSharpNetStandardClassLibrary, LanguageNames.CSharp, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(project, HangMitigatingCancellationToken);
+            await TestServices
+                .SolutionExplorer
+                .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
+            await TestServices
+                .SolutionExplorer
+                .AddProjectAsync(
+                    project,
+                    WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
+                    LanguageNames.CSharp,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .SolutionExplorer
+                .RestoreNuGetPackagesAsync(project, HangMitigatingCancellationToken);
 
             await InvokeFixAsync(version: "preview", HangMitigatingCancellationToken);
-            VerifyPropertyOutsideConfiguration(await GetProjectFileElementAsync(project, HangMitigatingCancellationToken), "LangVersion", "preview");
+            VerifyPropertyOutsideConfiguration(
+                await GetProjectFileElementAsync(project, HangMitigatingCancellationToken),
+                "LangVersion",
+                "preview"
+            );
         }
 
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/63026")]
@@ -53,11 +85,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var project = ProjectName;
 
-            await TestServices.SolutionExplorer.CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddCustomProjectAsync(
-                project,
-                ".csproj",
-                $@"<?xml version=""1.0"" encoding=""utf-8""?>
+            await TestServices
+                .SolutionExplorer
+                .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
+            await TestServices
+                .SolutionExplorer
+                .AddCustomProjectAsync(
+                    project,
+                    ".csproj",
+                    $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project ToolsVersion=""15.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <Import Project=""$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"" Condition=""Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"" />
   <PropertyGroup>
@@ -90,11 +126,23 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
   </ItemGroup>
   <Import Project=""$(MSBuildToolsPath)\Microsoft.CSharp.targets"" />
 </Project>",
-                HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddFileAsync(project, "C.cs", open: true, cancellationToken: HangMitigatingCancellationToken);
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "C.cs",
+                    open: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
             await InvokeFixAsync(version: "7.3", HangMitigatingCancellationToken);
-            VerifyPropertyInEachConfiguration(await GetProjectFileElementAsync(project, HangMitigatingCancellationToken), "LangVersion", "7.3");
+            VerifyPropertyInEachConfiguration(
+                await GetProjectFileElementAsync(project, HangMitigatingCancellationToken),
+                "LangVersion",
+                "7.3"
+            );
         }
 
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/63026")]
@@ -103,11 +151,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var project = ProjectName;
 
-            await TestServices.SolutionExplorer.CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddCustomProjectAsync(
-                project,
-                ".csproj",
-                $@"<?xml version=""1.0"" encoding=""utf-8""?>
+            await TestServices
+                .SolutionExplorer
+                .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
+            await TestServices
+                .SolutionExplorer
+                .AddCustomProjectAsync(
+                    project,
+                    ".csproj",
+                    $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project ToolsVersion=""15.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <Import Project=""$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"" Condition=""Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"" />
   <PropertyGroup>
@@ -143,12 +195,24 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
   </ItemGroup>
   <Import Project=""$(MSBuildToolsPath)\Microsoft.CSharp.targets"" />
 </Project>",
-                HangMitigatingCancellationToken);
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.SolutionExplorer.AddFileAsync(project, "C.cs", open: true, cancellationToken: HangMitigatingCancellationToken);
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "C.cs",
+                    open: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
             await InvokeFixAsync(version: "7.3", HangMitigatingCancellationToken);
-            VerifyPropertyInEachConfiguration(await GetProjectFileElementAsync(project, HangMitigatingCancellationToken), "LangVersion", "7.3");
+            VerifyPropertyInEachConfiguration(
+                await GetProjectFileElementAsync(project, HangMitigatingCancellationToken),
+                "LangVersion",
+                "7.3"
+            );
         }
     }
 }

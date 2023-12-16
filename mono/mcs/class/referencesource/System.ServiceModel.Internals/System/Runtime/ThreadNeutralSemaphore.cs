@@ -5,13 +5,16 @@
 namespace System.Runtime
 {
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Threading;
 
-    [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.PrivatePrimitive,
-        SupportsAsync = true, ReleaseMethod = "Exit")]
+    [Fx.Tag.SynchronizationPrimitive(
+        Fx.Tag.BlocksUsing.PrivatePrimitive,
+        SupportsAsync = true,
+        ReleaseMethod = "Exit"
+    )]
     class ThreadNeutralSemaphore
     {
 #if DEBUG
@@ -32,9 +35,7 @@ namespace System.Runtime
         Queue<AsyncWaitHandle> waiters;
 
         public ThreadNeutralSemaphore(int maxCount)
-            : this(maxCount, null)
-        {
-        }
+            : this(maxCount, null) { }
 
         public ThreadNeutralSemaphore(int maxCount, Func<Exception> abortedExceptionGenerator)
         {
@@ -92,7 +93,11 @@ namespace System.Runtime
                 this.Waiters.Enqueue(waiter);
             }
 
-            return waiter.WaitAsync(EnteredAsyncCallback, new EnterAsyncData(this, waiter, callback, state), timeout);
+            return waiter.WaitAsync(
+                EnteredAsyncCallback,
+                new EnterAsyncData(this, waiter, callback, state),
+                timeout
+            );
         }
 
         static void OnEnteredAsync(object state, TimeoutException exception)
@@ -111,7 +116,10 @@ namespace System.Runtime
                 }
             }
 
-            Fx.Assert(!thisPtr.waiters.Contains(data.Waiter), "The waiter should have been removed already.");
+            Fx.Assert(
+                !thisPtr.waiters.Contains(data.Waiter),
+                "The waiter should have been removed already."
+            );
 
             if (thisPtr.aborted)
             {
@@ -165,7 +173,6 @@ namespace System.Runtime
 
                     timedOut = false;
                 }
-
 
                 return !timedOut;
             }
@@ -258,8 +265,11 @@ namespace System.Runtime
                     if (!Fx.FastDebug && exitStack != null)
                     {
                         string originalStack = exitStack.ToString().Replace("\r\n", "\r\n    ");
-                        message = string.Format(CultureInfo.InvariantCulture,
-                            "Object synchronization method was called from an unsynchronized block of code. Previous Exit(): {0}", originalStack);
+                        message = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "Object synchronization method was called from an unsynchronized block of code. Previous Exit(): {0}",
+                            originalStack
+                        );
                     }
 #endif
 
@@ -313,7 +323,12 @@ namespace System.Runtime
 
         class EnterAsyncData
         {
-            public EnterAsyncData(ThreadNeutralSemaphore semaphore, AsyncWaitHandle waiter, FastAsyncCallback callback, object state)
+            public EnterAsyncData(
+                ThreadNeutralSemaphore semaphore,
+                AsyncWaitHandle waiter,
+                FastAsyncCallback callback,
+                object state
+            )
             {
                 this.Waiter = waiter;
                 this.Semaphore = semaphore;
@@ -321,29 +336,13 @@ namespace System.Runtime
                 this.State = state;
             }
 
-            public ThreadNeutralSemaphore Semaphore
-            {
-                get;
-                set;
-            }
+            public ThreadNeutralSemaphore Semaphore { get; set; }
 
-            public AsyncWaitHandle Waiter
-            {
-                get;
-                set;
-            }
+            public AsyncWaitHandle Waiter { get; set; }
 
-            public FastAsyncCallback Callback
-            {
-                get;
-                set;
-            }
+            public FastAsyncCallback Callback { get; set; }
 
-            public object State
-            {
-                get;
-                set;
-            }
+            public object State { get; set; }
         }
     }
 }

@@ -23,9 +23,17 @@ public class ConventionDispatcherTest
 
         Assert.Equal(
             CoreStrings.ConventionsInfiniteLoop,
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    entityBuilder.Property(typeof(int), shadowPropertyName, ConfigurationSource.Convention)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityBuilder.Property(
+                            typeof(int),
+                            shadowPropertyName,
+                            ConfigurationSource.Convention
+                        )
+                )
+                .Message
+        );
     }
 
     private class InfinitePropertyAddedConvention : IPropertyAddedConvention
@@ -34,8 +42,12 @@ public class ConventionDispatcherTest
 
         public void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<IConventionPropertyBuilder> context)
-            => ((IMutableEntityType)propertyBuilder.Metadata.DeclaringType).AddProperty("TempProperty" + _count++, typeof(int));
+            IConventionContext<IConventionPropertyBuilder> context
+        ) =>
+            ((IMutableEntityType)propertyBuilder.Metadata.DeclaringType).AddProperty(
+                "TempProperty" + _count++,
+                typeof(int)
+            );
     }
 
     [InlineData(false)]
@@ -65,8 +77,11 @@ public class ConventionDispatcherTest
         Assert.Equal(1, convention2.Calls);
         Assert.Equal(0, convention3.Calls);
 
-        AssertSetOperations(new ModelInitializedConvention(terminate: true),
-            conventions, conventions.ModelInitializedConventions);
+        AssertSetOperations(
+            new ModelInitializedConvention(terminate: true),
+            conventions,
+            conventions.ModelInitializedConventions
+        );
     }
 
     private class ModelInitializedConvention : IModelInitializedConvention
@@ -79,7 +94,10 @@ public class ConventionDispatcherTest
             _terminate = terminate;
         }
 
-        public void ProcessModelInitialized(IConventionModelBuilder modelBuilder, IConventionContext<IConventionModelBuilder> context)
+        public void ProcessModelInitialized(
+            IConventionModelBuilder modelBuilder,
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             Assert.NotNull(modelBuilder.Metadata.Builder);
 
@@ -121,8 +139,11 @@ public class ConventionDispatcherTest
         Assert.Equal(1, convention2.Calls);
         Assert.Equal(0, convention3.Calls);
 
-        AssertSetOperations(new ModelFinalizingConvention(terminate: true),
-            conventions, conventions.ModelFinalizingConventions);
+        AssertSetOperations(
+            new ModelFinalizingConvention(terminate: true),
+            conventions,
+            conventions.ModelFinalizingConventions
+        );
     }
 
     private class ModelFinalizingConvention : IModelFinalizingConvention
@@ -135,7 +156,10 @@ public class ConventionDispatcherTest
             _terminate = terminate;
         }
 
-        public void ProcessModelFinalizing(IConventionModelBuilder modelBuilder, IConventionContext<IConventionModelBuilder> context)
+        public void ProcessModelFinalizing(
+            IConventionModelBuilder modelBuilder,
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             Assert.NotNull(modelBuilder.Metadata.Builder);
 
@@ -217,8 +241,11 @@ public class ConventionDispatcherTest
         builder.Metadata[CoreAnnotationNames.ProductVersion] = "bar";
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new ModelAnnotationChangedConvention(terminate: true),
-            conventions, conventions.ModelAnnotationChangedConventions);
+        AssertSetOperations(
+            new ModelAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.ModelAnnotationChangedConventions
+        );
     }
 
     private class ModelAnnotationChangedConvention : IModelAnnotationChangedConvention
@@ -236,7 +263,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.NotNull(propertyBuilder.Metadata.Builder);
 
@@ -277,7 +305,9 @@ public class ConventionDispatcherTest
         }
         else
         {
-            var result = builder.Metadata.AddEntityType(typeof(Order), owned: false, ConfigurationSource.Convention);
+            var result = builder
+                .Metadata
+                .AddEntityType(typeof(Order), owned: false, ConfigurationSource.Convention);
 
             Assert.Equal(!useScope, result == null);
         }
@@ -296,8 +326,11 @@ public class ConventionDispatcherTest
         Assert.Empty(builder.Metadata.GetEntityTypes());
         Assert.Null(builder.Metadata.FindEntityType(typeof(Order)));
 
-        AssertSetOperations(new EntityTypeAddedConvention(terminate: true),
-            conventions, conventions.EntityTypeAddedConventions);
+        AssertSetOperations(
+            new EntityTypeAddedConvention(terminate: true),
+            conventions,
+            conventions.EntityTypeAddedConventions
+        );
     }
 
     private class EntityTypeAddedConvention : IEntityTypeAddedConvention
@@ -312,7 +345,8 @@ public class ConventionDispatcherTest
 
         public void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             Assert.Same(entityTypeBuilder, entityTypeBuilder.Metadata.Builder);
 
@@ -356,7 +390,9 @@ public class ConventionDispatcherTest
         builder.Entity(typeof(Order), ConfigurationSource.Convention);
         if (useBuilder)
         {
-            Assert.NotNull(builder.Ignore(typeof(Order).DisplayName(), ConfigurationSource.Convention));
+            Assert.NotNull(
+                builder.Ignore(typeof(Order).DisplayName(), ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -382,10 +418,16 @@ public class ConventionDispatcherTest
         Assert.Equal(1, convention5.Calls);
         Assert.Equal(0, convention6.Calls);
 
-        AssertSetOperations(new TypeIgnoredConvention(terminate: true),
-            conventions, conventions.TypeIgnoredConventions);
-        AssertSetOperations(new EntityTypeRemovedConvention(terminate: true),
-            conventions, conventions.EntityTypeRemovedConventions);
+        AssertSetOperations(
+            new TypeIgnoredConvention(terminate: true),
+            conventions,
+            conventions.TypeIgnoredConventions
+        );
+        AssertSetOperations(
+            new EntityTypeRemovedConvention(terminate: true),
+            conventions,
+            conventions.EntityTypeRemovedConventions
+        );
     }
 
     private class TypeIgnoredConvention : ITypeIgnoredConvention
@@ -402,7 +444,8 @@ public class ConventionDispatcherTest
             IConventionModelBuilder modelBuilder,
             string name,
             Type type,
-            IConventionContext<string> context)
+            IConventionContext<string> context
+        )
         {
             Assert.Null(modelBuilder.Metadata.FindEntityType(name));
             Calls++;
@@ -427,7 +470,8 @@ public class ConventionDispatcherTest
         public void ProcessEntityTypeRemoved(
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
-            IConventionContext<IConventionEntityType> context)
+            IConventionContext<IConventionEntityType> context
+        )
         {
             Assert.Null(modelBuilder.Metadata.FindEntityType(entityType.Name));
             Calls++;
@@ -494,8 +538,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "A" }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new EntityTypeMemberIgnoredConvention(terminate: true),
-            conventions, conventions.EntityTypeMemberIgnoredConventions);
+        AssertSetOperations(
+            new EntityTypeMemberIgnoredConvention(terminate: true),
+            conventions,
+            conventions.EntityTypeMemberIgnoredConventions
+        );
     }
 
     private class EntityTypeMemberIgnoredConvention : IEntityTypeMemberIgnoredConvention
@@ -511,7 +558,8 @@ public class ConventionDispatcherTest
         public void ProcessEntityTypeMemberIgnored(
             IConventionEntityTypeBuilder entityTypeBuilder,
             string name,
-            IConventionContext<string> context)
+            IConventionContext<string> context
+        )
         {
             Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -540,8 +588,10 @@ public class ConventionDispatcherTest
         conventions.Add(convention2);
         conventions.Add(convention3);
 
-        var builder = new InternalModelBuilder(new Model(conventions))
-            .Entity(typeof(SpecialOrder), ConfigurationSource.Convention);
+        var builder = new InternalModelBuilder(new Model(conventions)).Entity(
+            typeof(SpecialOrder),
+            ConfigurationSource.Convention
+        );
 
         var scope = useScope ? builder.Metadata.Model.DelayConventions() : null;
 
@@ -551,9 +601,15 @@ public class ConventionDispatcherTest
         }
         else
         {
-            builder.Metadata.SetBaseType(
-                builder.Metadata.Model.AddEntityType(typeof(Order), owned: false, ConfigurationSource.Explicit),
-                ConfigurationSource.Convention);
+            builder
+                .Metadata
+                .SetBaseType(
+                    builder
+                        .Metadata
+                        .Model
+                        .AddEntityType(typeof(Order), owned: false, ConfigurationSource.Explicit),
+                    ConfigurationSource.Convention
+                );
         }
 
         if (useScope)
@@ -574,7 +630,12 @@ public class ConventionDispatcherTest
         }
         else
         {
-            builder.Metadata.SetBaseType(builder.Metadata.Model.FindEntityType(typeof(Order)), ConfigurationSource.Convention);
+            builder
+                .Metadata
+                .SetBaseType(
+                    builder.Metadata.Model.FindEntityType(typeof(Order)),
+                    ConfigurationSource.Convention
+                );
         }
 
         Assert.Equal(new[] { typeof(Order) }, convention1.Calls);
@@ -594,8 +655,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { typeof(Order), null }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new EntityTypeBaseTypeChangedConvention(terminate: true),
-            conventions, conventions.EntityTypeBaseTypeChangedConventions);
+        AssertSetOperations(
+            new EntityTypeBaseTypeChangedConvention(terminate: true),
+            conventions,
+            conventions.EntityTypeBaseTypeChangedConventions
+        );
     }
 
     private class EntityTypeBaseTypeChangedConvention : IEntityTypeBaseTypeChangedConvention
@@ -612,7 +676,8 @@ public class ConventionDispatcherTest
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType newBaseType,
             IConventionEntityType oldBaseType,
-            IConventionContext<IConventionEntityType> context)
+            IConventionContext<IConventionEntityType> context
+        )
         {
             Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -630,7 +695,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnDiscriminatorPropertySet_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnDiscriminatorPropertySet_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -643,7 +711,10 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var propertyBuilder = entityBuilder.Property(Order.OrderIdProperty, ConfigurationSource.Convention);
+        var propertyBuilder = entityBuilder.Property(
+            Order.OrderIdProperty,
+            ConfigurationSource.Convention
+        );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -653,7 +724,9 @@ public class ConventionDispatcherTest
         }
         else
         {
-            entityBuilder.Metadata.SetDiscriminatorProperty(propertyBuilder.Metadata, ConfigurationSource.Convention);
+            entityBuilder
+                .Metadata
+                .SetDiscriminatorProperty(propertyBuilder.Metadata, ConfigurationSource.Convention);
         }
 
         if (useScope)
@@ -673,7 +746,9 @@ public class ConventionDispatcherTest
         }
         else
         {
-            entityBuilder.Metadata.SetDiscriminatorProperty(propertyBuilder.Metadata, ConfigurationSource.Convention);
+            entityBuilder
+                .Metadata
+                .SetDiscriminatorProperty(propertyBuilder.Metadata, ConfigurationSource.Convention);
         }
 
         Assert.Equal(new string[] { nameof(Order.OrderId) }, convention1.Calls);
@@ -693,8 +768,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { nameof(Order.OrderId), null }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new DiscriminatorPropertySetConvention(terminate: true),
-            conventions, conventions.DiscriminatorPropertySetConventions);
+        AssertSetOperations(
+            new DiscriminatorPropertySetConvention(terminate: true),
+            conventions,
+            conventions.DiscriminatorPropertySetConventions
+        );
     }
 
     private class DiscriminatorPropertySetConvention : IDiscriminatorPropertySetConvention
@@ -710,7 +788,8 @@ public class ConventionDispatcherTest
         public void ProcessDiscriminatorPropertySet(
             IConventionEntityTypeBuilder entityTypeBuilder,
             string name,
-            IConventionContext<string> context)
+            IConventionContext<string> context
+        )
         {
             Assert.True(entityTypeBuilder.Metadata.IsInModel);
 
@@ -748,14 +827,20 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention));
+            Assert.NotNull(
+                entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention)
+            );
         }
         else
         {
             Assert.NotNull(
-                entityBuilder.Metadata.SetPrimaryKey(
-                    entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata,
-                    ConfigurationSource.Convention));
+                entityBuilder
+                    .Metadata
+                    .SetPrimaryKey(
+                        entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata,
+                        ConfigurationSource.Convention
+                    )
+            );
         }
 
         if (useScope)
@@ -772,14 +857,20 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention));
+            Assert.NotNull(
+                entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention)
+            );
         }
         else
         {
             Assert.NotNull(
-                entityBuilder.Metadata.SetPrimaryKey(
-                    entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata,
-                    ConfigurationSource.Convention));
+                entityBuilder
+                    .Metadata
+                    .SetPrimaryKey(
+                        entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata,
+                        ConfigurationSource.Convention
+                    )
+            );
         }
 
         Assert.Equal(new string[] { null }, convention1.Calls);
@@ -788,11 +879,18 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.Null(entityBuilder.PrimaryKey((IReadOnlyList<string>)null, ConfigurationSource.Convention));
+            Assert.Null(
+                entityBuilder.PrimaryKey(
+                    (IReadOnlyList<string>)null,
+                    ConfigurationSource.Convention
+                )
+            );
         }
         else
         {
-            Assert.Null(entityBuilder.Metadata.SetPrimaryKey((Property)null, ConfigurationSource.Convention));
+            Assert.Null(
+                entityBuilder.Metadata.SetPrimaryKey((Property)null, ConfigurationSource.Convention)
+            );
         }
 
         Assert.Equal(new[] { null, "OrderId" }, convention1.Calls);
@@ -800,8 +898,11 @@ public class ConventionDispatcherTest
         Assert.Empty(convention3.Calls);
         Assert.Null(entityBuilder.Metadata.GetPrimaryKeyConfigurationSource());
 
-        AssertSetOperations(new EntityTypePrimaryKeyChangedConvention(terminate: true),
-            conventions, conventions.EntityTypePrimaryKeyChangedConventions);
+        AssertSetOperations(
+            new EntityTypePrimaryKeyChangedConvention(terminate: true),
+            conventions,
+            conventions.EntityTypePrimaryKeyChangedConventions
+        );
     }
 
     private class EntityTypePrimaryKeyChangedConvention : IEntityTypePrimaryKeyChangedConvention
@@ -818,7 +919,8 @@ public class ConventionDispatcherTest
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionKey newPrimaryKey,
             IConventionKey previousPrimaryKey,
-            IConventionContext<IConventionKey> context)
+            IConventionContext<IConventionKey> context
+        )
         {
             Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -836,7 +938,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnEntityTypeAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnEntityTypeAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -854,7 +959,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(entityBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                entityBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -874,7 +981,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(entityBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                entityBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -887,7 +996,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(entityBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+            Assert.NotNull(
+                entityBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -901,8 +1012,11 @@ public class ConventionDispatcherTest
         entityBuilder.Metadata[CoreAnnotationNames.PropertyAccessMode] = PropertyAccessMode.Field;
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new EntityTypeAnnotationChangedConvention(terminate: true),
-            conventions, conventions.EntityTypeAnnotationChangedConventions);
+        AssertSetOperations(
+            new EntityTypeAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.EntityTypeAnnotationChangedConventions
+        );
     }
 
     private class EntityTypeAnnotationChangedConvention : IEntityTypeAnnotationChangedConvention
@@ -920,7 +1034,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Calls.Add(annotation?.Value);
 
@@ -955,18 +1070,26 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            var result = entityBuilder.HasRelationship(entityBuilder.Metadata, ConfigurationSource.Convention);
+            var result = entityBuilder.HasRelationship(
+                entityBuilder.Metadata,
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var result = entityBuilder.Metadata.AddForeignKey(
-                entityBuilder.Property(typeof(int), "OrderId1", ConfigurationSource.Convention).Metadata,
-                entityBuilder.Metadata.FindPrimaryKey(),
-                entityBuilder.Metadata,
-                ConfigurationSource.Convention,
-                ConfigurationSource.Convention);
+            var result = entityBuilder
+                .Metadata
+                .AddForeignKey(
+                    entityBuilder
+                        .Property(typeof(int), "OrderId1", ConfigurationSource.Convention)
+                        .Metadata,
+                    entityBuilder.Metadata.FindPrimaryKey(),
+                    entityBuilder.Metadata,
+                    ConfigurationSource.Convention,
+                    ConfigurationSource.Convention
+                );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -982,8 +1105,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "OrderId1" }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ForeignKeyAddedConvention(terminate: true),
-            conventions, conventions.ForeignKeyAddedConventions);
+        AssertSetOperations(
+            new ForeignKeyAddedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyAddedConventions
+        );
     }
 
     private class ForeignKeyAddedConvention : IForeignKeyAddedConvention
@@ -998,7 +1124,8 @@ public class ConventionDispatcherTest
 
         public void ProcessForeignKeyAdded(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<IConventionForeignKeyBuilder> context)
+            IConventionContext<IConventionForeignKeyBuilder> context
+        )
         {
             var fk = relationshipBuilder.Metadata;
             Assert.NotNull(fk.Builder);
@@ -1007,7 +1134,11 @@ public class ConventionDispatcherTest
 
             if (_terminate)
             {
-                fk.DeclaringEntityType.RemoveForeignKey(fk.Properties, fk.PrincipalKey, fk.PrincipalEntityType);
+                fk.DeclaringEntityType.RemoveForeignKey(
+                    fk.Properties,
+                    fk.PrincipalKey,
+                    fk.PrincipalEntityType
+                );
                 context.StopProcessing();
             }
         }
@@ -1029,17 +1160,30 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var foreignKey = entityBuilder.Metadata.AddForeignKey(
-            new[] { entityBuilder.Property(typeof(int), "FK", ConfigurationSource.Convention).Metadata },
-            entityBuilder.HasKey(new[] { "OrderId" }, ConfigurationSource.Convention).Metadata,
-            entityBuilder.Metadata,
-            ConfigurationSource.Explicit,
-            ConfigurationSource.Explicit);
+        var foreignKey = entityBuilder
+            .Metadata
+            .AddForeignKey(
+                new[]
+                {
+                    entityBuilder
+                        .Property(typeof(int), "FK", ConfigurationSource.Convention)
+                        .Metadata
+                },
+                entityBuilder.HasKey(new[] { "OrderId" }, ConfigurationSource.Convention).Metadata,
+                entityBuilder.Metadata,
+                ConfigurationSource.Explicit,
+                ConfigurationSource.Explicit
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
-        var result = entityBuilder.Metadata.RemoveForeignKey(
-            foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType);
+        var result = entityBuilder
+            .Metadata
+            .RemoveForeignKey(
+                foreignKey.Properties,
+                foreignKey.PrincipalKey,
+                foreignKey.PrincipalEntityType
+            );
 
         if (useScope)
         {
@@ -1061,8 +1205,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "FK" }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ForeignKeyRemovedConvention(terminate: true),
-            conventions, conventions.ForeignKeyRemovedConventions);
+        AssertSetOperations(
+            new ForeignKeyRemovedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyRemovedConventions
+        );
     }
 
     private class ForeignKeyRemovedConvention : IForeignKeyRemovedConvention
@@ -1078,7 +1225,8 @@ public class ConventionDispatcherTest
         public void ProcessForeignKeyRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
-            IConventionContext<IConventionForeignKey> context)
+            IConventionContext<IConventionForeignKey> context
+        )
         {
             Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -1108,13 +1256,21 @@ public class ConventionDispatcherTest
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-        var relationship = dependentEntityBuilder
-            .HasRelationship(entityBuilder.Metadata, ConfigurationSource.Convention);
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
+        var relationship = dependentEntityBuilder.HasRelationship(
+            entityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
-        relationship = relationship.HasPrincipalKey(Array.Empty<string>(), ConfigurationSource.Convention);
+        relationship = relationship.HasPrincipalKey(
+            Array.Empty<string>(),
+            ConfigurationSource.Convention
+        );
         Assert.NotNull(relationship);
 
         if (useScope)
@@ -1128,7 +1284,10 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { nameof(Order) }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        relationship = relationship.HasPrincipalKey(relationship.Metadata.PrincipalKey.Properties, ConfigurationSource.Convention);
+        relationship = relationship.HasPrincipalKey(
+            relationship.Metadata.PrincipalKey.Properties,
+            ConfigurationSource.Convention
+        );
         Assert.NotNull(relationship);
 
         Assert.Equal(new[] { nameof(Order) }, convention1.Calls);
@@ -1138,7 +1297,10 @@ public class ConventionDispatcherTest
         scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         relationship.Metadata.SetPrincipalEndConfigurationSource(null);
-        relationship = relationship.HasForeignKey(Array.Empty<string>(), ConfigurationSource.Convention);
+        relationship = relationship.HasForeignKey(
+            Array.Empty<string>(),
+            ConfigurationSource.Convention
+        );
         Assert.NotNull(relationship);
 
         if (useScope)
@@ -1152,7 +1314,10 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { nameof(Order), nameof(Order) }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        relationship = relationship.HasForeignKey(relationship.Metadata.Properties, ConfigurationSource.Convention);
+        relationship = relationship.HasForeignKey(
+            relationship.Metadata.Properties,
+            ConfigurationSource.Convention
+        );
         Assert.NotNull(relationship);
 
         Assert.Equal(new[] { nameof(Order), nameof(Order) }, convention1.Calls);
@@ -1162,7 +1327,10 @@ public class ConventionDispatcherTest
         scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         relationship = relationship.HasEntityTypes(
-            relationship.Metadata.DeclaringEntityType, relationship.Metadata.PrincipalEntityType, ConfigurationSource.Convention);
+            relationship.Metadata.DeclaringEntityType,
+            relationship.Metadata.PrincipalEntityType,
+            ConfigurationSource.Convention
+        );
         Assert.NotNull(relationship);
 
         if (useScope)
@@ -1172,28 +1340,55 @@ public class ConventionDispatcherTest
             scope.Dispose();
         }
 
-        Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails) }, convention1.Calls);
-        Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails) }, convention2.Calls);
+        Assert.Equal(
+            new[] { nameof(Order), nameof(Order), nameof(OrderDetails) },
+            convention1.Calls
+        );
+        Assert.Equal(
+            new[] { nameof(Order), nameof(Order), nameof(OrderDetails) },
+            convention2.Calls
+        );
         Assert.Empty(convention3.Calls);
 
         relationship = relationship.HasEntityTypes(
-            relationship.Metadata.PrincipalEntityType, relationship.Metadata.DeclaringEntityType, ConfigurationSource.DataAnnotation);
+            relationship.Metadata.PrincipalEntityType,
+            relationship.Metadata.DeclaringEntityType,
+            ConfigurationSource.DataAnnotation
+        );
         Assert.NotNull(relationship);
 
-        Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) }, convention1.Calls);
-        Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) }, convention2.Calls);
+        Assert.Equal(
+            new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) },
+            convention1.Calls
+        );
+        Assert.Equal(
+            new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) },
+            convention2.Calls
+        );
         Assert.Empty(convention3.Calls);
 
         relationship = relationship.HasEntityTypes(
-            relationship.Metadata.PrincipalEntityType, relationship.Metadata.DeclaringEntityType, ConfigurationSource.DataAnnotation);
+            relationship.Metadata.PrincipalEntityType,
+            relationship.Metadata.DeclaringEntityType,
+            ConfigurationSource.DataAnnotation
+        );
         Assert.NotNull(relationship);
 
-        Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) }, convention1.Calls);
-        Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) }, convention2.Calls);
+        Assert.Equal(
+            new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) },
+            convention1.Calls
+        );
+        Assert.Equal(
+            new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) },
+            convention2.Calls
+        );
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ForeignKeyPrincipalEndChangedConvention(terminate: true),
-            conventions, conventions.ForeignKeyPrincipalEndChangedConventions);
+        AssertSetOperations(
+            new ForeignKeyPrincipalEndChangedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyPrincipalEndChangedConventions
+        );
     }
 
     private class ForeignKeyPrincipalEndChangedConvention : IForeignKeyPrincipalEndChangedConvention
@@ -1208,7 +1403,8 @@ public class ConventionDispatcherTest
 
         public void ProcessForeignKeyPrincipalEndChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<IConventionForeignKeyBuilder> context)
+            IConventionContext<IConventionForeignKeyBuilder> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1237,19 +1433,31 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var foreignKey = entityBuilder.Metadata.AddForeignKey(
-            new[] { entityBuilder.Property(typeof(int), "FK", ConfigurationSource.Convention).Metadata },
-            entityBuilder.HasKey(new[] { "OrderId" }, ConfigurationSource.Convention).Metadata,
-            entityBuilder.Metadata,
-            ConfigurationSource.Explicit,
-            ConfigurationSource.Explicit);
+        var foreignKey = entityBuilder
+            .Metadata
+            .AddForeignKey(
+                new[]
+                {
+                    entityBuilder
+                        .Property(typeof(int), "FK", ConfigurationSource.Convention)
+                        .Metadata
+                },
+                entityBuilder.HasKey(new[] { "OrderId" }, ConfigurationSource.Convention).Metadata,
+                entityBuilder.Metadata,
+                ConfigurationSource.Explicit,
+                ConfigurationSource.Explicit
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         foreignKey.SetProperties(
-            new[] { entityBuilder.Property(typeof(int), "FK2", ConfigurationSource.Convention).Metadata },
+            new[]
+            {
+                entityBuilder.Property(typeof(int), "FK2", ConfigurationSource.Convention).Metadata
+            },
             foreignKey.PrincipalKey,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
 
         if (useScope)
         {
@@ -1263,8 +1471,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { ("FK2", "FK3"), ("FK", "FK3") }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ForeignKeyPropertiesChangedConvention(terminate: true),
-            conventions, conventions.ForeignKeyPropertiesChangedConventions);
+        AssertSetOperations(
+            new ForeignKeyPropertiesChangedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyPropertiesChangedConventions
+        );
     }
 
     private class ForeignKeyPropertiesChangedConvention : IForeignKeyPropertiesChangedConvention
@@ -1281,23 +1492,36 @@ public class ConventionDispatcherTest
             IConventionForeignKeyBuilder relationshipBuilder,
             IReadOnlyList<IConventionProperty> oldDependentProperties,
             IConventionKey oldPrincipalKey,
-            IConventionContext<IReadOnlyList<IConventionProperty>> context)
+            IConventionContext<IReadOnlyList<IConventionProperty>> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
             Assert.NotNull(oldDependentProperties);
             Assert.NotNull(oldPrincipalKey);
 
-            Calls.Add((oldDependentProperties.First().Name, relationshipBuilder.Metadata.Properties.First().Name));
+            Calls.Add(
+                (
+                    oldDependentProperties.First().Name,
+                    relationshipBuilder.Metadata.Properties.First().Name
+                )
+            );
 
             if (relationshipBuilder.Metadata.Properties.First().Name == "FK2")
             {
-                relationshipBuilder.Metadata.SetProperties(
-                    new[]
-                    {
-                        relationshipBuilder.Metadata.DeclaringEntityType.Builder.Property(
-                            typeof(int), "FK3").Metadata
-                    },
-                    relationshipBuilder.Metadata.PrincipalKey);
+                relationshipBuilder
+                    .Metadata
+                    .SetProperties(
+                        new[]
+                        {
+                            relationshipBuilder
+                                .Metadata
+                                .DeclaringEntityType
+                                .Builder
+                                .Property(typeof(int), "FK3")
+                                .Metadata
+                        },
+                        relationshipBuilder.Metadata.PrincipalKey
+                    );
                 context.StopProcessingIfChanged(relationshipBuilder.Metadata.Properties);
             }
 
@@ -1313,7 +1537,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnForeignKeyUniquenessChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnForeignKeyUniquenessChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -1326,8 +1553,12 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-        var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
+        var foreignKey = dependentEntityBuilder
+            .HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
             .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
@@ -1380,11 +1611,20 @@ public class ConventionDispatcherTest
 
         Assert.Same(
             foreignKey,
-            dependentEntityBuilder.Metadata.RemoveForeignKey(
-                foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType));
+            dependentEntityBuilder
+                .Metadata
+                .RemoveForeignKey(
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                )
+        );
 
-        AssertSetOperations(new ForeignKeyUniquenessChangedConvention(terminate: true),
-            conventions, conventions.ForeignKeyUniquenessChangedConventions);
+        AssertSetOperations(
+            new ForeignKeyUniquenessChangedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyUniquenessChangedConventions
+        );
     }
 
     private class ForeignKeyUniquenessChangedConvention : IForeignKeyUniquenessChangedConvention
@@ -1399,7 +1639,8 @@ public class ConventionDispatcherTest
 
         public void ProcessForeignKeyUniquenessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1417,7 +1658,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnForeignKeyRequirednessChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnForeignKeyRequirednessChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -1430,8 +1674,12 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-        var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
+        var foreignKey = dependentEntityBuilder
+            .HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
             .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
@@ -1484,11 +1732,20 @@ public class ConventionDispatcherTest
 
         Assert.Same(
             foreignKey,
-            dependentEntityBuilder.Metadata.RemoveForeignKey(
-                foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType));
+            dependentEntityBuilder
+                .Metadata
+                .RemoveForeignKey(
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                )
+        );
 
-        AssertSetOperations(new ForeignKeyRequirednessChangedConvention(terminate: true),
-            conventions, conventions.ForeignKeyRequirednessChangedConventions);
+        AssertSetOperations(
+            new ForeignKeyRequirednessChangedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyRequirednessChangedConventions
+        );
     }
 
     private class ForeignKeyRequirednessChangedConvention : IForeignKeyRequirednessChangedConvention
@@ -1503,7 +1760,8 @@ public class ConventionDispatcherTest
 
         public void ProcessForeignKeyRequirednessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1521,7 +1779,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnForeignKeyDependentRequirednessChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnForeignKeyDependentRequirednessChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -1534,10 +1795,18 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-        var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
+        var foreignKey = dependentEntityBuilder
+            .HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
             .IsUnique(true, ConfigurationSource.Convention)
-            .HasEntityTypes(principalEntityBuilder.Metadata, dependentEntityBuilder.Metadata, ConfigurationSource.Convention)
+            .HasEntityTypes(
+                principalEntityBuilder.Metadata,
+                dependentEntityBuilder.Metadata,
+                ConfigurationSource.Convention
+            )
             .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
@@ -1590,14 +1859,24 @@ public class ConventionDispatcherTest
 
         Assert.Same(
             foreignKey,
-            dependentEntityBuilder.Metadata.RemoveForeignKey(
-                foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType));
+            dependentEntityBuilder
+                .Metadata
+                .RemoveForeignKey(
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                )
+        );
 
-        AssertSetOperations(new ForeignKeyDependentRequirednessChangedConvention(terminate: true),
-            conventions, conventions.ForeignKeyDependentRequirednessChangedConventions);
+        AssertSetOperations(
+            new ForeignKeyDependentRequirednessChangedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyDependentRequirednessChangedConventions
+        );
     }
 
-    private class ForeignKeyDependentRequirednessChangedConvention : IForeignKeyDependentRequirednessChangedConvention
+    private class ForeignKeyDependentRequirednessChangedConvention
+        : IForeignKeyDependentRequirednessChangedConvention
     {
         private readonly bool _terminate;
         public readonly List<bool> Calls = new();
@@ -1609,7 +1888,8 @@ public class ConventionDispatcherTest
 
         public void ProcessForeignKeyDependentRequirednessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1627,7 +1907,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnForeignKeyOwnershipChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnForeignKeyOwnershipChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -1640,9 +1923,18 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention, shouldBeOwned: true);
-        var foreignKey = dependentEntityBuilder.HasRelationship(
-                principalEntityBuilder.Metadata, null, nameof(Order.OrderDetails), ConfigurationSource.Convention)
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention,
+            shouldBeOwned: true
+        );
+        var foreignKey = dependentEntityBuilder
+            .HasRelationship(
+                principalEntityBuilder.Metadata,
+                null,
+                nameof(Order.OrderDetails),
+                ConfigurationSource.Convention
+            )
             .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
@@ -1696,11 +1988,20 @@ public class ConventionDispatcherTest
 
         Assert.Same(
             foreignKey,
-            dependentEntityBuilder.Metadata.RemoveForeignKey(
-                foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType));
+            dependentEntityBuilder
+                .Metadata
+                .RemoveForeignKey(
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                )
+        );
 
-        AssertSetOperations(new ForeignKeyOwnershipChangedConvention(terminate: true),
-            conventions, conventions.ForeignKeyOwnershipChangedConventions);
+        AssertSetOperations(
+            new ForeignKeyOwnershipChangedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyOwnershipChangedConventions
+        );
     }
 
     private class ForeignKeyOwnershipChangedConvention : IForeignKeyOwnershipChangedConvention
@@ -1715,7 +2016,8 @@ public class ConventionDispatcherTest
 
         public void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1733,7 +2035,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnForeignKeyAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnForeignKeyAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -1746,15 +2051,21 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-        var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
+        var foreignKey = dependentEntityBuilder
+            .HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
             .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
-            Assert.NotNull(foreignKey.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                foreignKey.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -1774,7 +2085,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(foreignKey.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                foreignKey.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -1787,7 +2100,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(foreignKey.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+            Assert.NotNull(
+                foreignKey.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -1802,8 +2117,11 @@ public class ConventionDispatcherTest
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new ForeignKeyAnnotationChangedConvention(terminate: true),
-            conventions, conventions.ForeignKeyAnnotationChangedConventions);
+        AssertSetOperations(
+            new ForeignKeyAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyAnnotationChangedConventions
+        );
     }
 
     private class ForeignKeyAnnotationChangedConvention : IForeignKeyAnnotationChangedConvention
@@ -1829,7 +2147,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1847,7 +2166,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnForeignKeyNullNavigationSet_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnForeignKeyNullNavigationSet_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -1860,20 +2182,28 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
             var result = dependentEntityBuilder.HasRelationship(
-                principalEntityBuilder.Metadata, (MemberInfo)null, null, ConfigurationSource.Convention);
+                principalEntityBuilder.Metadata,
+                (MemberInfo)null,
+                null,
+                ConfigurationSource.Convention
+            );
 
             Assert.NotNull(result);
         }
         else
         {
-            var fk = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
+            var fk = dependentEntityBuilder
+                .HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
                 .IsUnique(true, ConfigurationSource.Convention)
                 .Metadata;
             var result = fk.SetDependentToPrincipal((MemberInfo)null, ConfigurationSource.Explicit);
@@ -1896,8 +2226,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { true, false }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ForeignKeyNullNavigationSetConvention(terminate: true),
-            conventions, conventions.ForeignKeyNullNavigationSetConventions);
+        AssertSetOperations(
+            new ForeignKeyNullNavigationSetConvention(terminate: true),
+            conventions,
+            conventions.ForeignKeyNullNavigationSetConventions
+        );
     }
 
     private class ForeignKeyNullNavigationSetConvention : IForeignKeyNullNavigationSetConvention
@@ -1913,7 +2246,8 @@ public class ConventionDispatcherTest
         public void ProcessForeignKeyNullNavigationSet(
             IConventionForeignKeyBuilder relationshipBuilder,
             bool pointsToPrincipal,
-            IConventionContext<IConventionNavigation> context)
+            IConventionContext<IConventionNavigation> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1944,28 +2278,41 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
             var result = dependentEntityBuilder.HasRelationship(
-                principalEntityBuilder.Metadata, OrderDetails.OrderProperty, Order.OrderDetailsProperty,
-                ConfigurationSource.Convention);
+                principalEntityBuilder.Metadata,
+                OrderDetails.OrderProperty,
+                Order.OrderDetailsProperty,
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var fk = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
+            var fk = dependentEntityBuilder
+                .HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
                 .IsUnique(true, ConfigurationSource.Convention)
                 .Metadata;
-            var result = fk.SetDependentToPrincipal(OrderDetails.OrderProperty, ConfigurationSource.Explicit);
+            var result = fk.SetDependentToPrincipal(
+                OrderDetails.OrderProperty,
+                ConfigurationSource.Explicit
+            );
 
             Assert.Equal(!useScope, result == null);
 
-            result = fk.SetPrincipalToDependent(Order.OrderDetailsProperty, ConfigurationSource.Explicit);
+            result = fk.SetPrincipalToDependent(
+                Order.OrderDetailsProperty,
+                ConfigurationSource.Explicit
+            );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -1977,12 +2324,21 @@ public class ConventionDispatcherTest
             scope.Dispose();
         }
 
-        Assert.Equal(new[] { nameof(OrderDetails.Order), nameof(Order.OrderDetails) }, convention1.Calls);
-        Assert.Equal(new[] { nameof(OrderDetails.Order), nameof(Order.OrderDetails) }, convention2.Calls);
+        Assert.Equal(
+            new[] { nameof(OrderDetails.Order), nameof(Order.OrderDetails) },
+            convention1.Calls
+        );
+        Assert.Equal(
+            new[] { nameof(OrderDetails.Order), nameof(Order.OrderDetails) },
+            convention2.Calls
+        );
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new NavigationAddedConvention(terminate: true),
-            conventions, conventions.NavigationAddedConventions);
+        AssertSetOperations(
+            new NavigationAddedConvention(terminate: true),
+            conventions,
+            conventions.NavigationAddedConventions
+        );
     }
 
     private class NavigationAddedConvention : INavigationAddedConvention
@@ -1997,7 +2353,8 @@ public class ConventionDispatcherTest
 
         public void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
-            IConventionContext<IConventionNavigationBuilder> context)
+            IConventionContext<IConventionNavigationBuilder> context
+        )
         {
             var navigation = navigationBuilder.Metadata;
             var foreignKey = navigation.ForeignKey;
@@ -2027,7 +2384,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnNavigationAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnNavigationAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -2040,16 +2400,26 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-        var navigation = dependentEntityBuilder.HasRelationship(
-                principalEntityBuilder.Metadata, OrderDetails.OrderProperty, ConfigurationSource.Convention)
-            .Metadata.DependentToPrincipal;
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
+        var navigation = dependentEntityBuilder
+            .HasRelationship(
+                principalEntityBuilder.Metadata,
+                OrderDetails.OrderProperty,
+                ConfigurationSource.Convention
+            )
+            .Metadata
+            .DependentToPrincipal;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
-            Assert.NotNull(navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -2069,7 +2439,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -2082,7 +2454,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(navigation.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+            Assert.NotNull(
+                navigation.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -2097,8 +2471,11 @@ public class ConventionDispatcherTest
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new NavigationAnnotationChangedConvention(terminate: true),
-            conventions, conventions.NavigationAnnotationChangedConventions);
+        AssertSetOperations(
+            new NavigationAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.NavigationAnnotationChangedConventions
+        );
     }
 
     private class NavigationAnnotationChangedConvention : INavigationAnnotationChangedConvention
@@ -2117,7 +2494,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -2148,9 +2526,16 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
+        var dependentEntityBuilder = builder.Entity(
+            typeof(OrderDetails),
+            ConfigurationSource.Convention
+        );
         var relationshipBuilder = dependentEntityBuilder.HasRelationship(
-            principalEntityBuilder.Metadata, nameof(OrderDetails.Order), nameof(Order.OrderDetails), ConfigurationSource.Convention);
+            principalEntityBuilder.Metadata,
+            nameof(OrderDetails.Order),
+            nameof(Order.OrderDetails),
+            ConfigurationSource.Convention
+        );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2160,11 +2545,15 @@ public class ConventionDispatcherTest
                 relationshipBuilder.HasNavigation(
                     (string)null,
                     pointsToPrincipal: true,
-                    ConfigurationSource.Convention));
+                    ConfigurationSource.Convention
+                )
+            );
         }
         else
         {
-            var result = relationshipBuilder.Metadata.SetDependentToPrincipal((string)null, ConfigurationSource.Convention);
+            var result = relationshipBuilder
+                .Metadata
+                .SetDependentToPrincipal((string)null, ConfigurationSource.Convention);
 
             Assert.Equal(!useScope, result == null);
         }
@@ -2186,19 +2575,28 @@ public class ConventionDispatcherTest
                 relationshipBuilder.HasNavigation(
                     (string)null,
                     pointsToPrincipal: true,
-                    ConfigurationSource.Convention));
+                    ConfigurationSource.Convention
+                )
+            );
         }
         else
         {
-            Assert.Null(relationshipBuilder.Metadata.SetDependentToPrincipal((string)null, ConfigurationSource.Convention));
+            Assert.Null(
+                relationshipBuilder
+                    .Metadata
+                    .SetDependentToPrincipal((string)null, ConfigurationSource.Convention)
+            );
         }
 
         Assert.Equal(new[] { nameof(OrderDetails.Order) }, convention1.Calls);
         Assert.Equal(new[] { nameof(OrderDetails.Order) }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new NavigationRemovedConvention(terminate: true),
-            conventions, conventions.NavigationRemovedConventions);
+        AssertSetOperations(
+            new NavigationRemovedConvention(terminate: true),
+            conventions,
+            conventions.NavigationRemovedConventions
+        );
     }
 
     private class NavigationRemovedConvention : INavigationRemovedConvention
@@ -2216,7 +2614,8 @@ public class ConventionDispatcherTest
             IConventionEntityTypeBuilder targetEntityTypeBuilder,
             string navigationName,
             MemberInfo memberInfo,
-            IConventionContext<string> context)
+            IConventionContext<string> context
+        )
         {
             Assert.NotNull(sourceEntityTypeBuilder.Metadata.Builder);
 
@@ -2254,12 +2653,24 @@ public class ConventionDispatcherTest
         if (useBuilder)
         {
             firstEntityBuilder.HasSkipNavigation(
-                MemberIdentity.Create(nameof(Order.Products)), secondEntityBuilder.Metadata, ConfigurationSource.Convention);
+                MemberIdentity.Create(nameof(Order.Products)),
+                secondEntityBuilder.Metadata,
+                ConfigurationSource.Convention
+            );
         }
         else
         {
-            var result = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products), null, null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+            var result = firstEntityBuilder
+                .Metadata
+                .AddSkipNavigation(
+                    nameof(Order.Products),
+                    null,
+                    null,
+                    secondEntityBuilder.Metadata,
+                    true,
+                    false,
+                    ConfigurationSource.Convention
+                );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -2275,8 +2686,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { nameof(Order.Products) }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new SkipNavigationAddedConvention(terminate: true),
-            conventions, conventions.SkipNavigationAddedConventions);
+        AssertSetOperations(
+            new SkipNavigationAddedConvention(terminate: true),
+            conventions,
+            conventions.SkipNavigationAddedConventions
+        );
     }
 
     private class SkipNavigationAddedConvention : ISkipNavigationAddedConvention
@@ -2291,7 +2705,8 @@ public class ConventionDispatcherTest
 
         public void ProcessSkipNavigationAdded(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
-            IConventionContext<IConventionSkipNavigationBuilder> context)
+            IConventionContext<IConventionSkipNavigationBuilder> context
+        )
         {
             Assert.True(skipNavigationBuilder.Metadata.IsInModel);
 
@@ -2299,7 +2714,10 @@ public class ConventionDispatcherTest
 
             if (_terminate)
             {
-                skipNavigationBuilder.Metadata.DeclaringEntityType.RemoveSkipNavigation(skipNavigationBuilder.Metadata);
+                skipNavigationBuilder
+                    .Metadata
+                    .DeclaringEntityType
+                    .RemoveSkipNavigation(skipNavigationBuilder.Metadata);
 
                 context.StopProcessing();
             }
@@ -2311,7 +2729,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnSkipNavigationAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnSkipNavigationAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -2326,14 +2747,25 @@ public class ConventionDispatcherTest
         var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
 
-        var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-            nameof(Order.Products), null, null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+        var navigation = firstEntityBuilder
+            .Metadata
+            .AddSkipNavigation(
+                nameof(Order.Products),
+                null,
+                null,
+                secondEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
-            Assert.NotNull(navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -2353,7 +2785,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -2366,7 +2800,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(navigation.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+            Assert.NotNull(
+                navigation.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -2381,11 +2817,15 @@ public class ConventionDispatcherTest
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new SkipNavigationAnnotationChangedConvention(terminate: true),
-            conventions, conventions.SkipNavigationAnnotationChangedConventions);
+        AssertSetOperations(
+            new SkipNavigationAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.SkipNavigationAnnotationChangedConventions
+        );
     }
 
-    private class SkipNavigationAnnotationChangedConvention : ISkipNavigationAnnotationChangedConvention
+    private class SkipNavigationAnnotationChangedConvention
+        : ISkipNavigationAnnotationChangedConvention
     {
         private readonly bool _terminate;
         public readonly List<object> Calls = new();
@@ -2400,7 +2840,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.True(navigationBuilder.Metadata.IsInModel);
 
@@ -2418,7 +2859,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnSkipNavigationForeignKeyChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnSkipNavigationForeignKeyChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -2432,14 +2876,30 @@ public class ConventionDispatcherTest
         var builder = new InternalModelBuilder(new Model(conventions));
         var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
-        var joinEntityBuilder = builder.Entity(typeof(OrderProduct), ConfigurationSource.Convention);
+        var joinEntityBuilder = builder.Entity(
+            typeof(OrderProduct),
+            ConfigurationSource.Convention
+        );
 
         var foreignKey = joinEntityBuilder
-            .HasRelationship(typeof(Order), new[] { OrderProduct.OrderIdProperty }, ConfigurationSource.Convention)
+            .HasRelationship(
+                typeof(Order),
+                new[] { OrderProduct.OrderIdProperty },
+                ConfigurationSource.Convention
+            )
             .IsUnique(false, ConfigurationSource.Convention)
             .Metadata;
-        var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-            nameof(Order.Products), null, null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+        var navigation = firstEntityBuilder
+            .Metadata
+            .AddSkipNavigation(
+                nameof(Order.Products),
+                null,
+                null,
+                secondEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2476,11 +2936,15 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { foreignKey, null }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new SkipNavigationForeignKeyChangedConvention(terminate: true),
-            conventions, conventions.SkipNavigationForeignKeyChangedConventions);
+        AssertSetOperations(
+            new SkipNavigationForeignKeyChangedConvention(terminate: true),
+            conventions,
+            conventions.SkipNavigationForeignKeyChangedConventions
+        );
     }
 
-    private class SkipNavigationForeignKeyChangedConvention : ISkipNavigationForeignKeyChangedConvention
+    private class SkipNavigationForeignKeyChangedConvention
+        : ISkipNavigationForeignKeyChangedConvention
     {
         private readonly bool _terminate;
         public readonly List<object> Calls = new();
@@ -2494,7 +2958,8 @@ public class ConventionDispatcherTest
             IConventionSkipNavigationBuilder navigationBuilder,
             IConventionForeignKey foreignKey,
             IConventionForeignKey oldForeignKey,
-            IConventionContext<IConventionForeignKey> context)
+            IConventionContext<IConventionForeignKey> context
+        )
         {
             Assert.True(navigationBuilder.Metadata.IsInModel);
 
@@ -2517,7 +2982,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnSkipNavigationInverseChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnSkipNavigationInverseChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -2532,10 +3000,28 @@ public class ConventionDispatcherTest
         var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
 
-        var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-            nameof(Order.Products), null, null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
-        var inverse = secondEntityBuilder.Metadata.AddSkipNavigation(
-            nameof(Product.Orders), null, null, firstEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+        var navigation = firstEntityBuilder
+            .Metadata
+            .AddSkipNavigation(
+                nameof(Order.Products),
+                null,
+                null,
+                secondEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
+        var inverse = secondEntityBuilder
+            .Metadata
+            .AddSkipNavigation(
+                nameof(Product.Orders),
+                null,
+                null,
+                firstEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2566,8 +3052,14 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.Equal(new[] { nameof(Product.Orders), nameof(Order.Products) }, convention1.Calls);
-            Assert.Equal(new[] { nameof(Product.Orders), nameof(Order.Products) }, convention2.Calls);
+            Assert.Equal(
+                new[] { nameof(Product.Orders), nameof(Order.Products) },
+                convention1.Calls
+            );
+            Assert.Equal(
+                new[] { nameof(Product.Orders), nameof(Order.Products) },
+                convention2.Calls
+            );
         }
         else
         {
@@ -2577,8 +3069,11 @@ public class ConventionDispatcherTest
 
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new SkipNavigationInverseChangedConvention(terminate: true),
-            conventions, conventions.SkipNavigationInverseChangedConventions);
+        AssertSetOperations(
+            new SkipNavigationInverseChangedConvention(terminate: true),
+            conventions,
+            conventions.SkipNavigationInverseChangedConventions
+        );
     }
 
     private class SkipNavigationInverseChangedConvention : ISkipNavigationInverseChangedConvention
@@ -2595,7 +3090,8 @@ public class ConventionDispatcherTest
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             IConventionSkipNavigation inverse,
             IConventionSkipNavigation oldInverse,
-            IConventionContext<IConventionSkipNavigation> context)
+            IConventionContext<IConventionSkipNavigation> context
+        )
         {
             Assert.True(skipNavigationBuilder.Metadata.IsInModel);
 
@@ -2626,8 +3122,17 @@ public class ConventionDispatcherTest
         var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
 
-        var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-            nameof(Order.Products), null, null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+        var navigation = firstEntityBuilder
+            .Metadata
+            .AddSkipNavigation(
+                nameof(Order.Products),
+                null,
+                null,
+                secondEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2653,8 +3158,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { nameof(Order.Products) }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new SkipNavigationRemovedConvention(terminate: true),
-            conventions, conventions.SkipNavigationRemovedConventions);
+        AssertSetOperations(
+            new SkipNavigationRemovedConvention(terminate: true),
+            conventions,
+            conventions.SkipNavigationRemovedConventions
+        );
     }
 
     private class SkipNavigationRemovedConvention : ISkipNavigationRemovedConvention
@@ -2670,7 +3178,8 @@ public class ConventionDispatcherTest
         public void ProcessSkipNavigationRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionSkipNavigation navigation,
-            IConventionContext<IConventionSkipNavigation> context)
+            IConventionContext<IConventionSkipNavigation> context
+        )
         {
             Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -2712,7 +3221,9 @@ public class ConventionDispatcherTest
         }
         else
         {
-            var result = entityBuilder.Metadata.AddTrigger("MyTrigger", ConfigurationSource.Convention);
+            var result = entityBuilder
+                .Metadata
+                .AddTrigger("MyTrigger", ConfigurationSource.Convention);
 
             Assert.Equal(!useScope, result == null);
         }
@@ -2728,8 +3239,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "MyTrigger" }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new TriggerAddedConvention(terminate: true),
-            conventions, conventions.TriggerAddedConventions);
+        AssertSetOperations(
+            new TriggerAddedConvention(terminate: true),
+            conventions,
+            conventions.TriggerAddedConventions
+        );
     }
 
     private class TriggerAddedConvention : ITriggerAddedConvention
@@ -2742,7 +3256,10 @@ public class ConventionDispatcherTest
             _terminate = terminate;
         }
 
-        public void ProcessTriggerAdded(IConventionTriggerBuilder triggerBuilder, IConventionContext<IConventionTriggerBuilder> context)
+        public void ProcessTriggerAdded(
+            IConventionTriggerBuilder triggerBuilder,
+            IConventionContext<IConventionTriggerBuilder> context
+        )
         {
             Assert.True(triggerBuilder.Metadata.IsInModel);
 
@@ -2774,7 +3291,9 @@ public class ConventionDispatcherTest
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
 
-        var trigger = entityBuilder.Metadata.AddTrigger("MyTrigger", ConfigurationSource.Convention);
+        var trigger = entityBuilder
+            .Metadata
+            .AddTrigger("MyTrigger", ConfigurationSource.Convention);
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2800,8 +3319,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "MyTrigger" }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new TriggerRemovedConvention(terminate: true),
-            conventions, conventions.TriggerRemovedConventions);
+        AssertSetOperations(
+            new TriggerRemovedConvention(terminate: true),
+            conventions,
+            conventions.TriggerRemovedConventions
+        );
     }
 
     private class TriggerRemovedConvention : ITriggerRemovedConvention
@@ -2817,7 +3339,8 @@ public class ConventionDispatcherTest
         public void ProcessTriggerRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionTrigger trigger,
-            IConventionContext<IConventionTrigger> context)
+            IConventionContext<IConventionTrigger> context
+        )
         {
             Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -2855,13 +3378,17 @@ public class ConventionDispatcherTest
         if (useBuilder)
         {
             var result = entityBuilder.HasKey(
-                new List<string> { keyPropertyName }, ConfigurationSource.Convention);
+                new List<string> { keyPropertyName },
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var property = entityBuilder.Property(keyPropertyName, ConfigurationSource.Convention).Metadata;
+            var property = entityBuilder
+                .Property(keyPropertyName, ConfigurationSource.Convention)
+                .Metadata;
             property.IsNullable = false;
             var result = ((IMutableEntityType)entityBuilder.Metadata).AddKey(property);
 
@@ -2879,8 +3406,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { keyPropertyName }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new KeyAddedConvention(terminate: true),
-            conventions, conventions.KeyAddedConventions);
+        AssertSetOperations(
+            new KeyAddedConvention(terminate: true),
+            conventions,
+            conventions.KeyAddedConventions
+        );
     }
 
     private class KeyAddedConvention : IKeyAddedConvention
@@ -2893,7 +3423,10 @@ public class ConventionDispatcherTest
             _terminate = terminate;
         }
 
-        public void ProcessKeyAdded(IConventionKeyBuilder keyBuilder, IConventionContext<IConventionKeyBuilder> context)
+        public void ProcessKeyAdded(
+            IConventionKeyBuilder keyBuilder,
+            IConventionContext<IConventionKeyBuilder> context
+        )
         {
             Assert.NotNull(keyBuilder.Metadata.Builder);
 
@@ -2924,8 +3457,9 @@ public class ConventionDispatcherTest
         var builder = new InternalModelBuilder(new Model(conventions));
 
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var key = entityBuilder.HasKey(
-            new List<string> { "OrderId" }, ConfigurationSource.Convention).Metadata;
+        var key = entityBuilder
+            .HasKey(new List<string> { "OrderId" }, ConfigurationSource.Convention)
+            .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2945,8 +3479,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "OrderId" }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new KeyRemovedConvention(terminate: true),
-            conventions, conventions.KeyRemovedConventions);
+        AssertSetOperations(
+            new KeyRemovedConvention(terminate: true),
+            conventions,
+            conventions.KeyRemovedConventions
+        );
     }
 
     private class KeyRemovedConvention : IKeyRemovedConvention
@@ -2962,7 +3499,8 @@ public class ConventionDispatcherTest
         public void ProcessKeyRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionKey key,
-            IConventionContext<IConventionKey> context)
+            IConventionContext<IConventionKey> context
+        )
         {
             Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -2993,8 +3531,9 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var key = entityBuilder.HasKey(
-            new List<string> { "OrderId" }, ConfigurationSource.Convention).Metadata;
+        var key = entityBuilder
+            .HasKey(new List<string> { "OrderId" }, ConfigurationSource.Convention)
+            .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3048,8 +3587,11 @@ public class ConventionDispatcherTest
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new KeyAnnotationChangedConvention(terminate: true),
-            conventions, conventions.KeyAnnotationChangedConventions);
+        AssertSetOperations(
+            new KeyAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.KeyAnnotationChangedConventions
+        );
     }
 
     private class KeyAnnotationChangedConvention : IKeyAnnotationChangedConvention
@@ -3067,7 +3609,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.NotNull(keyBuilder.Metadata.Builder);
 
@@ -3104,13 +3647,17 @@ public class ConventionDispatcherTest
         if (useBuilder)
         {
             var result = entityBuilder.HasIndex(
-                new List<string> { "OrderId" }, ConfigurationSource.Convention);
+                new List<string> { "OrderId" },
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var property = entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata;
+            var property = entityBuilder
+                .Property("OrderId", ConfigurationSource.Convention)
+                .Metadata;
             var result = ((IMutableEntityType)entityBuilder.Metadata).AddIndex(property);
 
             Assert.Equal(!useScope, result == null);
@@ -3128,8 +3675,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "OrderId" }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new IndexAddedConvention(terminate: true),
-            conventions, conventions.IndexAddedConventions);
+        AssertSetOperations(
+            new IndexAddedConvention(terminate: true),
+            conventions,
+            conventions.IndexAddedConventions
+        );
     }
 
     private class IndexAddedConvention : IIndexAddedConvention
@@ -3142,7 +3692,10 @@ public class ConventionDispatcherTest
             _terminate = terminate;
         }
 
-        public void ProcessIndexAdded(IConventionIndexBuilder indexBuilder, IConventionContext<IConventionIndexBuilder> context)
+        public void ProcessIndexAdded(
+            IConventionIndexBuilder indexBuilder,
+            IConventionContext<IConventionIndexBuilder> context
+        )
         {
             Assert.NotNull(indexBuilder.Metadata.Builder);
 
@@ -3150,7 +3703,10 @@ public class ConventionDispatcherTest
 
             if (_terminate)
             {
-                indexBuilder.Metadata.DeclaringEntityType.RemoveIndex(indexBuilder.Metadata.Properties);
+                indexBuilder
+                    .Metadata
+                    .DeclaringEntityType
+                    .RemoveIndex(indexBuilder.Metadata.Properties);
                 context.StopProcessing();
             }
         }
@@ -3172,8 +3728,9 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var index = entityBuilder.HasIndex(
-            new List<string> { "OrderId" }, ConfigurationSource.Convention).Metadata;
+        var index = entityBuilder
+            .HasIndex(new List<string> { "OrderId" }, ConfigurationSource.Convention)
+            .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3199,8 +3756,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "OrderId" }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new IndexRemovedConvention(terminate: true),
-            conventions, conventions.IndexRemovedConventions);
+        AssertSetOperations(
+            new IndexRemovedConvention(terminate: true),
+            conventions,
+            conventions.IndexRemovedConventions
+        );
     }
 
     private class IndexRemovedConvention : IIndexRemovedConvention
@@ -3216,7 +3776,8 @@ public class ConventionDispatcherTest
         public void ProcessIndexRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionIndex index,
-            IConventionContext<IConventionIndex> context)
+            IConventionContext<IConventionIndex> context
+        )
         {
             Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -3247,8 +3808,9 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var index = entityBuilder.HasIndex(
-            new List<string> { "OrderId" }, ConfigurationSource.Convention).Metadata;
+        var index = entityBuilder
+            .HasIndex(new List<string> { "OrderId" }, ConfigurationSource.Convention)
+            .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3300,8 +3862,11 @@ public class ConventionDispatcherTest
 
         Assert.Same(index, entityBuilder.Metadata.RemoveIndex(index.Properties));
 
-        AssertSetOperations(new IndexUniquenessChangedConvention(terminate: true),
-            conventions, conventions.IndexUniquenessChangedConventions);
+        AssertSetOperations(
+            new IndexUniquenessChangedConvention(terminate: true),
+            conventions,
+            conventions.IndexUniquenessChangedConventions
+        );
     }
 
     private class IndexUniquenessChangedConvention : IIndexUniquenessChangedConvention
@@ -3316,7 +3881,8 @@ public class ConventionDispatcherTest
 
         public void ProcessIndexUniquenessChanged(
             IConventionIndexBuilder indexBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             Assert.NotNull(indexBuilder.Metadata.Builder);
 
@@ -3348,7 +3914,9 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention)!;
-        var index = entityBuilder.HasIndex(new List<string> { "OrderId" }, ConfigurationSource.Convention)!.Metadata;
+        var index = entityBuilder
+            .HasIndex(new List<string> { "OrderId" }, ConfigurationSource.Convention)!
+            .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3400,8 +3968,11 @@ public class ConventionDispatcherTest
 
         Assert.Same(index, entityBuilder.Metadata.RemoveIndex(index.Properties));
 
-        AssertSetOperations(new IndexSortOrderChangedConvention(terminate: true),
-            conventions, conventions.IndexSortOrderChangedConventions);
+        AssertSetOperations(
+            new IndexSortOrderChangedConvention(terminate: true),
+            conventions,
+            conventions.IndexSortOrderChangedConventions
+        );
     }
 
     private class IndexSortOrderChangedConvention : IIndexSortOrderChangedConvention
@@ -3416,7 +3987,8 @@ public class ConventionDispatcherTest
 
         public void ProcessIndexSortOrderChanged(
             IConventionIndexBuilder indexBuilder,
-            IConventionContext<IReadOnlyList<bool>?> context)
+            IConventionContext<IReadOnlyList<bool>?> context
+        )
         {
             Assert.NotNull(indexBuilder.Metadata.Builder);
 
@@ -3428,6 +4000,7 @@ public class ConventionDispatcherTest
             }
         }
     }
+
 #nullable restore
 
     [InlineData(false, false)]
@@ -3447,14 +4020,17 @@ public class ConventionDispatcherTest
         conventions.Add(convention3);
 
         var builder = new InternalModelBuilder(new Model(conventions));
-        var indexBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
+        var indexBuilder = builder
+            .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
             .HasIndex(new[] { nameof(SpecialOrder.Name) }, ConfigurationSource.Convention);
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
-            Assert.NotNull(indexBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                indexBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -3474,7 +4050,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(indexBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                indexBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -3502,8 +4080,11 @@ public class ConventionDispatcherTest
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new IndexAnnotationChangedConvention(terminate: true),
-            conventions, conventions.IndexAnnotationChangedConventions);
+        AssertSetOperations(
+            new IndexAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.IndexAnnotationChangedConventions
+        );
     }
 
     private class IndexAnnotationChangedConvention : IIndexAnnotationChangedConvention
@@ -3521,7 +4102,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.NotNull(indexBuilder.Metadata.Builder);
 
@@ -3558,14 +4140,24 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            var result = entityBuilder.Property(typeof(int), shadowPropertyName, ConfigurationSource.Convention);
+            var result = entityBuilder.Property(
+                typeof(int),
+                shadowPropertyName,
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var result = entityBuilder.Metadata.AddProperty(
-                shadowPropertyName, typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
+            var result = entityBuilder
+                .Metadata
+                .AddProperty(
+                    shadowPropertyName,
+                    typeof(int),
+                    ConfigurationSource.Convention,
+                    ConfigurationSource.Convention
+                );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -3585,13 +4177,18 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            var result = entityBuilder.Property(Order.OrderIdProperty, ConfigurationSource.Convention);
+            var result = entityBuilder.Property(
+                Order.OrderIdProperty,
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var result = ((IMutableEntityType)entityBuilder.Metadata).AddProperty(Order.OrderIdProperty);
+            var result = ((IMutableEntityType)entityBuilder.Metadata).AddProperty(
+                Order.OrderIdProperty
+            );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -3609,8 +4206,11 @@ public class ConventionDispatcherTest
 
         Assert.Empty(entityBuilder.Metadata.GetProperties());
 
-        AssertSetOperations(new PropertyAddedConvention(terminate: true),
-            conventions, conventions.PropertyAddedConventions);
+        AssertSetOperations(
+            new PropertyAddedConvention(terminate: true),
+            conventions,
+            conventions.PropertyAddedConventions
+        );
     }
 
     private class PropertyAddedConvention : IPropertyAddedConvention
@@ -3625,7 +4225,8 @@ public class ConventionDispatcherTest
 
         public void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<IConventionPropertyBuilder> context)
+            IConventionContext<IConventionPropertyBuilder> context
+        )
         {
             Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -3633,7 +4234,10 @@ public class ConventionDispatcherTest
 
             if (_terminate)
             {
-                propertyBuilder.Metadata.DeclaringType.RemoveProperty(propertyBuilder.Metadata.Name);
+                propertyBuilder
+                    .Metadata
+                    .DeclaringType
+                    .RemoveProperty(propertyBuilder.Metadata.Name);
                 context.StopProcessing();
             }
         }
@@ -3644,7 +4248,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnPropertyNullabilityChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnPropertyNullabilityChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -3659,7 +4266,9 @@ public class ConventionDispatcherTest
 
         var scope = useScope ? model.DelayConventions() : null;
 
-        var propertyBuilder = model.Builder.Entity(typeof(Order), ConfigurationSource.Convention)
+        var propertyBuilder = model
+            .Builder
+            .Entity(typeof(Order), ConfigurationSource.Convention)
             .Property(typeof(string), "Name", ConfigurationSource.Convention);
         if (useBuilder)
         {
@@ -3751,8 +4360,11 @@ public class ConventionDispatcherTest
 
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new PropertyNullabilityChangedConvention(terminate: true),
-            conventions, conventions.PropertyNullabilityChangedConventions);
+        AssertSetOperations(
+            new PropertyNullabilityChangedConvention(terminate: true),
+            conventions,
+            conventions.PropertyNullabilityChangedConventions
+        );
     }
 
     private class PropertyNullabilityChangedConvention : IPropertyNullabilityChangedConvention
@@ -3767,7 +4379,8 @@ public class ConventionDispatcherTest
 
         public void ProcessPropertyNullabilityChanged(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             Calls.Add(propertyBuilder.Metadata.IsNullable);
 
@@ -3796,19 +4409,24 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var propertyBuilder = entityBuilder.Property(Order.OrderIdProperty, ConfigurationSource.Convention);
+        var propertyBuilder = entityBuilder.Property(
+            Order.OrderIdProperty,
+            ConfigurationSource.Convention
+        );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasField(nameof(Order.IntField), ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasField(nameof(Order.IntField), ConfigurationSource.Convention)
+            );
         }
         else
         {
-            propertyBuilder.Metadata.SetField(
-                nameof(Order.IntField),
-                ConfigurationSource.Convention);
+            propertyBuilder
+                .Metadata
+                .SetField(nameof(Order.IntField), ConfigurationSource.Convention);
         }
 
         if (useScope)
@@ -3824,13 +4442,15 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasField(nameof(Order.IntField), ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasField(nameof(Order.IntField), ConfigurationSource.Convention)
+            );
         }
         else
         {
-            propertyBuilder.Metadata.SetField(
-                nameof(Order.IntField),
-                ConfigurationSource.Convention);
+            propertyBuilder
+                .Metadata
+                .SetField(nameof(Order.IntField), ConfigurationSource.Convention);
         }
 
         Assert.Equal(new string[] { null }, convention1.Calls);
@@ -3843,17 +4463,18 @@ public class ConventionDispatcherTest
         }
         else
         {
-            propertyBuilder.Metadata.SetFieldInfo(
-                null,
-                ConfigurationSource.Convention);
+            propertyBuilder.Metadata.SetFieldInfo(null, ConfigurationSource.Convention);
         }
 
         Assert.Equal(new[] { null, nameof(Order.IntField) }, convention1.Calls);
         Assert.Equal(new[] { null, nameof(Order.IntField) }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new PropertyFieldChangedConvention(terminate: true),
-            conventions, conventions.PropertyFieldChangedConventions);
+        AssertSetOperations(
+            new PropertyFieldChangedConvention(terminate: true),
+            conventions,
+            conventions.PropertyFieldChangedConventions
+        );
     }
 
     private class PropertyFieldChangedConvention : IPropertyFieldChangedConvention
@@ -3870,7 +4491,8 @@ public class ConventionDispatcherTest
             IConventionPropertyBuilder propertyBuilder,
             FieldInfo newFieldInfo,
             FieldInfo oldFieldInfo,
-            IConventionContext<FieldInfo> context)
+            IConventionContext<FieldInfo> context
+        )
         {
             Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -3888,7 +4510,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnPropertyElementTypeChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnPropertyElementTypeChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -3901,7 +4526,10 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention)!;
-        var propertyBuilder = entityBuilder.Property(Order.OrderIdsProperty, ConfigurationSource.Convention)!;
+        var propertyBuilder = entityBuilder.Property(
+            Order.OrderIdsProperty,
+            ConfigurationSource.Convention
+        )!;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3909,12 +4537,16 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.SetElementType(typeof(int), ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.SetElementType(typeof(int), ConfigurationSource.Convention)
+            );
             elementType = propertyBuilder.Metadata.GetElementType()!;
         }
         else
         {
-            elementType = propertyBuilder.Metadata.SetElementType(typeof(int), ConfigurationSource.Convention);
+            elementType = propertyBuilder
+                .Metadata
+                .SetElementType(typeof(int), ConfigurationSource.Convention);
         }
 
         if (useScope)
@@ -3930,12 +4562,16 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.Null(propertyBuilder.SetElementType(typeof(int), ConfigurationSource.Convention));
+            Assert.Null(
+                propertyBuilder.SetElementType(typeof(int), ConfigurationSource.Convention)
+            );
             elementType = propertyBuilder.Metadata.GetElementType()!;
         }
         else
         {
-            elementType = propertyBuilder.Metadata.SetElementType(typeof(int), ConfigurationSource.Convention);
+            elementType = propertyBuilder
+                .Metadata
+                .SetElementType(typeof(int), ConfigurationSource.Convention);
         }
 
         Assert.Equal(new (object, object)[] { (null, elementType) }, convention1.Calls);
@@ -3948,15 +4584,26 @@ public class ConventionDispatcherTest
         }
         else
         {
-            Assert.Null(propertyBuilder.Metadata.SetElementType(null, ConfigurationSource.Convention));
+            Assert.Null(
+                propertyBuilder.Metadata.SetElementType(null, ConfigurationSource.Convention)
+            );
         }
 
-        Assert.Equal(new (object, object)[] { (null, elementType), (elementType, null) }, convention1.Calls);
-        Assert.Equal(new (object, object)[] { (null, elementType), (elementType, null) }, convention2.Calls);
+        Assert.Equal(
+            new (object, object)[] { (null, elementType), (elementType, null) },
+            convention1.Calls
+        );
+        Assert.Equal(
+            new (object, object)[] { (null, elementType), (elementType, null) },
+            convention2.Calls
+        );
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new PropertyElementTypeChangedConvention(terminate: true),
-            conventions, conventions.PropertyElementTypeChangedConventions);
+        AssertSetOperations(
+            new PropertyElementTypeChangedConvention(terminate: true),
+            conventions,
+            conventions.PropertyElementTypeChangedConventions
+        );
     }
 
     private class PropertyElementTypeChangedConvention : IPropertyElementTypeChangedConvention
@@ -3973,7 +4620,8 @@ public class ConventionDispatcherTest
             IConventionPropertyBuilder propertyBuilder,
             IElementType newElementType,
             IElementType oldElementType,
-            IConventionContext<IElementType> context)
+            IConventionContext<IElementType> context
+        )
         {
             Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -3991,7 +4639,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnPropertyAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnPropertyAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -4003,14 +4654,17 @@ public class ConventionDispatcherTest
         conventions.Add(convention3);
 
         var builder = new InternalModelBuilder(new Model(conventions));
-        var propertyBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
+        var propertyBuilder = builder
+            .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
             .Property(nameof(SpecialOrder.Name), ConfigurationSource.Convention);
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4030,7 +4684,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4043,7 +4699,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4054,12 +4712,16 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "bar", null }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        propertyBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] = PropertySaveBehavior.Ignore;
+        propertyBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] =
+            PropertySaveBehavior.Ignore;
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new PropertyAnnotationChangedConvention(terminate: true),
-            conventions, conventions.PropertyAnnotationChangedConventions);
+        AssertSetOperations(
+            new PropertyAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.PropertyAnnotationChangedConventions
+        );
     }
 
     private class PropertyAnnotationChangedConvention : IPropertyAnnotationChangedConvention
@@ -4077,7 +4739,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -4107,8 +4770,14 @@ public class ConventionDispatcherTest
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         var shadowPropertyName = "ShadowProperty";
-        var property = entityBuilder.Metadata.AddProperty(
-            shadowPropertyName, typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
+        var property = entityBuilder
+            .Metadata
+            .AddProperty(
+                shadowPropertyName,
+                typeof(int),
+                ConfigurationSource.Convention,
+                ConfigurationSource.Convention
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -4134,8 +4803,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { property }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new PropertyRemovedConvention(terminate: true),
-            conventions, conventions.PropertyRemovedConventions);
+        AssertSetOperations(
+            new PropertyRemovedConvention(terminate: true),
+            conventions,
+            conventions.PropertyRemovedConventions
+        );
     }
 
     private class PropertyRemovedConvention : IPropertyRemovedConvention
@@ -4151,7 +4823,8 @@ public class ConventionDispatcherTest
         public void ProcessPropertyRemoved(
             IConventionTypeBaseBuilder typeBaseBuilder,
             IConventionProperty property,
-            IConventionContext<IConventionProperty> context)
+            IConventionContext<IConventionProperty> context
+        )
         {
             Assert.NotNull(typeBaseBuilder.Metadata.Builder);
 
@@ -4169,7 +4842,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexTypePropertyAdded_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexTypePropertyAdded_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -4182,8 +4858,13 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var complexBuilder = entityBuilder.ComplexProperty(
-                Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention)
+        var complexBuilder = entityBuilder
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            )
             .ComplexTypeBuilder;
         var shadowPropertyName = "ShadowProperty";
 
@@ -4191,14 +4872,24 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            var result = complexBuilder.Property(typeof(int), shadowPropertyName, ConfigurationSource.Convention);
+            var result = complexBuilder.Property(
+                typeof(int),
+                shadowPropertyName,
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var result = complexBuilder.Metadata.AddProperty(
-                shadowPropertyName, typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
+            var result = complexBuilder
+                .Metadata
+                .AddProperty(
+                    shadowPropertyName,
+                    typeof(int),
+                    ConfigurationSource.Convention,
+                    ConfigurationSource.Convention
+                );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -4219,13 +4910,18 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            var result = complexBuilder.Property(nameof(OrderDetails.Id), ConfigurationSource.Convention);
+            var result = complexBuilder.Property(
+                nameof(OrderDetails.Id),
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var result = ((IMutableComplexType)complexBuilder.Metadata).AddProperty(nameof(OrderDetails.Id));
+            var result = ((IMutableComplexType)complexBuilder.Metadata).AddProperty(
+                nameof(OrderDetails.Id)
+            );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -4250,7 +4946,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexTypePropertyNullabilityChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexTypePropertyNullabilityChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -4265,8 +4964,15 @@ public class ConventionDispatcherTest
 
         var scope = useScope ? model.DelayConventions() : null;
 
-        var propertyBuilder = model.Builder.Entity(typeof(Order), ConfigurationSource.Convention)
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention)
+        var propertyBuilder = model
+            .Builder
+            .Entity(typeof(Order), ConfigurationSource.Convention)
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            )
             .ComplexTypeBuilder
             .Property(typeof(string), "Name", ConfigurationSource.Convention);
         if (useBuilder)
@@ -4365,7 +5071,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexTypePropertyFieldChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexTypePropertyFieldChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -4379,7 +5088,12 @@ public class ConventionDispatcherTest
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         var propertyBuilder = entityBuilder
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention)
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            )
             .ComplexTypeBuilder
             .Property(nameof(OrderDetails.Id), ConfigurationSource.Convention);
 
@@ -4387,13 +5101,18 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasField(nameof(OrderDetails.IntField), ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasField(
+                    nameof(OrderDetails.IntField),
+                    ConfigurationSource.Convention
+                )
+            );
         }
         else
         {
-            propertyBuilder.Metadata.SetField(
-                nameof(OrderDetails.IntField),
-                ConfigurationSource.Convention);
+            propertyBuilder
+                .Metadata
+                .SetField(nameof(OrderDetails.IntField), ConfigurationSource.Convention);
         }
 
         if (useScope)
@@ -4409,13 +5128,18 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasField(nameof(OrderDetails.IntField), ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasField(
+                    nameof(OrderDetails.IntField),
+                    ConfigurationSource.Convention
+                )
+            );
         }
         else
         {
-            propertyBuilder.Metadata.SetField(
-                nameof(OrderDetails.IntField),
-                ConfigurationSource.Convention);
+            propertyBuilder
+                .Metadata
+                .SetField(nameof(OrderDetails.IntField), ConfigurationSource.Convention);
         }
 
         Assert.Equal(new string[] { null }, convention1.Calls);
@@ -4428,9 +5152,7 @@ public class ConventionDispatcherTest
         }
         else
         {
-            propertyBuilder.Metadata.SetFieldInfo(
-                null,
-                ConfigurationSource.Convention);
+            propertyBuilder.Metadata.SetFieldInfo(null, ConfigurationSource.Convention);
         }
 
         Assert.Equal(new[] { null, nameof(Order.IntField) }, convention1.Calls);
@@ -4443,7 +5165,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexTypePropertyAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexTypePropertyAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -4455,8 +5180,14 @@ public class ConventionDispatcherTest
         conventions.Add(convention3);
 
         var builder = new InternalModelBuilder(new Model(conventions));
-        var propertyBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention)
+        var propertyBuilder = builder
+            .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            )
             .ComplexTypeBuilder
             .Property(nameof(OrderDetails.Id), ConfigurationSource.Convention);
 
@@ -4464,7 +5195,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4484,7 +5217,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4497,7 +5232,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4508,7 +5245,8 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "bar", null }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        propertyBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] = PropertySaveBehavior.Ignore;
+        propertyBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] =
+            PropertySaveBehavior.Ignore;
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
     }
@@ -4531,9 +5269,20 @@ public class ConventionDispatcherTest
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         var shadowPropertyName = "ShadowProperty";
         var property = entityBuilder
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention)
-            .ComplexTypeBuilder.Metadata.AddProperty(
-                shadowPropertyName, typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            )
+            .ComplexTypeBuilder
+            .Metadata
+            .AddProperty(
+                shadowPropertyName,
+                typeof(int),
+                ConfigurationSource.Convention,
+                ConfigurationSource.Convention
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -4584,14 +5333,23 @@ public class ConventionDispatcherTest
         if (useBuilder)
         {
             var result = entityBuilder.ComplexProperty(
-                Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention);
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
-            var result = entityBuilder.Metadata.AddComplexProperty(
-                Order.OrderDetailsProperty, collection: false, ConfigurationSource.Convention);
+            var result = entityBuilder
+                .Metadata
+                .AddComplexProperty(
+                    Order.OrderDetailsProperty,
+                    collection: false,
+                    ConfigurationSource.Convention
+                );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -4612,14 +5370,20 @@ public class ConventionDispatcherTest
         if (useBuilder)
         {
             var result = entityBuilder.ComplexProperty(
-                Order.OtherOrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention);
+                Order.OtherOrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(!useScope, result == null);
         }
         else
         {
             var result = ((IMutableEntityType)entityBuilder.Metadata).AddComplexProperty(
-                Order.OtherOrderDetailsProperty, collection: false);
+                Order.OtherOrderDetailsProperty,
+                collection: false
+            );
 
             Assert.Equal(!useScope, result == null);
         }
@@ -4632,14 +5396,23 @@ public class ConventionDispatcherTest
             scope.Dispose();
         }
 
-        Assert.Equal(new[] { Order.OrderDetailsProperty.Name, Order.OtherOrderDetailsProperty.Name }, convention1.Calls);
-        Assert.Equal(new[] { Order.OrderDetailsProperty.Name, Order.OtherOrderDetailsProperty.Name }, convention2.Calls);
+        Assert.Equal(
+            new[] { Order.OrderDetailsProperty.Name, Order.OtherOrderDetailsProperty.Name },
+            convention1.Calls
+        );
+        Assert.Equal(
+            new[] { Order.OrderDetailsProperty.Name, Order.OtherOrderDetailsProperty.Name },
+            convention2.Calls
+        );
         Assert.Empty(convention3.Calls);
 
         Assert.Empty(entityBuilder.Metadata.GetComplexProperties());
 
-        AssertSetOperations(new ComplexPropertyAddedConvention(terminate: true),
-            conventions, conventions.ComplexPropertyAddedConventions);
+        AssertSetOperations(
+            new ComplexPropertyAddedConvention(terminate: true),
+            conventions,
+            conventions.ComplexPropertyAddedConventions
+        );
     }
 
     private class ComplexPropertyAddedConvention : IComplexPropertyAddedConvention
@@ -4654,7 +5427,8 @@ public class ConventionDispatcherTest
 
         public void ProcessComplexPropertyAdded(
             IConventionComplexPropertyBuilder propertyBuilder,
-            IConventionContext<IConventionComplexPropertyBuilder> context)
+            IConventionContext<IConventionComplexPropertyBuilder> context
+        )
         {
             Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -4662,7 +5436,9 @@ public class ConventionDispatcherTest
 
             if (_terminate)
             {
-                ((IConventionEntityType)propertyBuilder.Metadata.DeclaringType).RemoveComplexProperty(propertyBuilder.Metadata.Name);
+                (
+                    (IConventionEntityType)propertyBuilder.Metadata.DeclaringType
+                ).RemoveComplexProperty(propertyBuilder.Metadata.Name);
                 context.StopProcessing();
             }
         }
@@ -4673,7 +5449,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexPropertyNullabilityChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexPropertyNullabilityChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -4688,8 +5467,15 @@ public class ConventionDispatcherTest
 
         var scope = useScope ? model.DelayConventions() : null;
 
-        var propertyBuilder = model.Builder.Entity(typeof(Order), ConfigurationSource.Convention)
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention);
+        var propertyBuilder = model
+            .Builder
+            .Entity(typeof(Order), ConfigurationSource.Convention)
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            );
         if (useBuilder)
         {
             Assert.NotNull(propertyBuilder.IsRequired(true, ConfigurationSource.Convention));
@@ -4780,11 +5566,15 @@ public class ConventionDispatcherTest
 
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ComplexPropertyNullabilityChangedConvention(terminate: true),
-            conventions, conventions.ComplexPropertyNullabilityChangedConventions);
+        AssertSetOperations(
+            new ComplexPropertyNullabilityChangedConvention(terminate: true),
+            conventions,
+            conventions.ComplexPropertyNullabilityChangedConventions
+        );
     }
 
-    private class ComplexPropertyNullabilityChangedConvention : IComplexPropertyNullabilityChangedConvention
+    private class ComplexPropertyNullabilityChangedConvention
+        : IComplexPropertyNullabilityChangedConvention
     {
         public readonly List<bool?> Calls = new();
         private readonly bool _terminate;
@@ -4796,7 +5586,8 @@ public class ConventionDispatcherTest
 
         public void ProcessComplexPropertyNullabilityChanged(
             IConventionComplexPropertyBuilder propertyBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             Calls.Add(propertyBuilder.Metadata.IsNullable);
 
@@ -4812,7 +5603,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexPropertyFieldChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexPropertyFieldChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -4825,20 +5619,29 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var propertyBuilder = entityBuilder
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention);
+        var propertyBuilder = entityBuilder.ComplexProperty(
+            Order.OrderDetailsProperty,
+            complexTypeName: null,
+            collection: false,
+            ConfigurationSource.Convention
+        );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasField(nameof(Order.OrderDetailsField), ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasField(
+                    nameof(Order.OrderDetailsField),
+                    ConfigurationSource.Convention
+                )
+            );
         }
         else
         {
-            propertyBuilder.Metadata.SetField(
-                nameof(Order.OrderDetailsField),
-                ConfigurationSource.Convention);
+            propertyBuilder
+                .Metadata
+                .SetField(nameof(Order.OrderDetailsField), ConfigurationSource.Convention);
         }
 
         if (useScope)
@@ -4854,13 +5657,18 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasField(nameof(Order.OrderDetailsField), ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasField(
+                    nameof(Order.OrderDetailsField),
+                    ConfigurationSource.Convention
+                )
+            );
         }
         else
         {
-            propertyBuilder.Metadata.SetField(
-                nameof(Order.OrderDetailsField),
-                ConfigurationSource.Convention);
+            propertyBuilder
+                .Metadata
+                .SetField(nameof(Order.OrderDetailsField), ConfigurationSource.Convention);
         }
 
         Assert.Equal(new string[] { null }, convention1.Calls);
@@ -4873,17 +5681,18 @@ public class ConventionDispatcherTest
         }
         else
         {
-            propertyBuilder.Metadata.SetFieldInfo(
-                null,
-                ConfigurationSource.Convention);
+            propertyBuilder.Metadata.SetFieldInfo(null, ConfigurationSource.Convention);
         }
 
         Assert.Equal(new[] { null, nameof(Order.OrderDetailsField) }, convention1.Calls);
         Assert.Equal(new[] { null, nameof(Order.OrderDetailsField) }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ComplexPropertyFieldChangedConvention(terminate: true),
-            conventions, conventions.ComplexPropertyFieldChangedConventions);
+        AssertSetOperations(
+            new ComplexPropertyFieldChangedConvention(terminate: true),
+            conventions,
+            conventions.ComplexPropertyFieldChangedConventions
+        );
     }
 
     private class ComplexPropertyFieldChangedConvention : IComplexPropertyFieldChangedConvention
@@ -4900,7 +5709,8 @@ public class ConventionDispatcherTest
             IConventionComplexPropertyBuilder propertyBuilder,
             FieldInfo newFieldInfo,
             FieldInfo oldFieldInfo,
-            IConventionContext<FieldInfo> context)
+            IConventionContext<FieldInfo> context
+        )
         {
             Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -4918,7 +5728,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexPropertyAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexPropertyAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -4930,14 +5743,22 @@ public class ConventionDispatcherTest
         conventions.Add(convention3);
 
         var builder = new InternalModelBuilder(new Model(conventions));
-        var propertyBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention);
+        var propertyBuilder = builder
+            .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            );
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4957,7 +5778,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4970,7 +5793,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(propertyBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+            Assert.NotNull(
+                propertyBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -4981,15 +5806,20 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "bar", null }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        propertyBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] = PropertySaveBehavior.Ignore;
+        propertyBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] =
+            PropertySaveBehavior.Ignore;
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new ComplexPropertyAnnotationChangedConvention(terminate: true),
-            conventions, conventions.ComplexPropertyAnnotationChangedConventions);
+        AssertSetOperations(
+            new ComplexPropertyAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.ComplexPropertyAnnotationChangedConventions
+        );
     }
 
-    private class ComplexPropertyAnnotationChangedConvention : IComplexPropertyAnnotationChangedConvention
+    private class ComplexPropertyAnnotationChangedConvention
+        : IComplexPropertyAnnotationChangedConvention
     {
         private readonly bool _terminate;
         public readonly List<object> Calls = new();
@@ -5004,7 +5834,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -5034,7 +5865,12 @@ public class ConventionDispatcherTest
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
         var property = entityBuilder
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention)
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            )
             .Metadata;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
@@ -5061,8 +5897,11 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { property }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ComplexPropertyRemovedConvention(terminate: true),
-            conventions, conventions.ComplexPropertyRemovedConventions);
+        AssertSetOperations(
+            new ComplexPropertyRemovedConvention(terminate: true),
+            conventions,
+            conventions.ComplexPropertyRemovedConventions
+        );
     }
 
     private class ComplexPropertyRemovedConvention : IComplexPropertyRemovedConvention
@@ -5078,7 +5917,8 @@ public class ConventionDispatcherTest
         public void ProcessComplexPropertyRemoved(
             IConventionTypeBaseBuilder typeBaseBuilder,
             IConventionComplexProperty property,
-            IConventionContext<IConventionComplexProperty> context)
+            IConventionContext<IConventionComplexProperty> context
+        )
         {
             Assert.NotNull(typeBaseBuilder.Metadata.Builder);
 
@@ -5096,7 +5936,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexTypeAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexTypeAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -5108,8 +5951,14 @@ public class ConventionDispatcherTest
         conventions.Add(convention3);
 
         var builder = new InternalModelBuilder(new Model(conventions));
-        var typeBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
-            .ComplexProperty(Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention)
+        var typeBuilder = builder
+            .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            )
             .ComplexTypeBuilder;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
@@ -5164,8 +6013,11 @@ public class ConventionDispatcherTest
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new ComplexTypeAnnotationChangedConvention(terminate: true),
-            conventions, conventions.ComplexTypeAnnotationChangedConventions);
+        AssertSetOperations(
+            new ComplexTypeAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.ComplexTypeAnnotationChangedConventions
+        );
     }
 
     private class ComplexTypeAnnotationChangedConvention : IComplexTypeAnnotationChangedConvention
@@ -5183,7 +6035,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -5201,7 +6054,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnComplexTypeMemberIgnored_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnComplexTypeMemberIgnored_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -5214,8 +6070,13 @@ public class ConventionDispatcherTest
 
         var builder = new InternalModelBuilder(new Model(conventions));
         var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-        var complexBuilder = entityBuilder.ComplexProperty(
-                Order.OrderDetailsProperty, complexTypeName: null, collection: false, ConfigurationSource.Convention)
+        var complexBuilder = entityBuilder
+            .ComplexProperty(
+                Order.OrderDetailsProperty,
+                complexTypeName: null,
+                collection: false,
+                ConfigurationSource.Convention
+            )
             .ComplexTypeBuilder;
         var shadowPropertyName = "ShadowProperty";
 
@@ -5229,7 +6090,9 @@ public class ConventionDispatcherTest
         }
         else
         {
-            var result = complexBuilder.Metadata.AddIgnored(shadowPropertyName, ConfigurationSource.Convention);
+            var result = complexBuilder
+                .Metadata
+                .AddIgnored(shadowPropertyName, ConfigurationSource.Convention);
 
             Assert.Equal(!useScope, result == null);
         }
@@ -5255,7 +6118,9 @@ public class ConventionDispatcherTest
         }
         else
         {
-            var result = complexBuilder.Metadata.AddIgnored(shadowPropertyName, ConfigurationSource.Convention);
+            var result = complexBuilder
+                .Metadata
+                .AddIgnored(shadowPropertyName, ConfigurationSource.Convention);
 
             Assert.NotNull(result);
         }
@@ -5270,8 +6135,11 @@ public class ConventionDispatcherTest
 
         Assert.Empty(entityBuilder.Metadata.GetIgnoredMembers());
 
-        AssertSetOperations(new ComplexTypeMemberIgnoredConvention(terminate: true),
-            conventions, conventions.ComplexTypeMemberIgnoredConventions);
+        AssertSetOperations(
+            new ComplexTypeMemberIgnoredConvention(terminate: true),
+            conventions,
+            conventions.ComplexTypeMemberIgnoredConventions
+        );
     }
 
     private class ComplexTypeMemberIgnoredConvention : IComplexTypeMemberIgnoredConvention
@@ -5287,7 +6155,8 @@ public class ConventionDispatcherTest
         public void ProcessComplexTypeMemberIgnored(
             IConventionComplexTypeBuilder complexTypeBuilder,
             string name,
-            IConventionContext<string> context)
+            IConventionContext<string> context
+        )
         {
             Assert.NotNull(complexTypeBuilder.Metadata.Builder);
 
@@ -5305,7 +6174,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnElementTypeAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnElementTypeAnnotationChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -5317,7 +6189,8 @@ public class ConventionDispatcherTest
         conventions.Add(convention3);
 
         var builder = new InternalModelBuilder(new Model(conventions));
-        var elementTypeBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)!
+        var elementTypeBuilder = builder
+            .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)!
             .Property(nameof(SpecialOrder.OrderIds), ConfigurationSource.Convention)!
             .SetElementType(typeof(int), ConfigurationSource.Convention)!;
 
@@ -5325,7 +6198,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(elementTypeBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                elementTypeBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -5345,7 +6220,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(elementTypeBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+            Assert.NotNull(
+                elementTypeBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -5358,7 +6235,9 @@ public class ConventionDispatcherTest
 
         if (useBuilder)
         {
-            Assert.NotNull(elementTypeBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+            Assert.NotNull(
+                elementTypeBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+            );
         }
         else
         {
@@ -5369,12 +6248,16 @@ public class ConventionDispatcherTest
         Assert.Equal(new[] { "bar", null }, convention2.Calls);
         Assert.Empty(convention3.Calls);
 
-        elementTypeBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] = PropertySaveBehavior.Ignore;
+        elementTypeBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] =
+            PropertySaveBehavior.Ignore;
 
         Assert.Equal(new[] { "bar", null }, convention1.Calls);
 
-        AssertSetOperations(new ElementTypeAnnotationChangedConvention(terminate: true),
-            conventions, conventions.ElementTypeAnnotationChangedConventions);
+        AssertSetOperations(
+            new ElementTypeAnnotationChangedConvention(terminate: true),
+            conventions,
+            conventions.ElementTypeAnnotationChangedConventions
+        );
     }
 
     private class ElementTypeAnnotationChangedConvention : IElementTypeAnnotationChangedConvention
@@ -5392,7 +6275,8 @@ public class ConventionDispatcherTest
             string name,
             IConventionAnnotation annotation,
             IConventionAnnotation oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Assert.True(builder.Metadata.IsInModel);
 
@@ -5410,7 +6294,10 @@ public class ConventionDispatcherTest
     [InlineData(false, true)]
     [InlineData(true, true)]
     [ConditionalTheory]
-    public void OnElementTypeNullabilityChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+    public void OnElementTypeNullabilityChanged_calls_conventions_in_order(
+        bool useBuilder,
+        bool useScope
+    )
     {
         var conventions = new ConventionSet();
 
@@ -5425,7 +6312,8 @@ public class ConventionDispatcherTest
         var scope = useScope ? model.DelayConventions() : null;
 
         var builder = new InternalModelBuilder(model);
-        var elementTypeBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)!
+        var elementTypeBuilder = builder
+            .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)!
             .Property(nameof(SpecialOrder.Notes), ConfigurationSource.Convention)!
             .SetElementType(typeof(string), ConfigurationSource.Convention)!;
 
@@ -5519,8 +6407,11 @@ public class ConventionDispatcherTest
 
         Assert.Empty(convention3.Calls);
 
-        AssertSetOperations(new ElementTypeNullabilityChangedConvention(terminate: true),
-            conventions, conventions.ElementTypeNullabilityChangedConventions);
+        AssertSetOperations(
+            new ElementTypeNullabilityChangedConvention(terminate: true),
+            conventions,
+            conventions.ElementTypeNullabilityChangedConventions
+        );
     }
 
     private class ElementTypeNullabilityChangedConvention : IElementTypeNullabilityChangedConvention
@@ -5535,7 +6426,8 @@ public class ConventionDispatcherTest
 
         public void ProcessElementTypeNullabilityChanged(
             IConventionElementTypeBuilder builder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             Calls.Add(builder.Metadata.IsNullable);
 
@@ -5547,7 +6439,10 @@ public class ConventionDispatcherTest
     }
 
     private static void AssertSetOperations<TConvention>(
-        TConvention newConvention, ConventionSet conventions, List<TConvention> conventionList)
+        TConvention newConvention,
+        ConventionSet conventions,
+        List<TConvention> conventionList
+    )
         where TConvention : class, IConvention
     {
         Assert.Equal(3, conventionList.Count);
@@ -5561,12 +6456,21 @@ public class ConventionDispatcherTest
 
     private class Order
     {
-        public static readonly PropertyInfo OrderIdProperty = typeof(Order).GetProperty(nameof(OrderId));
-        public static readonly PropertyInfo OrderIdsProperty = typeof(Order).GetProperty(nameof(OrderIds));
-        public static readonly PropertyInfo OrderDetailsProperty = typeof(Order).GetProperty(nameof(OrderDetails));
-        public static readonly PropertyInfo OtherOrderDetailsProperty = typeof(Order).GetProperty(nameof(OtherOrderDetails));
+        public static readonly PropertyInfo OrderIdProperty = typeof(Order).GetProperty(
+            nameof(OrderId)
+        );
+        public static readonly PropertyInfo OrderIdsProperty = typeof(Order).GetProperty(
+            nameof(OrderIds)
+        );
+        public static readonly PropertyInfo OrderDetailsProperty = typeof(Order).GetProperty(
+            nameof(OrderDetails)
+        );
+        public static readonly PropertyInfo OtherOrderDetailsProperty = typeof(Order).GetProperty(
+            nameof(OtherOrderDetails)
+        );
 
         public readonly int IntField = 1;
+
         // ReSharper disable once RedundantDefaultMemberInitializer
         public readonly OrderDetails OrderDetailsField = default;
 
@@ -5581,13 +6485,13 @@ public class ConventionDispatcherTest
         public virtual ICollection<Product> Products { get; set; }
     }
 
-    private class SpecialOrder : Order
-    {
-    }
+    private class SpecialOrder : Order { }
 
     private class OrderDetails
     {
-        public static readonly PropertyInfo OrderProperty = typeof(OrderDetails).GetProperty(nameof(Order));
+        public static readonly PropertyInfo OrderProperty = typeof(OrderDetails).GetProperty(
+            nameof(Order)
+        );
         public readonly int IntField = 1;
 
         public int Id { get; set; }
@@ -5596,8 +6500,12 @@ public class ConventionDispatcherTest
 
     private class OrderProduct
     {
-        public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(nameof(OrderId));
-        public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(nameof(ProductId));
+        public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
+            nameof(OrderId)
+        );
+        public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(
+            nameof(ProductId)
+        );
 
         public int OrderId { get; set; }
         public int ProductId { get; set; }

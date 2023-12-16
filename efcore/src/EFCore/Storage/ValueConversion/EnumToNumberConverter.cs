@@ -20,10 +20,11 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
     {
         var underlyingModelType = typeof(TEnum).UnwrapEnumType();
 
-        return (underlyingModelType == typeof(long) || underlyingModelType == typeof(ulong))
+        return
+            (underlyingModelType == typeof(long) || underlyingModelType == typeof(ulong))
             && typeof(TNumber) == typeof(decimal)
-                ? new ConverterMappingHints(precision: 20, scale: 0)
-                : default;
+            ? new ConverterMappingHints(precision: 20, scale: 0)
+            : default;
     }
 
     /// <summary>
@@ -33,9 +34,7 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public EnumToNumberConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter. This converter preserves order.
@@ -48,18 +47,18 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
     ///     facets for the converted data.
     /// </param>
     public EnumToNumberConverter(ConverterMappingHints? mappingHints)
-        : base(
-            ToNumber(),
-            ToEnum(),
-            DefaultHints?.With(mappingHints) ?? mappingHints)
-    {
-    }
+        : base(ToNumber(), ToEnum(), DefaultHints?.With(mappingHints) ?? mappingHints) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(TEnum), typeof(TNumber), i => new EnumToNumberConverter<TEnum, TNumber>(i.MappingHints), DefaultHints);
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(TEnum),
+            typeof(TNumber),
+            i => new EnumToNumberConverter<TEnum, TNumber>(i.MappingHints),
+            DefaultHints
+        );
 
     private static Expression<Func<TEnum, TNumber>> ToNumber()
     {
@@ -69,15 +68,26 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
                 CoreStrings.ConverterBadType(
                     typeof(EnumToNumberConverter<TEnum, TNumber>).ShortDisplayName(),
                     typeof(TEnum).ShortDisplayName(),
-                    "enum types"));
+                    "enum types"
+                )
+            );
         }
 
         CheckTypeSupported(
             typeof(TNumber).UnwrapNullableType(),
             typeof(EnumToNumberConverter<TEnum, TNumber>),
-            typeof(int), typeof(long), typeof(short), typeof(byte),
-            typeof(uint), typeof(ulong), typeof(ushort), typeof(sbyte),
-            typeof(double), typeof(float), typeof(decimal));
+            typeof(int),
+            typeof(long),
+            typeof(short),
+            typeof(byte),
+            typeof(uint),
+            typeof(ulong),
+            typeof(ushort),
+            typeof(sbyte),
+            typeof(double),
+            typeof(float),
+            typeof(decimal)
+        );
 
         var param = Expression.Parameter(typeof(TEnum), "value");
 
@@ -86,7 +96,10 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
                 typeof(TNumber) == typeof(decimal)
                     ? Expression.Convert(param, typeof(long))
                     : param,
-                typeof(TNumber)), param);
+                typeof(TNumber)
+            ),
+            param
+        );
     }
 
     private static Expression<Func<TNumber, TEnum>> ToEnum()
@@ -97,6 +110,9 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
                 typeof(TNumber) == typeof(decimal)
                     ? Expression.Convert(param, typeof(long))
                     : param,
-                typeof(TEnum)), param);
+                typeof(TEnum)
+            ),
+            param
+        );
     }
 }

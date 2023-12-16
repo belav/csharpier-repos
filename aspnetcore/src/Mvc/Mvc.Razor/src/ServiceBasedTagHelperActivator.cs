@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 internal sealed class ServiceBasedTagHelperActivator : ITagHelperActivator
 {
     /// <inheritdoc />
-    public TTagHelper Create<TTagHelper>(ViewContext context) where TTagHelper : ITagHelper
+    public TTagHelper Create<TTagHelper>(ViewContext context)
+        where TTagHelper : ITagHelper
     {
         ArgumentNullException.ThrowIfNull(context);
 

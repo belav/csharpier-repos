@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,28 +32,28 @@ using System;
 using System.Web.Services.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.Services {
-	[TestFixture]
-	public class DiagnosticsElementTest
-	{
-		[Test]
-		public void Defaults ()
-		{
-			DiagnosticsElement el = new DiagnosticsElement ();
+namespace MonoTests.System.Web.Services
+{
+    [TestFixture]
+    public class DiagnosticsElementTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            DiagnosticsElement el = new DiagnosticsElement();
 
-			Assert.IsFalse (el.SuppressReturningExceptions, "A1");
-		}
+            Assert.IsFalse(el.SuppressReturningExceptions, "A1");
+        }
 
-		[Test]
-		public void GetSet ()
-		{
-			DiagnosticsElement el = new DiagnosticsElement ();
+        [Test]
+        public void GetSet()
+        {
+            DiagnosticsElement el = new DiagnosticsElement();
 
-			el.SuppressReturningExceptions = true;
-			Assert.IsTrue (el.SuppressReturningExceptions, "A1");
-			el.SuppressReturningExceptions = false;
-			Assert.IsFalse (el.SuppressReturningExceptions, "A2");
-		}
-	}
+            el.SuppressReturningExceptions = true;
+            Assert.IsTrue(el.SuppressReturningExceptions, "A1");
+            el.SuppressReturningExceptions = false;
+            Assert.IsFalse(el.SuppressReturningExceptions, "A2");
+        }
+    }
 }
-

@@ -9,6 +9,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle;
 
 internal static class NamingStyleOptionsStorage
 {
-    public static NamingStylePreferences GetNamingStylePreferences(this IGlobalOptionService globalOptions, string language)
-        => globalOptions.GetOption(NamingStyleOptions.NamingPreferences, language);
+    public static NamingStylePreferences GetNamingStylePreferences(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) => globalOptions.GetOption(NamingStyleOptions.NamingPreferences, language);
 }

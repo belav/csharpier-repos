@@ -32,20 +32,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var locals = new ArrayBuilder<LocalSymbol>(_syntax.Declaration.Variables.Count);
 
-                _syntax.Declaration.Type.VisitRankSpecifiers((rankSpecifier, args) =>
-                {
-                    foreach (var size in rankSpecifier.Sizes)
-                    {
-                        if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                _syntax
+                    .Declaration
+                    .Type
+                    .VisitRankSpecifiers(
+                        (rankSpecifier, args) =>
                         {
-                            ExpressionVariableFinder.FindExpressionVariables(args.binder, args.locals, size);
-                        }
-                    }
-                }, (binder: this, locals: locals));
+                            foreach (var size in rankSpecifier.Sizes)
+                            {
+                                if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                                {
+                                    ExpressionVariableFinder.FindExpressionVariables(
+                                        args.binder,
+                                        args.locals,
+                                        size
+                                    );
+                                }
+                            }
+                        },
+                        (binder: this, locals: locals)
+                    );
 
                 foreach (VariableDeclaratorSyntax declarator in _syntax.Declaration.Variables)
                 {
-                    locals.Add(MakeLocal(_syntax.Declaration, declarator, LocalDeclarationKind.FixedVariable, allowScoped: false));
+                    locals.Add(
+                        MakeLocal(
+                            _syntax.Declaration,
+                            declarator,
+                            LocalDeclarationKind.FixedVariable,
+                            allowScoped: false
+                        )
+                    );
 
                     // also gather expression-declared variables from the bracketed argument lists and the initializers
                     ExpressionVariableFinder.FindExpressionVariables(this, locals, declarator);
@@ -57,7 +74,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return ImmutableArray<LocalSymbol>.Empty;
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             if (_syntax == scopeDesignator)
             {
@@ -67,17 +86,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
         internal override SyntaxNode ScopeDesignator
         {
-            get
-            {
-                return _syntax;
-            }
+            get { return _syntax; }
         }
     }
 }

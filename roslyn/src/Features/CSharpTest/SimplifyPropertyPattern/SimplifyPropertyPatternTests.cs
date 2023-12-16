@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyPropertyPattern
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpSimplifyPropertyPatternDiagnosticAnalyzer,
-        CSharpSimplifyPropertyPatternCodeFixProvider>;
+        CSharpSimplifyPropertyPatternCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyPropertyPattern)]
     public class SimplifyPropertyPatternTests
@@ -725,11 +726,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyPropertyPattern
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(8,20): info IDE0170: Simplify property pattern
-                        VerifyCS.Diagnostic("IDE0170").WithSpan(8, 20, 8, 29).WithSpan(8, 20, 8, 86).WithSeverity(DiagnosticSeverity.Info),
+                        VerifyCS
+                            .Diagnostic("IDE0170")
+                            .WithSpan(8, 20, 8, 29)
+                            .WithSpan(8, 20, 8, 86)
+                            .WithSeverity(DiagnosticSeverity.Info),
                     }
                 },
                 LanguageVersion = LanguageVersion.CSharp10,
-                CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck,
+                CodeFixTestBehaviors =
+                    CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck,
                 DiagnosticSelector = ds => ds[1],
             }.RunAsync();
         }

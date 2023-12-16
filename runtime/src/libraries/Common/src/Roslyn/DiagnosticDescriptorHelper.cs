@@ -15,11 +15,23 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
             DiagnosticSeverity defaultSeverity,
             bool isEnabledByDefault,
             LocalizableString? description = null,
-            params string[] customTags)
+            params string[] customTags
+        )
         {
-            string helpLink = $"https://learn.microsoft.com/dotnet/fundamentals/syslib-diagnostics/{id.ToLowerInvariant()}";
+            string helpLink =
+                $"https://learn.microsoft.com/dotnet/fundamentals/syslib-diagnostics/{id.ToLowerInvariant()}";
 
-            return new DiagnosticDescriptor(id, title, messageFormat, category, defaultSeverity, isEnabledByDefault, description, helpLink, customTags);
+            return new DiagnosticDescriptor(
+                id,
+                title,
+                messageFormat,
+                category,
+                defaultSeverity,
+                isEnabledByDefault,
+                description,
+                helpLink,
+                customTags
+            );
         }
     }
 }

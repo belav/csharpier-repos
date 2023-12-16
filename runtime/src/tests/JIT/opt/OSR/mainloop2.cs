@@ -9,18 +9,18 @@ using Xunit;
 
 public class MainNestedLoop
 {
-   [Fact]
-   public static int TestEntryPoint()
-   {
-       long result = 0;
-       for (int i = 0; i < 1_000; i++)
-       {
-           for (int j = 0; j < 1_000; j++)
-           {
-               result += (long)(i * 1_000 + j);
-           }
-       }
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        long result = 0;
+        for (int i = 0; i < 1_000; i++)
+        {
+            for (int j = 0; j < 1_000; j++)
+            {
+                result += (long)(i * 1_000 + j);
+            }
+        }
 
-       return result == 499999500000 ? 100 : -1;
-   }  
+        return result == 499999500000 ? 100 : -1;
+    }
 }

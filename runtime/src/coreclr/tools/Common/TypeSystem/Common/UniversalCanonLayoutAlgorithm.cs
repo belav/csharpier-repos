@@ -17,7 +17,10 @@ namespace Internal.TypeSystem
             throw new NotSupportedException();
         }
 
-        public override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType type, InstanceLayoutKind layoutKind)
+        public override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType type,
+            InstanceLayoutKind layoutKind
+        )
         {
             return new ComputedInstanceFieldLayout()
             {
@@ -35,19 +38,40 @@ namespace Internal.TypeSystem
             throw new NotSupportedException();
         }
 
-        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType type, StaticLayoutKind layoutKind)
+        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType type,
+            StaticLayoutKind layoutKind
+        )
         {
             return new ComputedStaticFieldLayout()
             {
-                NonGcStatics = new StaticsBlock() { Size = LayoutInt.Zero, LargestAlignment = LayoutInt.Zero },
-                GcStatics = new StaticsBlock() { Size = LayoutInt.Zero, LargestAlignment = LayoutInt.Zero },
-                ThreadNonGcStatics = new StaticsBlock() { Size = LayoutInt.Zero, LargestAlignment = LayoutInt.Zero },
-                ThreadGcStatics = new StaticsBlock() { Size = LayoutInt.Zero, LargestAlignment = LayoutInt.Zero },
+                NonGcStatics = new StaticsBlock()
+                {
+                    Size = LayoutInt.Zero,
+                    LargestAlignment = LayoutInt.Zero
+                },
+                GcStatics = new StaticsBlock()
+                {
+                    Size = LayoutInt.Zero,
+                    LargestAlignment = LayoutInt.Zero
+                },
+                ThreadNonGcStatics = new StaticsBlock()
+                {
+                    Size = LayoutInt.Zero,
+                    LargestAlignment = LayoutInt.Zero
+                },
+                ThreadGcStatics = new StaticsBlock()
+                {
+                    Size = LayoutInt.Zero,
+                    LargestAlignment = LayoutInt.Zero
+                },
                 Offsets = Array.Empty<FieldAndOffset>()
             };
         }
 
-        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
+        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        )
         {
             return ValueTypeShapeCharacteristics.None;
         }

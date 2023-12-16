@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
         bool CanRename { get; }
 
         /// <summary>
-        /// Provides the reason that can be displayed to the user if the entity at the selected 
+        /// Provides the reason that can be displayed to the user if the entity at the selected
         /// location cannot be renamed.
         /// </summary>
         string LocalizedErrorMessage { get; }
@@ -51,7 +51,11 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
         /// <param name="renameInComments">Whether or not to rename within comments</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Returns a list of DocumentSpans</returns>
-        Task<IList<DocumentSpan>> FindRenameLocationsAsync(bool renameInStrings, bool renameInComments, CancellationToken cancellationToken);
+        Task<IList<DocumentSpan>> FindRenameLocationsAsync(
+            bool renameInStrings,
+            bool renameInComments,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Checks if the new replacement text is valid for this rename operation.

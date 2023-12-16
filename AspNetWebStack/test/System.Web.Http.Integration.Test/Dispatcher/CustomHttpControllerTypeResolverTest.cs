@@ -14,22 +14,25 @@ namespace System.Web.Http.Dispatcher
         internal static readonly string ExpectedContent = "Hello World!";
 
         public CustomControllerTypeResolverTest()
-            : base("http://localhost/")
-        {
-        }
+            : base("http://localhost/") { }
 
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {
             // Add default route
-            configuration.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            configuration
+                .Routes
+                .MapHttpRoute(
+                    name: "DefaultApi",
+                    routeTemplate: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional }
+                );
 
             // Set our own assembly resolver where we add the assemblies we need
-            CustomControllerTypeResolver customHttpControllerTypeResolver = new CustomControllerTypeResolver();
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), customHttpControllerTypeResolver);
+            CustomControllerTypeResolver customHttpControllerTypeResolver =
+                new CustomControllerTypeResolver();
+            configuration
+                .Services
+                .Replace(typeof(IHttpControllerTypeResolver), customHttpControllerTypeResolver);
         }
 
         [Fact]

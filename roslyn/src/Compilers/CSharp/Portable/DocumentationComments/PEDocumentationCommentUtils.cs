@@ -7,8 +7,8 @@
 using System;
 using System.Globalization;
 using System.Threading;
-using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             PEModuleSymbol containingPEModule,
             CultureInfo preferredCulture,
             CancellationToken cancellationToken,
-            ref Tuple<CultureInfo, string> lazyDocComment)
+            ref Tuple<CultureInfo, string> lazyDocComment
+        )
         {
             // Have we cached anything?
             if (lazyDocComment == null)
@@ -30,9 +31,16 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                     ref lazyDocComment,
                     Tuple.Create(
                         preferredCulture,
-                        containingPEModule.DocumentationProvider.GetDocumentationForSymbol(
-                            symbol.GetDocumentationCommentId(), preferredCulture, cancellationToken)),
-                    null);
+                        containingPEModule
+                            .DocumentationProvider
+                            .GetDocumentationForSymbol(
+                                symbol.GetDocumentationCommentId(),
+                                preferredCulture,
+                                cancellationToken
+                            )
+                    ),
+                    null
+                );
             }
 
             // Does the cached version match the culture we asked for?
@@ -42,8 +50,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             }
 
             // We've already cached a different culture - create a fresh version.
-            return containingPEModule.DocumentationProvider.GetDocumentationForSymbol(
-                symbol.GetDocumentationCommentId(), preferredCulture, cancellationToken);
+            return containingPEModule
+                .DocumentationProvider
+                .GetDocumentationForSymbol(
+                    symbol.GetDocumentationCommentId(),
+                    preferredCulture,
+                    cancellationToken
+                );
         }
     }
 }

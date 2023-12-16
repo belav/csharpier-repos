@@ -22,11 +22,12 @@ public class When_value_types_are_the_source_of_map_cycles : AutoMapperSpecBase
         public Destination Parent { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-    {
-        cfg.CreateMap<Source, Destination>().MaxDepth(2);
-        cfg.CreateMap<InnerSource, InnerDestination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>().MaxDepth(2);
+            cfg.CreateMap<InnerSource, InnerDestination>();
+        });
 
     [Fact]
     public void Should_work()
@@ -38,7 +39,8 @@ public class When_value_types_are_the_source_of_map_cycles : AutoMapperSpecBase
     }
 }
 
-public class When_value_types_are_the_source_of_map_cycles_with_PreserveReferences : AutoMapperSpecBase
+public class When_value_types_are_the_source_of_map_cycles_with_PreserveReferences
+    : AutoMapperSpecBase
 {
     public struct Source
     {
@@ -62,11 +64,12 @@ public class When_value_types_are_the_source_of_map_cycles_with_PreserveReferenc
         public InnerDestination Inner { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>().MaxDepth(2);
-        cfg.CreateMap<InnerSource, InnerDestination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>().MaxDepth(2);
+            cfg.CreateMap<InnerSource, InnerDestination>();
+        });
 
     [Fact]
     public void Should_work()
@@ -77,7 +80,11 @@ public class When_value_types_are_the_source_of_map_cycles_with_PreserveReferenc
         innerSource.Inner = innerSource;
         var destinationValue = Mapper.Map<Destination>(source).Value;
         destinationValue.Inner.ShouldBe(destinationValue);
-        FindTypeMapFor<InnerSource, InnerDestination>().MemberMaps.Single(m => m.DestinationName == nameof(InnerDestination.Inner)).Inline.ShouldBeFalse();
+        FindTypeMapFor<InnerSource, InnerDestination>()
+            .MemberMaps
+            .Single(m => m.DestinationName == nameof(InnerDestination.Inner))
+            .Inline
+            .ShouldBeFalse();
     }
 }
 
@@ -97,15 +104,15 @@ public class When_destination_type_is_a_value_type : AutoMapperSpecBase
         public string Value2;
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Value1 = 4, Value2 = "hello"});
+        _destination = Mapper.Map<Source, Destination>(new Source { Value1 = 4, Value2 = "hello" });
     }
 
     [Fact]
@@ -129,6 +136,7 @@ public class When_source_struct_config_has_custom_mappings : AutoMapperSpecBase
         public ushort Reg1;
         public ushort Reg2;
     }
+
     public class DigiIn1
     {
         public ushort CncInfo { get; set; }
@@ -136,9 +144,12 @@ public class When_source_struct_config_has_custom_mappings : AutoMapperSpecBase
         public ushort Reg2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(
-        cfg => cfg.CreateMap<matrixDigiInStruct1, DigiIn1>()
-            .ForMember(d => d.CncInfo, x => x.MapFrom(s => s.CNCinfo)));
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(
+            cfg =>
+                cfg.CreateMap<matrixDigiInStruct1, DigiIn1>()
+                    .ForMember(d => d.CncInfo, x => x.MapFrom(s => s.CNCinfo))
+        );
 
     [Fact]
     public void Should_map_correctly()
@@ -157,7 +168,6 @@ public class When_source_struct_config_has_custom_mappings : AutoMapperSpecBase
     }
 }
 
-
 public class When_destination_type_is_a_nullable_value_type : AutoMapperSpecBase
 {
     private Destination _destination;
@@ -174,16 +184,18 @@ public class When_destination_type_is_a_nullable_value_type : AutoMapperSpecBase
         public int? Value2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<string, int>().ConvertUsing((string s) => System.Convert.ToInt32(s));
-        cfg.CreateMap<string, int?>().ConvertUsing((string s) => (int?) System.Convert.ToInt32(s));
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<string, int>().ConvertUsing((string s) => System.Convert.ToInt32(s));
+            cfg.CreateMap<string, int?>()
+                .ConvertUsing((string s) => (int?)System.Convert.ToInt32(s));
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Value1 = "10", Value2 = "20"});
+        _destination = Mapper.Map<Source, Destination>(new Source { Value1 = "10", Value2 = "20" });
     }
 
     [Fact]

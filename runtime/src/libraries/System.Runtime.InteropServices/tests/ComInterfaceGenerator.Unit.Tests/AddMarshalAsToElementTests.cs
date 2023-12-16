@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.Interop;
 using Xunit;
-
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpCodeFixVerifier<
-       Microsoft.CodeAnalysis.Testing.EmptyDiagnosticAnalyzer,
-       Microsoft.Interop.Analyzers.AddMarshalAsToElementFixer>;
+    Microsoft.CodeAnalysis.Testing.EmptyDiagnosticAnalyzer,
+    Microsoft.Interop.Analyzers.AddMarshalAsToElementFixer
+>;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {
@@ -55,10 +55,21 @@ namespace ComInterfaceGenerator.Unit.Tests
                     }
                     """;
 
-            await VerifySourceGeneratorAsync(source, fixedSource, VerifyCS.Diagnostic(GeneratorDiagnostics.HResultTypeWillBeTreatedAsStruct).WithLocation(0).WithArguments("HResult"));
+            await VerifySourceGeneratorAsync(
+                source,
+                fixedSource,
+                VerifyCS
+                    .Diagnostic(GeneratorDiagnostics.HResultTypeWillBeTreatedAsStruct)
+                    .WithLocation(0)
+                    .WithArguments("HResult")
+            );
         }
 
-        private static Task VerifySourceGeneratorAsync(string source, string fixedSource, params DiagnosticResult[] diagnostics)
+        private static Task VerifySourceGeneratorAsync(
+            string source,
+            string fixedSource,
+            params DiagnosticResult[] diagnostics
+        )
         {
             var test = new Test()
             {
@@ -75,7 +86,9 @@ namespace ComInterfaceGenerator.Unit.Tests
 
         private sealed class Test : VerifyCS.Test
         {
-            private static readonly ImmutableArray<Type> GeneratorTypes = ImmutableArray.Create(typeof(Microsoft.Interop.ComInterfaceGenerator));
+            private static readonly ImmutableArray<Type> GeneratorTypes = ImmutableArray.Create(
+                typeof(Microsoft.Interop.ComInterfaceGenerator)
+            );
 
             protected override IEnumerable<Type> GetSourceGenerators() => GeneratorTypes;
         }

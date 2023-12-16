@@ -27,214 +27,227 @@
 
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data.Common;
+using System.Dynamic;
 using System.Linq;
 using System.Threading;
-using System.Dynamic;
-using System.Data.Common;
-using System.Configuration;
-using System.ComponentModel;
-using System.Collections.Generic;
 
 namespace WebMatrix.Data
 {
-	public class Database : IDisposable
-	{
-		public static event EventHandler<ConnectionEventArgs> ConnectionOpened;
+    public class Database : IDisposable
+    {
+        public static event EventHandler<ConnectionEventArgs> ConnectionOpened;
 
-		bool opened;
-		DbConnection connection;
-		readonly string providerName;
+        bool opened;
+        DbConnection connection;
+        readonly string providerName;
 
-		static readonly Dictionary<string, string> lastInsertedIdStmts = new Dictionary<string, string> ();
+        static readonly Dictionary<string, string> lastInsertedIdStmts =
+            new Dictionary<string, string>();
 
-		static Database ()
-		{
-			// Add your own DB-specific way to do so
-			lastInsertedIdStmts.Add ("System.Data.SqlClient", "select @@IDENTITY;");
-			lastInsertedIdStmts.Add ("Mono.Data.Sqlite", "select last_insert_rowid ();");
-			lastInsertedIdStmts.Add ("MySql.Data", "SELECT LAST_INSERT_ID();");
-			lastInsertedIdStmts.Add ("Npgsql", "SELECT lastval();");
-		}
+        static Database()
+        {
+            // Add your own DB-specific way to do so
+            lastInsertedIdStmts.Add("System.Data.SqlClient", "select @@IDENTITY;");
+            lastInsertedIdStmts.Add("Mono.Data.Sqlite", "select last_insert_rowid ();");
+            lastInsertedIdStmts.Add("MySql.Data", "SELECT LAST_INSERT_ID();");
+            lastInsertedIdStmts.Add("Npgsql", "SELECT lastval();");
+        }
 
-		private Database (DbConnection connection, string providerName)
-		{
-			this.connection = connection;
-			this.providerName = providerName;
-		}
+        private Database(DbConnection connection, string providerName)
+        {
+            this.connection = connection;
+            this.providerName = providerName;
+        }
 
-		public static Database Open (string name)
-		{
-			var config = ConfigurationManager.ConnectionStrings[name];
-			if (config == null)
-				throw new ArgumentException ("name", string.Format ("Database with name {0} doesn't exist", name));
+        public static Database Open(string name)
+        {
+            var config = ConfigurationManager.ConnectionStrings[name];
+            if (config == null)
+                throw new ArgumentException(
+                    "name",
+                    string.Format("Database with name {0} doesn't exist", name)
+                );
 
-			return OpenConnectionString (config.ConnectionString, config.ProviderName);
-		}
+            return OpenConnectionString(config.ConnectionString, config.ProviderName);
+        }
 
-		public static Database OpenConnectionString (string connectionString)
-		{
-			return OpenConnectionString (connectionString, "System.Data.SqlClient");
-		}
+        public static Database OpenConnectionString(string connectionString)
+        {
+            return OpenConnectionString(connectionString, "System.Data.SqlClient");
+        }
 
-		public static Database OpenConnectionString (string connectionString, string providerName)
-		{
-			var factory = DbProviderFactories.GetFactory (providerName);
-			var conn = factory.CreateConnection ();
-			conn.ConnectionString = connectionString;
+        public static Database OpenConnectionString(string connectionString, string providerName)
+        {
+            var factory = DbProviderFactories.GetFactory(providerName);
+            var conn = factory.CreateConnection();
+            conn.ConnectionString = connectionString;
 
-			return new Database (conn, providerName);
-		}
+            return new Database(conn, providerName);
+        }
 
-		public void Close ()
-		{
-			opened = false;
-			connection.Close ();
-		}
+        public void Close()
+        {
+            opened = false;
+            connection.Close();
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (disposing) {
-				if (opened)
-					connection.Close ();
-				connection.Dispose ();
-			}
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (opened)
+                    connection.Close();
+                connection.Dispose();
+            }
+        }
 
-		public int Execute (string commandText, params object[] args)
-		{
-			var command = PrepareCommand (commandText);
-			PrepareCommandParameters (command, args);
+        public int Execute(string commandText, params object[] args)
+        {
+            var command = PrepareCommand(commandText);
+            PrepareCommandParameters(command, args);
 
-			EnsureConnectionOpened ();
+            EnsureConnectionOpened();
 
-			var result = command.ExecuteNonQuery ();
+            var result = command.ExecuteNonQuery();
 
-			command.Dispose ();
+            command.Dispose();
 
-			return result;
-		}
+            return result;
+        }
 
-		public IEnumerable<dynamic> Query (string commandText, params object[] args)
-		{
-			var result = QueryInternal (commandText, args, false);
+        public IEnumerable<dynamic> Query(string commandText, params object[] args)
+        {
+            var result = QueryInternal(commandText, args, false);
 
-			return result != null ? result.Select (r => new DynamicRecord (r)) : null;
-		}
+            return result != null ? result.Select(r => new DynamicRecord(r)) : null;
+        }
 
-		public dynamic QuerySingle (string commandText, params object[] args)
-		{
-			var result = QueryInternal (commandText, args, true);
+        public dynamic QuerySingle(string commandText, params object[] args)
+        {
+            var result = QueryInternal(commandText, args, true);
 
-			return result != null ? new DynamicRecord (result[0]) : null;
-		}
+            return result != null ? new DynamicRecord(result[0]) : null;
+        }
 
-		List<Dictionary<string, object>> QueryInternal (string commandText, object[] args, bool unique)
-		{
-			EnsureConnectionOpened ();
+        List<Dictionary<string, object>> QueryInternal(
+            string commandText,
+            object[] args,
+            bool unique
+        )
+        {
+            EnsureConnectionOpened();
 
-			var command = PrepareCommand (commandText);
-			PrepareCommandParameters (command, args);
-			string[] columnsNames;
-			var rows = new List<Dictionary<string, object>> ();
+            var command = PrepareCommand(commandText);
+            PrepareCommandParameters(command, args);
+            string[] columnsNames;
+            var rows = new List<Dictionary<string, object>>();
 
-			using (var reader = command.ExecuteReader ()) {
-				if (!reader.Read () || !reader.HasRows)
-					return null;
+            using (var reader = command.ExecuteReader())
+            {
+                if (!reader.Read() || !reader.HasRows)
+                    return null;
 
-				columnsNames = new string [reader.FieldCount];
+                columnsNames = new string[reader.FieldCount];
 
-				do {				
-					var fields = new Dictionary<string, object> ();
+                do
+                {
+                    var fields = new Dictionary<string, object>();
 
-					for (int i = 0; i < reader.FieldCount; ++i) {
-						if (columnsNames[i] == null)
-							columnsNames[i] = reader.GetName (i);
+                    for (int i = 0; i < reader.FieldCount; ++i)
+                    {
+                        if (columnsNames[i] == null)
+                            columnsNames[i] = reader.GetName(i);
 
-						fields[columnsNames[i]] = reader[i];
-					}
+                        fields[columnsNames[i]] = reader[i];
+                    }
 
-					rows.Add (fields);
-				} while (!unique && reader.Read ());
-			}
+                    rows.Add(fields);
+                } while (!unique && reader.Read());
+            }
 
-			command.Dispose ();
+            command.Dispose();
 
-			return rows;
-		}
+            return rows;
+        }
 
-		public object QueryValue (string commandText, params object[] args)
-		{
-			EnsureConnectionOpened ();
+        public object QueryValue(string commandText, params object[] args)
+        {
+            EnsureConnectionOpened();
 
-			var command = PrepareCommand (commandText);
-			PrepareCommandParameters (command, args);
+            var command = PrepareCommand(commandText);
+            PrepareCommandParameters(command, args);
 
-			var result = command.ExecuteScalar ();
+            var result = command.ExecuteScalar();
 
-			command.Dispose ();
+            command.Dispose();
 
-			return result;
-		}
+            return result;
+        }
 
-		public object GetLastInsertId ()
-		{
-			string sql;
-			if (!lastInsertedIdStmts.TryGetValue (providerName, out sql))
-				throw new NotSupportedException ("This operation is not available for your database");
+        public object GetLastInsertId()
+        {
+            string sql;
+            if (!lastInsertedIdStmts.TryGetValue(providerName, out sql))
+                throw new NotSupportedException(
+                    "This operation is not available for your database"
+                );
 
-			return QueryValue (sql);
-		}
+            return QueryValue(sql);
+        }
 
-		DbCommand PrepareCommand (string commandText)
-		{
-			var command = connection.CreateCommand ();
-			command.CommandText = commandText;
+        DbCommand PrepareCommand(string commandText)
+        {
+            var command = connection.CreateCommand();
+            command.CommandText = commandText;
 
-			return command;
-		}
+            return command;
+        }
 
-		static void PrepareCommandParameters (DbCommand command, object[] args)
-		{
-			if (args.Length == 0)
-				return;
+        static void PrepareCommandParameters(DbCommand command, object[] args)
+        {
+            if (args.Length == 0)
+                return;
 
-			int index = 0;
+            int index = 0;
 
-			foreach (var arg in args) {
-				var param = command.CreateParameter ();
-				param.ParameterName = "@" + index;
-				param.Value = args[index++];
-				command.Parameters.Add (param);
-			}
-		}
+            foreach (var arg in args)
+            {
+                var param = command.CreateParameter();
+                param.ParameterName = "@" + index;
+                param.Value = args[index++];
+                command.Parameters.Add(param);
+            }
+        }
 
-		static void TriggerConnectionOpened (Database self, DbConnection connection)
-		{
-			EventHandler<ConnectionEventArgs> evt = ConnectionOpened;
-			if (evt != null)
-				evt (self, new ConnectionEventArgs (connection));
-		}
+        static void TriggerConnectionOpened(Database self, DbConnection connection)
+        {
+            EventHandler<ConnectionEventArgs> evt = ConnectionOpened;
+            if (evt != null)
+                evt(self, new ConnectionEventArgs(connection));
+        }
 
-		void EnsureConnectionOpened ()
-		{
-			if (opened)
-				return;
+        void EnsureConnectionOpened()
+        {
+            if (opened)
+                return;
 
-			connection.Open ();
-			opened = true;
-			TriggerConnectionOpened (this, connection);
-		}
+            connection.Open();
+            opened = true;
+            TriggerConnectionOpened(this, connection);
+        }
 
-		public DbConnection Connection {
-			get {
-				return connection;
-			}
-		}		
-	}
+        public DbConnection Connection
+        {
+            get { return connection; }
+        }
+    }
 }
-

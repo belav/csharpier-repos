@@ -16,7 +16,10 @@ internal static class Program
 {
     internal static async Task Main(string[] args)
     {
-        var propertyOption = new CliOption<string[]>("--property") { Arity = ArgumentArity.ZeroOrMore };
+        var propertyOption = new CliOption<string[]>("--property")
+        {
+            Arity = ArgumentArity.ZeroOrMore
+        };
         var binaryLogOption = new CliOption<string?>("--binlog") { Required = false };
         var command = new CliRootCommand { binaryLogOption, propertyOption };
         var parsedArguments = command.Parse(args);
@@ -33,25 +36,37 @@ internal static class Program
 
         // Create a console logger that logs everything to standard error instead of standard out; by setting the threshold to Trace
         // everything will go to standard error.
-        var loggerFactory = LoggerFactory.Create(builder =>
-            builder.AddConsole(configure =>
-            {
-                // DisableColors is deprecated in favor of us moving to simple console, but that loses the LogToStandardErrorThreshold
-                // which we also need
+        var loggerFactory = LoggerFactory.Create(
+            builder =>
+                builder.AddConsole(configure =>
+                {
+                    // DisableColors is deprecated in favor of us moving to simple console, but that loses the LogToStandardErrorThreshold
+                    // which we also need
 #pragma warning disable CS0618
-                configure.DisableColors = true;
+                    configure.DisableColors = true;
 #pragma warning restore CS0618
-                configure.LogToStandardErrorThreshold = LogLevel.Trace;
-            }));
+                    configure.LogToStandardErrorThreshold = LogLevel.Trace;
+                })
+        );
 
         var logger = loggerFactory.CreateLogger(typeof(Program));
 
-        logger.LogInformation($"BuildHost Runtime Version: {System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}");
+        logger.LogInformation(
+            $"BuildHost Runtime Version: {System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}"
+        );
 
-        var server = new RpcServer(sendingStream: Console.OpenStandardOutput(), receivingStream: Console.OpenStandardInput());
+        var server = new RpcServer(
+            sendingStream: Console.OpenStandardOutput(),
+            receivingStream: Console.OpenStandardInput()
+        );
 
-        var targetObject = server.AddTarget(new BuildHost(loggerFactory, propertiesBuilder.ToImmutable(), binaryLogPath, server));
-        Contract.ThrowIfFalse(targetObject == 0, "The first object registered should have target 0, which is assumed by the client.");
+        var targetObject = server.AddTarget(
+            new BuildHost(loggerFactory, propertiesBuilder.ToImmutable(), binaryLogPath, server)
+        );
+        Contract.ThrowIfFalse(
+            targetObject == 0,
+            "The first object registered should have target 0, which is assumed by the client."
+        );
 
         await server.RunAsync().ConfigureAwait(false);
 

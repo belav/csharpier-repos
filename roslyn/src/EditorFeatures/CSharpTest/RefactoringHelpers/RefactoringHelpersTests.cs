@@ -11,7 +11,8 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
 {
-    public partial class RefactoringHelpersTests : RefactoringHelpersTestBase<CSharpTestWorkspaceFixture>
+    public partial class RefactoringHelpersTests
+        : RefactoringHelpersTestBase<CSharpTestWorkspaceFixture>
     {
         #region Locations
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -1034,14 +1035,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                         {
                             C LocalFunction(C c)
                             {
-                    """ + data + """
+                    """
+                    + data
+                    + """
                     return null;
                             }
                             var a = new object();
                         }
                     }
                     """;
-
             }
         }
         #endregion
@@ -1166,14 +1168,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         [WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestMissingInHeaderHole(string data)
         {
-            var testText = """
+            var testText =
+                """
                 class C
                 {
                     void M()
                     {
                         C LocalFunction(C c)
                         {
-                """ + data + """
+                """
+                + data
+                + """
                 return null;
                         }
                         var a = new object();
@@ -1194,14 +1199,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         [WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestInHeader(string data)
         {
-            var testText = """
+            var testText =
+                """
                 class C
                 {
                     void M()
                     {
                         C LocalFunction(C c)
                         {
-                """ + data + """
+                """
+                + data
+                + """
                 return null;
                         }
                         var a = new object();
@@ -1299,7 +1307,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                     }
                 }
                 """;
-            await TestMissingAsync<ArgumentSyntax>(testText, n => n.Parent is TupleExpressionSyntax);
+            await TestMissingAsync<ArgumentSyntax>(
+                testText,
+                n => n.Parent is TupleExpressionSyntax
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -1599,7 +1610,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         [WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestLocalDeclarationInHeader(string data)
         {
-            var testText = """
+            var testText =
+                """
                 class C
                 {
                     void M()
@@ -1607,7 +1619,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
 
                         C LocalFunction(C c)
                         {
-                """ + data + """
+                """
+                + data
+                + """
                 return null;
                         }
                         var a = new object();
@@ -1624,7 +1638,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         [WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestMissingLocalDeclarationCaretInHeader(string data)
         {
-            var testText = """
+            var testText =
+                """
                 class C
                 {
                     void M()
@@ -1632,7 +1647,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
 
                         C LocalFunction(C c)
                         {
-                """ + data + """
+                """
+                + data
+                + """
                 return null;
                         }
                         var a = new object();
@@ -1667,7 +1684,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                         }|}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -1693,7 +1711,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                         }|]|}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -1719,7 +1738,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                         }|]
                     }
                 }
-                """);
+                """
+            );
         }
 
         #endregion
@@ -1781,7 +1801,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                     }
                 }
                 """;
-            await TestAsync<ArgumentSyntax>(testText, predicate: n => n.Parent is TupleExpressionSyntax);
+            await TestAsync<ArgumentSyntax>(
+                testText,
+                predicate: n => n.Parent is TupleExpressionSyntax
+            );
         }
         #endregion
     }

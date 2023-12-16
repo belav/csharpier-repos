@@ -18,31 +18,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
     {
         internal sealed class RawStringLiteralTestState : AbstractCommandHandlerTestState
         {
-            private static readonly TestComposition s_composition = EditorTestCompositions.EditorFeaturesWpf.AddParts(
-                typeof(RawStringLiteralCommandHandler));
+            private static readonly TestComposition s_composition = EditorTestCompositions
+                .EditorFeaturesWpf
+                .AddParts(typeof(RawStringLiteralCommandHandler));
 
             private readonly RawStringLiteralCommandHandler _commandHandler;
 
             public RawStringLiteralTestState(XElement workspaceElement)
                 : base(workspaceElement, s_composition)
             {
-                _commandHandler = (RawStringLiteralCommandHandler)GetExportedValues<ICommandHandler>().
-                    Single(c => c is RawStringLiteralCommandHandler);
+                _commandHandler = (RawStringLiteralCommandHandler)
+                    GetExportedValues<ICommandHandler>()
+                        .Single(c => c is RawStringLiteralCommandHandler);
             }
 
-            public static RawStringLiteralTestState CreateTestState(string markup, bool withSpansOnly = false)
-                => new(GetWorkspaceXml(markup, withSpansOnly));
+            public static RawStringLiteralTestState CreateTestState(
+                string markup,
+                bool withSpansOnly = false
+            ) => new(GetWorkspaceXml(markup, withSpansOnly));
 
             public static XElement GetWorkspaceXml(string markup, bool withSpansOnly)
             {
                 var spansOnlyMarkup = withSpansOnly ? """Markup="SpansOnly" """ : "";
-                return XElement.Parse($"""
+                return XElement.Parse(
+                    $"""
 <Workspace>
     <Project Language="C#" CommonReferences="true">
         <Document {spansOnlyMarkup}>{markup}</Document>
     </Project>
 </Workspace>
-""");
+"""
+                );
             }
 
             internal void AssertCodeIs(string expectedCode, bool withSpansOnly = false)
@@ -50,7 +56,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 if (withSpansOnly)
                     expectedCode = expectedCode.Replace("$", "\uD7FF");
 
-                MarkupTestFile.GetPositionAndSpans(expectedCode, out var massaged, out int? caretPosition, out var spans);
+                MarkupTestFile.GetPositionAndSpans(
+                    expectedCode,
+                    out var massaged,
+                    out int? caretPosition,
+                    out var spans
+                );
 
                 if (withSpansOnly)
                 {
@@ -61,25 +72,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 Assert.Equal(massaged, TextView.TextSnapshot.GetText());
 
                 if (!withSpansOnly)
-                    Assert.Equal(caretPosition!.Value, TextView.Caret.Position.BufferPosition.Position);
+                    Assert.Equal(
+                        caretPosition!.Value,
+                        TextView.Caret.Position.BufferPosition.Position
+                    );
 
-                var virtualSpaces = spans.SingleOrDefault(kvp => kvp.Key.StartsWith("VirtualSpaces#"));
+                var virtualSpaces = spans.SingleOrDefault(
+                    kvp => kvp.Key.StartsWith("VirtualSpaces#")
+                );
                 if (virtualSpaces.Key != null)
                 {
                     var virtualOffset = int.Parse(virtualSpaces.Key["VirtualSpaces-".Length..]);
                     Assert.True(TextView.Caret.InVirtualSpace);
-                    Assert.Equal(virtualOffset, TextView.Caret.Position.VirtualBufferPosition.VirtualSpaces);
+                    Assert.Equal(
+                        virtualOffset,
+                        TextView.Caret.Position.VirtualBufferPosition.VirtualSpaces
+                    );
                 }
             }
 
-            public void SendTypeChar(char ch)
-                => SendTypeChar(ch, _commandHandler.ExecuteCommand, () => EditorOperations.InsertText(ch.ToString()));
+            public void SendTypeChar(char ch) =>
+                SendTypeChar(
+                    ch,
+                    _commandHandler.ExecuteCommand,
+                    () => EditorOperations.InsertText(ch.ToString())
+                );
 
-            public void SendReturn(bool handled)
-                => SendReturn(_commandHandler.ExecuteCommand, () =>
-                {
-                    Assert.False(handled, "Return key should have been handled");
-                });
+            public void SendReturn(bool handled) =>
+                SendReturn(
+                    _commandHandler.ExecuteCommand,
+                    () =>
+                    {
+                        Assert.False(handled, "Return key should have been handled");
+                    }
+                );
         }
 
         #region enter tests
@@ -90,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
                 var v = """$$"""
-                """");
+                """"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -98,14 +125,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 var v = """
                 $${|VirtualSpaces-4:|}
                     """
-                """");
+                """"
+            );
         }
 
         [WpfFact]
         public void TestReturnInSixQuotesWithSemicolonAfter()
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = """"""$$"""""";");
+                @"var v = """"""$$"""""";"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -113,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 var v = """
                 $${|VirtualSpaces-4:|}
                     """;
-                """");
+                """"
+            );
         }
 
         [WpfFact]
@@ -122,13 +152,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """""
                 var v = """"$$""
-                """"");
+                """""
+            );
 
             testState.SendReturn(handled: false);
             testState.AssertCodeIs(
                 """""
                 var v = """"$$""
-                """"");
+                """""
+            );
         }
 
         [WpfFact]
@@ -137,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
                 var v = $"""$$"""
-                """");
+                """"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -145,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 var v = $"""
                 $${|VirtualSpaces-4:|}
                     """
-                """");
+                """"
+            );
         }
 
         [WpfFact]
@@ -155,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 """"
                 var v = """$$""";
                 Console.WriteLine("Goo");
-                """");
+                """"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -164,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 $${|VirtualSpaces-4:|}
                     """;
                 Console.WriteLine("Goo");
-                """");
+                """"
+            );
         }
 
         [WpfFact]
@@ -173,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
                 var v = WriteLine("""$$"""
-                """");
+                """"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -181,14 +218,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 var v = WriteLine("""
                 $${|VirtualSpaces-4:|}
                     """
-                """");
+                """"
+            );
         }
 
         [WpfFact]
         public void TestReturnInSixQuotesAsArgument2()
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = WriteLine(""""""$$"""""")");
+                @"var v = WriteLine(""""""$$"""""")"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -196,14 +235,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 var v = WriteLine("""
                 $${|VirtualSpaces-4:|}
                     """)
-                """");
+                """"
+            );
         }
 
         [WpfFact]
         public void TestReturnInSixQuotesAsArgument3()
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = WriteLine(""""""$$"""""");");
+                @"var v = WriteLine(""""""$$"""""");"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -211,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 var v = WriteLine("""
                 $${|VirtualSpaces-4:|}
                     """);
-                """");
+                """"
+            );
         }
 
         [WpfFact]
@@ -221,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 """"
                 var v = WriteLine(
                     """$$"""
-                """");
+                """"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -230,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                     """
                 $${|VirtualSpaces-4:|}
                     """
-                """");
+                """"
+            );
         }
 
         [WpfFact]
@@ -240,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 """"
                 var v = WriteLine(
                     """$$""")
-                """");
+                """"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -249,7 +294,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                     """
                 $${|VirtualSpaces-4:|}
                     """)
-                """");
+                """"
+            );
         }
 
         [WpfFact]
@@ -259,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 """"
                 var v = WriteLine(
                     """$$""");
-                """");
+                """"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -268,14 +315,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                     """
                 $${|VirtualSpaces-4:|}
                     """);
-                """");
+                """"
+            );
         }
 
         [WpfFact]
         public void TestReturnInSixQuotesWithSemicolonAfter_Interpolated()
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = $""""""$$"""""";");
+                @"var v = $""""""$$"""""";"
+            );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
@@ -283,7 +332,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
                 var v = $"""
                 $${|VirtualSpaces-4:|}
                     """;
-                """");
+                """"
+            );
         }
 
         [WpfFact]
@@ -292,20 +342,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """""
                 var v = $""""$$""
-                """"");
+                """""
+            );
 
             testState.SendReturn(handled: false);
             testState.AssertCodeIs(
                 """""
                 var v = $""""$$""
-                """"");
+                """""
+            );
         }
 
         [WpfFact]
         public void TestReturnEndOfFile()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = """"""$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"var v = """"""$$");
 
             testState.SendReturn(handled: false);
         }
@@ -313,8 +364,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         [WpfFact]
         public void TestReturnInEmptyFile()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"$$");
 
             testState.SendReturn(handled: false);
         }
@@ -326,108 +376,109 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         [WpfFact]
         public void TestGenerateAtEndOfFile()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = """"$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"var v = """"$$");
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """"
                 var v = """$$"""
-                """");
+                """"
+            );
         }
 
         [WpfFact]
         public void TestGenerateWithSemicolonAfter()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = """"$$;");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"var v = """"$$;");
 
             testState.SendTypeChar('"');
-            testState.AssertCodeIs(
-@"var v = """"""$$"""""";");
+            testState.AssertCodeIs(@"var v = """"""$$"""""";");
         }
 
         [WpfFact]
         public void TestGenerateWithInterpolatedString()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = $""""$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"var v = $""""$$");
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """"
                 var v = $"""$$"""
-                """");
+                """"
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/66538")]
         public void TestGenerateWithInterpolatedString_TwoDollarSigns()
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
-"""var v = $$""[||]""", withSpansOnly: true);
+                """var v = $$""[||]""",
+                withSpansOnly: true
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
-""""
+                """"
 var v = $$"""[||]"""
-"""", withSpansOnly: true);
+"""",
+                withSpansOnly: true
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/66538")]
         public void TestGenerateWithInterpolatedString_TwoDollarSigns_FourthDoubleQuote()
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
-""""var v = $$"""[||]""";"""", withSpansOnly: true);
+                """"var v = $$"""[||]""";"""",
+                withSpansOnly: true
+            );
 
             testState.SendTypeChar('"');
-            testState.AssertCodeIs(
-"""""var v = $$""""[||]"""";""""", withSpansOnly: true);
+            testState.AssertCodeIs("""""var v = $$""""[||]"""";""""", withSpansOnly: true);
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/66538")]
         public void TestGenerateWithInterpolatedString_ThreeDollarSigns()
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
-"""var v = $$$""[||]""", withSpansOnly: true);
+                """var v = $$$""[||]""",
+                withSpansOnly: true
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
-""""
+                """"
 var v = $$$"""[||]"""
-"""", withSpansOnly: true);
+"""",
+                withSpansOnly: true
+            );
         }
 
         [WpfFact]
         public void TestNoGenerateWithVerbatimString()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = @""""$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"var v = @""""$$");
 
             testState.SendTypeChar('"');
-            testState.AssertCodeIs(
-@"var v = @""""""$$");
+            testState.AssertCodeIs(@"var v = @""""""$$");
         }
 
         [WpfFact]
         public void TestNoGenerateWithVerbatimInterpolatedString1()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = @$""""$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"var v = @$""""$$");
 
             testState.SendTypeChar('"');
-            testState.AssertCodeIs(
-@"var v = @$""""""$$");
+            testState.AssertCodeIs(@"var v = @$""""""$$");
         }
 
         [WpfFact]
         public void TestNoGenerateWithVerbatimInterpolatedString2()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = $@""""$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"var v = $@""""$$");
 
             testState.SendTypeChar('"');
-            testState.AssertCodeIs(
-@"var v = $@""""""$$");
+            testState.AssertCodeIs(@"var v = $@""""""$$");
         }
 
         #endregion
@@ -440,13 +491,15 @@ var v = $$$"""[||]"""
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """
                 var v = "$$"
-                """);
+                """
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """
                 var v = ""$$"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -455,13 +508,15 @@ var v = $$$"""[||]"""
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """
                 var v = ""$$""
-                """);
+                """
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """"
                 var v = """$$""
-                """");
+                """"
+            );
         }
 
         [WpfFact]
@@ -470,13 +525,15 @@ var v = $$$"""[||]"""
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
                 var v = """$$"""
-                """");
+                """"
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
                 var v = """"$$""""
-                """"");
+                """""
+            );
         }
 
         [WpfFact]
@@ -485,13 +542,15 @@ var v = $$$"""[||]"""
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
                 var v = $"""$$"""
-                """");
+                """"
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
                 var v = $""""$$""""
-                """"");
+                """""
+            );
         }
 
         [WpfFact]
@@ -500,13 +559,15 @@ var v = $$$"""[||]"""
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """""
                 var v = $""$$""""
-                """"");
+                """""
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
                 var v = $"""$$""""
-                """"");
+                """""
+            );
         }
 
         #endregion
@@ -519,13 +580,15 @@ var v = $$$"""[||]"""
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
                 var v = """$$ """
-                """");
+                """"
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
                 var v = """"$$ """"
-                """"");
+                """""
+            );
         }
 
         [WpfFact]
@@ -536,7 +599,8 @@ var v = $$$"""[||]"""
                 var v = """$$
 
                     """
-                """");
+                """"
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
@@ -544,7 +608,8 @@ var v = $$$"""[||]"""
                 var v = """"$$
 
                     """"
-                """"");
+                """""
+            );
         }
 
         [WpfFact]
@@ -555,7 +620,8 @@ var v = $$$"""[||]"""
                 var v = $"""$$
 
                     """
-                """");
+                """"
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
@@ -563,18 +629,17 @@ var v = $$$"""[||]"""
                 var v = $""""$$
 
                     """"
-                """"");
+                """""
+            );
         }
 
         [WpfFact]
         public void TestDoNotGrowDelimetersWhenEndNotThere()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"var v = """"""$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"var v = """"""$$");
 
             testState.SendTypeChar('"');
-            testState.AssertCodeIs(
-@"var v = """"""""$$");
+            testState.AssertCodeIs(@"var v = """"""""$$");
         }
 
         [WpfFact]
@@ -585,7 +650,8 @@ var v = $$$"""[||]"""
                 var v = """$$
 
                     ""
-                """");
+                """"
+            );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
@@ -593,7 +659,8 @@ var v = $$$"""[||]"""
                 var v = """"$$
 
                     ""
-                """"");
+                """""
+            );
         }
 
         #endregion
@@ -601,14 +668,14 @@ var v = $$$"""[||]"""
         [WpfFact]
         public void TestTypeQuoteEmptyFile()
         {
-            using var testState = RawStringLiteralTestState.CreateTestState(
-@"$$");
+            using var testState = RawStringLiteralTestState.CreateTestState(@"$$");
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """
                 "$$
-                """);
+                """
+            );
         }
     }
 }

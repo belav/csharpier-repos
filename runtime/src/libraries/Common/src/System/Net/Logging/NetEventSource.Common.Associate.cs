@@ -17,8 +17,11 @@ namespace System.Net
         /// <param name="second">The second object.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
-        public static void Associate(object first, object second, [CallerMemberName] string? memberName = null) =>
-            Associate(first, first, second, memberName);
+        public static void Associate(
+            object first,
+            object second,
+            [CallerMemberName] string? memberName = null
+        ) => Associate(first, first, second, memberName);
 
         /// <summary>Logs a relationship between two objects.</summary>
         /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>
@@ -26,20 +29,49 @@ namespace System.Net
         /// <param name="second">The second object.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
-        public static void Associate(object? thisOrContextObject, object first, object second, [CallerMemberName] string? memberName = null) =>
-            Log.Associate(IdOf(thisOrContextObject), memberName, IdOf(first), IdOf(second));
+        public static void Associate(
+            object? thisOrContextObject,
+            object first,
+            object second,
+            [CallerMemberName] string? memberName = null
+        ) => Log.Associate(IdOf(thisOrContextObject), memberName, IdOf(first), IdOf(second));
 
-        [Event(AssociateEventId, Level = EventLevel.Informational, Keywords = Keywords.Default, Message = "[{2}]<-->[{3}]")]
-        private void Associate(string thisOrContextObject, string? memberName, string first, string second)
+        [Event(
+            AssociateEventId,
+            Level = EventLevel.Informational,
+            Keywords = Keywords.Default,
+            Message = "[{2}]<-->[{3}]"
+        )]
+        private void Associate(
+            string thisOrContextObject,
+            string? memberName,
+            string first,
+            string second
+        )
         {
             Debug.Assert(IsEnabled());
-            WriteEvent(AssociateEventId, thisOrContextObject, memberName ?? MissingMember, first, second);
+            WriteEvent(
+                AssociateEventId,
+                thisOrContextObject,
+                memberName ?? MissingMember,
+                first,
+                second
+            );
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
         [NonEvent]
-        private unsafe void WriteEvent(int eventId, string? arg1, string? arg2, string? arg3, string? arg4)
+        private unsafe void WriteEvent(
+            int eventId,
+            string? arg1,
+            string? arg2,
+            string? arg3,
+            string? arg4
+        )
         {
             arg1 ??= "";
             arg2 ??= "";

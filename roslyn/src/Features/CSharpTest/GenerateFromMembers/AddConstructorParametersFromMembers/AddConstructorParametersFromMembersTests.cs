@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             """;
 
         private const string FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig =
-            FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig + """
+            FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig
+            + """
 
             dotnet_naming_style.field_camel_case.required_suffix        = _End
             """;
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             """;
 
         private const string ParameterNamesCamelCaseWithPUnderscorePrefixEndUnderscoreSuffixEditorConfig =
-            ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig + """
+            ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+            + """
 
             dotnet_naming_style.p_camel_case.required_suffix            = _End
             """;
@@ -58,8 +60,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -73,8 +74,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -89,7 +89,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -98,8 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -114,8 +117,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -131,7 +133,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -140,8 +146,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -159,8 +164,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -180,7 +184,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i, string s)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_parameters_to_0,
+                            "Program(int i, string s)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -189,8 +200,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -207,8 +217,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -227,7 +236,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i, string s)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_parameters_to_0,
+                            "Program(int i, string s)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -236,8 +252,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -254,8 +269,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -274,7 +288,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i, string s)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_parameters_to_0,
+                            "Program(int i, string s)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -284,8 +305,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test()
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -299,8 +319,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -316,7 +335,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """,
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_optional_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_optional_parameters_to_0,
+                            "Program(int i)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -327,8 +353,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             // behavior change with 33603, now all constructors offered
             await new VerifyCS.Test()
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -348,8 +373,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -371,7 +395,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """,
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "Program(int i, string s)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "Program(int i, string s)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -382,8 +410,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             // Behavior change with #33603, now all constructors are offered
             await new VerifyCS.Test()
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -403,8 +430,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -426,7 +452,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """,
                 CodeActionIndex = 3,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "Program(int i, string s)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "Program(int i, string s)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -435,8 +465,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -450,8 +479,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -466,7 +494,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(bool b)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(bool b)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -475,8 +507,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -490,8 +521,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -507,7 +537,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """,
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_optional_parameters_to_0, "Program(bool b)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_optional_parameters_to_0,
+                            "Program(bool b)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -539,7 +576,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -570,7 +608,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -601,7 +640,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -609,8 +649,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class Program
                 {
                     [|(int, string) i;
@@ -622,8 +661,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class Program
                 {
                     (int, string) i;
@@ -646,8 +684,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class Program
                 {
                     [|(int, string) i;
@@ -659,8 +696,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class Program
                 {
                     (int, string) i;
@@ -682,8 +718,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class Program
                 {
                     [|(int a, string b) i;
@@ -695,8 +730,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class Program
                 {
                     (int a, string b) i;
@@ -719,8 +753,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class Program
                 {
                     [|(int a, string b) i;
@@ -732,8 +765,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class Program
                 {
                     (int a, string b) i;
@@ -756,8 +788,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class Program
                 {
                     [|(int a, string b) i;
@@ -769,8 +800,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class Program
                 {
                     (int a, string b) i;
@@ -792,8 +822,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class Program
                 {
                     [|(int a, string b) i;
@@ -805,8 +834,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class Program
                 {
                     [|(int a, string b) i;
@@ -851,7 +879,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -886,7 +915,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28775")]
@@ -925,7 +955,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28775")]
@@ -960,14 +991,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                         this.k = k;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28775")]
         public async Task TestMissingIfFieldsAlreadyExistingInConstructor()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     [|string _barBar;
@@ -983,8 +1014,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28775")]
         public async Task TestMissingIfPropertyAlreadyExistingInConstructor()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     [|string bar;
@@ -1057,8 +1087,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33602")]
         public async Task TestDefaultConstructor()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     [|int i;|]
@@ -1162,8 +1191,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     int [|l|];
@@ -1178,8 +1206,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     int l;
@@ -1195,15 +1222,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33603")]
         public async Task TestMultipleConstructors_SecondOfThree()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int [|l|];
@@ -1218,8 +1248,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     int l;
@@ -1240,15 +1269,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i, int j)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i, int j)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33603")]
         public async Task TestMultipleConstructors_ThirdOfThree()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int [|l|];
@@ -1264,8 +1296,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     int l;
@@ -1286,15 +1317,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 2,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i, int j, int k)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i, int j, int k)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33603")]
         public async Task TestMultipleConstructors_FirstOptionalOfThree()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int [|l|];
@@ -1309,8 +1343,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     int l;
@@ -1331,15 +1364,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 3,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33603")]
         public async Task TestMultipleConstructors_SecondOptionalOfThree()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int [|l|];
@@ -1354,8 +1390,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     int [|l|];
@@ -1377,15 +1412,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 4,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i, int j)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i, int j)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33603")]
         public async Task TestMultipleConstructors_ThirdOptionalOfThree()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int [|l|];
@@ -1400,8 +1438,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     int [|l|];
@@ -1422,15 +1459,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 5,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i, int j, int k)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i, int j, int k)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33603")]
         public async Task TestMultipleConstructors_OneMustBeOptional()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int [|l|];
@@ -1453,8 +1493,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     int [|l|];
@@ -1483,15 +1522,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i, double j, int k)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i, double j, int k)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33603")]
         public async Task TestMultipleConstructors_OneMustBeOptional2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int [|l|];
@@ -1512,8 +1554,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     int [|l|];
@@ -1540,7 +1581,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 3,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i, double j)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i, double j)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1549,8 +1594,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
- """
+                TestCode = """
  class C
  {
      int [|p|];
@@ -1565,8 +1609,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
      }
  }
  """,
-                FixedCode =
-                """
+                FixedCode = """
                 class C
                 {
                     int [|p|];
@@ -1582,15 +1625,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33603")]
         public async Task TestMultipleConstructors_AllMustBeOptional2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int [|p|];
@@ -1605,8 +1651,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     int [|p|];
@@ -1627,15 +1672,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 2,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(CodeFixesResources.Add_to_0, "C(int l, double m, int n)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(CodeFixesResources.Add_to_0, "C(int l, double m, int n)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33623")]
         public async Task TestDeserializationConstructor()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Runtime.Serialization;
 
@@ -1654,8 +1702,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35775")]
         public async Task TestNoFieldNamingStyle_ParameterPrefixAndSuffix()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private int [|v|];
@@ -1665,8 +1712,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     private int v;
@@ -1680,15 +1726,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = ParameterNamesCamelCaseWithPUnderscorePrefixEndUnderscoreSuffixEditorConfig
+                EditorConfig =
+                    ParameterNamesCamelCaseWithPUnderscorePrefixEndUnderscoreSuffixEditorConfig
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35775")]
         public async Task TestCommonFieldNamingStyle()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private int [|t_v|];
@@ -1698,8 +1744,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     private int t_v;
@@ -1720,8 +1765,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35775")]
         public async Task TestSpecifiedFieldNamingStyle()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private int [|field_v|];
@@ -1731,8 +1775,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     private int field_v;
@@ -1746,15 +1789,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig
+                    + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35775")]
         public async Task TestSpecifiedAndCommonFieldNamingStyle()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private int [|field_s_v|];
@@ -1764,8 +1808,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     private int field_s_v;
@@ -1780,15 +1823,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig
+                    + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35775")]
         public async Task TestSpecifiedAndCommonFieldNamingStyle2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private int [|s_field_v|];
@@ -1798,8 +1842,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     private int s_field_v;
@@ -1813,15 +1856,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig
+                    + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35775")]
         public async Task TestBaseNameEmpty()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private int [|field__End|];
@@ -1835,15 +1879,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             {
                 TestCode = source,
                 FixedCode = source,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35775")]
         public async Task TestSomeBaseNamesAreEmpty()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private int [|field_test_End;
@@ -1854,8 +1898,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     private int field_test_End;
@@ -1871,15 +1914,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig
+                    + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35775")]
         public async Task TestManyCommonPrefixes()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     private int [|______test|];
@@ -1889,8 +1933,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     private int ______test;
@@ -1914,8 +1957,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1929,8 +1971,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1945,7 +1986,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1954,8 +1999,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1969,8 +2013,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1985,7 +2028,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1994,8 +2041,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2009,8 +2055,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2025,7 +2070,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2034,8 +2083,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2049,8 +2097,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2065,7 +2112,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2074,8 +2125,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2089,8 +2139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2105,7 +2154,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2114,8 +2167,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2129,8 +2181,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2145,7 +2196,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2154,8 +2209,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2169,8 +2223,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2186,7 +2239,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2195,8 +2252,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2210,8 +2266,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2227,7 +2282,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2236,8 +2295,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2251,8 +2309,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2267,7 +2324,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2276,8 +2337,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2291,8 +2351,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2307,7 +2366,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2316,8 +2379,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2331,8 +2393,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2347,7 +2408,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2356,8 +2421,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2371,8 +2435,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2387,15 +2450,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int i)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23271")]
         public async Task TestNonSelectionMissing1()
         {
-            var source =
-                """
+            var source = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2416,8 +2482,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23271")]
         public async Task TestNonSelectionMissing2()
         {
-            var source =
-                """
+            var source = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2437,8 +2502,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23271")]
         public async Task TestNonSelectionMissing3()
         {
-            var source =
-                """
+            var source = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2458,8 +2522,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23271")]
         public async Task TestNonSelectionMissing4()
         {
-            var source =
-                """
+            var source = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2638,8 +2701,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 namespace M
                 {
                     public class C
@@ -2662,8 +2724,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 namespace M
                 {
                     public class C
@@ -2690,7 +2751,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     }
                 }
                 """,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "C(int original, int original2)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_parameters_to_0,
+                            "C(int original, int original2)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2699,8 +2767,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections.Generic;
 
                 class C
@@ -2711,8 +2778,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     public C(int x) => this.x = x;
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections.Generic;
 
                 class C

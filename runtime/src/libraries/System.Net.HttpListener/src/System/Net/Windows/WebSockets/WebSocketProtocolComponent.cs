@@ -12,7 +12,8 @@ namespace System.Net.WebSockets
         private static readonly IntPtr s_webSocketDllHandle;
         private static readonly string? s_supportedVersion;
 
-        private static readonly Interop.WebSocket.HttpHeader[] s_initialClientRequestHeaders = new Interop.WebSocket.HttpHeader[]
+        private static readonly Interop.WebSocket.HttpHeader[] s_initialClientRequestHeaders =
+            new Interop.WebSocket.HttpHeader[]
             {
                 new Interop.WebSocket.HttpHeader()
                 {
@@ -36,6 +37,7 @@ namespace System.Net.WebSockets
             ReceiveFromNetwork = 3,
             IndicateReceiveComplete = 4,
         }
+
         internal enum BufferType : uint
         {
             None = 0x00000000,
@@ -67,7 +69,9 @@ namespace System.Net.WebSockets
 #pragma warning disable CA1810 // explicit static cctor
         static WebSocketProtocolComponent()
         {
-            s_webSocketDllHandle = Interop.Kernel32.LoadLibraryEx(Interop.Libraries.WebSocket, IntPtr.Zero, 0);
+            s_webSocketDllHandle = Interop
+                .Kernel32
+                .LoadLibraryEx(Interop.Libraries.WebSocket, IntPtr.Zero, 0);
 
             if (s_webSocketDllHandle == IntPtr.Zero)
                 return;
@@ -120,10 +124,7 @@ namespace System.Net.WebSockets
 
         internal static bool IsSupported
         {
-            get
-            {
-                return s_webSocketDllHandle != IntPtr.Zero;
-            }
+            get { return s_webSocketDllHandle != IntPtr.Zero; }
         }
 
         internal static unsafe string GetSupportedVersion()
@@ -136,34 +137,45 @@ namespace System.Net.WebSockets
             SafeWebSocketHandle? webSocketHandle = null;
             try
             {
-                int errorCode = Interop.WebSocket.WebSocketCreateClientHandle(null!, 0, out webSocketHandle);
+                int errorCode = Interop
+                    .WebSocket
+                    .WebSocketCreateClientHandle(null!, 0, out webSocketHandle);
                 ThrowOnError(errorCode);
 
-                if (webSocketHandle == null ||
-                    webSocketHandle.IsInvalid)
+                if (webSocketHandle == null || webSocketHandle.IsInvalid)
                 {
                     HttpWebSocket.ThrowPlatformNotSupportedException_WSPC();
                 }
 
-                errorCode = Interop.WebSocket.WebSocketBeginClientHandshake(webSocketHandle!,
-                    IntPtr.Zero,
-                    0,
-                    IntPtr.Zero,
-                    0,
-                    s_initialClientRequestHeaders,
-                    (uint)s_initialClientRequestHeaders.Length,
-                    out Interop.WebSocket.WEB_SOCKET_HTTP_HEADER* additionalHeadersPtr,
-                    out uint additionalHeaderCount);
+                errorCode = Interop
+                    .WebSocket
+                    .WebSocketBeginClientHandshake(
+                        webSocketHandle!,
+                        IntPtr.Zero,
+                        0,
+                        IntPtr.Zero,
+                        0,
+                        s_initialClientRequestHeaders,
+                        (uint)s_initialClientRequestHeaders.Length,
+                        out Interop.WebSocket.WEB_SOCKET_HTTP_HEADER* additionalHeadersPtr,
+                        out uint additionalHeaderCount
+                    );
                 ThrowOnError(errorCode);
 
                 string? version = null;
                 for (uint i = 0; i < additionalHeaderCount; i++)
                 {
-                    Interop.WebSocket.HttpHeader header = MarshalAndVerifyHttpHeader(additionalHeadersPtr + i);
+                    Interop.WebSocket.HttpHeader header = MarshalAndVerifyHttpHeader(
+                        additionalHeadersPtr + i
+                    );
 
-                    if (string.Equals(header.Name,
+                    if (
+                        string.Equals(
+                            header.Name,
                             HttpKnownHeaderNames.SecWebSocketVersion,
-                            StringComparison.OrdinalIgnoreCase))
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         version = header.Value;
                         break;
@@ -179,12 +191,17 @@ namespace System.Net.WebSockets
             }
         }
 
-        internal static SafeWebSocketHandle WebSocketCreateServerHandle(Interop.WebSocket.Property[] properties, int propertyCount)
+        internal static SafeWebSocketHandle WebSocketCreateServerHandle(
+            Interop.WebSocket.Property[] properties,
+            int propertyCount
+        )
         {
             Debug.Assert(propertyCount >= 0, "'propertyCount' MUST NOT be negative.");
-            Debug.Assert((properties == null && propertyCount == 0) ||
-                (properties != null && propertyCount == properties.Length),
-                "'propertyCount' MUST MATCH 'properties.Length'.");
+            Debug.Assert(
+                (properties == null && propertyCount == 0)
+                    || (properties != null && propertyCount == properties.Length),
+                "'propertyCount' MUST MATCH 'properties.Length'."
+            );
 
             if (!IsSupported)
             {
@@ -194,7 +211,13 @@ namespace System.Net.WebSockets
             SafeWebSocketHandle? webSocketHandle = null;
             try
             {
-                int errorCode = Interop.WebSocket.WebSocketCreateServerHandle(properties!, (uint)propertyCount, out webSocketHandle);
+                int errorCode = Interop
+                    .WebSocket
+                    .WebSocketCreateServerHandle(
+                        properties!,
+                        (uint)propertyCount,
+                        out webSocketHandle
+                    );
                 ThrowOnError(errorCode);
                 if (webSocketHandle.IsInvalid)
                 {
@@ -210,14 +233,18 @@ namespace System.Net.WebSockets
                 // just fake an HTTP handshake for the WSPC calling
                 // WebSocketBeginServerHandshake and WebSocketEndServerHandshake
                 // with statically defined dummy headers.
-                errorCode = Interop.WebSocket.WebSocketBeginServerHandshake(webSocketHandle,
-                    IntPtr.Zero,
-                    IntPtr.Zero,
-                    0,
-                    s_serverFakeRequestHeaders!,
-                    (uint)s_serverFakeRequestHeaders!.Length,
-                    out _,
-                    out _);
+                errorCode = Interop
+                    .WebSocket
+                    .WebSocketBeginServerHandshake(
+                        webSocketHandle,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        0,
+                        s_serverFakeRequestHeaders!,
+                        (uint)s_serverFakeRequestHeaders!.Length,
+                        out _,
+                        out _
+                    );
                 ThrowOnError(errorCode);
 
                 errorCode = Interop.WebSocket.WebSocketEndServerHandshake(webSocketHandle);
@@ -234,8 +261,10 @@ namespace System.Net.WebSockets
 
         internal static void WebSocketAbortHandle(SafeHandle webSocketHandle)
         {
-            Debug.Assert(webSocketHandle != null && !webSocketHandle.IsInvalid,
-                "'webSocketHandle' MUST NOT be NULL or INVALID.");
+            Debug.Assert(
+                webSocketHandle != null && !webSocketHandle.IsInvalid,
+                "'webSocketHandle' MUST NOT be NULL or INVALID."
+            );
 
             Interop.WebSocket.WebSocketAbortHandle(webSocketHandle);
 
@@ -249,21 +278,31 @@ namespace System.Net.WebSockets
             Interop.WebSocket.WebSocketDeleteHandle(webSocketPtr);
         }
 
-        internal static void WebSocketSend(WebSocketBase webSocket,
+        internal static void WebSocketSend(
+            WebSocketBase webSocket,
             BufferType bufferType,
-            Interop.WebSocket.Buffer buffer)
+            Interop.WebSocket.Buffer buffer
+        )
         {
-            Debug.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Debug.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Debug.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
 
             ThrowIfSessionHandleClosed(webSocket);
 
             int errorCode;
             try
             {
-                errorCode = Interop.WebSocket.WebSocketSend_Raw(webSocket.SessionHandle, bufferType, ref buffer, IntPtr.Zero);
+                errorCode = Interop
+                    .WebSocket
+                    .WebSocketSend_Raw(
+                        webSocket.SessionHandle,
+                        bufferType,
+                        ref buffer,
+                        IntPtr.Zero
+                    );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -273,20 +312,30 @@ namespace System.Net.WebSockets
             ThrowOnError(errorCode);
         }
 
-        internal static void WebSocketSendWithoutBody(WebSocketBase webSocket,
-            BufferType bufferType)
+        internal static void WebSocketSendWithoutBody(
+            WebSocketBase webSocket,
+            BufferType bufferType
+        )
         {
-            Debug.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Debug.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Debug.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
 
             ThrowIfSessionHandleClosed(webSocket);
 
             int errorCode;
             try
             {
-                errorCode = Interop.WebSocket.WebSocketSendWithoutBody_Raw(webSocket.SessionHandle, bufferType, IntPtr.Zero, IntPtr.Zero);
+                errorCode = Interop
+                    .WebSocket
+                    .WebSocketSendWithoutBody_Raw(
+                        webSocket.SessionHandle,
+                        bufferType,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -298,17 +347,20 @@ namespace System.Net.WebSockets
 
         internal static void WebSocketReceive(WebSocketBase webSocket)
         {
-            Debug.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Debug.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Debug.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
 
             ThrowIfSessionHandleClosed(webSocket);
 
             int errorCode;
             try
             {
-                errorCode = Interop.WebSocket.WebSocketReceive(webSocket.SessionHandle, IntPtr.Zero, IntPtr.Zero);
+                errorCode = Interop
+                    .WebSocket
+                    .WebSocketReceive(webSocket.SessionHandle, IntPtr.Zero, IntPtr.Zero);
             }
             catch (ObjectDisposedException innerException)
             {
@@ -318,22 +370,27 @@ namespace System.Net.WebSockets
             ThrowOnError(errorCode);
         }
 
-        internal static void WebSocketGetAction(WebSocketBase webSocket,
+        internal static void WebSocketGetAction(
+            WebSocketBase webSocket,
             ActionQueue actionQueue,
             Interop.WebSocket.Buffer[] dataBuffers,
             ref uint dataBufferCount,
             out Action action,
             out BufferType bufferType,
-            out IntPtr actionContext)
+            out IntPtr actionContext
+        )
         {
-            Debug.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Debug.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Debug.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
             Debug.Assert(dataBufferCount >= 0, "'dataBufferCount' MUST NOT be negative.");
-            Debug.Assert((dataBuffers == null && dataBufferCount == 0) ||
-                (dataBuffers != null && dataBufferCount == dataBuffers.Length),
-                "'dataBufferCount' MUST MATCH 'dataBuffers.Length'.");
+            Debug.Assert(
+                (dataBuffers == null && dataBufferCount == 0)
+                    || (dataBuffers != null && dataBufferCount == dataBuffers.Length),
+                "'dataBufferCount' MUST MATCH 'dataBuffers.Length'."
+            );
 
             action = Action.NoAction;
             bufferType = BufferType.None;
@@ -345,14 +402,18 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop.WebSocket.WebSocketGetAction(webSocket.SessionHandle,
-                    actionQueue,
-                    dataBuffers!,
-                    ref dataBufferCount,
-                    out action,
-                    out bufferType,
-                    out dummy,
-                    out actionContext);
+                errorCode = Interop
+                    .WebSocket
+                    .WebSocketGetAction(
+                        webSocket.SessionHandle,
+                        actionQueue,
+                        dataBuffers!,
+                        ref dataBufferCount,
+                        out action,
+                        out bufferType,
+                        out dummy,
+                        out actionContext
+                    );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -363,18 +424,23 @@ namespace System.Net.WebSockets
             webSocket.ValidateNativeBuffers(action, bufferType, dataBuffers!, dataBufferCount);
 
             Debug.Assert(dataBufferCount >= 0);
-            Debug.Assert((dataBufferCount == 0 && dataBuffers == null) ||
-                (dataBufferCount <= dataBuffers!.Length));
+            Debug.Assert(
+                (dataBufferCount == 0 && dataBuffers == null)
+                    || (dataBufferCount <= dataBuffers!.Length)
+            );
         }
 
-        internal static void WebSocketCompleteAction(WebSocketBase webSocket,
+        internal static void WebSocketCompleteAction(
+            WebSocketBase webSocket,
             IntPtr actionContext,
-            int bytesTransferred)
+            int bytesTransferred
+        )
         {
-            Debug.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Debug.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Debug.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
             Debug.Assert(actionContext != IntPtr.Zero, "'actionContext' MUST NOT be IntPtr.Zero.");
             Debug.Assert(bytesTransferred >= 0, "'bytesTransferred' MUST NOT be negative.");
 
@@ -385,17 +451,23 @@ namespace System.Net.WebSockets
 
             try
             {
-                Interop.WebSocket.WebSocketCompleteAction(webSocket.SessionHandle, actionContext, (uint)bytesTransferred);
+                Interop
+                    .WebSocket
+                    .WebSocketCompleteAction(
+                        webSocket.SessionHandle,
+                        actionContext,
+                        (uint)bytesTransferred
+                    );
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
         }
 
         private static void DrainActionQueue(SafeHandle webSocketHandle, ActionQueue actionQueue)
         {
-            Debug.Assert(webSocketHandle != null && !webSocketHandle.IsInvalid,
-                "'webSocketHandle' MUST NOT be NULL or INVALID.");
+            Debug.Assert(
+                webSocketHandle != null && !webSocketHandle.IsInvalid,
+                "'webSocketHandle' MUST NOT be NULL or INVALID."
+            );
 
             IntPtr actionContext;
             Action action;
@@ -404,14 +476,18 @@ namespace System.Net.WebSockets
             {
                 Interop.WebSocket.Buffer[] dataBuffers = new Interop.WebSocket.Buffer[1];
                 uint dataBufferCount = 1;
-                int errorCode = Interop.WebSocket.WebSocketGetAction(webSocketHandle,
-                    actionQueue,
-                    dataBuffers,
-                    ref dataBufferCount,
-                    out action,
-                    out _,
-                    out _,
-                    out actionContext);
+                int errorCode = Interop
+                    .WebSocket
+                    .WebSocketGetAction(
+                        webSocketHandle,
+                        actionQueue,
+                        dataBuffers,
+                        ref dataBufferCount,
+                        out action,
+                        out _,
+                        out _,
+                        out actionContext
+                    );
 
                 if (!Succeeded(errorCode))
                 {
@@ -429,7 +505,8 @@ namespace System.Net.WebSockets
         }
 
         private static unsafe Interop.WebSocket.HttpHeader MarshalAndVerifyHttpHeader(
-            Interop.WebSocket.WEB_SOCKET_HTTP_HEADER* httpHeaderPtr)
+            Interop.WebSocket.WEB_SOCKET_HTTP_HEADER* httpHeaderPtr
+        )
         {
             Interop.WebSocket.HttpHeader httpHeader = default;
 
@@ -442,8 +519,10 @@ namespace System.Net.WebSockets
                 httpHeader.Name = Marshal.PtrToStringAnsi(httpHeaderNamePtr, length);
             }
 
-            if ((httpHeader.Name == null && length != 0) ||
-                (httpHeader.Name != null && length != httpHeader.Name.Length))
+            if (
+                (httpHeader.Name == null && length != 0)
+                || (httpHeader.Name != null && length != httpHeader.Name.Length)
+            )
             {
                 Debug.Fail("The length of 'httpHeader.Name' MUST MATCH 'length'.");
                 throw new AccessViolationException();
@@ -453,8 +532,10 @@ namespace System.Net.WebSockets
             length = (int)httpHeaderPtr->ValueLength;
             httpHeader.Value = Marshal.PtrToStringAnsi(httpHeaderValuePtr, length);
 
-            if ((httpHeader.Value == null && length != 0) ||
-                (httpHeader.Value != null && length != httpHeader.Value.Length))
+            if (
+                (httpHeader.Value == null && length != 0)
+                || (httpHeader.Value != null && length != httpHeader.Value.Length)
+            )
             {
                 Debug.Fail("The length of 'httpHeader.Value' MUST MATCH 'length'.");
                 throw new AccessViolationException();
@@ -482,16 +563,31 @@ namespace System.Net.WebSockets
         {
             if (webSocket.SessionHandle.IsClosed)
             {
-                throw new WebSocketException(WebSocketError.InvalidState,
-                    SR.Format(SR.net_WebSockets_InvalidState_ClosedOrAborted, webSocket.GetType().FullName, webSocket.State));
+                throw new WebSocketException(
+                    WebSocketError.InvalidState,
+                    SR.Format(
+                        SR.net_WebSockets_InvalidState_ClosedOrAborted,
+                        webSocket.GetType().FullName,
+                        webSocket.State
+                    )
+                );
             }
         }
 
-        private static WebSocketException ConvertObjectDisposedException(WebSocketBase webSocket, ObjectDisposedException innerException)
+        private static WebSocketException ConvertObjectDisposedException(
+            WebSocketBase webSocket,
+            ObjectDisposedException innerException
+        )
         {
-            return new WebSocketException(WebSocketError.InvalidState,
-                SR.Format(SR.net_WebSockets_InvalidState_ClosedOrAborted, webSocket.GetType().FullName, webSocket.State),
-                innerException);
+            return new WebSocketException(
+                WebSocketError.InvalidState,
+                SR.Format(
+                    SR.net_WebSockets_InvalidState_ClosedOrAborted,
+                    webSocket.GetType().FullName,
+                    webSocket.State
+                ),
+                innerException
+            );
         }
     }
 }

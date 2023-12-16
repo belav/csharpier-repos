@@ -33,12 +33,19 @@ namespace System.Diagnostics
 
         internal void WriteAssert(string stackTrace, string? message, string? detailMessage)
         {
-            WriteLine(SR.DebugAssertBanner + Environment.NewLineConst
-                   + SR.DebugAssertShortMessage + Environment.NewLineConst
-                   + message + Environment.NewLineConst
-                   + SR.DebugAssertLongMessage + Environment.NewLineConst
-                   + detailMessage + Environment.NewLineConst
-                   + stackTrace);
+            WriteLine(
+                SR.DebugAssertBanner
+                    + Environment.NewLineConst
+                    + SR.DebugAssertShortMessage
+                    + Environment.NewLineConst
+                    + message
+                    + Environment.NewLineConst
+                    + SR.DebugAssertLongMessage
+                    + Environment.NewLineConst
+                    + detailMessage
+                    + Environment.NewLineConst
+                    + stackTrace
+            );
         }
 
         public virtual void Write(string? message)
@@ -76,10 +83,12 @@ namespace System.Diagnostics
 
         private sealed class DebugAssertException : Exception
         {
-            internal DebugAssertException(string? message, string? detailMessage, string? stackTrace) :
-                base(Terminate(message) + Terminate(detailMessage) + stackTrace)
-            {
-            }
+            internal DebugAssertException(
+                string? message,
+                string? detailMessage,
+                string? stackTrace
+            )
+                : base(Terminate(message) + Terminate(detailMessage) + stackTrace) { }
 
             private static string? Terminate(string? s)
             {

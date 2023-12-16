@@ -12,9 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class SimpleLambdaExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<SimpleLambdaExpressionSyntax>
+public class SimpleLambdaExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<SimpleLambdaExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new SimpleLambdaExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new SimpleLambdaExpressionStructureProvider();
 
     [Fact]
     public async Task TestLambda()
@@ -31,8 +33,10 @@ public class SimpleLambdaExpressionStructureTests : AbstractCSharpSyntaxNodeStru
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -66,8 +70,10 @@ public class SimpleLambdaExpressionStructureTests : AbstractCSharpSyntaxNodeStru
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -85,7 +91,9 @@ public class SimpleLambdaExpressionStructureTests : AbstractCSharpSyntaxNodeStru
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 [Trait(Traits.Feature, Traits.Features.Outlining)]
 public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<BlockSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new BlockSyntaxStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new BlockSyntaxStructureProvider();
 
     [Fact]
     public async Task TestTryBlock1()
@@ -38,8 +39,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -57,8 +60,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -76,8 +81,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -95,8 +102,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -114,8 +123,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -133,8 +144,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -152,8 +165,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -171,8 +186,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -190,8 +207,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -210,8 +229,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -229,8 +250,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -251,8 +274,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -272,8 +297,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -294,8 +321,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -316,8 +345,17 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", "primaryhint", "primarytextspan", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region(
+                "textspan",
+                "hint",
+                "primaryhint",
+                "primarytextspan",
+                CSharpStructureHelpers.Ellipsis,
+                autoCollapse: false
+            )
+        );
     }
 
     [Fact]
@@ -338,8 +376,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -362,8 +402,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -385,8 +427,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -404,8 +448,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -427,8 +473,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -451,8 +499,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem(52493, "https://github.com/dotnet/roslyn/issues/")]
@@ -468,8 +518,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68513")]
@@ -488,8 +540,10 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68513")]
@@ -508,9 +562,13 @@ public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<
             }
             """;
 
-        await VerifyBlockSpansAsync(code, GetDefaultOptions() with
-        {
-            CollapseLocalFunctionsWhenCollapsingToDefinitions = true,
-        }, Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            GetDefaultOptions() with
+            {
+                CollapseLocalFunctionsWhenCollapsingToDefinitions = true,
+            },
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 }

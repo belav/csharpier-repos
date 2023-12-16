@@ -21,11 +21,15 @@ public class ControllerTest
     {
         get
         {
-            return typeof(Controller).GetTypeInfo()
+            return typeof(Controller)
+                .GetTypeInfo()
                 .DeclaredMethods
-                .Where(method => method.IsPublic &&
-                !method.IsSpecialName &&
-                !method.Name.Equals("Dispose", StringComparison.OrdinalIgnoreCase))
+                .Where(
+                    method =>
+                        method.IsPublic
+                        && !method.IsSpecialName
+                        && !method.Name.Equals("Dispose", StringComparison.OrdinalIgnoreCase)
+                )
                 .Select(method => new[] { method });
         }
     }
@@ -36,7 +40,9 @@ public class ControllerTest
         // Arrange
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var controller = new TestableController();
-        var originalViewData = controller.ViewData = new ViewDataDictionary<object>(metadataProvider);
+        var originalViewData = controller.ViewData = new ViewDataDictionary<object>(
+            metadataProvider
+        );
         var replacementViewData = new ViewDataDictionary<object>(metadataProvider);
 
         // Act
@@ -67,7 +73,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
 
         // Act
@@ -88,7 +97,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
 
         var model = new object();
@@ -112,7 +124,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
 
         // Act
@@ -133,7 +148,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
         var model = new object();
 
@@ -155,7 +173,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
         var model = new object();
 
@@ -177,7 +198,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
         controller.ViewData.Model = new object();
 
@@ -199,7 +223,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
 
         var model = new object();
@@ -223,7 +250,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
         var model = new object();
         controller.ViewData.Model = model;
@@ -246,7 +276,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
         var model = new object();
 
@@ -268,7 +301,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
         var model = new object();
 
@@ -290,7 +326,10 @@ public class ControllerTest
         var controller = new TestableController()
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-            TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+            TempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                Mock.Of<ITempDataProvider>()
+            ),
         };
         controller.ViewData.Model = new object();
 
@@ -343,16 +382,14 @@ public class ControllerTest
     public async Task Controller_ActionFilter_SettingResult_ShortCircuits()
     {
         // Arrange, Act &  Assert
-        await CommonFilterTest.ActionFilter_SettingResult_ShortCircuits(
-            new Mock<Controller>());
+        await CommonFilterTest.ActionFilter_SettingResult_ShortCircuits(new Mock<Controller>());
     }
 
     [Fact]
     public async Task Controller_ActionFilter_Calls_OnActionExecuted()
     {
         // Arrange, Act &  Assert
-        await CommonFilterTest.ActionFilter_Calls_OnActionExecuted(
-            new Mock<Controller>());
+        await CommonFilterTest.ActionFilter_Calls_OnActionExecuted(new Mock<Controller>());
     }
 
     [Fact]
@@ -389,14 +426,14 @@ public class ControllerTest
         {
             // Small grab bag of instances and expected types with no common base except typeof(object).
             return new TheoryData<object, Type>
-                {
-                    { null, typeof(object) },
-                    { true, typeof(bool) },
-                    { 43.78, typeof(double) },
-                    { "test string", typeof(string) },
-                    { new List<int>(), typeof(List<int>) },
-                    { new List<string>(), typeof(List<string>) },
-                };
+            {
+                { null, typeof(object) },
+                { true, typeof(bool) },
+                { 43.78, typeof(double) },
+                { "test string", typeof(string) },
+                { new List<int>(), typeof(List<int>) },
+                { new List<string>(), typeof(List<string>) },
+            };
         }
     }
 
@@ -405,11 +442,14 @@ public class ControllerTest
     public void ViewDataModelSetter_DoesNotThrow(object model, Type expectedType)
     {
         // Arrange
-        var activator = new ViewDataDictionaryControllerPropertyActivator(new EmptyModelMetadataProvider());
+        var activator = new ViewDataDictionaryControllerPropertyActivator(
+            new EmptyModelMetadataProvider()
+        );
         var actionContext = new ActionContext(
             new DefaultHttpContext(),
             new RouteData(),
-            new ControllerActionDescriptor());
+            new ControllerActionDescriptor()
+        );
         var controllerContext = new ControllerContext(actionContext);
         var controller = new TestableController();
         activator.Activate(controllerContext, controller);
@@ -435,11 +475,12 @@ public class ControllerTest
 
         var validatorProviders = new[]
         {
-                new DataAnnotationsModelValidatorProvider(
-                    new ValidationAttributeAdapterProvider(),
-                    Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                    stringLocalizerFactory: null),
-            };
+            new DataAnnotationsModelValidatorProvider(
+                new ValidationAttributeAdapterProvider(),
+                Options.Create(new MvcDataAnnotationsLocalizationOptions()),
+                stringLocalizerFactory: null
+            ),
+        };
 
         valueProvider = valueProvider ?? new SimpleValueProvider();
         var controllerContext = new ControllerContext()
@@ -452,7 +493,11 @@ public class ControllerTest
         {
             ControllerContext = controllerContext,
             MetadataProvider = metadataProvider,
-            ObjectValidator = new DefaultObjectValidator(metadataProvider, validatorProviders, new MvcOptions()),
+            ObjectValidator = new DefaultObjectValidator(
+                metadataProvider,
+                validatorProviders,
+                new MvcOptions()
+            ),
             TempData = tempData,
             ViewData = viewData,
         };
@@ -469,9 +514,7 @@ public class ControllerTest
         }
     }
 
-    private class TestableController : Controller
-    {
-    }
+    private class TestableController : Controller { }
 
     private class DisposableObject : IDisposable
     {

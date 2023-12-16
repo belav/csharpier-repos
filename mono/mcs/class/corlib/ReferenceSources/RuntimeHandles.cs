@@ -2,20 +2,14 @@ namespace System
 {
     internal interface IRuntimeMethodInfo
     {
-        RuntimeMethodHandleInternal Value
-        {
-            get;
-        }
+        RuntimeMethodHandleInternal Value { get; }
     }
 
     internal struct RuntimeMethodHandleInternal
     {
         internal static RuntimeMethodHandleInternal EmptyHandle
         {
-            get
-            {
-                return new RuntimeMethodHandleInternal();
-            }
+            get { return new RuntimeMethodHandleInternal(); }
         }
 
         internal bool IsNullHandle()
@@ -25,17 +19,14 @@ namespace System
 
         internal IntPtr Value
         {
-            get
-            {
-                return m_handle;
-            }
+            get { return m_handle; }
         }
 
         internal RuntimeMethodHandleInternal(IntPtr value)
         {
             m_handle = value;
         }
-      
+
         internal IntPtr m_handle;
     }
 }

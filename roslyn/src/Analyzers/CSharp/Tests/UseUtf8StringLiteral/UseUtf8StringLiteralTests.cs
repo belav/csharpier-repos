@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseUtf8StringLiteralDiagnosticAnalyzer,
-        UseUtf8StringLiteralCodeFixProvider>;
+        UseUtf8StringLiteralCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseUtf8StringLiteral)]
     public class UseUtf8StringLiteralTests
@@ -26,8 +27,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class MyAttribute : System.Attribute
                 {
                     public MyAttribute(byte[] data)
@@ -53,8 +53,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -72,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -92,8 +90,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -112,8 +109,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System;
                 using System.Linq.Expressions;
 
@@ -139,8 +135,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -159,8 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -183,8 +177,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -205,8 +198,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -225,8 +217,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -235,8 +226,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -256,8 +246,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     private const byte B = 66;
@@ -267,8 +256,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     private const byte B = 66;
@@ -289,8 +277,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -299,8 +286,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -320,8 +306,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -330,8 +315,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -351,8 +335,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -361,8 +344,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -382,8 +364,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -392,8 +373,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -413,8 +393,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -423,8 +402,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -443,8 +421,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -453,8 +430,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -474,8 +450,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(byte[] b)
@@ -484,8 +459,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(byte[] b)
@@ -505,8 +479,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -517,8 +490,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -540,8 +512,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -550,8 +521,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -571,8 +541,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -581,8 +550,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -602,8 +570,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -623,8 +590,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -644,8 +610,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -668,8 +633,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
             // that character isn't being used to detect a failure state of some kind.
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M()
@@ -678,8 +642,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M()
@@ -699,8 +662,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System.Collections;
                 using System.Collections.Generic;
 
@@ -734,8 +696,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System.Collections;
                 using System.Collections.Generic;
 
@@ -782,8 +743,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
             // There is an array creation operation for the param array
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 class C
                 {
                     public static void M1()
@@ -809,13 +769,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         // Various cases copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/Tests/System/Net/aspnetcore/Http2/HuffmanDecodingTests.cs
         [InlineData(new byte[] { 0xff, 0xcf })]
         [InlineData(new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1111 })]
-        [InlineData(new byte[] { 0xb6, 0xb9, 0xac, 0x1c, 0x85, 0x58, 0xd5, 0x20, 0xa4, 0xb6, 0xc2, 0xad, 0x61, 0x7b, 0x5a, 0x54, 0x25, 0x1f })]
+        [InlineData(
+            new byte[]
+            {
+                0xb6,
+                0xb9,
+                0xac,
+                0x1c,
+                0x85,
+                0x58,
+                0xd5,
+                0x20,
+                0xa4,
+                0xb6,
+                0xc2,
+                0xad,
+                0x61,
+                0x7b,
+                0x5a,
+                0x54,
+                0x25,
+                0x1f
+            }
+        )]
         [InlineData(new byte[] { 0xfe, 0x53 })]
         [InlineData(new byte[] { 0xff, 0xff, 0xf6, 0xff, 0xff, 0xfd, 0x68 })]
         [InlineData(new byte[] { 0xff, 0xff, 0xf9, 0xff, 0xff, 0xfd, 0x86 })]
         // Various cases copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/Tests/System/Net/aspnetcore/Http3/QPackDecoderTest.cs
         [InlineData(new byte[] { 0xa8, 0xbe, 0x16, 0x9c, 0xa3, 0x90, 0xb6, 0x7f })]
-        [InlineData(new byte[] { 0x37, 0x02, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x6c, 0x61, 0x74, 0x65 })]
+        [InlineData(
+            new byte[] { 0x37, 0x02, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x6c, 0x61, 0x74, 0x65 }
+        )]
         [InlineData(new byte[] { 0x3f, 0x01 })]
         // DaysInMonth365 from https://github.com/dotnet/runtime/blob/b5a8ece073110140e2d9696cdfdc047ec78c2fa1/src/libraries/System.Private.CoreLib/src/System/DateTime.cs
         [InlineData(new byte[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 })]
@@ -824,7 +808,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
             await new VerifyCS.Test
             {
                 TestCode =
-$@"
+                    $@"
 public class C
 {{
     private static readonly byte[] _bytes = new byte[] {{ {string.Join(", ", bytes)} }};
@@ -896,8 +880,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -906,8 +889,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -927,8 +909,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(int i, params byte[] b)
@@ -937,8 +918,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(int i, params byte[] b)
@@ -958,8 +938,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -968,8 +947,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -989,8 +967,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -999,8 +976,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -1020,8 +996,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -1030,8 +1005,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -1051,8 +1025,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -1061,8 +1034,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(params byte[] b)
@@ -1082,8 +1054,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(int x, params byte[] b)
@@ -1102,8 +1073,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(int x, params byte[] b)
@@ -1112,8 +1082,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(int x, params byte[] b)
@@ -1133,8 +1102,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(int x, params byte[] b)
@@ -1143,8 +1111,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(int x, params byte[] b)
@@ -1164,8 +1131,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(int x, params byte[] b)
@@ -1174,8 +1140,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(int x, params byte[] b)
@@ -1195,8 +1160,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(int x, int y, int z, params byte[] b)
@@ -1205,8 +1169,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(int x, int y, int z, params byte[] b)
@@ -1226,8 +1189,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public C(params byte[] b)
@@ -1236,8 +1198,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public C(params byte[] b)
@@ -1257,8 +1218,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public int this[params byte[] bytes]
@@ -1272,8 +1232,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public int this[params byte[] bytes]
@@ -1298,8 +1257,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public record C1(int x) : B([|65, 66, 67|]);
 
                 public record C2(params byte[] Bytes) : B(Bytes);
@@ -1320,8 +1278,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public record C1(int x) : B("ABC"u8.ToArray());
 
                 public record C2(params byte[] Bytes) : B(Bytes);
@@ -1353,8 +1310,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C1 : B
                 {
                     public C1(int x)
@@ -1392,8 +1348,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C1 : B
                 {
                     public C1(int x)
@@ -1442,8 +1397,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(int[] i, byte[] b)
@@ -1452,8 +1406,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(int[] i, byte[] b)
@@ -1473,8 +1426,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(int[] i, params byte[] b)
@@ -1483,8 +1435,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(int[] i, params byte[] b)
@@ -1504,8 +1455,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 public class C
                 {
                     public void M(byte[][] i, byte[] b)
@@ -1514,8 +1464,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 public class C
                 {
                     public void M(byte[][] i, byte[] b)
@@ -1535,8 +1484,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System;
 
                 public class C
@@ -1547,8 +1495,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System;
 
                 public class C
@@ -1570,8 +1517,7 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System;
 
                 public class C
@@ -1582,8 +1528,7 @@ public class C
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System;
 
                 public class C

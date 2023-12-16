@@ -5,42 +5,40 @@ using System.Globalization;
 using System.IO;
 using Xunit;
 
-class MyException : Exception
-{
-}
+class MyException : Exception { }
 
 public class Help
 {
-	public static Exception s_exceptionToThrow;
-	public static bool s_matchingException;
+    public static Exception s_exceptionToThrow;
+    public static bool s_matchingException;
 
-	public static Object s_object = new object();
+    public static Object s_object = new object();
 }
 
-public class A<T> where T : Exception
+public class A<T>
+    where T : Exception
 {
+    public void InstanceFunctionWithFewArgs()
+    {
+        try
+        {
+            throw Help.s_exceptionToThrow;
+        }
+        catch (T match)
+        {
+            if (!Help.s_matchingException)
+                throw new Exception("This should not have been caught here", match);
 
-	public void InstanceFunctionWithFewArgs()
-	{
-		try
-		{
-			throw Help.s_exceptionToThrow;
-		}
-		catch (T match)
-		{
-			if (!Help.s_matchingException)
-				throw new Exception("This should not have been caught here", match);
+            Console.WriteLine("Caught matching " + match.GetType());
+        }
+        catch (Exception mismatch)
+        {
+            if (Help.s_matchingException)
+                throw new Exception("Should have been caught above", mismatch);
 
-			Console.WriteLine("Caught matching " + match.GetType());
-		}
-		catch(Exception mismatch)
-		{
-			if (Help.s_matchingException)
-				throw new Exception("Should have been caught above", mismatch);
-
-			Console.WriteLine("Expected mismatch " + mismatch.GetType());
-		}
-	}
+            Console.WriteLine("Expected mismatch " + mismatch.GetType());
+        }
+    }
 }
 
 public class GenericExceptions
@@ -55,7 +53,10 @@ public class GenericExceptions
         Help.s_exceptionToThrow = new Exception();
         (new A<MyException>()).InstanceFunctionWithFewArgs();
     }
-    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     [Fact]
     public static int TestEntryPoint()
     {

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnnecessaryDiscardDesignationDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider>;
+        CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
     public class RemoveUnnecessaryDiscardDesignationTests

@@ -38,12 +38,17 @@ namespace System.CommandLine.Benchmarks.DragonFruit
         }
 
         [Benchmark(Description = "--help")]
-        public Task SearchForStartingPointWhenGivenEntryPointClass_Help()
-            => System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
-                _testAssembly,
-                new[] { "--help" },
-                null,
-                _testAssemblyXmlDocsFilePath);
+        public Task SearchForStartingPointWhenGivenEntryPointClass_Help() =>
+            System
+                .CommandLine
+                .DragonFruit
+                .CommandLine
+                .ExecuteAssemblyAsync(
+                    _testAssembly,
+                    new[] { "--help" },
+                    null,
+                    _testAssemblyXmlDocsFilePath
+                );
 
         [GlobalCleanup]
         public void Cleanup()

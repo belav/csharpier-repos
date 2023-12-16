@@ -22,59 +22,70 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGenerateConstructorDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGenerateConstructorDialog))
-        {
-        }
+            : base(instanceFactory, nameof(BasicGenerateConstructorDialog)) { }
 
         [WpfFact]
         public void VerifyCodeRefactoringOfferedAndCanceled()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class C
     Dim i as Integer
     Dim j as String
     Dim k as Boolean
 
 $$
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
             VerifyDialog(isOpen: true);
             Dialog_ClickCancel();
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(
-@"
+                @"
 Class C
     Dim i as Integer
     Dim j as String
     Dim k as Boolean
 
 
-End Class", actualText);
+End Class",
+                actualText
+            );
         }
 
         [WpfFact]
         public void VerifyCodeRefactoringOfferedAndAccepted()
         {
             SetUpEditor(
-@"
+                @"
 Class C
     Dim i as Integer
     Dim j as String
     Dim k as Boolean
 
 $$
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
             VerifyDialog(isOpen: true);
             Dialog_ClickOk();
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(
-@"
+                @"
 Class C
     Dim i as Integer
     Dim j as String
@@ -85,33 +96,41 @@ Class C
         Me.j = j
         Me.k = k
     End Sub
-End Class", actualText);
+End Class",
+                actualText
+            );
         }
 
         [WpfFact]
         public void VerifyReordering()
         {
             SetUpEditor(
-@"
+                @"
 Class C
     Dim i as Integer
     Dim j as String
     Dim k as Boolean
 
 $$
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
             VerifyDialog(isOpen: true);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Tab);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Tab);
             VisualStudio.Editor.PressDialogButton(DialogName, "Down");
             Dialog_ClickOk();
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(
-@"
+                @"
 Class C
     Dim i as Integer
     Dim j as String
@@ -122,33 +141,41 @@ Class C
         Me.i = i
         Me.k = k
     End Sub
-End Class", actualText);
+End Class",
+                actualText
+            );
         }
 
         [WpfFact]
         public void VerifyDeselect()
         {
             SetUpEditor(
-@"
+                @"
 Class C
     Dim i as Integer
     Dim j as String
     Dim k as Boolean
 
 $$
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
             VerifyDialog(isOpen: true);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Tab);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Tab);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Space);
             Dialog_ClickOk();
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(
-@"
+                @"
 Class C
     Dim i as Integer
     Dim j as String
@@ -158,16 +185,18 @@ Class C
         Me.j = j
         Me.k = k
     End Sub
-End Class", actualText);
+End Class",
+                actualText
+            );
         }
 
-        private void VerifyDialog(bool isOpen)
-            => VisualStudio.Editor.Verify.Dialog(DialogName, isOpen);
+        private void VerifyDialog(bool isOpen) =>
+            VisualStudio.Editor.Verify.Dialog(DialogName, isOpen);
 
-        private void Dialog_ClickCancel()
-            => VisualStudio.Editor.PressDialogButton(DialogName, "CancelButton");
+        private void Dialog_ClickCancel() =>
+            VisualStudio.Editor.PressDialogButton(DialogName, "CancelButton");
 
-        private void Dialog_ClickOk()
-            => VisualStudio.Editor.PressDialogButton(DialogName, "OkButton");
+        private void Dialog_ClickOk() =>
+            VisualStudio.Editor.PressDialogButton(DialogName, "OkButton");
     }
 }

@@ -22,6 +22,7 @@ public struct S0
     public short F5;
     public sbyte F6;
     public bool F7;
+
     public S0(bool f0, short f1, byte f2, uint f3, uint f4, short f5, sbyte f6, bool f7)
     {
         F0 = f0;
@@ -65,7 +66,5 @@ public class Runtime_87614
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume<T>(T value)
-    {
-    }
+    private static void Consume<T>(T value) { }
 }

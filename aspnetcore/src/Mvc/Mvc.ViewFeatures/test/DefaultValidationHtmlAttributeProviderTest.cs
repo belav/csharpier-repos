@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Options;
 using Moq;
 
@@ -32,10 +32,7 @@ public class DefaultValidationHtmlAttributeProviderTest
             .GetExplorerForProperty(nameof(Model.HasValidatorsProperty));
 
         // Act
-        attributeProvider.AddValidationAttributes(
-            viewContext,
-            modelExplorer,
-            attributes);
+        attributeProvider.AddValidationAttributes(viewContext, modelExplorer, attributes);
 
         // Assert
         Assert.Collection(
@@ -49,7 +46,8 @@ public class DefaultValidationHtmlAttributeProviderTest
             {
                 Assert.Equal("data-val-number", kvp.Key);
                 Assert.Equal(expectedMessage, kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -71,7 +69,8 @@ public class DefaultValidationHtmlAttributeProviderTest
             viewContext,
             modelExplorer,
             nameof(Model.HasValidatorsProperty),
-            attributes);
+            attributes
+        );
 
         // Assert
         Assert.Collection(
@@ -85,7 +84,8 @@ public class DefaultValidationHtmlAttributeProviderTest
             {
                 Assert.Equal("data-val-number", kvp.Key);
                 Assert.Equal(expectedMessage, kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -103,10 +103,7 @@ public class DefaultValidationHtmlAttributeProviderTest
             .GetExplorerForProperty(nameof(Model.HasValidatorsProperty));
 
         // Act
-        attributeProvider.AddValidationAttributes(
-            viewContext,
-            modelExplorer,
-            attributes);
+        attributeProvider.AddValidationAttributes(viewContext, modelExplorer, attributes);
 
         // Assert
         Assert.Empty(attributes);
@@ -127,10 +124,14 @@ public class DefaultValidationHtmlAttributeProviderTest
 
         var attributeProviderMock = new Mock<ValidationHtmlAttributeProvider>() { CallBase = true };
         attributeProviderMock
-            .Setup(p => p.AddValidationAttributes(
-                It.IsAny<ViewContext>(),
-                It.IsAny<ModelExplorer>(),
-                It.IsAny<IDictionary<string, string>>()))
+            .Setup(
+                p =>
+                    p.AddValidationAttributes(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<ModelExplorer>(),
+                        It.IsAny<IDictionary<string, string>>()
+                    )
+            )
             .Verifiable();
         var attributeProvider = attributeProviderMock.Object;
 
@@ -139,16 +140,20 @@ public class DefaultValidationHtmlAttributeProviderTest
             viewContext,
             modelExplorer,
             nameof(Model.HasValidatorsProperty),
-            attributes);
+            attributes
+        );
 
         // Assert
         Assert.Empty(attributes);
         attributeProviderMock.Verify(
-            p => p.AddValidationAttributes(
-                It.IsAny<ViewContext>(),
-                It.IsAny<ModelExplorer>(),
-                It.IsAny<IDictionary<string, string>>()),
-            Times.Never);
+            p =>
+                p.AddValidationAttributes(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<ModelExplorer>(),
+                    It.IsAny<IDictionary<string, string>>()
+                ),
+            Times.Never
+        );
     }
 
     [Fact]
@@ -167,10 +172,7 @@ public class DefaultValidationHtmlAttributeProviderTest
             .GetExplorerForProperty(nameof(Model.HasValidatorsProperty));
 
         // Act
-        attributeProvider.AddValidationAttributes(
-            viewContext,
-            modelExplorer,
-            attributes);
+        attributeProvider.AddValidationAttributes(viewContext, modelExplorer, attributes);
 
         // Assert
         Assert.Collection(
@@ -184,7 +186,8 @@ public class DefaultValidationHtmlAttributeProviderTest
             {
                 Assert.Equal("data-val-number", kvp.Key);
                 Assert.Equal(expectedMessage, kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -202,10 +205,14 @@ public class DefaultValidationHtmlAttributeProviderTest
 
         var attributeProviderMock = new Mock<ValidationHtmlAttributeProvider>() { CallBase = true };
         attributeProviderMock
-            .Setup(p => p.AddValidationAttributes(
-                It.IsAny<ViewContext>(),
-                It.IsAny<ModelExplorer>(),
-                It.IsAny<IDictionary<string, string>>()))
+            .Setup(
+                p =>
+                    p.AddValidationAttributes(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<ModelExplorer>(),
+                        It.IsAny<IDictionary<string, string>>()
+                    )
+            )
             .Verifiable();
         var attributeProvider = attributeProviderMock.Object;
 
@@ -214,16 +221,20 @@ public class DefaultValidationHtmlAttributeProviderTest
             viewContext,
             modelExplorer,
             nameof(Model.HasValidatorsProperty),
-            attributes);
+            attributes
+        );
 
         // Assert
         Assert.Empty(attributes);
         attributeProviderMock.Verify(
-            p => p.AddValidationAttributes(
-                It.IsAny<ViewContext>(),
-                It.IsAny<ModelExplorer>(),
-                It.IsAny<IDictionary<string, string>>()),
-            Times.Never);
+            p =>
+                p.AddValidationAttributes(
+                    It.IsAny<ViewContext>(),
+                    It.IsAny<ModelExplorer>(),
+                    It.IsAny<IDictionary<string, string>>()
+                ),
+            Times.Never
+        );
     }
 
     [Fact]
@@ -239,18 +250,22 @@ public class DefaultValidationHtmlAttributeProviderTest
             .GetExplorerForProperty(nameof(Model.Property));
 
         // Act
-        attributeProvider.AddValidationAttributes(
-            viewContext,
-            modelExplorer,
-            attributes);
+        attributeProvider.AddValidationAttributes(viewContext, modelExplorer, attributes);
 
         // Assert
         Assert.Empty(attributes);
     }
 
-    private static ViewContext GetViewContext<TModel>(TModel model, IModelMetadataProvider metadataProvider)
+    private static ViewContext GetViewContext<TModel>(
+        TModel model,
+        IModelMetadataProvider metadataProvider
+    )
     {
-        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+        var actionContext = new ActionContext(
+            new DefaultHttpContext(),
+            new RouteData(),
+            new ActionDescriptor()
+        );
         var viewData = new ViewDataDictionary<TModel>(metadataProvider, actionContext.ModelState)
         {
             Model = model,
@@ -262,10 +277,13 @@ public class DefaultValidationHtmlAttributeProviderTest
             viewData,
             Mock.Of<ITempDataDictionary>(),
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
     }
 
-    private static ValidationHtmlAttributeProvider GetAttributeProvider(IModelMetadataProvider metadataProvider)
+    private static ValidationHtmlAttributeProvider GetAttributeProvider(
+        IModelMetadataProvider metadataProvider
+    )
     {
         // Add validation properties for float, double and decimal properties. Ignore everything else.
         var mvcViewOptions = new MvcViewOptions();
@@ -277,7 +295,8 @@ public class DefaultValidationHtmlAttributeProviderTest
         return new DefaultValidationHtmlAttributeProvider(
             mvcViewOptionsAccessor.Object,
             metadataProvider,
-            new ClientValidatorCache());
+            new ClientValidatorCache()
+        );
     }
 
     private class Model

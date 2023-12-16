@@ -54,7 +54,11 @@ namespace System.Xml.XmlWriterApiTests
             wSettings.NewLineHandling = NewLineHandling.Entitize;
 
             XmlWriter w = utils.CreateWriter(wSettings);
-            CError.Compare(w.Settings.NewLineHandling, NewLineHandling.Entitize, "Mismatch in NewLineHandling");
+            CError.Compare(
+                w.Settings.NewLineHandling,
+                NewLineHandling.Entitize,
+                "Mismatch in NewLineHandling"
+            );
             w.WriteStartElement("root");
             w.WriteString("\r");
             w.WriteEndElement();

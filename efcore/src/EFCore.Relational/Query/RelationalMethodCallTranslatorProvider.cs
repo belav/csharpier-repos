@@ -17,7 +17,9 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
     ///     Creates a new instance of the <see cref="RelationalMethodCallTranslatorProvider" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-    public RelationalMethodCallTranslatorProvider(RelationalMethodCallTranslatorProviderDependencies dependencies)
+    public RelationalMethodCallTranslatorProvider(
+        RelationalMethodCallTranslatorProviderDependencies dependencies
+    )
     {
         Dependencies = dependencies;
 
@@ -38,7 +40,8 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
                 new ComparisonTranslator(sqlExpressionFactory),
                 new ByteArraySequenceEqualTranslator(sqlExpressionFactory),
                 new RandomTranslator(sqlExpressionFactory)
-            });
+            }
+        );
         _sqlExpressionFactory = sqlExpressionFactory;
     }
 
@@ -53,27 +56,38 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         var dbFunction = model.FindDbFunction(method);
         if (dbFunction != null)
         {
             if (dbFunction.Translation != null)
             {
-                var translation = dbFunction.Translation.Invoke(
-                    arguments.Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e)).ToList());
+                var translation = dbFunction
+                    .Translation
+                    .Invoke(
+                        arguments
+                            .Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e))
+                            .ToList()
+                    );
 
                 if (translation.Type.IsNullableValueType())
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.DbFunctionNullableValueReturnType(
-                            dbFunction.ModelName, dbFunction.ReturnType.ShortDisplayName()));
+                            dbFunction.ModelName,
+                            dbFunction.ReturnType.ShortDisplayName()
+                        )
+                    );
                 }
 
                 return translation;
             }
 
-            var argumentsPropagateNullability = dbFunction.Parameters.Select(p => p.PropagatesNullability);
+            var argumentsPropagateNullability = dbFunction
+                .Parameters
+                .Select(p => p.PropagatesNullability);
 
             return dbFunction.IsBuiltIn
                 ? _sqlExpressionFactory.Function(
@@ -82,7 +96,8 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
                     dbFunction.IsNullable,
                     argumentsPropagateNullability,
                     method.ReturnType.UnwrapNullableType(),
-                    dbFunction.TypeMapping)
+                    dbFunction.TypeMapping
+                )
                 : _sqlExpressionFactory.Function(
                     dbFunction.Schema,
                     dbFunction.Name,
@@ -90,10 +105,12 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
                     dbFunction.IsNullable,
                     argumentsPropagateNullability,
                     method.ReturnType.UnwrapNullableType(),
-                    dbFunction.TypeMapping);
+                    dbFunction.TypeMapping
+                );
         }
 
-        return _plugins.Concat(_translators)
+        return _plugins
+            .Concat(_translators)
             .Select(t => t.Translate(instance, method, arguments, logger))
             .FirstOrDefault(t => t != null);
     }
@@ -102,6 +119,6 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
     ///     Adds additional translators which will take priority over existing registered translators.
     /// </summary>
     /// <param name="translators">Translators to add.</param>
-    protected virtual void AddTranslators(IEnumerable<IMethodCallTranslator> translators)
-        => _translators.InsertRange(0, translators);
+    protected virtual void AddTranslators(IEnumerable<IMethodCallTranslator> translators) =>
+        _translators.InsertRange(0, translators);
 }

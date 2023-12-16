@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,64 +26,75 @@
 using System;
 using System.Windows;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    public static class PresentationTraceSources
+    {
+        public static readonly DependencyProperty TraceLevelProperty;
 
-	public static class PresentationTraceSources {
-		public static readonly DependencyProperty TraceLevelProperty;
+        public static TraceSource AnimationSource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource AnimationSource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource DataBindingSource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource DataBindingSource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource DependencyPropertySource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource DependencyPropertySource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource DocumentsSource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource DocumentsSource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource FreezableSource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource FreezableSource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource HwndHostSource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource HwndHostSource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource MarkupSource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource MarkupSource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource NameScopeSource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource NameScopeSource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource ResourceDictionarySource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource ResourceDictionarySource {
-			get { throw new NotImplementedException (); }
-		}
+        public static TraceSource RoutedEventSource
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static TraceSource RoutedEventSource {
-			get { throw new NotImplementedException (); }
-		}
+        public static PresentationTraceLevel GetTraceLevel(object element)
+        {
+            throw new NotImplementedException();
+        }
 
-		public static PresentationTraceLevel GetTraceLevel (object element)
-		{
-			throw new NotImplementedException ();
-		}
+        public static void Refresh()
+        {
+            throw new NotImplementedException();
+        }
 
-		public static void Refresh ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public static void SetTraceLevel (object element, PresentationTraceLevel traceLevel)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public static void SetTraceLevel(object element, PresentationTraceLevel traceLevel)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

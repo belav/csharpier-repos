@@ -24,14 +24,16 @@ namespace System.Web.Mvc.Routing
         /// <returns>A set of route entries for the controller.</returns>
 #if ASPNETWEBAPI
         IReadOnlyList<RouteEntry> GetDirectRoutes(
-            HttpControllerDescriptor controllerDescriptor, 
+            HttpControllerDescriptor controllerDescriptor,
             IReadOnlyList<HttpActionDescriptor> actionDescriptors,
-            IInlineConstraintResolver constraintResolver);
+            IInlineConstraintResolver constraintResolver
+        );
 #else
         IReadOnlyList<RouteEntry> GetDirectRoutes(
             ControllerDescriptor controllerDescriptor,
             IReadOnlyList<ActionDescriptor> actionDescriptors,
-            IInlineConstraintResolver constraintResolver);
+            IInlineConstraintResolver constraintResolver
+        );
 #endif
     }
 }

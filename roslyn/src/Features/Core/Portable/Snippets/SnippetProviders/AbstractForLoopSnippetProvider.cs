@@ -10,10 +10,11 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
 {
     internal abstract class AbstractForLoopSnippetProvider : AbstractInlineStatementSnippetProvider
     {
-        protected override bool IsValidAccessingType(ITypeSymbol type, Compilation compilation)
-            => type.IsIntegralType() || type.IsNativeIntegerType;
+        protected override bool IsValidAccessingType(ITypeSymbol type, Compilation compilation) =>
+            type.IsIntegralType() || type.IsNativeIntegerType;
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts)
-            => syntaxFacts.IsForStatement;
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        ) => syntaxFacts.IsForStatement;
     }
 }

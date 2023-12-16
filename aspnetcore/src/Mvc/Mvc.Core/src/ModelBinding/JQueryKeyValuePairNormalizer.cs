@@ -14,12 +14,14 @@ internal static class JQueryKeyValuePairNormalizer
 {
     public static IDictionary<string, StringValues> GetValues(
         IEnumerable<KeyValuePair<string, StringValues>> originalValues,
-        int valueCount)
+        int valueCount
+    )
     {
         var builder = new StringBuilder();
         var dictionary = new Dictionary<string, StringValues>(
             valueCount,
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
         foreach (var originalValue in originalValues)
         {
             var normalizedKey = NormalizeJQueryToMvc(builder, originalValue.Key);
@@ -69,8 +71,11 @@ internal static class JQueryKeyValuePairNormalizer
             if (indexClose == -1)
             {
                 throw new ArgumentException(
-                    message: Resources.FormatJQueryFormValueProviderFactory_MissingClosingBracket(key),
-                    paramName: nameof(key));
+                    message: Resources.FormatJQueryFormValueProviderFactory_MissingClosingBracket(
+                        key
+                    ),
+                    paramName: nameof(key)
+                );
             }
 
             if (indexClose == indexOpen + 1)

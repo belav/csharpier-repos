@@ -11,14 +11,29 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptMsgUpdate(SafeCryptMsgHandle hCryptMsg, byte[] pbData, int cbData, [MarshalAs(UnmanagedType.Bool)] bool fFinal);
+        internal static partial bool CryptMsgUpdate(
+            SafeCryptMsgHandle hCryptMsg,
+            byte[] pbData,
+            int cbData,
+            [MarshalAs(UnmanagedType.Bool)] bool fFinal
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptMsgUpdate(SafeCryptMsgHandle hCryptMsg, IntPtr pbData, int cbData, [MarshalAs(UnmanagedType.Bool)] bool fFinal);
+        internal static partial bool CryptMsgUpdate(
+            SafeCryptMsgHandle hCryptMsg,
+            IntPtr pbData,
+            int cbData,
+            [MarshalAs(UnmanagedType.Bool)] bool fFinal
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptMsgUpdate(SafeCryptMsgHandle hCryptMsg, ref byte pbData, int cbData, [MarshalAs(UnmanagedType.Bool)] bool fFinal);
+        internal static partial bool CryptMsgUpdate(
+            SafeCryptMsgHandle hCryptMsg,
+            ref byte pbData,
+            int cbData,
+            [MarshalAs(UnmanagedType.Bool)] bool fFinal
+        );
     }
 }

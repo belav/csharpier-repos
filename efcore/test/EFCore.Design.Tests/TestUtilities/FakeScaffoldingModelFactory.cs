@@ -15,12 +15,16 @@ public class FakeScaffoldingModelFactory : RelationalScaffoldingModelFactory
         IPluralizer pluralizer,
         ICSharpUtilities cSharpUtilities,
         IScaffoldingTypeMapper scaffoldingTypeMapper,
-        IModelRuntimeInitializer modelRuntimeInitializer)
+        IModelRuntimeInitializer modelRuntimeInitializer
+    )
         : base(
-            reporter, candidateNamingService, pluralizer, cSharpUtilities, scaffoldingTypeMapper,
-            modelRuntimeInitializer)
-    {
-    }
+            reporter,
+            candidateNamingService,
+            pluralizer,
+            cSharpUtilities,
+            scaffoldingTypeMapper,
+            modelRuntimeInitializer
+        ) { }
 
     public override IModel Create(DatabaseModel databaseModel, ModelReverseEngineerOptions options)
     {
@@ -63,7 +67,8 @@ public class FakeScaffoldingModelFactory : RelationalScaffoldingModelFactory
 
                 if (foreignKey.PrincipalTable is DatabaseTableRef tableRef)
                 {
-                    foreignKey.PrincipalTable = databaseModel.Tables
+                    foreignKey.PrincipalTable = databaseModel
+                        .Tables
                         .First(t => t.Name == tableRef.Name && t.Schema == tableRef.Schema);
                 }
 

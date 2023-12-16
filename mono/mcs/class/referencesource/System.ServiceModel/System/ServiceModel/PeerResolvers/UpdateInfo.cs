@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.PeerResolvers
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     [MessageContract(IsWrapped = false)]
     public class UpdateInfo
@@ -24,8 +24,15 @@ namespace System.ServiceModel.PeerResolvers
 
             [DataMember(Name = "RegistrationId")]
             public Guid RegistrationId;
+
             public UpdateInfoDC() { }
-            public UpdateInfoDC(Guid registrationId, Guid client, string meshId, PeerNodeAddress address)
+
+            public UpdateInfoDC(
+                Guid registrationId,
+                Guid client,
+                string meshId,
+                PeerNodeAddress address
+            )
             {
                 this.ClientId = client;
                 this.MeshId = meshId;
@@ -38,7 +45,11 @@ namespace System.ServiceModel.PeerResolvers
         {
             body = new UpdateInfoDC(registrationId, client, meshId, address);
         }
-        public UpdateInfo() { body = new UpdateInfoDC(); }
+
+        public UpdateInfo()
+        {
+            body = new UpdateInfoDC();
+        }
 
         public Guid ClientId
         {
@@ -69,4 +80,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

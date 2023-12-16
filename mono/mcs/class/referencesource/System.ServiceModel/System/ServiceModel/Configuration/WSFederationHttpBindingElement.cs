@@ -4,25 +4,21 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Configuration;
-    using System.ServiceModel;
-    using System.Globalization;
-    using System.ServiceModel.Security;
     using System.ComponentModel;
-    using System.Text;
+    using System.Configuration;
+    using System.Globalization;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
+    using System.Text;
 
     public partial class WSFederationHttpBindingElement : WSHttpBindingBaseElement
     {
         public WSFederationHttpBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public WSFederationHttpBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         protected override Type BindingElementType
         {
@@ -32,7 +28,7 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.PrivacyNoticeAt, DefaultValue = null)]
         public Uri PrivacyNoticeAt
         {
-            get { return (Uri) base[ConfigurationStrings.PrivacyNoticeAt]; }
+            get { return (Uri)base[ConfigurationStrings.PrivacyNoticeAt]; }
             set { base[ConfigurationStrings.PrivacyNoticeAt] = value; }
         }
 
@@ -40,7 +36,7 @@ namespace System.ServiceModel.Configuration
         [IntegerValidator(MinValue = 0)]
         public int PrivacyNoticeVersion
         {
-            get { return (int) base[ConfigurationStrings.PrivacyNoticeVersion]; }
+            get { return (int)base[ConfigurationStrings.PrivacyNoticeVersion]; }
             set { base[ConfigurationStrings.PrivacyNoticeVersion] = value; }
         }
 
@@ -54,10 +50,16 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(binding);
             WSFederationHttpBinding wspBinding = (WSFederationHttpBinding)binding;
-            if ( wspBinding.PrivacyNoticeAt != null )
+            if (wspBinding.PrivacyNoticeAt != null)
             {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.PrivacyNoticeAt, wspBinding.PrivacyNoticeAt);
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.PrivacyNoticeVersion, wspBinding.PrivacyNoticeVersion);
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.PrivacyNoticeAt,
+                    wspBinding.PrivacyNoticeAt
+                );
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.PrivacyNoticeVersion,
+                    wspBinding.PrivacyNoticeVersion
+                );
             }
             this.Security.InitializeFrom(wspBinding.Security);
         }
@@ -75,5 +77,4 @@ namespace System.ServiceModel.Configuration
             this.Security.ApplyConfiguration(wspBinding.Security);
         }
     }
-
 }

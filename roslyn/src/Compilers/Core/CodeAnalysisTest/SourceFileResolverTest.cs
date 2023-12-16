@@ -4,11 +4,11 @@
 
 #nullable disable
 
-using Roslyn.Test.Utilities;
-using Roslyn.Utilities;
 using System;
 using System.Collections.Immutable;
 using System.IO;
+using Roslyn.Test.Utilities;
+using Roslyn.Utilities;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
@@ -33,19 +33,27 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 new SourceFileResolver(
                     ImmutableArray.Create(""),
                     isABaseDirectory,
-                    ImmutableArray.Create(KeyValuePairUtil.Create<string, string>("key", null)));
+                    ImmutableArray.Create(KeyValuePairUtil.Create<string, string>("key", null))
+                );
                 AssertEx.Fail("Didn't throw");
             }
             catch (ArgumentException argException)
             {
-                Assert.Equal(new ArgumentException(CodeAnalysisResources.NullValueInPathMap, "pathMap").Message, argException.Message);
+                Assert.Equal(
+                    new ArgumentException(
+                        CodeAnalysisResources.NullValueInPathMap,
+                        "pathMap"
+                    ).Message,
+                    argException.Message
+                );
             }
 
             // Empty pathmap value doesn't throw
             new SourceFileResolver(
                 ImmutableArray.Create(""),
                 isABaseDirectory,
-                ImmutableArray.Create(KeyValuePairUtil.Create<string, string>("key", "")));
+                ImmutableArray.Create(KeyValuePairUtil.Create<string, string>("key", ""))
+            );
         }
 
         [Fact]
@@ -56,12 +64,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 new SourceFileResolver(
                     ImmutableArray.Create(""),
                     "not_a_root directory",
-                    ImmutableArray.Create(KeyValuePairUtil.Create<string, string>("key", "value")));
+                    ImmutableArray.Create(KeyValuePairUtil.Create<string, string>("key", "value"))
+                );
                 AssertEx.Fail("Didn't throw");
             }
             catch (ArgumentException argException)
             {
-                Assert.Equal(new ArgumentException(CodeAnalysisResources.AbsolutePathExpected, "baseDirectory").Message, argException.Message);
+                Assert.Equal(
+                    new ArgumentException(
+                        CodeAnalysisResources.AbsolutePathExpected,
+                        "baseDirectory"
+                    ).Message,
+                    argException.Message
+                );
             }
         }
     }

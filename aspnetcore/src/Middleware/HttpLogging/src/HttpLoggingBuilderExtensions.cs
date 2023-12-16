@@ -45,25 +45,44 @@ public static class HttpLoggingBuilderExtensions
 
     private static void VerifyHttpLoggingServicesAreRegistered(IApplicationBuilder app)
     {
-        var serviceProviderIsService = app.ApplicationServices.GetService<IServiceProviderIsService>();
-        if (serviceProviderIsService != null && (!serviceProviderIsService.IsService(typeof(ObjectPool<HttpLoggingInterceptorContext>)) ||
-            !serviceProviderIsService.IsService(typeof(TimeProvider))))
+        var serviceProviderIsService =
+            app.ApplicationServices.GetService<IServiceProviderIsService>();
+        if (
+            serviceProviderIsService != null
+            && (
+                !serviceProviderIsService.IsService(
+                    typeof(ObjectPool<HttpLoggingInterceptorContext>)
+                ) || !serviceProviderIsService.IsService(typeof(TimeProvider))
+            )
+        )
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                nameof(HttpLoggingServicesExtensions.AddHttpLogging)));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    nameof(HttpLoggingServicesExtensions.AddHttpLogging)
+                )
+            );
         }
     }
 
     private static void VerifyW3CLoggingServicesAreRegistered(IApplicationBuilder app)
     {
-        var serviceProviderIsService = app.ApplicationServices.GetService<IServiceProviderIsService>();
-        if (serviceProviderIsService != null && (!serviceProviderIsService.IsService(typeof(W3CLoggerProcessor)) ||
-          !serviceProviderIsService.IsService(typeof(W3CLogger))))
+        var serviceProviderIsService =
+            app.ApplicationServices.GetService<IServiceProviderIsService>();
+        if (
+            serviceProviderIsService != null
+            && (
+                !serviceProviderIsService.IsService(typeof(W3CLoggerProcessor))
+                || !serviceProviderIsService.IsService(typeof(W3CLogger))
+            )
+        )
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                nameof(HttpLoggingServicesExtensions.AddW3CLogging)));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    nameof(HttpLoggingServicesExtensions.AddW3CLogging)
+                )
+            );
         }
     }
 }

@@ -12,10 +12,13 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource;
 
 [Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
-public class EventFieldDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<EventFieldDeclarationSyntax>
+public class EventFieldDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<EventFieldDeclarationSyntax>
 {
     protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new EventFieldDeclarationStructureProvider();
+
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new EventFieldDeclarationStructureProvider();
 
     [Fact]
     public async Task NoCommentsOrAttributes()
@@ -41,8 +44,10 @@ public class EventFieldDeclarationStructureTests : AbstractCSharpSyntaxNodeStruc
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -58,8 +63,10 @@ public class EventFieldDeclarationStructureTests : AbstractCSharpSyntaxNodeStruc
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -75,7 +82,9 @@ public class EventFieldDeclarationStructureTests : AbstractCSharpSyntaxNodeStruc
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 }

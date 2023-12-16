@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixIncorrectConstraint
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpFixIncorrectConstraintCodeFixProvider>;
+        CSharpFixIncorrectConstraintCodeFixProvider
+    >;
 
     public class FixIncorrectConstraintTests
     {

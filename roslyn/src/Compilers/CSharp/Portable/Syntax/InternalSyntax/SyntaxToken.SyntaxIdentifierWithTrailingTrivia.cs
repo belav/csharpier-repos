@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            internal SyntaxIdentifierWithTrailingTrivia(string text, GreenNode trailing, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
+            internal SyntaxIdentifierWithTrailingTrivia(
+                string text,
+                GreenNode trailing,
+                DiagnosticInfo[] diagnostics,
+                SyntaxAnnotation[] annotations
+            )
                 : base(text, diagnostics, annotations)
             {
                 if (trailing != null)
@@ -39,22 +44,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             public override SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
             {
-                return new SyntaxIdentifierWithTrivia(this.Kind, this.TextField, this.TextField, trivia, _trailing, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxIdentifierWithTrivia(
+                    this.Kind,
+                    this.TextField,
+                    this.TextField,
+                    trivia,
+                    _trailing,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             public override SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
             {
-                return new SyntaxIdentifierWithTrailingTrivia(this.TextField, trivia, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxIdentifierWithTrailingTrivia(
+                    this.TextField,
+                    trivia,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[] diagnostics)
             {
-                return new SyntaxIdentifierWithTrailingTrivia(this.TextField, _trailing, diagnostics, this.GetAnnotations());
+                return new SyntaxIdentifierWithTrailingTrivia(
+                    this.TextField,
+                    _trailing,
+                    diagnostics,
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
             {
-                return new SyntaxIdentifierWithTrailingTrivia(this.TextField, _trailing, this.GetDiagnostics(), annotations);
+                return new SyntaxIdentifierWithTrailingTrivia(
+                    this.TextField,
+                    _trailing,
+                    this.GetDiagnostics(),
+                    annotations
+                );
             }
         }
     }

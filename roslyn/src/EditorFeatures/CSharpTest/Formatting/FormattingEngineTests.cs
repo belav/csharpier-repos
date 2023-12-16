@@ -27,10 +27,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting;
 [Trait(Traits.Feature, Traits.Features.Formatting)]
 public class FormattingEngineTests : CSharpFormattingEngineTestBase
 {
-    public FormattingEngineTests(ITestOutputHelper output) : base(output) { }
+    public FormattingEngineTests(ITestOutputHelper output)
+        : base(output) { }
 
-    private static OptionsCollection SmartIndentButDoNotFormatWhileTyping()
-        => new(LanguageNames.CSharp)
+    private static OptionsCollection SmartIndentButDoNotFormatWhileTyping() =>
+        new(LanguageNames.CSharp)
         {
             { IndentationOptionsStorage.SmartIndent, FormattingOptions2.IndentStyle.Smart },
             { AutoFormattingOptionsStorage.FormatOnTyping, false },
@@ -441,7 +442,14 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
         var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
         var syntaxRoot = await document.GetRequiredSyntaxRootAsync(CancellationToken.None);
         var options = CSharpSyntaxFormattingOptions.Default;
-        var node = Formatter.Format(syntaxRoot, spans, workspace.Services.SolutionServices, options, rules: null, CancellationToken.None);
+        var node = Formatter.Format(
+            syntaxRoot,
+            spans,
+            workspace.Services.SolutionServices,
+            options,
+            rules: null,
+            CancellationToken.None
+        );
         Assert.Equal(expected, node.ToFullString());
     }
 
@@ -1273,8 +1281,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     {
         // There are tabs in this test case.  Tools that touch the Roslyn repo should
         // not remove these as we are explicitly testing tab behavior.
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     static void Main()
@@ -1284,8 +1291,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     static void Main()
@@ -1319,8 +1325,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     static void Main()
@@ -1337,8 +1342,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [Trait(Traits.Feature, Traits.Features.SmartTokenFormatting)]
     public void DoNotFormatStatementIfSemicolonOptionIsOff()
     {
-        var code =
-            """
+        var code = """
                 namespace N
                 {
                     class C
@@ -1348,8 +1352,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 namespace N
                 {
                     class C
@@ -1371,8 +1374,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [Trait(Traits.Feature, Traits.Features.SmartTokenFormatting)]
     public void DoNotFormatStatementIfTypingOptionIsOff()
     {
-        var code =
-            """
+        var code = """
                 namespace N
                 {
                     class C
@@ -1382,8 +1384,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 namespace N
                 {
                     class C
@@ -1405,16 +1406,14 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [Trait(Traits.Feature, Traits.Features.SmartTokenFormatting)]
     public void OpenCurlyNotFormattedIfNotAtStartOfLine()
     {
-        var code =
-            """
+        var code = """
                 class C
                 {
                     public  int     P   {$$
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class C
                 {
                     public  int     P   {
@@ -1428,8 +1427,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [Trait(Traits.Feature, Traits.Features.SmartTokenFormatting)]
     public void OpenCurlyFormattedIfAtStartOfLine()
     {
-        var code =
-            """
+        var code = """
                 class C
                 {
                     public  int     P
@@ -1437,8 +1435,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class C
                 {
                     public  int     P
@@ -1636,8 +1633,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [WpfFact]
     public void DoNotFormatCompleteBlockOnSingleLineIfTypingSemicolon()
     {
-        var code =
-            """
+        var code = """
                 public class Class1
                 {
                     void M()
@@ -1648,8 +1644,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                     }
                 }
                 """;
-        var expected =
-            """
+        var expected = """
                 public class Class1
                 {
                     void M()
@@ -1666,8 +1661,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [WpfFact]
     public void FormatCompleteBlockOnSingleLineIfTypingCloseCurlyOnLaterLine()
     {
-        var code =
-            """
+        var code = """
                 public class Class1
                 {
                     void M()
@@ -1679,8 +1673,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                     }
                 }
                 """;
-        var expected =
-            """
+        var expected = """
                 public class Class1
                 {
                     void M()
@@ -1868,10 +1861,12 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     public async Task FormatAttributeAtEndOfFile(bool trailingNewLine)
     {
         var endOfFile = trailingNewLine ? Environment.NewLine : "";
-        var code = $@"using System.Diagnostics.CodeAnalysis;
+        var code =
+            $@"using System.Diagnostics.CodeAnalysis;
 
 [assembly:SuppressMessage(""Globalization"", ""CA1308: Normalize strings to uppercase"", Justification = ""My reason"", Scope = ""member"", Target = ""~M:Method"") ] {endOfFile}";
-        var expected = $@"using System.Diagnostics.CodeAnalysis;
+        var expected =
+            $@"using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage(""Globalization"", ""CA1308: Normalize strings to uppercase"", Justification = ""My reason"", Scope = ""member"", Target = ""~M:Method"")]{endOfFile}";
 
@@ -1882,8 +1877,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/30787")]
     public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff1()
     {
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -1894,8 +1888,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -1912,8 +1905,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/30787")]
     public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff2()
     {
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -1924,8 +1916,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -1943,8 +1934,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff3()
     {
         // We only smart indent the { if it's on it's own line.
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -1954,8 +1944,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -1972,8 +1961,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff4()
     {
         // We only smart indent the { if it's on it's own line.
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -1983,8 +1971,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -2001,8 +1988,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff5()
     {
         // Typing the { should not affect the formating of the preceding tokens.
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -2013,8 +1999,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -2032,8 +2017,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff6()
     {
         // Typing the { should not affect the formating of the preceding tokens.
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -2043,8 +2027,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -2060,8 +2043,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/30787")]
     public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff7()
     {
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -2069,8 +2051,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -2084,8 +2065,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/30787")]
     public void DoSmartIndentCloseBraceEvenWithFormatWhileTypingOff1()
     {
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -2097,8 +2077,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -2117,8 +2096,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     public void DoSmartIndentCloseBraceEvenWithFormatWhileTypingOff2()
     {
         // Note that the { is not updated since we are not formatting.
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -2129,8 +2107,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -2147,8 +2124,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/30787")]
     public void DoSmartIndentCloseBraceEvenWithFormatWhileTypingOff3()
     {
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M()
@@ -2157,8 +2133,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M()
@@ -2174,8 +2149,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
     public void DoSmartIndentCloseBraceEvenWithFormatWhileTypingOff4()
     {
         // Should not affect formatting of open brace
-        var code =
-            """
+        var code = """
                 class Program
                 {
                     void M() {
@@ -2183,8 +2157,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        var expected =
-            """
+        var expected = """
                 class Program
                 {
                     void M() {
@@ -2244,7 +2217,11 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
         var tree = SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script);
         var root = tree.GetRoot();
 
-        var entry = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression), SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression));
+        var entry = SyntaxFactory.BinaryExpression(
+            SyntaxKind.EqualsExpression,
+            SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression),
+            SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression)
+        );
         var newRoot = root.InsertNodesBefore(root.DescendantNodes().Last(), new[] { entry });
         AssertFormatOnArbitraryNode(newRoot, expected);
     }
@@ -2412,7 +2389,14 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 using MS.B;
                 """;
 
-        AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+        AssertFormatWithView(
+            expected,
+            code,
+            new OptionsCollection(LanguageNames.CSharp)
+            {
+                { GenerationOptions.SeparateImportDirectiveGroups, true }
+            }
+        );
     }
 
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/25003")]
@@ -2442,7 +2426,14 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 using MS.B;
                 """;
 
-        AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+        AssertFormatWithView(
+            expected,
+            code,
+            new OptionsCollection(LanguageNames.CSharp)
+            {
+                { GenerationOptions.SeparateImportDirectiveGroups, true }
+            }
+        );
     }
 
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/25003")]
@@ -2464,7 +2455,14 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 using MS.A;
                 """;
 
-        AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+        AssertFormatWithView(
+            expected,
+            code,
+            new OptionsCollection(LanguageNames.CSharp)
+            {
+                { GenerationOptions.SeparateImportDirectiveGroups, true }
+            }
+        );
     }
 
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/25003")]
@@ -2487,7 +2485,14 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 using MS.B;
                 """;
 
-        AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+        AssertFormatWithView(
+            expected,
+            code,
+            new OptionsCollection(LanguageNames.CSharp)
+            {
+                { GenerationOptions.SeparateImportDirectiveGroups, true }
+            }
+        );
     }
 
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/25003")]
@@ -2510,7 +2515,14 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 using System.B;
                 """;
 
-        AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+        AssertFormatWithView(
+            expected,
+            code,
+            new OptionsCollection(LanguageNames.CSharp)
+            {
+                { GenerationOptions.SeparateImportDirectiveGroups, true }
+            }
+        );
     }
 
     [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/58157")]
@@ -2571,7 +2583,12 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
 
         var options = CSharpSyntaxFormattingOptions.Default;
 
-        var formattedRoot = Formatter.Format(root, workspace.Services.SolutionServices, options, CancellationToken.None);
+        var formattedRoot = Formatter.Format(
+            root,
+            workspace.Services.SolutionServices,
+            options,
+            CancellationToken.None
+        );
         var annotatedTrivia = formattedRoot.GetAnnotatedTrivia("marker");
 
         Assert.Single(annotatedTrivia);
@@ -2734,7 +2751,11 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        AssertFormatWithView(expected, code, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+        AssertFormatWithView(
+            expected,
+            code,
+            parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12)
+        );
     }
 
     [WpfFact]
@@ -2759,7 +2780,11 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        AssertFormatWithView(expected, code, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+        AssertFormatWithView(
+            expected,
+            code,
+            parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12)
+        );
     }
 
     [WpfFact]
@@ -2784,7 +2809,11 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        AssertFormatWithView(expected, code, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+        AssertFormatWithView(
+            expected,
+            code,
+            parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12)
+        );
     }
 
     [WpfFact]
@@ -2804,7 +2833,11 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        AssertFormatAfterTypeChar(code, expected, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+        AssertFormatAfterTypeChar(
+            code,
+            expected,
+            parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12)
+        );
     }
 
     [WpfFact]
@@ -2824,7 +2857,11 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        AssertFormatAfterTypeChar(code, expected, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+        AssertFormatAfterTypeChar(
+            code,
+            expected,
+            parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12)
+        );
     }
 
     [WpfFact]
@@ -2844,7 +2881,11 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
                 }
                 """;
 
-        AssertFormatAfterTypeChar(code, expected, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12));
+        AssertFormatAfterTypeChar(
+            code,
+            expected,
+            parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12)
+        );
     }
 
     [WpfFact]
@@ -2934,20 +2975,34 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
         AssertFormatAfterTypeChar(code, expected);
     }
 
-    private static void AssertFormatAfterTypeChar(string code, string expected, OptionsCollection? globalOptions = null, ParseOptions? parseOptions = null)
+    private static void AssertFormatAfterTypeChar(
+        string code,
+        string expected,
+        OptionsCollection? globalOptions = null,
+        ParseOptions? parseOptions = null
+    )
     {
         using var workspace = TestWorkspace.CreateCSharp(code, parseOptions: parseOptions);
 
         var subjectDocument = workspace.Documents.Single();
 
         var commandHandler = workspace.GetService<FormatCommandHandler>();
-        var typedChar = subjectDocument.GetTextBuffer().CurrentSnapshot.GetText(subjectDocument.CursorPosition!.Value - 1, 1);
+        var typedChar = subjectDocument
+            .GetTextBuffer()
+            .CurrentSnapshot
+            .GetText(subjectDocument.CursorPosition!.Value - 1, 1);
         var textView = subjectDocument.GetTextView();
 
         globalOptions?.SetGlobalOptions(workspace.GlobalOptions);
-        workspace.GlobalOptions.SetEditorOptions(textView.Options.GlobalOptions, subjectDocument.Project.Language);
+        workspace
+            .GlobalOptions
+            .SetEditorOptions(textView.Options.GlobalOptions, subjectDocument.Project.Language);
 
-        commandHandler.ExecuteCommand(new TypeCharCommandArgs(textView, subjectDocument.GetTextBuffer(), typedChar[0]), () => { }, TestCommandExecutionContext.Create());
+        commandHandler.ExecuteCommand(
+            new TypeCharCommandArgs(textView, subjectDocument.GetTextBuffer(), typedChar[0]),
+            () => { },
+            TestCommandExecutionContext.Create()
+        );
 
         var newSnapshot = subjectDocument.GetTextBuffer().CurrentSnapshot;
 

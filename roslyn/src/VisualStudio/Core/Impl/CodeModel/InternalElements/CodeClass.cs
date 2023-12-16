@@ -14,20 +14,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeClass2))]
-    public sealed class CodeClass : AbstractCodeType, EnvDTE.CodeClass, EnvDTE80.CodeClass2, ICodeClassBase
+    public sealed class CodeClass
+        : AbstractCodeType,
+            EnvDTE.CodeClass,
+            EnvDTE80.CodeClass2,
+            ICodeClassBase
     {
-        private static readonly SymbolDisplayFormat s_BaseNameFormat =
-            new SymbolDisplayFormat(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        private static readonly SymbolDisplayFormat s_BaseNameFormat = new SymbolDisplayFormat(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         internal static EnvDTE.CodeClass Create(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
+            int? nodeKind
+        )
         {
             var element = new CodeClass(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeClass)ComAggregate.CreateAggregatedObject(element);
@@ -41,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeClass(state, fileCodeModel, nodeKind, name);
 
@@ -52,35 +58,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeClass(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         public override EnvDTE.vsCMElement Kind
         {
-            get
-            {
-                return this.CodeModelService.GetElementKind(LookupNode());
-            }
+            get { return this.CodeModelService.GetElementKind(LookupNode()); }
         }
 
         public bool IsAbstract
         {
             get
             {
-                return (InheritanceKind & EnvDTE80.vsCMInheritanceKind.vsCMInheritanceKindAbstract) != 0;
+                return (InheritanceKind & EnvDTE80.vsCMInheritanceKind.vsCMInheritanceKindAbstract)
+                    != 0;
             }
-
             set
             {
                 var inheritanceKind = InheritanceKind;
@@ -107,26 +108,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                return CodeModelService.GetClassKind(LookupNode(), (INamedTypeSymbol)LookupSymbol());
+                return CodeModelService.GetClassKind(
+                    LookupNode(),
+                    (INamedTypeSymbol)LookupSymbol()
+                );
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateClassKind, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateClassKind, value); }
         }
 
         public EnvDTE80.vsCMInheritanceKind InheritanceKind
         {
             get
             {
-                return CodeModelService.GetInheritanceKind(LookupNode(), (INamedTypeSymbol)LookupSymbol());
+                return CodeModelService.GetInheritanceKind(
+                    LookupNode(),
+                    (INamedTypeSymbol)LookupSymbol()
+                );
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateInheritanceKind, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateInheritanceKind, value); }
         }
 
         public EnvDTE.CodeElements PartialClasses
@@ -139,15 +138,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { return PartialTypeCollection.Create(State, this); }
         }
 
-        public EnvDTE.CodeClass AddClass(string name, object position, object bases, object implementedInterfaces, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeClass AddClass(
+            string name,
+            object position,
+            object bases,
+            object implementedInterfaces,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddClass(LookupNode(), name, position, bases, implementedInterfaces, access);
+                return FileCodeModel.AddClass(
+                    LookupNode(),
+                    name,
+                    position,
+                    bases,
+                    implementedInterfaces,
+                    access
+                );
             });
         }
 
-        public EnvDTE.CodeDelegate AddDelegate(string name, object type, object position, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeDelegate AddDelegate(
+            string name,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
@@ -155,7 +172,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        public EnvDTE.CodeEnum AddEnum(string name, object position, object bases, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeEnum AddEnum(
+            string name,
+            object position,
+            object bases,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
@@ -163,15 +185,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        public EnvDTE80.CodeEvent AddEvent(string name, string fullDelegateName, bool createPropertyStyleEvent, object location, EnvDTE.vsCMAccess access)
+        public EnvDTE80.CodeEvent AddEvent(
+            string name,
+            string fullDelegateName,
+            bool createPropertyStyleEvent,
+            object location,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddEvent(LookupNode(), name, fullDelegateName, createPropertyStyleEvent, location, access);
+                return FileCodeModel.AddEvent(
+                    LookupNode(),
+                    name,
+                    fullDelegateName,
+                    createPropertyStyleEvent,
+                    location,
+                    access
+                );
             });
         }
 
-        public EnvDTE.CodeFunction AddFunction(string name, EnvDTE.vsCMFunction kind, object type, object position, EnvDTE.vsCMAccess access, object location)
+        public EnvDTE.CodeFunction AddFunction(
+            string name,
+            EnvDTE.vsCMFunction kind,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access,
+            object location
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
@@ -179,23 +221,56 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        public EnvDTE.CodeProperty AddProperty(string getterName, string putterName, object type, object position, EnvDTE.vsCMAccess access, object location)
+        public EnvDTE.CodeProperty AddProperty(
+            string getterName,
+            string putterName,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access,
+            object location
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddProperty(LookupNode(), getterName, putterName, type, position, access);
+                return FileCodeModel.AddProperty(
+                    LookupNode(),
+                    getterName,
+                    putterName,
+                    type,
+                    position,
+                    access
+                );
             });
         }
 
-        public EnvDTE.CodeStruct AddStruct(string name, object position, object bases, object implementedInterfaces, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeStruct AddStruct(
+            string name,
+            object position,
+            object bases,
+            object implementedInterfaces,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddStruct(LookupNode(), name, position, bases, implementedInterfaces, access);
+                return FileCodeModel.AddStruct(
+                    LookupNode(),
+                    name,
+                    position,
+                    bases,
+                    implementedInterfaces,
+                    access
+                );
             });
         }
 
-        public EnvDTE.CodeVariable AddVariable(string name, object type, object position, EnvDTE.vsCMAccess access, object location)
+        public EnvDTE.CodeVariable AddVariable(
+            string name,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access,
+            object location
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {

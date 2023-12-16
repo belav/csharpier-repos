@@ -16,9 +16,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using Xunit;
@@ -45,7 +45,12 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForConnectionErrorAsync<Exception>(ignoreNonGoAwayFrames: false, 1, Http2ErrorCode.PROTOCOL_ERROR, "Malformed request: invalid headers.");
+        await WaitForConnectionErrorAsync<Exception>(
+            ignoreNonGoAwayFrames: false,
+            1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            "Malformed request: invalid headers."
+        );
     }
 
     [Fact]
@@ -62,7 +67,11 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.FormatHttp2ErrorMethodInvalid(""));
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.FormatHttp2ErrorMethodInvalid("")
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -81,7 +90,11 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.FormatHttp2ErrorMethodInvalid("Hello,World"));
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.FormatHttp2ErrorMethodInvalid("Hello,World")
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -107,10 +120,14 @@ public class Http2StreamTests : Http2TestBase
         // First request
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame1 = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame1 = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 45 + method.Length,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         _hpackDecoder.Decode(headersFrame1.PayloadSequence, endHeaders: false, handler: this);
 
@@ -124,10 +141,14 @@ public class Http2StreamTests : Http2TestBase
         // Second request (will use dynamic table indexes)
         await StartStreamAsync(3, headers, endStream: true);
 
-        var headersFrame2 = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame2 = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 7,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 3);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 3
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 3, ignoreNonGoAwayFrames: false);
 
@@ -153,12 +174,20 @@ public class Http2StreamTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
         };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 45,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -199,18 +228,24 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, Encoding.UTF8.GetBytes("Hello World"), endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)(Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -250,18 +285,24 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, Encoding.UTF8.GetBytes("Hello World"), endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)(Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -279,13 +320,24 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(_echoMethodNoBody);
 
         // :path and :scheme are not allowed, :authority is optional
-        var headers = new[] { new KeyValuePair<string, string>(InternalHeaderNames.Method, "CONNECT") };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        var headers = new[]
+        {
+            new KeyValuePair<string, string>(InternalHeaderNames.Method, "CONNECT")
+        };
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 48,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -309,12 +361,20 @@ public class Http2StreamTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "*")
         };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 56,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -340,12 +400,20 @@ public class Http2StreamTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/")
         };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 57,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -366,7 +434,10 @@ public class Http2StreamTests : Http2TestBase
         {
             context.Response.Headers["path"] = context.Request.Path.Value;
             context.Response.Headers["query"] = context.Request.QueryString.Value;
-            context.Response.Headers["rawtarget"] = context.Features.Get<IHttpRequestFeature>().RawTarget;
+            context.Response.Headers["rawtarget"] = context
+                .Features
+                .Get<IHttpRequestFeature>()
+                .RawTarget;
             return Task.CompletedTask;
         });
 
@@ -377,12 +448,20 @@ public class Http2StreamTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/a/path?a&que%35ry")
         };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 99,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -422,12 +501,20 @@ public class Http2StreamTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, input)
         };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -442,16 +529,30 @@ public class Http2StreamTests : Http2TestBase
     [Theory]
     [InlineData(":path", "/")]
     [InlineData(":scheme", "http")]
-    public async Task HEADERS_Received_CONNECTMethod_WithSchemeOrPath_Reset(string headerName, string value)
+    public async Task HEADERS_Received_CONNECTMethod_WithSchemeOrPath_Reset(
+        string headerName,
+        string value
+    )
     {
         await InitializeConnectionAsync(_noopApplication);
 
         // :path and :scheme are not allowed, :authority is optional
-        var headers = new[] { new KeyValuePair<string, string>(InternalHeaderNames.Method, "CONNECT"),
-                new KeyValuePair<string, string>(headerName, value) };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        var headers = new[]
+        {
+            new KeyValuePair<string, string>(InternalHeaderNames.Method, "CONNECT"),
+            new KeyValuePair<string, string>(headerName, value)
+        };
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.Http2ErrorConnectMustNotSendSchemeOrPath);
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.Http2ErrorConnectMustNotSendSchemeOrPath
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -463,13 +564,23 @@ public class Http2StreamTests : Http2TestBase
     {
         await InitializeConnectionAsync(_noopApplication);
 
-        var headers = new[] { new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
-                new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
-                new KeyValuePair<string, string>(InternalHeaderNames.Scheme, scheme) }; // Not the expected "http"
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        var headers = new[]
+        {
+            new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
+            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
+            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, scheme)
+        }; // Not the expected "http"
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR,
-            CoreStrings.FormatHttp2StreamErrorSchemeMismatch(scheme, "http"));
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.FormatHttp2StreamErrorSchemeMismatch(scheme, "http")
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -494,12 +605,20 @@ public class Http2StreamTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, scheme)
         }; // Not the expected "http"
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -526,10 +645,17 @@ public class Http2StreamTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, scheme)
         }; // Not the expected "http"
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR,
-            CoreStrings.FormatHttp2StreamErrorSchemeMismatch(scheme, "http"));
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.FormatHttp2StreamErrorSchemeMismatch(scheme, "http")
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -547,10 +673,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -576,10 +706,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -605,10 +739,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 46,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -636,10 +774,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 46,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -667,10 +809,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 46,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -698,10 +844,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 46,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -728,8 +878,11 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR,
-            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("local=host:80"));
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("local=host:80")
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -749,8 +902,11 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR,
-            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("d=ef"));
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("d=ef")
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -770,8 +926,11 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR,
-            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("host1,host2"));
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("host1,host2")
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -784,16 +943,29 @@ public class Http2StreamTests : Http2TestBase
         // https://github.com/aspnet/KestrelHttpServer/issues/2872
         var headers = new[]
         {
-            new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET" + new string('a', 1024 * 3)),
-            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/Hello/How/Are/You/" + new string('a', 1024 * 3)),
+            new KeyValuePair<string, string>(
+                InternalHeaderNames.Method,
+                "GET" + new string('a', 1024 * 3)
+            ),
+            new KeyValuePair<string, string>(
+                InternalHeaderNames.Path,
+                "/Hello/How/Are/You/" + new string('a', 1024 * 3)
+            ),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost" + new string('a', 1024 * 3) + ":80"),
+            new KeyValuePair<string, string>(
+                InternalHeaderNames.Authority,
+                "localhost" + new string('a', 1024 * 3) + ":80"
+            ),
         };
         await InitializeConnectionAsync(_noopApplication);
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.BadRequest_RequestLineTooLong);
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.BadRequest_RequestLineTooLong
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -820,10 +992,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 40,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -854,10 +1030,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 40,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -891,10 +1071,14 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, new byte[12], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -932,10 +1116,14 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, new byte[12], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -975,10 +1163,14 @@ public class Http2StreamTests : Http2TestBase
         await SendDataAsync(1, new byte[3], endStream: false);
         await SendDataAsync(1, new byte[8], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1005,7 +1197,10 @@ public class Http2StreamTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (!readResult.IsCompleted)
             {
-                context.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
+                context
+                    .Request
+                    .BodyReader
+                    .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
             }
 
@@ -1018,10 +1213,14 @@ public class Http2StreamTests : Http2TestBase
         await SendDataAsync(1, new byte[3], endStream: false);
         await SendDataAsync(1, new byte[8], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1071,10 +1270,14 @@ public class Http2StreamTests : Http2TestBase
         await SendDataAsync(1, new byte[3], endStream: false);
         await SendDataAsync(1, new byte[8], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1108,7 +1311,11 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.Http2StreamErrorLessDataThanLength);
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.Http2StreamErrorLessDataThanLength
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1133,7 +1340,11 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.Http2StreamErrorLessDataThanLength);
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.Http2StreamErrorLessDataThanLength
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -1162,11 +1373,19 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, new byte[13], endStream: true);
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.Http2StreamErrorMoreDataThanLength);
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.Http2StreamErrorMoreDataThanLength
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
-        var expectedError = new Http2StreamErrorException(1, CoreStrings.Http2StreamErrorMoreDataThanLength, Http2ErrorCode.PROTOCOL_ERROR);
+        var expectedError = new Http2StreamErrorException(
+            1,
+            CoreStrings.Http2StreamErrorMoreDataThanLength,
+            Http2ErrorCode.PROTOCOL_ERROR
+        );
 
         Assert.NotNull(thrownEx);
         Assert.Equal(expectedError.Message, thrownEx.Message);
@@ -1197,11 +1416,19 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, new byte[11], endStream: true);
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.Http2StreamErrorLessDataThanLength);
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.Http2StreamErrorLessDataThanLength
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
-        var expectedError = new Http2StreamErrorException(1, CoreStrings.Http2StreamErrorLessDataThanLength, Http2ErrorCode.PROTOCOL_ERROR);
+        var expectedError = new Http2StreamErrorException(
+            1,
+            CoreStrings.Http2StreamErrorLessDataThanLength,
+            Http2ErrorCode.PROTOCOL_ERROR
+        );
 
         Assert.NotNull(thrownEx);
         Assert.Equal(expectedError.Message, thrownEx.Message);
@@ -1233,11 +1460,19 @@ public class Http2StreamTests : Http2TestBase
         await SendDataAsync(1, new byte[1], endStream: false);
         await SendDataAsync(1, new byte[2], endStream: false);
         await SendDataAsync(1, new byte[10], endStream: false);
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.Http2StreamErrorMoreDataThanLength);
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.Http2StreamErrorMoreDataThanLength
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
-        var expectedError = new Http2StreamErrorException(1, CoreStrings.Http2StreamErrorMoreDataThanLength, Http2ErrorCode.PROTOCOL_ERROR);
+        var expectedError = new Http2StreamErrorException(
+            1,
+            CoreStrings.Http2StreamErrorMoreDataThanLength,
+            Http2ErrorCode.PROTOCOL_ERROR
+        );
 
         Assert.NotNull(thrownEx);
         Assert.Equal(expectedError.Message, thrownEx.Message);
@@ -1269,11 +1504,19 @@ public class Http2StreamTests : Http2TestBase
         await SendDataAsync(1, new byte[1], endStream: false);
         await SendDataAsync(1, new byte[2], endStream: true);
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.Http2StreamErrorLessDataThanLength);
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.Http2StreamErrorLessDataThanLength
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
-        var expectedError = new Http2StreamErrorException(1, CoreStrings.Http2StreamErrorLessDataThanLength, Http2ErrorCode.PROTOCOL_ERROR);
+        var expectedError = new Http2StreamErrorException(
+            1,
+            CoreStrings.Http2StreamErrorLessDataThanLength,
+            Http2ErrorCode.PROTOCOL_ERROR
+        );
 
         Assert.NotNull(thrownEx);
         Assert.Equal(expectedError.Message, thrownEx.Message);
@@ -1288,7 +1531,10 @@ public class Http2StreamTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (!readResult.IsCompleted)
             {
-                context.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
+                context
+                    .Request
+                    .BodyReader
+                    .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
             }
 
@@ -1313,10 +1559,14 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, new byte[12], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1345,16 +1595,28 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.RST_STREAM,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.RST_STREAM,
             withLength: 4,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        Assert.Contains(LogMessages, m => m.Exception?.Message.Contains("Response Content-Length mismatch: too many bytes written (12 of 11).") ?? false);
+        Assert.Contains(
+            LogMessages,
+            m =>
+                m.Exception
+                    ?.Message
+                    .Contains(
+                        "Response Content-Length mismatch: too many bytes written (12 of 11)."
+                    ) ?? false
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1384,16 +1646,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 6,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR, "Response Content-Length mismatch: too many bytes written (12 of 11).");
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.INTERNAL_ERROR,
+            "Response Content-Length mismatch: too many bytes written (12 of 11)."
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1422,12 +1692,19 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
-        Assert.Contains(LogMessages, m => m.Exception?.Message.Contains(CoreStrings.FormatTooFewBytesWritten(0, 11)) ?? false);
+        Assert.Contains(
+            LogMessages,
+            m => m.Exception?.Message.Contains(CoreStrings.FormatTooFewBytesWritten(0, 11)) ?? false
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1455,14 +1732,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1490,14 +1771,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1523,19 +1808,25 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.StartAsync();
-            ex = Assert.Throws<InvalidOperationException>(() => context.Response.OnStarting(_ => Task.CompletedTask, null));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => context.Response.OnStarting(_ => Task.CompletedTask, null)
+            );
         });
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1565,14 +1856,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1605,22 +1900,28 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         tcs.SetResult();
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1652,15 +1953,19 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1689,14 +1994,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1725,20 +2034,26 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1769,10 +2084,12 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR, "");
 
@@ -1803,10 +2120,12 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR, "");
 
@@ -1836,16 +2155,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 6,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR, CoreStrings.FormatTooFewBytesWritten(6, 11));
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.INTERNAL_ERROR,
+            CoreStrings.FormatTooFewBytesWritten(6, 11)
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1880,10 +2207,14 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, new byte[12], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1923,14 +2254,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: false);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 40,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.NO_ERROR, null);
         // Logged without an exception.
-        Assert.Contains(LogMessages, m => m.Message.Contains("the application completed without reading the entire request body."));
+        Assert.Contains(
+            LogMessages,
+            m =>
+                m.Message.Contains(
+                    "the application completed without reading the entire request body."
+                )
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -1966,10 +2307,14 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, new byte[12], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2010,14 +2355,24 @@ public class Http2StreamTests : Http2TestBase
         await SendDataAsync(1, new byte[6], endStream: false);
         await SendDataAsync(1, new byte[6], endStream: false);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 40,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await WaitForStreamErrorAsync(1, Http2ErrorCode.NO_ERROR, null);
         // Logged without an exception.
-        Assert.Contains(LogMessages, m => m.Message.Contains("the application completed without reading the entire request body."));
+        Assert.Contains(
+            LogMessages,
+            m =>
+                m.Message.Contains(
+                    "the application completed without reading the entire request body."
+                )
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2048,10 +2403,9 @@ public class Http2StreamTests : Http2TestBase
         };
         if (includeContentLength)
         {
-            headers.Concat(new[]
-                {
-                    new KeyValuePair<string, string>(HeaderNames.ContentLength, "18"),
-                });
+            headers.Concat(
+                new[] { new KeyValuePair<string, string>(HeaderNames.ContentLength, "18"), }
+            );
         }
         await InitializeConnectionAsync(async context =>
         {
@@ -2073,14 +2427,24 @@ public class Http2StreamTests : Http2TestBase
         await SendDataAsync(1, new byte[6], endStream: false);
         await SendDataAsync(1, new byte[6], endStream: false);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 40,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await WaitForStreamErrorAsync(1, Http2ErrorCode.NO_ERROR, null);
         // Logged without an exception.
-        Assert.Contains(LogMessages, m => m.Message.Contains("the application completed without reading the entire request body."));
+        Assert.Contains(
+            LogMessages,
+            m =>
+                m.Message.Contains(
+                    "the application completed without reading the entire request body."
+                )
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2108,10 +2472,9 @@ public class Http2StreamTests : Http2TestBase
         };
         if (includeContentLength)
         {
-            headers.Concat(new[]
-                {
-                    new KeyValuePair<string, string>(HeaderNames.ContentLength, "12"),
-                });
+            headers.Concat(
+                new[] { new KeyValuePair<string, string>(HeaderNames.ContentLength, "12"), }
+            );
         }
         await InitializeConnectionAsync(async context =>
         {
@@ -2128,10 +2491,14 @@ public class Http2StreamTests : Http2TestBase
         await StartStreamAsync(1, headers, endStream: false);
         await SendDataAsync(1, new byte[12], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2148,29 +2515,43 @@ public class Http2StreamTests : Http2TestBase
     {
         await InitializeConnectionAsync(async context =>
         {
-            Assert.Throws<InvalidOperationException>(() => context.Response.Headers.Append("Custom你好Name", "Custom Value"));
-            Assert.Throws<InvalidOperationException>(() => context.Response.ContentType = "Custom 你好 Type");
-            Assert.Throws<InvalidOperationException>(() => context.Response.Headers.Append("CustomName", "Custom 你好 Value"));
-            Assert.Throws<InvalidOperationException>(() => context.Response.Headers.Append("CustomName", "Custom \r Value"));
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.Headers.Append("Custom你好Name", "Custom Value")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.ContentType = "Custom 你好 Type"
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.Headers.Append("CustomName", "Custom 你好 Value")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.Headers.Append("CustomName", "Custom \r Value")
+            );
             await context.Response.WriteAsync("Hello World");
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2189,8 +2570,12 @@ public class Http2StreamTests : Http2TestBase
 
         await InitializeConnectionAsync(async context =>
         {
-            Assert.Throws<InvalidOperationException>(() => context.Response.Headers.Append("Custom你好Name", "Custom Value"));
-            Assert.Throws<InvalidOperationException>(() => context.Response.Headers.Append("CustomName", "Custom \r Value"));
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.Headers.Append("Custom你好Name", "Custom Value")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.Headers.Append("CustomName", "Custom \r Value")
+            );
             context.Response.ContentType = "Custom 你好 Type";
             context.Response.Headers.Append("CustomName", "Custom 你好 Value");
             await context.Response.WriteAsync("Hello World");
@@ -2198,20 +2583,26 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 84,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2227,8 +2618,11 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task ResponseHeaders_WithInvalidValuesAndCustomEncoder_AbortsConnection()
     {
-        var encoding = Encoding.GetEncoding(Encoding.Latin1.CodePage, EncoderFallback.ExceptionFallback,
-            DecoderFallback.ExceptionFallback);
+        var encoding = Encoding.GetEncoding(
+            Encoding.Latin1.CodePage,
+            EncoderFallback.ExceptionFallback,
+            DecoderFallback.ExceptionFallback
+        );
         _serviceContext.ServerOptions.ResponseHeaderEncodingSelector = _ => encoding;
 
         await InitializeConnectionAsync(async context =>
@@ -2239,7 +2633,11 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        await WaitForConnectionErrorAsync<Exception>(ignoreNonGoAwayFrames: false, int.MaxValue, Http2ErrorCode.INTERNAL_ERROR);
+        await WaitForConnectionErrorAsync<Exception>(
+            ignoreNonGoAwayFrames: false,
+            int.MaxValue,
+            Http2ErrorCode.INTERNAL_ERROR
+        );
     }
 
     [Fact]
@@ -2253,15 +2651,21 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2291,10 +2695,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_STREAM | Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_STREAM | Http2HeadersFrameFlags.END_HEADERS
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2322,26 +2730,38 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame1 = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame1 = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var trailersFrame1 = await ExpectAsync(Http2FrameType.HEADERS,
+            withStreamId: 1
+        );
+        var trailersFrame1 = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StartStreamAsync(3, _browserRequestHeaders, endStream: true);
 
-        var headersFrame2 = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame2 = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 6,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 3);
+            withStreamId: 3
+        );
 
-        var trailersFrame2 = await ExpectAsync(Http2FrameType.HEADERS,
+        var trailersFrame2 = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 1,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 3);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 3
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 3, ignoreNonGoAwayFrames: false);
 
@@ -2369,20 +2789,28 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2419,25 +2847,33 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 15440,
             withFlags: (byte)Http2HeadersFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var trailersContinuationFrame = await ExpectAsync(Http2FrameType.CONTINUATION,
+        var trailersContinuationFrame = await ExpectAsync(
+            Http2FrameType.CONTINUATION,
             withLength: 3088,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2460,7 +2896,11 @@ public class Http2StreamTests : Http2TestBase
 
         _decodedHeaders.Clear();
 
-        _hpackDecoder.Decode(trailersContinuationFrame.PayloadSequence, endHeaders: true, handler: this);
+        _hpackDecoder.Decode(
+            trailersContinuationFrame.PayloadSequence,
+            endHeaders: true,
+            handler: this
+        );
 
         Assert.Single(_decodedHeaders);
         Assert.Equal(largeHeader, _decodedHeaders["CustomName5"]);
@@ -2472,30 +2912,50 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.WriteAsync("Hello World");
-            Assert.Throws<InvalidOperationException>(() => context.Response.AppendTrailer("Custom你好Name", "Custom Value"));
-            Assert.Throws<InvalidOperationException>(() => context.Response.AppendTrailer("CustomName", "Custom 你好 Value"));
-            Assert.Throws<InvalidOperationException>(() => context.Response.AppendTrailer("CustomName", "Custom \r Value"));
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.AppendTrailer("Custom你好Name", "Custom Value")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.AppendTrailer("CustomName", "Custom 你好 Value")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.AppendTrailer("CustomName", "Custom \r Value")
+            );
             // ETag is one of the few special cased trailers. Accept is not.
-            Assert.Throws<InvalidOperationException>(() => context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag = "Custom 你好 Tag");
-            Assert.Throws<InvalidOperationException>(() => context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept = "Custom 你好 Tag");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
+                        "Custom 你好 Tag"
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept =
+                        "Custom 你好 Tag"
+            );
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2515,30 +2975,43 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.WriteAsync("Hello World");
-            Assert.Throws<InvalidOperationException>(() => context.Response.AppendTrailer("Custom你好Name", "Custom Value"));
-            Assert.Throws<InvalidOperationException>(() => context.Response.AppendTrailer("CustomName", "Custom \r Value"));
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.AppendTrailer("Custom你好Name", "Custom Value")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.AppendTrailer("CustomName", "Custom \r Value")
+            );
             context.Response.AppendTrailer("CustomName", "Custom 你好 Value");
             // ETag is one of the few special cased trailers. Accept is not.
             context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag = "Custom 你好 Tag";
-            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept = "Custom 你好 Accept";
+            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept =
+                "Custom 你好 Accept";
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 80,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_STREAM | Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_STREAM | Http2HeadersFrameFlags.END_HEADERS
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2561,8 +3034,11 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task ResponseTrailers_WithInvalidValuesAndCustomEncoder_AbortsConnection()
     {
-        var encoding = Encoding.GetEncoding(Encoding.Latin1.CodePage, EncoderFallback.ExceptionFallback,
-            DecoderFallback.ExceptionFallback);
+        var encoding = Encoding.GetEncoding(
+            Encoding.Latin1.CodePage,
+            EncoderFallback.ExceptionFallback,
+            DecoderFallback.ExceptionFallback
+        );
         _serviceContext.ServerOptions.ResponseHeaderEncodingSelector = _ => encoding;
 
         await InitializeConnectionAsync(async context =>
@@ -2573,15 +3049,19 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: true, handler: this);
 
@@ -2589,7 +3069,11 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("200", _decodedHeaders[InternalHeaderNames.Status]);
 
-        await WaitForConnectionErrorAsync<Exception>(ignoreNonGoAwayFrames: false, int.MaxValue, Http2ErrorCode.INTERNAL_ERROR);
+        await WaitForConnectionErrorAsync<Exception>(
+            ignoreNonGoAwayFrames: false,
+            int.MaxValue,
+            Http2ErrorCode.INTERNAL_ERROR
+        );
     }
 
     [Fact]
@@ -2598,25 +3082,36 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.WriteAsync("Hello World");
-            context.Response.AppendTrailer("too_long", new string('a', (int)Http2PeerSettings.DefaultMaxFrameSize));
+            context
+                .Response
+                .AppendTrailer(
+                    "too_long",
+                    new string('a', (int)Http2PeerSettings.DefaultMaxFrameSize)
+                );
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var goAway = await ExpectAsync(Http2FrameType.GOAWAY,
+        var goAway = await ExpectAsync(
+            Http2FrameType.GOAWAY,
             withLength: 8,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 0);
+            withStreamId: 0
+        );
 
         VerifyGoAway(goAway, int.MaxValue, Http2ErrorCode.INTERNAL_ERROR);
 
@@ -2640,33 +3135,43 @@ public class Http2StreamTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
         };
         await InitializeConnectionAsync(async context =>
-        {
-            await context.Response.StartAsync();
+            {
+                await context.Response.StartAsync();
 
-            // Body exceeds flow control available and requires the client to allow more
-            // data via updating the window
-            context.Response.BodyWriter.GetMemory(windowSize + 1);
-            context.Response.BodyWriter.Advance(windowSize + 1);
+                // Body exceeds flow control available and requires the client to allow more
+                // data via updating the window
+                context.Response.BodyWriter.GetMemory(windowSize + 1);
+                context.Response.BodyWriter.Advance(windowSize + 1);
 
-            context.Response.AppendTrailer("CustomName", "Custom Value");
-        }).DefaultTimeout();
+                context.Response.AppendTrailer("CustomName", "Custom Value");
+            })
+            .DefaultTimeout();
 
         await StartStreamAsync(1, headers, endStream: true).DefaultTimeout();
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
-            withLength: 32,
-            withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1).DefaultTimeout();
+        var headersFrame = await ExpectAsync(
+                Http2FrameType.HEADERS,
+                withLength: 32,
+                withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
+                withStreamId: 1
+            )
+            .DefaultTimeout();
 
-        await ExpectAsync(Http2FrameType.DATA,
-            withLength: 16384,
-            withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1).DefaultTimeout();
+        await ExpectAsync(
+                Http2FrameType.DATA,
+                withLength: 16384,
+                withFlags: (byte)Http2DataFrameFlags.NONE,
+                withStreamId: 1
+            )
+            .DefaultTimeout();
 
-        var dataTask = ExpectAsync(Http2FrameType.DATA,
-            withLength: 1,
-            withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1).DefaultTimeout();
+        var dataTask = ExpectAsync(
+                Http2FrameType.DATA,
+                withLength: 1,
+                withFlags: (byte)Http2DataFrameFlags.NONE,
+                withStreamId: 1
+            )
+            .DefaultTimeout();
 
         // Reading final frame of data requires window update
         // Verify this data task is waiting on window update
@@ -2676,12 +3181,18 @@ public class Http2StreamTests : Http2TestBase
 
         await dataTask;
 
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
-            withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1).DefaultTimeout();
+        var trailersFrame = await ExpectAsync(
+                Http2FrameType.HEADERS,
+                withLength: 25,
+                withFlags: (byte)(
+                    Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+                ),
+                withStreamId: 1
+            )
+            .DefaultTimeout();
 
-        await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false).DefaultTimeout();
+        await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false)
+            .DefaultTimeout();
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
 
@@ -2718,20 +3229,28 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2764,12 +3283,21 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
-        Assert.Contains(LogMessages, m => (m.Exception?.Message.Contains("App Faulted") ?? false) && m.LogLevel == LogLevel.Error);
+        Assert.Contains(
+            LogMessages,
+            m =>
+                (m.Exception?.Message.Contains("App Faulted") ?? false)
+                && m.LogLevel == LogLevel.Error
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -2798,14 +3326,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 6,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR, "App Faulted");
 
@@ -2839,15 +3371,17 @@ public class Http2StreamTests : Http2TestBase
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamIdFeature.StreamId);
-                }
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
+                    }
 
-                sem.Release();
-            });
+                    sem.Release();
+                });
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -2872,15 +3406,17 @@ public class Http2StreamTests : Http2TestBase
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamIdFeature.StreamId);
-                }
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
+                    }
 
-                sem.Release();
-            });
+                    sem.Release();
+                });
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -2909,11 +3445,17 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                var readTask = context.Request.Body.ReadAsync(new byte[100], 0, 100).DefaultTimeout();
+                var readTask = context
+                    .Request
+                    .Body
+                    .ReadAsync(new byte[100], 0, 100)
+                    .DefaultTimeout();
                 sem.Release();
                 await readTask;
 
-                _runningStreams[streamIdFeature.StreamId].TrySetException(new Exception("ReadAsync was expected to throw."));
+                _runningStreams[streamIdFeature.StreamId].TrySetException(
+                    new Exception("ReadAsync was expected to throw.")
+                );
             }
             catch (IOException) // Expected failure
             {
@@ -2951,12 +3493,22 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                var read = await context.Request.Body.ReadAsync(new byte[100], 0, 100).DefaultTimeout();
-                var readTask = context.Request.Body.ReadAsync(new byte[100], 0, 100).DefaultTimeout();
+                var read = await context
+                    .Request
+                    .Body
+                    .ReadAsync(new byte[100], 0, 100)
+                    .DefaultTimeout();
+                var readTask = context
+                    .Request
+                    .Body
+                    .ReadAsync(new byte[100], 0, 100)
+                    .DefaultTimeout();
                 sem.Release();
                 await readTask;
 
-                _runningStreams[streamIdFeature.StreamId].TrySetException(new Exception("ReadAsync was expected to throw."));
+                _runningStreams[streamIdFeature.StreamId].TrySetException(
+                    new Exception("ReadAsync was expected to throw.")
+                );
             }
             catch (IOException) // Expected failure
             {
@@ -2994,15 +3546,17 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                context.RequestAborted.Register(() =>
-                {
-                    lock (_abortedStreamIdsLock)
+                context
+                    .RequestAborted
+                    .Register(() =>
                     {
-                        _abortedStreamIds.Add(streamIdFeature.StreamId);
-                    }
+                        lock (_abortedStreamIdsLock)
+                        {
+                            _abortedStreamIds.Add(streamIdFeature.StreamId);
+                        }
 
-                    _runningStreams[streamIdFeature.StreamId].TrySetResult();
-                });
+                        _runningStreams[streamIdFeature.StreamId].TrySetResult();
+                    });
 
                 context.Abort();
 
@@ -3018,7 +3572,11 @@ public class Http2StreamTests : Http2TestBase
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.INTERNAL_ERROR, CoreStrings.ConnectionAbortedByApplication);
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.INTERNAL_ERROR,
+            CoreStrings.ConnectionAbortedByApplication
+        );
         await WaitForAllStreamsAsync();
         Assert.Contains(1, _abortedStreamIds);
 
@@ -3034,15 +3592,17 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                context.RequestAborted.Register(() =>
-                {
-                    lock (_abortedStreamIdsLock)
+                context
+                    .RequestAborted
+                    .Register(() =>
                     {
-                        _abortedStreamIds.Add(streamIdFeature.StreamId);
-                    }
+                        lock (_abortedStreamIdsLock)
+                        {
+                            _abortedStreamIds.Add(streamIdFeature.StreamId);
+                        }
 
-                    _runningStreams[streamIdFeature.StreamId].TrySetResult();
-                });
+                        _runningStreams[streamIdFeature.StreamId].TrySetResult();
+                    });
 
                 await context.Response.Body.WriteAsync(new byte[10], 0, 10);
 
@@ -3061,16 +3621,19 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
-            withLength: 10,
-            withFlags: 0,
-            withStreamId: 1);
+            withStreamId: 1
+        );
+        await ExpectAsync(Http2FrameType.DATA, withLength: 10, withFlags: 0, withStreamId: 1);
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.INTERNAL_ERROR, CoreStrings.ConnectionAbortedByApplication);
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.INTERNAL_ERROR,
+            CoreStrings.ConnectionAbortedByApplication
+        );
         await WaitForAllStreamsAsync();
         Assert.Contains(1, _abortedStreamIds);
 
@@ -3087,7 +3650,9 @@ public class Http2StreamTests : Http2TestBase
             context.Abort();
 
             var buffer = new byte[100];
-            var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(() => context.Request.Body.ReadAsync(buffer, 0, buffer.Length));
+            var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () => context.Request.Body.ReadAsync(buffer, 0, buffer.Length)
+            );
 
             Assert.True(thrownExTask.IsCompleted);
 
@@ -3095,7 +3660,11 @@ public class Http2StreamTests : Http2TestBase
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: false);
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.INTERNAL_ERROR, CoreStrings.ConnectionAbortedByApplication);
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.INTERNAL_ERROR,
+            CoreStrings.ConnectionAbortedByApplication
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3112,7 +3681,9 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             var buffer = new byte[100];
-            var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(() => context.Request.Body.ReadAsync(buffer, 0, buffer.Length));
+            var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () => context.Request.Body.ReadAsync(buffer, 0, buffer.Length)
+            );
 
             Assert.False(thrownExTask.IsCompleted);
 
@@ -3122,7 +3693,11 @@ public class Http2StreamTests : Http2TestBase
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: false);
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.INTERNAL_ERROR, CoreStrings.ConnectionAbortedByApplication);
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.INTERNAL_ERROR,
+            CoreStrings.ConnectionAbortedByApplication
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3152,32 +3727,42 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        await ExpectAsync(Http2FrameType.HEADERS,
+        await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: windowSize,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await SendWindowUpdateAsync(1, 2);
         await SendWindowUpdateAsync(0, 2);
 
         // Remaining 1 byte from the first write and then the second write
-        await ExpectAsync(Http2FrameType.DATA,
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -3185,26 +3770,37 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task ResponseWithHeadersTooLarge_AbortsConnection()
     {
-        var appFinished = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var appFinished = new TaskCompletionSource<string>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         await InitializeConnectionAsync(async context =>
         {
-            context.Response.Headers["too_long"] = new string('a', (int)Http2PeerSettings.DefaultMaxFrameSize);
+            context.Response.Headers["too_long"] = new string(
+                'a',
+                (int)Http2PeerSettings.DefaultMaxFrameSize
+            );
             await context.Response.WriteAsync("Hello World");
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
         // Just the StatusCode gets written before aborting in the continuation frame
-        await ExpectAsync(Http2FrameType.HEADERS,
+        await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         _pair.Application.Output.Complete();
 
-        await WaitForConnectionErrorAsync<HPackEncodingException>(ignoreNonGoAwayFrames: false, expectedLastStreamId: int.MaxValue, Http2ErrorCode.INTERNAL_ERROR,
-            SR.net_http_hpack_encode_failure);
+        await WaitForConnectionErrorAsync<HPackEncodingException>(
+            ignoreNonGoAwayFrames: false,
+            expectedLastStreamId: int.MaxValue,
+            Http2ErrorCode.INTERNAL_ERROR,
+            SR.net_http_hpack_encode_failure
+        );
     }
 
     [Fact]
@@ -3219,16 +3815,22 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             // The cancellation is checked at the start of WriteAsync and no application state is changed.
-            await Assert.ThrowsAsync<OperationCanceledException>(() => context.Response.WriteAsync("hello,", new CancellationToken(true)));
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                () => context.Response.WriteAsync("hello,", new CancellationToken(true))
+            );
             Assert.False(context.Response.HasStarted);
         });
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3244,7 +3846,9 @@ public class Http2StreamTests : Http2TestBase
     public async Task WriteAsync_CancellationTokenTriggeredDueToFlowControl_SendRST()
     {
         var cts = new CancellationTokenSource();
-        var writeStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var writeStarted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -3261,17 +3865,21 @@ public class Http2StreamTests : Http2TestBase
 
         _clientSettings.InitialWindowSize = 0;
         await SendSettingsAsync();
-        await ExpectAsync(Http2FrameType.SETTINGS,
+        await ExpectAsync(
+            Http2FrameType.SETTINGS,
             withLength: 0,
             withFlags: (byte)Http2SettingsFrameFlags.ACK,
-            withStreamId: 0);
+            withStreamId: 0
+        );
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await writeStarted.Task;
 
@@ -3314,14 +3922,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3360,14 +3972,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3409,18 +4025,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 4102,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3429,7 +4051,10 @@ public class Http2StreamTests : Http2TestBase
         Assert.Equal(2, _decodedHeaders.Count);
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("200", _decodedHeaders[InternalHeaderNames.Status]);
-        Assert.Equal(Encoding.ASCII.GetBytes(new string('a', 4102)), dataFrame.PayloadSequence.ToArray());
+        Assert.Equal(
+            Encoding.ASCII.GetBytes(new string('a', 4102)),
+            dataFrame.PayloadSequence.ToArray()
+        );
     }
 
     [Fact]
@@ -3462,18 +4087,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 4102,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3482,7 +4113,10 @@ public class Http2StreamTests : Http2TestBase
         Assert.Equal(2, _decodedHeaders.Count);
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("200", _decodedHeaders[InternalHeaderNames.Status]);
-        Assert.Equal(Encoding.ASCII.GetBytes(new string('a', 4102)), dataFrame.PayloadSequence.ToArray());
+        Assert.Equal(
+            Encoding.ASCII.GetBytes(new string('a', 4102)),
+            dataFrame.PayloadSequence.ToArray()
+        );
     }
 
     [Fact]
@@ -3512,14 +4146,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3562,14 +4200,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3604,18 +4246,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
@@ -3650,14 +4298,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3692,10 +4344,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3734,10 +4390,12 @@ public class Http2StreamTests : Http2TestBase
         });
 
         await StartStreamAsync(1, headers, endStream: true);
-        await ExpectAsync(Http2FrameType.RST_STREAM,
+        await ExpectAsync(
+            Http2FrameType.RST_STREAM,
             withLength: 4,
             withFlags: (byte)Http2HeadersFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: true);
         await appTcs.Task;
@@ -3765,22 +4423,30 @@ public class Http2StreamTests : Http2TestBase
         });
 
         await StartStreamAsync(1, headers, endStream: true);
-        await ExpectAsync(Http2FrameType.HEADERS,
+        await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 6,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 6,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: true);
     }
@@ -3815,30 +4481,42 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3881,14 +4559,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3927,14 +4609,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -3963,18 +4649,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -4015,30 +4707,42 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 14,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 14,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 14,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -4067,10 +4771,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -4094,16 +4802,21 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             context.Response.BodyWriter.Complete();
-            writeEx = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.WriteAsync(""));
+            writeEx = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => context.Response.WriteAsync("")
+            );
         });
 
         await StartStreamAsync(1, headers, endStream: true);
 
         // Don't receive content length because we called WriteAsync which caused an invalid response
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS | (byte)Http2HeadersFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS
+                | (byte)Http2HeadersFrameFlags.END_STREAM,
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -4133,10 +4846,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -4146,16 +4863,26 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("500", _decodedHeaders[InternalHeaderNames.Status]);
 
-        Assert.Contains(TestSink.Writes, w => w.EventId.Id == 13 && w.LogLevel == LogLevel.Error
-                   && w.Exception is ConnectionAbortedException && w.Exception.InnerException == expectedException);
+        Assert.Contains(
+            TestSink.Writes,
+            w =>
+                w.EventId.Id == 13
+                && w.LogLevel == LogLevel.Error
+                && w.Exception is ConnectionAbortedException
+                && w.Exception.InnerException == expectedException
+        );
     }
 
     [Fact]
     public async Task CompleteAsync_BeforeBodyStarted_SendsHeadersWithEndStream()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4166,12 +4893,20 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
                 await context.Response.CompleteAsync().DefaultTimeout();
 
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
                 Assert.True(context.Response.Headers.IsReadOnly);
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -4185,10 +4920,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -4206,9 +4945,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task CompleteAsync_BeforeBodyStarted_WithTrailers_SendsHeadersAndTrailersWithEndStream()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4219,7 +4962,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
                 context.Response.AppendTrailer("CustomName", "Custom Value");
 
                 await context.Response.CompleteAsync().DefaultTimeout();
@@ -4227,7 +4976,9 @@ public class Http2StreamTests : Http2TestBase
 
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
                 Assert.True(context.Response.Headers.IsReadOnly);
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -4241,14 +4992,20 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+            withStreamId: 1
+        );
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -4273,7 +5030,9 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task CompleteAsync_BeforeBodyStarted_WithTrailers_TruncatedContentLength_ThrowsAnd500()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var headers = new[]
         {
@@ -4285,17 +5044,27 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 context.Response.ContentLength = 25;
                 context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.CompleteAsync().DefaultTimeout());
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Response.CompleteAsync().DefaultTimeout()
+                );
                 Assert.Equal(CoreStrings.FormatTooFewBytesWritten(0, 25), ex.Message);
 
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully);
                 Assert.False(context.Response.Headers.IsReadOnly);
-                Assert.False(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.False(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 appTcs.SetResult();
             }
@@ -4307,10 +5076,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await appTcs.Task;
 
@@ -4327,9 +5100,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task CompleteAsync_AfterBodyStarted_SendsBodyWithEndStream()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4340,7 +5117,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -4349,7 +5132,9 @@ public class Http2StreamTests : Http2TestBase
                 await context.Response.CompleteAsync().DefaultTimeout();
                 await context.Response.CompleteAsync().DefaultTimeout(); // Can be called twice, no-ops
 
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -4363,18 +5148,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)(Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -4393,9 +5184,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task CompleteAsync_WriteAfterComplete_Throws()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4406,14 +5201,24 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
                 await context.Response.CompleteAsync().DefaultTimeout();
 
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
                 Assert.True(context.Response.Headers.IsReadOnly);
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.WriteAsync("2 Hello World").DefaultTimeout());
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
+                );
                 Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
@@ -4428,10 +5233,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -4449,9 +5258,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task CompleteAsync_WriteAgainAfterComplete_Throws()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4462,7 +5275,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World").DefaultTimeout();
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -4470,9 +5289,13 @@ public class Http2StreamTests : Http2TestBase
 
                 await context.Response.CompleteAsync().DefaultTimeout();
 
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.WriteAsync("2 Hello World").DefaultTimeout());
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
+                );
                 Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
@@ -4487,18 +5310,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)(Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -4543,10 +5372,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -4563,9 +5396,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task CompleteAsync_AfterPipeWrite_WithTrailers_SendsBodyAndTrailersWithEndStream()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4576,7 +5413,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 var buffer = context.Response.BodyWriter.GetMemory();
                 var length = Encoding.UTF8.GetBytes("Hello World", buffer.Span);
@@ -4591,7 +5434,9 @@ public class Http2StreamTests : Http2TestBase
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
                 Assert.True(context.Response.Headers.IsReadOnly);
 
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -4605,18 +5450,26 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+            withStreamId: 1
+        );
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -4642,9 +5495,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task CompleteAsync_AfterBodyStarted_WithTrailers_SendsBodyAndTrailersWithEndStream()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4655,7 +5512,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -4665,7 +5528,9 @@ public class Http2StreamTests : Http2TestBase
 
                 await context.Response.CompleteAsync().DefaultTimeout();
 
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -4679,18 +5544,26 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+            withStreamId: 1
+        );
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -4716,9 +5589,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task CompleteAsync_AfterBodyStarted_WithTrailers_TruncatedContentLength_ThrowsAndReset()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4729,7 +5606,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 context.Response.ContentLength = 25;
                 await context.Response.WriteAsync("Hello World");
@@ -4738,10 +5621,14 @@ public class Http2StreamTests : Http2TestBase
 
                 context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.CompleteAsync().DefaultTimeout());
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Response.CompleteAsync().DefaultTimeout()
+                );
                 Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
-                Assert.False(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.False(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -4755,19 +5642,26 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR,
-            expectedErrorMessage: CoreStrings.FormatTooFewBytesWritten(11, 25));
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.INTERNAL_ERROR,
+            expectedErrorMessage: CoreStrings.FormatTooFewBytesWritten(11, 25)
+        );
 
         await appTcs.Task;
 
@@ -4786,9 +5680,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task PipeWriterComplete_AfterBodyStarted_WithTrailers_TruncatedContentLength_ThrowsAndReset()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4800,7 +5698,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 context.Response.ContentLength = 25;
                 await context.Response.WriteAsync("Hello World");
@@ -4809,10 +5713,14 @@ public class Http2StreamTests : Http2TestBase
 
                 context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                var ex = Assert.Throws<InvalidOperationException>(() => context.Response.BodyWriter.Complete());
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => context.Response.BodyWriter.Complete()
+                );
                 Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
-                Assert.False(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.False(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -4826,19 +5734,26 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 37,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         clientTcs.SetResult();
 
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR,
-            expectedErrorMessage: CoreStrings.FormatTooFewBytesWritten(11, 25));
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.INTERNAL_ERROR,
+            expectedErrorMessage: CoreStrings.FormatTooFewBytesWritten(11, 25)
+        );
 
         await appTcs.Task;
 
@@ -4857,9 +5772,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task AbortAfterCompleteAsync_GETWithResponseBodyAndTrailers_ResetsAfterResponse()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -4870,7 +5789,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -4880,7 +5805,9 @@ public class Http2StreamTests : Http2TestBase
 
                 await context.Response.CompleteAsync().DefaultTimeout();
 
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // RequestAborted will no longer fire after CompleteAsync.
                 Assert.False(context.RequestAborted.CanBeCanceled);
@@ -4898,20 +5825,36 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+            withStreamId: 1
+        );
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
         // Stream should return an INTERNAL_ERROR. If there is an unexpected exception from app TCS instead, then throw it here to avoid timeout waiting for the stream error.
-        await Task.WhenAny(WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR, expectedErrorMessage: null), appTcs.Task).Unwrap();
+        await Task.WhenAny(
+                WaitForStreamErrorAsync(
+                    1,
+                    Http2ErrorCode.INTERNAL_ERROR,
+                    expectedErrorMessage: null
+                ),
+                appTcs.Task
+            )
+            .Unwrap();
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -4937,9 +5880,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task AbortAfterCompleteAsync_POSTWithResponseBodyAndTrailers_RequestBodyThrows()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "POST"),
@@ -4952,7 +5899,13 @@ public class Http2StreamTests : Http2TestBase
             {
                 var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -4962,14 +5915,18 @@ public class Http2StreamTests : Http2TestBase
 
                 await context.Response.CompleteAsync().DefaultTimeout();
 
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // RequestAborted will no longer fire after CompleteAsync.
                 Assert.False(context.RequestAborted.CanBeCanceled);
                 context.Abort();
 
                 await Assert.ThrowsAsync<TaskCanceledException>(async () => await requestBodyTask);
-                await Assert.ThrowsAsync<ConnectionAbortedException>(async () => await context.Request.BodyReader.ReadAsync());
+                await Assert.ThrowsAsync<ConnectionAbortedException>(
+                    async () => await context.Request.BodyReader.ReadAsync()
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -4983,18 +5940,26 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: false);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+            withStreamId: 1
+        );
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
         await WaitForStreamErrorAsync(1, Http2ErrorCode.INTERNAL_ERROR, expectedErrorMessage: null);
 
         clientTcs.SetResult();
@@ -5021,9 +5986,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task ResetAfterCompleteAsync_GETWithResponseBodyAndTrailers_ResetsAfterResponse()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
@@ -5034,7 +6003,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5044,7 +6019,9 @@ public class Http2StreamTests : Http2TestBase
 
                 await context.Response.CompleteAsync().DefaultTimeout();
 
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // RequestAborted will no longer fire after CompleteAsync.
                 Assert.False(context.RequestAborted.CanBeCanceled);
@@ -5064,20 +6041,31 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+            withStreamId: 1
+        );
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.NO_ERROR, expectedErrorMessage:
-            "The HTTP/2 stream was reset by the application with error code NO_ERROR.");
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.NO_ERROR,
+            expectedErrorMessage: "The HTTP/2 stream was reset by the application with error code NO_ERROR."
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -5103,9 +6091,13 @@ public class Http2StreamTests : Http2TestBase
     [Fact]
     public async Task ResetAfterCompleteAsync_POSTWithResponseBodyAndTrailers_RequestBodyThrows()
     {
-        var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startingTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var appTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var clientTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var headers = new[]
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "POST"),
@@ -5118,7 +6110,13 @@ public class Http2StreamTests : Http2TestBase
             {
                 var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                context.Response.OnStarting(() => { startingTcs.SetResult(); return Task.CompletedTask; });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5128,7 +6126,9 @@ public class Http2StreamTests : Http2TestBase
 
                 await context.Response.CompleteAsync().DefaultTimeout();
 
-                Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                Assert.True(
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                );
 
                 // RequestAborted will no longer fire after CompleteAsync.
                 Assert.False(context.RequestAborted.CanBeCanceled);
@@ -5137,7 +6137,9 @@ public class Http2StreamTests : Http2TestBase
                 resetFeature.Reset((int)Http2ErrorCode.NO_ERROR);
 
                 await Assert.ThrowsAsync<TaskCanceledException>(async () => await requestBodyTask);
-                await Assert.ThrowsAsync<ConnectionAbortedException>(async () => await context.Request.BodyReader.ReadAsync());
+                await Assert.ThrowsAsync<ConnectionAbortedException>(
+                    async () => await context.Request.BodyReader.ReadAsync()
+                );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                 await clientTcs.Task.DefaultTimeout();
@@ -5151,20 +6153,31 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: false);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-            withStreamId: 1);
-        var bodyFrame = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var bodyFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 11,
             withFlags: (byte)(Http2HeadersFrameFlags.NONE),
-            withStreamId: 1);
-        var trailersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+            withStreamId: 1
+        );
+        var trailersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 25,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
-        await WaitForStreamErrorAsync(1, Http2ErrorCode.NO_ERROR, expectedErrorMessage:
-            "The HTTP/2 stream was reset by the application with error code NO_ERROR.");
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
+        await WaitForStreamErrorAsync(
+            1,
+            Http2ErrorCode.NO_ERROR,
+            expectedErrorMessage: "The HTTP/2 stream was reset by the application with error code NO_ERROR."
+        );
 
         clientTcs.SetResult();
         await appTcs.Task;
@@ -5193,9 +6206,52 @@ public class Http2StreamTests : Http2TestBase
     // X-Test = £
     private static readonly byte[] LatinHeaderData = new byte[]
     {
-        0, 7, 58, 109, 101, 116, 104, 111, 100, 3, 71, 69, 84, 0, 5, 58, 112, 97, 116,
-        104, 1, 47, 0, 7, 58, 115, 99, 104, 101, 109, 101, 4, 104, 116, 116, 112, 0,
-        6, 120, 45, 116, 101, 115, 116, 1, 163
+        0,
+        7,
+        58,
+        109,
+        101,
+        116,
+        104,
+        111,
+        100,
+        3,
+        71,
+        69,
+        84,
+        0,
+        5,
+        58,
+        112,
+        97,
+        116,
+        104,
+        1,
+        47,
+        0,
+        7,
+        58,
+        115,
+        99,
+        104,
+        101,
+        109,
+        101,
+        4,
+        104,
+        116,
+        116,
+        112,
+        0,
+        6,
+        120,
+        45,
+        116,
+        101,
+        115,
+        116,
+        1,
+        163
     };
 
     [Fact]
@@ -5211,10 +6267,14 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, LatinHeaderData, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -5237,14 +6297,18 @@ public class Http2StreamTests : Http2TestBase
             ignoreNonGoAwayFrames: true,
             expectedLastStreamId: 1,
             expectedErrorCode: Http2ErrorCode.PROTOCOL_ERROR,
-            expectedErrorMessage: CoreStrings.BadRequest_MalformedRequestInvalidHeaders);
+            expectedErrorMessage: CoreStrings.BadRequest_MalformedRequestInvalidHeaders
+        );
     }
 
     [Fact]
     public async Task HEADERS_Received_CustomEncoding_InvalidCharacters_AbortsConnection()
     {
-        var encoding = Encoding.GetEncoding(Encoding.ASCII.CodePage, EncoderFallback.ExceptionFallback,
-            DecoderFallback.ExceptionFallback);
+        var encoding = Encoding.GetEncoding(
+            Encoding.ASCII.CodePage,
+            EncoderFallback.ExceptionFallback,
+            DecoderFallback.ExceptionFallback
+        );
         _serviceContext.ServerOptions.RequestHeaderEncodingSelector = _ => encoding;
 
         await InitializeConnectionAsync(context =>
@@ -5255,8 +6319,12 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, LatinHeaderData, endStream: true);
 
-        await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(ignoreNonGoAwayFrames: false, expectedLastStreamId: 1,
-            Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.BadRequest_MalformedRequestInvalidHeaders);
+        await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
+            ignoreNonGoAwayFrames: false,
+            expectedLastStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.BadRequest_MalformedRequestInvalidHeaders
+        );
     }
 
     [Fact]
@@ -5276,18 +6344,24 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        var dataFrame1 = await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        var dataFrame1 = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 12,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -5299,7 +6373,13 @@ public class Http2StreamTests : Http2TestBase
 
         Assert.True(_helloWorldBytes.AsSpan().SequenceEqual(dataFrame1.PayloadSequence.ToArray()));
 
-        Assert.Contains(LogMessages, m => m.Message.Equals("One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."));
+        Assert.Contains(
+            LogMessages,
+            m =>
+                m.Message.Equals(
+                    "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
+                )
+        );
     }
 
     [Theory]
@@ -5332,14 +6412,18 @@ public class Http2StreamTests : Http2TestBase
 
         await StartStreamAsync(1, headers, endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
-        await ExpectAsync(Http2FrameType.RST_STREAM,
+            withStreamId: 1
+        );
+        await ExpectAsync(
+            Http2FrameType.RST_STREAM,
             withLength: 4,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 

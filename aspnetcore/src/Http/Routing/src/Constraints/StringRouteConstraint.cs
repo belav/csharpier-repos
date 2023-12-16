@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constrains a route parameter to contain only a specified string.
 /// </summary>
-public class StringRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class StringRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 {
     private readonly string _value;
 
@@ -26,13 +29,18 @@ public class StringRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatc
     }
 
     /// <inheritdoc />
-    public bool Match(HttpContext? httpContext, IRouter? route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
+    public bool Match(
+        HttpContext? httpContext,
+        IRouter? route,
+        string routeKey,
+        RouteValueDictionary values,
+        RouteDirection routeDirection
+    )
     {
         ArgumentNullException.ThrowIfNull(routeKey);
         ArgumentNullException.ThrowIfNull(values);
 
-        if (values.TryGetValue(routeKey, out var routeValue)
-            && routeValue != null)
+        if (values.TryGetValue(routeKey, out var routeValue) && routeValue != null)
         {
             var parameterValueString = Convert.ToString(routeValue, CultureInfo.InvariantCulture)!;
             return CheckConstraintCore(parameterValueString);

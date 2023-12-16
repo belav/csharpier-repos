@@ -3,12 +3,15 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindSetOperationsQuerySqliteTest : NorthwindSetOperationsQueryRelationalTestBase<
-    NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+public class NorthwindSetOperationsQuerySqliteTest
+    : NorthwindSetOperationsQueryRelationalTestBase<
+        NorthwindQuerySqliteFixture<NoopModelCustomizer>
+    >
 {
     public NorthwindSetOperationsQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
@@ -17,8 +20,13 @@ public class NorthwindSetOperationsQuerySqliteTest : NorthwindSetOperationsQuery
 
     public override async Task Client_eval_Union_FirstOrDefault(bool async)
         // Client evaluation in projection. Issue #16243.
-        => Assert.Equal(
+        =>
+        Assert.Equal(
             RelationalStrings.SetOperationsNotAllowedAfterClientEvaluation,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Client_eval_Union_FirstOrDefault(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Client_eval_Union_FirstOrDefault(async)
+                )
+            ).Message
+        );
 }

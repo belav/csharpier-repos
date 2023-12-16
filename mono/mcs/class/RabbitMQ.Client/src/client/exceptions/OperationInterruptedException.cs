@@ -78,27 +78,32 @@ namespace RabbitMQ.Client.Exceptions
 
         protected OperationInterruptedException() { }
 
-        protected OperationInterruptedException(string message) : base(message) { }
+        protected OperationInterruptedException(string message)
+            : base(message) { }
 
         protected OperationInterruptedException(string message, System.Exception inner)
             : base(message, inner) { }
 
-        protected OperationInterruptedException(SerializationInfo info,
-                                                StreamingContext context)
+        protected OperationInterruptedException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
         ///<summary>Construct an OperationInterruptedException with
         ///the passed-in explanation, if any.</summary>
         public OperationInterruptedException(ShutdownEventArgs reason)
-            : base(reason == null ? "The AMQP operation was interrupted" :
-                   string.Format("The AMQP operation was interrupted: {0}",
-                                 reason))
+            : base(
+                reason == null
+                    ? "The AMQP operation was interrupted"
+                    : string.Format("The AMQP operation was interrupted: {0}", reason)
+            )
         {
             m_shutdownReason = reason;
         }
 
         ///<summary>Retrieves the explanation for the shutdown. May
         ///return null if no explanation is available.</summary>
-        public ShutdownEventArgs ShutdownReason { get { return m_shutdownReason; } }
+        public ShutdownEventArgs ShutdownReason
+        {
+            get { return m_shutdownReason; }
+        }
     }
 }

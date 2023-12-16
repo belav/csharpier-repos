@@ -2,9 +2,8 @@ using System;
 
 namespace Microsoft.Build.Framework
 {
-	public interface IEventRedirector
-	{
-		void ForwardEvent (BuildEventArgs buildEvent);
-	}
+    public interface IEventRedirector
+    {
+        void ForwardEvent(BuildEventArgs buildEvent);
+    }
 }
-

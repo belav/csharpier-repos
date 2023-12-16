@@ -27,12 +27,22 @@ namespace System.Xml.XmlWriterApiTests
             {
                 case WriterType.WrappedWriter:
                     expectedLength = 113;
-                    XmlWriter ww = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    XmlWriter ww = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     w = WriterHelper.Create(ww, wSettings, overrideAsync: true, async: utils.Async);
                     break;
                 case WriterType.CharCheckingWriter:
                     expectedLength = 113;
-                    XmlWriter w1 = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    XmlWriter w1 = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     XmlWriterSettings ws1 = new XmlWriterSettings();
                     ws1.CheckCharacters = true;
                     w = WriterHelper.Create(w1, ws1, overrideAsync: true, async: utils.Async);
@@ -40,24 +50,44 @@ namespace System.Xml.XmlWriterApiTests
                 case WriterType.UTF8Writer:
                     wSettings.Encoding = Encoding.UTF8;
                     expectedLength = 113;
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.UnicodeWriter:
                     wSettings.Encoding = Encoding.Unicode;
                     expectedLength = 224;
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.UTF8WriterIndent:
                     wSettings.Encoding = Encoding.UTF8;
                     expectedLength = 125;
                     wSettings.Indent = true;
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.UnicodeWriterIndent:
                     wSettings.Encoding = Encoding.Unicode;
                     expectedLength = 248;
                     wSettings.Indent = true;
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 default:
                     Assert.Fail("unknown writer");
@@ -120,7 +150,12 @@ namespace System.Xml.XmlWriterApiTests
 
             wSettings.CloseOutput = false;
 
-            XmlWriter w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+            XmlWriter w = WriterHelper.Create(
+                writerStream,
+                wSettings,
+                overrideAsync: true,
+                async: utils.Async
+            );
 
             try
             {
@@ -177,7 +212,11 @@ namespace System.Xml.XmlWriterApiTests
             XmlWriter w = utils.CreateWriter();
             w.Dispose();
             CError.Equals(w.Settings.Indent, utils.IsIndent(), "Incorrect default value of Indent");
-            CError.Equals(w.Settings.CheckCharacters, true, "Incorrect default value of CheckCharacters");
+            CError.Equals(
+                w.Settings.CheckCharacters,
+                true,
+                "Incorrect default value of CheckCharacters"
+            );
         }
     }
 }

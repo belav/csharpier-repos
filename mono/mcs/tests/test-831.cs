@@ -2,12 +2,8 @@ using System.Diagnostics;
 
 class C
 {
-	[Conditional ("true")]
-	static void Test ()
-	{
-	}
+    [Conditional("true")]
+    static void Test() { }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

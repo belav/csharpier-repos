@@ -1,9 +1,10 @@
-﻿
-namespace System.ComponentModel.DataAnnotations {
+﻿namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Enumeration of logical data types that may appear in <see cref="DataTypeAttribute"/>
     /// </summary>
-    public enum DataType {
+    public enum DataType
+    {
         /// <summary>
         /// Custom data type, not one of the static data types we know
         /// </summary>

@@ -24,7 +24,8 @@ public static class HtmlHelperPartialExtensions
     /// </returns>
     public static Task<IHtmlContent> PartialAsync(
         this IHtmlHelper htmlHelper,
-        string partialViewName)
+        string partialViewName
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(partialViewName);
@@ -47,7 +48,8 @@ public static class HtmlHelperPartialExtensions
     public static Task<IHtmlContent> PartialAsync(
         this IHtmlHelper htmlHelper,
         string partialViewName,
-        ViewDataDictionary viewData)
+        ViewDataDictionary viewData
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(partialViewName);
@@ -70,7 +72,8 @@ public static class HtmlHelperPartialExtensions
     public static Task<IHtmlContent> PartialAsync(
         this IHtmlHelper htmlHelper,
         string partialViewName,
-        object model)
+        object model
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(partialViewName);
@@ -115,7 +118,8 @@ public static class HtmlHelperPartialExtensions
     public static IHtmlContent Partial(
         this IHtmlHelper htmlHelper,
         string partialViewName,
-        ViewDataDictionary viewData)
+        ViewDataDictionary viewData
+    )
     {
         return Partial(htmlHelper, partialViewName, htmlHelper.ViewData.Model, viewData);
     }
@@ -135,7 +139,11 @@ public static class HtmlHelperPartialExtensions
     /// This method synchronously calls and blocks on
     /// <see cref="IHtmlHelper.PartialAsync(string, object, ViewDataDictionary)"/>
     /// </remarks>
-    public static IHtmlContent Partial(this IHtmlHelper htmlHelper, string partialViewName, object model)
+    public static IHtmlContent Partial(
+        this IHtmlHelper htmlHelper,
+        string partialViewName,
+        object model
+    )
     {
         return Partial(htmlHelper, partialViewName, model, viewData: null);
     }
@@ -160,7 +168,8 @@ public static class HtmlHelperPartialExtensions
         this IHtmlHelper htmlHelper,
         string partialViewName,
         object model,
-        ViewDataDictionary viewData)
+        ViewDataDictionary viewData
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(partialViewName);
@@ -198,7 +207,8 @@ public static class HtmlHelperPartialExtensions
     public static void RenderPartial(
         this IHtmlHelper htmlHelper,
         string partialViewName,
-        ViewDataDictionary viewData)
+        ViewDataDictionary viewData
+    )
     {
         RenderPartial(htmlHelper, partialViewName, htmlHelper.ViewData.Model, viewData);
     }
@@ -214,7 +224,11 @@ public static class HtmlHelperPartialExtensions
     /// <remarks>
     /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
     /// </remarks>
-    public static void RenderPartial(this IHtmlHelper htmlHelper, string partialViewName, object model)
+    public static void RenderPartial(
+        this IHtmlHelper htmlHelper,
+        string partialViewName,
+        object model
+    )
     {
         RenderPartial(htmlHelper, partialViewName, model, viewData: null);
     }
@@ -235,7 +249,8 @@ public static class HtmlHelperPartialExtensions
         this IHtmlHelper htmlHelper,
         string partialViewName,
         object model,
-        ViewDataDictionary viewData)
+        ViewDataDictionary viewData
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(partialViewName);
@@ -255,14 +270,16 @@ public static class HtmlHelperPartialExtensions
     /// <remarks>
     /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
     /// </remarks>
-    public static Task RenderPartialAsync(
-        this IHtmlHelper htmlHelper,
-        string partialViewName)
+    public static Task RenderPartialAsync(this IHtmlHelper htmlHelper, string partialViewName)
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(partialViewName);
 
-        return htmlHelper.RenderPartialAsync(partialViewName, htmlHelper.ViewData.Model, viewData: null);
+        return htmlHelper.RenderPartialAsync(
+            partialViewName,
+            htmlHelper.ViewData.Model,
+            viewData: null
+        );
     }
 
     /// <summary>
@@ -280,7 +297,8 @@ public static class HtmlHelperPartialExtensions
     public static Task RenderPartialAsync(
         this IHtmlHelper htmlHelper,
         string partialViewName,
-        ViewDataDictionary viewData)
+        ViewDataDictionary viewData
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(partialViewName);
@@ -303,7 +321,8 @@ public static class HtmlHelperPartialExtensions
     public static Task RenderPartialAsync(
         this IHtmlHelper htmlHelper,
         string partialViewName,
-        object model)
+        object model
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(partialViewName);

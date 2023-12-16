@@ -14,27 +14,46 @@ namespace System.ServiceModel.Activities
     {
         static DispatchRuntime dummyDispatchRuntime;
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode,
-            Justification = "The GetDispatcherFormatterFromRuntime uses this.")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "The GetDispatcherFormatterFromRuntime uses this."
+        )]
         static DispatchRuntime DummyDispatchRuntime
         {
             get
             {
                 if (dummyDispatchRuntime == null)
                 {
-                    EndpointDispatcher dispatcher = new EndpointDispatcher(new EndpointAddress("http://dummyuri/"), "dummyContract", "urn:dummyContractNs");
+                    EndpointDispatcher dispatcher = new EndpointDispatcher(
+                        new EndpointAddress("http://dummyuri/"),
+                        "dummyContract",
+                        "urn:dummyContractNs"
+                    );
                     dummyDispatchRuntime = dispatcher.DispatchRuntime;
                 }
                 return dummyDispatchRuntime;
             }
         }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode,
-            Justification = "The GetDispatcherFormatterFromRuntime is used by Receive")]
-        internal static IDispatchMessageFormatter GetDispatcherFormatterFromRuntime(OperationDescription operationDescription)
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "The GetDispatcherFormatterFromRuntime is used by Receive"
+        )]
+        internal static IDispatchMessageFormatter GetDispatcherFormatterFromRuntime(
+            OperationDescription operationDescription
+        )
         {
-            System.ServiceModel.Dispatcher.DispatchOperation dispatchOperation = new System.ServiceModel.Dispatcher.DispatchOperation(DummyDispatchRuntime, operationDescription.Name, operationDescription.Messages[0].Action);
-            IOperationBehavior operationBehavior = new DataContractSerializerOperationBehavior(operationDescription);
+            System.ServiceModel.Dispatcher.DispatchOperation dispatchOperation =
+                new System.ServiceModel.Dispatcher.DispatchOperation(
+                    DummyDispatchRuntime,
+                    operationDescription.Name,
+                    operationDescription.Messages[0].Action
+                );
+            IOperationBehavior operationBehavior = new DataContractSerializerOperationBehavior(
+                operationDescription
+            );
             operationBehavior.ApplyDispatchBehavior(operationDescription, dispatchOperation);
 
             return dispatchOperation.Formatter;

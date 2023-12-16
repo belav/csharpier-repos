@@ -1,4 +1,5 @@
 using AutoMapper.Internal.Mappers;
+
 namespace AutoMapper.Configuration;
 
 [EditorBrowsable(EditorBrowsableState.Never)]
@@ -11,14 +12,32 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
             validator(context);
         }
     }
-    public void AssertConfigurationExpressionIsValid(IGlobalConfiguration config, IEnumerable<TypeMap> typeMaps)
+
+    public void AssertConfigurationExpressionIsValid(
+        IGlobalConfiguration config,
+        IEnumerable<TypeMap> typeMaps
+    )
     {
-        var duplicateTypeMapConfigs = Expression.Profiles.Append((Profile)Expression)
+        var duplicateTypeMapConfigs = Expression
+            .Profiles
+            .Append((Profile)Expression)
             .SelectMany(p => p.TypeMapConfigs, (profile, typeMap) => (profile, typeMap))
             .GroupBy(x => x.typeMap.Types)
             .Where(g => g.Count() > 1)
-            .Select(g => (TypePair : g.Key, ProfileNames : g.Select(tmc => tmc.profile.ProfileName).ToArray()))
-            .Select(g => new DuplicateTypeMapConfigurationException.TypeMapConfigErrors(g.TypePair, g.ProfileNames))
+            .Select(
+                g =>
+                    (
+                        TypePair: g.Key,
+                        ProfileNames: g.Select(tmc => tmc.profile.ProfileName).ToArray()
+                    )
+            )
+            .Select(
+                g =>
+                    new DuplicateTypeMapConfigurationException.TypeMapConfigErrors(
+                        g.TypePair,
+                        g.ProfileNames
+                    )
+            )
             .ToArray();
         if (duplicateTypeMapConfigs.Any())
         {
@@ -26,17 +45,25 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
         }
         AssertConfigurationIsValid(config, typeMaps);
     }
-    public void AssertConfigurationIsValid(IGlobalConfiguration config, IEnumerable<TypeMap> typeMaps)
+
+    public void AssertConfigurationIsValid(
+        IGlobalConfiguration config,
+        IEnumerable<TypeMap> typeMaps
+    )
     {
         var maps = typeMaps as TypeMap[] ?? typeMaps.ToArray();
-        var badTypeMaps =
-            (from typeMap in maps
-                where typeMap.ShouldCheckForValid
-                let unmappedPropertyNames = typeMap.GetUnmappedPropertyNames()
-                let canConstruct = typeMap.PassesCtorValidation
-                where unmappedPropertyNames.Length > 0 || !canConstruct
-                select new AutoMapperConfigurationException.TypeMapConfigErrors(typeMap, unmappedPropertyNames, canConstruct)
-                ).ToArray();
+        var badTypeMaps = (
+            from typeMap in maps
+            where typeMap.ShouldCheckForValid
+            let unmappedPropertyNames = typeMap.GetUnmappedPropertyNames()
+            let canConstruct = typeMap.PassesCtorValidation
+            where unmappedPropertyNames.Length > 0 || !canConstruct
+            select new AutoMapperConfigurationException.TypeMapConfigErrors(
+                typeMap,
+                unmappedPropertyNames,
+                canConstruct
+            )
+        ).ToArray();
 
         if (badTypeMaps.Any())
         {
@@ -64,9 +91,16 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
             throw configExceptions[0];
         }
     }
-    private void DryRunTypeMap(IGlobalConfiguration config, HashSet<TypeMap> typeMapsChecked, TypePair types, TypeMap typeMap, MemberMap memberMap)
+
+    private void DryRunTypeMap(
+        IGlobalConfiguration config,
+        HashSet<TypeMap> typeMapsChecked,
+        TypePair types,
+        TypeMap typeMap,
+        MemberMap memberMap
+    )
     {
-        if(typeMap == null)
+        if (typeMap == null)
         {
             if (types.ContainsGenericParameters)
             {
@@ -83,7 +117,7 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
             typeMapsChecked.Add(typeMap);
             var context = new ValidationContext(types, memberMap, typeMap);
             Validate(context);
-            if(!typeMap.ShouldCheckForValid)
+            if (!typeMap.ShouldCheckForValid)
             {
                 return;
             }
@@ -94,7 +128,10 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
             var mapperToUse = config.FindMapper(types);
             if (mapperToUse == null)
             {
-                throw new AutoMapperConfigurationException(memberMap.TypeMap.Types) { MemberMap = memberMap };
+                throw new AutoMapperConfigurationException(memberMap.TypeMap.Types)
+                {
+                    MemberMap = memberMap
+                };
             }
             var context = new ValidationContext(types, memberMap, ObjectMapper: mapperToUse);
             Validate(context);
@@ -104,11 +141,22 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
             }
         }
     }
-    private void CheckPropertyMaps(IGlobalConfiguration config, HashSet<TypeMap> typeMapsChecked, TypeMap typeMap)
+
+    private void CheckPropertyMaps(
+        IGlobalConfiguration config,
+        HashSet<TypeMap> typeMapsChecked,
+        TypeMap typeMap
+    )
     {
         foreach (var memberMap in typeMap.MemberMaps)
         {
-            if(memberMap.Ignored || (memberMap is PropertyMap && typeMap.ConstructorParameterMatches(memberMap.DestinationName)))
+            if (
+                memberMap.Ignored
+                || (
+                    memberMap is PropertyMap
+                    && typeMap.ConstructorParameterMatches(memberMap.DestinationName)
+                )
+            )
             {
                 continue;
             }
@@ -118,8 +166,20 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
             {
                 return;
             }
-            DryRunTypeMap(config, typeMapsChecked, new(sourceType, memberMap.DestinationType), null, memberMap);
+            DryRunTypeMap(
+                config,
+                typeMapsChecked,
+                new(sourceType, memberMap.DestinationType),
+                null,
+                memberMap
+            );
         }
     }
 }
-public readonly record struct ValidationContext(TypePair Types, MemberMap MemberMap, TypeMap TypeMap = null, IObjectMapper ObjectMapper = null);
+
+public readonly record struct ValidationContext(
+    TypePair Types,
+    MemberMap MemberMap,
+    TypeMap TypeMap = null,
+    IObjectMapper ObjectMapper = null
+);

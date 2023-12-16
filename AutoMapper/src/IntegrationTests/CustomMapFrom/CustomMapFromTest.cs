@@ -2,19 +2,38 @@
 
 public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateProjection<Customer, CustomerViewModel>()
-            .ForMember(x => x.FullAddress, o => o.MapFrom(c => c.Address.Street + ", " + c.Address.City + " " + c.Address.State)));
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(
+            cfg =>
+                cfg.CreateProjection<Customer, CustomerViewModel>()
+                    .ForMember(
+                        x => x.FullAddress,
+                        o =>
+                            o.MapFrom(
+                                c =>
+                                    c.Address.Street + ", " + c.Address.City + " " + c.Address.State
+                            )
+                    )
+        );
+
     [Fact]
     public void can_map_with_projection()
     {
         using (var context = new Context())
         {
-            var customerVms = context.Customers.Select(c => new CustomerViewModel
-            {
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                FullAddress = c.Address.Street + ", " + c.Address.City + " " + c.Address.State
-            }).ToList();
+            var customerVms = context
+                .Customers
+                .Select(
+                    c =>
+                        new CustomerViewModel
+                        {
+                            FirstName = c.FirstName,
+                            LastName = c.LastName,
+                            FullAddress =
+                                c.Address.Street + ", " + c.Address.City + " " + c.Address.State
+                        }
+                )
+                .ToList();
 
             customerVms.ForEach(x =>
             {
@@ -30,6 +49,7 @@ public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseIniti
             });
         }
     }
+
     public class Customer
     {
         [Key]
@@ -61,24 +81,27 @@ public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseIniti
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
-
     }
 
     public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(new Customer
-            {
-                FirstName = "Bob",
-                LastName = "Smith",
-                Address = new Address
-                {
-                    Street = "123 Anywhere",
-                    City = "Austin",
-                    State = "TX"
-                }
-            });
+            context
+                .Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Address = new Address
+                        {
+                            Street = "123 Anywhere",
+                            City = "Austin",
+                            State = "TX"
+                        }
+                    }
+                );
 
             base.Seed(context);
         }

@@ -12,6 +12,7 @@ namespace Internal.Reflection.Core
     public abstract class ReflectionDomainSetup
     {
         protected ReflectionDomainSetup() { }
+
         public abstract AssemblyBinder AssemblyBinder { get; }
         public abstract Exception CreateMissingMetadataException(Type pertainant);
         public abstract Exception CreateNonInvokabilityException(MemberInfo pertainant);

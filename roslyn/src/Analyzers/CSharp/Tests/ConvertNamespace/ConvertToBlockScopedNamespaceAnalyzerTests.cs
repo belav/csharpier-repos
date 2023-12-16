@@ -15,7 +15,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 {
-    using VerifyCS = CSharpCodeFixVerifier<ConvertToBlockScopedNamespaceDiagnosticAnalyzer, ConvertNamespaceCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        ConvertToBlockScopedNamespaceDiagnosticAnalyzer,
+        ConvertNamespaceCodeFixProvider
+    >;
 
     public class ConvertToBlockScopedNamespaceAnalyzerTests
     {
@@ -46,7 +49,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp9,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -67,7 +73,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp9,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped, NotificationOption2.Suggestion }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped,
+                        NotificationOption2.Suggestion
+                    }
                 }
             }.RunAsync();
         }
@@ -85,14 +95,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(EndOfDocumentSequences))]
-        public async Task TestConvertToBlockScopedInCSharp10WithFileScopedPreference(string endOfDocumentSequence)
+        public async Task TestConvertToBlockScopedInCSharp10WithFileScopedPreference(
+            string endOfDocumentSequence
+        )
         {
             await new VerifyCS.Test
             {
@@ -107,14 +122,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(EndOfDocumentSequences))]
-        public async Task TestConvertToBlockScopedInCSharp10WithDirectives1(string endOfDocumentSequence)
+        public async Task TestConvertToBlockScopedInCSharp10WithDirectives1(
+            string endOfDocumentSequence
+        )
         {
             await new VerifyCS.Test
             {
@@ -134,14 +154,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(EndOfDocumentSequences))]
-        public async Task TestConvertToBlockScopedInCSharp10WithDirectives2(string endOfDocumentSequence)
+        public async Task TestConvertToBlockScopedInCSharp10WithDirectives2(
+            string endOfDocumentSequence
+        )
         {
             await new VerifyCS.Test
             {
@@ -161,7 +186,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -190,7 +218,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -218,7 +249,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 NumberOfFixAllIterations = 2,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -246,7 +280,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -273,8 +310,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped },
-                    { CSharpFormattingOptions2.NewLineBeforeOpenBrace, CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue & ~NewLineBeforeOpenBracePlacement.Types },
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    },
+                    {
+                        CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                        CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue
+                            & ~NewLineBeforeOpenBracePlacement.Types
+                    },
                 }
             }.RunAsync();
         }
@@ -307,7 +351,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -340,7 +387,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -365,7 +415,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -389,7 +442,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -414,7 +470,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -438,7 +497,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -466,7 +528,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -496,7 +561,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -525,7 +593,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -553,7 +624,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -583,7 +657,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
