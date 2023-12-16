@@ -30,9 +30,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices
-                .Shell
-                .ExecuteCommandAsync(VSConstants.VSStd12CmdID.NavigateTo, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                VSConstants.VSStd12CmdID.NavigateTo,
+                cancellationToken
+            );
 
             return await WaitForNavigateToFocusAsync(cancellationToken);
 
@@ -45,23 +46,19 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                     cancellationToken.ThrowIfCancellationRequested();
 
                     // Take no direct action regarding activation, but assert the correct item already has focus
-                    TestServices
-                        .JoinableTaskFactory
-                        .Run(async () =>
+                    TestServices.JoinableTaskFactory.Run(async () =>
+                    {
+                        await TestServices.JoinableTaskFactory.SwitchToMainThreadAsync();
+                        var searchBox = Assert.IsAssignableFrom<Control>(Keyboard.FocusedElement);
+                        if ("PART_SearchBox" == searchBox.Name)
                         {
-                            await TestServices.JoinableTaskFactory.SwitchToMainThreadAsync();
-                            var searchBox = Assert.IsAssignableFrom<Control>(
-                                Keyboard.FocusedElement
-                            );
-                            if ("PART_SearchBox" == searchBox.Name)
-                            {
-                                isAllInOneSearchActive = false; // Old search name
-                            }
-                            else if ("SearchBoxControl" == searchBox.Name)
-                            {
-                                isAllInOneSearchActive = true; // All-in-one search name
-                            }
-                        });
+                            isAllInOneSearchActive = false; // Old search name
+                        }
+                        else if ("SearchBoxControl" == searchBox.Name)
+                        {
+                            isAllInOneSearchActive = true; // All-in-one search name
+                        }
+                    });
 
                     if (isAllInOneSearchActive.HasValue)
                     {
@@ -182,11 +179,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var dispatcher = await TestServices
-                .Shell
-                .GetRequiredGlobalServiceAsync<SUIHostCommandDispatcher, IOleCommandTarget>(
-                    cancellationToken
-                );
+            var dispatcher = await TestServices.Shell.GetRequiredGlobalServiceAsync<
+                SUIHostCommandDispatcher,
+                IOleCommandTarget
+            >(cancellationToken);
 
             var pvaIn = Marshal.AllocHGlobal(Marshal.SizeOf<VARIANT>());
             try
@@ -251,11 +247,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var dispatcher = await TestServices
-                .Shell
-                .GetRequiredGlobalServiceAsync<SUIHostCommandDispatcher, IOleCommandTarget>(
-                    cancellationToken
-                );
+            var dispatcher = await TestServices.Shell.GetRequiredGlobalServiceAsync<
+                SUIHostCommandDispatcher,
+                IOleCommandTarget
+            >(cancellationToken);
             OLECMD[] commands = { new OLECMD { cmdID = commandId }, };
 
             var status = dispatcher.QueryStatus(

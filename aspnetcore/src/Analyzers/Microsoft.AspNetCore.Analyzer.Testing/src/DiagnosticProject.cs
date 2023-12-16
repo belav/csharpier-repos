@@ -46,8 +46,12 @@ public class DiagnosticProject
 
                 var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
                 solution = workspaceFactory()
-                    .CurrentSolution
-                    .AddProject(projectId, TestProjectName, TestProjectName, LanguageNames.CSharp);
+                    .CurrentSolution.AddProject(
+                        projectId,
+                        TestProjectName,
+                        TestProjectName,
+                        LanguageNames.CSharp
+                    );
 
                 foreach (
                     var defaultCompileLibrary in DependencyContext

@@ -284,9 +284,13 @@ namespace System.Net
                     count -= this.read;
                     offset += this.read;
                 }
-                IAsyncResult result = parent
-                    .BaseStream
-                    .BeginRead(buffer, offset, count, onRead, this);
+                IAsyncResult result = parent.BaseStream.BeginRead(
+                    buffer,
+                    offset,
+                    count,
+                    onRead,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     //

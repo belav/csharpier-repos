@@ -426,15 +426,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 int rva;
                 MethodImplAttributes implFlags;
-                moduleSymbol
-                    .Module
-                    .GetMethodDefPropsOrThrow(
-                        methodDef,
-                        out _name,
-                        out implFlags,
-                        out localflags,
-                        out rva
-                    );
+                moduleSymbol.Module.GetMethodDefPropsOrThrow(
+                    methodDef,
+                    out _name,
+                    out implFlags,
+                    out localflags,
+                    out rva
+                );
                 Debug.Assert((uint)implFlags <= ushort.MaxValue);
                 _implFlags = (ushort)implFlags;
             }
@@ -1013,10 +1011,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 try
                 {
-                    return _containingType
-                        .ContainingPEModule
-                        .Module
-                        .GetMethodSignatureOrThrow(_handle);
+                    return _containingType.ContainingPEModule.Module.GetMethodSignatureOrThrow(
+                        _handle
+                    );
                 }
                 catch (BadImageFormatException)
                 {
@@ -1115,9 +1112,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     )
                     {
                         var moduleSymbol = _containingType.ContainingPEModule;
-                        isExtensionMethod = moduleSymbol
-                            .Module
-                            .HasExtensionAttribute(_handle, ignoreCase: false);
+                        isExtensionMethod = moduleSymbol.Module.HasExtensionAttribute(
+                            _handle,
+                            ignoreCase: false
+                        );
                     }
                     _packedFlags.InitializeIsExtensionMethod(isExtensionMethod);
                 }
@@ -1244,10 +1242,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             byte? value;
             if (!_packedFlags.TryGetNullableContext(out value))
             {
-                value = _containingType
-                    .ContainingPEModule
-                    .Module
-                    .HasNullableContextAttribute(_handle, out byte arg)
+                value = _containingType.ContainingPEModule.Module.HasNullableContextAttribute(
+                    _handle,
+                    out byte arg
+                )
                     ? arg
                     : _containingType.GetNullableContextValue();
                 _packedFlags.SetNullableContext(value);
@@ -1792,8 +1790,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             )
             {
                 useSiteInfo = AccessUncommonFields()
-                    ._lazyCachedUseSiteInfo
-                    .InterlockedInitialize(PrimaryDependency, useSiteInfo);
+                    ._lazyCachedUseSiteInfo.InterlockedInitialize(PrimaryDependency, useSiteInfo);
             }
 
             _packedFlags.SetIsUseSiteDiagnosticPopulated();
@@ -1804,10 +1801,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             if (!_packedFlags.IsConditionalPopulated)
             {
-                var result = _containingType
-                    .ContainingPEModule
-                    .Module
-                    .GetConditionalAttributeValues(_handle);
+                var result =
+                    _containingType.ContainingPEModule.Module.GetConditionalAttributeValues(
+                        _handle
+                    );
                 Debug.Assert(!result.IsDefault);
                 if (!result.IsEmpty)
                 {
@@ -1845,10 +1842,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 Debug.Assert(MethodKind == MethodKind.Constructor);
                 if (!_packedFlags.HasSetsRequiredMembersPopulated)
                 {
-                    var result = _containingType
-                        .ContainingPEModule
-                        .Module
-                        .HasAttribute(_handle, AttributeDescription.SetsRequiredMembersAttribute);
+                    var result = _containingType.ContainingPEModule.Module.HasAttribute(
+                        _handle,
+                        AttributeDescription.SetsRequiredMembersAttribute
+                    );
                     _packedFlags.InitializeSetsRequiredMembersBit(result);
                 }
 
@@ -1913,9 +1910,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (!_packedFlags.IsUnmanagedCallersOnlyAttributePopulated)
             {
                 var containingModule = (PEModuleSymbol)ContainingModule;
-                var unmanagedCallersOnlyData = containingModule
-                    .Module
-                    .TryGetUnmanagedCallersOnlyAttribute(
+                var unmanagedCallersOnlyData =
+                    containingModule.Module.TryGetUnmanagedCallersOnlyAttribute(
                         _handle,
                         new MetadataDecoder(containingModule),
                         static (name, value, isField) =>
@@ -2043,12 +2039,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override bool HasAsyncMethodBuilderAttribute(out TypeSymbol builderArgument)
         {
-            builderArgument = _containingType
-                .ContainingPEModule
-                .TryDecodeAttributeWithTypeArgument(
-                    this.Handle,
-                    AttributeDescription.AsyncMethodBuilderAttribute
-                );
+            builderArgument = _containingType.ContainingPEModule.TryDecodeAttributeWithTypeArgument(
+                this.Handle,
+                AttributeDescription.AsyncMethodBuilderAttribute
+            );
             return builderArgument is not null;
         }
     }

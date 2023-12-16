@@ -126,10 +126,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     (node, generator) =>
                     {
                         var currentInvocation = (InvocationExpressionSyntax)node;
-                        var seenNamedArgument = currentInvocation
-                            .ArgumentList
-                            .Arguments
-                            .Any(a => a.NameColon != null);
+                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(
+                            a => a.NameColon != null
+                        );
                         var seenDefaultArgumentValue =
                             currentInvocation.ArgumentList.Arguments.Count
                             < localFunction.ParameterList.Parameters.Count;
@@ -149,19 +148,18 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                                         )
                             );
 
-                        var newArgumentsList = currentInvocation
-                            .ArgumentList
-                            .Arguments
-                            .AddRange(newArguments);
+                        var newArgumentsList = currentInvocation.ArgumentList.Arguments.AddRange(
+                            newArguments
+                        );
                         if (thisParameter != null)
                             newArgumentsList = newArgumentsList.Insert(
                                 0,
                                 (ArgumentSyntax)generator.Argument(generator.ThisExpression())
                             );
 
-                        var newArgList = currentInvocation
-                            .ArgumentList
-                            .WithArguments(newArgumentsList);
+                        var newArgList = currentInvocation.ArgumentList.WithArguments(
+                            newArgumentsList
+                        );
                         return currentInvocation.WithArgumentList(newArgList);
                     }
                 );

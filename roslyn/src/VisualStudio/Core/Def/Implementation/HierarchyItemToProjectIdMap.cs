@@ -43,9 +43,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // First filter the projects by matching up properties on the input hierarchy against properties on each
             // project's hierarchy.
             var candidateProjects = _workspace
-                .CurrentSolution
-                .Projects
-                .Where(p =>
+                .CurrentSolution.Projects.Where(p =>
                 {
                     // We're about to access various properties of the IVsHierarchy associated with the project.
                     // The properties supported and the interpretation of their values varies from one project system
@@ -93,9 +91,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             foreach (var candidateProject in candidateProjects)
             {
                 if (
-                    !candidateProject
-                        .DocumentIds
-                        .Any(id => ContainedDocument.TryGetContainedDocument(id) != null)
+                    !candidateProject.DocumentIds.Any(
+                        id => ContainedDocument.TryGetContainedDocument(id) != null
+                    )
                 )
                 {
                     projectId = candidateProject.Id;

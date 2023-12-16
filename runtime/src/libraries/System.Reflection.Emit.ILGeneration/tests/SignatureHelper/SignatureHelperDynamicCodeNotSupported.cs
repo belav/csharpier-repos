@@ -12,12 +12,10 @@ namespace System.Reflection.Emit.Tests
         public static void ThrowsWhenDynamicCodeNotSupported()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
-                .Add(
-                    "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
-                    false.ToString()
-                );
+            options.RuntimeConfigurationOptions.Add(
+                "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+                false.ToString()
+            );
 
             using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(
                 static () =>

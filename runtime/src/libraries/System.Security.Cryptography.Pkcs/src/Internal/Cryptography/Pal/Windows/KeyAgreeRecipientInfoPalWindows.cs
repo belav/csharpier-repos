@@ -110,9 +110,7 @@ namespace Internal.Cryptography.Pal.Windows
                                     => recipient->OriginatorCertId.ToSubjectIdentifierOrKey(),
 
                                 CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY
-                                    => recipient
-                                        ->OriginatorPublicKeyInfo
-                                        .ToSubjectIdentifierOrKey(),
+                                    => recipient->OriginatorPublicKeyInfo.ToSubjectIdentifierOrKey(),
 
                                 _
                                     => throw new CryptographicException(

@@ -249,12 +249,10 @@ namespace System.Net.WebSockets
             // SubProtocols
             if (options.RequestedSubProtocols.Count > 0)
             {
-                request
-                    .Headers
-                    .Add(
-                        HttpKnownHeaderNames.SecWebSocketProtocol,
-                        string.Join(", ", options.RequestedSubProtocols)
-                    );
+                request.Headers.Add(
+                    HttpKnownHeaderNames.SecWebSocketProtocol,
+                    string.Join(", ", options.RequestedSubProtocols)
+                );
             }
 
             // Creds

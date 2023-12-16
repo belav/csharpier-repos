@@ -47,9 +47,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         )
         {
             using (
-                context
-                    .OperationContext
-                    .AddScope(allowCancellation: true, EditorFeaturesResources.Extract_Interface)
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Extract_Interface
+                )
             )
             {
                 var subjectBuffer = args.SubjectBuffer;
@@ -64,9 +65,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                     return false;
                 }
 
-                var document = subjectBuffer
-                    .CurrentSnapshot
-                    .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                var document =
+                    subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
                     );
@@ -82,58 +82,50 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
                 var extractInterfaceService =
                     document.GetLanguageService<AbstractExtractInterfaceService>();
-                _threadingContext
-                    .JoinableTaskFactory
-                    .Run(async () =>
-                    {
-                        // ConfigureAwait(true) here so we are back on the UI thread
-                        // before calling TryApplyChanges below. Make sure if other
-                        // async code is added between the two calls to handle thread
-                        // affinity accordingly
-                        var result = await extractInterfaceService
-                            .ExtractInterfaceAsync(
-                                document,
-                                caretPoint.Value.Position,
-                                _globalOptions.CreateProvider(),
-                                (errorMessage, severity) =>
-                                    workspace
-                                        .Services
-                                        .GetService<INotificationService>()
-                                        .SendNotification(errorMessage, severity: severity),
-                                CancellationToken.None
-                            )
-                            .ConfigureAwait(true);
-
-                        if (result == null || !result.Succeeded)
-                        {
-                            return;
-                        }
-
-                        if (
-                            !document
-                                .Project
-                                .Solution
-                                .Workspace
-                                .TryApplyChanges(result.UpdatedSolution)
+                _threadingContext.JoinableTaskFactory.Run(async () =>
+                {
+                    // ConfigureAwait(true) here so we are back on the UI thread
+                    // before calling TryApplyChanges below. Make sure if other
+                    // async code is added between the two calls to handle thread
+                    // affinity accordingly
+                    var result = await extractInterfaceService
+                        .ExtractInterfaceAsync(
+                            document,
+                            caretPoint.Value.Position,
+                            _globalOptions.CreateProvider(),
+                            (errorMessage, severity) =>
+                                workspace
+                                    .Services.GetService<INotificationService>()
+                                    .SendNotification(errorMessage, severity: severity),
+                            CancellationToken.None
                         )
-                        {
-                            // TODO: handle failure
-                            return;
-                        }
+                        .ConfigureAwait(true);
 
-                        var navigationService = workspace
-                            .Services
-                            .GetService<IDocumentNavigationService>();
-                        await navigationService
-                            .TryNavigateToPositionAsync(
-                                _threadingContext,
-                                workspace,
-                                result.NavigationDocumentId,
-                                position: 0,
-                                CancellationToken.None
-                            )
-                            .ConfigureAwait(false);
-                    });
+                    if (result == null || !result.Succeeded)
+                    {
+                        return;
+                    }
+
+                    if (
+                        !document.Project.Solution.Workspace.TryApplyChanges(result.UpdatedSolution)
+                    )
+                    {
+                        // TODO: handle failure
+                        return;
+                    }
+
+                    var navigationService =
+                        workspace.Services.GetService<IDocumentNavigationService>();
+                    await navigationService
+                        .TryNavigateToPositionAsync(
+                            _threadingContext,
+                            workspace,
+                            result.NavigationDocumentId,
+                            position: 0,
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false);
+                });
 
                 return true;
             }

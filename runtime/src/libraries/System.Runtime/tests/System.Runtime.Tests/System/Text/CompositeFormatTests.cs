@@ -101,14 +101,12 @@ namespace System.Text.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "format",
                 () =>
-                    Span<char>
-                        .Empty
-                        .TryWrite(
-                            null,
-                            (CompositeFormat)null,
-                            out _,
-                            (ReadOnlySpan<object>)new object[0]
-                        )
+                    Span<char>.Empty.TryWrite(
+                        null,
+                        (CompositeFormat)null,
+                        out _,
+                        (ReadOnlySpan<object>)new object[0]
+                    )
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "format",

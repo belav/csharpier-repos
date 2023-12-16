@@ -86,11 +86,9 @@ namespace Tracing.Tests.Common
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.RedirectStandardError = true;
 
-                Logger
-                    .logger
-                    .Log(
-                        $"running sub-process: {process.StartInfo.FileName} {process.StartInfo.Arguments}"
-                    );
+                Logger.logger.Log(
+                    $"running sub-process: {process.StartInfo.FileName} {process.StartInfo.Arguments}"
+                );
                 DateTime startTime = DateTime.Now;
                 process.OutputDataReceived += new DataReceivedEventHandler(
                     (s, e) =>
@@ -140,11 +138,9 @@ namespace Tracing.Tests.Common
 
                 while (!EventPipeClient.ListAvailablePorts().Contains(process.Id))
                 {
-                    Logger
-                        .logger
-                        .Log(
-                            $"Standard Diagnostics Server connection not created yet -> try again in 100 ms"
-                        );
+                    Logger.logger.Log(
+                        $"Standard Diagnostics Server connection not created yet -> try again in 100 ms"
+                    );
                     await Task.Delay(100);
                 }
 

@@ -93,9 +93,12 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 this.AssertNotDisposed();
 
-                Interop
-                    .Runtime
-                    .GetByIndexRef(JSHandle, i, out int exception, out object indexValue);
+                Interop.Runtime.GetByIndexRef(
+                    JSHandle,
+                    i,
+                    out int exception,
+                    out object indexValue
+                );
 
                 if (exception != 0)
                     throw new JSException((string)indexValue);
@@ -106,9 +109,13 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 this.AssertNotDisposed();
 
-                Interop
-                    .Runtime
-                    .SetByIndexRef(JSHandle, i, value, out int exception, out object res);
+                Interop.Runtime.SetByIndexRef(
+                    JSHandle,
+                    i,
+                    value,
+                    out int exception,
+                    out object res
+                );
 
                 if (exception != 0)
                     throw new JSException((string)res);

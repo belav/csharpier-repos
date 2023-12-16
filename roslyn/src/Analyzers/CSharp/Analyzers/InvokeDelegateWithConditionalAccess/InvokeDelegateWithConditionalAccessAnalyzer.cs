@@ -101,8 +101,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             // Function pointers can only be invoked directly via the "()" operator, not "?.Invoke()".
             if (
                 syntaxContext
-                    .SemanticModel
-                    .GetTypeInfo(invocationExpression.Expression, syntaxContext.CancellationToken)
+                    .SemanticModel.GetTypeInfo(
+                        invocationExpression.Expression,
+                        syntaxContext.CancellationToken
+                    )
                     .Type is
                 { TypeKind: TypeKind.FunctionPointer }
             )

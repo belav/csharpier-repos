@@ -57,17 +57,15 @@ namespace System.Security.Cryptography.X509Certificates
             )
             {
                 if (
-                    !Interop
-                        .Crypt32
-                        .CertAddCertificateContextToStore(
-                            _certStore,
-                            certContext,
-                            Interop
-                                .Crypt32
-                                .CertStoreAddDisposition
-                                .CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES,
-                            IntPtr.Zero
-                        )
+                    !Interop.Crypt32.CertAddCertificateContextToStore(
+                        _certStore,
+                        certContext,
+                        Interop
+                            .Crypt32
+                            .CertStoreAddDisposition
+                            .CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES,
+                        IntPtr.Zero
+                    )
                 )
                     throw Marshal.GetLastPInvokeError().ToCryptographicException();
             }
@@ -87,14 +85,12 @@ namespace System.Security.Cryptography.X509Certificates
                 Interop.Crypt32.CERT_CONTEXT* pCertContext =
                     existingCertContext.DangerousCertContext;
                 if (
-                    !Interop
-                        .crypt32
-                        .CertFindCertificateInStore(
-                            _certStore,
-                            Interop.Crypt32.CertFindType.CERT_FIND_EXISTING,
-                            pCertContext,
-                            ref enumCertContext
-                        )
+                    !Interop.crypt32.CertFindCertificateInStore(
+                        _certStore,
+                        Interop.Crypt32.CertFindType.CERT_FIND_EXISTING,
+                        pCertContext,
+                        ref enumCertContext
+                    )
                 )
                     return; // The certificate is not present in the store, simply return.
 

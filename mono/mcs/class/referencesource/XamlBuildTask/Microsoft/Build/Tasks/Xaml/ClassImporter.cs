@@ -152,14 +152,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 string xClassDirectiveName =
                     "{" + XamlLanguage.Class.PreferredXamlNamespace + "}" + XamlLanguage.Class.Name;
 
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        LogInvalidOperationException(
-                            null,
-                            SR.TaskCannotProcessFileWithoutType(xClassDirectiveName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(
+                        null,
+                        SR.TaskCannotProcessFileWithoutType(xClassDirectiveName)
+                    )
+                );
             }
 
             strippedXamlNodes.Writer.Close();
@@ -498,9 +496,9 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     catch (InvalidOperationException e)
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(LogInvalidOperationException(reader, e.Message));
+                        throw FxTrace.Exception.AsError(
+                            LogInvalidOperationException(reader, e.Message)
+                        );
                     }
                     nextNodeRead = true;
                     attributes.Add(attribute);
@@ -527,14 +525,12 @@ namespace Microsoft.Build.Tasks.Xaml
                         nextNodeRead = true;
                         if (members.ContainsKey(xProperty.Name))
                         {
-                            throw FxTrace
-                                .Exception
-                                .AsError(
-                                    LogInvalidOperationException(
-                                        reader,
-                                        SR.DuplicatePropertyDefinition(xProperty.Name)
-                                    )
-                                );
+                            throw FxTrace.Exception.AsError(
+                                LogInvalidOperationException(
+                                    reader,
+                                    SR.DuplicatePropertyDefinition(xProperty.Name)
+                                )
+                            );
                         }
                         members.Add(xProperty.Name, xProperty);
                     }
@@ -585,14 +581,12 @@ namespace Microsoft.Build.Tasks.Xaml
                             // Ignore AttachedProperties on property
                             if (!member.IsAttachable)
                             {
-                                throw FxTrace
-                                    .Exception
-                                    .AsError(
-                                        LogInvalidOperationException(
-                                            xamlReader,
-                                            SR.UnknownPropertyMember(member.Name)
-                                        )
-                                    );
+                                throw FxTrace.Exception.AsError(
+                                    LogInvalidOperationException(
+                                        xamlReader,
+                                        SR.UnknownPropertyMember(member.Name)
+                                    )
+                                );
                             }
                             break;
                     }
@@ -600,20 +594,15 @@ namespace Microsoft.Build.Tasks.Xaml
             }
             if (string.IsNullOrEmpty(property.Name))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(LogInvalidOperationException(xamlReader, SR.PropertyNameRequired));
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(xamlReader, SR.PropertyNameRequired)
+                );
             }
             if (property.Type == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        LogInvalidOperationException(
-                            xamlReader,
-                            SR.PropertyTypeRequired(property.Name)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(xamlReader, SR.PropertyTypeRequired(property.Name))
+                );
             }
             return property;
         }
@@ -651,14 +640,12 @@ namespace Microsoft.Build.Tasks.Xaml
             reader.Read();
             if (reader.NodeType != XamlNodeType.Value)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        LogInvalidOperationException(
-                            reader,
-                            SR.TextRepresentationExpected(propertyName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(
+                        reader,
+                        SR.TextRepresentationExpected(propertyName)
+                    )
+                );
             }
             return (string)reader.Value;
         }
@@ -682,9 +669,9 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (string.IsNullOrEmpty(classData.Name))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(LogInvalidOperationException(null, SR.ClassNameMustBeNonEmpty));
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(null, SR.ClassNameMustBeNonEmpty)
+                );
             }
         }
 

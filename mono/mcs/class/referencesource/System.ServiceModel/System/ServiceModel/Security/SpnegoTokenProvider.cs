@@ -63,17 +63,15 @@ namespace System.ServiceModel.Security
                 TokenImpersonationLevelHelper.Validate(value);
                 if (value == TokenImpersonationLevel.None)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                String.Format(
-                                    CultureInfo.InvariantCulture,
-                                    SR.GetString(SR.SpnegoImpersonationLevelCannotBeSetToNone)
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                SR.GetString(SR.SpnegoImpersonationLevelCannotBeSetToNone)
                             )
-                        );
+                        )
+                    );
                 }
                 this.allowedImpersonationLevel = value;
             }
@@ -302,19 +300,15 @@ namespace System.ServiceModel.Security
             WindowsSspiNegotiation windowsNegotiation = (WindowsSspiNegotiation)sspiNegotiation;
             if (windowsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
+                );
             }
             if (this.AuthenticateServer && windowsNegotiation.IsMutualAuthFlag == false)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityNegotiationException(SR.GetString(SR.CannotAuthenticateServer))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.CannotAuthenticateServer))
+                );
             }
             SecurityTraceRecordHelper.TraceClientSpnego(windowsNegotiation);
 

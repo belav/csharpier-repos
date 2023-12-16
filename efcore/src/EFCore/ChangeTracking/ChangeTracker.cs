@@ -41,8 +41,7 @@ public class ChangeTracker : IResettableService
         _defaultQueryTrackingBehavior =
             context
                 .GetService<IDbContextOptions>()
-                .Extensions
-                .OfType<CoreOptionsExtension>()
+                .Extensions.OfType<CoreOptionsExtension>()
                 .FirstOrDefault()
                 ?.QueryTrackingBehavior ?? QueryTrackingBehavior.TrackAll;
 
@@ -211,8 +210,7 @@ public class ChangeTracker : IResettableService
         TryDetectChanges();
 
         return StateManager
-            .Entries
-            .Where(e => e.Entity is TEntity)
+            .Entries.Where(e => e.Entity is TEntity)
             .Select(e => new EntityEntry<TEntity>(e));
     }
 

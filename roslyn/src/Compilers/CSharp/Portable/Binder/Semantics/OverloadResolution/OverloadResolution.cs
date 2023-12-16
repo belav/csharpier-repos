@@ -727,9 +727,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     if (
-                        expectedConvention
-                            .CallKind
-                            .IsCallingConvention(Cci.CallingConvention.Unmanaged)
+                        expectedConvention.CallKind.IsCallingConvention(
+                            Cci.CallingConvention.Unmanaged
+                        )
                     )
                     {
                         if (
@@ -1399,16 +1399,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !moreDerivedOverride.IsOverride
                 || checkOverrideContainingType
-                    && !moreDerivedOverride
-                        .ContainingType
-                        .IsDerivedFrom(
-                            member.ContainingType,
-                            TypeCompareKind.ConsiderEverything,
-                            ref useSiteInfo
-                        )
-                || !MemberSignatureComparer
-                    .SloppyOverrideComparer
-                    .Equals(member, moreDerivedOverride)
+                    && !moreDerivedOverride.ContainingType.IsDerivedFrom(
+                        member.ContainingType,
+                        TypeCompareKind.ConsiderEverything,
+                        ref useSiteInfo
+                    )
+                || !MemberSignatureComparer.SloppyOverrideComparer.Equals(
+                    member,
+                    moreDerivedOverride
+                )
             )
             {
                 // Easy out.
@@ -1866,12 +1865,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             foreach (MemberResolutionResult<TMember> result in results)
             {
-                result
-                    .Member
-                    .AddUseSiteInfo(
-                        ref useSiteInfo,
-                        addDiagnostics: result.HasUseSiteDiagnosticToReport
-                    );
+                result.Member.AddUseSiteInfo(
+                    ref useSiteInfo,
+                    addDiagnostics: result.HasUseSiteDiagnosticToReport
+                );
             }
         }
 
@@ -3109,9 +3106,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // choice after we received customer reports of problems in the space.
             // https://github.com/dotnet/roslyn/issues/55345
             if (
-                _binder
-                    .Compilation
-                    .IsFeatureEnabled(MessageID.IDS_FeatureImprovedInterpolatedStrings)
+                _binder.Compilation.IsFeatureEnabled(
+                    MessageID.IDS_FeatureImprovedInterpolatedStrings
+                )
                 && node
                     is BoundUnconvertedInterpolatedString { ConstantValueOpt: null }
                         or BoundBinaryOperator
@@ -4146,9 +4143,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         argRefKind == RefKind.Ref
-                        && binder
-                            .Compilation
-                            .IsFeatureEnabled(MessageID.IDS_FeatureRefReadonlyParameters)
+                        && binder.Compilation.IsFeatureEnabled(
+                            MessageID.IDS_FeatureRefReadonlyParameters
+                        )
                     )
                     {
                         return RefKind.Ref;

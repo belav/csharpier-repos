@@ -24,9 +24,9 @@ internal static class DiagnosticDataExtensions
         // If there are 'unnecessary' locations specified in the property bag, use those instead of the main diagnostic location.
         if (diagnosticData.TryGetUnnecessaryLocationIndices(out var unnecessaryIndices))
         {
-            using var _ = PooledObjects
-                .ArrayBuilder<DiagnosticDataLocation>
-                .GetInstance(out var locationsToTag);
+            using var _ = PooledObjects.ArrayBuilder<DiagnosticDataLocation>.GetInstance(
+                out var locationsToTag
+            );
 
             foreach (var index in GetLocationIndices(unnecessaryIndices))
                 locationsToTag.Add(diagnosticData.AdditionalLocations[index]);
@@ -63,9 +63,10 @@ internal static class DiagnosticDataExtensions
 
         return diagnosticData.AdditionalLocations.Length > 0
             && diagnosticData.Properties != null
-            && diagnosticData
-                .Properties
-                .TryGetValue(WellKnownDiagnosticTags.Unnecessary, out unnecessaryIndices)
+            && diagnosticData.Properties.TryGetValue(
+                WellKnownDiagnosticTags.Unnecessary,
+                out unnecessaryIndices
+            )
             && unnecessaryIndices != null;
     }
 }

@@ -26,15 +26,13 @@ public class FrameworkConfigurationBuilder
 
     public void AddHubMethod(string hub, string method, RequestDelegate requestDelegate)
     {
-        _dataSource
-            .HubMethods
-            .Add(
-                new HubMethod
-                {
-                    Hub = hub,
-                    Method = method,
-                    RequestDelegate = requestDelegate
-                }
-            );
+        _dataSource.HubMethods.Add(
+            new HubMethod
+            {
+                Hub = hub,
+                Method = method,
+                RequestDelegate = requestDelegate
+            }
+        );
     }
 }

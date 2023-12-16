@@ -71,8 +71,7 @@ namespace IdeCoreBenchmarks
 
             Console.WriteLine("Found Roslyn.sln: " + Process.GetCurrentProcess().Id);
             var assemblies = MSBuildMefHostServices
-                .DefaultAssemblies
-                .Add(typeof(AnalyzerRunnerHelper).Assembly)
+                .DefaultAssemblies.Add(typeof(AnalyzerRunnerHelper).Assembly)
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
 
@@ -187,8 +186,7 @@ namespace IdeCoreBenchmarks
             foreach (var project in _workspace.CurrentSolution.Projects)
             {
                 var tasks = project
-                    .Documents
-                    .Select(
+                    .Documents.Select(
                         d =>
                             Task.Run(async () =>
                             {
@@ -222,9 +220,7 @@ namespace IdeCoreBenchmarks
                 var start = DateTime.Now;
                 var indexTime = TimeSpan.Zero;
                 var tasks = _workspace
-                    .CurrentSolution
-                    .Projects
-                    .SelectMany(p => p.Documents)
+                    .CurrentSolution.Projects.SelectMany(p => p.Documents)
                     .Select(
                         d =>
                             Task.Run(async () =>
@@ -254,8 +250,7 @@ namespace IdeCoreBenchmarks
             // Search each project with an independent threadpool task.
             var solution = _workspace.CurrentSolution;
             var searchTasks = solution
-                .Projects
-                .GroupBy(p => p.Services.GetService<INavigateToSearchService>())
+                .Projects.GroupBy(p => p.Services.GetService<INavigateToSearchService>())
                 .Select(
                     g =>
                         Task.Run(

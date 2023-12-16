@@ -55,16 +55,14 @@ namespace BrowserDebugProxy
             CancellationToken token
         )
         {
-            var fieldValue = await sdbHelper
-                .ValueCreator
-                .ReadAsVariableValue(
-                    reader,
-                    field.Name,
-                    token,
-                    isOwn: isOwn,
-                    field.TypeId,
-                    getObjectOptions.HasFlag(GetObjectCommandOptions.ForDebuggerDisplayAttribute)
-                );
+            var fieldValue = await sdbHelper.ValueCreator.ReadAsVariableValue(
+                reader,
+                field.Name,
+                token,
+                isOwn: isOwn,
+                field.TypeId,
+                getObjectOptions.HasFlag(GetObjectCommandOptions.ForDebuggerDisplayAttribute)
+            );
 
             var typeFieldsBrowsableInfo = typeInfo?.Info?.DebuggerBrowsableFields;
             var typePropertiesBrowsableInfo = typeInfo?.Info?.DebuggerBrowsableProperties;
@@ -75,9 +73,9 @@ namespace BrowserDebugProxy
                 typePropertiesBrowsableInfo.TryGetValue(field.Name, out state);
             }
             fieldValue[InternalUseFieldName.State.Name] = state?.ToString();
-            fieldValue[InternalUseFieldName.Section.Name] = field
-                .Attributes
-                .HasFlag(FieldAttributes.Private)
+            fieldValue[InternalUseFieldName.Section.Name] = field.Attributes.HasFlag(
+                FieldAttributes.Private
+            )
                 ? "private"
                 : "result";
 
@@ -382,9 +380,10 @@ namespace BrowserDebugProxy
             bool includeStatic = false
         )
         {
-            return sdbHelper
-                .ValueCreator
-                .TryGetValueTypeById(valueTypeId, out ValueTypeClass valueType)
+            return sdbHelper.ValueCreator.TryGetValueTypeById(
+                valueTypeId,
+                out ValueTypeClass valueType
+            )
                 ? valueType.GetMemberValues(
                     sdbHelper,
                     getCommandOptions,

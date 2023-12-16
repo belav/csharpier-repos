@@ -292,8 +292,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 return new(ImmutableArray<FinderLocation>.Empty);
 
             var tokens = state
-                .Root
-                .DescendantTokens(descendIntoTrivia: true)
+                .Root.DescendantTokens(descendIntoTrivia: true)
                 .WhereAsArray(
                     static (token, tuple) =>
                         IsPotentialReference(tuple.predefinedType, tuple.state.SyntaxFacts, token),

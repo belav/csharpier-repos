@@ -46,9 +46,11 @@ namespace System.Threading
             // Allocate _gcHandle and _tpWait as the last step and make sure they are never leaked
             _gcHandle = GCHandle.Alloc(this);
 
-            _tpWait = Interop
-                .Kernel32
-                .CreateThreadpoolWait(&RegisteredWaitCallback, (IntPtr)_gcHandle, IntPtr.Zero);
+            _tpWait = Interop.Kernel32.CreateThreadpoolWait(
+                &RegisteredWaitCallback,
+                (IntPtr)_gcHandle,
+                IntPtr.Zero
+            );
 
             if (_tpWait == IntPtr.Zero)
             {
@@ -126,9 +128,11 @@ namespace System.Threading
             }
 
             // We can use DangerousGetHandle because of DangerousAddRef in the constructor
-            Interop
-                .Kernel32
-                .SetThreadpoolWait(_tpWait, _waitHandle!.DangerousGetHandle(), (IntPtr)pTimeout);
+            Interop.Kernel32.SetThreadpoolWait(
+                _tpWait,
+                _waitHandle!.DangerousGetHandle(),
+                (IntPtr)pTimeout
+            );
         }
 
         private bool UnregisterWindowsThreadPool(WaitHandle waitObject)

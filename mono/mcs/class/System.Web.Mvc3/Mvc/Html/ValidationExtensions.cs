@@ -34,9 +34,11 @@
             );
 
             // write rules to context object
-            IEnumerable<ModelValidator> validators = ModelValidatorProviders
-                .Providers
-                .GetValidators(modelMetadata, htmlHelper.ViewContext);
+            IEnumerable<ModelValidator> validators =
+                ModelValidatorProviders.Providers.GetValidators(
+                    modelMetadata,
+                    htmlHelper.ViewContext
+                );
             foreach (
                 ModelClientValidationRule rule in validators.SelectMany(
                     v => v.GetClientValidationRules()
@@ -137,11 +139,9 @@
                 return; // nothing to do
             }
 
-            string modelName = htmlHelper
-                .ViewContext
-                .ViewData
-                .TemplateInfo
-                .GetFullHtmlFieldName(expression);
+            string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                expression
+            );
             ApplyFieldValidationMetadata(htmlHelper, modelMetadata, modelName);
         }
 
@@ -345,11 +345,9 @@
             IDictionary<string, object> htmlAttributes
         )
         {
-            string modelName = htmlHelper
-                .ViewContext
-                .ViewData
-                .TemplateInfo
-                .GetFullHtmlFieldName(expression);
+            string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                expression
+            );
             FormContext formContext = htmlHelper.ViewContext.GetFormContextForClientValidation();
 
             if (!htmlHelper.ViewData.ModelState.ContainsKey(modelName) && formContext == null)
@@ -563,10 +561,10 @@
             if (excludePropertyErrors)
             {
                 ModelState ms;
-                htmlHelper
-                    .ViewData
-                    .ModelState
-                    .TryGetValue(htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, out ms);
+                htmlHelper.ViewData.ModelState.TryGetValue(
+                    htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix,
+                    out ms
+                );
                 if (ms != null)
                 {
                     modelStates = new ModelState[] { ms };

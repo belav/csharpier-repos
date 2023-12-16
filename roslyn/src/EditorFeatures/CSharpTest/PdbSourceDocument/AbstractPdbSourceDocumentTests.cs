@@ -188,16 +188,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var masWorkspace = service.TryGetWorkspace();
 
                 var document = masWorkspace!
-                    .CurrentSolution
-                    .Projects
-                    .First()
-                    .Documents
-                    .First(d => d.FilePath == file.FilePath);
+                    .CurrentSolution.Projects.First()
+                    .Documents.First(d => d.FilePath == file.FilePath);
 
                 // Mapping the project from the generated document should map back to the original project
                 var provider = workspace
-                    .ExportProvider
-                    .GetExportedValues<IMetadataAsSourceFileProvider>()
+                    .ExportProvider.GetExportedValues<IMetadataAsSourceFileProvider>()
                     .OfType<PdbSourceDocumentMetadataAsSourceFileProvider>()
                     .Single();
                 var mappedProject = provider.MapDocument(document);
@@ -301,8 +297,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             // to be available.
 
             return EditorTestCompositions
-                .EditorFeatures
-                .WithExcludedPartTypes(
+                .EditorFeatures.WithExcludedPartTypes(
                     ImmutableHashSet.Create(typeof(IMetadataAsSourceFileProvider))
                 )
                 .AddParts(
@@ -385,10 +380,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             Encoding? fallbackEncoding = null
         )
         {
-            var compilationFactory = project
-                .Solution
-                .Services
-                .GetRequiredLanguageService<ICompilationFactoryService>(LanguageNames.CSharp);
+            var compilationFactory =
+                project.Solution.Services.GetRequiredLanguageService<ICompilationFactoryService>(
+                    LanguageNames.CSharp
+                );
             var options = compilationFactory
                 .GetDefaultCompilationOptions()
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary);

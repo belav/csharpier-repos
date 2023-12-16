@@ -60,10 +60,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
 
             return _module
-                .Assembly
-                .GetName()
-                .Name
-                .CompareTo(otherModuleSpecificHeaderTableNode._module.Assembly.GetName().Name);
+                .Assembly.GetName()
+                .Name.CompareTo(otherModuleSpecificHeaderTableNode._module.Assembly.GetName().Name);
         }
 
         protected abstract string ModuleSpecificName { get; }

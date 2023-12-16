@@ -89,9 +89,9 @@ namespace Microsoft.VisualStudio.LanguageServices
                                 _threadingContext.JoinableTaskFactory
                             )
                             .ConfigureAwait(true);
-                        await _threadingContext
-                            .JoinableTaskFactory
-                            .SwitchToMainThreadAsync(_threadingContext.DisposalToken);
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                            _threadingContext.DisposalToken
+                        );
                         shellService.AdviseSolutionEvents(this, out _);
                     },
                     _threadingContext.DisposalToken

@@ -36,16 +36,19 @@ public class Test
             );
 
             await TestServices.Input.SendAsync(';', HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CurrentLineTextAsync("        f.ToString();$$", assertCaretPosition: true);
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        f.ToString();$$",
+                assertCaretPosition: true
+            );
 
-            await TestServices
-                .Shell
-                .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CurrentLineTextAsync("        f.ToString($$)", assertCaretPosition: true);
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.Undo,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        f.ToString($$)",
+                assertCaretPosition: true
+            );
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/43400")]
@@ -67,22 +70,19 @@ public class Test
             );
 
             await TestServices.Input.SendAsync(';', HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CurrentLineTextAsync(
-                    "        Method(condition ? whenTrue );$$",
-                    assertCaretPosition: true
-                );
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        Method(condition ? whenTrue );$$",
+                assertCaretPosition: true
+            );
 
-            await TestServices
-                .Shell
-                .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CurrentLineTextAsync(
-                    "        Method(condition ? whenTrue $$)",
-                    assertCaretPosition: true
-                );
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.Undo,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        Method(condition ? whenTrue $$)",
+                assertCaretPosition: true
+            );
         }
 
         [IdeFact]
@@ -104,23 +104,28 @@ public class Test
             );
 
             await TestServices.Input.SendAsync(';', HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CurrentLineTextAsync("        f.ToString();$$", assertCaretPosition: true);
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        f.ToString();$$",
+                assertCaretPosition: true
+            );
 
-            await TestServices
-                .Shell
-                .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CurrentLineTextAsync("        f.ToString( );$$", assertCaretPosition: true);
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.Undo,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        f.ToString( );$$",
+                assertCaretPosition: true
+            );
 
-            await TestServices
-                .Shell
-                .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CurrentLineTextAsync("        f.ToString($$ )", assertCaretPosition: true);
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.Undo,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        f.ToString($$ )",
+                assertCaretPosition: true
+            );
         }
     }
 }

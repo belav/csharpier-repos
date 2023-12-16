@@ -37,16 +37,14 @@ End Class
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
-                .SendAsync(
-                    (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.Input.SendAsync(
+                (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
+                HangMitigatingCancellationToken
+            );
 
-            var results = await TestServices
-                .FindReferencesWindow
-                .GetContentsAsync(HangMitigatingCancellationToken);
+            var results = await TestServices.FindReferencesWindow.GetContentsAsync(
+                HangMitigatingCancellationToken
+            );
 
             Assert.Collection(
                 results,
@@ -83,16 +81,16 @@ End Class$$
                 HangMitigatingCancellationToken
             );
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
-                .AddFileAsync(
-                    project,
-                    "File2.vb",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
-            await TestServices
-                .SolutionExplorer
-                .OpenFileAsync(project, "File2.vb", HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddFileAsync(
+                project,
+                "File2.vb",
+                cancellationToken: HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                project,
+                "File2.vb",
+                HangMitigatingCancellationToken
+            );
 
             await SetUpEditorAsync(
                 @"
@@ -105,16 +103,14 @@ End Class
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
-                .SendAsync(
-                    (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.Input.SendAsync(
+                (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
+                HangMitigatingCancellationToken
+            );
 
-            var results = await TestServices
-                .FindReferencesWindow
-                .GetContentsAsync(HangMitigatingCancellationToken);
+            var results = await TestServices.FindReferencesWindow.GetContentsAsync(
+                HangMitigatingCancellationToken
+            );
 
             Assert.Collection(
                 results,
@@ -141,27 +137,25 @@ End Class
                 }
             );
 
-            await TestServices
-                .FindReferencesWindow
-                .NavigateToAsync(
-                    results[0],
-                    isPreview: false,
-                    shouldActivate: true,
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.FindReferencesWindow.NavigateToAsync(
+                results[0],
+                isPreview: false,
+                shouldActivate: true,
+                HangMitigatingCancellationToken
+            );
 
             // Assert we are in the right file now
             Assert.Equal(
                 $"Class1.vb",
-                await TestServices
-                    .Shell
-                    .GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken)
+                await TestServices.Shell.GetActiveDocumentFileNameAsync(
+                    HangMitigatingCancellationToken
+                )
             );
             Assert.Equal(
                 "Alpha As Int32",
-                await TestServices
-                    .Editor
-                    .GetLineTextAfterCaretAsync(HangMitigatingCancellationToken)
+                await TestServices.Editor.GetLineTextAfterCaretAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
     }

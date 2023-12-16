@@ -56,16 +56,14 @@ namespace System.Reflection.Emit
         internal void Debug()
         {
 #if NO
-            System
-                .Console
-                .Write(
-                    "\ttype="
-                        + type.ToString()
-                        + " start="
-                        + start.ToString()
-                        + " len="
-                        + len.ToString()
-                );
+            System.Console.Write(
+                "\ttype="
+                    + type.ToString()
+                    + " start="
+                    + start.ToString()
+                    + " len="
+                    + len.ToString()
+            );
             if (extype != null)
                 System.Console.WriteLine(" extype=" + extype.ToString());
             else

@@ -812,9 +812,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     coord[2 * i + 1] = pointNew.Y;
                 }
 
-                common
-                    .HotRegionsList
-                    .AddHotRegion(mapAreaPath, false, coord, point, series.Name, pointIndex);
+                common.HotRegionsList.AddHotRegion(
+                    mapAreaPath,
+                    false,
+                    coord,
+                    point,
+                    series.Name,
+                    pointIndex
+                );
             }
             //Clean up
             if (areaBrush != null)

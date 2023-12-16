@@ -31,9 +31,10 @@ namespace System.Activities.XamlIntegration
             if (argument == null)
             {
                 // expect CanConvertToString() always comes before ConvertToString()
-                throw FxTrace
-                    .Exception
-                    .Argument("value", SR.CannotSerializeExpression(value.GetType()));
+                throw FxTrace.Exception.Argument(
+                    "value",
+                    SR.CannotSerializeExpression(value.GetType())
+                );
             }
 
             return argument.ConvertToString(context);

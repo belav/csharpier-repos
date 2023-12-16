@@ -68,13 +68,11 @@ public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         builder.AddAttribute(
             7,
             "onchange",
-            EventCallback
-                .Factory
-                .CreateBinder<string?>(
-                    this,
-                    __value => CurrentValueAsString = __value,
-                    CurrentValueAsString
-                )
+            EventCallback.Factory.CreateBinder<string?>(
+                this,
+                __value => CurrentValueAsString = __value,
+                CurrentValueAsString
+            )
         );
         builder.SetUpdatesAttributeName("value");
         builder.AddElementReferenceCapture(8, __inputReference => Element = __inputReference);

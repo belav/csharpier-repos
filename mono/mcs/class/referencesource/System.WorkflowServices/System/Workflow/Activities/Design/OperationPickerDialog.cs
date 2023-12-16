@@ -171,9 +171,9 @@ namespace System.Workflow.Activities.Design
         {
             if (serviceOperation == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("serviceOperation");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serviceOperation"
+                );
             }
             String key = serviceOperation.ContractName;
             ServiceContractListItem serviceContract = this.serviceContracts.Find(key);
@@ -449,12 +449,9 @@ namespace System.Workflow.Activities.Design
                 DesignerHelpers.ShowMessage(
                     this.serviceProvider,
                     errorString,
-                    System
-                        .Workflow
-                        .ComponentModel
-                        .Design
-                        .DR
-                        .GetString(System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle),
+                    System.Workflow.ComponentModel.Design.DR.GetString(
+                        System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle
+                    ),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1
@@ -491,12 +488,9 @@ namespace System.Workflow.Activities.Design
                 DesignerHelpers.ShowMessage(
                     this.serviceProvider,
                     errorString,
-                    System
-                        .Workflow
-                        .ComponentModel
-                        .Design
-                        .DR
-                        .GetString(System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle),
+                    System.Workflow.ComponentModel.Design.DR.GetString(
+                        System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle
+                    ),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1
@@ -516,12 +510,9 @@ namespace System.Workflow.Activities.Design
                 DesignerHelpers.ShowMessage(
                     this.serviceProvider,
                     errorString,
-                    System
-                        .Workflow
-                        .ComponentModel
-                        .Design
-                        .DR
-                        .GetString(System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle),
+                    System.Workflow.ComponentModel.Design.DR.GetString(
+                        System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle
+                    ),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1
@@ -559,12 +550,9 @@ namespace System.Workflow.Activities.Design
                 DesignerHelpers.ShowMessage(
                     this.serviceProvider,
                     errorString,
-                    System
-                        .Workflow
-                        .ComponentModel
-                        .Design
-                        .DR
-                        .GetString(System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle),
+                    System.Workflow.ComponentModel.Design.DR.GetString(
+                        System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle
+                    ),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1

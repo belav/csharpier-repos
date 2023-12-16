@@ -27,19 +27,17 @@ namespace System.ServiceModel.Configuration
                 )
                 {
 #pragma warning disable 56506 //Microsoft; element.ElementInformation is guaranteed to be non-null(System.Configuration)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigInvalidCommonEndpointBehaviorType,
-                                    element.ConfigurationElementName,
-                                    typeof(System.ServiceModel.Description.IEndpointBehavior).FullName
-                                ),
-                                element.ElementInformation.Source,
-                                element.ElementInformation.LineNumber
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidCommonEndpointBehaviorType,
+                                element.ConfigurationElementName,
+                                typeof(System.ServiceModel.Description.IEndpointBehavior).FullName
+                            ),
+                            element.ElementInformation.Source,
+                            element.ElementInformation.LineNumber
+                        )
+                    );
 #pragma warning restore
                 }
             }
@@ -60,19 +58,17 @@ namespace System.ServiceModel.Configuration
                 )
                 {
 #pragma warning disable 56506 //Microsoft; element.ElementInformation is guaranteed to be non-null(System.Configuration)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigInvalidCommonEndpointBehaviorType,
-                                    element.ConfigurationElementName,
-                                    typeof(System.ServiceModel.Description.IEndpointBehavior).FullName
-                                ),
-                                element.ElementInformation.Source,
-                                element.ElementInformation.LineNumber
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidCommonEndpointBehaviorType,
+                                element.ConfigurationElementName,
+                                typeof(System.ServiceModel.Description.IEndpointBehavior).FullName
+                            ),
+                            element.ElementInformation.Source,
+                            element.ElementInformation.LineNumber
+                        )
+                    );
 #pragma warning restore
                 }
             }

@@ -185,15 +185,13 @@ public class AdditionalFileDiagnosticsTests : AbstractPullDiagnosticTestsBase
 
     private protected override TestAnalyzerReferenceByLanguage CreateTestAnalyzersReference() =>
         new(
-            ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>
-                .Empty
-                .Add(
-                    LanguageNames.CSharp,
-                    ImmutableArray.Create(
-                        DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp),
-                        new MockAdditionalFileDiagnosticAnalyzer()
-                    )
+            ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>.Empty.Add(
+                LanguageNames.CSharp,
+                ImmutableArray.Create(
+                    DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp),
+                    new MockAdditionalFileDiagnosticAnalyzer()
                 )
+            )
         );
 
     [DiagnosticAnalyzer(LanguageNames.CSharp), PartNotDiscoverable]

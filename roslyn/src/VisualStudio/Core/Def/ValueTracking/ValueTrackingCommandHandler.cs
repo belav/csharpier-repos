@@ -106,26 +106,21 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 return false;
             }
 
-            _threadingContext
-                .JoinableTaskFactory
-                .RunAsync(async () =>
+            _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+            {
+                var service =
+                    document.Project.Solution.Services.GetRequiredService<IValueTrackingService>();
+                var items = await service
+                    .TrackValueSourceAsync(textSpan, document, cancellationToken)
+                    .ConfigureAwait(false);
+                if (items.Length == 0)
                 {
-                    var service = document
-                        .Project
-                        .Solution
-                        .Services
-                        .GetRequiredService<IValueTrackingService>();
-                    var items = await service
-                        .TrackValueSourceAsync(textSpan, document, cancellationToken)
-                        .ConfigureAwait(false);
-                    if (items.Length == 0)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    await ShowToolWindowAsync(args.TextView, document, items, cancellationToken)
-                        .ConfigureAwait(false);
-                });
+                await ShowToolWindowAsync(args.TextView, document, items, cancellationToken)
+                    .ConfigureAwait(false);
+            });
 
             return true;
         }
@@ -147,18 +142,16 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             var classificationFormatMap =
                 _classificationFormatMapService.GetClassificationFormatMap(textView);
             var solution = document.Project.Solution;
-            var valueTrackingService = solution
-                .Services
-                .GetRequiredService<IValueTrackingService>();
+            var valueTrackingService =
+                solution.Services.GetRequiredService<IValueTrackingService>();
             var rootItemMap = items.GroupBy(
                 i => i.Parent,
                 resultSelector: (key, items) => (parent: key, children: items)
             );
 
-            using var _ = CodeAnalysis
-                .PooledObjects
-                .ArrayBuilder<TreeItemViewModel>
-                .GetInstance(out var rootItems);
+            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<TreeItemViewModel>.GetInstance(
+                out var rootItems
+            );
 
             foreach (var (parent, children) in rootItemMap)
             {
@@ -186,10 +179,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 }
                 else
                 {
-                    using var _1 = CodeAnalysis
-                        .PooledObjects
-                        .ArrayBuilder<TreeItemViewModel>
-                        .GetInstance(out var childItems);
+                    using var _1 =
+                        CodeAnalysis.PooledObjects.ArrayBuilder<TreeItemViewModel>.GetInstance(
+                            out var childItems
+                        );
                     foreach (var child in children)
                     {
                         var childViewModel = await ValueTrackedTreeItemViewModel

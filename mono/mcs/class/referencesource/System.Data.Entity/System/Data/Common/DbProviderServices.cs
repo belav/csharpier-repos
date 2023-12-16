@@ -394,14 +394,10 @@ namespace System.Data.Common
             if (factory == null)
             {
                 throw EntityUtil.ProviderIncompatible(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .EntityClient_ReturnedNullOnProviderMethod(
-                            "get_ProviderFactory",
-                            connection.GetType().ToString()
-                        )
+                    System.Data.Entity.Strings.EntityClient_ReturnedNullOnProviderMethod(
+                        "get_ProviderFactory",
+                        connection.GetType().ToString()
+                    )
                 );
             }
             Debug.Assert(factory != null, "Should have thrown on null");
@@ -423,11 +419,9 @@ namespace System.Data.Common
             if (serviceProvider == null)
             {
                 throw EntityUtil.ProviderIncompatible(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .EntityClient_DoesNotImplementIServiceProvider(factory.GetType().ToString())
+                    System.Data.Entity.Strings.EntityClient_DoesNotImplementIServiceProvider(
+                        factory.GetType().ToString()
+                    )
                 );
             }
 
@@ -436,14 +430,10 @@ namespace System.Data.Common
             if (providerServices == null)
             {
                 throw EntityUtil.ProviderIncompatible(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .EntityClient_ReturnedNullOnProviderMethod(
-                            "GetService",
-                            factory.GetType().ToString()
-                        )
+                    System.Data.Entity.Strings.EntityClient_ReturnedNullOnProviderMethod(
+                        "GetService",
+                        factory.GetType().ToString()
+                    )
                 );
             }
 

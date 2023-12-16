@@ -37,9 +37,8 @@ internal static class ShowToastNotification
             LanguageServerHost.Instance,
             "We don't have an LSP channel yet to send this request through."
         );
-        var languageServerManager = LanguageServerHost
-            .Instance
-            .GetRequiredLspService<IClientLanguageServerManager>();
+        var languageServerManager =
+            LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
         var toastParams = new ShowToastNotificationParams(messageType, message, commands);
         await languageServerManager.SendNotificationAsync(
             ShowToastNotificationName,

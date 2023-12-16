@@ -279,9 +279,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                                 Assert.Contains(
                                     reflectionAttribute
                                         .NamedArguments[j]
-                                        .TypedValue
-                                        .Value
-                                        .ToString(),
+                                        .TypedValue.Value.ToString(),
                                     arguments.Value.ToString()
                                 );
                             }

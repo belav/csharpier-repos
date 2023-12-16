@@ -40,11 +40,9 @@ internal sealed class AuthorizationPageApplicationModelProvider : IPageApplicati
         var authorizeData = pageModel.HandlerTypeAttributes.OfType<IAuthorizeData>().ToArray();
         if (authorizeData.Length > 0)
         {
-            pageModel
-                .Filters
-                .Add(
-                    AuthorizationApplicationModelProvider.GetFilter(_policyProvider, authorizeData)
-                );
+            pageModel.Filters.Add(
+                AuthorizationApplicationModelProvider.GetFilter(_policyProvider, authorizeData)
+            );
         }
         foreach (var _ in pageModel.HandlerTypeAttributes.OfType<IAllowAnonymous>())
         {

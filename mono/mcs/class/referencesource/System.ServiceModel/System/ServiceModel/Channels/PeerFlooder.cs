@@ -411,12 +411,10 @@ namespace System.ServiceModel.Channels
             try
             {
                 // If a message contains multiple Hopcounts with our name and namespace or the message can't deserialize to a ulong then ignore the HopCount
-                index = message
-                    .Headers
-                    .FindHeader(
-                        PeerStrings.HopCountElementName,
-                        PeerStrings.HopCountElementNamespace
-                    );
+                index = message.Headers.FindHeader(
+                    PeerStrings.HopCountElementName,
+                    PeerStrings.HopCountElementNamespace
+                );
                 if (index != -1)
                 {
                     currentValue = PeerMessageHelpers.GetHeaderULong(message.Headers, index);
@@ -657,9 +655,10 @@ namespace System.ServiceModel.Channels
             {
                 FloodAsyncResult fresult = result as FloodAsyncResult;
                 if (fresult == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "result",
+                        SR.GetString(SR.InvalidAsyncResult)
+                    );
                 fresult.End();
             }
         }
@@ -856,11 +855,9 @@ namespace System.ServiceModel.Channels
                 int table = NotFound;
                 if (disposed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed))
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed))
+                    );
                 }
 
                 lock (ThisLock)
@@ -877,11 +874,9 @@ namespace System.ServiceModel.Channels
             {
                 if (disposed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed))
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed))
+                    );
                 }
 
                 lock (ThisLock)
@@ -1045,9 +1040,9 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new TimeoutException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new TimeoutException()
+                        );
                     }
                     catch (Exception e)
                     {

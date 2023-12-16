@@ -84,13 +84,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (currentBufferSize >= maxBufferSize)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
-                                    maxBufferSize
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                                maxBufferSize
+                            )
+                        );
                     }
 
                     currentBufferSize = Math.Min(currentBufferSize * 2, maxBufferSize);
@@ -166,9 +164,9 @@ namespace System.ServiceModel.Channels
         public virtual bool IsContentTypeSupported(string contentType)
         {
             if (contentType == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("contentType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("contentType")
+                );
 
             return IsContentTypeSupported(contentType, this.ContentType, this.MediaType);
         }

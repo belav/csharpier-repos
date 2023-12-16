@@ -411,13 +411,11 @@ namespace System.Xml
                 {
                     if (
                         string.Equals(
-                            Encoding
-                                .UTF8
-                                .GetString(
-                                    _xmlnsBuffer!,
-                                    xmlnsAttribute.prefixOffset,
-                                    xmlnsAttribute.prefixLength
-                                ),
+                            Encoding.UTF8.GetString(
+                                _xmlnsBuffer!,
+                                xmlnsAttribute.prefixOffset,
+                                xmlnsAttribute.prefixLength
+                            ),
                             _inclusivePrefixes[i],
                             StringComparison.Ordinal
                         )
@@ -582,14 +580,22 @@ namespace System.Xml
             EnsureXmlnsBuffer(totalLength * maxBytesPerChar);
             XmlnsAttribute xmlnsAttribute;
             xmlnsAttribute.prefixOffset = _xmlnsOffset;
-            xmlnsAttribute.prefixLength = Encoding
-                .UTF8
-                .GetBytes(prefix, 0, prefix.Length, _xmlnsBuffer, _xmlnsOffset);
+            xmlnsAttribute.prefixLength = Encoding.UTF8.GetBytes(
+                prefix,
+                0,
+                prefix.Length,
+                _xmlnsBuffer,
+                _xmlnsOffset
+            );
             _xmlnsOffset += xmlnsAttribute.prefixLength;
             xmlnsAttribute.nsOffset = _xmlnsOffset;
-            xmlnsAttribute.nsLength = Encoding
-                .UTF8
-                .GetBytes(ns, 0, ns.Length, _xmlnsBuffer, _xmlnsOffset);
+            xmlnsAttribute.nsLength = Encoding.UTF8.GetBytes(
+                ns,
+                0,
+                ns.Length,
+                _xmlnsBuffer,
+                _xmlnsOffset
+            );
             _xmlnsOffset += xmlnsAttribute.nsLength;
             xmlnsAttribute.referred = false;
             AddXmlnsAttribute(ref xmlnsAttribute);

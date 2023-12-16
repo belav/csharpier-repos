@@ -165,10 +165,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                                 : TargetProjectChangeInLanguage.CSharpToVisualBasic;
 
                         // Get the cross language service
-                        _targetLanguageService = _generateTypeOptionsResult
-                            .Project
-                            .Services
-                            .GetService<IGenerateTypeService>();
+                        _targetLanguageService =
+                            _generateTypeOptionsResult.Project.Services.GetService<IGenerateTypeService>();
                     }
 
                     if (_generateTypeOptionsResult.IsNewFile)
@@ -347,9 +345,13 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     projectToBeUpdated.Id,
                     debugName: documentName
                 );
-                var newSolution = projectToBeUpdated
-                    .Solution
-                    .AddDocument(newDocumentId, documentName, string.Empty, folders, fullFilePath);
+                var newSolution = projectToBeUpdated.Solution.AddDocument(
+                    newDocumentId,
+                    documentName,
+                    string.Empty,
+                    folders,
+                    fullFilePath
+                );
 
                 // Now we get the semantic model for that file we just added.  We do that to get the
                 // root namespace in that new document, along with location for that new namespace.
@@ -460,11 +462,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 // TODO(cyrusn): make sure documentId is unique.
                 var documentId = DocumentId.CreateNewId(projectToBeUpdated.Id, documentName);
 
-                var updatedSolution = projectToBeUpdated
-                    .Solution
-                    .AddDocument(
-                        DocumentInfo.Create(documentId, documentName, containers, sourceCodeKind)
-                    );
+                var updatedSolution = projectToBeUpdated.Solution.AddDocument(
+                    DocumentInfo.Create(documentId, documentName, containers, sourceCodeKind)
+                );
 
                 updatedSolution = updatedSolution.WithDocumentSyntaxRoot(
                     documentId,
@@ -510,9 +510,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 if (projectToBeUpdated != triggeringProject)
                 {
                     if (
-                        !triggeringProject
-                            .ProjectReferences
-                            .Any(pr => pr.ProjectId == projectToBeUpdated.Id)
+                        !triggeringProject.ProjectReferences.Any(
+                            pr => pr.ProjectId == projectToBeUpdated.Id
+                        )
                     )
                     {
                         updatedSolution = updatedSolution.AddProjectReference(
@@ -529,9 +529,10 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 ImmutableArray<CodeActionOperation>
             > GetGenerateIntoContainingNamespaceOperationsAsync(INamedTypeSymbol namedType)
             {
-                var enclosingNamespace = _semanticDocument
-                    .SemanticModel
-                    .GetEnclosingNamespace(_state.SimpleName.SpanStart, _cancellationToken);
+                var enclosingNamespace = _semanticDocument.SemanticModel.GetEnclosingNamespace(
+                    _state.SimpleName.SpanStart,
+                    _cancellationToken
+                );
 
                 var solution = _semanticDocument.Project.Solution;
                 var codeGenResult = await CodeGenerator
@@ -539,9 +540,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         new CodeGenerationSolutionContext(
                             solution,
                             new CodeGenerationContext(
-                                afterThisLocation: _semanticDocument
-                                    .SyntaxTree
-                                    .GetLocation(_state.SimpleName.Span)
+                                afterThisLocation: _semanticDocument.SyntaxTree.GetLocation(
+                                    _state.SimpleName.Span
+                                )
                             ),
                             _fallbackOptions
                         ),
@@ -566,8 +567,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
             )
             {
                 var root = await generateTypeOptionsResult
-                    .ExistingDocument
-                    .GetSyntaxRootAsync(_cancellationToken)
+                    .ExistingDocument.GetSyntaxRootAsync(_cancellationToken)
                     .ConfigureAwait(false);
                 var folders = generateTypeOptionsResult.ExistingDocument.Folders;
 
@@ -835,9 +835,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 IList<TArgumentSyntax> argumentList
             )
             {
-                var syntaxFacts = _semanticDocument
-                    .Document
-                    .GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts =
+                    _semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
                 return argumentList.SelectAsArray(
                     a => (TExpressionSyntax)syntaxFacts.GetExpressionOfArgument(a)
                 );
@@ -882,8 +881,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 }
 
                 var fieldNamingRule = await _semanticDocument
-                    .Document
-                    .GetApplicableNamingRuleAsync(
+                    .Document.GetApplicableNamingRuleAsync(
                         SymbolKind.Field,
                         Accessibility.Private,
                         _fallbackOptions,
@@ -891,8 +889,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     )
                     .ConfigureAwait(false);
                 var nameToUse = fieldNamingRule
-                    .NamingStyle
-                    .MakeCompliant(parameterName.NameBasedOnArgument)
+                    .NamingStyle.MakeCompliant(parameterName.NameBasedOnArgument)
                     .First();
                 parameterToNewFieldMap[parameterName.BestNameForParameter] = nameToUse;
                 return false;
@@ -942,11 +939,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     case Accessibility.ProtectedAndInternal:
                     case Accessibility.Internal:
                         // TODO: Code coverage
-                        return _semanticDocument
-                            .SemanticModel
-                            .Compilation
-                            .Assembly
-                            .IsSameAssemblyOrHasFriendAccessTo(symbol.ContainingAssembly);
+                        return _semanticDocument.SemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
+                            symbol.ContainingAssembly
+                        );
 
                     default:
                         return false;

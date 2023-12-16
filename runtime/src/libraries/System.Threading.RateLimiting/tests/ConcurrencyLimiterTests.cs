@@ -161,16 +161,14 @@ namespace System.Threading.RateLimiting.Test
         {
             typeof(ConcurrencyLimiter)
                 .GetEvent("ReleasePreHook", BindingFlags.NonPublic | BindingFlags.Instance)
-                .AddMethod
-                .Invoke(limiter, new object[] { hook });
+                .AddMethod.Invoke(limiter, new object[] { hook });
         }
 
         private void SetReleasePostHook(ConcurrencyLimiter limiter, Action hook)
         {
             typeof(ConcurrencyLimiter)
                 .GetEvent("ReleasePostHook", BindingFlags.NonPublic | BindingFlags.Instance)
-                .AddMethod
-                .Invoke(limiter, new object[] { hook });
+                .AddMethod.Invoke(limiter, new object[] { hook });
         }
 
         private async Task DoesNotDeadlockCleaningUpCanceledRequestedLease(

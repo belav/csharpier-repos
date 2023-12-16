@@ -209,9 +209,9 @@ namespace System.Activities
 
             if (!object.ReferenceEquals(activity.Parent, this.CurrentInstance))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new InvalidOperationException(SR.CanOnlyAbortDirectChildren));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CanOnlyAbortDirectChildren)
+                );
             }
 
             this.executor.AbortActivityInstance(activity, reason);
@@ -263,9 +263,9 @@ namespace System.Activities
 
             if (!object.ReferenceEquals(activityInstance.Parent, this.CurrentInstance))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new InvalidOperationException(SR.CanOnlyCancelDirectChildren));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CanOnlyCancelDirectChildren)
+                );
             }
 
             this.executor.CancelActivity(activityInstance);
@@ -323,12 +323,10 @@ namespace System.Activities
 
             if (!CallbackWrapper.IsValidCallback(callback, this.CurrentInstance))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "callback",
-                        SR.InvalidExecutionCallback(callback, this.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "callback",
+                    SR.InvalidExecutionCallback(callback, this.Activity.ToString())
+                );
             }
 
             BookmarkOptionsHelper.Validate(options, "options");
@@ -363,12 +361,10 @@ namespace System.Activities
 
             if (!CallbackWrapper.IsValidCallback(callback, this.CurrentInstance))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "callback",
-                        SR.InvalidExecutionCallback(callback, this.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "callback",
+                    SR.InvalidExecutionCallback(callback, this.Activity.ToString())
+                );
             }
 
             if (scope == null)
@@ -378,9 +374,13 @@ namespace System.Activities
 
             BookmarkOptionsHelper.Validate(options, "options");
 
-            return this.executor
-                .BookmarkScopeManager
-                .CreateBookmark(name, scope, callback, this.CurrentInstance, options);
+            return this.executor.BookmarkScopeManager.CreateBookmark(
+                name,
+                scope,
+                callback,
+                this.CurrentInstance,
+                options
+            );
         }
 
         // we don't just do CreateBookmark(BookmarkCallback callback = null, BookmarkOptions options = BookmarkOptions.None) below
@@ -405,12 +405,10 @@ namespace System.Activities
                 && !CallbackWrapper.IsValidCallback(callback, this.CurrentInstance)
             )
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "callback",
-                        SR.InvalidExecutionCallback(callback, this.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "callback",
+                    SR.InvalidExecutionCallback(callback, this.Activity.ToString())
+                );
             }
 
             BookmarkOptionsHelper.Validate(options, "options");
@@ -434,9 +432,9 @@ namespace System.Activities
 
             if (scopeId != Guid.Empty && !this.executor.KeysAllowed)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new InvalidOperationException(SR.BookmarkScopesRequireKeys));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkScopesRequireKeys)
+                );
             }
 
             return this.executor.BookmarkScopeManager.CreateAndRegisterScope(scopeId, scopeHandle);
@@ -458,9 +456,9 @@ namespace System.Activities
             ThrowIfDisposed();
             if (!this.executor.KeysAllowed)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new InvalidOperationException(SR.BookmarkScopesRequireKeys));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkScopesRequireKeys)
+                );
             }
 
             this.executor.BookmarkScopeManager.InitializeScope(scope, id);
@@ -489,11 +487,9 @@ namespace System.Activities
 
             if (!this.CurrentInstance.IsCancellationRequested)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(SR.MarkCanceledOnlyCallableIfCancelRequested)
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.MarkCanceledOnlyCallableIfCancelRequested)
+                );
             }
 
             this.CurrentInstance.MarkCanceled();
@@ -534,9 +530,11 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNull("scope");
             }
 
-            return this.executor
-                .BookmarkScopeManager
-                .RemoveBookmark(new Bookmark(name), scope, this.CurrentInstance);
+            return this.executor.BookmarkScopeManager.RemoveBookmark(
+                new Bookmark(name),
+                scope,
+                this.CurrentInstance
+            );
         }
 
         public BookmarkResumptionResult ResumeBookmark(Bookmark bookmark, object value)
@@ -609,12 +607,10 @@ namespace System.Activities
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
-                        .Argument(
-                            "onCompleted",
-                            SR.InvalidExecutionCallback(onCompleted, this.Activity.ToString())
-                        );
+                    throw FxTrace.Exception.Argument(
+                        "onCompleted",
+                        SR.InvalidExecutionCallback(onCompleted, this.Activity.ToString())
+                    );
                 }
             }
 
@@ -629,12 +625,10 @@ namespace System.Activities
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
-                        .Argument(
-                            "onFaulted",
-                            SR.InvalidExecutionCallback(onFaulted, this.Activity.ToString())
-                        );
+                    throw FxTrace.Exception.Argument(
+                        "onFaulted",
+                        SR.InvalidExecutionCallback(onFaulted, this.Activity.ToString())
+                    );
                 }
             }
 
@@ -651,55 +645,42 @@ namespace System.Activities
 
             if (!activity.IsMetadataCached || activity.CacheId != parent.Activity.CacheId)
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "activity",
-                        SR.ActivityNotPartOfThisTree(
-                            activity.DisplayName,
-                            parent.Activity.DisplayName
-                        )
-                    );
+                throw FxTrace.Exception.Argument(
+                    "activity",
+                    SR.ActivityNotPartOfThisTree(activity.DisplayName, parent.Activity.DisplayName)
+                );
             }
 
             if (!activity.CanBeScheduledBy(parent.Activity))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.CanOnlyScheduleDirectChildren(
-                                parent.Activity.DisplayName,
-                                activity.DisplayName,
-                                activity.Parent.DisplayName
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CanOnlyScheduleDirectChildren(
+                            parent.Activity.DisplayName,
+                            activity.DisplayName,
+                            activity.Parent.DisplayName
                         )
-                    );
+                    )
+                );
             }
 
             if (activity.HandlerOf != null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DelegateHandlersCannotBeScheduledDirectly(
-                                parent.Activity.DisplayName,
-                                activity.DisplayName
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DelegateHandlersCannotBeScheduledDirectly(
+                            parent.Activity.DisplayName,
+                            activity.DisplayName
                         )
-                    );
+                    )
+                );
             }
 
             if (parent.WaitingForTransactionContext)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.CannotScheduleChildrenWhileEnteringIsolation
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CannotScheduleChildrenWhileEnteringIsolation)
+                );
             }
 
             if (parent.IsPerformingDefaultCancelation)
@@ -738,22 +719,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             return InternalScheduleDelegate(
@@ -792,22 +769,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(1)
@@ -852,22 +825,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(2)
@@ -914,22 +883,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(3)
@@ -978,22 +943,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(4)
@@ -1044,22 +1005,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(5)
@@ -1112,22 +1069,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(6)
@@ -1182,22 +1135,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(7)
@@ -1254,22 +1203,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(8)
@@ -1328,22 +1273,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(9)
@@ -1404,22 +1345,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(10)
@@ -1482,22 +1419,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(11)
@@ -1562,22 +1495,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(12)
@@ -1658,22 +1587,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(13)
@@ -1772,22 +1697,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(14)
@@ -1890,22 +1811,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(15)
@@ -2012,22 +1929,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(16)
@@ -2085,22 +1998,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             return InternalScheduleActivity(
@@ -2137,22 +2046,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             return InternalScheduleDelegate(
@@ -2191,22 +2096,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(1)
@@ -2251,22 +2152,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(2)
@@ -2313,22 +2210,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(3)
@@ -2377,22 +2270,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(4)
@@ -2443,22 +2332,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(5)
@@ -2511,22 +2396,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(6)
@@ -2581,22 +2462,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(7)
@@ -2653,22 +2530,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(8)
@@ -2727,22 +2600,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(9)
@@ -2803,22 +2672,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(10)
@@ -2881,22 +2746,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(11)
@@ -2975,22 +2836,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(12)
@@ -3087,22 +2944,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(13)
@@ -3203,22 +3056,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(14)
@@ -3323,22 +3172,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(15)
@@ -3447,22 +3292,18 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(16)
@@ -3516,43 +3357,38 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onCompleted",
-                        SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onCompleted",
+                    SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
+                );
             }
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "onFaulted",
-                        SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
-                    );
+                throw FxTrace.Exception.Argument(
+                    "onFaulted",
+                    SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
+                );
             }
 
             // Check if the inputParameters collection matches the expected inputs for activityDelegate
-            IEnumerable<RuntimeDelegateArgument> expectedParameters = activityDelegate
-                .RuntimeDelegateArguments
-                .Where(p => ArgumentDirectionHelper.IsIn(p.Direction));
+            IEnumerable<RuntimeDelegateArgument> expectedParameters =
+                activityDelegate.RuntimeDelegateArguments.Where(
+                    p => ArgumentDirectionHelper.IsIn(p.Direction)
+                );
             int expectedParameterCount = expectedParameters.Count();
             if (
                 (inputParameters == null && expectedParameterCount > 0)
                 || (inputParameters != null && inputParameters.Count != expectedParameterCount)
             )
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        "inputParameters",
-                        SR.InputParametersCountMismatch(
-                            inputParameters == null ? 0 : inputParameters.Count,
-                            expectedParameterCount
-                        )
-                    );
+                throw FxTrace.Exception.Argument(
+                    "inputParameters",
+                    SR.InputParametersCountMismatch(
+                        inputParameters == null ? 0 : inputParameters.Count,
+                        expectedParameterCount
+                    )
+                );
             }
             else if (expectedParameterCount > 0)
             {
@@ -3569,25 +3405,21 @@ namespace System.Activities
                             )
                         )
                         {
-                            throw FxTrace
-                                .Exception
-                                .Argument(
-                                    "inputParameters",
-                                    SR.InputParametersTypeMismatch(
-                                        expectedParameter.Type,
-                                        parameterName
-                                    )
-                                );
+                            throw FxTrace.Exception.Argument(
+                                "inputParameters",
+                                SR.InputParametersTypeMismatch(
+                                    expectedParameter.Type,
+                                    parameterName
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
-                            .Argument(
-                                "inputParameters",
-                                SR.InputParametersMissing(expectedParameter.Name)
-                            );
+                        throw FxTrace.Exception.Argument(
+                            "inputParameters",
+                            SR.InputParametersMissing(expectedParameter.Name)
+                        );
                     }
                 }
             }
@@ -3615,53 +3447,41 @@ namespace System.Activities
 
                 if (!activity.IsMetadataCached || activity.CacheId != parent.Activity.CacheId)
                 {
-                    throw FxTrace
-                        .Exception
-                        .Argument(
-                            "activity",
-                            SR.ActivityNotPartOfThisTree(
-                                activity.DisplayName,
-                                parent.Activity.DisplayName
-                            )
-                        );
+                    throw FxTrace.Exception.Argument(
+                        "activity",
+                        SR.ActivityNotPartOfThisTree(
+                            activity.DisplayName,
+                            parent.Activity.DisplayName
+                        )
+                    );
                 }
             }
 
             if (activityDelegate.Owner == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.ActivityDelegateOwnerMissing(activityDelegate)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.ActivityDelegateOwnerMissing(activityDelegate))
+                );
             }
 
             if (!activityDelegate.CanBeScheduledBy(parent.Activity))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.CanOnlyScheduleDirectChildren(
-                                parent.Activity.DisplayName,
-                                activityDelegate.DisplayName,
-                                activityDelegate.Owner.DisplayName
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CanOnlyScheduleDirectChildren(
+                            parent.Activity.DisplayName,
+                            activityDelegate.DisplayName,
+                            activityDelegate.Owner.DisplayName
                         )
-                    );
+                    )
+                );
             }
 
             if (parent.WaitingForTransactionContext)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.CannotScheduleChildrenWhileEnteringIsolation
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CannotScheduleChildrenWhileEnteringIsolation)
+                );
             }
 
             ActivityInstance declaringActivityInstance = this.FindDeclaringActivityInstance(
@@ -3744,9 +3564,9 @@ namespace System.Activities
 
             if (property == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new InvalidOperationException(SR.UnmatchedNoPersistExit));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.UnmatchedNoPersistExit)
+                );
             }
 
             if (property.Exit())
@@ -3820,13 +3640,11 @@ namespace System.Activities
             Activity associatedActivity = this.Activity;
             if (!associatedActivity.InternalCanInduceIdle)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.CanInduceIdleNotSpecified(associatedActivity.GetType().FullName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CanInduceIdleNotSpecified(associatedActivity.GetType().FullName)
+                    )
+                );
             }
         }
     }

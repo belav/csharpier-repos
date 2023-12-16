@@ -146,9 +146,8 @@ namespace System.Activities.Core.Presentation
             this.ModelItem.Properties[CatchesPropertyName].Collection.CollectionChanged +=
                 OnModelItemCollectionChanged;
 
-            ViewStateService viewStateService = this.Context
-                .Services
-                .GetService<ViewStateService>();
+            ViewStateService viewStateService =
+                this.Context.Services.GetService<ViewStateService>();
 
             foreach (ModelItem modelItem in this.ModelItem.Properties["Catches"].Collection)
             {

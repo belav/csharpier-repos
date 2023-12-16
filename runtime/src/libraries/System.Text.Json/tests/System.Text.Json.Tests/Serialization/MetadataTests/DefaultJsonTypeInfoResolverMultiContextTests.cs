@@ -20,15 +20,13 @@ namespace System.Text.Json.Serialization.Tests
         public async Task TypeInfoWithNullCreateObjectFailsDeserialization()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(ti =>
+            resolver.Modifiers.Add(ti =>
+            {
+                if (ti.Type == typeof(Poco))
                 {
-                    if (ti.Type == typeof(Poco))
-                    {
-                        ti.CreateObject = null;
-                    }
-                });
+                    ti.CreateObject = null;
+                }
+            });
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = resolver;

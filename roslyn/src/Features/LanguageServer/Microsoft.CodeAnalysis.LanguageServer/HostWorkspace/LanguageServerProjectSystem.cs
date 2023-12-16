@@ -313,10 +313,9 @@ internal sealed class LanguageServerProjectSystem
                 var projectLanguage = loadedProjectInfos.FirstOrDefault()?.Language;
                 if (
                     projectLanguage != null
-                    && _workspaceFactory
-                        .Workspace
-                        .Services
-                        .GetLanguageService<ICommandLineParserService>(projectLanguage) == null
+                    && _workspaceFactory.Workspace.Services.GetLanguageService<ICommandLineParserService>(
+                        projectLanguage
+                    ) == null
                 )
                 {
                     return (null, null);
@@ -356,9 +355,8 @@ internal sealed class LanguageServerProjectSystem
                             FilePath = projectPath
                         };
 
-                        var projectSystemProject = await _workspaceFactory
-                            .ProjectSystemProjectFactory
-                            .CreateAndAddToWorkspaceAsync(
+                        var projectSystemProject =
+                            await _workspaceFactory.ProjectSystemProjectFactory.CreateAndAddToWorkspaceAsync(
                                 projectSystemName,
                                 loadedProjectInfo.Language,
                                 projectCreationInfo,

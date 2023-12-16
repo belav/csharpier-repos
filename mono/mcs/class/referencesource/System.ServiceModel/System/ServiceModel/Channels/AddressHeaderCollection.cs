@@ -33,11 +33,9 @@ namespace System.ServiceModel.Channels
                 for (int i = 0; i < collection.Count; i++)
                 {
                     if (collection[i] == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new ArgumentException(SR.GetString(SR.MessageHeaderIsNull0))
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.MessageHeaderIsNull0))
+                        );
                 }
             }
             else if (!LocalAppContextSwitches.DisableAddressHeaderCollectionValidation)
@@ -45,11 +43,9 @@ namespace System.ServiceModel.Channels
                 foreach (AddressHeader addressHeader in addressHeaders)
                 {
                     if (addressHeader == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new ArgumentException(SR.GetString(SR.MessageHeaderIsNull0))
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.MessageHeaderIsNull0))
+                        );
                 }
             }
         }
@@ -84,13 +80,13 @@ namespace System.ServiceModel.Channels
         public AddressHeader[] FindAll(string name, string ns)
         {
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("name")
+                );
             if (ns == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("ns"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("ns")
+                );
 
             List<AddressHeader> results = new List<AddressHeader>();
             for (int i = 0; i < Count; i++)
@@ -108,13 +104,13 @@ namespace System.ServiceModel.Channels
         public AddressHeader FindHeader(string name, string ns)
         {
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("name")
+                );
             if (ns == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("ns"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("ns")
+                );
 
             AddressHeader matchingHeader = null;
 
@@ -124,13 +120,9 @@ namespace System.ServiceModel.Channels
                 if (header.Name == name && header.Namespace == ns)
                 {
                     if (matchingHeader != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new ArgumentException(
-                                    SR.GetString(SR.MultipleMessageHeaders, name, ns)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.MultipleMessageHeaders, name, ns))
+                        );
                     matchingHeader = header;
                 }
             }

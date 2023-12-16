@@ -97,8 +97,7 @@ namespace System.CommandLine.Rendering.Tests
             );
 
             _terminal
-                .Out
-                .ToString()
+                .Out.ToString()
                 .TrimEnd()
                 .Should()
                 .Contain($"{Ansi.Color.Foreground.Red}normal{Ansi.Color.Foreground.Default}");
@@ -159,8 +158,7 @@ namespace System.CommandLine.Rendering.Tests
             writer.RenderToRegion($"{NewLine}*", region);
 
             _terminal
-                .Out
-                .ToString()
+                .Out.ToString()
                 .Should()
                 .Be(
                     $"{Ansi.Cursor.Move.ToLocation(left: 1, top: 1).EscapeSequence}     {Ansi.Cursor.Move.ToLocation(left: 1, top: 2).EscapeSequence}*    "
@@ -177,8 +175,7 @@ namespace System.CommandLine.Rendering.Tests
             writer.RenderToRegion($"{NewLine}*", region);
 
             _terminal
-                .Events
-                .OfType<CursorPositionChanged>()
+                .Events.OfType<CursorPositionChanged>()
                 .Select(e => e.Position)
                 .Should()
                 .BeEquivalentSequenceTo(new Point(13, 17), new Point(13, 18));
@@ -194,8 +191,7 @@ namespace System.CommandLine.Rendering.Tests
             writer.RenderToRegion($"{NewLine}*", region);
 
             _terminal
-                .Out
-                .ToString()
+                .Out.ToString()
                 .Should()
                 .Be(
                     $"{Ansi.Cursor.Move.ToLocation(left: 6, top: 14).EscapeSequence}     {Ansi.Cursor.Move.ToLocation(left: 6, top: 15).EscapeSequence}*    "
@@ -238,8 +234,7 @@ namespace System.CommandLine.Rendering.Tests
             renderer.RenderToRegion("hello", new Region(0, 0, 5, 1));
 
             _terminal
-                .Events
-                .Should()
+                .Events.Should()
                 .BeEquivalentSequenceTo(
                     new CursorPositionChanged(new Point(0, 0)),
                     new ContentWritten("hello"),
@@ -256,8 +251,7 @@ namespace System.CommandLine.Rendering.Tests
             renderer.RenderToRegion("hello", new Region(0, 0, 5, 1));
 
             _terminal
-                .Events
-                .Should()
+                .Events.Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
                     new TestTerminal.ContentWritten("hello"),

@@ -129,8 +129,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 // of waiting time, and there's no user input that should take precedence.
                 if (stopwatch.Elapsed.Ticks > MaxTimeSlice || IsInputPending())
                 {
-                    await this.Listener
-                        .Delay(delayBetweenProcessing, cancellationToken)
+                    await this.Listener.Delay(delayBetweenProcessing, cancellationToken)
                         .ConfigureAwait(true);
                     stopwatch = SharedStopwatch.StartNew();
                 }
@@ -265,12 +264,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         {
             _ = _threadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
             {
-                await _threadingContext
-                    .JoinableTaskFactory
-                    .StartOnIdle(
-                        () => a(cancellationToken),
-                        VsTaskRunContext.UIThreadNormalPriority
-                    );
+                await _threadingContext.JoinableTaskFactory.StartOnIdle(
+                    () => a(cancellationToken),
+                    VsTaskRunContext.UIThreadNormalPriority
+                );
             });
         }
     }

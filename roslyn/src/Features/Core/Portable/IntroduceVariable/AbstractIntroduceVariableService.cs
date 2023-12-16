@@ -381,13 +381,11 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 state.IsConstant
                 && !state
                     .GetSemanticMap(cancellationToken)
-                    .AllReferencedSymbols
-                    .OfType<ILocalSymbol>()
+                    .AllReferencedSymbols.OfType<ILocalSymbol>()
                     .Any()
                 && !state
                     .GetSemanticMap(cancellationToken)
-                    .AllReferencedSymbols
-                    .OfType<IParameterSymbol>()
+                    .AllReferencedSymbols.OfType<IParameterSymbol>()
                     .Any()
             )
             {
@@ -511,9 +509,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             CancellationToken cancellationToken
         )
         {
-            var semanticFacts = semanticDocument
-                .Document
-                .GetLanguageService<ISemanticFactsService>();
+            var semanticFacts =
+                semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
 
             var semanticModel = semanticDocument.SemanticModel;
             var baseName = semanticFacts.GenerateNameForExpression(
@@ -543,9 +540,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         {
             var semanticModel = semanticDocument.SemanticModel;
 
-            var semanticFacts = semanticDocument
-                .Document
-                .GetLanguageService<ISemanticFactsService>();
+            var semanticFacts =
+                semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
             var baseName = semanticFacts.GenerateNameForExpression(
                 semanticModel,
                 expression,
@@ -753,8 +749,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             var semanticMap = semanticModel.GetSemanticMap(expression, cancellationToken);
 
             var anonymousMethodParameters = semanticMap
-                .AllReferencedSymbols
-                .OfType<IParameterSymbol>()
+                .AllReferencedSymbols.OfType<IParameterSymbol>()
                 .Where(p => p.ContainingSymbol.IsAnonymousFunction());
             return anonymousMethodParameters;
         }
@@ -775,8 +770,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 .CreateAsync(newDocument, cancellationToken)
                 .ConfigureAwait(false);
             var newMatches = newSemanticDocument
-                .Root
-                .GetCurrentNodes(matches.AsEnumerable())
+                .Root.GetCurrentNodes(matches.AsEnumerable())
                 .ToSet();
 
             // Next, expand the topmost parenting expression of each match, being careful
@@ -786,8 +780,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 .Distinct();
 
             newRoot = await newSemanticDocument
-                .Root
-                .ReplaceNodesAsync(
+                .Root.ReplaceNodesAsync(
                     topMostExpressions,
                     computeReplacementAsync: async (oldNode, newNode, ct) =>
                     {

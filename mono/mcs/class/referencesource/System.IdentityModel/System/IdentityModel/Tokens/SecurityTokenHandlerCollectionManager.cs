@@ -123,9 +123,10 @@ namespace System.IdentityModel.Tokens
                 new SecurityTokenHandlerCollectionManager(ConfigurationStrings.DefaultServiceName);
 
             defaultManager.collections.Clear();
-            defaultManager
-                .collections
-                .Add(SecurityTokenHandlerCollectionManager.Usage.Default, defaultHandlers);
+            defaultManager.collections.Add(
+                SecurityTokenHandlerCollectionManager.Usage.Default,
+                defaultHandlers
+            );
 
             return defaultManager;
         }

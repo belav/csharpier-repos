@@ -880,9 +880,11 @@ namespace MonoTests.System.Reflection.Emit
             aname.Name = "lib";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
+            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                aname,
+                AssemblyBuilderAccess.RunAndSave,
+                tempDir
+            );
 
             // AssemblyCulture
             Type attrType = typeof(AssemblyCultureAttribute);
@@ -902,9 +904,11 @@ namespace MonoTests.System.Reflection.Emit
             }
             catch (CultureNotFoundException ex) { }
 
-            ab = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
+            ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                aname,
+                AssemblyBuilderAccess.RunAndSave,
+                tempDir
+            );
 
             // AssemblyCulture
             attrType = typeof(AssemblyCultureAttribute);
@@ -998,9 +1002,11 @@ namespace MonoTests.System.Reflection.Emit
             aname.Name = "lib";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
+            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                aname,
+                AssemblyBuilderAccess.RunAndSave,
+                tempDir
+            );
 
             // AssemblyCulture
             Type attrType = typeof(AssemblyCultureAttribute);
@@ -1020,9 +1026,11 @@ namespace MonoTests.System.Reflection.Emit
             }
             catch (CultureNotFoundException ex) { }
 
-            ab = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
+            ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                aname,
+                AssemblyBuilderAccess.RunAndSave,
+                tempDir
+            );
 
             // AssemblyCulture
             attrType = typeof(AssemblyCultureAttribute);
@@ -2401,9 +2409,11 @@ namespace MonoTests.System.Reflection.Emit
             const string fullName =
                 "AssemblyNameTest_PublicKey, Version=1.2.3.4, Culture=neutral, PublicKeyToken=0eea7ce65f35f2d8";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, tempDir);
+            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.Save,
+                tempDir
+            );
 
             AssemblyName abName = ab.GetName();
             Assert.AreEqual(CultureInfo.InvariantCulture, abName.CultureInfo, "#B1");
@@ -2444,9 +2454,11 @@ namespace MonoTests.System.Reflection.Emit
             const string fullName =
                 "AssemblyNameTest_MoreCultureInfo, Version=1.2.3.4, Culture=neutral, PublicKeyToken=0eea7ce65f35f2d8";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, tempDir);
+            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.Save,
+                tempDir
+            );
 
             AssemblyName abName = ab.GetName();
             Assert.IsNotNull(abName.CultureInfo != null, "#B1");

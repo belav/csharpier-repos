@@ -27,8 +27,7 @@ public class LspOptionsTests : AbstractLanguageServerProtocolTests
 
     protected override TestComposition Composition =>
         EditorTestCompositions
-            .LanguageServerProtocol
-            .AddParts(typeof(TestDocumentTrackingService))
+            .LanguageServerProtocol.AddParts(typeof(TestDocumentTrackingService))
             .AddParts(typeof(TestWorkspaceRegistrationService));
 
     [Theory, CombinatorialData]
@@ -39,10 +38,8 @@ public class LspOptionsTests : AbstractLanguageServerProtocolTests
             markup,
             mutatingLspWorkspace
         );
-        var globalOptions = testLspServer
-            .TestWorkspace
-            .ExportProvider
-            .GetExportedValue<IGlobalOptionService>();
+        var globalOptions =
+            testLspServer.TestWorkspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
         var project = testLspServer.GetCurrentSolution().Projects.Single().Services;
         Assert.NotNull(globalOptions.GetAddImportPlacementOptions(project));
         Assert.NotNull(globalOptions.GetCodeGenerationOptions(project));
@@ -59,10 +56,8 @@ public class LspOptionsTests : AbstractLanguageServerProtocolTests
             markup,
             mutatingLspWorkspace
         );
-        var globalOptions = testLspServer
-            .TestWorkspace
-            .ExportProvider
-            .GetExportedValue<IGlobalOptionService>();
+        var globalOptions =
+            testLspServer.TestWorkspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
         var project = testLspServer.GetCurrentSolution().Projects.Single().Services;
         Assert.NotNull(globalOptions.GetAddImportPlacementOptions(project));
         Assert.NotNull(globalOptions.GetCodeGenerationOptions(project));

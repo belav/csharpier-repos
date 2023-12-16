@@ -133,12 +133,8 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             if (UseWebcil)
             {
                 var tmpWebcil = Path.GetTempFileName();
-                var webcilWriter = Microsoft
-                    .WebAssembly
-                    .Build
-                    .Tasks
-                    .WebcilConverter
-                    .FromPortableExecutable(
+                var webcilWriter =
+                    Microsoft.WebAssembly.Build.Tasks.WebcilConverter.FromPortableExecutable(
                         inputPath: assembly,
                         outputPath: tmpWebcil,
                         logger: Log
@@ -269,12 +265,8 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             if (UseWebcil)
             {
                 var tmpWebcil = Path.GetTempFileName();
-                var webcilWriter = Microsoft
-                    .WebAssembly
-                    .Build
-                    .Tasks
-                    .WebcilConverter
-                    .FromPortableExecutable(
+                var webcilWriter =
+                    Microsoft.WebAssembly.Build.Tasks.WebcilConverter.FromPortableExecutable(
                         inputPath: args.fullPath,
                         outputPath: tmpWebcil,
                         logger: Log
@@ -294,10 +286,10 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
                 _fileWrites.Add(finalWebcil);
 
                 if (
-                    !bootConfig
-                        .resources
-                        .satelliteResources
-                        .TryGetValue(args.culture, out var cultureSatelliteResources)
+                    !bootConfig.resources.satelliteResources.TryGetValue(
+                        args.culture,
+                        out var cultureSatelliteResources
+                    )
                 )
                     bootConfig.resources.satelliteResources[args.culture] =
                         cultureSatelliteResources = new();
@@ -312,10 +304,10 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
                 FileCopyChecked(args.fullPath, satellitePath, "SatelliteAssemblies");
 
                 if (
-                    !bootConfig
-                        .resources
-                        .satelliteResources
-                        .TryGetValue(args.culture, out var cultureSatelliteResources)
+                    !bootConfig.resources.satelliteResources.TryGetValue(
+                        args.culture,
+                        out var cultureSatelliteResources
+                    )
                 )
                     bootConfig.resources.satelliteResources[args.culture] =
                         cultureSatelliteResources = new();

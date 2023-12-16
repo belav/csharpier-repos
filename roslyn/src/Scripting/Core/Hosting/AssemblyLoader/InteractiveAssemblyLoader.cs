@@ -337,9 +337,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                         loadedAssemblyWithEqualNameAndVersionOpt = loadedInfos.FirstOrDefault(
                             info =>
-                                AssemblyIdentityComparer
-                                    .SimpleNameComparer
-                                    .Equals(info.Identity.Name, identity.Name)
+                                AssemblyIdentityComparer.SimpleNameComparer.Equals(
+                                    info.Identity.Name,
+                                    identity.Name
+                                )
                                 && info.Identity.Version == identity.Version
                         );
                     }
@@ -582,9 +583,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             foreach (var info in infos)
             {
                 if (
-                    DesktopAssemblyIdentityComparer
-                        .Default
-                        .ReferenceMatchesDefinition(identity, info.Identity)
+                    DesktopAssemblyIdentityComparer.Default.ReferenceMatchesDefinition(
+                        identity,
+                        info.Identity
+                    )
                 )
                 {
                     if (candidate == null || candidateVersion < info.Identity.Version)
@@ -607,9 +609,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             foreach (var assembly in assemblies)
             {
                 if (
-                    DesktopAssemblyIdentityComparer
-                        .Default
-                        .ReferenceMatchesDefinition(identity, assembly.Identity)
+                    DesktopAssemblyIdentityComparer.Default.ReferenceMatchesDefinition(
+                        identity,
+                        assembly.Identity
+                    )
                 )
                 {
                     if (

@@ -33,12 +33,10 @@ namespace System.ServiceModel
         {
             ValidateBaseAddress(item, "item");
             if (this.Contains(item.Scheme))
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "item",
-                        SR.GetString(SR.BaseAddressDuplicateScheme, item.Scheme)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "item",
+                    SR.GetString(SR.BaseAddressDuplicateScheme, item.Scheme)
+                );
 
             base.InsertItem(index, item);
         }
@@ -49,12 +47,10 @@ namespace System.ServiceModel
             if (this[index].Scheme != item.Scheme)
             {
                 if (this.Contains(item.Scheme))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "item",
-                            SR.GetString(SR.BaseAddressDuplicateScheme, item.Scheme)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "item",
+                        SR.GetString(SR.BaseAddressDuplicateScheme, item.Scheme)
+                    );
             }
             base.SetItem(index, item);
         }
@@ -68,36 +64,34 @@ namespace System.ServiceModel
 
             if (!uri.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(argumentName, SR.GetString(SR.BaseAddressMustBeAbsolute));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    argumentName,
+                    SR.GetString(SR.BaseAddressMustBeAbsolute)
+                );
             }
 
             if (!string.IsNullOrEmpty(uri.UserInfo))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        argumentName,
-                        SR.GetString(SR.BaseAddressCannotHaveUserInfo)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    argumentName,
+                    SR.GetString(SR.BaseAddressCannotHaveUserInfo)
+                );
             }
 
             if (!string.IsNullOrEmpty(uri.Query))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(argumentName, SR.GetString(SR.BaseAddressCannotHaveQuery));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    argumentName,
+                    SR.GetString(SR.BaseAddressCannotHaveQuery)
+                );
             }
 
             if (!string.IsNullOrEmpty(uri.Fragment))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        argumentName,
-                        SR.GetString(SR.BaseAddressCannotHaveFragment)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    argumentName,
+                    SR.GetString(SR.BaseAddressCannotHaveFragment)
+                );
             }
         }
     }

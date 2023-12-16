@@ -20,23 +20,20 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
 
         var derivedEntity =
             context
-                .BaseEntities
-                .Include(e => e.BaseCollectionOnBase)
+                .BaseEntities.Include(e => e.BaseCollectionOnBase)
                 .Single(e => e.Name == "Derived1(4)") as DerivedInheritanceRelationshipEntity;
 
         Assert.NotNull(derivedEntity);
 
         var firstRelatedEntity = derivedEntity
-            .BaseCollectionOnBase
-            .Cast<DerivedCollectionOnBase>()
+            .BaseCollectionOnBase.Cast<DerivedCollectionOnBase>()
             .First();
 
         var originalValue = firstRelatedEntity.DerivedProperty;
         Assert.NotEqual(0, originalValue);
 
         var entry = context
-            .ChangeTracker
-            .Entries<DerivedCollectionOnBase>()
+            .ChangeTracker.Entries<DerivedCollectionOnBase>()
             .Single(e => e.Entity == firstRelatedEntity);
 
         Assert.IsType<DerivedCollectionOnBase>(entry.Entity);

@@ -153,16 +153,14 @@ namespace System.Net.Http
 #if FEATURE_WASM_THREADS
                     if (!_abortController.IsDisposed)
                     {
-                        _abortController
-                            .SynchronizationContext
-                            .Send(
-                                static (JSObject __abortController) =>
-                                {
-                                    BrowserHttpInterop.AbortRequest(__abortController);
-                                    __abortController.Dispose();
-                                },
-                                _abortController
-                            );
+                        _abortController.SynchronizationContext.Send(
+                            static (JSObject __abortController) =>
+                            {
+                                BrowserHttpInterop.AbortRequest(__abortController);
+                                __abortController.Dispose();
+                            },
+                            _abortController
+                        );
                     }
 #else
                     if (!_abortController.IsDisposed)
@@ -185,9 +183,10 @@ namespace System.Net.Http
                     ? request.RequestUri.AbsoluteUri
                     : request.RequestUri.ToString();
 
-                bool hasFetchOptions = request
-                    .Options
-                    .TryGetValue(FetchOptions, out IDictionary<string, object>? fetchOptions);
+                bool hasFetchOptions = request.Options.TryGetValue(
+                    FetchOptions,
+                    out IDictionary<string, object>? fetchOptions
+                );
                 int optionCount =
                     1
                     + (allowAutoRedirect.HasValue ? 1 : 0)
@@ -277,8 +276,7 @@ namespace System.Net.Http
                                 try
                                 {
                                     await request
-                                        .Content
-                                        .CopyToAsync(stream, cancellationToken)
+                                        .Content.CopyToAsync(stream, cancellationToken)
                                         .ConfigureAwait(true);
                                     Task closePromise = BrowserHttpInterop.TransformStreamClose(
                                         transformStream
@@ -315,8 +313,7 @@ namespace System.Net.Http
                     else
                     {
                         byte[] buffer = await request
-                            .Content
-                            .ReadAsByteArrayAsync(cancellationToken)
+                            .Content.ReadAsByteArrayAsync(cancellationToken)
                             .ConfigureAwait(true);
                         cancellationToken.ThrowIfCancellationRequested();
 
@@ -422,14 +419,12 @@ namespace System.Net.Http
         {
             bool? allowAutoRedirect = _isAllowAutoRedirectTouched ? AllowAutoRedirect : null;
 #if FEATURE_WASM_THREADS
-            return JSHost
-                .CurrentOrMainJSSynchronizationContext
-                .Send(() =>
-                {
+            return JSHost.CurrentOrMainJSSynchronizationContext.Send(() =>
+            {
 #endif
-                    return Impl(request, cancellationToken, allowAutoRedirect);
+                return Impl(request, cancellationToken, allowAutoRedirect);
 #if FEATURE_WASM_THREADS
-                });
+            });
 #endif
 
             static async Task<HttpResponseMessage> Impl(
@@ -467,9 +462,9 @@ namespace System.Net.Http
         {
             cancellationToken.ThrowIfCancellationRequested();
 #if FEATURE_WASM_THREADS
-            return _transformStream
-                .SynchronizationContext
-                .Send(() => Impl(this, buffer, cancellationToken));
+            return _transformStream.SynchronizationContext.Send(
+                () => Impl(this, buffer, cancellationToken)
+            );
 #else
             return Impl(this, buffer, cancellationToken);
 #endif
@@ -727,10 +722,9 @@ namespace System.Net.Http
             ArgumentNullException.ThrowIfNull(stream, nameof(stream));
             _fetchResponse.ThrowIfDisposed();
 #if FEATURE_WASM_THREADS
-            return _fetchResponse
-                .FetchResponse!
-                .SynchronizationContext
-                .Send(() => Impl(this, stream, cancellationToken));
+            return _fetchResponse.FetchResponse!.SynchronizationContext.Send(
+                () => Impl(this, stream, cancellationToken)
+            );
 #else
             return Impl(this, stream, cancellationToken);
 #endif
@@ -783,9 +777,9 @@ namespace System.Net.Http
             _fetchResponse.ThrowIfDisposed();
 #if FEATURE_WASM_THREADS
             return await _fetchResponse
-                .FetchResponse!
-                .SynchronizationContext
-                .Send(() => Impl(this, buffer, cancellationToken))
+                .FetchResponse!.SynchronizationContext.Send(
+                    () => Impl(this, buffer, cancellationToken)
+                )
                 .ConfigureAwait(true);
 #else
             return await Impl(this, buffer, cancellationToken).ConfigureAwait(true);

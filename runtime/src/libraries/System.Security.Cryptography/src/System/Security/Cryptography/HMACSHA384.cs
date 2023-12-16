@@ -170,9 +170,12 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser
-                .OneShotHashProvider
-                .MacData(HashAlgorithmNames.SHA384, key, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(
+                HashAlgorithmNames.SHA384,
+                key,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;

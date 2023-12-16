@@ -251,9 +251,12 @@ namespace System.IO
                         Interop.Sys.IOVector* pinnedVectors = &MemoryMarshal.GetReference(vectors)
                     )
                     {
-                        bytesWritten = Interop
-                            .Sys
-                            .PWriteV(handle, pinnedVectors, buffersCount, fileOffset);
+                        bytesWritten = Interop.Sys.PWriteV(
+                            handle,
+                            pinnedVectors,
+                            buffersCount,
+                            fileOffset
+                        );
                     }
 
                     FileStreamHelpers.CheckFileCall(bytesWritten, handle.Path);

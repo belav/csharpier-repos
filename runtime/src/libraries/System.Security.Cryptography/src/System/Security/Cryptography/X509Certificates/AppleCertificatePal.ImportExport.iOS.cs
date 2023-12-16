@@ -146,9 +146,12 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             SafeSecIdentityHandle identityHandle;
-            SafeSecCertificateHandle certHandle = Interop
-                .AppleCrypto
-                .X509ImportCertificate(rawData, contentType, password, out identityHandle);
+            SafeSecCertificateHandle certHandle = Interop.AppleCrypto.X509ImportCertificate(
+                rawData,
+                contentType,
+                password,
+                out identityHandle
+            );
 
             if (identityHandle.IsInvalid)
             {

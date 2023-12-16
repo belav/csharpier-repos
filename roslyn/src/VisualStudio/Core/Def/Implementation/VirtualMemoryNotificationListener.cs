@@ -170,8 +170,7 @@ namespace Microsoft.VisualStudio.LanguageServices
 
             // Show info bar.
             _workspace
-                .Services
-                .GetRequiredService<IErrorReportingService>()
+                .Services.GetRequiredService<IErrorReportingService>()
                 .ShowGlobalErrorInfo(
                     message: ServicesVSResources.Visual_Studio_has_suspended_some_advanced_features_to_improve_performance,
                     TelemetryFeatureName.VirtualMemoryNotification,

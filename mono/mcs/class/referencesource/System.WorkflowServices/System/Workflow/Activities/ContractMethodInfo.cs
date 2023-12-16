@@ -34,12 +34,10 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(operationInfo.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "operationInfo",
-                        SR2.GetString(SR2.Error_OperationNameNotSpecified)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "operationInfo",
+                    SR2.GetString(SR2.Error_OperationNameNotSpecified)
+                );
             }
 
             this.declaringType = declaringType;
@@ -107,11 +105,9 @@ namespace System.Workflow.Activities
             get
             {
 #pragma warning suppress 56503
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
+                );
             }
         }
 
@@ -149,9 +145,9 @@ namespace System.Workflow.Activities
 
         public override MethodInfo GetBaseDefinition()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public override object[] GetCustomAttributes(bool inherit)
@@ -186,11 +182,9 @@ namespace System.Workflow.Activities
             CultureInfo culture
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
+            );
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)

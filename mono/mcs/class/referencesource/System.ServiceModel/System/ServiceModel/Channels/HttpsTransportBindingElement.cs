@@ -81,9 +81,9 @@ namespace System.ServiceModel.Channels
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.messageSecurityVersion = value;
             }
@@ -100,26 +100,22 @@ namespace System.ServiceModel.Channels
 
             if (this.MessageHandlerFactory != null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.HttpPipelineNotSupportedOnClientSide,
-                                "MessageHandlerFactory"
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpPipelineNotSupportedOnClientSide,
+                            "MessageHandlerFactory"
                         )
-                    );
+                    )
+                );
             }
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "TChannel",
-                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             return (IChannelFactory<TChannel>)
@@ -139,12 +135,10 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "TChannel",
-                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             this.UpdateAuthenticationSchemes(context);

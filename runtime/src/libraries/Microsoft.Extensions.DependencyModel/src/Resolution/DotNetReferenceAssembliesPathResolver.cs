@@ -46,11 +46,9 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                 RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
                 &&
 #endif
-                fileSystem
-                    .Directory
-                    .Exists(
-                        "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/xbuild-frameworks"
-                    )
+                fileSystem.Directory.Exists(
+                    "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/xbuild-frameworks"
+                )
             )
             {
                 return "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/xbuild-frameworks";

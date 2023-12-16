@@ -66,10 +66,8 @@ namespace AnalyzerRunner
 
             if (usePersistentStorage)
             {
-                var persistentStorageService = _workspace
-                    .Services
-                    .SolutionServices
-                    .GetPersistentStorageService();
+                var persistentStorageService =
+                    _workspace.Services.SolutionServices.GetPersistentStorageService();
                 await using var persistentStorage = await persistentStorageService
                     .GetStorageAsync(
                         SolutionKey.ToSolutionKey(_workspace.CurrentSolution),
@@ -108,10 +106,9 @@ namespace AnalyzerRunner
                     .Where(x => x.Metadata.Name == incrementalAnalyzerName)
                     .SingleOrDefault(
                         provider =>
-                            provider
-                                .Metadata
-                                .WorkspaceKinds
-                                ?.Contains(WorkspaceKind.RemoteWorkspace) ?? false
+                            provider.Metadata.WorkspaceKinds?.Contains(
+                                WorkspaceKind.RemoteWorkspace
+                            ) ?? false
                     )
                     ?.Value;
                 incrementalAnalyzerProvider ??= incrementalAnalyzerProviders

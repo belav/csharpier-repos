@@ -401,8 +401,7 @@ namespace System.ServiceModel.Description
                 );
             if (
                 !endpoint
-                    .Binding
-                    .CreateBindingElements()
+                    .Binding.CreateBindingElements()
                     .Find<TransportBindingElement>()
                     .ManualAddressing
             )

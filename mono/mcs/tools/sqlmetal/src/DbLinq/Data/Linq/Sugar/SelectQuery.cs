@@ -97,10 +97,9 @@ namespace DbLinq.Data.Linq.Sugar
                     foreach (object p in (Array)parameter.GetValue())
                     {
                         dbParameter = dbCommand.Command.CreateParameter();
-                        dbParameter.ParameterName = DataContext
-                            .Vendor
-                            .SqlProvider
-                            .GetParameterName(parameter.Alias + i.ToString());
+                        dbParameter.ParameterName = DataContext.Vendor.SqlProvider.GetParameterName(
+                            parameter.Alias + i.ToString()
+                        );
                         dbParameter.Value = p;
                         dbCommand.Command.Parameters.Add(dbParameter);
                         ++i;
@@ -109,10 +108,9 @@ namespace DbLinq.Data.Linq.Sugar
                 else
                 {
                     dbParameter = dbCommand.Command.CreateParameter();
-                    dbParameter.ParameterName = DataContext
-                        .Vendor
-                        .SqlProvider
-                        .GetParameterName(parameter.Alias);
+                    dbParameter.ParameterName = DataContext.Vendor.SqlProvider.GetParameterName(
+                        parameter.Alias
+                    );
                     dbParameter.Value = parameter.GetValue();
                     dbCommand.Command.Parameters.Add(dbParameter);
                 }

@@ -158,18 +158,16 @@ namespace System.ServiceModel.Discovery
                 return WSDiscoveryApril2005;
             }
 
-            throw FxTrace
-                .Exception
-                .AsError(
-                    new ArgumentOutOfRangeException(
-                        SR2.DiscoveryIncorrectVersion(
-                            name,
-                            WSDiscovery11.Name,
-                            WSDiscoveryCD1.Name,
-                            WSDiscoveryApril2005.Name
-                        )
+            throw FxTrace.Exception.AsError(
+                new ArgumentOutOfRangeException(
+                    SR2.DiscoveryIncorrectVersion(
+                        name,
+                        WSDiscovery11.Name,
+                        WSDiscoveryCD1.Name,
+                        WSDiscoveryApril2005.Name
                     )
-                );
+                )
+            );
         }
 
         public override string ToString()

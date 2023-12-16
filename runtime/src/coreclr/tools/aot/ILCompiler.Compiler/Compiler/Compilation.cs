@@ -60,10 +60,8 @@ namespace ILCompiler
             foreach (var rootProvider in compilationRoots)
                 rootProvider.AddCompilationRoots(rootingService);
 
-            MetadataType globalModuleGeneratedType = nodeFactory
-                .TypeSystemContext
-                .GeneratedAssembly
-                .GetGlobalModuleType();
+            MetadataType globalModuleGeneratedType =
+                nodeFactory.TypeSystemContext.GeneratedAssembly.GetGlobalModuleType();
             _typeGetTypeMethodThunks = new TypeGetTypeMethodThunkCache(globalModuleGeneratedType);
             _assemblyGetExecutingAssemblyMethodThunks =
                 new AssemblyGetExecutingAssemblyMethodThunkCache(globalModuleGeneratedType);
@@ -332,9 +330,10 @@ namespace ILCompiler
             MethodDesc ctor = type.GetDefaultConstructor();
             if (ctor == null)
             {
-                MetadataType activatorType = type.Context
-                    .SystemModule
-                    .GetKnownType("System", "Activator");
+                MetadataType activatorType = type.Context.SystemModule.GetKnownType(
+                    "System",
+                    "Activator"
+                );
                 if (type.IsValueType && type.GetParameterlessConstructor() == null)
                 {
                     ctor = activatorType
@@ -438,10 +437,9 @@ namespace ILCompiler
                 if (
                     !type.IsRuntimeDeterminedType
                     || (
-                        !((RuntimeDeterminedType)type)
-                            .CanonicalType
-                            .IsCanonicalDefinitionType(CanonicalFormKind.Universal)
-                        && !((RuntimeDeterminedType)type).CanonicalType.IsNullable
+                        !((RuntimeDeterminedType)type).CanonicalType.IsCanonicalDefinitionType(
+                            CanonicalFormKind.Universal
+                        ) && !((RuntimeDeterminedType)type).CanonicalType.IsNullable
                     )
                 )
                 {
@@ -599,9 +597,9 @@ namespace ILCompiler
                 Debug.Assert(!runtimeDeterminedOwningType.IsInterface);
 
                 while (
-                    !slotNormalizedMethod
-                        .OwningType
-                        .HasSameTypeDefinition(runtimeDeterminedOwningType)
+                    !slotNormalizedMethod.OwningType.HasSameTypeDefinition(
+                        runtimeDeterminedOwningType
+                    )
                 )
                 {
                     DefType runtimeDeterminedBaseTypeDefinition = runtimeDeterminedOwningType

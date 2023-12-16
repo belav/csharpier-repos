@@ -3171,15 +3171,14 @@ class Test
             var comp = CSharpCompilation.Create(
                 "Name",
                 references: new[] { reference },
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
             );
 
             var pid = (
                 (NamedTypeSymbol)
-                    comp.GlobalNamespace
-                        .GetMembers()
+                    comp.GlobalNamespace.GetMembers()
                         .Single(
                             s =>
                                 s.Name.StartsWith(
@@ -10782,8 +10781,7 @@ public class Program
                 expectedOutput: "",
                 symbolValidator: validator,
                 options: TestOptions
-                    .DebugDll
-                    .WithOutputKind(OutputKind.ConsoleApplication)
+                    .DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
                     .WithMetadataImportOptions(MetadataImportOptions.All)
             );
 

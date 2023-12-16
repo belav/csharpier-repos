@@ -65,8 +65,7 @@ namespace System.Xml
             }
 
             WebResponse resp = await Task<WebResponse>
-                .Factory
-                .FromAsync(req.BeginGetResponse, req.EndGetResponse, null)
+                .Factory.FromAsync(req.BeginGetResponse, req.EndGetResponse, null)
                 .ConfigureAwait(false);
             HttpWebRequest webReq = req as HttpWebRequest;
             if (webReq != null)

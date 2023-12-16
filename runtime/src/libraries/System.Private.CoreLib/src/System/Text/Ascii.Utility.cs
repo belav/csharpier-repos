@@ -1330,8 +1330,7 @@ namespace System.Text
                     .CompareGreaterThan(firstVector, largestAsciiValue)
                     .AsByte();
                 ulong asciiCompareMask = AdvSimd
-                    .Arm64
-                    .UnzipOdd(compareResult, compareResult)
+                    .Arm64.UnzipOdd(compareResult, compareResult)
                     .AsUInt64()
                     .ToScalar();
                 // Compare mask now contains 8 bits for each 16-bit char. Divide it by 8 to get to the first non-ASCII byte.
@@ -1881,8 +1880,7 @@ namespace System.Text
                     : AdvSimd.Arm64.IsSupported
                         ? AllBytesInUInt64AreAscii(
                             AdvSimd
-                                .Arm64
-                                .MaxPairwise(vector.AsByte(), vector.AsByte())
+                                .Arm64.MaxPairwise(vector.AsByte(), vector.AsByte())
                                 .AsUInt64()
                                 .ToScalar()
                         )
@@ -1895,8 +1893,7 @@ namespace System.Text
                     : AdvSimd.Arm64.IsSupported
                         ? AllCharsInUInt64AreAscii(
                             AdvSimd
-                                .Arm64
-                                .MaxPairwise(vector.AsUInt16(), vector.AsUInt16())
+                                .Arm64.MaxPairwise(vector.AsUInt16(), vector.AsUInt16())
                                 .AsUInt64()
                                 .ToScalar()
                         )
@@ -2614,8 +2611,7 @@ namespace System.Text
             {
                 Vector128<byte> vecNarrow = AdvSimd.DuplicateToVector128(value).AsByte();
                 Vector128<ulong> vecWide = AdvSimd
-                    .Arm64
-                    .ZipLow(vecNarrow, Vector128<byte>.Zero)
+                    .Arm64.ZipLow(vecNarrow, Vector128<byte>.Zero)
                     .AsUInt64();
                 Unsafe.WriteUnaligned(
                     ref Unsafe.As<char, byte>(ref outputBuffer),

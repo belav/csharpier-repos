@@ -327,9 +327,10 @@ namespace System.Net
         {
             get
             {
-                _remoteEndPoint ??= Interop
-                    .HttpApi
-                    .GetRemoteEndPoint(RequestBuffer, OriginalBlobAddress);
+                _remoteEndPoint ??= Interop.HttpApi.GetRemoteEndPoint(
+                    RequestBuffer,
+                    OriginalBlobAddress
+                );
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this, "_remoteEndPoint" + _remoteEndPoint);
                 return _remoteEndPoint!;
@@ -340,9 +341,10 @@ namespace System.Net
         {
             get
             {
-                _localEndPoint ??= Interop
-                    .HttpApi
-                    .GetLocalEndPoint(RequestBuffer, OriginalBlobAddress);
+                _localEndPoint ??= Interop.HttpApi.GetLocalEndPoint(
+                    RequestBuffer,
+                    OriginalBlobAddress
+                );
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this, $"_localEndPoint={_localEndPoint}");
                 return _localEndPoint!;
@@ -421,17 +423,15 @@ namespace System.Net
                             );
                         uint bytesReceived = 0;
 
-                        uint statusCode = Interop
-                            .HttpApi
-                            .HttpReceiveClientCertificate(
-                                HttpListenerContext.RequestQueueHandle,
-                                _connectionId,
-                                (uint)Interop.HttpApi.HTTP_FLAGS.NONE,
-                                asyncResult.RequestBlob,
-                                size,
-                                &bytesReceived,
-                                asyncResult.NativeOverlapped
-                            );
+                        uint statusCode = Interop.HttpApi.HttpReceiveClientCertificate(
+                            HttpListenerContext.RequestQueueHandle,
+                            _connectionId,
+                            (uint)Interop.HttpApi.HTTP_FLAGS.NONE,
+                            asyncResult.RequestBlob,
+                            size,
+                            &bytesReceived,
+                            asyncResult.NativeOverlapped
+                        );
 
                         if (NetEventSource.Log.IsEnabled())
                             NetEventSource.Info(
@@ -545,17 +545,15 @@ namespace System.Net
                             );
                         uint bytesReceived = 0;
 
-                        uint statusCode = Interop
-                            .HttpApi
-                            .HttpReceiveClientCertificate(
-                                HttpListenerContext.RequestQueueHandle,
-                                _connectionId,
-                                (uint)Interop.HttpApi.HTTP_FLAGS.NONE,
-                                pClientCertInfo,
-                                size,
-                                &bytesReceived,
-                                null
-                            );
+                        uint statusCode = Interop.HttpApi.HttpReceiveClientCertificate(
+                            HttpListenerContext.RequestQueueHandle,
+                            _connectionId,
+                            (uint)Interop.HttpApi.HTTP_FLAGS.NONE,
+                            pClientCertInfo,
+                            size,
+                            &bytesReceived,
+                            null
+                        );
 
                         if (NetEventSource.Log.IsEnabled())
                             NetEventSource.Info(

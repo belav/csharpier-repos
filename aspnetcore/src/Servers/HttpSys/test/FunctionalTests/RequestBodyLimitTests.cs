@@ -89,17 +89,13 @@ public class RequestBodyLimitTests : LoggedTest
                     Assert.False(feature.IsReadOnly);
                     Assert.Equal(11, httpContext.Request.ContentLength);
                     byte[] input = new byte[100];
-                    int read = httpContext
-                        .Request
-                        .Body
-                        .EndRead(
-                            httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
-                        );
+                    int read = httpContext.Request.Body.EndRead(
+                        httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
+                    );
                     httpContext.Response.ContentLength = read;
-                    httpContext
-                        .Response
-                        .Body
-                        .EndWrite(httpContext.Response.Body.BeginWrite(input, 0, read, null, null));
+                    httpContext.Response.Body.EndWrite(
+                        httpContext.Response.Body.BeginWrite(input, 0, read, null, null)
+                    );
                     return Task.FromResult(0);
                 },
                 options => options.MaxRequestBodySize = 11,
@@ -185,17 +181,13 @@ public class RequestBodyLimitTests : LoggedTest
                     Assert.False(feature.IsReadOnly);
                     Assert.Null(httpContext.Request.ContentLength);
                     byte[] input = new byte[100];
-                    int read = httpContext
-                        .Request
-                        .Body
-                        .EndRead(
-                            httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
-                        );
+                    int read = httpContext.Request.Body.EndRead(
+                        httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
+                    );
                     httpContext.Response.ContentLength = read;
-                    httpContext
-                        .Response
-                        .Body
-                        .EndWrite(httpContext.Response.Body.BeginWrite(input, 0, read, null, null));
+                    httpContext.Response.Body.EndWrite(
+                        httpContext.Response.Body.BeginWrite(input, 0, read, null, null)
+                    );
                     return Task.FromResult(0);
                 },
                 options => options.MaxRequestBodySize = 11,

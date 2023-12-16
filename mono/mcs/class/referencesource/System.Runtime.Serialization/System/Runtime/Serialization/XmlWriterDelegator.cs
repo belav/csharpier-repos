@@ -421,12 +421,9 @@ namespace System.Runtime.Serialization
                     break;
             }
             if (!handled)
-                throw System
-                    .Runtime
-                    .Serialization
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(CreateInvalidPrimitiveTypeException(valueType));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidPrimitiveTypeException(valueType)
+                );
         }
 
         internal void WriteExtensionData(IDataNode dataNode)
@@ -505,12 +502,9 @@ namespace System.Runtime.Serialization
                     break;
             }
             if (!handled)
-                throw System
-                    .Runtime
-                    .Serialization
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(CreateInvalidPrimitiveTypeException(valueType));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidPrimitiveTypeException(valueType)
+                );
         }
 
         internal void WriteString(string value)

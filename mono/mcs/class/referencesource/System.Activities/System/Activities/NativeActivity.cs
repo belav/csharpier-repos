@@ -61,13 +61,11 @@ namespace System.Activities
         {
             if (!context.IsCancellationRequested)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DefaultCancelationRequiresCancelHasBeenRequested
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DefaultCancelationRequiresCancelHasBeenRequested
+                    )
+                );
             }
             context.Cancel();
         }
@@ -85,9 +83,9 @@ namespace System.Activities
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace
-                .Exception
-                .AsError(new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity)
+            );
         }
 
         protected virtual void CacheMetadata(NativeActivityMetadata metadata)
@@ -127,11 +125,9 @@ namespace System.Activities
             Activity originalActivity
         )
         {
-            throw FxTrace
-                .Exception
-                .AsError(
-                    new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity)
-                );
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity)
+            );
         }
 
         [SuppressMessage(
@@ -302,13 +298,11 @@ namespace System.Activities
         {
             if (!context.IsCancellationRequested)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DefaultCancelationRequiresCancelHasBeenRequested
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DefaultCancelationRequiresCancelHasBeenRequested
+                    )
+                );
             }
             context.Cancel();
         }
@@ -326,9 +320,9 @@ namespace System.Activities
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace
-                .Exception
-                .AsError(new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity)
+            );
         }
 
         protected virtual void CacheMetadata(NativeActivityMetadata metadata)
@@ -368,11 +362,9 @@ namespace System.Activities
             Activity originalActivity
         )
         {
-            throw FxTrace
-                .Exception
-                .AsError(
-                    new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity)
-                );
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity)
+            );
         }
 
         [SuppressMessage(

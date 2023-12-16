@@ -144,16 +144,14 @@ namespace System.ServiceModel.Channels
             ThrowIfDisposed();
             if (this.State != CommunicationState.Opened)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ChannelFactoryCannotBeUsedToCreateChannels,
-                                this.GetType().ToString()
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ChannelFactoryCannotBeUsedToCreateChannels,
+                            this.GetType().ToString()
                         )
-                    );
+                    )
+                );
             }
         }
 

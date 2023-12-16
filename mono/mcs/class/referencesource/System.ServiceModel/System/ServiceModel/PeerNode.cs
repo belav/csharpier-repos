@@ -60,9 +60,10 @@ namespace System.ServiceModel
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperCallback(SR.GetString(SR.NotificationException), e);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
+                        SR.GetString(SR.NotificationException),
+                        e
+                    );
                 }
             }
         }

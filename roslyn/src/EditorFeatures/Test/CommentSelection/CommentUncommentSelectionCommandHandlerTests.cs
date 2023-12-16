@@ -917,8 +917,7 @@ class A
             AssertEx.SetEqual(expectedChanges, edits.TextChanges);
 
             var trackingSpans = edits
-                .TrackingSpans
-                .Select(
+                .TrackingSpans.Select(
                     textSpan =>
                         AbstractCommentSelectionBase<Operation>.CreateTrackingSpan(
                             edits.ResultOperation,
@@ -973,20 +972,19 @@ class A
             var snapshot = textView.TextSnapshot;
             if (spans.Count == 1)
             {
-                textView
-                    .Selection
-                    .Select(new SnapshotSpan(snapshot, spans.Single()), isReversed: false);
+                textView.Selection.Select(
+                    new SnapshotSpan(snapshot, spans.Single()),
+                    isReversed: false
+                );
                 textView.Caret.MoveTo(new SnapshotPoint(snapshot, spans.Single().End));
             }
             else
             {
                 textView.Selection.Mode = TextSelectionMode.Box;
-                textView
-                    .Selection
-                    .Select(
-                        new VirtualSnapshotPoint(snapshot, spans.First().Start),
-                        new VirtualSnapshotPoint(snapshot, spans.Last().End)
-                    );
+                textView.Selection.Select(
+                    new VirtualSnapshotPoint(snapshot, spans.First().Start),
+                    new VirtualSnapshotPoint(snapshot, spans.Last().End)
+                );
                 textView.Caret.MoveTo(new SnapshotPoint(snapshot, spans.Last().End));
             }
 

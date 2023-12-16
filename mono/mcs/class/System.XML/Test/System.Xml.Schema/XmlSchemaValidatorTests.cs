@@ -380,9 +380,10 @@ namespace MonoTests.System.Xml
         public void FacetsOnBaseSimpleContentRestriction()
         {
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings
-                .Schemas
-                .Add(null, TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/595947.xsd"));
+            settings.Schemas.Add(
+                null,
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/595947.xsd")
+            );
             settings.ValidationType = ValidationType.Schema;
             settings.Schemas.Compile();
 

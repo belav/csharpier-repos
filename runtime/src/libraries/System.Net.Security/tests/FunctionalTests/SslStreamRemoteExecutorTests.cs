@@ -46,9 +46,8 @@ namespace System.Net.Security.Tests
                         using (var client = new SslStream(clientStream))
                         using (var server = new SslStream(serverStream))
                         using (
-                            X509Certificate2 certificate = Configuration
-                                .Certificates
-                                .GetServerCertificate()
+                            X509Certificate2 certificate =
+                                Configuration.Certificates.GetServerCertificate()
                         )
                         {
                             SslClientAuthenticationOptions clientOptions =

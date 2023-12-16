@@ -58,15 +58,13 @@ namespace Mono.ILASM
             if (owner.UseTypeSpec)
             {
                 PEAPI.Type owner_ref = owner.PeapiType;
-                peapi_method = code_gen
-                    .PEFile
-                    .AddMethodToTypeSpec(
-                        owner_ref,
-                        write_name,
-                        ret_type.PeapiType,
-                        param_list,
-                        gen_param_count
-                    );
+                peapi_method = code_gen.PEFile.AddMethodToTypeSpec(
+                    owner_ref,
+                    write_name,
+                    ret_type.PeapiType,
+                    param_list,
+                    gen_param_count
+                );
             }
             else
             {
@@ -128,15 +126,13 @@ namespace Mono.ILASM
             if (owner.UseTypeSpec)
             {
                 PEAPI.Type owner_ref = owner.PeapiType;
-                peapi_method = code_gen
-                    .PEFile
-                    .AddVarArgMethodToTypeSpec(
-                        owner_ref,
-                        write_name,
-                        ret_type.PeapiType,
-                        (PEAPI.Type[])param_list.ToArray(typeof(PEAPI.Type)),
-                        (PEAPI.Type[])opt_list.ToArray(typeof(PEAPI.Type))
-                    );
+                peapi_method = code_gen.PEFile.AddVarArgMethodToTypeSpec(
+                    owner_ref,
+                    write_name,
+                    ret_type.PeapiType,
+                    (PEAPI.Type[])param_list.ToArray(typeof(PEAPI.Type)),
+                    (PEAPI.Type[])opt_list.ToArray(typeof(PEAPI.Type))
+                );
             }
             else
             {

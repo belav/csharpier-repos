@@ -310,9 +310,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     {
                         foreach (var cyclicAddForeignKeyOperation in cyclicAddForeignKeyOperations)
                         {
-                            var removed = createTableOperation
-                                .ForeignKeys
-                                .Remove(cyclicAddForeignKeyOperation);
+                            var removed = createTableOperation.ForeignKeys.Remove(
+                                cyclicAddForeignKeyOperation
+                            );
                             if (removed)
                             {
                                 constraintOperations.Add(cyclicAddForeignKeyOperation);
@@ -477,9 +477,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             if (sourceMigrationsAnnotationsForRemoved.Count > 0)
             {
                 var alterDatabaseOperation = new AlterDatabaseOperation();
-                alterDatabaseOperation
-                    .OldDatabase
-                    .AddAnnotations(sourceMigrationsAnnotationsForRemoved);
+                alterDatabaseOperation.OldDatabase.AddAnnotations(
+                    sourceMigrationsAnnotationsForRemoved
+                );
                 yield return alterDatabaseOperation;
             }
 
@@ -512,8 +512,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             .Concat(target.Sequences.SelectMany(t => Add(t, diffContext)))
             .Concat(
                 target
-                    .Tables
-                    .SelectMany(t => t.ForeignKeyConstraints)
+                    .Tables.SelectMany(t => t.ForeignKeyConstraints)
                     .SelectMany(k => Add(k, diffContext))
             );
 
@@ -716,13 +715,11 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         };
         createTableOperation.AddAnnotations(target.GetAnnotations());
 
-        createTableOperation
-            .Columns
-            .AddRange(
-                GetSortedColumns(target)
-                    .SelectMany(p => Add(p, diffContext, inline: true))
-                    .Cast<AddColumnOperation>()
-            );
+        createTableOperation.Columns.AddRange(
+            GetSortedColumns(target)
+                .SelectMany(p => Add(p, diffContext, inline: true))
+                .Cast<AddColumnOperation>()
+        );
 
         var primaryKey = target.PrimaryKey;
         if (primaryKey != null)
@@ -732,23 +729,17 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 .Single();
         }
 
-        createTableOperation
-            .UniqueConstraints
-            .AddRange(
-                target
-                    .UniqueConstraints
-                    .Where(c => !c.GetIsPrimaryKey())
-                    .SelectMany(c => Add(c, diffContext))
-                    .Cast<AddUniqueConstraintOperation>()
-            );
-        createTableOperation
-            .CheckConstraints
-            .AddRange(
-                target
-                    .CheckConstraints
-                    .SelectMany(c => Add(c, diffContext))
-                    .Cast<AddCheckConstraintOperation>()
-            );
+        createTableOperation.UniqueConstraints.AddRange(
+            target
+                .UniqueConstraints.Where(c => !c.GetIsPrimaryKey())
+                .SelectMany(c => Add(c, diffContext))
+                .Cast<AddUniqueConstraintOperation>()
+        );
+        createTableOperation.CheckConstraints.AddRange(
+            target
+                .CheckConstraints.SelectMany(c => Add(c, diffContext))
+                .Cast<AddCheckConstraintOperation>()
+        );
 
         diffContext.AddCreate(target, createTableOperation);
 
@@ -858,8 +849,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             var clrType = clrProperty.DeclaringType!;
             var index = clrType
                 .GetTypeInfo()
-                .DeclaredProperties
-                .IndexOf(clrProperty, PropertyInfoEqualityComparer.Instance);
+                .DeclaredProperties.IndexOf(clrProperty, PropertyInfoEqualityComparer.Instance);
 
             Check.DebugAssert(clrType != null, "clrType is null");
             types.GetOrAddNew(clrType)[index] = clrProperty;
@@ -904,8 +894,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 var clrType = linkingNavigationProperty.DeclaringType!;
                 var index = clrType
                     .GetTypeInfo()
-                    .DeclaredProperties
-                    .IndexOf(linkingNavigationProperty, PropertyInfoEqualityComparer.Instance);
+                    .DeclaredProperties.IndexOf(
+                        linkingNavigationProperty,
+                        PropertyInfoEqualityComparer.Instance
+                    );
 
                 Check.DebugAssert(clrType != null, "clrType is null");
                 types.GetOrAddNew(clrType)[index] = linkingNavigationProperty;
@@ -1288,9 +1280,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 if (source is not JsonColumn && source.Order.HasValue)
                 {
-                    alterColumnOperation
-                        .OldColumn
-                        .AddAnnotation(RelationalAnnotationNames.ColumnOrder, source.Order.Value);
+                    alterColumnOperation.OldColumn.AddAnnotation(
+                        RelationalAnnotationNames.ColumnOrder,
+                        source.Order.Value
+                    );
                 }
 
                 if (target is not JsonColumn && target.Order.HasValue)
@@ -1508,8 +1501,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             Remove,
             (s, t, c) =>
                 s.Name == t.Name
-                && s.Columns
-                    .Select(p => p.Name)
+                && s.Columns.Select(p => p.Name)
                     .SequenceEqual(t.Columns.Select(p => c.FindSource(p)?.Name))
                 && s.GetIsPrimaryKey() == t.GetIsPrimaryKey()
                 && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
@@ -1610,12 +1602,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             Remove,
             (s, t, context) =>
                 s.Name == t.Name
-                && s.Columns
-                    .Select(c => c.Name)
+                && s.Columns.Select(c => c.Name)
                     .SequenceEqual(t.Columns.Select(c => context.FindSource(c)?.Name))
                 && s.PrincipalTable == context.FindSource(t.PrincipalTable)
-                && s.PrincipalColumns
-                    .Select(c => c.Name)
+                && s.PrincipalColumns.Select(c => c.Name)
                     .SequenceEqual(t.PrincipalColumns.Select(c => context.FindSource(c)?.Name))
                 && s.OnDeleteAction == t.OnDeleteAction
                 && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
@@ -1740,8 +1730,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         && source.Filter == target.Filter
         && !HasDifferences(source.GetAnnotations(), target.GetAnnotations())
         && source
-            .Columns
-            .Select(p => p.Name)
+            .Columns.Select(p => p.Name)
             .SequenceEqual(target.Columns.Select(p => diffContext.FindSource(p)?.Name));
 
     /// <summary>
@@ -2202,9 +2191,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 }
                 else
                 {
-                    command = CommandBatchPreparerDependencies
-                        .ModificationCommandFactory
-                        .CreateNonTrackedModificationCommand(
+                    command =
+                        CommandBatchPreparerDependencies.ModificationCommandFactory.CreateNonTrackedModificationCommand(
                             new NonTrackedModificationCommandParameters(
                                 table,
                                 sensitiveLoggingEnabled
@@ -2269,9 +2257,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         }
                     }
 
-                    var existingColumnModification = command
-                        .ColumnModifications
-                        .FirstOrDefault(c => c.ColumnName == column.Name);
+                    var existingColumnModification = command.ColumnModifications.FirstOrDefault(
+                        c => c.ColumnName == column.Name
+                    );
                     if (existingColumnModification != null)
                     {
                         if (!Equals(existingColumnModification.Value, value))
@@ -2457,9 +2445,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 for (var i = 0; i < keyValues.Length; i++)
                 {
-                    var modification = targetRow
-                        .ColumnModifications
-                        .First(m => m.ColumnName == key.Columns[i].Name);
+                    var modification = targetRow.ColumnModifications.First(
+                        m => m.ColumnName == key.Columns[i].Name
+                    );
                     keyValues[i] = modification.Value;
                 }
 
@@ -2520,9 +2508,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         continue;
                     }
 
-                    var sourceColumnModification = sourceRow
-                        .ColumnModifications
-                        .FirstOrDefault(m => m.ColumnName == sourceColumn.Name);
+                    var sourceColumnModification = sourceRow.ColumnModifications.FirstOrDefault(
+                        m => m.ColumnName == sourceColumn.Name
+                    );
                     if (sourceColumnModification == null)
                     {
                         if (targetColumnModification.IsWrite)
@@ -2626,8 +2614,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         }
 
         var commands = identityMaps
-            .Values
-            .SelectMany(m => m.Rows)
+            .Values.SelectMany(m => m.Rows)
             .Where(
                 r =>
                     r.EntityState is EntityState.Added or EntityState.Modified
@@ -2654,20 +2641,16 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                             if (
                                 batchInsertOperation.Table == command.TableName
                                 && batchInsertOperation.Schema == command.Schema
-                                && batchInsertOperation
-                                    .Columns
-                                    .SequenceEqual(
-                                        command
-                                            .ColumnModifications
-                                            .Where(col => col.IsKey || col.IsWrite)
-                                            .Select(col => col.ColumnName)
-                                    )
+                                && batchInsertOperation.Columns.SequenceEqual(
+                                    command
+                                        .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
+                                        .Select(col => col.ColumnName)
+                                )
                             )
                             {
                                 batchInsertOperation.Values = AddToMultidimensionalArray(
                                     command
-                                        .ColumnModifications
-                                        .Where(col => col.IsKey || col.IsWrite)
+                                        .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
                                         .Select(col => col.Value)
                                         .ToList(),
                                     batchInsertOperation.Values
@@ -2689,14 +2672,12 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                             Schema = command.Schema,
                             Table = command.TableName,
                             Columns = command
-                                .ColumnModifications
-                                .Where(col => col.IsKey || col.IsWrite)
+                                .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
                                 .Select(col => col.ColumnName)
                                 .ToArray(),
                             Values = ToMultidimensionalArray(
                                 command
-                                    .ColumnModifications
-                                    .Where(col => col.IsKey || col.IsWrite)
+                                    .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
                                     .Select(col => col.Value)
                                     .ToList()
                             )
@@ -2720,26 +2701,22 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                             Schema = command.Schema,
                             Table = command.TableName,
                             KeyColumns = command
-                                .ColumnModifications
-                                .Where(col => col.IsKey)
+                                .ColumnModifications.Where(col => col.IsKey)
                                 .Select(col => col.ColumnName)
                                 .ToArray(),
                             KeyValues = ToMultidimensionalArray(
                                 command
-                                    .ColumnModifications
-                                    .Where(col => col.IsKey)
+                                    .ColumnModifications.Where(col => col.IsKey)
                                     .Select(col => col.Value)
                                     .ToList()
                             ),
                             Columns = command
-                                .ColumnModifications
-                                .Where(col => col.IsWrite)
+                                .ColumnModifications.Where(col => col.IsWrite)
                                 .Select(col => col.ColumnName)
                                 .ToArray(),
                             Values = ToMultidimensionalArray(
                                 command
-                                    .ColumnModifications
-                                    .Where(col => col.IsWrite)
+                                    .ColumnModifications.Where(col => col.IsWrite)
                                     .Select(col => col.Value)
                                     .ToList()
                             ),
@@ -2757,8 +2734,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         Check.DebugAssert(forSource, "Delete using the target model");
 
                         var keyColumns = command
-                            .ColumnModifications
-                            .Where(col => col.IsKey)
+                            .ColumnModifications.Where(col => col.IsKey)
                             .Select(c => (IColumn)c.Column!);
                         var anyKeyColumnDropped = keyColumns.Any(
                             c => diffContext.FindDrop(c) != null
@@ -2769,8 +2745,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                             Schema = command.Schema,
                             Table = command.TableName,
                             KeyColumns = command
-                                .ColumnModifications
-                                .Where(col => col.IsKey)
+                                .ColumnModifications.Where(col => col.IsKey)
                                 .Select(col => col.ColumnName)
                                 .ToArray(),
                             KeyColumnTypes = anyKeyColumnDropped
@@ -2778,8 +2753,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                                 : null,
                             KeyValues = ToMultidimensionalArray(
                                 command
-                                    .ColumnModifications
-                                    .Where(col => col.IsKey)
+                                    .ColumnModifications.Where(col => col.IsKey)
                                     .Select(col => col.Value)
                                     .ToArray()
                             ),
@@ -2887,9 +2861,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             var index = unmatched.FindIndex(
                 a =>
                     a.Name == annotation.Name
-                    && StructuralComparisons
-                        .StructuralEqualityComparer
-                        .Equals(a.Value, annotation.Value)
+                    && StructuralComparisons.StructuralEqualityComparer.Equals(
+                        a.Value,
+                        annotation.Value
+                    )
             );
             if (index == -1)
             {
@@ -2910,8 +2885,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     /// </summary>
     protected virtual IEnumerable<string> GetSchemas(IRelationalModel model) =>
         model
-            .Tables
-            .Where(t => !t.IsExcludedFromMigrations)
+            .Tables.Where(t => !t.IsExcludedFromMigrations)
             .Select(t => t.Schema)
             .Concat(model.Views.Where(t => t.ViewDefinitionSql != null).Select(s => s.Schema))
             .Concat(model.Sequences.Select(s => s.Schema))

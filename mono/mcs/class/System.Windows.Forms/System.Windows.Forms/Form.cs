@@ -1031,9 +1031,11 @@ namespace System.Windows.Forms
                                 bounds.Height,
                                 ClientSize.Width,
                                 ClientSize.Height
-                                    - ThemeEngine
-                                        .Current
-                                        .CalcMenuBarSize(DeviceContext, menu, ClientSize.Width)
+                                    - ThemeEngine.Current.CalcMenuBarSize(
+                                        DeviceContext,
+                                        menu,
+                                        ClientSize.Width
+                                    )
                             );
                         }
                     }
@@ -3288,9 +3290,11 @@ namespace System.Windows.Forms
                     Marshal.PtrToStructure(m.LParam, typeof(XplatUIWin32.NCCALCSIZE_PARAMS));
 
                 // Adjust for menu
-                ncp.rgrc1.top += ThemeEngine
-                    .Current
-                    .CalcMenuBarSize(DeviceContext, ActiveMenu, ClientSize.Width);
+                ncp.rgrc1.top += ThemeEngine.Current.CalcMenuBarSize(
+                    DeviceContext,
+                    ActiveMenu,
+                    ClientSize.Width
+                );
                 Marshal.StructureToPtr(ncp, m.LParam, true);
             }
             DefWndProc(ref m);

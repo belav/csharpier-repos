@@ -35,8 +35,7 @@ public partial class C
 ",
                 sourceSymbolValidator: m =>
                 {
-                    var gooDef = m.GlobalNamespace
-                        .GetMember<NamedTypeSymbol>("C")
+                    var gooDef = m.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                         .GetMember<SourceOrdinaryMethodSymbol>("goo");
                     Assert.True(gooDef.IsPartial);
                     Assert.True(gooDef.IsPartialDefinition);
@@ -395,9 +394,9 @@ class C : B
         System.Console.WriteLine(c.Y());
     }
 }",
-                options: TestOptions
-                    .ReleaseExe
-                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
+                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
             );
             var verifier = CompileAndVerify(
                 comp,
@@ -431,9 +430,9 @@ class C
         System.Console.WriteLine(c.N(""World""));
     }
 }",
-                options: TestOptions
-                    .ReleaseExe
-                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
+                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
             );
             var verifier = CompileAndVerify(
                 comp,

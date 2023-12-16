@@ -71,14 +71,12 @@ internal sealed class DelegateKeywordRecommender : AbstractSyntacticSingleKeywor
     )
     {
         return context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.AsyncKeyword)
-            && context
-                .SyntaxTree
-                .IsExpressionContext(
-                    context.TargetToken.SpanStart,
-                    context.TargetToken,
-                    attributes: false,
-                    cancellationToken: cancellationToken,
-                    semanticModel: context.SemanticModel
-                );
+            && context.SyntaxTree.IsExpressionContext(
+                context.TargetToken.SpanStart,
+                context.TargetToken,
+                attributes: false,
+                cancellationToken: cancellationToken,
+                semanticModel: context.SemanticModel
+            );
     }
 }

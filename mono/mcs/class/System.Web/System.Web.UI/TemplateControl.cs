@@ -173,12 +173,10 @@ namespace System.Web.UI
                     evinfo.evt.AddEventHandler(this, npi.FakeDelegate);
                 }
                 else
-                    evinfo
-                        .evt
-                        .AddEventHandler(
-                            this,
-                            Delegate.CreateDelegate(typeof(EventHandler), this, evinfo.method)
-                        );
+                    evinfo.evt.AddEventHandler(
+                        this,
+                        Delegate.CreateDelegate(typeof(EventHandler), this, evinfo.method)
+                    );
             }
         }
 

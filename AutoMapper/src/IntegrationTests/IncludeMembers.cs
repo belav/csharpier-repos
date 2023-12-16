@@ -627,8 +627,7 @@ public class IncludeMembersSelectFirstOrDefaultWithSubqueryMapFrom
                     o =>
                         o.MapFrom(
                             s =>
-                                s.InnerSourceDetailsWrapper
-                                    .Select(s => s.InnerSourceDetails)
+                                s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails)
                                     .FirstOrDefault()
                         )
                 );
@@ -1081,8 +1080,7 @@ public class SubqueryMapFromWithIncludeMembersSelectMemberFirstOrDefault
             cfg.CreateProjection<InnerSource, DestinationDetails>()
                 .IncludeMembers(
                     s =>
-                        s.InnerSourceDetailsWrapper
-                            .Select(s => s.InnerSourceDetails)
+                        s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails)
                             .FirstOrDefault()
                 );
             cfg.CreateProjection<OtherInnerSource, OtherDestinationDetails>()

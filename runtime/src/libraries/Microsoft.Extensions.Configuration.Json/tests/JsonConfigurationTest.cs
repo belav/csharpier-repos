@@ -262,8 +262,7 @@ namespace Microsoft.Extensions.Configuration
                 .AddJsonFile(filePath, optional: false)
                 .Build();
             JsonConfigurationProvider jsonConfigurationProvider = config
-                .Providers
-                .OfType<JsonConfigurationProvider>()
+                .Providers.OfType<JsonConfigurationProvider>()
                 .Single();
 
             Assert.NotNull(jsonConfigurationProvider.Source.FileProvider);

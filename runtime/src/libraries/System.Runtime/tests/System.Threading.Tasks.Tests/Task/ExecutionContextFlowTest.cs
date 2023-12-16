@@ -19,13 +19,12 @@ namespace System.Threading.Tasks.Tests
             using (suppressFlow ? ExecutionContext.SuppressFlow() : default)
             {
                 var asyncLocal = new AsyncLocal<int>();
-                Task.Factory
-                    .StartNew(
-                        () => asyncLocal.Value = 42,
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        new InlineTaskScheduler()
-                    )
+                Task.Factory.StartNew(
+                    () => asyncLocal.Value = 42,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    new InlineTaskScheduler()
+                )
                     .Wait();
                 Assert.Equal(suppressFlow ? 42 : 0, asyncLocal.Value);
             }

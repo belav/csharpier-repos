@@ -427,8 +427,7 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 entity
                     .GetKeys()
                     .First(k => k != entity.FindPrimaryKey())
-                    .Properties
-                    .Select(p => p.Name)
+                    .Properties.Select(p => p.Name)
             );
 
             var idProperty = entity.FindProperty(StoreKeyConvention.DefaultIdPropertyName);
@@ -463,8 +462,7 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 entity
                     .GetKeys()
                     .First(k => k != entity.FindPrimaryKey())
-                    .Properties
-                    .Select(p => p.Name)
+                    .Properties.Select(p => p.Name)
             );
         }
 
@@ -885,8 +883,7 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 entity
                     .GetKeys()
                     .First(k => k != entity.FindPrimaryKey())
-                    .Properties
-                    .Select(p => p.Name)
+                    .Properties.Select(p => p.Name)
             );
 
             var idProperty = entity.FindProperty(StoreKeyConvention.DefaultIdPropertyName);
@@ -921,8 +918,7 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
                 entity
                     .GetKeys()
                     .First(k => k != entity.FindPrimaryKey())
-                    .Properties
-                    .Select(p => p.Name)
+                    .Properties.Select(p => p.Name)
             );
         }
 
@@ -1074,8 +1070,7 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
             mb.Entity<AL>();
             mb.Entity<L>();
 
-            var mutableEntityTypes = mb.Model
-                .GetEntityTypes()
+            var mutableEntityTypes = mb.Model.GetEntityTypes()
                 .Where(e => e.ClrType == typeof(Q))
                 .ToList();
 

@@ -337,11 +337,10 @@
         public bool IsLocalUrl(string url)
         {
             // TODO this should call the System.Web.dll API once it gets added to the framework and MVC takes a dependency on it.
-            return System
-                .Web
-                .WebPages
-                .RequestExtensions
-                .IsUrlLocalToHost(RequestContext.HttpContext.Request, url);
+            return System.Web.WebPages.RequestExtensions.IsUrlLocalToHost(
+                RequestContext.HttpContext.Request,
+                url
+            );
         }
 
         [SuppressMessage(

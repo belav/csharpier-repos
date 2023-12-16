@@ -90,8 +90,7 @@ namespace Microsoft.CodeAnalysis.Collections
                 return existingSet.WithComparer(equalityComparer);
 
             return ImmutableSegmentedHashSet<TSource>
-                .Empty
-                .WithComparer(equalityComparer)
+                .Empty.WithComparer(equalityComparer)
                 .Union(source);
         }
 

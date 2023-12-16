@@ -70,8 +70,7 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
 
         protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
             !diagnostic
-                .Descriptor
-                .ImmutableCustomTags()
+                .Descriptor.ImmutableCustomTags()
                 .Contains(WellKnownDiagnosticTags.Unnecessary);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
@@ -152,9 +151,9 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             whenTrue = syntaxFacts.WalkDownParentheses(whenTrue);
             whenFalse = syntaxFacts.WalkDownParentheses(whenFalse);
 
-            var whenPartIsNullable = diagnostic
-                .Properties
-                .ContainsKey(UseNullPropagationConstants.WhenPartIsNullable);
+            var whenPartIsNullable = diagnostic.Properties.ContainsKey(
+                UseNullPropagationConstants.WhenPartIsNullable
+            );
             editor.ReplaceNode(
                 conditionalExpression,
                 (conditionalExpression, _) =>
@@ -228,9 +227,9 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                     getInnermostNodeForTie: true
                 );
 
-            var whenPartIsNullable = diagnostic
-                .Properties
-                .ContainsKey(UseNullPropagationConstants.WhenPartIsNullable);
+            var whenPartIsNullable = diagnostic.Properties.ContainsKey(
+                UseNullPropagationConstants.WhenPartIsNullable
+            );
 
             SyntaxNode nodeToBeReplaced = ifStatement;
             SyntaxNode? replacementNode = null;

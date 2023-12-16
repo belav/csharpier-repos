@@ -53,11 +53,9 @@ namespace Microsoft.Interop.Analyzers
 
             static bool IsRequiresDiableRuntimeMarshallingDiagnostic(Diagnostic diagnostic)
             {
-                return diagnostic
-                    .Properties
-                    .ContainsKey(
-                        GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
-                    );
+                return diagnostic.Properties.ContainsKey(
+                    GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
+                );
             }
         }
 
@@ -84,20 +82,14 @@ namespace Microsoft.Interop.Analyzers
 
             editor.ReplaceNode(
                 syntaxRoot,
-                editor
-                    .Generator
-                    .AddAttributes(
-                        syntaxRoot,
-                        editor
-                            .Generator
-                            .Attribute(
-                                editor
-                                    .Generator
-                                    .DottedName(
-                                        TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute
-                                    )
-                            )
+                editor.Generator.AddAttributes(
+                    syntaxRoot,
+                    editor.Generator.Attribute(
+                        editor.Generator.DottedName(
+                            TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute
+                        )
                     )
+                )
             );
 
             return editor.GetChangedDocument().Project.Solution;

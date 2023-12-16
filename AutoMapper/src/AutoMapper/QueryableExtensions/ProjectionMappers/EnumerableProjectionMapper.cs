@@ -30,9 +30,10 @@ public class EnumerableProjectionMapper : IProjectionMapper
         if (sourceListType != destinationListType)
         {
             var itemRequest = request.InnerRequest(sourceListType, destinationListType);
-            var transformedExpressions = configuration
-                .ProjectionBuilder
-                .CreateProjection(itemRequest, letPropertyMaps.New());
+            var transformedExpressions = configuration.ProjectionBuilder.CreateProjection(
+                itemRequest,
+                letPropertyMaps.New()
+            );
             if (transformedExpressions.Empty)
             {
                 return null;

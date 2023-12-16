@@ -152,13 +152,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             bool isRefAssembly
         )
         {
-            return SourceModule
-                .ContainingSourceAssembly
-                .GetCustomAttributesToEmit(
-                    this,
-                    isRefAssembly,
-                    emittingAssemblyAttributesInNetModule: OutputKind.IsNetModule()
-                );
+            return SourceModule.ContainingSourceAssembly.GetCustomAttributesToEmit(
+                this,
+                isRefAssembly,
+                emittingAssemblyAttributesInNetModule: OutputKind.IsNetModule()
+            );
         }
 
         public sealed override IEnumerable<Cci.SecurityAttribute> GetSourceAssemblySecurityAttributes()
@@ -691,8 +689,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             }
 
             return Compilation
-                .AnonymousTypeManager
-                .GetAllCreatedTemplates()
+                .AnonymousTypeManager.GetAllCreatedTemplates()
 #if DEBUG
                 .Select(type => type.GetCciAdapter())
 #endif
@@ -2309,13 +2306,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             Debug.Assert(methodSymbol.Name == methodName);
 
             // use add-then-get pattern to ensure the symbol exists, and then ensure we use the single "canonical" instance added by whichever thread won the race.
-            privateImplClass
-                .PrivateImplementationDetails
-                .TryAddSynthesizedMethod(methodSymbol.GetCciAdapter());
+            privateImplClass.PrivateImplementationDetails.TryAddSynthesizedMethod(
+                methodSymbol.GetCciAdapter()
+            );
             return (MethodSymbol)
                 privateImplClass
-                    .PrivateImplementationDetails
-                    .GetMethod(methodName)!
+                    .PrivateImplementationDetails.GetMethod(methodName)!
                     .GetInternalSymbol()!;
         }
 

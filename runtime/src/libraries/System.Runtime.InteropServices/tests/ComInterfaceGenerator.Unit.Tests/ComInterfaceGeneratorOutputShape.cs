@@ -339,12 +339,10 @@ namespace ComInterfaceGenerator.Unit.Tests
                 AttributeData iUnknownDerivedAttribute = Assert.Single(
                     userDefinedInterface.GetAttributes(),
                     attr =>
-                        SymbolEqualityComparer
-                            .Default
-                            .Equals(
-                                attr.AttributeClass?.OriginalDefinition,
-                                iUnknownDerivedAttributeType
-                            )
+                        SymbolEqualityComparer.Default.Equals(
+                            attr.AttributeClass?.OriginalDefinition,
+                            iUnknownDerivedAttributeType
+                        )
                 );
 
                 Assert.Collection(

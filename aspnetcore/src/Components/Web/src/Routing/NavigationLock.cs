@@ -49,18 +49,20 @@ public sealed class NavigationLock : IComponent, IHandleAfterRender, IAsyncDispo
         foreach (var parameter in parameters)
         {
             if (
-                parameter
-                    .Name
-                    .Equals(nameof(OnBeforeInternalNavigation), StringComparison.OrdinalIgnoreCase)
+                parameter.Name.Equals(
+                    nameof(OnBeforeInternalNavigation),
+                    StringComparison.OrdinalIgnoreCase
+                )
             )
             {
                 OnBeforeInternalNavigation =
                     (EventCallback<LocationChangingContext>)parameter.Value;
             }
             else if (
-                parameter
-                    .Name
-                    .Equals(nameof(ConfirmExternalNavigation), StringComparison.OrdinalIgnoreCase)
+                parameter.Name.Equals(
+                    nameof(ConfirmExternalNavigation),
+                    StringComparison.OrdinalIgnoreCase
+                )
             )
             {
                 ConfirmExternalNavigation = (bool)parameter.Value;

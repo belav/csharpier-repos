@@ -21,12 +21,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     !targetMethod.IsGenericMethod
                     || @params.Length < 2
                     || @params[0].Type is not INamedTypeSymbol { IsGenericType: true } genericType
-                    || !SymbolEqualityComparer
-                        .Default
-                        .Equals(
-                            _typeSymbols.OptionsBuilderOfT_Unbound,
-                            genericType.ConstructUnboundGenericType()
-                        )
+                    || !SymbolEqualityComparer.Default.Equals(
+                        _typeSymbols.OptionsBuilderOfT_Unbound,
+                        genericType.ConstructUnboundGenericType()
+                    )
                 )
                 {
                     return;
@@ -61,9 +59,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 Debug.Assert(paramCount >= 2);
 
                 if (
-                    !SymbolEqualityComparer
-                        .Default
-                        .Equals(_typeSymbols.IConfiguration, @params[1].Type)
+                    !SymbolEqualityComparer.Default.Equals(
+                        _typeSymbols.IConfiguration,
+                        @params[1].Type
+                    )
                 )
                 {
                     return;
@@ -73,9 +72,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 {
                     2 => MethodsToGen.OptionsBuilderExt_Bind_T,
                     3
-                        when SymbolEqualityComparer
-                            .Default
-                            .Equals(_typeSymbols.ActionOfBinderOptions, @params[2].Type)
+                        when SymbolEqualityComparer.Default.Equals(
+                            _typeSymbols.ActionOfBinderOptions,
+                            @params[2].Type
+                        )
                         => MethodsToGen.OptionsBuilderExt_Bind_T_BinderOptions,
                     _ => MethodsToGen.None
                 };
@@ -100,9 +100,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 if (
                     paramCount is 3
                     && @params[1].Type.SpecialType is SpecialType.System_String
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(_typeSymbols.ActionOfBinderOptions, @params[2].Type)
+                    && SymbolEqualityComparer.Default.Equals(
+                        _typeSymbols.ActionOfBinderOptions,
+                        @params[2].Type
+                    )
                 )
                 {
                     EnqueueTargetTypeForRootInvocation(

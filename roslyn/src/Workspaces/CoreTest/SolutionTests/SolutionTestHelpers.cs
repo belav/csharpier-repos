@@ -20,8 +20,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         ) =>
             new AdhocWorkspace(
                 FeaturesTestCompositions
-                    .Features
-                    .AddParts(additionalParts)
+                    .Features.AddParts(additionalParts)
                     .WithTestHostParts(testHost)
                     .GetHostServices()
             );

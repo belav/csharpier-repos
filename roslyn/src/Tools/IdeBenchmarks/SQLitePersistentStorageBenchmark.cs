@@ -63,12 +63,10 @@ namespace IdeBenchmarks
 </Workspace>"
             );
 
-            var connectionPoolService = _workspace
-                .ExportProvider
-                .GetExportedValue<SQLiteConnectionPoolService>();
+            var connectionPoolService =
+                _workspace.ExportProvider.GetExportedValue<SQLiteConnectionPoolService>();
             var asyncListener = _workspace
-                .ExportProvider
-                .GetExportedValue<IAsynchronousOperationListenerProvider>()
+                .ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>()
                 .GetListener(FeatureAttribute.PersistentStorage);
 
             _storageService = new SQLitePersistentStorageService(

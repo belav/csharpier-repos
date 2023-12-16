@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
             var openParen = Token(SyntaxKind.OpenParenToken);
             var closeParen = Token(SyntaxKind.CloseParenToken);
             var newTrailingTrivia = asExpression
-                .Left
-                .GetTrailingTrivia()
+                .Left.GetTrailingTrivia()
                 .SkipInitialWhitespace()
                 .ToSyntaxTriviaList()
                 .AddRange(asExpression.GetTrailingTrivia());

@@ -355,12 +355,10 @@ namespace Internal.TypeSystem.NoMetadata
 
             return (clone == null)
                 ? this
-                : _genericTypeDefinitionAsDefType
-                    .Context
-                    .ResolveGenericInstantiation(
-                        _genericTypeDefinitionAsDefType,
-                        new Instantiation(clone)
-                    );
+                : _genericTypeDefinitionAsDefType.Context.ResolveGenericInstantiation(
+                    _genericTypeDefinitionAsDefType,
+                    new Instantiation(clone)
+                );
         }
 
         public override Instantiation Instantiation

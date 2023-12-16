@@ -739,13 +739,11 @@ namespace System.Workflow.Activities
             ITypeProvider typeProvider = manager.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.General_MissingService, typeof(ITypeProvider).Name)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.General_MissingService, typeof(ITypeProvider).Name)
+                    )
+                );
             }
 
             ValidationErrorCollection validationErrors = new ValidationErrorCollection();
@@ -1188,9 +1186,9 @@ namespace System.Workflow.Activities
             }
             if (parameterBindings == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("parameterBindings");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "parameterBindings"
+                );
             }
             if (manager == null)
             {
@@ -1200,12 +1198,10 @@ namespace System.Workflow.Activities
             MethodInfo methodInfo = operationInfo.GetMethodInfo(manager);
             if (methodInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "operationInfo",
-                        SR2.GetString(SR2.Error_MethodInfoNotAvailable, ownerActivity.Name)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "operationInfo",
+                    SR2.GetString(SR2.Error_MethodInfoNotAvailable, ownerActivity.Name)
+                );
             }
 
             bool isOneWayOperation = operationInfo.GetIsOneWay(manager);

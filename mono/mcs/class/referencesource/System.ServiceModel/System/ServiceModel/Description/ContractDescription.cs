@@ -77,14 +77,12 @@ namespace System.ServiceModel.Description
 
                 if (value.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(SR.SFxContractDescriptionNameCannotBeEmpty)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxContractDescriptionNameCannotBeEmpty)
+                        )
+                    );
                 }
                 this.name = new XmlName(
                     value,
@@ -115,9 +113,9 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -141,9 +139,9 @@ namespace System.ServiceModel.Description
             {
                 if (!SessionModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.sessionMode = value;
@@ -195,9 +193,9 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractType");
 
             if (serviceImplementation == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("serviceImplementation");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serviceImplementation"
+                );
 
             TypeLoader typeLoader = new TypeLoader();
             Type serviceType = serviceImplementation.GetType();
@@ -231,33 +229,27 @@ namespace System.ServiceModel.Description
         {
             if (string.IsNullOrEmpty(this.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.AChannelServiceEndpointSContractSNameIsNull0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.AChannelServiceEndpointSContractSNameIsNull0)
+                    )
+                );
             }
             if (this.Namespace == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.AChannelServiceEndpointSContractSNamespace0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.AChannelServiceEndpointSContractSNamespace0)
+                    )
+                );
             }
             if (this.Operations.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxContractHasZeroOperations, this.Name)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxContractHasZeroOperations, this.Name)
+                    )
+                );
             }
             bool thereIsAtLeastOneInitiatingOperation = false;
             for (int i = 0; i < this.Operations.Count; i++)
@@ -271,27 +263,20 @@ namespace System.ServiceModel.Description
                     && (this.SessionMode != SessionMode.Required)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ContractIsNotSelfConsistentItHasOneOrMore2,
-                                    this.Name
-                                )
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ContractIsNotSelfConsistentItHasOneOrMore2, this.Name)
+                        )
+                    );
                 }
             }
             if (!thereIsAtLeastOneInitiatingOperation)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxContractHasZeroInitiatingOperations, this.Name)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxContractHasZeroInitiatingOperations, this.Name)
+                    )
+                );
             }
         }
 

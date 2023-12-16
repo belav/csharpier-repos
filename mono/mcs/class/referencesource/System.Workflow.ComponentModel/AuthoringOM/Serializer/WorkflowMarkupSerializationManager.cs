@@ -156,9 +156,10 @@ namespace System.Workflow.ComponentModel.Serialization
             //Make sure that while writting the workflow namespaces will always be the default
             prefix =
                 (
-                    mappingForType
-                        .Prefix
-                        .Equals(StandardXomlKeys.WorkflowPrefix, StringComparison.Ordinal)
+                    mappingForType.Prefix.Equals(
+                        StandardXomlKeys.WorkflowPrefix,
+                        StringComparison.Ordinal
+                    )
                 )
                     ? String.Empty
                     : mappingForType.Prefix;
@@ -256,9 +257,10 @@ namespace System.Workflow.ComponentModel.Serialization
                             resolvedType = GetType(fullTypeName);
                             if (
                                 resolvedType != null
-                                && !resolvedType
-                                    .AssemblyQualifiedName
-                                    .Equals(assemblyQualifiedName, StringComparison.Ordinal)
+                                && !resolvedType.AssemblyQualifiedName.Equals(
+                                    assemblyQualifiedName,
+                                    StringComparison.Ordinal
+                                )
                             )
                                 resolvedType = null;
                         }

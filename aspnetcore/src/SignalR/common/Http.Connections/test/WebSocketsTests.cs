@@ -52,18 +52,18 @@ public class WebSocketsTests : VerifiableLoggedTest
                 var client = feature.Client.ExecuteAndCaptureFramesAsync();
 
                 // Send a frame, then close
-                await feature
-                    .Client
-                    .SendAsync(
-                        buffer: new ArraySegment<byte>(Encoding.UTF8.GetBytes("Hello")),
-                        messageType: (WebSocketMessageType)
-                            Enum.Parse(typeof(WebSocketMessageType), webSocketMessageType),
-                        endOfMessage: true,
-                        cancellationToken: CancellationToken.None
-                    );
-                await feature
-                    .Client
-                    .CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                await feature.Client.SendAsync(
+                    buffer: new ArraySegment<byte>(Encoding.UTF8.GetBytes("Hello")),
+                    messageType: (WebSocketMessageType)
+                        Enum.Parse(typeof(WebSocketMessageType), webSocketMessageType),
+                    endOfMessage: true,
+                    cancellationToken: CancellationToken.None
+                );
+                await feature.Client.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "",
+                    CancellationToken.None
+                );
 
                 var result = await connection.Transport.Input.ReadAsync();
                 var buffer = result.Buffer;
@@ -125,9 +125,11 @@ public class WebSocketsTests : VerifiableLoggedTest
 
                 // The client should finish now, as should the server
                 var clientSummary = await client;
-                await feature
-                    .Client
-                    .CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                await feature.Client.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "",
+                    CancellationToken.None
+                );
                 await transport;
 
                 Assert.Equal(1, clientSummary.Received.Count);
@@ -243,10 +245,9 @@ public class WebSocketsTests : VerifiableLoggedTest
                 var client = feature.Client.ExecuteAndCaptureFramesAsync();
 
                 // Fail in the app
-                connection
-                    .Transport
-                    .Output
-                    .Complete(new InvalidOperationException("Catastrophic failure."));
+                connection.Transport.Output.Complete(
+                    new InvalidOperationException("Catastrophic failure.")
+                );
                 var clientSummary = await client.DefaultTimeout();
                 Assert.Equal(
                     WebSocketCloseStatus.InternalServerError,
@@ -254,9 +255,11 @@ public class WebSocketsTests : VerifiableLoggedTest
                 );
 
                 // Close from the client
-                await feature
-                    .Client
-                    .CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                await feature.Client.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "",
+                    CancellationToken.None
+                );
 
                 await transport.DefaultTimeout();
             }
@@ -371,8 +374,7 @@ public class WebSocketsTests : VerifiableLoggedTest
                 _ = await client.DefaultTimeout();
 
                 await feature
-                    .Client
-                    .CloseOutputAsync(
+                    .Client.CloseOutputAsync(
                         WebSocketCloseStatus.NormalClosure,
                         null,
                         CancellationToken.None
@@ -417,8 +419,7 @@ public class WebSocketsTests : VerifiableLoggedTest
                 var client = feature.Client.ExecuteAndCaptureFramesAsync();
 
                 await feature
-                    .Client
-                    .CloseOutputAsync(
+                    .Client.CloseOutputAsync(
                         WebSocketCloseStatus.NormalClosure,
                         null,
                         CancellationToken.None
@@ -470,10 +471,10 @@ public class WebSocketsTests : VerifiableLoggedTest
 
                 // Create an HttpContext
                 var context = new DefaultHttpContext();
-                context
-                    .Request
-                    .Headers
-                    .Add(HeaderNames.WebSocketSubProtocols, providedSubProtocols.ToArray());
+                context.Request.Headers.Add(
+                    HeaderNames.WebSocketSubProtocols,
+                    providedSubProtocols.ToArray()
+                );
                 context.Features.Set<IHttpWebSocketFeature>(feature);
                 var transport = ws.ProcessRequestAsync(context, CancellationToken.None);
 
@@ -486,8 +487,7 @@ public class WebSocketsTests : VerifiableLoggedTest
                 var client = feature.Client.ExecuteAndCaptureFramesAsync();
 
                 await feature
-                    .Client
-                    .CloseOutputAsync(
+                    .Client.CloseOutputAsync(
                         WebSocketCloseStatus.NormalClosure,
                         null,
                         CancellationToken.None

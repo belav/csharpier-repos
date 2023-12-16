@@ -61,15 +61,13 @@ namespace System.ServiceModel.Dispatcher
             switch (matches.Count)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MultipleFilterMatchesException(
-                                SR.GetString(SR.FilterMultipleMatches),
-                                null,
-                                matches
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MultipleFilterMatchesException(
+                            SR.GetString(SR.FilterMultipleMatches),
+                            null,
+                            matches
+                        )
+                    );
 
                 case 0:
                     match = null;
@@ -372,13 +370,9 @@ namespace System.ServiceModel.Dispatcher
 
                         if (prefix.Length > 0 && namespaces.LookupNamespace(prefix) == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new XsltException(
-                                        SR.GetString(SR.FilterUndefinedPrefix, prefix)
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new XsltException(SR.GetString(SR.FilterUndefinedPrefix, prefix))
+                            );
                         }
                     }
                 }
@@ -392,11 +386,9 @@ namespace System.ServiceModel.Dispatcher
             if (XPathResultType.Error == xpathExpr.ReturnType)
             {
                 // This should never be reached.  The above property should throw if there's an error
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XPathException(SR.GetString(SR.FilterCouldNotCompile, expression))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XPathException(SR.GetString(SR.FilterCouldNotCompile, expression))
+                );
             }
 
             OpcodeBlock codeBlock = new OpcodeBlock();
@@ -466,11 +458,9 @@ namespace System.ServiceModel.Dispatcher
 
                 if (null == parseTree)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new QueryCompileException(QueryCompileError.CouldNotParseExpression)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryCompileException(QueryCompileError.CouldNotParseExpression)
+                    );
                 }
 
                 returnType = parseTree.ReturnType;

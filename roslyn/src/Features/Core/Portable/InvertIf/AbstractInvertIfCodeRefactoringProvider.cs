@@ -422,8 +422,7 @@ namespace Microsoft.CodeAnalysis.InvertIf
                 {
                     Debug.Assert(statementRange.FirstStatement == statementRange.LastStatement);
                     return statementRange
-                        .FirstStatement
-                        .DescendantNodesAndSelf()
+                        .FirstStatement.DescendantNodesAndSelf()
                         .All(IsNoOpSyntaxNode);
                 }
 

@@ -48,11 +48,9 @@ namespace System.Activities.Statements
 
             if (faultContext == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(SR.FaultContextNotFound(this.DisplayName))
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.FaultContextNotFound(this.DisplayName))
+                );
             }
 
             context.RethrowException(faultContext);

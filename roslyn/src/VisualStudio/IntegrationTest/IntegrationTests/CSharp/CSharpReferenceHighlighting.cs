@@ -39,13 +39,11 @@ class {|definition:C|}
         {|reference:C|} c = new {|reference:C|}();
     }
 }";
-            Test.Utilities
-                .MarkupTestFile
-                .GetSpans(
-                    markup,
-                    out var text,
-                    out IDictionary<string, ImmutableArray<TextSpan>> spans
-                );
+            Test.Utilities.MarkupTestFile.GetSpans(
+                markup,
+                out var text,
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
             VisualStudio.Editor.SetText(text);
             Verify("C", spans);
 
@@ -66,13 +64,11 @@ class C
         {|writtenreference:x|} = 3;
     }
 }";
-            Test.Utilities
-                .MarkupTestFile
-                .GetSpans(
-                    markup,
-                    out var text,
-                    out IDictionary<string, ImmutableArray<TextSpan>> spans
-                );
+            Test.Utilities.MarkupTestFile.GetSpans(
+                markup,
+                out var text,
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
             VisualStudio.Editor.SetText(text);
             Verify("x", spans);
 
@@ -96,16 +92,15 @@ class C
             VisualStudio.Editor.SetText(text);
             VisualStudio.Editor.PlaceCaret("x");
             VisualStudio.Editor.InvokeNavigateToNextHighlightedReference();
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("x$$ = 3;", assertCaretPosition: true, trimWhitespace: true);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "x$$ = 3;",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/pull/52041")]
@@ -127,43 +122,39 @@ class C
             VisualStudio.Editor.PlaceCaret("x");
 
             VisualStudio.Editor.InvokeNavigateToNextHighlightedReference();
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("x$$++;", assertCaretPosition: true, trimWhitespace: true);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "x$$++;",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
 
             VisualStudio.Editor.InvokeNavigateToNextHighlightedReference();
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("x$$ = 3;", assertCaretPosition: true, trimWhitespace: true);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "x$$ = 3;",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
         }
 
         private void Verify(string marker, IDictionary<string, ImmutableArray<TextSpan>> spans)
         {
             VisualStudio.Editor.PlaceCaret(marker, charsOffset: -1);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.Classification,
-                    FeatureAttribute.ReferenceHighlighting
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace,
+                FeatureAttribute.SolutionCrawlerLegacy,
+                FeatureAttribute.DiagnosticService,
+                FeatureAttribute.Classification,
+                FeatureAttribute.ReferenceHighlighting
+            );
 
             AssertEx.SetEqual(
                 spans["definition"],
@@ -193,16 +184,14 @@ class C
         private void VerifyNone(string marker)
         {
             VisualStudio.Editor.PlaceCaret(marker, charsOffset: -1);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.Classification,
-                    FeatureAttribute.ReferenceHighlighting
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace,
+                FeatureAttribute.SolutionCrawlerLegacy,
+                FeatureAttribute.DiagnosticService,
+                FeatureAttribute.Classification,
+                FeatureAttribute.ReferenceHighlighting
+            );
 
             Assert.Empty(VisualStudio.Editor.GetTagSpans(ReferenceHighlightTag.TagId));
             Assert.Empty(VisualStudio.Editor.GetTagSpans(DefinitionHighlightTag.TagId));

@@ -106,13 +106,11 @@ internal abstract partial class ResourceInvoker
             {
                 var logger = invoker._logger;
 
-                invoker
-                    ._diagnosticListener
-                    .BeforeAction(
-                        actionContext.ActionDescriptor,
-                        actionContext.HttpContext,
-                        actionContext.RouteData
-                    );
+                invoker._diagnosticListener.BeforeAction(
+                    actionContext.ActionDescriptor,
+                    actionContext.HttpContext,
+                    actionContext.RouteData
+                );
 
                 var actionScope = logger.ActionScope(actionContext.ActionDescriptor);
 
@@ -143,13 +141,11 @@ internal abstract partial class ResourceInvoker
             }
             finally
             {
-                invoker
-                    ._diagnosticListener
-                    .AfterAction(
-                        actionContext.ActionDescriptor,
-                        actionContext.HttpContext,
-                        actionContext.RouteData
-                    );
+                invoker._diagnosticListener.AfterAction(
+                    actionContext.ActionDescriptor,
+                    actionContext.HttpContext,
+                    actionContext.RouteData
+                );
             }
         }
     }

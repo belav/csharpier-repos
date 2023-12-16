@@ -407,18 +407,16 @@ namespace System.Runtime.Serialization
             {
                 if (!IsKnownType(dataContract, declaredType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.GetString(
-                                    SR.DcTypeNotFoundOnSerialize,
-                                    DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
-                                    dataContract.StableName.Name,
-                                    dataContract.StableName.Namespace
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.DcTypeNotFoundOnSerialize,
+                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
+                                dataContract.StableName.Name,
+                                dataContract.StableName.Namespace
                             )
-                        );
+                        )
+                    );
                 }
             }
             WriteDataContractValue(dataContract, xmlWriter, obj, declaredTypeHandle);
@@ -618,16 +616,14 @@ namespace System.Runtime.Serialization
                     );
                 }
                 if (byValObjectsInScope.Contains(obj))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.GetString(
-                                    SR.CannotSerializeObjectWithCycles,
-                                    DataContract.GetClrTypeFullName(obj.GetType())
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.CannotSerializeObjectWithCycles,
+                                DataContract.GetClrTypeFullName(obj.GetType())
                             )
-                        );
+                        )
+                    );
                 byValObjectsInScope.Push(obj);
             }
             return false;
@@ -710,13 +706,11 @@ namespace System.Runtime.Serialization
 
         public static void ThrowRequiredMemberMustBeEmitted(string memberName, Type type)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new SerializationException(
-                        SR.GetString(SR.RequiredMemberMustBeEmitted, memberName, type.FullName)
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SerializationException(
+                    SR.GetString(SR.RequiredMemberMustBeEmitted, memberName, type.FullName)
+                )
+            );
         }
 
         public static bool GetHasValue<T>(Nullable<T> value)
@@ -759,16 +753,14 @@ namespace System.Runtime.Serialization
                         foreach (XmlNode xmlNode in xmlNodes)
                             xmlNode.WriteTo(xmlSerializableWriter);
                     else
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                XmlObjectSerializer.CreateSerializationException(
-                                    SR.GetString(
-                                        SR.UnknownXmlType,
-                                        DataContract.GetClrTypeFullName(obj.GetType())
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(
+                                    SR.UnknownXmlType,
+                                    DataContract.GetClrTypeFullName(obj.GetType())
                                 )
-                            );
+                            )
+                        );
                 }
             }
             xmlSerializableWriter.EndWrite();
@@ -809,16 +801,14 @@ namespace System.Runtime.Serialization
             )
             {
                 // Throw if a malicious type tries to set its assembly name to "0" to get deserialized in mscorlib
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(
-                                SR.ISerializableAssemblyNameSetToZero,
-                                DataContract.GetClrTypeFullName(obj.GetType())
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(
+                            SR.ISerializableAssemblyNameSetToZero,
+                            DataContract.GetClrTypeFullName(obj.GetType())
                         )
-                    );
+                    )
+                );
             }
 
             WriteSerializationInfo(xmlWriter, objType, serInfo);
@@ -1156,17 +1146,15 @@ namespace System.Runtime.Serialization
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(
-                                SR.ResolveTypeReturnedFalse,
-                                DataContract.GetClrTypeFullName(DataContractResolver.GetType()),
-                                DataContract.GetClrTypeFullName(objectType)
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(
+                            SR.ResolveTypeReturnedFalse,
+                            DataContract.GetClrTypeFullName(DataContractResolver.GetType()),
+                            DataContract.GetClrTypeFullName(objectType)
                         )
-                    );
+                    )
+                );
             }
             if (typeName == null)
             {
@@ -1176,24 +1164,7 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.GetString(
-                                    SR.ResolveTypeReturnedNull,
-                                    DataContract.GetClrTypeFullName(DataContractResolver.GetType()),
-                                    DataContract.GetClrTypeFullName(objectType)
-                                )
-                            )
-                        );
-                }
-            }
-            if (typeNamespace == null)
-            {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
                                 SR.ResolveTypeReturnedNull,
@@ -1202,6 +1173,19 @@ namespace System.Runtime.Serialization
                             )
                         )
                     );
+                }
+            }
+            if (typeNamespace == null)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(
+                            SR.ResolveTypeReturnedNull,
+                            DataContract.GetClrTypeFullName(DataContractResolver.GetType()),
+                            DataContract.GetClrTypeFullName(objectType)
+                        )
+                    )
+                );
             }
             return true;
         }

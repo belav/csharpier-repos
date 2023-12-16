@@ -64,9 +64,10 @@ namespace System.Workflow.Activities
                 get
                 {
                     DesignerLayout designerLayout;
-                    ((StateDesigner)this.AssociatedDesigner)
-                        .DesignerLayouts
-                        .TryGetValue(this._eventHandler, out designerLayout);
+                    ((StateDesigner)this.AssociatedDesigner).DesignerLayouts.TryGetValue(
+                        this._eventHandler,
+                        out designerLayout
+                    );
                     return designerLayout;
                 }
             }

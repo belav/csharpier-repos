@@ -33,9 +33,8 @@ public class InterceptorsTests : CSharpTestBase
         "attributes.cs"
     );
 
-    private static readonly CSharpParseOptions RegularWithInterceptors = TestOptions
-        .Regular
-        .WithFeature("InterceptorsPreviewNamespaces", "global");
+    private static readonly CSharpParseOptions RegularWithInterceptors =
+        TestOptions.Regular.WithFeature("InterceptorsPreviewNamespaces", "global");
 
     [Fact]
     public void FeatureFlag()
@@ -152,9 +151,10 @@ public class InterceptorsTests : CSharpTestBase
 
         comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
-                .WithFeature("InterceptorsPreviewNamespaces", "NS1.NS2")
+            parseOptions: TestOptions.Regular.WithFeature(
+                "InterceptorsPreviewNamespaces",
+                "NS1.NS2"
+            )
         );
         comp.VerifyEmitDiagnostics(
             // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled. Add '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);NS1</InterceptorsPreviewNamespaces>' to your project.
@@ -178,9 +178,10 @@ public class InterceptorsTests : CSharpTestBase
 
         verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
-                .WithFeature("InterceptorsPreviewNamespaces", "NS1;NS2"),
+            parseOptions: TestOptions.Regular.WithFeature(
+                "InterceptorsPreviewNamespaces",
+                "NS1;NS2"
+            ),
             expectedOutput: "1"
         );
         verifier.VerifyDiagnostics();
@@ -231,9 +232,10 @@ public class InterceptorsTests : CSharpTestBase
         {
             var comp = CreateCompilation(
                 new[] { (source, "Program.cs"), s_attributesSource },
-                parseOptions: TestOptions
-                    .Regular
-                    .WithFeature("InterceptorsPreviewNamespaces", featureValue)
+                parseOptions: TestOptions.Regular.WithFeature(
+                    "InterceptorsPreviewNamespaces",
+                    featureValue
+                )
             );
             comp.VerifyEmitDiagnostics(
                 // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled. Add '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);NS1.NS2</InterceptorsPreviewNamespaces>' to your project.
@@ -253,9 +255,10 @@ public class InterceptorsTests : CSharpTestBase
         {
             var verifier = CompileAndVerify(
                 new[] { (source, "Program.cs"), s_attributesSource },
-                parseOptions: TestOptions
-                    .Regular
-                    .WithFeature("InterceptorsPreviewNamespaces", featureValue),
+                parseOptions: TestOptions.Regular.WithFeature(
+                    "InterceptorsPreviewNamespaces",
+                    featureValue
+                ),
                 expectedOutput: "1"
             );
             verifier.VerifyDiagnostics();
@@ -324,18 +327,20 @@ public class InterceptorsTests : CSharpTestBase
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
-                .WithFeature("InterceptorsPreviewNamespaces", "global"),
+            parseOptions: TestOptions.Regular.WithFeature(
+                "InterceptorsPreviewNamespaces",
+                "global"
+            ),
             expectedOutput: "1"
         );
         verifier.VerifyDiagnostics();
 
         verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
-                .WithFeature("interceptorspreviewnamespaces", "global"),
+            parseOptions: TestOptions.Regular.WithFeature(
+                "interceptorspreviewnamespaces",
+                "global"
+            ),
             expectedOutput: "1"
         );
         verifier.VerifyDiagnostics();
@@ -367,9 +372,10 @@ public class InterceptorsTests : CSharpTestBase
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
-                .WithFeature("InterceptorsPreviewNamespaces", "global.A")
+            parseOptions: TestOptions.Regular.WithFeature(
+                "InterceptorsPreviewNamespaces",
+                "global.A"
+            )
         );
         comp.VerifyEmitDiagnostics(
             // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled in this namespace. Add '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);global.B</InterceptorsPreviewNamespaces>' to your project.
@@ -5471,11 +5477,9 @@ partial struct CustomHandler
         var verifier = CompileAndVerify(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
-                .WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
-                ),
+            options: TestOptions.DebugExe.WithSourceReferenceResolver(
+                new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
+            ),
             expectedOutput: "1"
         );
         verifier.VerifyDiagnostics();
@@ -5510,11 +5514,9 @@ partial struct CustomHandler
         var comp = CreateCompilation(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
-                .WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
-                )
+            options: TestOptions.DebugExe.WithSourceReferenceResolver(
+                new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
+            )
         );
         comp.VerifyEmitDiagnostics(
             // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9145: Cannot intercept: Path 'C:\My\Machine\Specific\Path\Program.cs' is unmapped. Expected mapped path '/_/Program.cs'.
@@ -5555,11 +5557,9 @@ partial struct CustomHandler
         var comp = CreateCompilation(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
-                .WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
-                )
+            options: TestOptions.DebugExe.WithSourceReferenceResolver(
+                new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
+            )
         );
         comp.VerifyEmitDiagnostics(
             // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9140: Cannot intercept: compilation does not contain a file with path '\_\Program.cs'. Did you mean to use path '/_/Program.cs'?
@@ -5632,11 +5632,9 @@ partial struct CustomHandler
         var comp = CreateCompilation(
             new[] { (source1, path1), (source2, path2), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugDll
-                .WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
-                )
+            options: TestOptions.DebugDll.WithSourceReferenceResolver(
+                new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
+            )
         );
         comp.VerifyEmitDiagnostics(
             // C:\My\Machine\Specific\Path1\Program.cs(16,25): error CS9152: Cannot intercept a call in file with path '/_/Program.cs' because multiple files in the compilation have this path.
@@ -5675,11 +5673,9 @@ partial struct CustomHandler
         var verifier = CompileAndVerify(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
-                .WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
-                ),
+            options: TestOptions.DebugExe.WithSourceReferenceResolver(
+                new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
+            ),
             expectedOutput: "1"
         );
         verifier.VerifyDiagnostics();
@@ -5713,11 +5709,9 @@ partial struct CustomHandler
         var comp = CreateCompilation(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
-                .WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
-                )
+            options: TestOptions.DebugExe.WithSourceReferenceResolver(
+                new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
+            )
         );
         comp.VerifyEmitDiagnostics(
             // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9140: Cannot intercept: compilation does not contain a file with path '/_/Program.cs'. Did you mean to use path '\_/Program.cs'?
@@ -5759,11 +5753,9 @@ partial struct CustomHandler
         var verifier = CompileAndVerify(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
-                .WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
-                ),
+            options: TestOptions.DebugExe.WithSourceReferenceResolver(
+                new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
+            ),
             expectedOutput: "1"
         );
         verifier.VerifyDiagnostics();

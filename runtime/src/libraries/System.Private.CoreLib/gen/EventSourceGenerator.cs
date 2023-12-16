@@ -39,8 +39,7 @@ namespace Generators
                 "System.Diagnostics.Tracing.EventSourceAutoGenerateAttribute";
 
             IncrementalValuesProvider<EventSourceClass> eventSourceClasses = context
-                .SyntaxProvider
-                .ForAttributeWithMetadataName(
+                .SyntaxProvider.ForAttributeWithMetadataName(
                     EventSourceAutoGenerateAttribute,
                     (node, _) => node is ClassDeclarationSyntax,
                     GetSemanticTargetForGeneration

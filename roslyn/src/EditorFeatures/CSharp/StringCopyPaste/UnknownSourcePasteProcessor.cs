@@ -289,9 +289,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             ArrayBuilder<TextChange> edits
         )
         {
-            var endLine = TextBeforePaste
-                .Lines
-                .GetLineFromPosition(StringExpressionBeforePaste.Span.End);
+            var endLine = TextBeforePaste.Lines.GetLineFromPosition(
+                StringExpressionBeforePaste.Span.End
+            );
 
             // The indentation whitespace every line of the final raw string needs.
             var indentationWhitespace = endLine.GetLeadingWhitespace();
@@ -352,8 +352,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                         if (
                             line
                             == TextBeforePaste
-                                .Lines
-                                .GetLineFromPosition(StringExpressionBeforePaste.SpanStart)
+                                .Lines.GetLineFromPosition(StringExpressionBeforePaste.SpanStart)
                                 .LineNumber
                         )
                         {
@@ -422,8 +421,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                         if (
                             line
                             == TextBeforePaste
-                                .Lines
-                                .GetLineFromPosition(StringExpressionBeforePaste.Span.End)
+                                .Lines.GetLineFromPosition(StringExpressionBeforePaste.Span.End)
                                 .LineNumber
                         )
                         {

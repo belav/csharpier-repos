@@ -670,17 +670,21 @@ namespace System.Xml
             {
                 // this will be hit when user create a XmlReader by setting Async, but the first call is Read() instead of ReadAsync(),
                 // then we still should create an async stream here. And wait for the method finish.
-                Task<object> t = _laterInitParam
-                    .inputUriResolver
-                    .GetEntityAsync(_laterInitParam.inputbaseUri, string.Empty, typeof(Stream));
+                Task<object> t = _laterInitParam.inputUriResolver.GetEntityAsync(
+                    _laterInitParam.inputbaseUri,
+                    string.Empty,
+                    typeof(Stream)
+                );
                 stream = (Stream)t.GetAwaiter().GetResult();
             }
             else
             {
                 stream = (Stream?)
-                    _laterInitParam
-                        .inputUriResolver
-                        .GetEntity(_laterInitParam.inputbaseUri, string.Empty, typeof(Stream));
+                    _laterInitParam.inputUriResolver.GetEntity(
+                        _laterInitParam.inputbaseUri,
+                        string.Empty,
+                        typeof(Stream)
+                    );
             }
 
             if (stream == null)
@@ -8956,8 +8960,7 @@ namespace System.Xml
                                     int endPos = ParseQName(true, 1, out _);
                                     if (
                                         endPos - _ps.charPos - 1 == _curNode.localName.Length
-                                        && _ps.chars
-                                            .AsSpan(_ps.charPos + 1)
+                                        && _ps.chars.AsSpan(_ps.charPos + 1)
                                             .StartsWith(_curNode.localName)
                                         && (
                                             _ps.chars[endPos] == '>'

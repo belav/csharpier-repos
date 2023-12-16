@@ -23,28 +23,24 @@ namespace System.ServiceModel.Security
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.SFxTimeoutOutOfRange0)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.cachingTime = value;
@@ -61,15 +57,13 @@ namespace System.ServiceModel.Security
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.ValueMustBeNonNegative)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.maxCachedNonces = value;
             }

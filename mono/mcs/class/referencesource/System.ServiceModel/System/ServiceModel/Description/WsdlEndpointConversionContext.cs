@@ -75,9 +75,7 @@ namespace System.ServiceModel.Description
             get
             {
                 foreach (
-                    IWsdlExportExtension extension in endpoint
-                        .Behaviors
-                        .FindAll<IWsdlExportExtension>()
+                    IWsdlExportExtension extension in endpoint.Behaviors.FindAll<IWsdlExportExtension>()
                 )
                 {
                     yield return extension;
@@ -85,8 +83,7 @@ namespace System.ServiceModel.Description
 
                 foreach (
                     IWsdlExportExtension extension in endpoint
-                        .Binding
-                        .CreateBindingElements()
+                        .Binding.CreateBindingElements()
                         .FindAll<IWsdlExportExtension>()
                 )
                 {
@@ -94,10 +91,7 @@ namespace System.ServiceModel.Description
                 }
 
                 foreach (
-                    IWsdlExportExtension extension in endpoint
-                        .Contract
-                        .Behaviors
-                        .FindAll<IWsdlExportExtension>()
+                    IWsdlExportExtension extension in endpoint.Contract.Behaviors.FindAll<IWsdlExportExtension>()
                 )
                 {
                     yield return extension;
@@ -113,9 +107,8 @@ namespace System.ServiceModel.Description
                     // In 3.0SP1, the DCSOB and XSOB were moved from before to after the custom behaviors.  For
                     // IWsdlExportExtension compat, run them in the pre-SP1 order.
                     // TEF QFE 367607
-                    Collection<IWsdlExportExtension> extensions = operation
-                        .Behaviors
-                        .FindAll<IWsdlExportExtension>();
+                    Collection<IWsdlExportExtension> extensions =
+                        operation.Behaviors.FindAll<IWsdlExportExtension>();
                     for (int i = 0; i < extensions.Count; )
                     {
                         if (WsdlExporter.IsBuiltInOperationBehavior(extensions[i]))

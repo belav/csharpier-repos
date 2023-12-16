@@ -676,9 +676,10 @@ namespace Microsoft.VSDesigner.WCFModel
 
             foreach (NamespaceMapping namespaceMapping in proxyOptions.NamespaceMappingList)
             {
-                contractGenerator
-                    .NamespaceMappings
-                    .Add(namespaceMapping.TargetNamespace, namespaceMapping.ClrNamespace);
+                contractGenerator.NamespaceMappings.Add(
+                    namespaceMapping.TargetNamespace,
+                    namespaceMapping.ClrNamespace
+                );
             }
 
             return contractGenerator;
@@ -730,9 +731,8 @@ namespace Microsoft.VSDesigner.WCFModel
 
             try
             {
-                HttpBindingExtension httpBindingEx = importer
-                    .WsdlImportExtensions
-                    .Find<HttpBindingExtension>();
+                HttpBindingExtension httpBindingEx =
+                    importer.WsdlImportExtensions.Find<HttpBindingExtension>();
 
                 foreach (ContractDescription contract in contractCollection)
                 {
@@ -837,12 +837,12 @@ namespace Microsoft.VSDesigner.WCFModel
                     .EnableDataBinding;
             }
 
-            webReferenceOptions
-                .SchemaImporterExtensions
-                .Add(typedDataSetSchemaImporterExtension.AssemblyQualifiedName);
-            webReferenceOptions
-                .SchemaImporterExtensions
-                .Add(typeof(System.Data.DataSetSchemaImporterExtension).AssemblyQualifiedName);
+            webReferenceOptions.SchemaImporterExtensions.Add(
+                typedDataSetSchemaImporterExtension.AssemblyQualifiedName
+            );
+            webReferenceOptions.SchemaImporterExtensions.Add(
+                typeof(System.Data.DataSetSchemaImporterExtension).AssemblyQualifiedName
+            );
 
             /*
 
@@ -940,9 +940,10 @@ namespace Microsoft.VSDesigner.WCFModel
 
             foreach (NamespaceMapping namespaceMapping in proxyOptions.NamespaceMappingList)
             {
-                options
-                    .Namespaces
-                    .Add(namespaceMapping.TargetNamespace, namespaceMapping.ClrNamespace);
+                options.Namespaces.Add(
+                    namespaceMapping.TargetNamespace,
+                    namespaceMapping.ClrNamespace
+                );
             }
 
             xsdDataContractImporter.Options = options;
@@ -1497,14 +1498,10 @@ namespace Microsoft.VSDesigner.WCFModel
 
                 if (serviceModelSection != null)
                 {
-                    Collection<IWsdlImportExtension> wsdlImportExtensions = serviceModelSection
-                        .Client
-                        .Metadata
-                        .LoadWsdlImportExtensions();
-                    Collection<IPolicyImportExtension> policyImportExtensions = serviceModelSection
-                        .Client
-                        .Metadata
-                        .LoadPolicyImportExtensions();
+                    Collection<IWsdlImportExtension> wsdlImportExtensions =
+                        serviceModelSection.Client.Metadata.LoadWsdlImportExtensions();
+                    Collection<IPolicyImportExtension> policyImportExtensions =
+                        serviceModelSection.Client.Metadata.LoadPolicyImportExtensions();
 
                     // If we have specified a specific serializer to use, we remove
                     // the other serializer...
@@ -1554,35 +1551,31 @@ namespace Microsoft.VSDesigner.WCFModel
 
             // DevDiv 124333 - Always add DataContract importer (even if we are in XmlSerializerMode) to
             // enable importing Fault contracts...
-            importer
-                .State
-                .Add(
-                    typeof(System.Runtime.Serialization.XsdDataContractImporter),
-                    CreateDataContractImporter(
+            importer.State.Add(
+                typeof(System.Runtime.Serialization.XsdDataContractImporter),
+                CreateDataContractImporter(
+                    svcMapFile.ClientOptions,
+                    targetCompileUnit,
+                    codeDomProvider,
+                    targetNamespace,
+                    typeLoader,
+                    targetFrameworkVersion,
+                    importErrors
+                )
+            );
+
+            if (serializerType != ClientOptions.ProxySerializerType.DataContractSerializer)
+            {
+                importer.State.Add(
+                    typeof(System.ServiceModel.Channels.XmlSerializerImportOptions),
+                    CreateXmlSerializerImportOptions(
                         svcMapFile.ClientOptions,
                         targetCompileUnit,
                         codeDomProvider,
                         targetNamespace,
-                        typeLoader,
-                        targetFrameworkVersion,
-                        importErrors
+                        typedDataSetSchemaImporterExtension
                     )
                 );
-
-            if (serializerType != ClientOptions.ProxySerializerType.DataContractSerializer)
-            {
-                importer
-                    .State
-                    .Add(
-                        typeof(System.ServiceModel.Channels.XmlSerializerImportOptions),
-                        CreateXmlSerializerImportOptions(
-                            svcMapFile.ClientOptions,
-                            targetCompileUnit,
-                            codeDomProvider,
-                            targetNamespace,
-                            typedDataSetSchemaImporterExtension
-                        )
-                    );
             }
 
             // Read the UseSerializerForFaults from Reference.svcmap, create a FaultImportOptions using this information
@@ -1989,22 +1982,16 @@ namespace Microsoft.VSDesigner.WCFModel
             }
 
             bindingCollection = importer.ImportAllBindings();
-            System
-                .Diagnostics
-                .Debug
-                .Assert(
-                    bindingCollection != null,
-                    "The importer should never return a NULL binding collection!"
-                );
+            System.Diagnostics.Debug.Assert(
+                bindingCollection != null,
+                "The importer should never return a NULL binding collection!"
+            );
 
             contractCollection = importer.ImportAllContracts();
-            System
-                .Diagnostics
-                .Debug
-                .Assert(
-                    contractCollection != null,
-                    "The importer should never return a NULL contract collection!"
-                );
+            System.Diagnostics.Debug.Assert(
+                contractCollection != null,
+                "The importer should never return a NULL contract collection!"
+            );
 
             foreach (MetadataConversionError error in importer.Errors)
             {
@@ -2200,11 +2187,9 @@ namespace Microsoft.VSDesigner.WCFModel
             string fileExtension = codeDomProvider.FileExtension;
             try
             {
-                string language = System
-                    .CodeDom
-                    .Compiler
-                    .CodeDomProvider
-                    .GetLanguageFromExtension(fileExtension);
+                string language = System.CodeDom.Compiler.CodeDomProvider.GetLanguageFromExtension(
+                    fileExtension
+                );
                 return String.Equals(
                     language,
                     VB_LANGUAGE_NAME,

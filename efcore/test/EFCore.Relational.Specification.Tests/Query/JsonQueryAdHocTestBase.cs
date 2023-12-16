@@ -16,9 +16,9 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<MyContext32310>(seed: Seed32310);
         await using var context = contextFactory.CreateContext();
 
-        var query = context
-            .Pubs
-            .Where(u => u.Visits.DaysVisited.Contains(new DateOnly(2023, 1, 1)));
+        var query = context.Pubs.Where(
+            u => u.Visits.DaysVisited.Contains(new DateOnly(2023, 1, 1))
+        );
 
         var result = async ? await query.FirstOrDefaultAsync()! : query.FirstOrDefault()!;
 
@@ -235,8 +235,7 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         using (var context = contextFactory.CreateContext())
         {
             var result = context
-                .Entities
-                .OrderBy(x => x.Id)
+                .Entities.OrderBy(x => x.Id)
                 .Select(
                     x =>
                         new
@@ -295,8 +294,7 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         using (var context = contextFactory.CreateContext())
         {
             var query = context
-                .Entities
-                .OrderBy(x => x.Id)
+                .Entities.OrderBy(x => x.Id)
                 .Select(x => new { x.Reference.IntArray, x.Reference.ListOfString });
 
             var result = async ? await query.ToListAsync() : query.ToList();
@@ -320,8 +318,7 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         using (var context = contextFactory.CreateContext())
         {
             var query = context
-                .Entities
-                .OrderBy(x => x.Id)
+                .Entities.OrderBy(x => x.Id)
                 .Select(x => new { x.Collection[0].IntArray, x.Collection[1].ListOfString });
 
             var result = async ? await query.ToListAsync() : query.ToList();
@@ -345,8 +342,7 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         using (var context = contextFactory.CreateContext())
         {
             var query = context
-                .Entities
-                .OrderBy(x => x.Id)
+                .Entities.OrderBy(x => x.Id)
                 .Select(
                     x =>
                         new
@@ -409,8 +405,7 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         using (var context = contextFactory.CreateContext())
         {
             var query = context
-                .Entities
-                .Where(
+                .Entities.Where(
                     x =>
                         x.Reference.IntArray.AsQueryable().ElementAt(0) == 1
                         || x.Reference.ListOfString.AsQueryable().ElementAt(1) == "Bar"
@@ -760,35 +755,29 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
             Assert.NotNull(result[0].ReferenceWithCtor);
 
             var referenceEntry = context
-                .ChangeTracker
-                .Entries()
+                .ChangeTracker.Entries()
                 .Single(x => x.Entity == result[0].Reference);
             Assert.Equal("Foo", referenceEntry.Property("ShadowString").CurrentValue);
 
             var referenceCtorEntry = context
-                .ChangeTracker
-                .Entries()
+                .ChangeTracker.Entries()
                 .Single(x => x.Entity == result[0].ReferenceWithCtor);
             Assert.Equal(143, referenceCtorEntry.Property("Shadow_Int").CurrentValue);
 
             var collectionEntry1 = context
-                .ChangeTracker
-                .Entries()
+                .ChangeTracker.Entries()
                 .Single(x => x.Entity == result[0].Collection[0]);
             var collectionEntry2 = context
-                .ChangeTracker
-                .Entries()
+                .ChangeTracker.Entries()
                 .Single(x => x.Entity == result[0].Collection[1]);
             Assert.Equal(5.5, collectionEntry1.Property("ShadowDouble").CurrentValue);
             Assert.Equal(20.5, collectionEntry2.Property("ShadowDouble").CurrentValue);
 
             var collectionCtorEntry1 = context
-                .ChangeTracker
-                .Entries()
+                .ChangeTracker.Entries()
                 .Single(x => x.Entity == result[0].CollectionWithCtor[0]);
             var collectionCtorEntry2 = context
-                .ChangeTracker
-                .Entries()
+                .ChangeTracker.Entries()
                 .Single(x => x.Entity == result[0].CollectionWithCtor[1]);
             Assert.Equal((byte)6, collectionCtorEntry1.Property("ShadowNullableByte").CurrentValue);
             Assert.Null(collectionCtorEntry2.Property("ShadowNullableByte").CurrentValue);
@@ -827,16 +816,14 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context
-                .Entities
-                .Select(
-                    x =>
-                        new
-                        {
-                            ShadowString = EF.Property<string>(x.Reference, "ShadowString"),
-                            ShadowInt = EF.Property<int>(x.ReferenceWithCtor, "Shadow_Int"),
-                        }
-                );
+            var query = context.Entities.Select(
+                x =>
+                    new
+                    {
+                        ShadowString = EF.Property<string>(x.Reference, "ShadowString"),
+                        ShadowInt = EF.Property<int>(x.ReferenceWithCtor, "Shadow_Int"),
+                    }
+            );
 
             var result = async ? await query.ToListAsync() : query.ToList();
 

@@ -164,8 +164,7 @@ namespace TypeSystemTests
                 )
                 {
                     var typeIdentifierAttribute = module
-                        .MetadataReader
-                        .GetCustomAttribute(attributeHandle)
+                        .MetadataReader.GetCustomAttribute(attributeHandle)
                         .DecodeValue(customAttributeTypeProvider);
 
                     if (typeIdentifierAttribute.FixedArguments.Length != 2)

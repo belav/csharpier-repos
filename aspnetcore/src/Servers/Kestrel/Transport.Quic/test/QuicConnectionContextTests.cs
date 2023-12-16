@@ -114,9 +114,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         Assert.NotNull(serverStream);
 
         var read = await serverStream
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         Assert.Equal(TestData, read.Buffer.ToArray());
         serverStream.Transport.Input.AdvanceTo(read.Buffer.End);
@@ -197,9 +195,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         // Read data from client.
         var read = await serverStream
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         Assert.Equal(TestData, read.Buffer.ToArray());
         serverStream.Transport.Input.AdvanceTo(read.Buffer.End);
@@ -250,9 +246,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         // Read data from client.
         var read = await serverStream
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         Assert.Equal(TestData, read.Buffer.ToArray());
         serverStream.Transport.Input.AdvanceTo(read.Buffer.End);
@@ -383,9 +377,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         await clientStream.WriteAsync(TestData, completeWrites: true).DefaultTimeout();
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
         var readResult = await serverStream
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         serverStream.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
@@ -436,9 +428,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         await clientStream.WriteAsync(TestData, completeWrites: true).DefaultTimeout();
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
         var readResult = await serverStream
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         serverStream.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
@@ -492,9 +482,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
         var readResult = await serverStream
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         serverStream.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
@@ -558,9 +546,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
         var readResult = await serverStream
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         serverStream.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
@@ -732,15 +718,13 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         static async Task SendStream(RequestState requestState)
         {
-            var clientStream = await requestState
-                .QuicConnection
-                .OpenOutboundStreamAsync(QuicStreamType.Bidirectional);
+            var clientStream = await requestState.QuicConnection.OpenOutboundStreamAsync(
+                QuicStreamType.Bidirectional
+            );
             await clientStream.WriteAsync(TestData, completeWrites: true).DefaultTimeout();
             var serverStream = await requestState.ServerConnection.AcceptAsync().DefaultTimeout();
             var readResult = await serverStream
-                .Transport
-                .Input
-                .ReadAtLeastAsync(TestData.Length)
+                .Transport.Input.ReadAtLeastAsync(TestData.Length)
                 .DefaultTimeout();
             serverStream.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
@@ -802,9 +786,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         Logger.LogInformation("Server reading stream 1");
         var readResult1 = await serverStream1
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         serverStream1.Transport.Input.AdvanceTo(readResult1.Buffer.End);
 
@@ -836,9 +818,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         Logger.LogInformation("Server reading stream 2");
         var readResult2 = await serverStream2
-            .Transport
-            .Input
-            .ReadAtLeastAsync(TestData.Length)
+            .Transport.Input.ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         serverStream2.Transport.Input.AdvanceTo(readResult2.Buffer.End);
 

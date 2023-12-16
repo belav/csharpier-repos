@@ -67,9 +67,10 @@ namespace System.Linq.Expressions.Compiler
             var name = new AssemblyName("Snippets");
 
 #if SILVERLIGHT  // AssemblyBuilderAccess.RunAndSave, Environment.CurrentDirectory
-            _myAssembly = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
+            _myAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                name,
+                AssemblyBuilderAccess.Run
+            );
             _myModule = _myAssembly.DefineDynamicModule(name.Name, false);
 #else
 
@@ -105,28 +106,28 @@ namespace System.Linq.Expressions.Compiler
 
                 _outFileName = name.Name + ".dll";
                 _outDir = outDir;
-                _myAssembly = AppDomain
-                    .CurrentDomain
-                    .DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.RunAndSave,
-                        outDir,
-                        null,
-                        null,
-                        null,
-                        null,
-                        false,
-                        attributes
-                    );
+                _myAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    name,
+                    AssemblyBuilderAccess.RunAndSave,
+                    outDir,
+                    null,
+                    null,
+                    null,
+                    null,
+                    false,
+                    attributes
+                );
 
                 _myModule = _myAssembly.DefineDynamicModule(name.Name, _outFileName, false);
             }
             else
 #endif
             {
-                _myAssembly = AppDomain
-                    .CurrentDomain
-                    .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, attributes);
+                _myAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    name,
+                    AssemblyBuilderAccess.Run,
+                    attributes
+                );
                 _myModule = _myAssembly.DefineDynamicModule(name.Name, false);
             }
 

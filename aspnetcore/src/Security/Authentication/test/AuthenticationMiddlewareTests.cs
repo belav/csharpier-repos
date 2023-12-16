@@ -229,21 +229,19 @@ public class AuthenticationMiddlewareTests
     public async Task WebApplicationBuilder_RegistersAuthenticationAndAuthorizationMiddlewares()
     {
         var builder = WebApplication.CreateBuilder();
-        builder
-            .Configuration
-            .AddInMemoryCollection(
-                new[]
-                {
-                    new KeyValuePair<string, string>(
-                        "Authentication:Schemes:Bearer:ValidIssuer",
-                        "SomeIssuer"
-                    ),
-                    new KeyValuePair<string, string>(
-                        "Authentication:Schemes:Bearer:ValidAudiences:0",
-                        "https://localhost:5001"
-                    )
-                }
-            );
+        builder.Configuration.AddInMemoryCollection(
+            new[]
+            {
+                new KeyValuePair<string, string>(
+                    "Authentication:Schemes:Bearer:ValidIssuer",
+                    "SomeIssuer"
+                ),
+                new KeyValuePair<string, string>(
+                    "Authentication:Schemes:Bearer:ValidAudiences:0",
+                    "https://localhost:5001"
+                )
+            }
+        );
         builder.Services.AddAuthorization();
         builder.Services.AddAuthentication().AddJwtBearer();
         await using var app = builder.Build();
@@ -258,8 +256,7 @@ public class AuthenticationMiddlewareTests
         Assert.True(app.Properties.ContainsKey("__AuthenticationMiddlewareSet"));
         Assert.True(app.Properties.ContainsKey("__AuthorizationMiddlewareSet"));
 
-        var options = app.Services
-            .GetService<IOptionsMonitor<JwtBearerOptions>>()
+        var options = app.Services.GetService<IOptionsMonitor<JwtBearerOptions>>()
             .Get(JwtBearerDefaults.AuthenticationScheme);
         Assert.Equal(new[] { "SomeIssuer" }, options.TokenValidationParameters.ValidIssuers);
         Assert.Equal(

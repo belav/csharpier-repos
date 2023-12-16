@@ -15,14 +15,12 @@ namespace System.Formats.Tar
         {
             Debug.Assert(EntryType is TarEntryType.BlockDevice);
             Interop.CheckIo(
-                Interop
-                    .Sys
-                    .CreateBlockDevice(
-                        destinationFileName,
-                        (uint)Mode,
-                        (uint)_header._devMajor,
-                        (uint)_header._devMinor
-                    ),
+                Interop.Sys.CreateBlockDevice(
+                    destinationFileName,
+                    (uint)Mode,
+                    (uint)_header._devMajor,
+                    (uint)_header._devMinor
+                ),
                 destinationFileName
             );
         }
@@ -32,14 +30,12 @@ namespace System.Formats.Tar
         {
             Debug.Assert(EntryType is TarEntryType.CharacterDevice);
             Interop.CheckIo(
-                Interop
-                    .Sys
-                    .CreateCharacterDevice(
-                        destinationFileName,
-                        (uint)Mode,
-                        (uint)_header._devMajor,
-                        (uint)_header._devMinor
-                    ),
+                Interop.Sys.CreateCharacterDevice(
+                    destinationFileName,
+                    (uint)Mode,
+                    (uint)_header._devMajor,
+                    (uint)_header._devMinor
+                ),
                 destinationFileName
             );
         }

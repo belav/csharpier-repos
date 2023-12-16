@@ -863,16 +863,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             if (this.Common.ProcessModeRegions)
             {
                 // Add hot region
-                this.Common
-                    .HotRegionsList
-                    .AddHotRegion(
-                        segmentPath,
-                        false,
-                        this.Graph,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                this.Common.HotRegionsList.AddHotRegion(
+                    segmentPath,
+                    false,
+                    this.Graph,
+                    point,
+                    point.series.Name,
+                    pointIndex
+                );
             }
             segmentPath.Dispose();
 
@@ -941,16 +939,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             if (this.Common.ProcessModeRegions)
             {
                 // Add hot region
-                this.Common
-                    .HotRegionsList
-                    .AddHotRegion(
-                        segmentPath,
-                        false,
-                        this.Graph,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                this.Common.HotRegionsList.AddHotRegion(
+                    segmentPath,
+                    false,
+                    this.Graph,
+                    point,
+                    point.series.Name,
+                    pointIndex
+                );
             }
             segmentPath.Dispose();
 
@@ -995,16 +991,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     if (this.Common.ProcessModeRegions)
                     {
                         // Add hot region
-                        this.Common
-                            .HotRegionsList
-                            .AddHotRegion(
-                                topCurve,
-                                false,
-                                this.Graph,
-                                point,
-                                point.series.Name,
-                                pointIndex
-                            );
+                        this.Common.HotRegionsList.AddHotRegion(
+                            topCurve,
+                            false,
+                            this.Graph,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                     }
                     topCurve.Dispose();
                 }
@@ -1057,16 +1051,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     if (this.Common.ProcessModeRegions)
                     {
                         // Add hot region
-                        this.Common
-                            .HotRegionsList
-                            .AddHotRegion(
-                                topCurve,
-                                false,
-                                this.Graph,
-                                point,
-                                point.series.Name,
-                                pointIndex
-                            );
+                        this.Common.HotRegionsList.AddHotRegion(
+                            topCurve,
+                            false,
+                            this.Graph,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                     }
                     topCurve.Dispose();
                 }
@@ -1453,16 +1445,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             if (this.Common.ProcessModeRegions)
             {
                 // Add hot region
-                this.Common
-                    .HotRegionsList
-                    .AddHotRegion(
-                        segmentPath,
-                        false,
-                        this.Graph,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                this.Common.HotRegionsList.AddHotRegion(
+                    segmentPath,
+                    false,
+                    this.Graph,
+                    point,
+                    point.series.Name,
+                    pointIndex
+                );
             }
             segmentPath.Dispose();
 
@@ -1506,16 +1496,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     if (this.Common.ProcessModeRegions)
                     {
                         // Add hot region
-                        this.Common
-                            .HotRegionsList
-                            .AddHotRegion(
-                                topCurve,
-                                false,
-                                this.Graph,
-                                point,
-                                point.series.Name,
-                                pointIndex
-                            );
+                        this.Common.HotRegionsList.AddHotRegion(
+                            topCurve,
+                            false,
+                            this.Graph,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                     }
                     topCurve.Dispose();
                 }
@@ -1567,16 +1555,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     if (this.Common.ProcessModeRegions)
                     {
                         // Add hot region
-                        this.Common
-                            .HotRegionsList
-                            .AddHotRegion(
-                                topCurve,
-                                false,
-                                this.Graph,
-                                point,
-                                point.series.Name,
-                                pointIndex
-                            );
+                        this.Common.HotRegionsList.AddHotRegion(
+                            topCurve,
+                            false,
+                            this.Graph,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                     }
                     topCurve.Dispose();
                 }
@@ -1615,9 +1601,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 this._funnelNeckSize = GetFunnelNeckSize(series);
 
                 // Loop through all ponts in the data series
-                float currentLocation = this.Graph
-                    .GetAbsolutePoint(this.PlotAreaPosition.Location)
-                    .Y;
+                float currentLocation = this.Graph.GetAbsolutePoint(
+                    this.PlotAreaPosition.Location
+                ).Y;
                 if (this.isPyramid)
                 {
                     // Pyramid is drawn in reversed order.

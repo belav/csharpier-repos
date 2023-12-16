@@ -212,15 +212,13 @@
             }
 
             bool usingAreas;
-            VirtualPathData vpd = htmlHelper
-                .RouteCollection
-                .GetVirtualPathForArea(
-                    htmlHelper.ViewContext.RequestContext,
-                    null /* name */
-                    ,
-                    routeValues,
-                    out usingAreas
-                );
+            VirtualPathData vpd = htmlHelper.RouteCollection.GetVirtualPathForArea(
+                htmlHelper.ViewContext.RequestContext,
+                null /* name */
+                ,
+                routeValues,
+                out usingAreas
+            );
             if (vpd == null)
             {
                 throw new InvalidOperationException(MvcResources.Common_NoRouteMatched);
@@ -253,13 +251,11 @@
             HttpContextBase httpContext = htmlHelper.ViewContext.HttpContext;
             RequestContext requestContext = new RequestContext(httpContext, routeData);
             ChildActionMvcHandler handler = new ChildActionMvcHandler(requestContext);
-            httpContext
-                .Server
-                .Execute(
-                    HttpHandlerUtil.WrapForServerExecute(handler),
-                    textWriter,
-                    true /* preserveForm */
-                );
+            httpContext.Server.Execute(
+                HttpHandlerUtil.WrapForServerExecute(handler),
+                textWriter,
+                true /* preserveForm */
+            );
         }
 
         private static RouteData CreateRouteData(

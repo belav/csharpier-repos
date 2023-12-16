@@ -168,13 +168,10 @@ namespace System.Xaml
             )
             {
                 if (type == typeof(DateTime))
-                    return System
-                        .Xml
-                        .XmlConvert
-                        .ToDateTime(
-                            (string)value,
-                            System.Xml.XmlDateTimeSerializationMode.Unspecified
-                        );
+                    return System.Xml.XmlConvert.ToDateTime(
+                        (string)value,
+                        System.Xml.XmlDateTimeSerializationMode.Unspecified
+                    );
                 return ((IConvertible)value).ToType(type, CultureInfo.InvariantCulture);
             }
 
@@ -283,8 +280,7 @@ namespace System.Xaml
         {
             var args = type.GetConstructorArguments().ToArray();
             foreach (
-                var ci in type.UnderlyingType
-                    .GetConstructors()
+                var ci in type.UnderlyingType.GetConstructors()
                     .Where(c => c.GetParameters().Length == args.Length)
             )
             {

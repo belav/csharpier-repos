@@ -122,8 +122,7 @@ file class C
             var compilation = await project.GetCompilationAsync();
 
             var type = compilation
-                .GlobalNamespace
-                .GetMembers("C")
+                .GlobalNamespace.GetMembers("C")
                 .Single()
                 .GetMembers("Inner")
                 .Single();
@@ -180,11 +179,9 @@ file class C
             Assert.Equal(
                 "global::ConditionalWeakTableTest<TKey!, TValue!>.CreateValueCallback!",
                 parameterType.ToDisplayString(
-                    SymbolDisplayFormat
-                        .FullyQualifiedFormat
-                        .WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                        )
+                    SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
+                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                    )
                 )
             );
 
@@ -211,9 +208,9 @@ file class C
                 var solution = workspace.CurrentSolution;
 
                 var bodyProject = solution.Projects.Single(p => p.AssemblyName == "BodyProject");
-                var referenceProject = solution
-                    .Projects
-                    .Single(p => p.AssemblyName == "ReferenceProject");
+                var referenceProject = solution.Projects.Single(
+                    p => p.AssemblyName == "ReferenceProject"
+                );
 
                 var (bodyCompilation, referenceCompilation) = await GetCompilationsAsync(
                     bodyProject,

@@ -158,9 +158,10 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
         {
             Sequence<Handler> list;
             if (
-                !CurrentSubroutineWithHandlers
-                    .ProtectingHandlers
-                    .TryGetValue(currentBlock, out list)
+                !CurrentSubroutineWithHandlers.ProtectingHandlers.TryGetValue(
+                    currentBlock,
+                    out list
+                )
             )
                 return;
             CurrentSubroutineWithHandlers.ProtectingHandlers.Add(newBlock, list);

@@ -162,26 +162,20 @@ internal class EndpointParameter
             Source = EndpointParameterSource.FormBody;
             LookupName = GetEscapedParameterName(fromFormAttribute, symbol.Name);
             if (
-                SymbolEqualityComparer
-                    .Default
-                    .Equals(
-                        Type,
-                        wellKnownTypes.Get(
-                            WellKnownType.Microsoft_AspNetCore_Http_IFormFileCollection
-                        )
-                    )
+                SymbolEqualityComparer.Default.Equals(
+                    Type,
+                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormFileCollection)
+                )
             )
             {
                 IsFormFile = true;
                 AssigningCode = "httpContext.Request.Form.Files";
             }
             else if (
-                SymbolEqualityComparer
-                    .Default
-                    .Equals(
-                        Type,
-                        wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormFile)
-                    )
+                SymbolEqualityComparer.Default.Equals(
+                    Type,
+                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormFile)
+                )
             )
             {
                 IsFormFile = true;
@@ -189,12 +183,10 @@ internal class EndpointParameter
                     $"httpContext.Request.Form.Files[{SymbolDisplay.FormatLiteral(LookupName, true)}]";
             }
             else if (
-                SymbolEqualityComparer
-                    .Default
-                    .Equals(
-                        Type,
-                        wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormCollection)
-                    )
+                SymbolEqualityComparer.Default.Equals(
+                    Type,
+                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormCollection)
+                )
             )
             {
                 AssigningCode = "httpContext.Request.Form";
@@ -211,18 +203,20 @@ internal class EndpointParameter
         else if (TryGetExplicitFromJsonBody(symbol, attributes, wellKnownTypes, out var isOptional))
         {
             if (
-                SymbolEqualityComparer
-                    .Default
-                    .Equals(Type, wellKnownTypes.Get(WellKnownType.System_IO_Stream))
+                SymbolEqualityComparer.Default.Equals(
+                    Type,
+                    wellKnownTypes.Get(WellKnownType.System_IO_Stream)
+                )
             )
             {
                 Source = EndpointParameterSource.SpecialType;
                 AssigningCode = "httpContext.Request.Body";
             }
             else if (
-                SymbolEqualityComparer
-                    .Default
-                    .Equals(Type, wellKnownTypes.Get(WellKnownType.System_IO_Pipelines_PipeReader))
+                SymbolEqualityComparer.Default.Equals(
+                    Type,
+                    wellKnownTypes.Get(WellKnownType.System_IO_Pipelines_PipeReader)
+                )
             )
             {
                 Source = EndpointParameterSource.SpecialType;
@@ -254,14 +248,12 @@ internal class EndpointParameter
             )
             {
                 var location = endpoint.Operation.Syntax.GetLocation();
-                endpoint
-                    .Diagnostics
-                    .Add(
-                        Diagnostic.Create(
-                            DiagnosticDescriptors.KeyedAndNotKeyedServiceAttributesNotSupported,
-                            location
-                        )
-                    );
+                endpoint.Diagnostics.Add(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.KeyedAndNotKeyedServiceAttributesNotSupported,
+                        location
+                    )
+                );
             }
         }
         else if (
@@ -287,15 +279,13 @@ internal class EndpointParameter
             var location = endpoint.Operation.Syntax.GetLocation();
             if (IsOptional)
             {
-                endpoint
-                    .Diagnostics
-                    .Add(
-                        Diagnostic.Create(
-                            DiagnosticDescriptors.InvalidAsParametersNullable,
-                            location,
-                            Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
-                        )
-                    );
+                endpoint.Diagnostics.Add(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.InvalidAsParametersNullable,
+                        location,
+                        Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
+                    )
+                );
             }
             if (
                 symbol is IPropertySymbol
@@ -310,14 +300,9 @@ internal class EndpointParameter
             {
                 if (symbol is IPropertySymbol)
                 {
-                    endpoint
-                        .Diagnostics
-                        .Add(
-                            Diagnostic.Create(
-                                DiagnosticDescriptors.InvalidAsParametersNested,
-                                location
-                            )
-                        );
+                    endpoint.Diagnostics.Add(
+                        Diagnostic.Create(DiagnosticDescriptors.InvalidAsParametersNested, location)
+                    );
                 }
                 return;
             }
@@ -357,12 +342,10 @@ internal class EndpointParameter
             AssigningCode = specialTypeAssigningCode;
         }
         else if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(
-                    Type,
-                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormFileCollection)
-                )
+            SymbolEqualityComparer.Default.Equals(
+                Type,
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormFileCollection)
+            )
         )
         {
             endpoint.IsAwaitable = true;
@@ -371,9 +354,10 @@ internal class EndpointParameter
             AssigningCode = "httpContext.Request.Form.Files";
         }
         else if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(Type, wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormFile))
+            SymbolEqualityComparer.Default.Equals(
+                Type,
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormFile)
+            )
         )
         {
             endpoint.IsAwaitable = true;
@@ -383,12 +367,10 @@ internal class EndpointParameter
                 $"httpContext.Request.Form.Files[{SymbolDisplay.FormatLiteral(LookupName, true)}]";
         }
         else if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(
-                    Type,
-                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormCollection)
-                )
+            SymbolEqualityComparer.Default.Equals(
+                Type,
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IFormCollection)
+            )
         )
         {
             endpoint.IsAwaitable = true;
@@ -418,12 +400,10 @@ internal class EndpointParameter
             Source = EndpointParameterSource.JsonBodyOrQuery;
         }
         else if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(
-                    Type,
-                    wellKnownTypes.Get(WellKnownType.Microsoft_Extensions_Primitives_StringValues)
-                )
+            SymbolEqualityComparer.Default.Equals(
+                Type,
+                wellKnownTypes.Get(WellKnownType.Microsoft_Extensions_Primitives_StringValues)
+            )
         )
         {
             Source = EndpointParameterSource.Query;
@@ -600,18 +580,20 @@ internal class EndpointParameter
                 $$"""{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}.TryParse({{inputArgument}}!, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AllowWhiteSpaces, out var {{outputArgument}})""";
         }
         else if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(parameterType, wellKnownTypes.Get(WellKnownType.System_DateTimeOffset))
+            SymbolEqualityComparer.Default.Equals(
+                parameterType,
+                wellKnownTypes.Get(WellKnownType.System_DateTimeOffset)
+            )
         )
         {
             preferredTryParseInvocation = (string inputArgument, string outputArgument) =>
                 $$"""{{parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}}.TryParse({{inputArgument}}!, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AllowWhiteSpaces, out var {{outputArgument}})""";
         }
         else if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(parameterType, wellKnownTypes.Get(WellKnownType.System_DateOnly))
+            SymbolEqualityComparer.Default.Equals(
+                parameterType,
+                wellKnownTypes.Get(WellKnownType.System_DateOnly)
+            )
         )
         {
             preferredTryParseInvocation = (string inputArgument, string outputArgument) =>
@@ -699,75 +681,70 @@ internal class EndpointParameter
     {
         callingCode = null;
         if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(
-                    type,
-                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HttpContext)
-                )
+            SymbolEqualityComparer.Default.Equals(
+                type,
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HttpContext)
+            )
         )
         {
             callingCode = "httpContext";
             return true;
         }
         if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(
-                    type,
-                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HttpRequest)
-                )
+            SymbolEqualityComparer.Default.Equals(
+                type,
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HttpRequest)
+            )
         )
         {
             callingCode = "httpContext.Request";
             return true;
         }
         if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(
-                    type,
-                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HttpResponse)
-                )
+            SymbolEqualityComparer.Default.Equals(
+                type,
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HttpResponse)
+            )
         )
         {
             callingCode = "httpContext.Response";
             return true;
         }
         if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(type, wellKnownTypes.Get(WellKnownType.System_IO_Pipelines_PipeReader))
+            SymbolEqualityComparer.Default.Equals(
+                type,
+                wellKnownTypes.Get(WellKnownType.System_IO_Pipelines_PipeReader)
+            )
         )
         {
             callingCode = "httpContext.Request.BodyReader";
             return true;
         }
         if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(type, wellKnownTypes.Get(WellKnownType.System_IO_Stream))
+            SymbolEqualityComparer.Default.Equals(
+                type,
+                wellKnownTypes.Get(WellKnownType.System_IO_Stream)
+            )
         )
         {
             callingCode = "httpContext.Request.Body";
             return true;
         }
         if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(
-                    type,
-                    wellKnownTypes.Get(WellKnownType.System_Security_Claims_ClaimsPrincipal)
-                )
+            SymbolEqualityComparer.Default.Equals(
+                type,
+                wellKnownTypes.Get(WellKnownType.System_Security_Claims_ClaimsPrincipal)
+            )
         )
         {
             callingCode = "httpContext.User";
             return true;
         }
         if (
-            SymbolEqualityComparer
-                .Default
-                .Equals(type, wellKnownTypes.Get(WellKnownType.System_Threading_CancellationToken))
+            SymbolEqualityComparer.Default.Equals(
+                type,
+                wellKnownTypes.Get(WellKnownType.System_Threading_CancellationToken)
+            )
         )
         {
             callingCode = "httpContext.RequestAborted";
@@ -846,15 +823,13 @@ internal class EndpointParameter
         var location = endpoint.Operation.Syntax.GetLocation();
         if (type.IsAbstract)
         {
-            endpoint
-                .Diagnostics
-                .Add(
-                    Diagnostic.Create(
-                        DiagnosticDescriptors.InvalidAsParametersAbstractType,
-                        location,
-                        parameterTypeString
-                    )
-                );
+            endpoint.Diagnostics.Add(
+                Diagnostic.Create(
+                    DiagnosticDescriptors.InvalidAsParametersAbstractType,
+                    location,
+                    parameterTypeString
+                )
+            );
             return false;
         }
 
@@ -900,15 +875,13 @@ internal class EndpointParameter
                 }
                 else
                 {
-                    endpoint
-                        .Diagnostics
-                        .Add(
-                            Diagnostic.Create(
-                                DiagnosticDescriptors.InvalidAsParametersSignature,
-                                location,
-                                parameterTypeString
-                            )
-                        );
+                    endpoint.Diagnostics.Add(
+                        Diagnostic.Create(
+                            DiagnosticDescriptors.InvalidAsParametersSignature,
+                            location,
+                            parameterTypeString
+                        )
+                    );
                     return false;
                 }
             }
@@ -929,27 +902,23 @@ internal class EndpointParameter
 
         if (numOfConstructors > 1)
         {
-            endpoint
-                .Diagnostics
-                .Add(
-                    Diagnostic.Create(
-                        DiagnosticDescriptors.InvalidAsParametersSingleConstructorOnly,
-                        location,
-                        parameterTypeString
-                    )
-                );
-            return false;
-        }
-
-        endpoint
-            .Diagnostics
-            .Add(
+            endpoint.Diagnostics.Add(
                 Diagnostic.Create(
-                    DiagnosticDescriptors.InvalidAsParametersNoConstructorFound,
+                    DiagnosticDescriptors.InvalidAsParametersSingleConstructorOnly,
                     location,
                     parameterTypeString
                 )
             );
+            return false;
+        }
+
+        endpoint.Diagnostics.Add(
+            Diagnostic.Create(
+                DiagnosticDescriptors.InvalidAsParametersNoConstructorFound,
+                location,
+                parameterTypeString
+            )
+        );
         return false;
     }
 

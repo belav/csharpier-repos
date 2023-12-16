@@ -176,21 +176,19 @@ namespace System.ServiceModel.Dispatcher
         {
             object customPrincipal;
             if (
-                securityContext
-                    .AuthorizationContext
-                    .Properties
-                    .TryGetValue(SecurityUtils.Principal, out customPrincipal)
+                securityContext.AuthorizationContext.Properties.TryGetValue(
+                    SecurityUtils.Principal,
+                    out customPrincipal
+                )
                 && customPrincipal is IPrincipal
             )
                 return (IPrincipal)customPrincipal;
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)
+                    )
+                );
         }
 
         internal bool IsSecurityContextImpersonationRequired(ref MessageRpc rpc)
@@ -284,9 +282,9 @@ namespace System.ServiceModel.Dispatcher
                         WindowsSidIdentity sidIdentity = (WindowsSidIdentity)
                             securityContext.PrimaryIdentity;
                         if (
-                            sidIdentity
-                                .SecurityIdentifier
-                                .IsWellKnown(WellKnownSidType.AnonymousSid)
+                            sidIdentity.SecurityIdentifier.IsWellKnown(
+                                WellKnownSidType.AnonymousSid
+                            )
                         )
                         {
                             impersonationContext = new WindowsAnonymousIdentity().Impersonate();
@@ -493,13 +491,11 @@ namespace System.ServiceModel.Dispatcher
                 || (delimiterPos == downlevelName.Length - 1)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName)
+                    )
+                );
             }
             string shortDomainName = downlevelName.Substring(0, delimiterPos + 1);
             string userName = downlevelName.Substring(delimiterPos + 1);
@@ -542,26 +538,22 @@ namespace System.ServiceModel.Dispatcher
                         )
                         {
                             errorCode = Marshal.GetLastWin32Error();
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperWarning(
-                                    new InvalidOperationException(
-                                        SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName),
-                                        new Win32Exception(errorCode)
-                                    )
-                                );
-                        }
-                    }
-                    else
-                    {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperWarning(
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
                                 new InvalidOperationException(
                                     SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName),
                                     new Win32Exception(errorCode)
                                 )
                             );
+                        }
+                    }
+                    else
+                    {
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName),
+                                new Win32Exception(errorCode)
+                            )
+                        );
                     }
                 }
                 // trim the trailing / from fqdn
@@ -661,18 +653,18 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new Win32Exception(error));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(error)
+                        );
                     }
                 }
 
                 if (!SafeNativeMethods.ImpersonateAnonymousUserOnCurrentThread(threadHandle))
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new Win32Exception(error));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(error)
+                    );
                 }
 
                 return new ImpersonationContext(threadHandle, tokenHandle);
@@ -701,16 +693,14 @@ namespace System.ServiceModel.Dispatcher
                     if (!SafeNativeMethods.SetCurrentThreadToken(IntPtr.Zero, this.tokenHandle))
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new SecurityException(
-                                    SR.GetString(
-                                        SR.RevertImpersonationFailure,
-                                        new Win32Exception(error).Message
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.RevertImpersonationFailure,
+                                    new Win32Exception(error).Message
                                 )
-                            );
+                            )
+                        );
                     }
                     tokenHandle.Close();
                 }

@@ -110,9 +110,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
                 return;
 
             if (
-                thisOrBaseKeyword
-                    .LeadingTrivia
-                    .Any(t => !t.IsWhitespaceOrEndOfLine() && !t.IsSingleOrMultiLineComment())
+                thisOrBaseKeyword.LeadingTrivia.Any(
+                    t => !t.IsWhitespaceOrEndOfLine() && !t.IsSingleOrMultiLineComment()
+                )
             )
                 return;
 

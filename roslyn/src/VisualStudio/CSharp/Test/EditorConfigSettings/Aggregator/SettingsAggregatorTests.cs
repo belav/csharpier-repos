@@ -20,8 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Ag
         public static Workspace CreateWorkspace(params Type[]? additionalParts) =>
             new AdhocWorkspace(
                 VisualStudioTestCompositions
-                    .LanguageServices
-                    .AddParts(additionalParts)
+                    .LanguageServices.AddParts(additionalParts)
                     .GetHostServices(),
                 WorkspaceKind.Host
             );
@@ -35,8 +34,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Ag
             Assert.True(
                 workspace.TryApplyChanges(
                     workspace
-                        .CurrentSolution
-                        .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp)
+                        .CurrentSolution.AddProject(
+                            projectId,
+                            "proj1",
+                            "proj1.dll",
+                            LanguageNames.CSharp
+                        )
                         .AddDocument(
                             DocumentId.CreateNewId(projectId),
                             "goo.cs",

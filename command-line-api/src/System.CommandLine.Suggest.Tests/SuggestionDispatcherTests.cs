@@ -172,9 +172,7 @@ namespace System.CommandLine.Suggest.Tests
             await dispatcher.InvokeAsync(new[] { "list" });
 
             dispatcher
-                .Configuration
-                .Output
-                .ToString()
+                .Configuration.Output.ToString()
                 .Should()
                 .Be(
                     $"dotnet-format{Environment.NewLine}dotnet format{Environment.NewLine}kiwi-fruit{Environment.NewLine}"

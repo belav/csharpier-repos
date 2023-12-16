@@ -56,9 +56,12 @@ namespace DbLinq.Sqlite
             var sql = string.Format(SelectTablesFormat, "");
             const string pragma = @"PRAGMA table_info('{0}');";
 
-            return Schema
-                .DataCommand
-                .Find<IDataTableColumn>(connectionString, sql, pragma, ReadColumn);
+            return Schema.DataCommand.Find<IDataTableColumn>(
+                connectionString,
+                sql,
+                pragma,
+                ReadColumn
+            );
         }
     }
 }

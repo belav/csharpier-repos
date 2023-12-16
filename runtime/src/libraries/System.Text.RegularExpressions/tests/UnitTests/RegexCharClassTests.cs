@@ -32,8 +32,7 @@ namespace System.Text.RegularExpressions.Tests
         {
             RegexNode setNode = RegexParser
                 .Parse($"{set}", RegexOptions.None, CultureInfo.InvariantCulture)
-                .Root
-                .Child(0);
+                .Root.Child(0);
             Assert.Equal(expected, RegexCharClass.DescribeSet(setNode.Str!));
         }
 
@@ -78,8 +77,7 @@ namespace System.Text.RegularExpressions.Tests
         {
             RegexNode setNode = RegexParser
                 .Parse($"{set}", RegexOptions.None, CultureInfo.InvariantCulture)
-                .Root
-                .Child(0);
+                .Root.Child(0);
             RegexCharClass.CharClassAnalysisResults results = RegexCharClass.Analyze(setNode.Str!);
 
             Assert.Equal(allAsciiContained, results.AllAsciiContained);

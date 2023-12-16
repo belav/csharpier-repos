@@ -268,9 +268,10 @@ public class InMemoryTable<TKey> : IInMemoryTable
                 (comparer != null && !comparer.Equals(rowValue, originalValue))
                 || (
                     comparer == null
-                    && !StructuralComparisons
-                        .StructuralEqualityComparer
-                        .Equals(rowValue, originalValue)
+                    && !StructuralComparisons.StructuralEqualityComparer.Equals(
+                        rowValue,
+                        originalValue
+                    )
                 )
             )
             {

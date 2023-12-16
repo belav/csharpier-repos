@@ -49,11 +49,9 @@ namespace System.IdentityModel.Tokens
                 {
                     if (!UriUtil.CanCreateValidUri(value, UriKind.Absolute))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.ID2002))
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ID2002))
+                        );
                     }
                 }
 

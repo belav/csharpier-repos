@@ -74,13 +74,11 @@ namespace System.Activities.Statements
             IEnumerable<T> values = this.Values.Get(context);
             if (values == null)
             {
-                throw SA.FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SA.SR.ForEachRequiresNonNullValues(this.DisplayName)
-                        )
-                    );
+                throw SA.FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SA.SR.ForEachRequiresNonNullValues(this.DisplayName)
+                    )
+                );
             }
 
             IEnumerator<T> valueEnumerator = values.GetEnumerator();

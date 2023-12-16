@@ -31,9 +31,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             CommandExecutionContext context
         )
         {
-            using var _ = context
-                .OperationContext
-                .AddScope(allowCancellation: true, EditorFeaturesResources.Formatting_pasted_text);
+            using var _ = context.OperationContext.AddScope(
+                allowCancellation: true,
+                EditorFeaturesResources.Formatting_pasted_text
+            );
             var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer);
 
             nextHandler();
@@ -74,9 +75,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return;
             }
 
-            var document = subjectBuffer
-                .CurrentSnapshot
-                .GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return;
 
@@ -102,14 +102,11 @@ namespace Microsoft.CodeAnalysis.Formatting
             if (formattingService == null || !formattingService.SupportsFormatOnPaste)
                 return;
 
-            var trackingSpan = caretPosition
-                .Value
-                .Snapshot
-                .CreateTrackingSpan(
-                    caretPosition.Value.Position,
-                    0,
-                    SpanTrackingMode.EdgeInclusive
-                );
+            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
+                caretPosition.Value.Position,
+                0,
+                SpanTrackingMode.EdgeInclusive
+            );
             var span = trackingSpan.GetSpan(subjectBuffer.CurrentSnapshot).Span.ToTextSpan();
 
             // Note: C# always completes synchronously, TypeScript is async

@@ -92,13 +92,10 @@ namespace MonoTests.System.Web.Security
                 )
             );
             t.Run();
-            global::System
-                .Diagnostics
-                .Trace
-                .WriteLineIf(
-                    (t.Response.StatusCode != global::System.Net.HttpStatusCode.OK),
-                    t.Response.Body
-                );
+            global::System.Diagnostics.Trace.WriteLineIf(
+                (t.Response.StatusCode != global::System.Net.HttpStatusCode.OK),
+                t.Response.Body
+            );
             Assert.AreEqual(
                 global::System.Net.HttpStatusCode.OK,
                 t.Response.StatusCode,

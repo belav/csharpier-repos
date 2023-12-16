@@ -30,10 +30,9 @@ namespace Microsoft.Interop.Analyzers
                 {
                     var attribute = gen.Attribute(
                         gen.TypeExpression(
-                                editor
-                                    .SemanticModel
-                                    .Compilation
-                                    .GetBestTypeByMetadataName(TypeNames.GeneratedComClassAttribute)
+                                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
+                                    TypeNames.GeneratedComClassAttribute
+                                )
                             )
                             .WithAdditionalAnnotations(Simplifier.AddImportsAnnotation)
                     );

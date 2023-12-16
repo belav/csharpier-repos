@@ -154,8 +154,9 @@ namespace Microsoft.Interop
                 if (
                     declaringSyntax
                         .GetLocation()
-                        .SourceSpan
-                        .Contains(methodLocationInAttributedInterfaceDeclaration.SourceSpan)
+                        .SourceSpan.Contains(
+                            methodLocationInAttributedInterfaceDeclaration.SourceSpan
+                        )
                 )
                 {
                     comMethodDeclaringSyntax = (MethodDeclarationSyntax)declaringSyntax;

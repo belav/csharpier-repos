@@ -191,8 +191,7 @@ public class TextTemplatingEngineHost
         }
 
         var path = DependencyContext
-            .Default
-            ?.CompileLibraries
+            .Default?.CompileLibraries
             .FirstOrDefault(
                 l => l.Assemblies.Any(a => Path.GetFileNameWithoutExtension(a) == assemblyReference)
             )

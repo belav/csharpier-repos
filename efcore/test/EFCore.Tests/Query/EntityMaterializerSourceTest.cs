@@ -19,8 +19,7 @@ public class EntityMaterializerSourceTest
     public void Throws_for_abstract_types()
     {
         var entityType = CreateConventionalModelBuilder()
-            .Model
-            .AddEntityType(typeof(SomeAbstractEntity));
+            .Model.AddEntityType(typeof(SomeAbstractEntity));
         var source = (IEntityMaterializerSource)
             new EntityMaterializerSource(
                 new EntityMaterializerSourceDependencies(Array.Empty<ISingletonInterceptor>())
@@ -55,8 +54,7 @@ public class EntityMaterializerSourceTest
             et.ConstructorBinding = new ConstructorBinding(
                 typeof(SomeEntity)
                     .GetTypeInfo()
-                    .DeclaredConstructors
-                    .Single(c => c.GetParameters().Length == 2),
+                    .DeclaredConstructors.Single(c => c.GetParameters().Length == 2),
                 new List<ParameterBinding>
                 {
                     new PropertyParameterBinding(et.FindProperty(nameof(SomeEntity.Id))!),

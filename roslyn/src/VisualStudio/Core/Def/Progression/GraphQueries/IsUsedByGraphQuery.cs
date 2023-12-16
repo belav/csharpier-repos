@@ -46,8 +46,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         var projectId = graphBuilder.GetContextProject(node, cancellationToken).Id;
 
                         var allLocations = referencedSymbol
-                            .Locations
-                            .Concat(reference.Locations.Select(r => r.Location))
+                            .Locations.Concat(reference.Locations.Select(r => r.Location))
                             .Where(l => l != null && l.IsInSource);
 
                         foreach (var location in allLocations)
@@ -85,8 +84,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 return null;
 
             var lineText = location
-                .SourceTree
-                .GetText(cancellationToken)
+                .SourceTree.GetText(cancellationToken)
                 .Lines[span.StartLinePosition.Line]
                 .ToString();
             var filePath = location.SourceTree.FilePath;
@@ -101,14 +99,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 span.StartLinePosition.Character + 1,
                 lineText.TrimStart()
             );
-            var locationNode = context
-                .Graph
-                .Nodes
-                .GetOrCreate(
-                    sourceLocation.Value.CreateGraphNodeId(),
-                    label,
-                    CodeNodeCategories.SourceLocation
-                );
+            var locationNode = context.Graph.Nodes.GetOrCreate(
+                sourceLocation.Value.CreateGraphNodeId(),
+                label,
+                CodeNodeCategories.SourceLocation
+            );
             locationNode[CodeNodeProperties.SourceLocation] = sourceLocation.Value;
             locationNode[RoslynGraphProperties.ContextProjectId] = projectId;
             locationNode[DgmlNodeProperties.Icon] = IconHelper.GetIconName(

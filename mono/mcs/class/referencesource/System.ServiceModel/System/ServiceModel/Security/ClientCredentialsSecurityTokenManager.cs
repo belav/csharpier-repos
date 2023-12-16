@@ -26,9 +26,9 @@ namespace System.ServiceModel
         {
             if (clientCredentials == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("clientCredentials");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "clientCredentials"
+                );
             }
             this.parent = clientCredentials;
         }
@@ -45,14 +45,12 @@ namespace System.ServiceModel
             EndpointAddress targetAddress = initiatorRequirement.TargetAddress;
             if (targetAddress == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenRequirementDoesNotSpecifyTargetAddress,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenRequirementDoesNotSpecifyTargetAddress,
+                        initiatorRequirement
+                    )
+                );
             }
             IdentityVerifier identityVerifier;
             SecurityBindingElement securityBindingElement =
@@ -113,27 +111,23 @@ namespace System.ServiceModel
             EndpointAddress targetAddress = initiatorRequirement.TargetAddress;
             if (targetAddress == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenRequirementDoesNotSpecifyTargetAddress,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenRequirementDoesNotSpecifyTargetAddress,
+                        initiatorRequirement
+                    )
+                );
             }
             SecurityBindingElement securityBindingElement =
                 initiatorRequirement.SecurityBindingElement;
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenProviderRequiresSecurityBindingElement,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenProviderRequiresSecurityBindingElement,
+                        initiatorRequirement
+                    )
+                );
             }
             SspiIssuanceChannelParameter sspiChannelParameter = GetSspiIssuanceChannelParameter(
                 initiatorRequirement
@@ -161,11 +155,9 @@ namespace System.ServiceModel
             spnegoTokenProvider.SecurityAlgorithmSuite =
                 initiatorRequirement.SecurityAlgorithmSuite;
             // if this is not a supporting token, authenticate the server
-            spnegoTokenProvider.AuthenticateServer = !initiatorRequirement
-                .Properties
-                .ContainsKey(
-                    ServiceModelSecurityTokenRequirement.SupportingTokenAttachmentModeProperty
-                );
+            spnegoTokenProvider.AuthenticateServer = !initiatorRequirement.Properties.ContainsKey(
+                ServiceModelSecurityTokenRequirement.SupportingTokenAttachmentModeProperty
+            );
             spnegoTokenProvider.NegotiateTokenOnOpen = negotiateTokenOnOpen;
             spnegoTokenProvider.CacheServiceTokens =
                 negotiateTokenOnOpen || localClientSettings.CacheCookies;
@@ -295,27 +287,23 @@ namespace System.ServiceModel
             EndpointAddress targetAddress = initiatorRequirement.TargetAddress;
             if (targetAddress == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenRequirementDoesNotSpecifyTargetAddress,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenRequirementDoesNotSpecifyTargetAddress,
+                        initiatorRequirement
+                    )
+                );
             }
             SecurityBindingElement securityBindingElement =
                 initiatorRequirement.SecurityBindingElement;
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenProviderRequiresSecurityBindingElement,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenProviderRequiresSecurityBindingElement,
+                        initiatorRequirement
+                    )
+                );
             }
             SspiIssuanceChannelParameter sspiChannelParameter = GetSspiIssuanceChannelParameter(
                 initiatorRequirement
@@ -369,27 +357,23 @@ namespace System.ServiceModel
             EndpointAddress targetAddress = initiatorRequirement.TargetAddress;
             if (targetAddress == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenRequirementDoesNotSpecifyTargetAddress,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenRequirementDoesNotSpecifyTargetAddress,
+                        initiatorRequirement
+                    )
+                );
             }
             SecurityBindingElement securityBindingElement =
                 initiatorRequirement.SecurityBindingElement;
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenProviderRequiresSecurityBindingElement,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenProviderRequiresSecurityBindingElement,
+                        initiatorRequirement
+                    )
+                );
             }
             LocalClientSecuritySettings localClientSettings =
                 securityBindingElement.LocalClientSettings;
@@ -514,10 +498,10 @@ namespace System.ServiceModel
             X509Certificate2 targetServerCertificate = null;
             if (targetAddress != null)
             {
-                parent
-                    .ServiceCertificate
-                    .ScopedCertificates
-                    .TryGetValue(targetAddress.Uri, out targetServerCertificate);
+                parent.ServiceCertificate.ScopedCertificates.TryGetValue(
+                    targetAddress.Uri,
+                    out targetServerCertificate
+                );
             }
             if (targetServerCertificate == null)
             {
@@ -539,16 +523,14 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ServiceCertificateNotProvidedOnClientCredentials,
-                                targetAddress.Uri
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ServiceCertificateNotProvidedOnClientCredentials,
+                            targetAddress.Uri
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -565,10 +547,7 @@ namespace System.ServiceModel
             if (parent.ServiceCertificate.SslCertificateAuthentication != null)
             {
                 return new X509SecurityTokenAuthenticator(
-                    parent
-                        .ServiceCertificate
-                        .SslCertificateAuthentication
-                        .GetCertificateValidator(),
+                    parent.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator(),
                     false
                 );
             }
@@ -579,11 +558,9 @@ namespace System.ServiceModel
         bool IsDigestAuthenticationScheme(SecurityTokenRequirement requirement)
         {
             if (
-                requirement
-                    .Properties
-                    .ContainsKey(
-                        ServiceModelSecurityTokenRequirement.HttpAuthenticationSchemeProperty
-                    )
+                requirement.Properties.ContainsKey(
+                    ServiceModelSecurityTokenRequirement.HttpAuthenticationSchemeProperty
+                )
             )
             {
                 AuthenticationSchemes authScheme = (AuthenticationSchemes)
@@ -593,12 +570,10 @@ namespace System.ServiceModel
 
                 if (!authScheme.IsSingleton())
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "value",
-                            SR.GetString(SR.HttpRequiresSingleAuthScheme, authScheme)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.HttpRequiresSingleAuthScheme, authScheme)
+                    );
                 }
 
                 return (authScheme == AuthenticationSchemes.Digest);
@@ -615,9 +590,9 @@ namespace System.ServiceModel
         {
             if (
                 requirement != null
-                && requirement
-                    .Properties
-                    .ContainsKey(ServiceModelSecurityTokenRequirement.IssuerAddressProperty)
+                && requirement.Properties.ContainsKey(
+                    ServiceModelSecurityTokenRequirement.IssuerAddressProperty
+                )
             )
             {
                 // handle all issued token requirements except for spnego, tlsnego and secure conversation
@@ -650,17 +625,15 @@ namespace System.ServiceModel
                 {
                     if (behavior is SecurityCredentialsManager)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.IssuerChannelBehaviorsCannotContainSecurityCredentialsManager,
-                                        issuerAddress,
-                                        typeof(SecurityCredentialsManager)
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.IssuerChannelBehaviorsCannotContainSecurityCredentialsManager,
+                                    issuerAddress,
+                                    typeof(SecurityCredentialsManager)
                                 )
-                            );
+                            )
+                        );
                     }
                     federationTokenProvider.IssuerChannelBehaviors.Add(behavior);
                 }
@@ -739,27 +712,23 @@ namespace System.ServiceModel
         {
             if (initiatorRequirement.TargetAddress == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenRequirementDoesNotSpecifyTargetAddress,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenRequirementDoesNotSpecifyTargetAddress,
+                        initiatorRequirement
+                    )
+                );
             }
             SecurityBindingElement securityBindingElement =
                 initiatorRequirement.SecurityBindingElement;
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(
-                            SR.TokenProviderRequiresSecurityBindingElement,
-                            initiatorRequirement
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.TokenProviderRequiresSecurityBindingElement,
+                        initiatorRequirement
+                    )
+                );
             }
 
             EndpointAddress issuerAddress = initiatorRequirement.IssuerAddress;
@@ -780,32 +749,26 @@ namespace System.ServiceModel
             if (issuerAddress == null)
             {
                 // if issuer address is still null then the user forgot to specify the local issuer
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.StsAddressNotSet, initiatorRequirement.TargetAddress)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.StsAddressNotSet, initiatorRequirement.TargetAddress)
+                    )
+                );
             }
             if (issuerBinding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.StsBindingNotSet, issuerAddress)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.StsBindingNotSet, issuerAddress))
+                );
             }
 
             Uri issuerUri = issuerAddress.Uri;
             KeyedByTypeCollection<IEndpointBehavior> issuerChannelBehaviors;
             if (
-                !parent
-                    .IssuedToken
-                    .IssuerChannelBehaviors
-                    .TryGetValue(issuerAddress.Uri, out issuerChannelBehaviors) && isLocalIssuer
+                !parent.IssuedToken.IssuerChannelBehaviors.TryGetValue(
+                    issuerAddress.Uri,
+                    out issuerChannelBehaviors
+                ) && isLocalIssuer
             )
             {
                 issuerChannelBehaviors = parent.IssuedToken.LocalIssuerChannelBehaviors;
@@ -897,9 +860,9 @@ namespace System.ServiceModel
         {
             if (tokenRequirement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("tokenRequirement");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tokenRequirement"
+                );
             }
 
             SecurityTokenProvider result = null;
@@ -917,13 +880,11 @@ namespace System.ServiceModel
                     // this is the uncorrelated duplex case
                     if (parent.ClientCertificate.Certificate == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.ClientCertificateNotProvidedOnClientCredentials)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ClientCertificateNotProvidedOnClientCredentials)
+                            )
+                        );
                     }
                     result = new X509SecurityTokenProvider(parent.ClientCertificate.Certificate);
                 }
@@ -957,9 +918,9 @@ namespace System.ServiceModel
                     else if (tokenType == SecurityTokenTypes.X509Certificate)
                     {
                         if (
-                            initiatorRequirement
-                                .Properties
-                                .ContainsKey(SecurityTokenRequirement.KeyUsageProperty)
+                            initiatorRequirement.Properties.ContainsKey(
+                                SecurityTokenRequirement.KeyUsageProperty
+                            )
                             && initiatorRequirement.KeyUsage == SecurityKeyUsage.Exchange
                         )
                         {
@@ -971,15 +932,13 @@ namespace System.ServiceModel
                         {
                             if (parent.ClientCertificate.Certificate == null)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new InvalidOperationException(
-                                            SR.GetString(
-                                                SR.ClientCertificateNotProvidedOnClientCredentials
-                                            )
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.ClientCertificateNotProvidedOnClientCredentials
                                         )
-                                    );
+                                    )
+                                );
                             }
                             result = new X509SecurityTokenProvider(
                                 parent.ClientCertificate.Certificate
@@ -1004,15 +963,11 @@ namespace System.ServiceModel
                     {
                         if (parent.UserName.UserName == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(
-                                            SR.UserNamePasswordNotProvidedOnClientCredentials
-                                        )
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.UserNamePasswordNotProvidedOnClientCredentials)
+                                )
+                            );
                         }
                         result = new UserNameSecurityTokenProvider(
                             parent.UserName.UserName,
@@ -1068,16 +1023,14 @@ namespace System.ServiceModel
 
             if ((result == null) && !tokenRequirement.IsOptionalToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.SecurityTokenManagerCannotCreateProviderForRequirement,
-                                tokenRequirement
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.SecurityTokenManagerCannotCreateProviderForRequirement,
+                            tokenRequirement
                         )
-                    );
+                    )
+                );
             }
 
             return result;
@@ -1100,9 +1053,9 @@ namespace System.ServiceModel
         {
             if (version == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             }
             return this.CreateSecurityTokenSerializer(
                 MessageSecurityTokenVersion.GetSecurityTokenVersion(version, true)
@@ -1138,16 +1091,14 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.SecurityTokenManagerCannotCreateSerializerForVersion,
-                                version
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.SecurityTokenManagerCannotCreateSerializerForVersion,
+                            version
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -1161,39 +1112,37 @@ namespace System.ServiceModel
             foreach (string securitySpecification in version.GetSecuritySpecifications())
             {
                 if (
-                    StringComparer
-                        .Ordinal
-                        .Equals(securitySpecification, WSTrustFeb2005Constants.NamespaceURI)
+                    StringComparer.Ordinal.Equals(
+                        securitySpecification,
+                        WSTrustFeb2005Constants.NamespaceURI
+                    )
                 )
                 {
                     trustVersion = TrustVersion.WSTrustFeb2005;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
-                        .Equals(securitySpecification, WSTrust13Constants.NamespaceURI)
+                    StringComparer.Ordinal.Equals(
+                        securitySpecification,
+                        WSTrust13Constants.NamespaceURI
+                    )
                 )
                 {
                     trustVersion = TrustVersion.WSTrust13;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
-                        .Equals(
-                            securitySpecification,
-                            System.IdentityModel.WSSecureConversationFeb2005Constants.Namespace
-                        )
+                    StringComparer.Ordinal.Equals(
+                        securitySpecification,
+                        System.IdentityModel.WSSecureConversationFeb2005Constants.Namespace
+                    )
                 )
                 {
                     scVersion = SecureConversationVersion.WSSecureConversationFeb2005;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
-                        .Equals(
-                            securitySpecification,
-                            System.IdentityModel.WSSecureConversation13Constants.Namespace
-                        )
+                    StringComparer.Ordinal.Equals(
+                        securitySpecification,
+                        System.IdentityModel.WSSecureConversation13Constants.Namespace
+                    )
                 )
                 {
                     scVersion = SecureConversationVersion.WSSecureConversation13;
@@ -1228,9 +1177,9 @@ namespace System.ServiceModel
         {
             if (tokenRequirement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("tokenRequirement");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tokenRequirement"
+                );
             }
 
             outOfBandTokenResolver = null;
@@ -1291,16 +1240,14 @@ namespace System.ServiceModel
 
             if (result == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.SecurityTokenManagerCannotCreateAuthenticatorForRequirement,
-                                tokenRequirement
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.SecurityTokenManagerCannotCreateAuthenticatorForRequirement,
+                            tokenRequirement
                         )
-                    );
+                    )
+                );
             }
 
             return result;

@@ -235,27 +235,23 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "timeout",
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
             }
 
             if (TimeoutHelper.IsTooLarge(timeout))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "timeout",
-                            timeout,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        timeout,
+                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                    )
+                );
             }
         }
 
@@ -399,9 +395,10 @@ namespace System.ServiceModel.Channels
                 ThrowIfNotReceived();
                 if (Transaction.Current != null)
                 {
-                    Transaction
-                        .Current
-                        .EnlistVolatile(new EnlistmentNotifications(this), EnlistmentOptions.None);
+                    Transaction.Current.EnlistVolatile(
+                        new EnlistmentNotifications(this),
+                        EnlistmentOptions.None
+                    );
                 }
                 this.State = ReceiveContextState.Completing;
             }
@@ -416,13 +413,11 @@ namespace System.ServiceModel.Channels
         {
             if (State == ReceiveContextState.Faulted)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new CommunicationException(
-                            SR.GetString(SR.ReceiveContextFaulted, this.GetType().ToString())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(
+                        SR.GetString(SR.ReceiveContextFaulted, this.GetType().ToString())
+                    )
+                );
             }
         }
 
@@ -430,17 +425,15 @@ namespace System.ServiceModel.Channels
         {
             if (State != ReceiveContextState.Abandoning)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ReceiveContextInInvalidState,
-                                this.GetType().ToString(),
-                                this.State.ToString()
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ReceiveContextInInvalidState,
+                            this.GetType().ToString(),
+                            this.State.ToString()
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -448,17 +441,15 @@ namespace System.ServiceModel.Channels
         {
             if (State != ReceiveContextState.Completing)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ReceiveContextInInvalidState,
-                                this.GetType().ToString(),
-                                this.State.ToString()
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ReceiveContextInInvalidState,
+                            this.GetType().ToString(),
+                            this.State.ToString()
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -466,17 +457,15 @@ namespace System.ServiceModel.Channels
         {
             if (State != ReceiveContextState.Received)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ReceiveContextCannotBeUsed,
-                                this.GetType().ToString(),
-                                this.State.ToString()
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ReceiveContextCannotBeUsed,
+                            this.GetType().ToString(),
+                            this.State.ToString()
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -488,9 +477,9 @@ namespace System.ServiceModel.Channels
             }
             catch (TimeoutException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(WrapStateException(exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    WrapStateException(exception)
+                );
             }
         }
 

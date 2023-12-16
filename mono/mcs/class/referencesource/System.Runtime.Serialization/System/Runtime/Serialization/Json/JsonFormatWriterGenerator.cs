@@ -557,19 +557,17 @@ namespace System.Runtime.Serialization.Json
                             break;
                         case CollectionKind.GenericCollection:
                         case CollectionKind.GenericList:
-                            incrementCollectionCountMethod = XmlFormatGeneratorStatics
-                                .IncrementCollectionCountGenericMethod
-                                .MakeGenericMethod(collectionContract.ItemType);
+                            incrementCollectionCountMethod =
+                                XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod.MakeGenericMethod(
+                                    collectionContract.ItemType
+                                );
                             break;
                         case CollectionKind.GenericDictionary:
-                            incrementCollectionCountMethod = XmlFormatGeneratorStatics
-                                .IncrementCollectionCountGenericMethod
-                                .MakeGenericMethod(
-                                    Globals
-                                        .TypeOfKeyValuePair
-                                        .MakeGenericType(
-                                            collectionContract.ItemType.GetGenericArguments()
-                                        )
+                            incrementCollectionCountMethod =
+                                XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod.MakeGenericMethod(
+                                    Globals.TypeOfKeyValuePair.MakeGenericType(
+                                        collectionContract.ItemType.GetGenericArguments()
+                                    )
                                 );
                             break;
                     }
@@ -591,9 +589,9 @@ namespace System.Runtime.Serialization.Json
                     {
                         isGenericDictionary = true;
                         keyValueTypes = collectionContract.ItemType.GetGenericArguments();
-                        enumeratorType = Globals
-                            .TypeOfGenericDictionaryEnumerator
-                            .MakeGenericType(keyValueTypes);
+                        enumeratorType = Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(
+                            keyValueTypes
+                        );
                     }
                     else if (collectionContract.Kind == CollectionKind.Dictionary)
                     {
@@ -689,11 +687,9 @@ namespace System.Runtime.Serialization.Json
                     }
                     else if (isGenericDictionary)
                     {
-                        Type ctorParam = Globals
-                            .TypeOfIEnumeratorGeneric
-                            .MakeGenericType(
-                                Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes)
-                            );
+                        Type ctorParam = Globals.TypeOfIEnumeratorGeneric.MakeGenericType(
+                            Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes)
+                        );
                         ConstructorInfo dictEnumCtor = enumeratorType.GetConstructor(
                             Globals.ScanAllMembers,
                             null,
@@ -711,9 +707,9 @@ namespace System.Runtime.Serialization.Json
                     bool canWriteSimpleDictionary = isDictionary || isGenericDictionary;
                     if (canWriteSimpleDictionary)
                     {
-                        Type genericDictionaryKeyValueType = Globals
-                            .TypeOfKeyValue
-                            .MakeGenericType(keyValueTypes);
+                        Type genericDictionaryKeyValueType = Globals.TypeOfKeyValue.MakeGenericType(
+                            keyValueTypes
+                        );
                         PropertyInfo genericDictionaryKeyProperty =
                             genericDictionaryKeyValueType.GetProperty(JsonGlobals.KeyString);
                         PropertyInfo genericDictionaryValueProperty =
@@ -1144,9 +1140,9 @@ namespace System.Runtime.Serialization.Json
                     );
                     ilg.Brfalse(onNull);
                     ilg.Call(
-                        XmlFormatGeneratorStatics
-                            .GetNullableValueMethod
-                            .MakeGenericMethod(innerType)
+                        XmlFormatGeneratorStatics.GetNullableValueMethod.MakeGenericMethod(
+                            innerType
+                        )
                     );
                     memberType = innerType;
                 }

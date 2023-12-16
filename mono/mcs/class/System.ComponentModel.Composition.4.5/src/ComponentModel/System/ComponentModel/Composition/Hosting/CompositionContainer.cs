@@ -584,9 +584,10 @@ namespace System.ComponentModel.Composition.Hosting
 
             object source;
             if (
-                !definition
-                    .Metadata
-                    .TryGetValue(CompositionConstants.ImportSourceMetadataName, out source)
+                !definition.Metadata.TryGetValue(
+                    CompositionConstants.ImportSourceMetadataName,
+                    out source
+                )
             )
             {
                 source = ImportSource.Any;

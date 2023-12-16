@@ -81,8 +81,7 @@ public class LoginWith2faModel : PageModel
         }
 
         var authenticatorCode = Input
-            .TwoFactorCode
-            .Replace(" ", string.Empty)
+            .TwoFactorCode.Replace(" ", string.Empty)
             .Replace("-", string.Empty);
 
         var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(

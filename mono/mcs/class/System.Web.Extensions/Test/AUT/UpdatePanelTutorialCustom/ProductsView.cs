@@ -70,8 +70,7 @@ namespace UpdatePanelTutorialCustom.CS
             {
                 productID = ((GridView)sender)
                     .DataKeys[Convert.ToInt32(e.CommandArgument)]
-                    .Value
-                    .ToString();
+                    .Value.ToString();
                 if (_cart == null)
                 {
                     GetCart();
@@ -85,8 +84,7 @@ namespace UpdatePanelTutorialCustom.CS
             {
                 productID = ((GridView)sender)
                     .DataKeys[Convert.ToInt32(e.CommandArgument)]
-                    .Value
-                    .ToString();
+                    .Value.ToString();
                 if (_cart == null)
                 {
                     GetCart();

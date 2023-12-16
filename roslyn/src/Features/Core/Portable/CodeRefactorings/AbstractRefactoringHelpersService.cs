@@ -655,8 +655,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                         .ConfigureAwait(false);
 
                     var argumentStartLine = sourceText
-                        .Lines
-                        .GetLineFromPosition(correctTypeNode.Span.Start)
+                        .Lines.GetLineFromPosition(correctTypeNode.Span.Start)
                         .LineNumber;
                     var caretLine = sourceText.Lines.GetLineFromPosition(position).LineNumber;
 

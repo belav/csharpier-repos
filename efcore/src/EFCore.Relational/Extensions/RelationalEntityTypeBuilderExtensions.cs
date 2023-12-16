@@ -187,9 +187,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
             return null;
         }
 
-        entityTypeBuilder
-            .Metadata
-            .SetIsTableExcludedFromMigrations(excludedFromMigrations, fromDataAnnotation);
+        entityTypeBuilder.Metadata.SetIsTableExcludedFromMigrations(
+            excludedFromMigrations,
+            fromDataAnnotation
+        );
         return entityTypeBuilder;
     }
 
@@ -802,14 +803,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         if (name is not null)
         {
-            entityType
-                .Model
-                .Builder
-                .HasDbFunction(
-                    name,
-                    typeof(IQueryable<>).MakeGenericType(entityType.ClrType),
-                    fromDataAnnotation
-                );
+            entityType.Model.Builder.HasDbFunction(
+                name,
+                typeof(IQueryable<>).MakeGenericType(entityType.ClrType),
+                fromDataAnnotation
+            );
         }
 
         return entityTypeBuilder;

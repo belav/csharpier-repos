@@ -46,25 +46,23 @@ namespace System.ServiceModel.Configuration
             {
                 if (extensionType == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgumentNull("extensionType");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "extensionType"
+                    );
                 }
 
                 if (!this.CollectionElementBaseType.IsAssignableFrom(extensionType))
                 {
 #pragma warning disable 56506 //Microsoft; Variable 'extensionType' checked for null previously
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "extensionType",
-                            SR.GetString(
-                                SR.ConfigInvalidExtensionType,
-                                extensionType.ToString(),
-                                this.CollectionElementBaseType.FullName,
-                                this.extensionCollectionName
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "extensionType",
+                        SR.GetString(
+                            SR.ConfigInvalidExtensionType,
+                            extensionType.ToString(),
+                            this.CollectionElementBaseType.FullName,
+                            this.extensionCollectionName
+                        )
+                    );
 #pragma warning restore
                 }
                 TServiceModelExtensionElement retval = null;
@@ -122,11 +120,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (element == null)
             {
@@ -137,25 +133,21 @@ namespace System.ServiceModel.Configuration
 
             if (this.Contains(element))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "element",
-                        SR.GetString(SR.ConfigDuplicateKey, element.ConfigurationElementName)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "element",
+                    SR.GetString(SR.ConfigDuplicateKey, element.ConfigurationElementName)
+                );
             }
             else if (!this.CanAdd(element))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "element",
-                        SR.GetString(
-                            SR.ConfigElementTypeNotAllowed,
-                            element.ConfigurationElementName,
-                            this.extensionCollectionName
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "element",
+                    SR.GetString(
+                        SR.ConfigElementTypeNotAllowed,
+                        element.ConfigurationElementName,
+                        this.extensionCollectionName
+                    )
+                );
             }
             else
             {
@@ -178,11 +170,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             element.ExtensionCollectionName = this.extensionCollectionName;
             element.ContainingEvaluationContext = ConfigurationHelpers.GetEvaluationContext(this);
@@ -245,11 +235,9 @@ namespace System.ServiceModel.Configuration
             Dictionary<string, string> values
         )
         {
-            values["ElementType"] = System
-                .Runtime
-                .Diagnostics
-                .DiagnosticTraceBase
-                .XmlEncode(typeof(TServiceModelExtensionElement).AssemblyQualifiedName);
+            values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(
+                typeof(TServiceModelExtensionElement).AssemblyQualifiedName
+            );
             values["ConfiguredSectionName"] = element.ConfigurationElementName;
             values["CollectionName"] =
                 ConfigurationStrings.ExtensionsSectionPath + "/" + this.extensionCollectionName;
@@ -260,11 +248,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (this.Properties.Count > 0)
             {
@@ -338,12 +324,10 @@ namespace System.ServiceModel.Configuration
             }
             if (start < 0 || start >= elements.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "start",
-                        SR.GetString(SR.ConfigInvalidStartValue, elements.Length - 1, start)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "start",
+                    SR.GetString(SR.ConfigInvalidStartValue, elements.Length - 1, start)
+                );
             }
 
             foreach (TServiceModelExtensionElement element in this)
@@ -375,15 +359,13 @@ namespace System.ServiceModel.Configuration
                 && !(name == ConfigurationStrings.Clear || name == ConfigurationStrings.Remove)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigDuplicateItem, name, this.GetType().Name),
-                            this.ElementInformation.Source,
-                            this.ElementInformation.LineNumber
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigDuplicateItem, name, this.GetType().Name),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             TServiceModelExtensionElement retval = null;
@@ -423,36 +405,32 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigInvalidExtensionElement,
-                                    name,
-                                    this.CollectionElementBaseType.FullName
-                                ),
-                                this.ElementInformation.Source,
-                                this.ElementInformation.LineNumber
-                            )
-                        );
-                }
-            }
-            else
-            {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
-                                SR.ConfigInvalidExtensionElementName,
+                                SR.ConfigInvalidExtensionElement,
                                 name,
-                                this.extensionCollectionName
+                                this.CollectionElementBaseType.FullName
                             ),
                             this.ElementInformation.Source,
                             this.ElementInformation.LineNumber
                         )
                     );
+                }
+            }
+            else
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidExtensionElementName,
+                            name,
+                            this.extensionCollectionName
+                        ),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             return retval;
@@ -475,15 +453,13 @@ namespace System.ServiceModel.Configuration
                 Type elementType = Type.GetType(element.Type, false);
                 if (null == elementType)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(SR.ConfigInvalidType, element.Type, element.Name),
-                                this.ElementInformation.Source,
-                                this.ElementInformation.LineNumber
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigInvalidType, element.Type, element.Name),
+                            this.ElementInformation.Source,
+                            this.ElementInformation.LineNumber
+                        )
+                    );
                 }
                 return elementType;
             }
@@ -560,9 +536,9 @@ namespace System.ServiceModel.Configuration
                 {
                     if (this.Properties.Contains(reader.Name))
                     {
-                        this[reader.Name] = this.Properties[reader.Name]
-                            .Converter
-                            .ConvertFromString(reader.Value);
+                        this[reader.Name] = this.Properties[
+                            reader.Name
+                        ].Converter.ConvertFromString(reader.Value);
                     }
                     else
                     {

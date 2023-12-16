@@ -49,12 +49,10 @@ namespace System.Text
         {
             if (_array != null)
             {
-                ArrayPool<T>
-                    .Shared
-                    .Return(
-                        _array,
-                        clearArray: RuntimeHelpers.IsReferenceOrContainsReferences<T>()
-                    );
+                ArrayPool<T>.Shared.Return(
+                    _array,
+                    clearArray: RuntimeHelpers.IsReferenceOrContainsReferences<T>()
+                );
                 _array = null!;
             }
         }
@@ -71,9 +69,10 @@ namespace System.Text
 
             T[] newArray = _array = ArrayPool<T>.Shared.Rent(newSize);
             Array.Copy(array, newArray, _count);
-            ArrayPool<T>
-                .Shared
-                .Return(array, clearArray: RuntimeHelpers.IsReferenceOrContainsReferences<T>());
+            ArrayPool<T>.Shared.Return(
+                array,
+                clearArray: RuntimeHelpers.IsReferenceOrContainsReferences<T>()
+            );
             newArray[_count++] = item;
         }
     }

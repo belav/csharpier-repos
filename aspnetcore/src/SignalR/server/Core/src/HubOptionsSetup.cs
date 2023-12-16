@@ -35,8 +35,7 @@ public class HubOptionsSetup : IConfigureOptions<HubOptions>
             if (
                 hubProtocol
                     .GetType()
-                    .CustomAttributes
-                    .Where(
+                    .CustomAttributes.Where(
                         a =>
                             a.AttributeType.FullName
                             == "Microsoft.AspNetCore.SignalR.Internal.NonDefaultHubProtocolAttribute"

@@ -189,14 +189,12 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            context
-                .Tree
-                .FindNode(
-                    context.FilterSpan,
-                    findInTrivia,
-                    getInnermostNodeForTie,
-                    context.CancellationToken
-                );
+            context.Tree.FindNode(
+                context.FilterSpan,
+                findInTrivia,
+                getInnermostNodeForTie,
+                context.CancellationToken
+            );
 
         /// <summary>
         /// Gets the root node in the analysis span for the given <paramref name="context"/>.
@@ -206,15 +204,12 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            context
-                .SemanticModel
-                .SyntaxTree
-                .FindNode(
-                    context.FilterSpan,
-                    findInTrivia,
-                    getInnermostNodeForTie,
-                    context.CancellationToken
-                );
+            context.SemanticModel.SyntaxTree.FindNode(
+                context.FilterSpan,
+                findInTrivia,
+                getInnermostNodeForTie,
+                context.CancellationToken
+            );
 
         /// <summary>
         /// Gets the root node in the analysis span for the given <paramref name="context"/>.
@@ -229,14 +224,12 @@ namespace Microsoft.CodeAnalysis
         {
             Contract.ThrowIfNull(context.FilterTree);
             Contract.ThrowIfFalse(context.FilterSpan.HasValue);
-            return context
-                .FilterTree
-                .FindNode(
-                    context.FilterSpan,
-                    findInTrivia,
-                    getInnermostNodeForTie,
-                    context.CancellationToken
-                );
+            return context.FilterTree.FindNode(
+                context.FilterSpan,
+                findInTrivia,
+                getInnermostNodeForTie,
+                context.CancellationToken
+            );
         }
 
         /// <summary>
@@ -252,14 +245,12 @@ namespace Microsoft.CodeAnalysis
         {
             Contract.ThrowIfNull(context.FilterTree);
             Contract.ThrowIfFalse(context.FilterSpan.HasValue);
-            return context
-                .FilterTree
-                .FindNode(
-                    context.FilterSpan,
-                    findInTrivia,
-                    getInnermostNodeForTie,
-                    context.CancellationToken
-                );
+            return context.FilterTree.FindNode(
+                context.FilterSpan,
+                findInTrivia,
+                getInnermostNodeForTie,
+                context.CancellationToken
+            );
         }
 
         /// <summary>
@@ -271,9 +262,11 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            operationBlock
-                .Syntax
-                .FindNode(context.FilterSpan, findInTrivia, getInnermostNodeForTie);
+            operationBlock.Syntax.FindNode(
+                context.FilterSpan,
+                findInTrivia,
+                getInnermostNodeForTie
+            );
 
         /// <summary>
         /// Gets the root node in the analysis span for the given <paramref name="context"/>.
@@ -284,9 +277,11 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            operationBlock
-                .Syntax
-                .FindNode(context.FilterSpan, findInTrivia, getInnermostNodeForTie);
+            operationBlock.Syntax.FindNode(
+                context.FilterSpan,
+                findInTrivia,
+                getInnermostNodeForTie
+            );
 
         /// <summary>
         /// Gets the root node in the analysis span for the given <paramref name="context"/>.
@@ -296,10 +291,11 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            context
-                .Operation
-                .Syntax
-                .FindNode(context.FilterSpan, findInTrivia, getInnermostNodeForTie);
+            context.Operation.Syntax.FindNode(
+                context.FilterSpan,
+                findInTrivia,
+                getInnermostNodeForTie
+            );
 
         /// <summary>
         /// Gets the root node in the analysis span for the given <paramref name="context"/>.

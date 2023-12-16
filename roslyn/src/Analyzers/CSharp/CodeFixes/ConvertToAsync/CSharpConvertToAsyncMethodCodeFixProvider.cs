@@ -73,8 +73,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
             }
 
             var oldRoot = await methodDeclaration
-                .SyntaxTree
-                .GetRootAsync(cancellationToken)
+                .SyntaxTree.GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newRoot = oldRoot.ReplaceNode(
                 methodDeclaration,

@@ -791,9 +791,7 @@ namespace Newtonsoft.Json.Tests
         public void Return(char[] array)
         {
             // use System.Buffers shared pool
-            ArrayPool<char>
-                .Shared
-                .Return(array);
+            ArrayPool<char>.Shared.Return(array);
         }
     }
 #endif

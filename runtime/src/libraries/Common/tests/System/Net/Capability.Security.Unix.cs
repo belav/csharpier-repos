@@ -13,9 +13,10 @@ namespace System.Net.Test.Common
                 // Linux bionic uses managed NTLM implementation
                 (
                     OperatingSystem.IsLinux()
-                    && RuntimeInformation
-                        .RuntimeIdentifier
-                        .StartsWith("linux-bionic-", StringComparison.Ordinal)
+                    && RuntimeInformation.RuntimeIdentifier.StartsWith(
+                        "linux-bionic-",
+                        StringComparison.Ordinal
+                    )
                 )
                 ||
                 // GSS on Linux does not work with OpenSSL 3.0. Fix was submitted to gss-ntlm but it will take a while to make to

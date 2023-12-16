@@ -147,9 +147,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CancellationToken cancellationToken
         )
         {
-            var workspaceStatusService = solution
-                .Services
-                .GetRequiredService<IWorkspaceStatusService>();
+            var workspaceStatusService =
+                solution.Services.GetRequiredService<IWorkspaceStatusService>();
             var isFullyLoaded = await workspaceStatusService
                 .IsFullyLoadedAsync(cancellationToken)
                 .ConfigureAwait(false);

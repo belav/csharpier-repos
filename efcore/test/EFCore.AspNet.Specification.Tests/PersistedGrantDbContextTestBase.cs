@@ -284,8 +284,7 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
         using (var context = CreateContext())
         {
             var entityTypeMappings = context
-                .Model
-                .GetEntityTypes()
+                .Model.GetEntityTypes()
                 .Select(e => new EntityTypeMapping(e))
                 .ToList();
 

@@ -1144,9 +1144,10 @@ public static partial class RequestDelegateFactory
         )
         {
             var routeName = routeAttribute.Name ?? parameter.Name;
-            factoryContext
-                .TrackedParameters
-                .Add(parameter.Name, RequestDelegateFactoryConstants.RouteAttribute);
+            factoryContext.TrackedParameters.Add(
+                parameter.Name,
+                RequestDelegateFactoryConstants.RouteAttribute
+            );
             if (
                 factoryContext.RouteParameters is { } routeParams
                 && !routeParams.Contains(routeName, StringComparer.OrdinalIgnoreCase)
@@ -1169,9 +1170,10 @@ public static partial class RequestDelegateFactory
             { } queryAttribute
         )
         {
-            factoryContext
-                .TrackedParameters
-                .Add(parameter.Name, RequestDelegateFactoryConstants.QueryAttribute);
+            factoryContext.TrackedParameters.Add(
+                parameter.Name,
+                RequestDelegateFactoryConstants.QueryAttribute
+            );
             return BindParameterFromProperty(
                 parameter,
                 QueryExpr,
@@ -1186,9 +1188,10 @@ public static partial class RequestDelegateFactory
             { } headerAttribute
         )
         {
-            factoryContext
-                .TrackedParameters
-                .Add(parameter.Name, RequestDelegateFactoryConstants.HeaderAttribute);
+            factoryContext.TrackedParameters.Add(
+                parameter.Name,
+                RequestDelegateFactoryConstants.HeaderAttribute
+            );
             return BindParameterFromProperty(
                 parameter,
                 HeadersExpr,
@@ -1203,9 +1206,10 @@ public static partial class RequestDelegateFactory
             { } bodyAttribute
         )
         {
-            factoryContext
-                .TrackedParameters
-                .Add(parameter.Name, RequestDelegateFactoryConstants.BodyAttribute);
+            factoryContext.TrackedParameters.Add(
+                parameter.Name,
+                RequestDelegateFactoryConstants.BodyAttribute
+            );
 
             if (parameter.ParameterType == typeof(Stream))
             {
@@ -1282,9 +1286,9 @@ public static partial class RequestDelegateFactory
                 );
         }
         else if (
-            parameter
-                .CustomAttributes
-                .Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType))
+            parameter.CustomAttributes.Any(
+                a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
+            )
         )
         {
             if (
@@ -1296,9 +1300,10 @@ public static partial class RequestDelegateFactory
                     $"The {nameof(FromKeyedServicesAttribute)} is not supported on parameters that are also annotated with {nameof(IFromServiceMetadata)}."
                 );
             }
-            factoryContext
-                .TrackedParameters
-                .Add(parameter.Name, RequestDelegateFactoryConstants.ServiceAttribute);
+            factoryContext.TrackedParameters.Add(
+                parameter.Name,
+                RequestDelegateFactoryConstants.ServiceAttribute
+            );
             return BindParameterFromService(parameter, factoryContext);
         }
         else if (
@@ -1384,9 +1389,10 @@ public static partial class RequestDelegateFactory
                 {
                     // We're in the fallback case and we have a parameter and route parameter match so don't fallback
                     // to query string in this case
-                    factoryContext
-                        .TrackedParameters
-                        .Add(parameter.Name, RequestDelegateFactoryConstants.RouteParameter);
+                    factoryContext.TrackedParameters.Add(
+                        parameter.Name,
+                        RequestDelegateFactoryConstants.RouteParameter
+                    );
                     return BindParameterFromProperty(
                         parameter,
                         RouteValuesExpr,
@@ -1398,9 +1404,10 @@ public static partial class RequestDelegateFactory
                 }
                 else
                 {
-                    factoryContext
-                        .TrackedParameters
-                        .Add(parameter.Name, RequestDelegateFactoryConstants.QueryStringParameter);
+                    factoryContext.TrackedParameters.Add(
+                        parameter.Name,
+                        RequestDelegateFactoryConstants.QueryStringParameter
+                    );
                     return BindParameterFromProperty(
                         parameter,
                         QueryExpr,
@@ -1412,9 +1419,10 @@ public static partial class RequestDelegateFactory
                 }
             }
 
-            factoryContext
-                .TrackedParameters
-                .Add(parameter.Name, RequestDelegateFactoryConstants.RouteOrQueryStringParameter);
+            factoryContext.TrackedParameters.Add(
+                parameter.Name,
+                RequestDelegateFactoryConstants.RouteOrQueryStringParameter
+            );
             return BindParameterFromRouteValueOrQueryString(
                 parameter,
                 parameter.Name,
@@ -1438,9 +1446,10 @@ public static partial class RequestDelegateFactory
         {
             // We only infer parameter types if you have an array of TryParsables/string[]/StringValues/StringValues?, and DisableInferredFromBody is true
 
-            factoryContext
-                .TrackedParameters
-                .Add(parameter.Name, RequestDelegateFactoryConstants.QueryStringParameter);
+            factoryContext.TrackedParameters.Add(
+                parameter.Name,
+                RequestDelegateFactoryConstants.QueryStringParameter
+            );
             return BindParameterFromProperty(
                 parameter,
                 QueryExpr,
@@ -1459,9 +1468,10 @@ public static partial class RequestDelegateFactory
             {
                 if (serviceProviderIsService.IsService(parameter.ParameterType))
                 {
-                    factoryContext
-                        .TrackedParameters
-                        .Add(parameter.Name, RequestDelegateFactoryConstants.ServiceParameter);
+                    factoryContext.TrackedParameters.Add(
+                        parameter.Name,
+                        RequestDelegateFactoryConstants.ServiceParameter
+                    );
                     return Expression.Call(
                         GetRequiredServiceMethod.MakeGenericMethod(parameter.ParameterType),
                         RequestServicesExpr
@@ -1470,9 +1480,10 @@ public static partial class RequestDelegateFactory
             }
 
             factoryContext.HasInferredBody = true;
-            factoryContext
-                .TrackedParameters
-                .Add(parameter.Name, RequestDelegateFactoryConstants.BodyParameter);
+            factoryContext.TrackedParameters.Add(
+                parameter.Name,
+                RequestDelegateFactoryConstants.BodyParameter
+            );
             return BindParameterFromBody(parameter, allowEmpty: false, factoryContext);
         }
     }
@@ -1622,27 +1633,23 @@ public static partial class RequestDelegateFactory
 
         if (returnType == typeof(string))
         {
-            builder
-                .Metadata
-                .Add(
-                    ProducesResponseTypeMetadata.CreateUnvalidated(
-                        type: null,
-                        statusCode: 200,
-                        PlaintextContentType
-                    )
-                );
+            builder.Metadata.Add(
+                ProducesResponseTypeMetadata.CreateUnvalidated(
+                    type: null,
+                    statusCode: 200,
+                    PlaintextContentType
+                )
+            );
         }
         else
         {
-            builder
-                .Metadata
-                .Add(
-                    ProducesResponseTypeMetadata.CreateUnvalidated(
-                        returnType,
-                        statusCode: 200,
-                        DefaultAcceptsAndProducesContentType
-                    )
-                );
+            builder.Metadata.Add(
+                ProducesResponseTypeMetadata.CreateUnvalidated(
+                    returnType,
+                    statusCode: 200,
+                    DefaultAcceptsAndProducesContentType
+                )
+            );
         }
     }
 
@@ -1740,18 +1747,18 @@ public static partial class RequestDelegateFactory
                         methodCall,
                         HttpContextExpr,
                         Expression.Constant(
-                            factoryContext
-                                .JsonSerializerOptions
-                                .GetReadOnlyTypeInfo(typeof(object)),
+                            factoryContext.JsonSerializerOptions.GetReadOnlyTypeInfo(
+                                typeof(object)
+                            ),
                             typeof(JsonTypeInfo<object>)
                         )
                     );
                 }
                 else
                 {
-                    var jsonTypeInfo = factoryContext
-                        .JsonSerializerOptions
-                        .GetReadOnlyTypeInfo(typeArg);
+                    var jsonTypeInfo = factoryContext.JsonSerializerOptions.GetReadOnlyTypeInfo(
+                        typeArg
+                    );
 
                     if (jsonTypeInfo.HasKnownPolymorphism())
                     {
@@ -1808,18 +1815,18 @@ public static partial class RequestDelegateFactory
                         methodCall,
                         HttpContextExpr,
                         Expression.Constant(
-                            factoryContext
-                                .JsonSerializerOptions
-                                .GetReadOnlyTypeInfo(typeof(object)),
+                            factoryContext.JsonSerializerOptions.GetReadOnlyTypeInfo(
+                                typeof(object)
+                            ),
                             typeof(JsonTypeInfo<object>)
                         )
                     );
                 }
                 else
                 {
-                    var jsonTypeInfo = factoryContext
-                        .JsonSerializerOptions
-                        .GetReadOnlyTypeInfo(typeArg);
+                    var jsonTypeInfo = factoryContext.JsonSerializerOptions.GetReadOnlyTypeInfo(
+                        typeArg
+                    );
 
                     if (jsonTypeInfo.HasKnownPolymorphism())
                     {
@@ -2409,13 +2416,14 @@ public static partial class RequestDelegateFactory
             initExpression = Expression.MemberInit(newExpression, bindings);
         }
 
-        factoryContext
-            .ParamCheckExpressions
-            .Add(Expression.Assign(argumentExpression, initExpression));
+        factoryContext.ParamCheckExpressions.Add(
+            Expression.Assign(argumentExpression, initExpression)
+        );
 
-        factoryContext
-            .TrackedParameters
-            .Add(parameter.Name!, RequestDelegateFactoryConstants.PropertyAsParameter);
+        factoryContext.TrackedParameters.Add(
+            parameter.Name!,
+            RequestDelegateFactoryConstants.PropertyAsParameter
+        );
         factoryContext.ExtraLocals.Add(argumentExpression);
 
         return argumentExpression;
@@ -2968,10 +2976,9 @@ public static partial class RequestDelegateFactory
             return;
         }
 
-        factoryContext
-            .EndpointBuilder
-            .Metadata
-            .Add(new AcceptsMetadata(contentTypes, type, factoryContext.AllowEmptyRequestBody));
+        factoryContext.EndpointBuilder.Metadata.Add(
+            new AcceptsMetadata(contentTypes, type, factoryContext.AllowEmptyRequestBody)
+        );
     }
 
     private static void InferFormAcceptsMetadata(RequestDelegateFactoryContext factoryContext)
@@ -3010,9 +3017,10 @@ public static partial class RequestDelegateFactory
     )
     {
         factoryContext.FirstFormRequestBodyParameter ??= parameter;
-        factoryContext
-            .TrackedParameters
-            .Add(parameter.Name!, RequestDelegateFactoryConstants.FormCollectionParameter);
+        factoryContext.TrackedParameters.Add(
+            parameter.Name!,
+            RequestDelegateFactoryConstants.FormCollectionParameter
+        );
         factoryContext.ReadForm = true;
 
         return BindParameterFromExpression(parameter, FormExpr, factoryContext, "body");
@@ -3084,9 +3092,10 @@ public static partial class RequestDelegateFactory
     )
     {
         factoryContext.FirstFormRequestBodyParameter ??= parameter;
-        factoryContext
-            .TrackedParameters
-            .TryAdd(key, RequestDelegateFactoryConstants.FormBindingAttribute);
+        factoryContext.TrackedParameters.TryAdd(
+            key,
+            RequestDelegateFactoryConstants.FormBindingAttribute
+        );
         factoryContext.ReadForm = true;
 
         // var name_local;
@@ -3100,10 +3109,8 @@ public static partial class RequestDelegateFactory
         }
 
         var formDataMapperOptions = factoryContext.FormDataMapperOptions;
-        var formMappingOptionsMetadatas = factoryContext
-            .EndpointBuilder
-            .Metadata
-            .OfType<FormMappingOptionsMetadata>();
+        var formMappingOptionsMetadatas =
+            factoryContext.EndpointBuilder.Metadata.OfType<FormMappingOptionsMetadata>();
         foreach (var formMappingOptionsMetadata in formMappingOptionsMetadatas)
         {
             formDataMapperOptions.MaxRecursionDepth =
@@ -3264,9 +3271,10 @@ public static partial class RequestDelegateFactory
     )
     {
         factoryContext.FirstFormRequestBodyParameter ??= parameter;
-        factoryContext
-            .TrackedParameters
-            .Add(parameter.Name!, RequestDelegateFactoryConstants.FormFileParameter);
+        factoryContext.TrackedParameters.Add(
+            parameter.Name!,
+            RequestDelegateFactoryConstants.FormFileParameter
+        );
         factoryContext.ReadForm = true;
         factoryContext.ReadFormFile = true;
 
@@ -3337,27 +3345,25 @@ public static partial class RequestDelegateFactory
                 //    wasParamCheckFailure = true;
                 //    Log.ImplicitBodyNotProvided(httpContext, "todo", ThrowOnBadRequest);
                 // }
-                factoryContext
-                    .ParamCheckExpressions
-                    .Add(
-                        Expression.Block(
-                            Expression.IfThen(
-                                Expression.Equal(BodyValueExpr, Expression.Constant(null)),
-                                Expression.Block(
-                                    Expression.Assign(
-                                        WasParamCheckFailureExpr,
-                                        Expression.Constant(true)
-                                    ),
-                                    Expression.Call(
-                                        LogImplicitBodyNotProvidedMethod,
-                                        HttpContextExpr,
-                                        Expression.Constant(parameter.Name),
-                                        Expression.Constant(factoryContext.ThrowOnBadRequest)
-                                    )
+                factoryContext.ParamCheckExpressions.Add(
+                    Expression.Block(
+                        Expression.IfThen(
+                            Expression.Equal(BodyValueExpr, Expression.Constant(null)),
+                            Expression.Block(
+                                Expression.Assign(
+                                    WasParamCheckFailureExpr,
+                                    Expression.Constant(true)
+                                ),
+                                Expression.Call(
+                                    LogImplicitBodyNotProvidedMethod,
+                                    HttpContextExpr,
+                                    Expression.Constant(parameter.Name),
+                                    Expression.Constant(factoryContext.ThrowOnBadRequest)
                                 )
                             )
                         )
-                    );
+                    )
+                );
             }
             else
             {

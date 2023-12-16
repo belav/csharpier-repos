@@ -335,9 +335,7 @@ namespace System.Web.UI.DataVisualization.Charting
             foreach (Axis currentAxis in axesYArray)
             {
                 // Get automatic scale break segments
-                currentAxis
-                    .ScaleBreakStyle
-                    .GetAxisSegmentForScaleBreaks(currentAxis.ScaleSegments);
+                currentAxis.ScaleBreakStyle.GetAxisSegmentForScaleBreaks(currentAxis.ScaleSegments);
 
                 // Make sure axis scale do not exceed segments scale
                 if (currentAxis.ScaleSegments.Count > 0)
@@ -1115,9 +1113,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 {
                     try
                     {
-                        Common
-                            .DataManager
-                            .GetMinMaxXValue(out autoMinimum, out autoMaximum, xAxesSeries);
+                        Common.DataManager.GetMinMaxXValue(
+                            out autoMinimum,
+                            out autoMaximum,
+                            xAxesSeries
+                        );
                     }
                     catch (System.Exception)
                     {
@@ -1131,12 +1131,14 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Chart type with two y values used for scale ( bubble chart type )
                 else if (secondYScale)
                 {
-                    autoMaximum = Common
-                        .DataManager
-                        .GetMaxXWithRadiusValue((ChartArea)this, xAxesSeries);
-                    autoMinimum = Common
-                        .DataManager
-                        .GetMinXWithRadiusValue((ChartArea)this, xAxesSeries);
+                    autoMaximum = Common.DataManager.GetMaxXWithRadiusValue(
+                        (ChartArea)this,
+                        xAxesSeries
+                    );
+                    autoMinimum = Common.DataManager.GetMinXWithRadiusValue(
+                        (ChartArea)this,
+                        xAxesSeries
+                    );
                     ChartValueType valueTypes = Common
                         .DataManager
                         .Series[xAxesSeries[0]]
@@ -1153,9 +1155,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 else
                 {
-                    Common
-                        .DataManager
-                        .GetMinMaxXValue(out autoMinimum, out autoMaximum, xAxesSeries);
+                    Common.DataManager.GetMinMaxXValue(
+                        out autoMinimum,
+                        out autoMaximum,
+                        xAxesSeries
+                    );
                 }
             }
             else // Y axis type is used (Y or Y2)
@@ -1169,18 +1173,14 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         if (hundredPercent) // It's a hundred percent stacked chart
                         {
-                            autoMaximum = Common
-                                .DataManager
-                                .GetMaxHundredPercentStackedYValue(
-                                    hundredPercentNegative,
-                                    yAxesSeries
-                                );
-                            autoMinimum = Common
-                                .DataManager
-                                .GetMinHundredPercentStackedYValue(
-                                    hundredPercentNegative,
-                                    yAxesSeries
-                                );
+                            autoMaximum = Common.DataManager.GetMaxHundredPercentStackedYValue(
+                                hundredPercentNegative,
+                                yAxesSeries
+                            );
+                            autoMinimum = Common.DataManager.GetMinHundredPercentStackedYValue(
+                                hundredPercentNegative,
+                                yAxesSeries
+                            );
                         }
                         else
                         {
@@ -1196,20 +1196,22 @@ namespace System.Web.UI.DataVisualization.Charting
                             foreach (string[] groupSeriesNames in stackedGroups)
                             {
                                 // For stacked bar and column
-                                double stackMaxBarColumnForGroup = Common
-                                    .DataManager
-                                    .GetMaxStackedYValue(0, groupSeriesNames);
-                                double stackMinBarColumnForGroup = Common
-                                    .DataManager
-                                    .GetMinStackedYValue(0, groupSeriesNames);
+                                double stackMaxBarColumnForGroup =
+                                    Common.DataManager.GetMaxStackedYValue(0, groupSeriesNames);
+                                double stackMinBarColumnForGroup =
+                                    Common.DataManager.GetMinStackedYValue(0, groupSeriesNames);
 
                                 // For stacked area
-                                double stackMaxAreaForGroup = Common
-                                    .DataManager
-                                    .GetMaxUnsignedStackedYValue(0, groupSeriesNames);
-                                double stackMinAreaForGroup = Common
-                                    .DataManager
-                                    .GetMinUnsignedStackedYValue(0, groupSeriesNames);
+                                double stackMaxAreaForGroup =
+                                    Common.DataManager.GetMaxUnsignedStackedYValue(
+                                        0,
+                                        groupSeriesNames
+                                    );
+                                double stackMinAreaForGroup =
+                                    Common.DataManager.GetMinUnsignedStackedYValue(
+                                        0,
+                                        groupSeriesNames
+                                    );
 
                                 // Select minimum/maximum
                                 stackMaxBarColumn = Math.Max(
@@ -1243,12 +1245,14 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Chart type with two y values used for scale ( bubble chart type )
                 else if (secondYScale)
                 {
-                    autoMaximum = Common
-                        .DataManager
-                        .GetMaxYWithRadiusValue((ChartArea)this, yAxesSeries);
-                    autoMinimum = Common
-                        .DataManager
-                        .GetMinYWithRadiusValue((ChartArea)this, yAxesSeries);
+                    autoMaximum = Common.DataManager.GetMaxYWithRadiusValue(
+                        (ChartArea)this,
+                        yAxesSeries
+                    );
+                    autoMinimum = Common.DataManager.GetMinYWithRadiusValue(
+                        (ChartArea)this,
+                        yAxesSeries
+                    );
                 }
                 // *****************************
                 // Non Stacked Chart Types
@@ -1263,9 +1267,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             if (series.ChartArea == ((ChartArea)this).Name)
                             {
-                                IChartType charType = Common
-                                    .ChartTypeRegistry
-                                    .GetChartType(series.ChartTypeName);
+                                IChartType charType = Common.ChartTypeRegistry.GetChartType(
+                                    series.ChartTypeName
+                                );
                                 if (charType != null && charType.ExtraYValuesConnectedToYAxis)
                                 {
                                     extraYValuesConnectedToYAxis = true;
@@ -1278,15 +1282,20 @@ namespace System.Web.UI.DataVisualization.Charting
                     // The first Chart type can have many Y values (Stock Chart, Range Chart)
                     if (extraYValuesConnectedToYAxis)
                     {
-                        Common
-                            .DataManager
-                            .GetMinMaxYValue(out autoMinimum, out autoMaximum, yAxesSeries);
+                        Common.DataManager.GetMinMaxYValue(
+                            out autoMinimum,
+                            out autoMaximum,
+                            yAxesSeries
+                        );
                     }
                     else
                     { // The first Chart type can have only one Y value
-                        Common
-                            .DataManager
-                            .GetMinMaxYValue(0, out autoMinimum, out autoMaximum, yAxesSeries);
+                        Common.DataManager.GetMinMaxYValue(
+                            0,
+                            out autoMinimum,
+                            out autoMaximum,
+                            yAxesSeries
+                        );
                     }
                 }
             }
@@ -1395,9 +1404,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // The maximum is equal to the number of data points.
-            double autoMaximum = Common
-                .DataManager
-                .GetNumberOfPoints(GetXAxesSeries(type, axis.SubAxisName).ToArray());
+            double autoMaximum = Common.DataManager.GetNumberOfPoints(
+                GetXAxesSeries(type, axis.SubAxisName).ToArray()
+            );
             double autoMinimum = 0.0;
 
             // Axis margin used only for zooming
@@ -1536,43 +1545,37 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             if (
                                 Common
-                                    .ChartTypeRegistry
-                                    .GetChartType(series.ChartTypeName)
+                                    .ChartTypeRegistry.GetChartType(series.ChartTypeName)
                                     .SwitchValueAxes
                             )
                                 switchValueAxes = true;
                             if (
                                 !Common
-                                    .ChartTypeRegistry
-                                    .GetChartType(series.ChartTypeName)
+                                    .ChartTypeRegistry.GetChartType(series.ChartTypeName)
                                     .RequireAxes
                             )
                                 requireAxes = false;
                             if (
                                 Common
-                                    .ChartTypeRegistry
-                                    .GetChartType(series.ChartTypeName)
+                                    .ChartTypeRegistry.GetChartType(series.ChartTypeName)
                                     .CircularChartArea
                             )
                                 chartAreaIsCurcular = true;
                             if (
                                 Common
-                                    .ChartTypeRegistry
-                                    .GetChartType(series.ChartTypeName)
+                                    .ChartTypeRegistry.GetChartType(series.ChartTypeName)
                                     .HundredPercent
                             )
                                 hundredPercent = true;
                             if (
                                 Common
-                                    .ChartTypeRegistry
-                                    .GetChartType(series.ChartTypeName)
+                                    .ChartTypeRegistry.GetChartType(series.ChartTypeName)
                                     .HundredPercentSupportNegative
                             )
                                 hundredPercentNegative = true;
                             if (
                                 Common
-                                    .ChartTypeRegistry
-                                    .GetChartType(series.ChartTypeName)
+                                    .ChartTypeRegistry.GetChartType(series.ChartTypeName)
                                     .SecondYScale
                             )
                                 secondYScale = true;
@@ -1583,8 +1586,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             if (
                                 Common
-                                    .ChartTypeRegistry
-                                    .GetChartType(series.ChartTypeName)
+                                    .ChartTypeRegistry.GetChartType(series.ChartTypeName)
                                     .SwitchValueAxes != switchValueAxes
                             )
                             {
@@ -1631,16 +1633,12 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             try
                             {
-                                Common
-                                    .DataManipulator
-                                    .CheckXValuesAlignment(
-                                        Common
-                                            .DataManipulator
-                                            .ConvertToSeriesArray(
-                                                seriesNamesStr.TrimEnd(','),
-                                                false
-                                            )
-                                    );
+                                Common.DataManipulator.CheckXValuesAlignment(
+                                    Common.DataManipulator.ConvertToSeriesArray(
+                                        seriesNamesStr.TrimEnd(','),
+                                        false
+                                    )
+                                );
                             }
                             catch (Exception e)
                             {

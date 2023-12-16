@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
 
         private static readonly ImmutableDictionary<string, string> s_languageNameToPrefix =
             ImmutableDictionary<string, string>
-                .Empty
-                .Add(LanguageNames.CSharp, "csharp")
+                .Empty.Add(LanguageNames.CSharp, "csharp")
                 .Add(LanguageNames.VisualBasic, "visual_basic");
 
         public static readonly ImmutableArray<string> SupportedLanguages = ImmutableArray.Create(

@@ -132,8 +132,7 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         var position = context.Position;
 
         var root = await context
-            .Document
-            .GetSyntaxRootAsync(context.CancellationToken)
+            .Document.GetSyntaxRootAsync(context.CancellationToken)
             .ConfigureAwait(false);
         if (root == null)
         {
@@ -164,8 +163,7 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         }
 
         var semanticModel = await context
-            .Document
-            .GetSemanticModelAsync(context.CancellationToken)
+            .Document.GetSemanticModelAsync(context.CancellationToken)
             .ConfigureAwait(false);
         if (semanticModel == null)
         {
@@ -355,10 +353,10 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             }
 
             // Keep everything sorted in the order we just produced the items in.
-            var sortText = routePatternCompletionContext
-                .Items
-                .Count
-                .ToString("0000", CultureInfo.InvariantCulture);
+            var sortText = routePatternCompletionContext.Items.Count.ToString(
+                "0000",
+                CultureInfo.InvariantCulture
+            );
             context.AddItem(
                 CompletionItem.Create(
                     displayText: embeddedItem.DisplayText,
@@ -488,14 +486,12 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
                         }
 
                         if (
-                            SymbolEqualityComparer
-                                .Default
-                                .Equals(
-                                    attributeTypeSymbol.ContainingSymbol,
-                                    wellKnownTypes.Get(
-                                        WellKnownType.Microsoft_AspNetCore_Http_AsParametersAttribute
-                                    )
+                            SymbolEqualityComparer.Default.Equals(
+                                attributeTypeSymbol.ContainingSymbol,
+                                wellKnownTypes.Get(
+                                    WellKnownType.Microsoft_AspNetCore_Http_AsParametersAttribute
                                 )
+                            )
                         )
                         {
                             return true;

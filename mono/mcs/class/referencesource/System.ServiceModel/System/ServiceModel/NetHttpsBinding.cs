@@ -102,16 +102,14 @@ namespace System.ServiceModel
                     == HttpClientCredentialType.InheritedFromHost
             )
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.HttpClientCredentialTypeInvalid,
-                                this.BasicHttpSecurity.Transport.ClientCredentialType
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpClientCredentialTypeInvalid,
+                            this.BasicHttpSecurity.Transport.ClientCredentialType
                         )
-                    );
+                    )
+                );
             }
 
             return base.BuildChannelFactory<TChannel>(parameters);
@@ -193,17 +191,15 @@ namespace System.ServiceModel
                 && UnsafeNativeMethods.IsTailoredApplication.Value
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.UnsupportedBindingProperty,
-                                "MessageEncoding",
-                                this.MessageEncoding
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.UnsupportedBindingProperty,
+                            "MessageEncoding",
+                            this.MessageEncoding
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -315,17 +311,15 @@ namespace System.ServiceModel
             NetHttpsBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidBindingConfigurationName,
-                                configurationName,
-                                ConfigurationStrings.NetHttpBindingCollectionElementName
-                            )
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.NetHttpBindingCollectionElementName
                         )
-                    );
+                    )
+                );
             }
             else
             {

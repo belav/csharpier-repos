@@ -17,15 +17,13 @@ namespace Internal.Cryptography.Pal.Windows
             int numRecipients;
             int cbRecipientsCount = sizeof(int);
             if (
-                !Interop
-                    .Crypt32
-                    .CryptMsgGetParam(
-                        hCryptMsg,
-                        CryptMsgParamType.CMSG_CMS_RECIPIENT_COUNT_PARAM,
-                        0,
-                        out numRecipients,
-                        ref cbRecipientsCount
-                    )
+                !Interop.Crypt32.CryptMsgGetParam(
+                    hCryptMsg,
+                    CryptMsgParamType.CMSG_CMS_RECIPIENT_COUNT_PARAM,
+                    0,
+                    out numRecipients,
+                    ref cbRecipientsCount
+                )
             )
                 throw Marshal.GetLastPInvokeError().ToCryptographicException();
 

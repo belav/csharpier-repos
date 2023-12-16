@@ -84,8 +84,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             var designTimeSolution = designTimeDocument.Project.Solution;
             var compileTimeSolution = workspace
-                .Services
-                .GetRequiredService<ICompileTimeSolutionProvider>()
+                .Services.GetRequiredService<ICompileTimeSolutionProvider>()
                 .GetCompileTimeSolution(designTimeSolution);
 
             var compileTimeDocument = await CompileTimeSolutionProvider
@@ -107,9 +106,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var activeStatementSpanProvider = new ActiveStatementSpanProvider(
                 async (documentId, filePath, cancellationToken) =>
                 {
-                    var trackingService = workspace
-                        .Services
-                        .GetRequiredService<IActiveStatementTrackingService>();
+                    var trackingService =
+                        workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
                     return await trackingService
                         .GetSpansAsync(compileTimeSolution, documentId, filePath, cancellationToken)
                         .ConfigureAwait(false);

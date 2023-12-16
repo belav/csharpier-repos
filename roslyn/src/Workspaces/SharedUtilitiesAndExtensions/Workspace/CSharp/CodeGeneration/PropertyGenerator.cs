@@ -314,16 +314,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (declaration.ExpressionBody == null)
             {
                 if (
-                    declaration
-                        .Body
-                        ?.TryConvertToArrowExpressionBody(
-                            declaration.Kind(),
-                            info.LanguageVersion,
-                            info.Options.PreferExpressionBodiedAccessors.Value,
-                            cancellationToken,
-                            out var expressionBody,
-                            out var semicolonToken
-                        ) == true
+                    declaration.Body?.TryConvertToArrowExpressionBody(
+                        declaration.Kind(),
+                        info.LanguageVersion,
+                        info.Options.PreferExpressionBodiedAccessors.Value,
+                        cancellationToken,
+                        out var expressionBody,
+                        out var semicolonToken
+                    ) == true
                 )
                 {
                     declaration = declaration
@@ -362,16 +360,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return false;
             }
 
-            return accessor
-                .Body
-                .TryConvertToArrowExpressionBody(
-                    declarationKind,
-                    languageVersion,
-                    preference,
-                    cancellationToken,
-                    out arrowExpression,
-                    out semicolonToken
-                );
+            return accessor.Body.TryConvertToArrowExpressionBody(
+                declarationKind,
+                languageVersion,
+                preference,
+                cancellationToken,
+                out arrowExpression,
+                out semicolonToken
+            );
         }
 
         private static AccessorListSyntax? GenerateAccessorList(

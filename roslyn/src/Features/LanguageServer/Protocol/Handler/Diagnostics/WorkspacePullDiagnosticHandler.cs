@@ -66,8 +66,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             VSInternalWorkspaceDiagnosticsParams diagnosticsParams
         ) =>
             diagnosticsParams
-                .PreviousResults
-                ?.Where(d => d.PreviousResultId != null)
+                .PreviousResults?.Where(d => d.PreviousResultId != null)
                 .Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!))
                 .ToImmutableArray();
 

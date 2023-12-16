@@ -90,9 +90,8 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
             // We don't expect both of these to be provided, and they are internal so there's
             // no realistic way this could happen.
             var dynamicPageMetadata = endpoint.Metadata.GetMetadata<DynamicPageMetadata>();
-            var transformerMetadata = endpoint
-                .Metadata
-                .GetMetadata<DynamicPageRouteValueTransformerMetadata>();
+            var transformerMetadata =
+                endpoint.Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>();
             DynamicRouteValueTransformer? transformer = null;
             if (dynamicPageMetadata != null)
             {
@@ -101,9 +100,9 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
             else if (transformerMetadata != null)
             {
                 transformer = (DynamicRouteValueTransformer)
-                    httpContext
-                        .RequestServices
-                        .GetRequiredService(transformerMetadata.SelectorType);
+                    httpContext.RequestServices.GetRequiredService(
+                        transformerMetadata.SelectorType
+                    );
                 if (transformer.State != null)
                 {
                     throw new InvalidOperationException(

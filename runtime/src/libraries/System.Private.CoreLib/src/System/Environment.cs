@@ -226,8 +226,7 @@ namespace System
             get
             {
                 string? versionString = typeof(object)
-                    .Assembly
-                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                     ?.InformationalVersion;
 
                 ReadOnlySpan<char> versionSpan = versionString.AsSpan();

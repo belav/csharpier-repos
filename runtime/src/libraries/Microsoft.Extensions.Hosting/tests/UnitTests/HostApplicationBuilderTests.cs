@@ -227,23 +227,19 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             HostApplicationBuilder builder = createBuilder();
 
-            builder
-                .Configuration
-                .AddInMemoryCollection(
-                    new KeyValuePair<string, string>[]
-                    {
-                        new KeyValuePair<string, string>("key1", "value1")
-                    }
-                );
+            builder.Configuration.AddInMemoryCollection(
+                new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>("key1", "value1")
+                }
+            );
 
-            builder
-                .Configuration
-                .AddInMemoryCollection(
-                    new KeyValuePair<string, string>[]
-                    {
-                        new KeyValuePair<string, string>("key2", "value2")
-                    }
-                );
+            builder.Configuration.AddInMemoryCollection(
+                new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>("key2", "value2")
+                }
+            );
 
             using IHost host = builder.Build();
 
@@ -253,14 +249,12 @@ namespace Microsoft.Extensions.Hosting.Tests
             Assert.Equal("value1", config["key1"]);
             Assert.Equal("value2", config["key2"]);
 
-            builder
-                .Configuration
-                .AddInMemoryCollection(
-                    new KeyValuePair<string, string>[]
-                    {
-                        new KeyValuePair<string, string>("key2", "value3")
-                    }
-                );
+            builder.Configuration.AddInMemoryCollection(
+                new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>("key2", "value3")
+                }
+            );
 
             Assert.Equal("value1", config["key1"]);
             Assert.Equal("value3", config["key2"]);
@@ -641,13 +635,11 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var builder = new HostApplicationBuilder();
 
-            builder
-                .Services
-                .Configure<HostOptions>(options =>
-                {
-                    options.BackgroundServiceExceptionBehavior = testBehavior;
-                    options.ShutdownTimeout = testShutdown;
-                });
+            builder.Services.Configure<HostOptions>(options =>
+            {
+                options.BackgroundServiceExceptionBehavior = testBehavior;
+                options.ShutdownTimeout = testShutdown;
+            });
 
             using IHost host = builder.Build();
             var options = host.Services.GetRequiredService<IOptions<HostOptions>>();

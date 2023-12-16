@@ -120,21 +120,14 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
     {
         if (
             caseExpression is { Operand: null, ElseResult: null, WhenClauses.Count: 3 }
-            && caseExpression
-                .WhenClauses
-                .All(
-                    c =>
-                        c
-                            is {
-                                Test: SqlBinaryExpression,
-                                Result: SqlConstantExpression { Value: int }
-                            }
-                )
+            && caseExpression.WhenClauses.All(
+                c =>
+                    c is { Test: SqlBinaryExpression, Result: SqlConstantExpression { Value: int } }
+            )
         )
         {
             var whenClauses = caseExpression
-                .WhenClauses
-                .Select(
+                .WhenClauses.Select(
                     c =>
                         new
                         {
@@ -268,9 +261,9 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
             && caseComponent is { Operand: null, ElseResult: null }
         )
         {
-            var matchingCaseBlock = caseComponent
-                .WhenClauses
-                .FirstOrDefault(wc => sqlConstantComponent.Equals(wc.Result));
+            var matchingCaseBlock = caseComponent.WhenClauses.FirstOrDefault(
+                wc => sqlConstantComponent.Equals(wc.Result)
+            );
             if (matchingCaseBlock != null)
             {
                 return Visit(matchingCaseBlock.Test);

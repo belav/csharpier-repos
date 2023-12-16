@@ -80,11 +80,8 @@ namespace AssemblyDependencyResolverTests
 
         public void TestComponentLoadFailureWithPreviousErrorWriter()
         {
-            IntPtr previousWriter = System
-                .Runtime
-                .InteropServices
-                .Marshal
-                .GetFunctionPointerForDelegate(
+            IntPtr previousWriter =
+                System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(
                     (HostPolicyMock.ErrorWriterDelegate)(
                         (string _) =>
                         {
@@ -120,11 +117,8 @@ namespace AssemblyDependencyResolverTests
         {
             string assemblyDependencyPath = CreateMockAssembly("AssemblyDependency.dll");
 
-            IntPtr previousWriter = System
-                .Runtime
-                .InteropServices
-                .Marshal
-                .GetFunctionPointerForDelegate(
+            IntPtr previousWriter =
+                System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(
                     (HostPolicyMock.ErrorWriterDelegate)(
                         (string _) =>
                         {

@@ -52,15 +52,13 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.ValueMustBePositive)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
 
                 this.maxAcceptedChannels = value;
             }
@@ -89,12 +87,10 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IOutputChannel))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "TChannel",
-                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             // Prefer IDuplexChannel
@@ -118,14 +114,12 @@ namespace System.ServiceModel.Channels
                     (object)new RequestOneWayChannelFactory(this, context);
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
 #pragma warning suppress 56506 // context.Binding will never be null.
-                    new InvalidOperationException(
-                        SR.GetString(SR.OneWayInternalTypeNotSupported, context.Binding.Name)
-                    )
-                );
+                new InvalidOperationException(
+                    SR.GetString(SR.OneWayInternalTypeNotSupported, context.Binding.Name)
+                )
+            );
         }
 
         public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
@@ -139,12 +133,10 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IInputChannel))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "TChannel",
-                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             // Prefer IDuplexChannel
@@ -168,14 +160,12 @@ namespace System.ServiceModel.Channels
                     (object)new ReplyOneWayChannelListener(this, context);
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
 #pragma warning suppress 56506 // context.Binding will never be null.
-                    new InvalidOperationException(
-                        SR.GetString(SR.OneWayInternalTypeNotSupported, context.Binding.Name)
-                    )
-                );
+                new InvalidOperationException(
+                    SR.GetString(SR.OneWayInternalTypeNotSupported, context.Binding.Name)
+                )
+            );
         }
 
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)

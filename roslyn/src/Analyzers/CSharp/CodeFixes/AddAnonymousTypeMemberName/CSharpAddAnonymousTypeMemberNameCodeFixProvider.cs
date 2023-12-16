@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAnonymousTypeMemberName
             AnonymousObjectCreationExpressionSyntax initializer
         ) =>
             initializer
-                .Initializers
-                .Where(i => i.NameEquals != null)
+                .Initializers.Where(i => i.NameEquals != null)
                 .Select(i => i.NameEquals!.Name.Identifier.ValueText);
     }
 }

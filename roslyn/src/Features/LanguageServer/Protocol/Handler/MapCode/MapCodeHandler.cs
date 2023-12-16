@@ -139,8 +139,7 @@ internal sealed class MapCodeHandler : ILspServiceRequestHandler<MapCodeParams, 
 
             var oldText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var textEdits = textChanges
-                .Value
-                .Select(change => ProtocolConversions.TextChangeToTextEdit(change, oldText))
+                .Value.Select(change => ProtocolConversions.TextChangeToTextEdit(change, oldText))
                 .ToArray();
 
             return (textDocument.Uri, textEdits);

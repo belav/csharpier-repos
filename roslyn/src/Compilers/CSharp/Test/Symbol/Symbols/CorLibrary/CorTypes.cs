@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
             }
 
             var p = noMsCorLibRef
-                .GlobalNamespace
-                .GetTypeMembers("I1")
+                .GlobalNamespace.GetTypeMembers("I1")
                 .Single()
                 .GetMembers("M1")
                 .OfType<MethodSymbol>()
@@ -194,8 +193,7 @@ namespace System
 
             var system_object = msCorLibRef
                 .Modules[0]
-                .GlobalNamespace
-                .GetMembers("System")
+                .GlobalNamespace.GetMembers("System")
                 .Select(m => (NamespaceSymbol)m)
                 .Single()
                 .GetTypeMembers("Object")

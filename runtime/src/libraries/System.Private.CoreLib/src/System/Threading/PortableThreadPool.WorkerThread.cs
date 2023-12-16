@@ -121,23 +121,22 @@ namespace System.Threading
                         );
                         newCounts.NumThreadsGoal = newNumThreadsGoal;
 
-                        ThreadCounts oldCounts = threadPoolInstance
-                            ._separated
-                            .counts
-                            .InterlockedCompareExchange(newCounts, counts);
+                        ThreadCounts oldCounts =
+                            threadPoolInstance._separated.counts.InterlockedCompareExchange(
+                                newCounts,
+                                counts
+                            );
                         if (oldCounts == counts)
                         {
-                            HillClimbing
-                                .ThreadPoolHillClimber
-                                .ForceChange(
-                                    newNumThreadsGoal,
-                                    HillClimbing.StateOrTransition.ThreadTimedOut
-                                );
+                            HillClimbing.ThreadPoolHillClimber.ForceChange(
+                                newNumThreadsGoal,
+                                HillClimbing.StateOrTransition.ThreadTimedOut
+                            );
                             if (NativeRuntimeEventSource.Log.IsEnabled())
                             {
-                                NativeRuntimeEventSource
-                                    .Log
-                                    .ThreadPoolWorkerThreadStop((uint)newNumExistingThreads);
+                                NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadStop(
+                                    (uint)newNumExistingThreads
+                                );
                             }
                             return true;
                         }
@@ -164,10 +163,11 @@ namespace System.Threading
                     ThreadCounts newCounts = counts;
                     newCounts.NumProcessingWork--;
 
-                    ThreadCounts countsBeforeUpdate = threadPoolInstance
-                        ._separated
-                        .counts
-                        .InterlockedCompareExchange(newCounts, counts);
+                    ThreadCounts countsBeforeUpdate =
+                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
+                            newCounts,
+                            counts
+                        );
                     if (countsBeforeUpdate == counts)
                     {
                         break;
@@ -209,10 +209,11 @@ namespace System.Threading
                     newCounts.NumProcessingWork = newNumProcessingWork;
                     newCounts.NumExistingThreads = newNumExistingThreads;
 
-                    ThreadCounts oldCounts = threadPoolInstance
-                        ._separated
-                        .counts
-                        .InterlockedCompareExchange(newCounts, counts);
+                    ThreadCounts oldCounts =
+                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
+                            newCounts,
+                            counts
+                        );
 
                     if (oldCounts == counts)
                     {
@@ -263,10 +264,11 @@ namespace System.Threading
                     ThreadCounts newCounts = counts;
                     newCounts.NumProcessingWork--;
 
-                    ThreadCounts oldCounts = threadPoolInstance
-                        ._separated
-                        .counts
-                        .InterlockedCompareExchange(newCounts, counts);
+                    ThreadCounts oldCounts =
+                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
+                            newCounts,
+                            counts
+                        );
 
                     if (oldCounts == counts)
                     {

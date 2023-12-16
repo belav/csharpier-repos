@@ -362,14 +362,10 @@ namespace System.Data.Metadata.Edm
                             AddError(
                                 errors,
                                 new EdmItemError(
-                                    System
-                                        .Data
-                                        .Entity
-                                        .Strings
-                                        .Validator_NullableEntityKeyProperty(
-                                            keyProperty.Name,
-                                            item.FullName
-                                        ),
+                                    System.Data.Entity.Strings.Validator_NullableEntityKeyProperty(
+                                        keyProperty.Name,
+                                        item.FullName
+                                    ),
                                     keyProperty
                                 )
                             );

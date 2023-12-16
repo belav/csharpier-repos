@@ -405,8 +405,7 @@ namespace System.Net.Security.Tests
 
                     X509ChainStatusFlags[] flags = chain
                         .ChainElements[0]
-                        .ChainElementStatus
-                        .Select(cs => cs.Status)
+                        .ChainElementStatus.Select(cs => cs.Status)
                         .ToArray();
                     Assert.Contains(X509ChainStatusFlags.RevocationStatusUnknown, flags);
                 }
@@ -418,8 +417,7 @@ namespace System.Net.Security.Tests
 
                     X509ChainStatusFlags[] flags = chain
                         .ChainElements[0]
-                        .ChainElementStatus
-                        .Select(cs => cs.Status)
+                        .ChainElementStatus.Select(cs => cs.Status)
                         .ToArray();
                     Assert.Contains(X509ChainStatusFlags.Revoked, flags);
                 }

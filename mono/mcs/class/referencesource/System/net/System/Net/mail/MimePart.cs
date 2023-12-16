@@ -206,9 +206,13 @@ namespace System.Net.Mime
             context.bytesLeft = Stream.EndRead(result);
             if (context.bytesLeft > 0)
             {
-                IAsyncResult writeResult = context
-                    .outputStream
-                    .BeginWrite(context.buffer, 0, context.bytesLeft, writeCallback, context);
+                IAsyncResult writeResult = context.outputStream.BeginWrite(
+                    context.buffer,
+                    0,
+                    context.bytesLeft,
+                    writeCallback,
+                    context
+                );
                 if (writeResult.CompletedSynchronously)
                 {
                     WriteCallbackHandler(writeResult);

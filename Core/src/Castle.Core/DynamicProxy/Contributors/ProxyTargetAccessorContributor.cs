@@ -45,13 +45,11 @@ namespace Castle.DynamicProxy.Contributors
                 typeof(object)
             );
 
-            dynProxyGetTarget
-                .CodeBuilder
-                .AddStatement(
-                    new ReturnStatement(
-                        new ConvertExpression(typeof(object), targetType, targetReference)
-                    )
-                );
+            dynProxyGetTarget.CodeBuilder.AddStatement(
+                new ReturnStatement(
+                    new ConvertExpression(typeof(object), targetType, targetReference)
+                )
+            );
 
             var dynProxySetTarget = emitter.CreateMethod(
                 nameof(IProxyTargetAccessor.DynProxySetTarget),
@@ -62,28 +60,24 @@ namespace Castle.DynamicProxy.Contributors
             // we can only change the target of the interface proxy
             if (targetReference is FieldReference targetField)
             {
-                dynProxySetTarget
-                    .CodeBuilder
-                    .AddStatement(
-                        new AssignStatement(
-                            targetField,
-                            new ConvertExpression(
-                                targetField.FieldBuilder.FieldType,
-                                dynProxySetTarget.Arguments[0]
-                            )
+                dynProxySetTarget.CodeBuilder.AddStatement(
+                    new AssignStatement(
+                        targetField,
+                        new ConvertExpression(
+                            targetField.FieldBuilder.FieldType,
+                            dynProxySetTarget.Arguments[0]
                         )
-                    );
+                    )
+                );
             }
             else
             {
-                dynProxySetTarget
-                    .CodeBuilder
-                    .AddStatement(
-                        new ThrowStatement(
-                            typeof(InvalidOperationException),
-                            "Cannot change the target of the class proxy."
-                        )
-                    );
+                dynProxySetTarget.CodeBuilder.AddStatement(
+                    new ThrowStatement(
+                        typeof(InvalidOperationException),
+                        "Cannot change the target of the class proxy."
+                    )
+                );
             }
 
             dynProxySetTarget.CodeBuilder.AddStatement(new ReturnStatement());

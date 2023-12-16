@@ -132,9 +132,7 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("Names and aliases cannot be null, empty, or consist entirely of whitespace.");
         }
 
@@ -146,9 +144,7 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("Names and aliases cannot be null, empty, or consist entirely of whitespace.");
         }
 
@@ -173,9 +169,7 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Contain($"Names and aliases cannot contain whitespace: \"{name}\"");
         }
 
@@ -194,9 +188,7 @@ namespace System.CommandLine.Tests
             addAlias
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Contain($"Names and aliases cannot contain whitespace: \"{alias}\"");
         }
 
@@ -264,24 +256,20 @@ namespace System.CommandLine.Tests
         public void Option_T_default_value_is_validated()
         {
             var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
-            option
-                .Validators
-                .Add(
-                    symbol =>
-                        symbol.AddError(
-                            symbol
-                                .Tokens
-                                .Select(t => t.Value)
-                                .Where(v => v == "123")
-                                .Select(_ => "ERR")
-                                .First()
-                        )
-                );
+            option.Validators.Add(
+                symbol =>
+                    symbol.AddError(
+                        symbol
+                            .Tokens.Select(t => t.Value)
+                            .Where(v => v == "123")
+                            .Select(_ => "ERR")
+                            .First()
+                    )
+            );
 
             new CliRootCommand { option }
                 .Parse("-x 123")
-                .Errors
-                .Select(e => e.Message)
+                .Errors.Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(new[] { "ERR" });
         }
@@ -316,8 +304,7 @@ namespace System.CommandLine.Tests
             var result = new CliRootCommand { option }.Parse("--color Fuschia");
 
             result
-                .Errors
-                .Select(e => e.Message)
+                .Errors.Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(
                     new[]

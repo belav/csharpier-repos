@@ -382,13 +382,10 @@ internal sealed class ChunkingCookieManager
 
         if (keyValuePairs.Count > 0)
         {
-            context
-                .Response
-                .Cookies
-                .Append(
-                    keyValuePairs.ToArray(),
-                    new CookieOptions(options) { Expires = DateTimeOffset.UnixEpoch, }
-                );
+            context.Response.Cookies.Append(
+                keyValuePairs.ToArray(),
+                new CookieOptions(options) { Expires = DateTimeOffset.UnixEpoch, }
+            );
         }
     }
 }

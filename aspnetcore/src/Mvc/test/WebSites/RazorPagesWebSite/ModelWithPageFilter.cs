@@ -27,10 +27,9 @@ public class HandlerChangingPageFilterAttribute : Attribute, IPageFilter
 {
     public void OnPageHandlerSelected(PageHandlerSelectedContext context)
     {
-        context.HandlerMethod = context
-            .ActionDescriptor
-            .HandlerMethods
-            .First(m => m.Name == "Edit");
+        context.HandlerMethod = context.ActionDescriptor.HandlerMethods.First(
+            m => m.Name == "Edit"
+        );
     }
 
     public void OnPageHandlerExecuting(PageHandlerExecutingContext context) { }

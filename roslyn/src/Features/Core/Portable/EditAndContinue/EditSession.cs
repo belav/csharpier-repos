@@ -151,13 +151,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 // If the runtime doesn't support adding new types then we expect every row number for any type that is
                 // emitted will be less than or equal to the number of rows in the original metadata.
-                var highestEmittedTypeDefRow = emitResult
-                    .ChangedTypes
-                    .Max(t => MetadataTokens.GetRowNumber(t));
+                var highestEmittedTypeDefRow = emitResult.ChangedTypes.Max(
+                    t => MetadataTokens.GetRowNumber(t)
+                );
                 var highestExistingTypeDefRow = emitResult
-                    .Baseline
-                    .OriginalMetadata
-                    .GetMetadataReader()
+                    .Baseline.OriginalMetadata.GetMetadataReader()
                     .GetTableRowCount(TableIndex.TypeDef);
 
                 if (highestEmittedTypeDefRow > highestExistingTypeDefRow)
@@ -187,8 +185,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Contract.ThrowIfTrue(documentAnalyses.IsEmpty);
 
             var availability = await DebuggingSession
-                .DebuggerService
-                .GetAvailabilityAsync(mvid, cancellationToken)
+                .DebuggerService.GetAvailabilityAsync(mvid, cancellationToken)
                 .ConfigureAwait(false);
             if (availability.Status == ManagedHotReloadAvailabilityStatus.ModuleNotLoaded)
             {
@@ -316,8 +313,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             try
             {
                 var capabilities = await DebuggingSession
-                    .DebuggerService
-                    .GetCapabilitiesAsync(cancellationToken)
+                    .DebuggerService.GetCapabilitiesAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return EditAndContinueCapabilitiesParser.Parse(capabilities);
             }
@@ -335,8 +331,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 // Last committed solution reflects the state of the source that is in sync with the binaries that are loaded in the debuggee.
                 var debugInfos = await DebuggingSession
-                    .DebuggerService
-                    .GetActiveStatementsAsync(cancellationToken)
+                    .DebuggerService.GetActiveStatementsAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return ActiveStatementsMap.Create(debugInfos, NonRemappableRegions);
             }
@@ -457,13 +452,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newProject
-                    .State
-                    .DocumentStates
-                    .GetChangedStateIds(
-                        oldProject.State.DocumentStates,
-                        ignoreUnchangedContent: true
-                    )
+                var documentId in newProject.State.DocumentStates.GetChangedStateIds(
+                    oldProject.State.DocumentStates,
+                    ignoreUnchangedContent: true
+                )
             )
             {
                 var document = newProject.GetRequiredDocument(documentId);
@@ -493,10 +485,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newProject
-                    .State
-                    .DocumentStates
-                    .GetAddedStateIds(oldProject.State.DocumentStates)
+                var documentId in newProject.State.DocumentStates.GetAddedStateIds(
+                    oldProject.State.DocumentStates
+                )
             )
             {
                 var document = newProject.GetRequiredDocument(documentId);
@@ -522,13 +513,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newProject
-                    .State
-                    .AdditionalDocumentStates
-                    .GetChangedStateIds(
-                        oldProject.State.AdditionalDocumentStates,
-                        ignoreUnchangedContent: true
-                    )
+                var documentId in newProject.State.AdditionalDocumentStates.GetChangedStateIds(
+                    oldProject.State.AdditionalDocumentStates,
+                    ignoreUnchangedContent: true
+                )
             )
             {
                 var document = newProject.GetRequiredAdditionalDocument(documentId);
@@ -546,13 +534,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newProject
-                    .State
-                    .AnalyzerConfigDocumentStates
-                    .GetChangedStateIds(
-                        oldProject.State.AnalyzerConfigDocumentStates,
-                        ignoreUnchangedContent: true
-                    )
+                var documentId in newProject.State.AnalyzerConfigDocumentStates.GetChangedStateIds(
+                    oldProject.State.AnalyzerConfigDocumentStates,
+                    ignoreUnchangedContent: true
+                )
             )
             {
                 var document = newProject.GetRequiredAnalyzerConfigDocument(documentId);
@@ -572,29 +557,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             // TODO: should handle removed documents above (detect them as edits) https://github.com/dotnet/roslyn/issues/62848
             if (
                 newProject
-                    .State
-                    .DocumentStates
-                    .GetRemovedStateIds(oldProject.State.DocumentStates)
+                    .State.DocumentStates.GetRemovedStateIds(oldProject.State.DocumentStates)
                     .Any()
                 || newProject
-                    .State
-                    .AdditionalDocumentStates
-                    .GetRemovedStateIds(oldProject.State.AdditionalDocumentStates)
+                    .State.AdditionalDocumentStates.GetRemovedStateIds(
+                        oldProject.State.AdditionalDocumentStates
+                    )
                     .Any()
                 || newProject
-                    .State
-                    .AdditionalDocumentStates
-                    .GetAddedStateIds(oldProject.State.AdditionalDocumentStates)
+                    .State.AdditionalDocumentStates.GetAddedStateIds(
+                        oldProject.State.AdditionalDocumentStates
+                    )
                     .Any()
                 || newProject
-                    .State
-                    .AnalyzerConfigDocumentStates
-                    .GetRemovedStateIds(oldProject.State.AnalyzerConfigDocumentStates)
+                    .State.AnalyzerConfigDocumentStates.GetRemovedStateIds(
+                        oldProject.State.AnalyzerConfigDocumentStates
+                    )
                     .Any()
                 || newProject
-                    .State
-                    .AnalyzerConfigDocumentStates
-                    .GetAddedStateIds(oldProject.State.AnalyzerConfigDocumentStates)
+                    .State.AnalyzerConfigDocumentStates.GetAddedStateIds(
+                        oldProject.State.AnalyzerConfigDocumentStates
+                    )
                     .Any()
             )
             {
@@ -629,17 +612,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             cancellationToken.ThrowIfCancellationRequested();
 
             var oldSourceGeneratedDocumentStates = await oldProject
-                .Solution
-                .State
-                .GetSourceGeneratedDocumentStatesAsync(oldProject.State, cancellationToken)
+                .Solution.State.GetSourceGeneratedDocumentStatesAsync(
+                    oldProject.State,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
 
             var newSourceGeneratedDocumentStates = await newProject
-                .Solution
-                .State
-                .GetSourceGeneratedDocumentStatesAsync(newProject.State, cancellationToken)
+                .Solution.State.GetSourceGeneratedDocumentStatesAsync(
+                    newProject.State,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             foreach (
@@ -695,13 +680,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newProject
-                    .State
-                    .DocumentStates
-                    .GetChangedStateIds(
-                        oldProject.State.DocumentStates,
-                        ignoreUnchangedContent: true
-                    )
+                var documentId in newProject.State.DocumentStates.GetChangedStateIds(
+                    oldProject.State.DocumentStates,
+                    ignoreUnchangedContent: true
+                )
             )
             {
                 yield return documentId;
@@ -717,14 +699,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             if (
                 !newProject.State.DocumentStates.HasAnyStateChanges(oldProject.State.DocumentStates)
-                && !newProject
-                    .State
-                    .AdditionalDocumentStates
-                    .HasAnyStateChanges(oldProject.State.AdditionalDocumentStates)
-                && !newProject
-                    .State
-                    .AnalyzerConfigDocumentStates
-                    .HasAnyStateChanges(oldProject.State.AnalyzerConfigDocumentStates)
+                && !newProject.State.AdditionalDocumentStates.HasAnyStateChanges(
+                    oldProject.State.AdditionalDocumentStates
+                )
+                && !newProject.State.AnalyzerConfigDocumentStates.HasAnyStateChanges(
+                    oldProject.State.AnalyzerConfigDocumentStates
+                )
             )
             {
                 // Based on the above assumption there are no changes in source generated files.
@@ -734,17 +714,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             cancellationToken.ThrowIfCancellationRequested();
 
             var oldSourceGeneratedDocumentStates = await oldProject
-                .Solution
-                .State
-                .GetSourceGeneratedDocumentStatesAsync(oldProject.State, cancellationToken)
+                .Solution.State.GetSourceGeneratedDocumentStatesAsync(
+                    oldProject.State,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
 
             var newSourceGeneratedDocumentStates = await newProject
-                .Solution
-                .State
-                .GetSourceGeneratedDocumentStatesAsync(newProject.State, cancellationToken)
+                .Solution.State.GetSourceGeneratedDocumentStatesAsync(
+                    newProject.State,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             foreach (
@@ -775,8 +757,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             foreach (var newDocument in changedOrAddedDocuments)
             {
                 var (oldDocument, oldDocumentState) = await DebuggingSession
-                    .LastCommittedSolution
-                    .GetDocumentAndStateAsync(
+                    .LastCommittedSolution.GetDocumentAndStateAsync(
                         newDocument.Id,
                         newDocument,
                         cancellationToken,
@@ -1043,9 +1024,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 )
                 {
                     // For deletes, we use NewSymbol to reference the containing type of the deleted member
-                    newResolution = edit.DeletedSymbolContainer
-                        .Value
-                        .Resolve(newCompilation, ignoreAssemblyKey: true, cancellationToken);
+                    newResolution = edit.DeletedSymbolContainer.Value.Resolve(
+                        newCompilation,
+                        ignoreAssemblyKey: true,
+                        cancellationToken
+                    );
                     Contract.ThrowIfNull(newResolution.Symbol);
                 }
                 else
@@ -1537,12 +1520,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         }
                         else
                         {
-                            var updatedMethodTokens = emitResult
-                                .UpdatedMethods
-                                .SelectAsArray(h => MetadataTokens.GetToken(h));
-                            var changedTypeTokens = emitResult
-                                .ChangedTypes
-                                .SelectAsArray(h => MetadataTokens.GetToken(h));
+                            var updatedMethodTokens = emitResult.UpdatedMethods.SelectAsArray(
+                                h => MetadataTokens.GetToken(h)
+                            );
+                            var changedTypeTokens = emitResult.ChangedTypes.SelectAsArray(
+                                h => MetadataTokens.GetToken(h)
+                            );
 
                             // Determine all active statements whose span changed and exception region span deltas.
                             GetActiveStatementAndExceptionRegionSpans(

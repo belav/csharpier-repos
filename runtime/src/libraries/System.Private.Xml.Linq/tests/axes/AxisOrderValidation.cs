@@ -378,8 +378,7 @@ namespace System.Xml.Linq.Tests
         {
             XDocument xDoc = TestData.GetDocumentWithContacts();
             Random rnd = new Random();
-            var randomOrderedElements = xDoc.Root
-                .DescendantNodesAndSelf()
+            var randomOrderedElements = xDoc.Root.DescendantNodesAndSelf()
                 .OrderBy(n => rnd.Next(0, int.MaxValue));
             using (var en = randomOrderedElements.InDocumentOrder().GetEnumerator())
             {

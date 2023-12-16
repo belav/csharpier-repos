@@ -1428,8 +1428,7 @@ INNER JOIN (
     {
         using var context = CreateContext();
         var query = context
-            .LevelOne
-            .FromSqlRaw("SELECT * FROM [LevelOne]")
+            .LevelOne.FromSqlRaw("SELECT * FROM [LevelOne]")
             .Include(e => e.OneToOne_Optional_FK1)
             .ThenInclude(e => e.OneToMany_Optional2)
             .Include(e => e.OneToMany_Optional1)

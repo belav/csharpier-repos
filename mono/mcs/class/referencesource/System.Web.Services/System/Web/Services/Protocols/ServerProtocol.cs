@@ -255,17 +255,15 @@ namespace System.Web.Services.Protocols
                     };
                 }
 
-                HttpRuntime
-                    .Cache
-                    .Add(
-                        key,
-                        result,
-                        null,
-                        Cache.NoAbsoluteExpiration,
-                        Cache.NoSlidingExpiration,
-                        CacheItemPriority.NotRemovable,
-                        null
-                    );
+                HttpRuntime.Cache.Add(
+                    key,
+                    result,
+                    null,
+                    Cache.NoAbsoluteExpiration,
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.NotRemovable,
+                    null
+                );
             }
 
             return result;
@@ -325,17 +323,15 @@ namespace System.Web.Services.Protocols
         )
         {
             PartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
-            HttpRuntime
-                .Cache
-                .Insert(
-                    CreateKey(protocolType, serverType, excludeSchemeHostPort),
-                    value,
-                    null,
-                    Cache.NoAbsoluteExpiration,
-                    Cache.NoSlidingExpiration,
-                    CacheItemPriority.NotRemovable,
-                    null
-                );
+            HttpRuntime.Cache.Insert(
+                CreateKey(protocolType, serverType, excludeSchemeHostPort),
+                value,
+                null,
+                Cache.NoAbsoluteExpiration,
+                Cache.NoSlidingExpiration,
+                CacheItemPriority.NotRemovable,
+                null
+            );
         }
 
         protected object GetFromCache(Type protocolType, Type serverType)
@@ -346,9 +342,9 @@ namespace System.Web.Services.Protocols
         internal object GetFromCache(Type protocolType, Type serverType, bool excludeSchemeHostPort)
         {
             PartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
-            return HttpRuntime
-                .Cache
-                .Get(CreateKey(protocolType, serverType, excludeSchemeHostPort));
+            return HttpRuntime.Cache.Get(
+                CreateKey(protocolType, serverType, excludeSchemeHostPort)
+            );
         }
 
         // IsCacheUnderPressure is part of a DOS mitigation mechanism addressing CSDMain#195148. Original problem: when a large number of
@@ -389,17 +385,15 @@ namespace System.Web.Services.Protocols
             }
             else
             {
-                HttpRuntime
-                    .Cache
-                    .Insert(
-                        key,
-                        new ServerProtocolCachePressure { Pressure = 1 },
-                        null,
-                        Cache.NoAbsoluteExpiration,
-                        Cache.NoSlidingExpiration,
-                        CacheItemPriority.NotRemovable,
-                        null
-                    );
+                HttpRuntime.Cache.Insert(
+                    key,
+                    new ServerProtocolCachePressure { Pressure = 1 },
+                    null,
+                    Cache.NoAbsoluteExpiration,
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.NotRemovable,
+                    null
+                );
 
                 return false;
             }

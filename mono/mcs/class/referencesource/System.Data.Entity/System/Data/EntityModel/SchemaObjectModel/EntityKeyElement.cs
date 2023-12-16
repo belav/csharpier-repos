@@ -89,11 +89,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidKey,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .InvalidKeyNoProperty(this.ParentElement.FQName, property.Name)
+                        System.Data.Entity.Strings.InvalidKeyNoProperty(
+                            this.ParentElement.FQName,
+                            property.Name
+                        )
                     );
                 }
             }
@@ -126,14 +125,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.DuplicatePropertySpecifiedInEntityKey,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .DuplicatePropertyNameSpecifiedInEntityKey(
-                                this.ParentElement.FQName,
-                                property.Name
-                            )
+                        System.Data.Entity.Strings.DuplicatePropertyNameSpecifiedInEntityKey(
+                            this.ParentElement.FQName,
+                            property.Name
+                        )
                     );
                     continue;
                 }
@@ -145,11 +140,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidKey,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .InvalidKeyNullablePart(property.Name, this.ParentElement.Name)
+                        System.Data.Entity.Strings.InvalidKeyNullablePart(
+                            property.Name,
+                            this.ParentElement.Name
+                        )
                     );
                 }
 
@@ -162,11 +156,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.EntityKeyMustBeScalar,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .EntityKeyMustBeScalar(property.Name, this.ParentElement.Name)
+                        System.Data.Entity.Strings.EntityKeyMustBeScalar(
+                            property.Name,
+                            this.ParentElement.Name
+                        )
                     );
                     continue;
                 }

@@ -227,13 +227,11 @@ namespace System.ServiceModel.Activities
         {
             if (this.Request == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.TransactedReceiveScopeRequiresReceive(this.DisplayName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.TransactedReceiveScopeRequiresReceive(this.DisplayName)
+                    )
+                );
             }
             // we have to do this in code since we aren't fully modeled (in order for
             // dynamic update to work correctly)
@@ -241,12 +239,10 @@ namespace System.ServiceModel.Activities
             Fx.Assert(handleInstance != null, "RuntimeTransactionHandle is null");
 
             //This is used by InternalReceiveMessage to update the InitiatingTransaction so that we can later call Commit/Complete on it
-            context
-                .Properties
-                .Add(
-                    TransactedReceiveData.TransactedReceiveDataExecutionPropertyName,
-                    new TransactedReceiveData()
-                );
+            context.Properties.Add(
+                TransactedReceiveData.TransactedReceiveDataExecutionPropertyName,
+                new TransactedReceiveData()
+            );
 
             RuntimeTransactionHandle foundHandle =
                 context.Properties.Find(handleInstance.ExecutionPropertyName)
@@ -260,15 +256,13 @@ namespace System.ServiceModel.Activities
                 //nested case
                 if (foundHandle.SuppressTransaction)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new InvalidOperationException(
-                                SR2.CannotNestTransactedReceiveScopeWhenAmbientHandleIsSuppressed(
-                                    this.DisplayName
-                                )
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR2.CannotNestTransactedReceiveScopeWhenAmbientHandleIsSuppressed(
+                                this.DisplayName
                             )
-                        );
+                        )
+                    );
                 }
 
                 // Verify if TRS is root and if the foundHandle is not from the parent HandleScope<RTH>
@@ -296,10 +290,9 @@ namespace System.ServiceModel.Activities
         void OnBodyCompleted(NativeActivityContext context, ActivityInstance completedInstance)
         {
             TransactedReceiveData transactedReceiveData =
-                context
-                    .Properties
-                    .Find(TransactedReceiveData.TransactedReceiveDataExecutionPropertyName)
-                as TransactedReceiveData;
+                context.Properties.Find(
+                    TransactedReceiveData.TransactedReceiveDataExecutionPropertyName
+                ) as TransactedReceiveData;
             Fx.Assert(
                 transactedReceiveData != null,
                 "TransactedReceiveScope.OnBodyComplete - transactedreceivedata is null"

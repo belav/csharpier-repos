@@ -420,9 +420,10 @@ namespace System.Activities.Statements
 
                 if (existingCatch != null)
                 {
-                    throw FxTrace
-                        .Exception
-                        .Argument("item", SR.DuplicateCatchClause(item.ExceptionType.FullName));
+                    throw FxTrace.Exception.Argument(
+                        "item",
+                        SR.DuplicateCatchClause(item.ExceptionType.FullName)
+                    );
                 }
 
                 base.InsertItem(index, item);
@@ -439,9 +440,10 @@ namespace System.Activities.Statements
 
                 if (existingCatch != null && !object.ReferenceEquals(this[index], existingCatch))
                 {
-                    throw FxTrace
-                        .Exception
-                        .Argument("item", SR.DuplicateCatchClause(item.ExceptionType.FullName));
+                    throw FxTrace.Exception.Argument(
+                        "item",
+                        SR.DuplicateCatchClause(item.ExceptionType.FullName)
+                    );
                 }
 
                 base.SetItem(index, item);

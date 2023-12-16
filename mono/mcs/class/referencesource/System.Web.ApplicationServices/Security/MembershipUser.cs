@@ -190,8 +190,7 @@ namespace System.Web.Security
         public virtual string GetPassword(string passwordAnswer)
         {
             return SystemWebProxy
-                .Membership
-                .Providers[ProviderName]
+                .Membership.Providers[ProviderName]
                 .GetPassword(UserName, passwordAnswer);
         }
 
@@ -262,8 +261,7 @@ namespace System.Web.Security
 
             if (
                 !SystemWebProxy
-                    .Membership
-                    .Providers[ProviderName]
+                    .Membership.Providers[ProviderName]
                     .ChangePassword(UserName, oldPassword, newPassword)
             )
                 return false;
@@ -330,8 +328,7 @@ namespace System.Web.Security
 
             if (
                 !SystemWebProxy
-                    .Membership
-                    .Providers[ProviderName]
+                    .Membership.Providers[ProviderName]
                     .ChangePasswordQuestionAndAnswer(
                         UserName,
                         password,
@@ -347,8 +344,7 @@ namespace System.Web.Security
         public virtual string ResetPassword(string passwordAnswer)
         {
             string pass = SystemWebProxy
-                .Membership
-                .Providers[ProviderName]
+                .Membership.Providers[ProviderName]
                 .ResetPassword(UserName, passwordAnswer);
             if (!String.IsNullOrEmpty(pass))
             {
@@ -440,8 +436,7 @@ namespace System.Web.Security
         private void UpdateSelf()
         {
             MembershipUser mu = SystemWebProxy
-                .Membership
-                .Providers[ProviderName]
+                .Membership.Providers[ProviderName]
                 .GetUser(UserName, false);
             if (mu != null)
             {

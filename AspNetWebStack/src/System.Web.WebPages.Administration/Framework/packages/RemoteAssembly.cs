@@ -210,9 +210,10 @@ namespace System.Web.WebPages.Administration.PackageManager
             {
                 return versionDiff;
             }
-            var publicKeyDiff = StringComparer
-                .OrdinalIgnoreCase
-                .Compare(a.PublicKeyToken, b.PublicKeyToken);
+            var publicKeyDiff = StringComparer.OrdinalIgnoreCase.Compare(
+                a.PublicKeyToken,
+                b.PublicKeyToken
+            );
             if (publicKeyDiff != 0)
             {
                 return publicKeyDiff;

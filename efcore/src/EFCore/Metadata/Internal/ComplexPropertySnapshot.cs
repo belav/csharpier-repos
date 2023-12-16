@@ -194,34 +194,28 @@ public class ComplexPropertySnapshot
 
         if (ComplexType.GetChangeTrackingStrategyConfigurationSource() != null)
         {
-            complexTypeBuilder
-                .Metadata
-                .SetChangeTrackingStrategy(
-                    ComplexType.GetChangeTrackingStrategy(),
-                    ComplexType.GetChangeTrackingStrategyConfigurationSource()!.Value
-                );
+            complexTypeBuilder.Metadata.SetChangeTrackingStrategy(
+                ComplexType.GetChangeTrackingStrategy(),
+                ComplexType.GetChangeTrackingStrategyConfigurationSource()!.Value
+            );
         }
 
         Properties.Attach(complexTypeBuilder);
 
         if (ComplexType.GetConstructorBindingConfigurationSource() != null)
         {
-            complexTypeBuilder
-                .Metadata
-                .SetConstructorBinding(
-                    Create(ComplexType.ConstructorBinding, complexTypeBuilder.Metadata),
-                    ComplexType.GetConstructorBindingConfigurationSource()!.Value
-                );
+            complexTypeBuilder.Metadata.SetConstructorBinding(
+                Create(ComplexType.ConstructorBinding, complexTypeBuilder.Metadata),
+                ComplexType.GetConstructorBindingConfigurationSource()!.Value
+            );
         }
 
         if (ComplexType.GetServiceOnlyConstructorBindingConfigurationSource() != null)
         {
-            complexTypeBuilder
-                .Metadata
-                .SetServiceOnlyConstructorBinding(
-                    Create(ComplexType.ServiceOnlyConstructorBinding, complexTypeBuilder.Metadata),
-                    ComplexType.GetServiceOnlyConstructorBindingConfigurationSource()!.Value
-                );
+            complexTypeBuilder.Metadata.SetServiceOnlyConstructorBinding(
+                Create(ComplexType.ServiceOnlyConstructorBinding, complexTypeBuilder.Metadata),
+                ComplexType.GetServiceOnlyConstructorBindingConfigurationSource()!.Value
+            );
         }
 
         return complexPropertyBuilder;
@@ -233,8 +227,7 @@ public class ComplexPropertySnapshot
     ) =>
         instantiationBinding?.With(
             instantiationBinding
-                .ParameterBindings
-                .Select(binding => Create(binding, complexType))
+                .ParameterBindings.Select(binding => Create(binding, complexType))
                 .ToList()
         );
 
@@ -244,8 +237,7 @@ public class ComplexPropertySnapshot
     ) =>
         parameterBinding.With(
             parameterBinding
-                .ConsumedProperties
-                .Select(
+                .ConsumedProperties.Select(
                     property =>
                         (IPropertyBase?)complexType.FindProperty(property.Name)
                         ?? complexType.FindComplexProperty(property.Name)!

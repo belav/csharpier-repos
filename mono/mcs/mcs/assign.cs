@@ -395,19 +395,17 @@ namespace Mono.CSharp
             System.Linq.Expressions.UnaryExpression source_object;
             if (ctx.HasSet(BuilderContext.Options.CheckedScope))
             {
-                source_object = System
-                    .Linq
-                    .Expressions
-                    .Expression
-                    .ConvertChecked(source.MakeExpression(ctx), target_object.Type);
+                source_object = System.Linq.Expressions.Expression.ConvertChecked(
+                    source.MakeExpression(ctx),
+                    target_object.Type
+                );
             }
             else
             {
-                source_object = System
-                    .Linq
-                    .Expressions
-                    .Expression
-                    .Convert(source.MakeExpression(ctx), target_object.Type);
+                source_object = System.Linq.Expressions.Expression.Convert(
+                    source.MakeExpression(ctx),
+                    target_object.Type
+                );
             }
 
             return System.Linq.Expressions.Expression.Assign(target_object, source_object);
@@ -745,9 +743,7 @@ namespace Mono.CSharp
         protected override Expression DoResolve(ResolveContext rc)
         {
             target = new FieldExpr(field, loc);
-            source = rc.CurrentBlock
-                .ParametersBlock
-                .GetParameterInfo(parameter)
+            source = rc.CurrentBlock.ParametersBlock.GetParameterInfo(parameter)
                 .CreateReferenceExpression(rc, loc);
             return base.DoResolve(rc);
         }

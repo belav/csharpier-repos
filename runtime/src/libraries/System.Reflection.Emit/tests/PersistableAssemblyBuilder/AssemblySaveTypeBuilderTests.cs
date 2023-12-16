@@ -242,8 +242,7 @@ namespace System.Reflection.Emit.Tests
 
                 Type testType = AssemblySaveTools
                     .LoadAssemblyFromPath(file.Path)
-                    .Modules
-                    .First()
+                    .Modules.First()
                     .GetTypes()[0];
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
                 Type[] genericTypeParams = testType.GetGenericArguments();
@@ -346,8 +345,7 @@ namespace System.Reflection.Emit.Tests
 
                 Type testType = AssemblySaveTools
                     .LoadAssemblyFromPath(file.Path)
-                    .Modules
-                    .First()
+                    .Modules.First()
                     .GetTypes()[0];
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
                 Type[] genericTypeParams = testMethod.GetGenericArguments();
@@ -384,8 +382,7 @@ namespace System.Reflection.Emit.Tests
 
                 Type testType = AssemblySaveTools
                     .LoadAssemblyFromPath(file.Path)
-                    .Modules
-                    .First()
+                    .Modules.First()
                     .GetTypes()[0];
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
                 Type intArray = testMethod.GetParameters()[2].ParameterType;
@@ -425,8 +422,7 @@ namespace System.Reflection.Emit.Tests
 
                 Type testType = AssemblySaveTools
                     .LoadAssemblyFromPath(file.Path)
-                    .Modules
-                    .First()
+                    .Modules.First()
                     .GetTypes()[0];
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
 
@@ -460,8 +456,7 @@ namespace System.Reflection.Emit.Tests
 
                 Type testType = AssemblySaveTools
                     .LoadAssemblyFromPath(file.Path)
-                    .Modules
-                    .First()
+                    .Modules.First()
                     .GetTypes()[0];
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
 
@@ -525,8 +520,7 @@ namespace System.Reflection.Emit.Tests
 
                 Type testType = AssemblySaveTools
                     .LoadAssemblyFromPath(file.Path)
-                    .Modules
-                    .First()
+                    .Modules.First()
                     .GetTypes()[0];
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
                 Type paramType = testMethod.GetParameters()[1].ParameterType;
@@ -639,8 +633,7 @@ namespace System.Reflection.Emit.Tests
 
                 Type testType = AssemblySaveTools
                     .LoadAssemblyFromPath(file.Path)
-                    .Modules
-                    .First()
+                    .Modules.First()
                     .GetTypes()[0];
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
                 Type paramType = testMethod.GetParameters()[1].ParameterType;

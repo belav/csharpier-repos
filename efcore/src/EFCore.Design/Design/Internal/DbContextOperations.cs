@@ -446,8 +446,7 @@ public class DbContextOperations
     {
         var factoryInterface = typeof(IDesignTimeDbContextFactory<>).MakeGenericType(contextType);
         var factory = contextType
-            .Assembly
-            .GetConstructibleTypes()
+            .Assembly.GetConstructibleTypes()
             .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));
         return factory == null
             ? null

@@ -435,14 +435,12 @@ namespace System
                     byte[] encodedBytes = new byte[maxNumberOfBytesEncoded];
                     fixed (byte* pEncodedBytes = encodedBytes)
                     {
-                        int encodedBytesCount = Encoding
-                            .UTF8
-                            .GetBytes(
-                                pInput + next,
-                                surrogatePair ? 2 : 1,
-                                pEncodedBytes,
-                                maxNumberOfBytesEncoded
-                            );
+                        int encodedBytesCount = Encoding.UTF8.GetBytes(
+                            pInput + next,
+                            surrogatePair ? 2 : 1,
+                            pEncodedBytes,
+                            maxNumberOfBytesEncoded
+                        );
                         Debug.Assert(
                             encodedBytesCount <= maxNumberOfBytesEncoded,
                             "UTF8 encoder should not exceed specified byteCount"

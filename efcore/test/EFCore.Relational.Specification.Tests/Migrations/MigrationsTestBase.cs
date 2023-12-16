@@ -3521,8 +3521,7 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         // Round-trip the source model through a snapshot, compiling it and then extracting it back again.
         // This simulates the real-world migration flow and can expose errors in snapshot generation
         var migrationsCodeGenerator = Fixture
-            .TestHelpers
-            .CreateDesignServiceProvider()
+            .TestHelpers.CreateDesignServiceProvider()
             .GetRequiredService<IMigrationsCodeGenerator>();
         var sourceModelSnapshot = migrationsCodeGenerator.GenerateSnapshot(
             modelSnapshotNamespace: null,
@@ -3594,8 +3593,7 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         // Round-trip the source model through a snapshot, compiling it and then extracting it back again.
         // This simulates the real-world migration flow and can expose errors in snapshot generation
         var migrationsCodeGenerator = Fixture
-            .TestHelpers
-            .CreateDesignServiceProvider()
+            .TestHelpers.CreateDesignServiceProvider()
             .GetRequiredService<IMigrationsCodeGenerator>();
         var sourceModelSnapshot = migrationsCodeGenerator.GenerateSnapshot(
             modelSnapshotNamespace: null,
@@ -3724,8 +3722,7 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"));
 
         var databaseProvider = Fixture
-            .TestHelpers
-            .CreateContextServices()
+            .TestHelpers.CreateContextServices()
             .GetRequiredService<IDatabaseProvider>();
         build.References.Add(BuildReference.ByName(databaseProvider.Name));
 

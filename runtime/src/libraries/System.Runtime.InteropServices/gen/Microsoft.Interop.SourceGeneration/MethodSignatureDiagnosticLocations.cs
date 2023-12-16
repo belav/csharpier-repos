@@ -58,9 +58,7 @@ namespace Microsoft.Interop
             : this(
                 syntax.Identifier.Text,
                 syntax
-                    .ParameterList
-                    .Parameters
-                    .Select(p => p.Identifier.GetLocation())
+                    .ParameterList.Parameters.Select(p => p.Identifier.GetLocation())
                     .ToImmutableArray(),
                 syntax.Identifier.GetLocation()
             ) { }

@@ -131,12 +131,9 @@ namespace System.Web.UI.WebControls
                 if (Path.IsPathRooted(BodyFileName))
                     filePath = BodyFileName;
                 else
-                    filePath = HttpContext
-                        .Current
-                        .Request
-                        .MapPath(
-                            VirtualPathUtility.Combine(owner.TemplateSourceDirectory, BodyFileName)
-                        );
+                    filePath = HttpContext.Current.Request.MapPath(
+                        VirtualPathUtility.Combine(owner.TemplateSourceDirectory, BodyFileName)
+                    );
 
                 using (StreamReader sr = new StreamReader(filePath))
                 {

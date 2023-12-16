@@ -138,8 +138,7 @@ namespace Internal.IL.Stubs
             {
                 var fieldByReferenceValueToken = emitter.NewToken(
                     Context
-                        .SystemModule
-                        .GetKnownType("System", "ByReference")
+                        .SystemModule.GetKnownType("System", "ByReference")
                         .GetKnownField("Value")
                 );
                 for (int i = 0; i < _targetSignature.Length; i++)

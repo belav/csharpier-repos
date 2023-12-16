@@ -27,9 +27,10 @@ namespace Mono.Linker.Steps
                 return;
 
             if (
-                !context
-                    .Annotations
-                    .TryGetPreservedMembers(exportedType, out TypePreserveMembers members)
+                !context.Annotations.TryGetPreservedMembers(
+                    exportedType,
+                    out TypePreserveMembers members
+                )
             )
                 return;
 
@@ -46,13 +47,11 @@ namespace Mono.Linker.Steps
                 return;
             }
 
-            context
-                .Annotations
-                .Mark(
-                    type,
-                    new DependencyInfo(DependencyKind.ExportedType, exportedType),
-                    new MessageOrigin(assembly)
-                );
+            context.Annotations.Mark(
+                type,
+                new DependencyInfo(DependencyKind.ExportedType, exportedType),
+                new MessageOrigin(assembly)
+            );
             context.Annotations.SetMembersPreserve(type, members);
         }
     }

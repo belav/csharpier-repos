@@ -34,10 +34,8 @@ public class DbcsTableGenerator
 
         if (args.Length < 3)
         {
-            Console
-                .Error
-                .WriteLine(
-                    @"
+            Console.Error.WriteLine(
+                @"
 usage1: dbcs-table-generator.exe BIG5
 
 usage2: dbcs-table-generator.exe GB2312
@@ -46,7 +44,7 @@ usage3: dbcs-table-generator.exe CPxxx.TXT xxx.table from [len]
 
 from: BIG5 (CP950) = A1, GB2312 (CP936) = 81
 len: optional. length of array. BIG5: 43"
-                );
+            );
             return;
         }
         byte upper = byte.Parse(args[2], NumberStyles.HexNumber);
@@ -63,9 +61,11 @@ len: optional. length of array. BIG5: 43"
         {
             native_count = int.Parse(args[3], NumberStyles.HexNumber) << 8;
             native_max = native_min + native_count;
-            Console
-                .Error
-                .WriteLine("adjusted as count = {0:X04} max = {1:X04}", native_count, native_max);
+            Console.Error.WriteLine(
+                "adjusted as count = {0:X04} max = {1:X04}",
+                native_count,
+                native_max
+            );
         }
 
         int map_count = 0;

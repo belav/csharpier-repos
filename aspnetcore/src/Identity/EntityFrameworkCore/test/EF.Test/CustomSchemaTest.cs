@@ -36,8 +36,7 @@ public class CustomSchemaTest : IClassFixture<ScratchDatabaseFixture>
 
         _builder = new ApplicationBuilder(services.BuildServiceProvider());
         using var scope = _builder
-            .ApplicationServices
-            .GetRequiredService<IServiceScopeFactory>()
+            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CustomVersionDbContext>();
         db.Database.EnsureCreated();
@@ -47,8 +46,7 @@ public class CustomSchemaTest : IClassFixture<ScratchDatabaseFixture>
     public void CanAddCustomColumn()
     {
         using var scope = _builder
-            .ApplicationServices
-            .GetRequiredService<IServiceScopeFactory>()
+            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CustomVersionDbContext>();
         VersionTwoSchemaTest.VerifyVersion2Schema(db);

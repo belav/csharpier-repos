@@ -118,8 +118,7 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
 
             foreach (
                 var argumentNamespace in current
-                    .Arguments
-                    .Where(
+                    .Arguments.Where(
                         a =>
                             a
                                 is not null

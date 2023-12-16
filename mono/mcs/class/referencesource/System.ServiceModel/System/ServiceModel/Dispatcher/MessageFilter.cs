@@ -117,15 +117,13 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> f = new Collection<MessageFilter>();
                         f.Add(filter);
                         f.Add(item.Key);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MultipleFilterMatchesException(
-                                    SR.GetString(SR.FilterMultipleMatches),
-                                    null,
-                                    f
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                f
+                            )
+                        );
                     }
 
                     filter = item.Key;
@@ -204,15 +202,13 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> f = new Collection<MessageFilter>();
                         f.Add(filter);
                         f.Add(item.Key);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MultipleFilterMatchesException(
-                                    SR.GetString(SR.FilterMultipleMatches),
-                                    null,
-                                    f
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                f
+                            )
+                        );
                     }
 
                     filter = item.Key;

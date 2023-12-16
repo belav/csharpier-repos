@@ -2576,8 +2576,9 @@ namespace System.Net.Http.Tests
 
             KeyValuePair<string, string>[] entries = enumerateNonValidated
                 ? headers
-                    .NonValidated
-                    .Select(pair => KeyValuePair.Create(pair.Key, Assert.Single(pair.Value)))
+                    .NonValidated.Select(
+                        pair => KeyValuePair.Create(pair.Key, Assert.Single(pair.Value))
+                    )
                     .ToArray()
                 : headers
                     .Select(pair => KeyValuePair.Create(pair.Key, Assert.Single(pair.Value)))
@@ -2648,8 +2649,7 @@ namespace System.Net.Http.Tests
             Assert.Equal(numberOfHeaders, newKeys.Length);
 
             string[] nonValidatedKeysAfterValidation = headers
-                .NonValidated
-                .Select(pair => pair.Key)
+                .NonValidated.Select(pair => pair.Key)
                 .ToArray();
             Assert.Equal(numberOfHeaders, nonValidatedKeysAfterValidation.Length);
 

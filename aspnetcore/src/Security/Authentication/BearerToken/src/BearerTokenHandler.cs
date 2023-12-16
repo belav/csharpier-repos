@@ -80,9 +80,9 @@ internal sealed class BearerTokenHandler(
 
         var response = new AccessTokenResponse
         {
-            AccessToken = Options
-                .BearerTokenProtector
-                .Protect(CreateBearerTicket(user, properties)),
+            AccessToken = Options.BearerTokenProtector.Protect(
+                CreateBearerTicket(user, properties)
+            ),
             ExpiresIn = (long)Options.BearerTokenExpiration.TotalSeconds,
             RefreshToken = Options.RefreshTokenProtector.Protect(CreateRefreshTicket(user, utcNow)),
         };
@@ -99,8 +99,7 @@ internal sealed class BearerTokenHandler(
         // Attempt to resolve options from DI then fall back to static options
         var typeInfo =
             httpContext
-                .RequestServices
-                .GetService<IOptions<JsonOptions>>()
+                .RequestServices.GetService<IOptions<JsonOptions>>()
                 ?.Value
                 ?.SerializerOptions
                 ?.GetTypeInfo(typeof(AccessTokenResponse)) as JsonTypeInfo<AccessTokenResponse>;

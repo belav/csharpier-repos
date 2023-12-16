@@ -896,8 +896,7 @@ namespace System.Reflection.Metadata.Tests
             using (
                 var stream = typeof(ResourceHelper)
                     .GetTypeInfo()
-                    .Assembly
-                    .GetManifestResourceStream(fullName)
+                    .Assembly.GetManifestResourceStream(fullName)
             )
             {
                 var bytes = new byte[stream.Length];

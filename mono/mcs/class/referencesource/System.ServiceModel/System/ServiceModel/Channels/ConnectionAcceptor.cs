@@ -54,15 +54,13 @@ namespace System.ServiceModel.Channels
         {
             if (maxAccepts <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "maxAccepts",
-                            maxAccepts,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "maxAccepts",
+                        maxAccepts,
+                        SR.GetString(SR.ValueMustBePositive)
+                    )
+                );
             }
 
             Fx.Assert(maxPendingConnections > 0, "maxPendingConnections must be positive");

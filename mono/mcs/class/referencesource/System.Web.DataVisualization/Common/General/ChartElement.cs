@@ -1583,11 +1583,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             if (
-                Utilities
-                    .CustomPropertyRegistry
-                    .IsXAxisQuantitativeChartTypes
-                    .Contains(series.ChartType)
-                && series.IsCustomPropertySet(Utilities.CustomPropertyName.IsXAxisQuantitative)
+                Utilities.CustomPropertyRegistry.IsXAxisQuantitativeChartTypes.Contains(
+                    series.ChartType
+                ) && series.IsCustomPropertySet(Utilities.CustomPropertyName.IsXAxisQuantitative)
             )
             {
                 string attribValue = series[Utilities.CustomPropertyName.IsXAxisQuantitative];

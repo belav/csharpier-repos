@@ -823,9 +823,10 @@
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
-                    .GetMetadataForType(() => model, typeof(TModel)),
+                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => model,
+                    typeof(TModel)
+                ),
                 ModelName = prefix,
                 ModelState = ModelState,
                 PropertyFilter = propertyFilter,
@@ -850,9 +851,10 @@
                 throw new ArgumentNullException("model");
             }
 
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => model, model.GetType());
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
 
             foreach (
                 ModelValidationResult validationResult in ModelValidator

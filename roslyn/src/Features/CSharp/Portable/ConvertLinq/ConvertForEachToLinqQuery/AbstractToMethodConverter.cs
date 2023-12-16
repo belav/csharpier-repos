@@ -81,10 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         // If so, join the declaration with the query.
                         if (
                             _modifyingExpression is IdentifierNameSyntax identifierName
-                            && lastDeclaration
-                                .Identifier
-                                .ValueText
-                                .Equals(identifierName.Identifier.ValueText)
+                            && lastDeclaration.Identifier.ValueText.Equals(
+                                identifierName.Identifier.ValueText
+                            )
                             && CanReplaceInitialization(
                                 lastDeclaration.Initializer.Value,
                                 cancellationToken
@@ -108,18 +107,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         if (
                             ((ExpressionStatementSyntax)previous).Expression
                                 is AssignmentExpressionSyntax assignmentExpression
-                            && SymbolEquivalenceComparer
-                                .Instance
-                                .Equals(
-                                    ForEachInfo
-                                        .SemanticModel
-                                        .GetSymbolInfo(assignmentExpression.Left, cancellationToken)
-                                        .Symbol,
-                                    ForEachInfo
-                                        .SemanticModel
-                                        .GetSymbolInfo(_modifyingExpression, cancellationToken)
-                                        .Symbol
-                                )
+                            && SymbolEquivalenceComparer.Instance.Equals(
+                                ForEachInfo
+                                    .SemanticModel.GetSymbolInfo(
+                                        assignmentExpression.Left,
+                                        cancellationToken
+                                    )
+                                    .Symbol,
+                                ForEachInfo
+                                    .SemanticModel.GetSymbolInfo(
+                                        _modifyingExpression,
+                                        cancellationToken
+                                    )
+                                    .Symbol
+                            )
                             && CanReplaceInitialization(
                                 assignmentExpression.Right,
                                 cancellationToken
@@ -153,23 +154,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
 
                 // Check if expressionAssigning is followed by a return statement.
                 var expresisonSymbol = ForEachInfo
-                    .SemanticModel
-                    .GetSymbolInfo(_modifyingExpression, cancellationToken)
+                    .SemanticModel.GetSymbolInfo(_modifyingExpression, cancellationToken)
                     .Symbol;
                 if (
                     expresisonSymbol is ILocalSymbol
                     && ForEachInfo.ForEachStatement.GetNextStatement()
                         is ReturnStatementSyntax returnStatement
                     && !returnStatement.ContainsDirectives
-                    && SymbolEquivalenceComparer
-                        .Instance
-                        .Equals(
-                            expresisonSymbol,
-                            ForEachInfo
-                                .SemanticModel
-                                .GetSymbolInfo(returnStatement.Expression, cancellationToken)
-                                .Symbol
-                        )
+                    && SymbolEquivalenceComparer.Instance.Equals(
+                        expresisonSymbol,
+                        ForEachInfo
+                            .SemanticModel.GetSymbolInfo(
+                                returnStatement.Expression,
+                                cancellationToken
+                            )
+                            .Symbol
+                    )
                 )
                 {
                     // Input:

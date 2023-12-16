@@ -431,12 +431,10 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public override bool IsSubclassOf(Type potentialBaseType)
         {
-            return System
-                .Workflow
-                .ComponentModel
-                .Compiler
-                .TypeProvider
-                .IsSubclassOf(this.runtimeType, potentialBaseType);
+            return System.Workflow.ComponentModel.Compiler.TypeProvider.IsSubclassOf(
+                this.runtimeType,
+                potentialBaseType
+            );
         }
 
         public override bool IsAssignableFrom(Type c)

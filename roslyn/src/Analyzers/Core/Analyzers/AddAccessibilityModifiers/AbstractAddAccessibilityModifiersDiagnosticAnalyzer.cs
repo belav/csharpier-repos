@@ -13,12 +13,10 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
         where TCompilationUnitSyntax : SyntaxNode
     {
         protected static readonly ImmutableDictionary<string, string?> ModifiersAddedProperties =
-            ImmutableDictionary<string, string?>
-                .Empty
-                .Add(
-                    AddAccessibilityModifiersConstants.ModifiersAdded,
-                    AddAccessibilityModifiersConstants.ModifiersAdded
-                );
+            ImmutableDictionary<string, string?>.Empty.Add(
+                AddAccessibilityModifiersConstants.ModifiersAdded,
+                AddAccessibilityModifiersConstants.ModifiersAdded
+            );
 
         protected AbstractAddAccessibilityModifiersDiagnosticAnalyzer()
             : base(

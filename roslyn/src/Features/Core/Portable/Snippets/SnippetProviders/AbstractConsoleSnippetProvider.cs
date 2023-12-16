@@ -207,8 +207,7 @@ namespace Microsoft.CodeAnalysis.Snippets
         )
         {
             var compilation = await document
-                .Project
-                .GetRequiredCompilationAsync(cancellationToken)
+                .Project.GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var symbol = compilation.GetBestTypeByMetadataName(typeof(Console).FullName!);
             return symbol;

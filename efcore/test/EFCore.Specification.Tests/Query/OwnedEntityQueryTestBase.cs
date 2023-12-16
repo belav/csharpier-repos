@@ -20,20 +20,17 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
         using (var context = contextFactory.CreateContext())
         {
             var query = context
-                .Entities
-                .AsNoTracking()
+                .Entities.AsNoTracking()
                 .Select(
                     e =>
                         new
                         {
                             e.Id,
-                            FirstChild = e.Children
-                                .Where(c => c.Type == 1)
+                            FirstChild = e.Children.Where(c => c.Type == 1)
                                 .AsQueryable()
                                 .Select(_project)
                                 .FirstOrDefault(),
-                            SecondChild = e.Children
-                                .Where(c => c.Type == 2)
+                            SecondChild = e.Children.Where(c => c.Type == 2)
                                 .AsQueryable()
                                 .Select(_project)
                                 .FirstOrDefault(),
@@ -104,8 +101,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
         using (var context = contextFactory.CreateContext())
         {
             var results = await context
-                .Contacts
-                .Select(
+                .Contacts.Select(
                     contact =>
                         new ContactDto22089
                         {
@@ -244,14 +240,12 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
         using var context = contextFactory.CreateContext();
         var query = context
-            .Warehouses
-            .Select(
+            .Warehouses.Select(
                 x =>
                     new WarehouseModel
                     {
                         WarehouseCode = x.WarehouseCode,
-                        DestinationCountryCodes = x.DestinationCountries
-                            .Select(c => c.CountryCode)
+                        DestinationCountryCodes = x.DestinationCountries.Select(c => c.CountryCode)
                             .ToArray()
                     }
             )
@@ -325,8 +319,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
     )
     {
         var query = context
-            .Companies
-            .Where(e => e.CustomerData != null)
+            .Companies.Where(e => e.CustomerData != null)
             .OrderBy(e => e.Id)
             .Take(10);
         var result = async ? await query.ToListAsync() : query.ToList();
@@ -343,8 +336,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
     )
     {
         var query = context
-            .Owners
-            .Where(e => e.OwnedEntity.CustomerData != null)
+            .Owners.Where(e => e.OwnedEntity.CustomerData != null)
             .OrderBy(e => e.Id)
             .Take(10);
         var result = async ? await query.ToListAsync() : query.ToList();

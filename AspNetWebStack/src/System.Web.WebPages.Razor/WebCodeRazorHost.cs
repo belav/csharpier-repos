@@ -54,9 +54,7 @@ namespace System.Web.WebPages.Razor
 
             // Make ApplicationInstance static
             CodeMemberProperty appInstanceProperty = context
-                .GeneratedClass
-                .Members
-                .OfType<CodeMemberProperty>()
+                .GeneratedClass.Members.OfType<CodeMemberProperty>()
                 .Where(p => ApplicationInstancePropertyName.Equals(p.Name))
                 .SingleOrDefault();
 

@@ -81,8 +81,7 @@ internal sealed class HubMethodDescriptor
 
         // Take out synthetic arguments that will be provided by the server, this list will be given to the protocol parsers
         ParameterTypes = methodExecutor
-            .MethodParameters
-            .Where(
+            .MethodParameters.Where(
                 (p, index) =>
                 {
                     // Only streams can take CancellationTokens currently
@@ -184,8 +183,7 @@ internal sealed class HubMethodDescriptor
         if (HasSyntheticArguments)
         {
             OriginalParameterTypes = methodExecutor
-                .MethodParameters
-                .Select(p => p.ParameterType)
+                .MethodParameters.Select(p => p.ParameterType)
                 .ToArray();
         }
 

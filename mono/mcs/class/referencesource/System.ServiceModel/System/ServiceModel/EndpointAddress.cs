@@ -183,14 +183,9 @@ namespace System.ServiceModel
 
             if (identity != null && ident2 != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.MultipleIdentities),
-                            "extensionReader"
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.MultipleIdentities), "extensionReader")
+                );
             }
 
             PossiblyPopulateBuffer(pspReader, ref buffer, out pspSection);
@@ -259,9 +254,10 @@ namespace System.ServiceModel
         )
         {
             if (!uri.IsAbsoluteUri)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument("uri", SR.GetString(SR.UriMustBeAbsolute));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "uri",
+                    SR.GetString(SR.UriMustBeAbsolute)
+                );
 
             this.addressingVersion = version;
             this.uri = uri;
@@ -381,16 +377,14 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.AddressingVersionNotSupported,
-                                    message.Version.Addressing
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(
+                                SR.AddressingVersionNotSupported,
+                                message.Version.Addressing
                             )
-                        );
+                        )
+                    );
                 }
             }
             else if (IsNone)
@@ -685,18 +679,17 @@ namespace System.ServiceModel
             }
             else if (reader.NodeType != XmlNodeType.Element)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument("reader", SR.GetString(SR.CannotDetectAddressingVersion));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "reader",
+                    SR.GetString(SR.CannotDetectAddressingVersion)
+                );
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "reader",
-                        SR.GetString(SR.AddressingVersionNotSupported, reader.NamespaceURI)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "reader",
+                    SR.GetString(SR.AddressingVersionNotSupported, reader.NamespaceURI)
+                );
             }
 
             EndpointAddress ea = ReadFromDriver(version, reader);
@@ -739,18 +732,17 @@ namespace System.ServiceModel
             }
             else if (reader.NodeType != XmlNodeType.Element)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument("reader", SR.GetString(SR.CannotDetectAddressingVersion));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "reader",
+                    SR.GetString(SR.CannotDetectAddressingVersion)
+                );
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "reader",
-                        SR.GetString(SR.AddressingVersionNotSupported, reader.NamespaceURI)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "reader",
+                    SR.GetString(SR.AddressingVersionNotSupported, reader.NamespaceURI)
+                );
             }
 
             EndpointAddress ea = ReadFromDriver(version, reader);
@@ -776,9 +768,9 @@ namespace System.ServiceModel
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
 
             XmlDictionaryReader dictReader = XmlDictionaryReader.CreateDictionaryReader(reader);
             dictReader.ReadFullStartElement(localName, ns);
@@ -795,9 +787,9 @@ namespace System.ServiceModel
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
 
             reader.ReadFullStartElement();
             EndpointAddress ea = ReadFromDriver(addressingVersion, reader);
@@ -815,9 +807,9 @@ namespace System.ServiceModel
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
 
             reader.ReadFullStartElement(localName, ns);
             EndpointAddress ea = ReadFromDriver(addressingVersion, reader);
@@ -866,12 +858,10 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "addressingVersion",
-                        SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "addressingVersion",
+                    SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
+                );
             }
 
             if (isAnonymous && headers == null && identity == null && buffer == null)
@@ -922,34 +912,30 @@ namespace System.ServiceModel
                 )
                 {
                     if (identity != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                CreateXmlException(
-                                    reader,
-                                    SR.GetString(
-                                        SR.UnexpectedDuplicateElement,
-                                        XD.AddressingDictionary.Identity.Value,
-                                        XD.AddressingDictionary.IdentityExtensionNamespace.Value
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateXmlException(
+                                reader,
+                                SR.GetString(
+                                    SR.UnexpectedDuplicateElement,
+                                    XD.AddressingDictionary.Identity.Value,
+                                    XD.AddressingDictionary.IdentityExtensionNamespace.Value
                                 )
-                            );
+                            )
+                        );
                     identity = EndpointIdentity.ReadIdentity(reader);
                 }
                 else if (version != null && reader.NamespaceURI == version.Namespace)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            CreateXmlException(
-                                reader,
-                                SR.GetString(
-                                    SR.AddressingExtensionInBadNS,
-                                    reader.LocalName,
-                                    reader.NamespaceURI
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateXmlException(
+                            reader,
+                            SR.GetString(
+                                SR.AddressingExtensionInBadNS,
+                                reader.LocalName,
+                                reader.NamespaceURI
                             )
-                        );
+                        )
+                    );
                 }
                 else
                 {
@@ -1006,20 +992,18 @@ namespace System.ServiceModel
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        CreateXmlException(
-                            reader,
-                            SR.GetString(
-                                SR.UnexpectedElementExpectingElement,
-                                reader.LocalName,
-                                reader.NamespaceURI,
-                                XD.AddressingDictionary.Address.Value,
-                                XD.Addressing200408Dictionary.Namespace.Value
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateXmlException(
+                        reader,
+                        SR.GetString(
+                            SR.UnexpectedElementExpectingElement,
+                            reader.LocalName,
+                            reader.NamespaceURI,
+                            XD.AddressingDictionary.Address.Value,
+                            XD.Addressing200408Dictionary.Namespace.Value
                         )
-                    );
+                    )
+                );
             }
             string address = reader.ReadElementContentAsString();
 
@@ -1199,18 +1183,16 @@ namespace System.ServiceModel
             else
             {
                 if (!Uri.TryCreate(address, UriKind.Absolute, out uri))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(
-                                    SR.InvalidUriValue,
-                                    address,
-                                    XD.AddressingDictionary.Address.Value,
-                                    AddressingVersion.WSAddressingAugust2004.Namespace
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.InvalidUriValue,
+                                address,
+                                XD.AddressingDictionary.Address.Value,
+                                AddressingVersion.WSAddressingAugust2004.Namespace
                             )
-                        );
+                        )
+                    );
             }
             return false;
         }
@@ -1236,20 +1218,18 @@ namespace System.ServiceModel
                     XD.Addressing10Dictionary.Namespace
                 )
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        CreateXmlException(
-                            reader,
-                            SR.GetString(
-                                SR.UnexpectedElementExpectingElement,
-                                reader.LocalName,
-                                reader.NamespaceURI,
-                                XD.AddressingDictionary.Address.Value,
-                                XD.Addressing10Dictionary.Namespace.Value
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateXmlException(
+                        reader,
+                        SR.GetString(
+                            SR.UnexpectedElementExpectingElement,
+                            reader.LocalName,
+                            reader.NamespaceURI,
+                            XD.AddressingDictionary.Address.Value,
+                            XD.Addressing10Dictionary.Namespace.Value
                         )
-                    );
+                    )
+                );
             string address = reader.ReadElementContentAsString();
 
             // Headers
@@ -1320,18 +1300,16 @@ namespace System.ServiceModel
             {
                 if (!Uri.TryCreate(address, UriKind.Absolute, out uri))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(
-                                    SR.InvalidUriValue,
-                                    address,
-                                    XD.AddressingDictionary.Address.Value,
-                                    XD.Addressing10Dictionary.Namespace.Value
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.InvalidUriValue,
+                                address,
+                                XD.AddressingDictionary.Address.Value,
+                                XD.Addressing10Dictionary.Namespace.Value
                             )
-                        );
+                        )
+                    );
                 }
             }
             return false;
@@ -1378,9 +1356,9 @@ namespace System.ServiceModel
 
             if (addressingVersion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
             }
 
             if (addressingVersion == AddressingVersion.WSAddressing10)
@@ -1397,12 +1375,10 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "addressingVersion",
-                        SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "addressingVersion",
+                    SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
+                );
             }
         }
 
@@ -1424,9 +1400,10 @@ namespace System.ServiceModel
             }
             else if (isNone)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument("addressingVersion", SR.GetString(SR.SFxNone2004));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "addressingVersion",
+                    SR.GetString(SR.SFxNone2004)
+                );
             }
             else
             {
@@ -1486,18 +1463,16 @@ namespace System.ServiceModel
                 {
                     if (reader.NamespaceURI == AddressingVersion.WSAddressingAugust2004.Namespace)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                CreateXmlException(
-                                    reader,
-                                    SR.GetString(
-                                        SR.AddressingExtensionInBadNS,
-                                        reader.LocalName,
-                                        reader.NamespaceURI
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateXmlException(
+                                reader,
+                                SR.GetString(
+                                    SR.AddressingExtensionInBadNS,
+                                    reader.LocalName,
+                                    reader.NamespaceURI
                                 )
-                            );
+                            )
+                        );
                     }
 
                     writer.WriteNode(reader, true);
@@ -1563,18 +1538,16 @@ namespace System.ServiceModel
                 {
                     if (reader.NamespaceURI == AddressingVersion.WSAddressing10.Namespace)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                CreateXmlException(
-                                    reader,
-                                    SR.GetString(
-                                        SR.AddressingExtensionInBadNS,
-                                        reader.LocalName,
-                                        reader.NamespaceURI
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateXmlException(
+                                reader,
+                                SR.GetString(
+                                    SR.AddressingExtensionInBadNS,
+                                    reader.LocalName,
+                                    reader.NamespaceURI
                                 )
-                            );
+                            )
+                        );
                     }
 
                     writer.WriteNode(reader, true);
@@ -1613,9 +1586,9 @@ namespace System.ServiceModel
             }
             if (addressingVersion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
             }
             if (localName == null)
             {
@@ -1659,9 +1632,9 @@ namespace System.ServiceModel
             }
             if (addressingVersion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
             }
             if (localName == null)
             {

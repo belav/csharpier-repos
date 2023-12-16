@@ -139,11 +139,9 @@ namespace System.Data.Objects
                 if (index == -1)
                 {
                     throw EntityUtil.ArgumentOutOfRange(
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .ObjectParameterCollection_ParameterNameNotFound(name),
+                        System.Data.Entity.Strings.ObjectParameterCollection_ParameterNameNotFound(
+                            name
+                        ),
                         "name"
                     );
                 }
@@ -196,11 +194,9 @@ namespace System.Data.Objects
             if (this.Contains(parameter))
             {
                 throw EntityUtil.Argument(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .ObjectParameterCollection_ParameterAlreadyExists(parameter.Name),
+                    System.Data.Entity.Strings.ObjectParameterCollection_ParameterAlreadyExists(
+                        parameter.Name
+                    ),
                     "parameter"
                 );
             }
@@ -208,11 +204,9 @@ namespace System.Data.Objects
             if (this.Contains(parameter.Name))
             {
                 throw EntityUtil.Argument(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .ObjectParameterCollection_DuplicateParameterName(parameter.Name),
+                    System.Data.Entity.Strings.ObjectParameterCollection_DuplicateParameterName(
+                        parameter.Name
+                    ),
                     "parameter"
                 );
             }
@@ -220,11 +214,9 @@ namespace System.Data.Objects
             if (!parameter.ValidateParameterType(this._perspective))
             {
                 throw EntityUtil.ArgumentOutOfRange(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .ObjectParameter_InvalidParameterType(parameter.ParameterType.FullName),
+                    System.Data.Entity.Strings.ObjectParameter_InvalidParameterType(
+                        parameter.ParameterType.FullName
+                    ),
                     "parameter"
                 );
             }

@@ -96,9 +96,9 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
             },
             EndpointMetadata = routeEndpoint.Metadata.ToList()
         };
-        apiDescription
-            .SupportedRequestFormats
-            .Add(new ApiRequestFormat { MediaType = "application/json" });
+        apiDescription.SupportedRequestFormats.Add(
+            new ApiRequestFormat { MediaType = "application/json" }
+        );
 
         var responseBodyDescriptor = ServiceDescriptorHelpers.ResolveResponseBodyDescriptor(
             httpRule.ResponseBody,
@@ -108,36 +108,24 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
             responseBodyDescriptor != null
                 ? MessageDescriptorHelpers.ResolveFieldType(responseBodyDescriptor)
                 : methodDescriptor.OutputType.ClrType;
-        apiDescription
-            .SupportedResponseTypes
-            .Add(
-                new ApiResponseType
-                {
-                    ApiResponseFormats =
-                    {
-                        new ApiResponseFormat { MediaType = "application/json" }
-                    },
-                    ModelMetadata = new GrpcModelMetadata(
-                        ModelMetadataIdentity.ForType(responseType)
-                    ),
-                    StatusCode = 200
-                }
-            );
-        apiDescription
-            .SupportedResponseTypes
-            .Add(
-                new ApiResponseType
-                {
-                    ApiResponseFormats =
-                    {
-                        new ApiResponseFormat { MediaType = "application/json" }
-                    },
-                    ModelMetadata = new GrpcModelMetadata(
-                        ModelMetadataIdentity.ForType(typeof(Google.Rpc.Status))
-                    ),
-                    IsDefaultResponse = true
-                }
-            );
+        apiDescription.SupportedResponseTypes.Add(
+            new ApiResponseType
+            {
+                ApiResponseFormats = { new ApiResponseFormat { MediaType = "application/json" } },
+                ModelMetadata = new GrpcModelMetadata(ModelMetadataIdentity.ForType(responseType)),
+                StatusCode = 200
+            }
+        );
+        apiDescription.SupportedResponseTypes.Add(
+            new ApiResponseType
+            {
+                ApiResponseFormats = { new ApiResponseFormat { MediaType = "application/json" } },
+                ModelMetadata = new GrpcModelMetadata(
+                    ModelMetadataIdentity.ForType(typeof(Google.Rpc.Status))
+                ),
+                IsDefaultResponse = true
+            }
+        );
         var explorerSettings = routeEndpoint.Metadata.GetMetadata<ApiExplorerSettingsAttribute>();
         if (explorerSettings != null)
         {
@@ -175,17 +163,15 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                         MessageDescriptorHelpers.ResolveFieldType(field)
                     );
 
-            apiDescription
-                .ParameterDescriptions
-                .Add(
-                    new ApiParameterDescription
-                    {
-                        Name = routeParameter.Value.JsonPath,
-                        ModelMetadata = new GrpcModelMetadata(identity),
-                        Source = BindingSource.Path,
-                        DefaultValue = string.Empty
-                    }
-                );
+            apiDescription.ParameterDescriptions.Add(
+                new ApiParameterDescription
+                {
+                    Name = routeParameter.Value.JsonPath,
+                    ModelMetadata = new GrpcModelMetadata(identity),
+                    Source = BindingSource.Path,
+                    DefaultValue = string.Empty
+                }
+            );
         }
 
         var bodyDescriptor = ServiceDescriptorHelpers.ResolveBodyDescriptor(
@@ -214,17 +200,15 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                     }
                     : null;
 
-            apiDescription
-                .ParameterDescriptions
-                .Add(
-                    new ApiParameterDescription
-                    {
-                        Name = "Input",
-                        ModelMetadata = new GrpcModelMetadata(identity),
-                        Source = BindingSource.Body,
-                        ParameterDescriptor = parameterDescriptor!
-                    }
-                );
+            apiDescription.ParameterDescriptions.Add(
+                new ApiParameterDescription
+                {
+                    Name = "Input",
+                    ModelMetadata = new GrpcModelMetadata(identity),
+                    Source = BindingSource.Body,
+                    ParameterDescriptor = parameterDescriptor!
+                }
+            );
         }
 
         var queryParameters = ServiceDescriptorHelpers.ResolveQueryParameterDescriptors(
@@ -237,19 +221,15 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
         {
             var fieldType = MessageDescriptorHelpers.ResolveFieldType(queryDescription.Value);
 
-            apiDescription
-                .ParameterDescriptions
-                .Add(
-                    new ApiParameterDescription
-                    {
-                        Name = queryDescription.Key,
-                        ModelMetadata = new GrpcModelMetadata(
-                            ModelMetadataIdentity.ForType(fieldType)
-                        ),
-                        Source = BindingSource.Query,
-                        DefaultValue = string.Empty
-                    }
-                );
+            apiDescription.ParameterDescriptions.Add(
+                new ApiParameterDescription
+                {
+                    Name = queryDescription.Key,
+                    ModelMetadata = new GrpcModelMetadata(ModelMetadataIdentity.ForType(fieldType)),
+                    Source = BindingSource.Query,
+                    DefaultValue = string.Empty
+                }
+            );
         }
 
         return apiDescription;

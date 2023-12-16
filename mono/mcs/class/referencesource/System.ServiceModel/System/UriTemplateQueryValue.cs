@@ -48,16 +48,14 @@ namespace System
                     return UriTemplateLiteralQueryValue.CreateFromUriTemplate(value);
 
                 case UriTemplatePartType.Compound:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.UTQueryCannotHaveCompoundValue,
-                                    template.originalTemplate
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.UTQueryCannotHaveCompoundValue,
+                                template.originalTemplate
                             )
-                        );
+                        )
+                    );
 
                 case UriTemplatePartType.Variable:
                     return new UriTemplateVariableQueryValue(

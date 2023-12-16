@@ -63,8 +63,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             if (common.ContainsDiagnostics && !CloseBraceOfTryOrDoBlock(endToken))
             {
                 smartTokenformattingRules = ImmutableArray<AbstractFormattingRule>
-                    .Empty
-                    .Add(new NoLineChangeFormattingRule())
+                    .Empty.Add(new NoLineChangeFormattingRule())
                     .AddRange(_formattingRules);
             }
 

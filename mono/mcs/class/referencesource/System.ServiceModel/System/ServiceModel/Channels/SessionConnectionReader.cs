@@ -153,9 +153,9 @@ namespace System.ServiceModel.Channels
             size = Connection.EndRead();
             if (size == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(decoder.CreatePrematureEOFException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    decoder.CreatePrematureEOFException()
+                );
             }
         }
 
@@ -485,9 +485,9 @@ namespace System.ServiceModel.Channels
                             );
                             if (size == 0)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(decoder.CreatePrematureEOFException());
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    decoder.CreatePrematureEOFException()
+                                );
                             }
                         }
 
@@ -615,17 +615,15 @@ namespace System.ServiceModel.Channels
                 if (!this.MessageEncoder.IsContentTypeSupported(decoder.ContentType))
                 {
                     SendFault(FramingEncodingString.ContentTypeInvalidFault, ref timeoutHelper);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.ContentTypeMismatch,
-                                    decoder.ContentType,
-                                    this.MessageEncoder.ContentType
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(
+                                SR.ContentTypeMismatch,
+                                decoder.ContentType,
+                                this.MessageEncoder.ContentType
                             )
-                        );
+                        )
+                    );
                 }
 
                 ICompressedMessageEncoder compressedMessageEncoder =
@@ -651,28 +649,21 @@ namespace System.ServiceModel.Channels
                 if (this.upgradeAcceptor == null)
                 {
                     SendFault(FramingEncodingString.UpgradeInvalidFault, ref timeoutHelper);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.UpgradeRequestToNonupgradableService,
-                                    decoder.Upgrade
-                                )
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.UpgradeRequestToNonupgradableService, decoder.Upgrade)
+                        )
+                    );
                 }
 
                 if (!this.upgradeAcceptor.CanUpgrade(decoder.Upgrade))
                 {
                     SendFault(FramingEncodingString.UpgradeInvalidFault, ref timeoutHelper);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(SR.UpgradeProtocolNotSupported, decoder.Upgrade)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.UpgradeProtocolNotSupported, decoder.Upgrade)
+                        )
+                    );
                 }
             }
 
@@ -701,9 +692,9 @@ namespace System.ServiceModel.Channels
                             SR.GetString(SR.RemoteSecurityNotNegotiatedOnStreamUpgrade, this.Via)
                         );
                         WriteAuditFailure(securityUpgradeAcceptor, securityFailedException);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(securityFailedException);
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            securityFailedException
+                        );
                     }
                     else
                     {
@@ -882,15 +873,13 @@ namespace System.ServiceModel.Channels
                             }
 
                             if (
-                                channel
-                                    .Connection
-                                    .BeginRead(
-                                        0,
-                                        channel.connectionBuffer.Length,
-                                        timeoutHelper.RemainingTime(),
-                                        readCallback,
-                                        this
-                                    ) == AsyncCompletionResult.Queued
+                                channel.Connection.BeginRead(
+                                    0,
+                                    channel.connectionBuffer.Length,
+                                    timeoutHelper.RemainingTime(),
+                                    readCallback,
+                                    this
+                                ) == AsyncCompletionResult.Queued
                             )
                             {
                                 return false;
@@ -915,9 +904,8 @@ namespace System.ServiceModel.Channels
                                         );
                                     }
 
-                                    AsyncCompletionResult writeResult = channel
-                                        .Connection
-                                        .BeginWrite(
+                                    AsyncCompletionResult writeResult =
+                                        channel.Connection.BeginWrite(
                                             ServerSessionEncoder.UpgradeResponseBytes,
                                             0,
                                             ServerSessionEncoder.UpgradeResponseBytes.Length,
@@ -949,9 +937,8 @@ namespace System.ServiceModel.Channels
                                         );
                                     }
 
-                                    AsyncCompletionResult writeAckResult = channel
-                                        .Connection
-                                        .BeginWrite(
+                                    AsyncCompletionResult writeAckResult =
+                                        channel.Connection.BeginWrite(
                                             ServerSessionEncoder.AckResponseBytes,
                                             0,
                                             ServerSessionEncoder.AckResponseBytes.Length,
@@ -981,9 +968,9 @@ namespace System.ServiceModel.Channels
                     channel.size = channel.Connection.EndRead();
                     if (channel.size == 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(channel.decoder.CreatePrematureEOFException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            channel.decoder.CreatePrematureEOFException()
+                        );
                     }
                 }
 
@@ -1112,12 +1099,10 @@ namespace System.ServiceModel.Channels
                         thisPtr.CleanupOnError();
 
                         // Audit Authentication Failure
-                        thisPtr
-                            .channel
-                            .WriteAuditFailure(
-                                thisPtr.channel.upgradeAcceptor as StreamSecurityUpgradeAcceptor,
-                                e
-                            );
+                        thisPtr.channel.WriteAuditFailure(
+                            thisPtr.channel.upgradeAcceptor as StreamSecurityUpgradeAcceptor,
+                            e
+                        );
                     }
 
                     if (completeSelf)
@@ -1157,12 +1142,10 @@ namespace System.ServiceModel.Channels
                         thisPtr.CleanupOnError();
 
                         // Audit Authentication Failure
-                        thisPtr
-                            .channel
-                            .WriteAuditFailure(
-                                thisPtr.channel.upgradeAcceptor as StreamSecurityUpgradeAcceptor,
-                                e
-                            );
+                        thisPtr.channel.WriteAuditFailure(
+                            thisPtr.channel.upgradeAcceptor as StreamSecurityUpgradeAcceptor,
+                            e
+                        );
                     }
 
                     if (completeSelf)
@@ -1234,9 +1217,9 @@ namespace System.ServiceModel.Channels
                         )
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(decoder.CreatePrematureEOFException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            decoder.CreatePrematureEOFException()
+                        );
                     }
                 }
 
@@ -1257,15 +1240,13 @@ namespace System.ServiceModel.Channels
                             {
                                 if (!object.ReferenceEquals(buffer, EnvelopeBuffer))
                                 {
-                                    System
-                                        .Buffer
-                                        .BlockCopy(
-                                            buffer,
-                                            offset,
-                                            EnvelopeBuffer,
-                                            EnvelopeOffset,
-                                            bytesRead
-                                        );
+                                    System.Buffer.BlockCopy(
+                                        buffer,
+                                        offset,
+                                        EnvelopeBuffer,
+                                        EnvelopeOffset,
+                                        bytesRead
+                                    );
                                 }
                                 EnvelopeOffset += bytesRead;
                             }
@@ -1285,13 +1266,11 @@ namespace System.ServiceModel.Channels
                                         timeout
                                     );
 
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
-                                        .ThrowHelperError(
-                                            MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
-                                                maxBufferSize
-                                            )
-                                        );
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                                            maxBufferSize
+                                        )
+                                    );
                                 }
                                 EnvelopeBuffer = bufferManager.TakeBuffer(envelopeSize);
                                 EnvelopeOffset = 0;
@@ -1335,14 +1314,12 @@ namespace System.ServiceModel.Channels
                                         }
                                         catch (XmlException xmlException)
                                         {
-                                            throw DiagnosticUtility
-                                                .ExceptionUtility
-                                                .ThrowHelperError(
-                                                    new ProtocolException(
-                                                        SR.GetString(SR.MessageXmlProtocolError),
-                                                        xmlException
-                                                    )
-                                                );
+                                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                                new ProtocolException(
+                                                    SR.GetString(SR.MessageXmlProtocolError),
+                                                    xmlException
+                                                )
+                                            );
                                         }
 
                                         if (DiagnosticUtility.ShouldUseActivity)
@@ -1374,9 +1351,10 @@ namespace System.ServiceModel.Channels
                     {
                         RemoteEndpointMessageProperty remoteEndpointProperty =
                             new RemoteEndpointMessageProperty(remoteEndPoint);
-                        message
-                            .Properties
-                            .Add(RemoteEndpointMessageProperty.Name, remoteEndpointProperty);
+                        message.Properties.Add(
+                            RemoteEndpointMessageProperty.Name,
+                            remoteEndpointProperty
+                        );
                     }
                 }
             }
@@ -1632,9 +1610,9 @@ namespace System.ServiceModel.Channels
 
                 if (buffer == null)
                 {
-                    buffer = DiagnosticUtility
-                        .Utility
-                        .AllocateByteArray(connection.AsyncReadBufferSize);
+                    buffer = DiagnosticUtility.Utility.AllocateByteArray(
+                        connection.AsyncReadBufferSize
+                    );
                 }
 
                 int bytesRead;
@@ -1881,9 +1859,9 @@ namespace System.ServiceModel.Channels
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(decoder.CreatePrematureEOFException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    decoder.CreatePrematureEOFException()
+                );
             }
         }
 
@@ -1947,15 +1925,13 @@ namespace System.ServiceModel.Channels
                     if (EnvelopeBuffer != null)
                     {
                         if (!object.ReferenceEquals(buffer, EnvelopeBuffer))
-                            System
-                                .Buffer
-                                .BlockCopy(
-                                    buffer,
-                                    offset,
-                                    EnvelopeBuffer,
-                                    EnvelopeOffset,
-                                    bytesRead
-                                );
+                            System.Buffer.BlockCopy(
+                                buffer,
+                                offset,
+                                EnvelopeBuffer,
+                                EnvelopeOffset,
+                                bytesRead
+                            );
                         EnvelopeOffset += bytesRead;
                     }
 
@@ -1967,15 +1943,13 @@ namespace System.ServiceModel.Channels
                 {
                     case ClientFramingDecoderState.Fault:
                         channel.Session.CloseOutputSession(channel.InternalCloseTimeout);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                FaultStringDecoder.GetFaultException(
-                                    decoder.Fault,
-                                    channel.RemoteAddress.Uri.ToString(),
-                                    messageEncoder.ContentType
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            FaultStringDecoder.GetFaultException(
+                                decoder.Fault,
+                                channel.RemoteAddress.Uri.ToString(),
+                                messageEncoder.ContentType
+                            )
+                        );
 
                     case ClientFramingDecoderState.End:
                         isAtEOF = true;
@@ -1985,13 +1959,11 @@ namespace System.ServiceModel.Channels
                         int envelopeSize = decoder.EnvelopeSize;
                         if (envelopeSize > maxBufferSize)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
-                                        maxBufferSize
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                                    maxBufferSize
+                                )
+                            );
                         }
                         EnvelopeBuffer = bufferManager.TakeBuffer(envelopeSize);
                         EnvelopeOffset = 0;
@@ -2020,14 +1992,12 @@ namespace System.ServiceModel.Channels
                             }
                             catch (XmlException xmlException)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new ProtocolException(
-                                            SR.GetString(SR.MessageXmlProtocolError),
-                                            xmlException
-                                        )
-                                    );
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ProtocolException(
+                                        SR.GetString(SR.MessageXmlProtocolError),
+                                        xmlException
+                                    )
+                                );
                             }
                             EnvelopeBuffer = null;
                             return message;

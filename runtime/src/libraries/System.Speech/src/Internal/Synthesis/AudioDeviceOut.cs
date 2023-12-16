@@ -72,16 +72,14 @@ namespace System.Speech.Internal.Synthesis
             Interop.WinMM.MMSYSERR result;
             lock (_noWriteOutLock)
             {
-                result = Interop
-                    .WinMM
-                    .waveOutOpen(
-                        ref _hwo,
-                        _curDevice,
-                        wfx,
-                        _delegate,
-                        IntPtr.Zero,
-                        Interop.WinMM.CALLBACK_FUNCTION
-                    );
+                result = Interop.WinMM.waveOutOpen(
+                    ref _hwo,
+                    _curDevice,
+                    wfx,
+                    _delegate,
+                    IntPtr.Zero,
+                    Interop.WinMM.CALLBACK_FUNCTION
+                );
 
                 if (_fPaused && result == Interop.WinMM.MMSYSERR.NOERROR)
                 {
@@ -154,9 +152,11 @@ namespace System.Speech.Internal.Synthesis
 
                 WaveHeader waveHeader = new(buffer);
                 GCHandle waveHdr = waveHeader.WAVEHDR;
-                Interop.WinMM.MMSYSERR result = Interop
-                    .WinMM
-                    .waveOutPrepareHeader(_hwo, waveHdr.AddrOfPinnedObject(), waveHeader.SizeHDR);
+                Interop.WinMM.MMSYSERR result = Interop.WinMM.waveOutPrepareHeader(
+                    _hwo,
+                    waveHdr.AddrOfPinnedObject(),
+                    waveHeader.SizeHDR
+                );
 
                 if (result != Interop.WinMM.MMSYSERR.NOERROR)
                 {
@@ -178,9 +178,11 @@ namespace System.Speech.Internal.Synthesis
                         }
 
                         // Start playback of the first buffer
-                        result = Interop
-                            .WinMM
-                            .waveOutWrite(_hwo, waveHdr.AddrOfPinnedObject(), waveHeader.SizeHDR);
+                        result = Interop.WinMM.waveOutWrite(
+                            _hwo,
+                            waveHdr.AddrOfPinnedObject(),
+                            waveHeader.SizeHDR
+                        );
                         if (result != Interop.WinMM.MMSYSERR.NOERROR)
                         {
                             lock (_queueIn)
@@ -208,15 +210,12 @@ namespace System.Speech.Internal.Synthesis
                         Interop.WinMM.MMSYSERR result = Interop.WinMM.waveOutPause(_hwo);
                         if (result != Interop.WinMM.MMSYSERR.NOERROR)
                         {
-                            System
-                                .Diagnostics
-                                .Debug
-                                .Assert(
-                                    false,
-                                    ((int)result).ToString(
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                                );
+                            System.Diagnostics.Debug.Assert(
+                                false,
+                                ((int)result).ToString(
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                )
+                            );
                         }
                     }
                     _fPaused = true;
@@ -339,13 +338,11 @@ namespace System.Speech.Internal.Synthesis
             prodName = string.Empty;
             Interop.WinMM.WAVEOUTCAPS caps = new();
 
-            Interop.WinMM.MMSYSERR result = Interop
-                .WinMM
-                .waveOutGetDevCaps(
-                    (IntPtr)deviceId,
-                    ref caps,
-                    Marshal.SizeOf<Interop.WinMM.WAVEOUTCAPS>()
-                );
+            Interop.WinMM.MMSYSERR result = Interop.WinMM.waveOutGetDevCaps(
+                (IntPtr)deviceId,
+                ref caps,
+                Marshal.SizeOf<Interop.WinMM.WAVEOUTCAPS>()
+            );
             if (result != Interop.WinMM.MMSYSERR.NOERROR)
             {
                 return result;
@@ -429,13 +426,11 @@ namespace System.Speech.Internal.Synthesis
             foreach (InItem item in _queueOut)
             {
                 WaveHeader waveHeader = item._waveHeader;
-                Interop.WinMM.MMSYSERR result = Interop
-                    .WinMM
-                    .waveOutUnprepareHeader(
-                        _hwo,
-                        waveHeader.WAVEHDR.AddrOfPinnedObject(),
-                        waveHeader.SizeHDR
-                    );
+                Interop.WinMM.MMSYSERR result = Interop.WinMM.waveOutUnprepareHeader(
+                    _hwo,
+                    waveHeader.WAVEHDR.AddrOfPinnedObject(),
+                    waveHeader.SizeHDR
+                );
                 if (result != Interop.WinMM.MMSYSERR.NOERROR)
                 {
                     //System.Diagnostics.Debug.Assert (false);
@@ -459,13 +454,11 @@ namespace System.Speech.Internal.Synthesis
                         if (inItem._waveHeader != null)
                         {
                             WaveHeader waveHeader = inItem._waveHeader;
-                            Interop
-                                .WinMM
-                                .waveOutUnprepareHeader(
-                                    _hwo,
-                                    waveHeader.WAVEHDR.AddrOfPinnedObject(),
-                                    waveHeader.SizeHDR
-                                );
+                            Interop.WinMM.waveOutUnprepareHeader(
+                                _hwo,
+                                waveHeader.WAVEHDR.AddrOfPinnedObject(),
+                                waveHeader.SizeHDR
+                            );
                             waveHeader.Dispose();
                         }
                         else

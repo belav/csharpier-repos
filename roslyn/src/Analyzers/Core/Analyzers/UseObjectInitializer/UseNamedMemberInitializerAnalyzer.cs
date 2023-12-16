@@ -154,8 +154,7 @@ internal abstract class AbstractUseNamedMemberInitializerAnalyzer<
             if (!this.State.ValuePatternMatches(expression))
                 break;
 
-            var leftSymbol = this.SemanticModel
-                .GetSymbolInfo(leftMemberAccess, cancellationToken)
+            var leftSymbol = this.SemanticModel.GetSymbolInfo(leftMemberAccess, cancellationToken)
                 .GetAnySymbol();
             if (leftSymbol?.IsStatic is true)
             {
@@ -163,9 +162,10 @@ internal abstract class AbstractUseNamedMemberInitializerAnalyzer<
                 break;
             }
 
-            var type = this.SemanticModel
-                .GetTypeInfo(_objectCreationExpression, cancellationToken)
-                .Type;
+            var type = this.SemanticModel.GetTypeInfo(
+                _objectCreationExpression,
+                cancellationToken
+            ).Type;
             if (type == null)
                 break;
 

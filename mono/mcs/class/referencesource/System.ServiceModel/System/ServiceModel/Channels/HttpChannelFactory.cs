@@ -85,36 +85,30 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.MaxReceivedMessageSize > int.MaxValue)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "bindingElement.MaxReceivedMessageSize",
-                                SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "bindingElement.MaxReceivedMessageSize",
+                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                        )
+                    );
                 }
 
                 if (bindingElement.MaxBufferSize != bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "bindingElement",
-                            SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
+                    );
                 }
             }
             else
             {
                 if (bindingElement.MaxBufferSize > bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "bindingElement",
-                            SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
+                    );
                 }
             }
 
@@ -123,12 +117,10 @@ namespace System.ServiceModel.Channels
                 && bindingElement.AuthenticationScheme != AuthenticationSchemes.Anonymous
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "bindingElement",
-                        SR.GetString(SR.HttpAuthDoesNotSupportRequestStreaming)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "bindingElement",
+                    SR.GetString(SR.HttpAuthDoesNotSupportRequestStreaming)
+                );
             }
 
             this.allowCookies = bindingElement.AllowCookies;
@@ -139,16 +131,14 @@ namespace System.ServiceModel.Channels
                     context.BindingParameters.FindAll<HttpCookieContainerBindingElement>();
                 if (httpCookieContainerBindingElements.Count > 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.MultipleCCbesInParameters,
-                                    typeof(HttpCookieContainerBindingElement)
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.MultipleCCbesInParameters,
+                                typeof(HttpCookieContainerBindingElement)
                             )
-                        );
+                        )
+                    );
                 }
                 if (httpCookieContainerBindingElements.Count == 1)
                 {
@@ -165,15 +155,13 @@ namespace System.ServiceModel.Channels
 
             if (!bindingElement.AuthenticationScheme.IsSingleton())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "value",
-                        SR.GetString(
-                            SR.HttpRequiresSingleAuthScheme,
-                            bindingElement.AuthenticationScheme
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "value",
+                    SR.GetString(
+                        SR.HttpRequiresSingleAuthScheme,
+                        bindingElement.AuthenticationScheme
+                    )
+                );
             }
 
             this.authenticationScheme = bindingElement.AuthenticationScheme;
@@ -190,15 +178,11 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.UseDefaultWebProxy)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.UseDefaultWebProxyCantBeUsedWithExplicitProxyAddress
-                                )
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UseDefaultWebProxyCantBeUsedWithExplicitProxyAddress)
+                        )
+                    );
                 }
 
                 if (bindingElement.ProxyAuthenticationScheme == AuthenticationSchemes.Anonymous)
@@ -234,21 +218,18 @@ namespace System.ServiceModel.Channels
             );
             this.bufferPool = new ConnectionBufferPool(webSocketBufferSize);
 
-            Collection<ClientWebSocketFactory> clientWebSocketFactories = context
-                .BindingParameters
-                .FindAll<ClientWebSocketFactory>();
+            Collection<ClientWebSocketFactory> clientWebSocketFactories =
+                context.BindingParameters.FindAll<ClientWebSocketFactory>();
             if (clientWebSocketFactories.Count > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "context",
-                        SR.GetString(
-                            SR.MultipleClientWebSocketFactoriesSpecified,
-                            typeof(BindingContext).Name,
-                            typeof(ClientWebSocketFactory).Name
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "context",
+                    SR.GetString(
+                        SR.MultipleClientWebSocketFactoriesSpecified,
+                        typeof(BindingContext).Name,
+                        typeof(ClientWebSocketFactory).Name
+                    )
+                );
             }
             else
             {
@@ -427,13 +408,11 @@ namespace System.ServiceModel.Channels
             ];
             if (spn == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(SR.HttpSpnNotFound, response.ResponseUri)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.HttpSpnNotFound, response.ResponseUri)
+                    )
+                );
             }
             ReadOnlyCollection<IAuthorizationPolicy> spnPolicies =
                 SecurityUtils.CreatePrincipalNameAuthorizationPolicies(spn);
@@ -523,9 +502,9 @@ namespace System.ServiceModel.Channels
                 && remoteAddress.Uri != via
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(CreateToMustEqualViaException(remoteAddress.Uri, via));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateToMustEqualViaException(remoteAddress.Uri, via)
+                );
             }
         }
 
@@ -583,9 +562,23 @@ namespace System.ServiceModel.Channels
                 && this.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Always
             )
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.WebSocketCannotCreateRequestClientChannelWithCertainWebSocketTransportUsage,
+                            typeof(TChannel),
+                            WebSocketTransportSettings.TransportUsageMethodName,
+                            typeof(WebSocketTransportSettings).Name,
+                            this.WebSocketSettings.TransportUsage
+                        )
+                    )
+                );
+            }
+            else if (channelType == typeof(IDuplexSessionChannel))
+            {
+                if (this.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Never)
+                {
+                    throw FxTrace.Exception.AsError(
                         new InvalidOperationException(
                             SR.GetString(
                                 SR.WebSocketCannotCreateRequestClientChannelWithCertainWebSocketTransportUsage,
@@ -596,40 +589,20 @@ namespace System.ServiceModel.Channels
                             )
                         )
                     );
-            }
-            else if (channelType == typeof(IDuplexSessionChannel))
-            {
-                if (this.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Never)
-                {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.WebSocketCannotCreateRequestClientChannelWithCertainWebSocketTransportUsage,
-                                    typeof(TChannel),
-                                    WebSocketTransportSettings.TransportUsageMethodName,
-                                    typeof(WebSocketTransportSettings).Name,
-                                    this.WebSocketSettings.TransportUsage
-                                )
-                            )
-                        );
                 }
                 else if (
                     !WebSocketHelper.OSSupportsWebSockets()
                     && this.ClientWebSocketFactory == null
                 )
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new PlatformNotSupportedException(
-                                SR.GetString(
-                                    SR.WebSocketsClientSideNotSupported,
-                                    typeof(ClientWebSocketFactory).FullName
-                                )
+                    throw FxTrace.Exception.AsError(
+                        new PlatformNotSupportedException(
+                            SR.GetString(
+                                SR.WebSocketsClientSideNotSupported,
+                                typeof(ClientWebSocketFactory).FullName
                             )
-                        );
+                        )
+                    );
                 }
             }
         }
@@ -1576,9 +1549,10 @@ namespace System.ServiceModel.Channels
                 {
                     object property;
                     if (
-                        message
-                            .Properties
-                            .TryGetValue(ConnectionGroupPrefixMessagePropertyName, out property)
+                        message.Properties.TryGetValue(
+                            ConnectionGroupPrefixMessagePropertyName,
+                            out property
+                        )
                     )
                     {
                         string prefix = property as string;
@@ -1708,13 +1682,11 @@ namespace System.ServiceModel.Channels
                             // workaround for Whidbey bug #558605 - only happens in streamed case.
                             if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        HttpChannelUtilities.CreateNullReferenceResponseException(
-                                            nullReferenceException
-                                        )
-                                    );
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    HttpChannelUtilities.CreateNullReferenceResponseException(
+                                        nullReferenceException
+                                    )
+                                );
                             }
                             throw;
                         }
@@ -2080,13 +2052,11 @@ namespace System.ServiceModel.Channels
                             // workaround for Whidbey bug #558605 - only happens in streamed case.
                             if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        HttpChannelUtilities.CreateNullReferenceResponseException(
-                                            nullReferenceException
-                                        )
-                                    );
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    HttpChannelUtilities.CreateNullReferenceResponseException(
+                                        nullReferenceException
+                                    )
+                                );
                             }
                             throw;
                         }
@@ -2162,13 +2132,11 @@ namespace System.ServiceModel.Channels
                                 // workaround for Whidbey bug #558605 - only happens in streamed case.
                                 if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
-                                        .ThrowHelperError(
-                                            HttpChannelUtilities.CreateNullReferenceResponseException(
-                                                nullReferenceException
-                                            )
-                                        );
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        HttpChannelUtilities.CreateNullReferenceResponseException(
+                                            nullReferenceException
+                                        )
+                                    );
                                 }
                                 throw;
                             }
@@ -2592,13 +2560,11 @@ namespace System.ServiceModel.Channels
                     {
                         if (authenticationLevel == AuthenticationLevel.MutualAuthRequired)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(SR.CredentialDisallowsNtlm)
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.CredentialDisallowsNtlm)
+                                )
+                            );
                         }
                     }
 
@@ -2714,12 +2680,10 @@ namespace System.ServiceModel.Channels
 
                 if (!authenticationScheme.IsSingleton())
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "value",
-                            SR.GetString(SR.HttpRequiresSingleAuthScheme, authenticationScheme)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.HttpRequiresSingleAuthScheme, authenticationScheme)
+                    );
                 }
 
                 this.authenticationScheme = authenticationScheme;
@@ -2759,17 +2723,15 @@ namespace System.ServiceModel.Channels
                         )
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.ProxyImpersonationLevelMismatch,
-                                        impersonationLevel,
-                                        request.ImpersonationLevel
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ProxyImpersonationLevelMismatch,
+                                    impersonationLevel,
+                                    request.ImpersonationLevel
                                 )
-                            );
+                            )
+                        );
                     }
 
                     // The authentication level for target auth is also used for proxy auth (by System.Net).
@@ -2779,17 +2741,15 @@ namespace System.ServiceModel.Channels
                         && (request.AuthenticationLevel != AuthenticationLevel.MutualAuthRequired)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.ProxyAuthenticationLevelMismatch,
-                                        authenticationLevel,
-                                        request.AuthenticationLevel
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ProxyAuthenticationLevelMismatch,
+                                    authenticationLevel,
+                                    request.AuthenticationLevel
                                 )
-                            );
+                            )
+                        );
                     }
 
                     CredentialCache credentials = new CredentialCache();

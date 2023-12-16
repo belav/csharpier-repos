@@ -175,13 +175,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             // Assembly.Save is only available in .NET Framework (https://github.com/dotnet/runtime/issues/15704)
             assembly.Save(fileName);
 #endif
-            DependencyInjectionEventSource
-                .Log
-                .DynamicMethodBuilt(
-                    _rootScope.RootProvider,
-                    callSite.ServiceType,
-                    ilGenerator.ILOffset
-                );
+            DependencyInjectionEventSource.Log.DynamicMethodBuilt(
+                _rootScope.RootProvider,
+                callSite.ServiceType,
+                ilGenerator.ILOffset
+            );
 
             return new GeneratedMethod()
             {
@@ -259,9 +257,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             AddConstant(argument, generatedMethod.Lambda);
             // ProviderScope
             argument.Generator.Emit(OpCodes.Ldarg_1);
-            argument
-                .Generator
-                .Emit(OpCodes.Call, generatedMethod.Lambda.GetType().GetMethod("Invoke"));
+            argument.Generator.Emit(
+                OpCodes.Call,
+                generatedMethod.Lambda.GetType().GetMethod("Invoke")
+            );
 #else
             AddConstant(argument, generatedMethod.Context);
             // ProviderScope
@@ -298,12 +297,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             if (enumerableCallSite.ServiceCallSites.Length == 0)
             {
-                argument
-                    .Generator
-                    .Emit(
-                        OpCodes.Call,
-                        ServiceLookupHelpers.GetArrayEmptyMethodInfo(enumerableCallSite.ItemType)
-                    );
+                argument.Generator.Emit(
+                    OpCodes.Call,
+                    ServiceLookupHelpers.GetArrayEmptyMethodInfo(enumerableCallSite.ItemType)
+                );
             }
             else
             {
@@ -311,9 +308,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 // array[0] = [Create argument0];
                 // array[1] = [Create argument1];
                 // ...
-                argument
-                    .Generator
-                    .Emit(OpCodes.Ldc_I4, enumerableCallSite.ServiceCallSites.Length);
+                argument.Generator.Emit(OpCodes.Ldc_I4, enumerableCallSite.ServiceCallSites.Length);
                 argument.Generator.Emit(OpCodes.Newarr, enumerableCallSite.ItemType);
                 for (int i = 0; i < enumerableCallSite.ServiceCallSites.Length; i++)
                 {
@@ -425,12 +420,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
             if (callSite.Cache.Location == CallSiteResultCacheLocation.Scope)
             {
-                LocalBuilder cacheKeyLocal = context
-                    .Generator
-                    .DeclareLocal(typeof(ServiceCacheKey));
-                LocalBuilder resolvedServicesLocal = context
-                    .Generator
-                    .DeclareLocal(typeof(IDictionary<ServiceCacheKey, object>));
+                LocalBuilder cacheKeyLocal = context.Generator.DeclareLocal(
+                    typeof(ServiceCacheKey)
+                );
+                LocalBuilder resolvedServicesLocal = context.Generator.DeclareLocal(
+                    typeof(IDictionary<ServiceCacheKey, object>)
+                );
                 LocalBuilder syncLocal = context.Generator.DeclareLocal(typeof(object));
                 LocalBuilder lockTakenLocal = context.Generator.DeclareLocal(typeof(bool));
                 LocalBuilder resultLocal = context.Generator.DeclareLocal(typeof(object));
@@ -486,9 +481,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 // Load address of result local
                 context.Generator.Emit(OpCodes.Ldloca, resultLocal);
                 // .TryGetValue
-                context
-                    .Generator
-                    .Emit(OpCodes.Callvirt, ServiceLookupHelpers.TryGetValueMethodInfo);
+                context.Generator.Emit(
+                    OpCodes.Callvirt,
+                    ServiceLookupHelpers.TryGetValueMethodInfo
+                );
 
                 // Jump to the end if already in cache
                 context.Generator.Emit(OpCodes.Brtrue, skipCreationLabel);
@@ -559,9 +555,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private static void EndCaptureDisposable(ILEmitResolverBuilderContext argument)
         {
             // When calling CaptureDisposable we expect callee and arguments to be on the stackcontext.Generator.BeginExceptionBlock
-            argument
-                .Generator
-                .Emit(OpCodes.Callvirt, ServiceLookupHelpers.CaptureDisposableMethodInfo);
+            argument.Generator.Emit(
+                OpCodes.Callvirt,
+                ServiceLookupHelpers.CaptureDisposableMethodInfo
+            );
         }
     }
 }

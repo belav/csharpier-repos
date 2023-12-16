@@ -28,9 +28,9 @@ public class MulticastDelegateGetInvocationList
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario("PosTest1: Call GetInvocationList against a delegate with one function");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Call GetInvocationList against a delegate with one function"
+        );
 
         try
         {
@@ -42,13 +42,11 @@ public class MulticastDelegateGetInvocationList
 
             if (invocationList.Length != 1)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "001",
-                        "Call GetInvocationList against a delegate with one function returns wrong result: "
-                            + invocationList.Length
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "Call GetInvocationList against a delegate with one function returns wrong result: "
+                        + invocationList.Length
+                );
                 retVal = false;
             }
         }
@@ -67,9 +65,9 @@ public class MulticastDelegateGetInvocationList
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario("PosTest2: Verify the function order of the returned invocation list");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Verify the function order of the returned invocation list"
+        );
 
         try
         {
@@ -87,13 +85,11 @@ public class MulticastDelegateGetInvocationList
 
             if (invocationList.Length != 3)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "003",
-                        "Call GetInvocationList against a delegate with multiple functions returns wrong result: "
-                            + invocationList.Length
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "Call GetInvocationList against a delegate with multiple functions returns wrong result: "
+                        + invocationList.Length
+                );
                 retVal = false;
             }
 
@@ -131,11 +127,9 @@ public class MulticastDelegateGetInvocationList
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NagTest1: Insert multiple functions with null embedded in the function list"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NagTest1: Insert multiple functions with null embedded in the function list"
+        );
 
         try
         {
@@ -154,13 +148,11 @@ public class MulticastDelegateGetInvocationList
 
             if (invocationList.Length != 3)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "101",
-                        "Call GetInvocationList against a delegate with one function returns wrong result: "
-                            + invocationList.Length
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "101",
+                    "Call GetInvocationList against a delegate with one function returns wrong result: "
+                        + invocationList.Length
+                );
                 retVal = false;
             }
         }

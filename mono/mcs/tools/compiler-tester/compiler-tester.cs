@@ -1524,9 +1524,8 @@ namespace TestRunner
                         continue;
 
                     string name = r.GetAttribute("name");
-                    PositiveTestCase.VerificationData tc = PositiveTestCase
-                        .VerificationData
-                        .FromFile(name, r);
+                    PositiveTestCase.VerificationData tc =
+                        PositiveTestCase.VerificationData.FromFile(name, r);
                     verif_data.Add(name, tc);
                 }
             }
@@ -1951,11 +1950,9 @@ namespace TestRunner
             }
             catch (Exception)
             {
-                Console
-                    .Error
-                    .WriteLine(
-                        "Switching to command line mode (compiler entry point was not found)"
-                    );
+                Console.Error.WriteLine(
+                    "Switching to command line mode (compiler entry point was not found)"
+                );
                 if (!File.Exists(compiler))
                 {
                     Console.Error.WriteLine("ERROR: Tested compiler was not found");

@@ -416,9 +416,9 @@ public class WebApplicationTests
     )
     {
         var builder = createBuilder();
-        builder
-            .Services
-            .AddSingleton<IServer>(new MockAddressesServer(new List<string>().AsReadOnly()));
+        builder.Services.AddSingleton<IServer>(
+            new MockAddressesServer(new List<string>().AsReadOnly())
+        );
         await using var app = builder.Build();
 
         await Assert.ThrowsAsync<InvalidOperationException>(
@@ -458,9 +458,10 @@ public class WebApplicationTests
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .WebHost
-                    .UseSetting(WebHostDefaults.ApplicationKey, nameof(WebApplicationTests))
+                builder.WebHost.UseSetting(
+                    WebHostDefaults.ApplicationKey,
+                    nameof(WebApplicationTests)
+                )
         );
         Assert.Throws<NotSupportedException>(
             () => builder.WebHost.UseSetting(WebHostDefaults.EnvironmentKey, envName)
@@ -476,12 +477,10 @@ public class WebApplicationTests
         );
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .WebHost
-                    .UseSetting(
-                        WebHostDefaults.HostingStartupExcludeAssembliesKey,
-                        "hostingexclude"
-                    )
+                builder.WebHost.UseSetting(
+                    WebHostDefaults.HostingStartupExcludeAssembliesKey,
+                    "hostingexclude"
+                )
         );
         Assert.Throws<NotSupportedException>(() => builder.WebHost.UseEnvironment(envName));
         Assert.Throws<NotSupportedException>(() => builder.WebHost.UseContentRoot(contentRoot));
@@ -501,95 +500,77 @@ public class WebApplicationTests
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .WebHost
-                    .ConfigureAppConfiguration(builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.ApplicationKey, nameof(WebApplicationTests) }
-                            }
-                        );
-                    })
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.ApplicationKey, nameof(WebApplicationTests) }
+                        }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .WebHost
-                    .ConfigureAppConfiguration(builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.EnvironmentKey, envName }
-                            }
-                        );
-                    })
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.EnvironmentKey, envName }
+                        }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .WebHost
-                    .ConfigureAppConfiguration(builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.ContentRootKey, contentRoot }
-                            }
-                        );
-                    })
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.ContentRootKey, contentRoot }
+                        }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .WebHost
-                    .ConfigureAppConfiguration(builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.WebRootKey, webRoot }
-                            }
-                        );
-                    })
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string> { { WebHostDefaults.WebRootKey, webRoot } }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .WebHost
-                    .ConfigureAppConfiguration(builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.HostingStartupAssembliesKey, "hosting" }
-                            }
-                        );
-                    })
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.HostingStartupAssembliesKey, "hosting" }
+                        }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .WebHost
-                    .ConfigureAppConfiguration(builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                {
-                                    WebHostDefaults.HostingStartupExcludeAssembliesKey,
-                                    "hostingexclude"
-                                }
-                            }
-                        );
-                    })
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.HostingStartupExcludeAssembliesKey, "hostingexclude" }
+                        }
+                    );
+                })
         );
     }
 
@@ -1196,23 +1177,19 @@ public class WebApplicationTests
         );
 
         Assert.Equal(assemblyName, builder.Environment.ApplicationName);
-        builder
-            .Host
-            .ConfigureAppConfiguration(
-                (context, config) =>
-                {
-                    Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
-                }
-            );
+        builder.Host.ConfigureAppConfiguration(
+            (context, config) =>
+            {
+                Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
+            }
+        );
 
-        builder
-            .WebHost
-            .ConfigureAppConfiguration(
-                (context, config) =>
-                {
-                    Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
-                }
-            );
+        builder.WebHost.ConfigureAppConfiguration(
+            (context, config) =>
+            {
+                Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
+            }
+        );
 
         var app = builder.Build();
         var hostEnv = app.Services.GetRequiredService<IHostEnvironment>();
@@ -1248,23 +1225,19 @@ public class WebApplicationTests
         );
 
         Assert.Equal(assemblyName, builder.Environment.ApplicationName);
-        builder
-            .Host
-            .ConfigureAppConfiguration(
-                (context, config) =>
-                {
-                    Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
-                }
-            );
+        builder.Host.ConfigureAppConfiguration(
+            (context, config) =>
+            {
+                Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
+            }
+        );
 
-        builder
-            .WebHost
-            .ConfigureAppConfiguration(
-                (context, config) =>
-                {
-                    Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
-                }
-            );
+        builder.WebHost.ConfigureAppConfiguration(
+            (context, config) =>
+            {
+                Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
+            }
+        );
 
         var app = builder.Build();
         var hostEnv = app.Services.GetRequiredService<IHostEnvironment>();
@@ -1331,23 +1304,19 @@ public class WebApplicationTests
         Assert.Equal("Testing", builder.Configuration["environment"]);
         Assert.Equal("Testing", builder.Environment.EnvironmentName);
 
-        builder
-            .WebHost
-            .ConfigureAppConfiguration(
-                (context, config) =>
-                {
-                    Assert.Equal("Testing", context.HostingEnvironment.EnvironmentName);
-                }
-            );
+        builder.WebHost.ConfigureAppConfiguration(
+            (context, config) =>
+            {
+                Assert.Equal("Testing", context.HostingEnvironment.EnvironmentName);
+            }
+        );
 
-        builder
-            .Host
-            .ConfigureAppConfiguration(
-                (context, config) =>
-                {
-                    Assert.Equal("Testing", context.HostingEnvironment.EnvironmentName);
-                }
-            );
+        builder.Host.ConfigureAppConfiguration(
+            (context, config) =>
+            {
+                Assert.Equal("Testing", context.HostingEnvironment.EnvironmentName);
+            }
+        );
 
         var app = builder.Build();
         var hostEnv = app.Services.GetRequiredService<IHostEnvironment>();
@@ -1374,17 +1343,12 @@ public class WebApplicationTests
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder
-                    .Host
-                    .ConfigureHostConfiguration(builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { HostDefaults.ApplicationKey, "myapp" }
-                            }
-                        );
-                    })
+                builder.Host.ConfigureHostConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string> { { HostDefaults.ApplicationKey, "myapp" } }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(() => builder.Host.UseEnvironment(envName));
@@ -1493,9 +1457,9 @@ public class WebApplicationTests
 
         var builder = createBuilder();
 
-        builder
-            .Configuration
-            .AddInMemoryCollection(new Dictionary<string, string>() { { "C", "C" }, });
+        builder.Configuration.AddInMemoryCollection(
+            new Dictionary<string, string>() { { "C", "C" }, }
+        );
 
         await using var app = builder.Build();
 
@@ -1542,9 +1506,9 @@ public class WebApplicationTests
             }
         );
 
-        builder
-            .Configuration
-            .AddInMemoryCollection(new Dictionary<string, string>() { { "B", "B" }, });
+        builder.Configuration.AddInMemoryCollection(
+            new Dictionary<string, string>() { { "B", "B" }, }
+        );
 
         await using var app = builder.Build();
 
@@ -1664,12 +1628,10 @@ public class WebApplicationTests
     )
     {
         var builder = createBuilder();
-        var host = builder
-            .WebHost
-            .ConfigureAppConfiguration(configBuilder =>
-            {
-                configBuilder.Add(new ReloadableMemorySource());
-            });
+        var host = builder.WebHost.ConfigureAppConfiguration(configBuilder =>
+        {
+            configBuilder.Add(new ReloadableMemorySource());
+        });
         await using var app = builder.Build();
 
         var config = app.Services.GetRequiredService<IConfiguration>();
@@ -1794,8 +1756,7 @@ public class WebApplicationTests
 
         var env0 = app.Services.GetRequiredService<IHostEnvironment>();
 
-        var env1 = app.Services
-            .GetRequiredService<IServiceCollection>()
+        var env1 = app.Services.GetRequiredService<IServiceCollection>()
             .BuildServiceProvider()
             .GetRequiredService<IHostEnvironment>();
 
@@ -1829,8 +1790,7 @@ public class WebApplicationTests
 
         var service0 = app.Services.GetRequiredService<IService>();
 
-        var service1 = app.Services
-            .GetRequiredService<IServiceCollection>()
+        var service1 = app.Services.GetRequiredService<IServiceCollection>()
             .BuildServiceProvider()
             .GetRequiredService<IService>();
 
@@ -1846,9 +1806,9 @@ public class WebApplicationTests
     {
         var builder = createBuilder();
 
-        builder
-            .Configuration
-            .AddInMemoryCollection(new Dictionary<string, string> { ["foo"] = "bar", });
+        builder.Configuration.AddInMemoryCollection(
+            new Dictionary<string, string> { ["foo"] = "bar", }
+        );
 
         Assert.Equal("bar", builder.Configuration["foo"]);
 
@@ -1884,8 +1844,7 @@ public class WebApplicationTests
         var app = builder.Build();
 
         var hostLifetime0 = app.Services.GetRequiredService<IHostLifetime>();
-        var childServiceProvider = app.Services
-            .GetRequiredService<IServiceCollection>()
+        var childServiceProvider = app.Services.GetRequiredService<IServiceCollection>()
             .BuildServiceProvider();
         var hostLifetime1 = childServiceProvider.GetRequiredService<IHostLifetime>();
 
@@ -2107,35 +2066,31 @@ public class WebApplicationTests
         var builder = createBuilder();
 
         Assert.Single(
-            builder
-                .Services
-                .Where(
-                    descriptor =>
-                        descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
-                )
+            builder.Services.Where(
+                descriptor =>
+                    descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
+            )
         );
         // IWebHostEnvironment is added by ConfigureWebHostDefaults
         Assert.Single(
-            builder
-                .Services
-                .Where(descriptor => descriptor.ServiceType == typeof(IWebHostEnvironment))
+            builder.Services.Where(
+                descriptor => descriptor.ServiceType == typeof(IWebHostEnvironment)
+            )
         );
         Assert.Single(
-            builder
-                .Services
-                .Where(
-                    descriptor =>
-                        descriptor.ServiceType
-                        == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
-                )
+            builder.Services.Where(
+                descriptor =>
+                    descriptor.ServiceType
+                    == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
+            )
         );
         Assert.Single(
             builder.Services.Where(descriptor => descriptor.ServiceType == typeof(IServer))
         );
         Assert.Single(
-            builder
-                .Services
-                .Where(descriptor => descriptor.ServiceType == typeof(EndpointDataSource))
+            builder.Services.Where(
+                descriptor => descriptor.ServiceType == typeof(EndpointDataSource)
+            )
         );
 
         await using var app = builder.Build();
@@ -2158,36 +2113,32 @@ public class WebApplicationTests
         var builder = WebApplication.CreateEmptyBuilder(new());
 
         Assert.Empty(
-            builder
-                .Services
-                .Where(
-                    descriptor =>
-                        descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
-                )
+            builder.Services.Where(
+                descriptor =>
+                    descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
+            )
         );
         Assert.Empty(
-            builder
-                .Services
-                .Where(
-                    descriptor =>
-                        descriptor.ServiceType
-                        == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
-                )
+            builder.Services.Where(
+                descriptor =>
+                    descriptor.ServiceType
+                    == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
+            )
         );
         Assert.Empty(
             builder.Services.Where(descriptor => descriptor.ServiceType == typeof(IServer))
         );
         Assert.Empty(
-            builder
-                .Services
-                .Where(descriptor => descriptor.ServiceType == typeof(EndpointDataSource))
+            builder.Services.Where(
+                descriptor => descriptor.ServiceType == typeof(EndpointDataSource)
+            )
         );
 
         // These services are still necessary
         Assert.Single(
-            builder
-                .Services
-                .Where(descriptor => descriptor.ServiceType == typeof(IWebHostEnvironment))
+            builder.Services.Where(
+                descriptor => descriptor.ServiceType == typeof(IWebHostEnvironment)
+            )
         );
     }
 
@@ -2708,35 +2659,29 @@ public class WebApplicationTests
         builder.Host.Properties["hello"] = "world";
         var callbacks = 0;
 
-        builder
-            .Host
-            .ConfigureAppConfiguration(
-                (context, config) =>
-                {
-                    callbacks |= 0b00000001;
-                    Assert.Equal("world", context.Properties["hello"]);
-                }
-            );
+        builder.Host.ConfigureAppConfiguration(
+            (context, config) =>
+            {
+                callbacks |= 0b00000001;
+                Assert.Equal("world", context.Properties["hello"]);
+            }
+        );
 
-        builder
-            .Host
-            .ConfigureServices(
-                (context, config) =>
-                {
-                    callbacks |= 0b00000010;
-                    Assert.Equal("world", context.Properties["hello"]);
-                }
-            );
+        builder.Host.ConfigureServices(
+            (context, config) =>
+            {
+                callbacks |= 0b00000010;
+                Assert.Equal("world", context.Properties["hello"]);
+            }
+        );
 
-        builder
-            .Host
-            .ConfigureContainer<IServiceCollection>(
-                (context, config) =>
-                {
-                    callbacks |= 0b00000100;
-                    Assert.Equal("world", context.Properties["hello"]);
-                }
-            );
+        builder.Host.ConfigureContainer<IServiceCollection>(
+            (context, config) =>
+            {
+                callbacks |= 0b00000100;
+                Assert.Equal("world", context.Properties["hello"]);
+            }
+        );
 
         using var app = builder.Build();
 
@@ -2845,9 +2790,9 @@ public class WebApplicationTests
     {
         var builder = createBuilder();
 
-        builder
-            .Configuration
-            .AddInMemoryCollection(new Dictionary<string, string> { ["foo"] = "bar", });
+        builder.Configuration.AddInMemoryCollection(
+            new Dictionary<string, string> { ["foo"] = "bar", }
+        );
 
         var app = builder.Build();
 
@@ -2989,8 +2934,7 @@ public class WebApplicationTests
 
         builder.Services.AddAuthorization();
         builder
-            .Services
-            .AddAuthentication("testSchemeName")
+            .Services.AddAuthentication("testSchemeName")
             .AddScheme<AuthenticationSchemeOptions, UberHandler>(
                 "testSchemeName",
                 "testDisplayName",
@@ -3039,8 +2983,7 @@ public class WebApplicationTests
         var builder = createBuilder();
         builder.Services.AddAuthorization();
         builder
-            .Services
-            .AddAuthentication("testSchemeName")
+            .Services.AddAuthentication("testSchemeName")
             .AddScheme<AuthenticationSchemeOptions, UberHandler>(
                 "testSchemeName",
                 "testDisplayName",
@@ -3232,8 +3175,7 @@ public class WebApplicationTests
     {
         var builder = WebApplication.CreateSlimBuilder();
         builder
-            .Services
-            .AddRoutingCore()
+            .Services.AddRoutingCore()
             .Configure<RouteOptions>(options =>
             {
                 options.SetParameterPolicy<RegexInlineRouteConstraint>("regex");

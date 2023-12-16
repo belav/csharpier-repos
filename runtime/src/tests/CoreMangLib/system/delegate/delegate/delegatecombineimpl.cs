@@ -69,18 +69,19 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario("PosTest1: combine two  delegates which are not null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest1: combine two  delegates which are not null"
+            );
 
             try
             {
                 booldelegate delegate1 = new booldelegate(new TestClass().Working_Bool);
                 if (!CombineImpl(delegate1, identify_null.c_Start_null_false))
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("001", "delegate combineimpl is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "001",
+                        "delegate combineimpl is not successful "
+                    );
                     retVal = false;
                 }
             }
@@ -99,18 +100,19 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario("PosTest2: combine two delegate ,first is null,second is not null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest2: combine two delegate ,first is null,second is not null"
+            );
 
             try
             {
                 booldelegate delegate1 = null;
                 if (!CombineImpl(delegate1, identify_null.c_Working_null_false))
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("003", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "003",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
             }
@@ -129,18 +131,19 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario("PosTest3: combine two delegate ,first is not null,second is  null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest3: combine two delegate ,first is not null,second is  null"
+            );
 
             try
             {
                 booldelegate delegate1 = new booldelegate(new TestClass().StartWork_Bool);
                 if (!CombineImpl(delegate1, identify_null.c_Working_null_true))
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("005", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "005",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
             }
@@ -159,20 +162,19 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario(
-                    "PosTest4: combine two delegate ,first is  null and second is  null"
-                );
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest4: combine two delegate ,first is  null and second is  null"
+            );
 
             try
             {
                 booldelegate delegate1 = null;
                 if (!CombineImpl(delegate1, identify_null.c_Working_null_true))
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("007", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "007",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
             }
@@ -191,20 +193,19 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario(
-                    "PosTest5: combine three delegate ,first is  not null and the two others  entry that refer to the same method on the same object"
-                );
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest5: combine three delegate ,first is  not null and the two others  entry that refer to the same method on the same object"
+            );
 
             try
             {
                 booldelegate delegate1 = new booldelegate(new TestClass().Working_Bool);
                 if (!CombineImpl(delegate1, identify_null.c_Start_null_false_duplicate))
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("009", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "009",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
             }

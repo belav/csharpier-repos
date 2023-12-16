@@ -28,15 +28,13 @@ namespace System.ServiceModel.Security
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidEnumArgumentException(
-                            "value",
-                            (int)value,
-                            typeof(SecurityTokenAttachmentMode)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(SecurityTokenAttachmentMode)
+                    )
+                );
             }
         }
 
@@ -72,9 +70,9 @@ namespace System.ServiceModel.Security
                     mode = ReceiveSecurityHeaderBindingModes.SignedEndorsing;
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
             }
         }
     }

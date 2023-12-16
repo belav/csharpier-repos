@@ -85,9 +85,9 @@ namespace tests.system_data_dll.System_Data
             ds.Relations.Add(
                 new DataRelation("Relation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
             );
-            ds.Tables[0]
-                .Constraints
-                .Add(new UniqueConstraint("Constraint", ds.Tables[0].Columns[1]));
+            ds.Tables[0].Constraints.Add(
+                new UniqueConstraint("Constraint", ds.Tables[0].Columns[1])
+            );
 
             try
             {
@@ -142,9 +142,9 @@ namespace tests.system_data_dll.System_Data
                 BeginCase("DuplicateNameException - Constraints ");
                 try
                 {
-                    ds.Tables[0]
-                        .Constraints
-                        .Add(new UniqueConstraint("Constraint", ds.Tables[0].Columns[2]));
+                    ds.Tables[0].Constraints.Add(
+                        new UniqueConstraint("Constraint", ds.Tables[0].Columns[2])
+                    );
                 }
                 catch (DuplicateNameException ex)
                 {

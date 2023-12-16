@@ -282,12 +282,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     bool success;
 
                     if (
-                        operationContext
-                            .IncomingMessageProperties
-                            .TryGetValue(
-                                ChannelHandler.MessageBufferPropertyName,
-                                out requestMessageBuffer
-                            )
+                        operationContext.IncomingMessageProperties.TryGetValue(
+                            ChannelHandler.MessageBufferPropertyName,
+                            out requestMessageBuffer
+                        )
                     )
                     {
                         success = this.keyCalculator.CalculateKeys(
@@ -323,9 +321,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                             additionalKeys
                         );
 
-                        operationContext
-                            .IncomingMessageProperties
-                            .Add(CorrelationMessageProperty.Name, correlationMessageProperty);
+                        operationContext.IncomingMessageProperties.Add(
+                            CorrelationMessageProperty.Name,
+                            correlationMessageProperty
+                        );
                     }
                 }
             }
@@ -342,9 +341,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     this.host.RaiseUnknownMessageReceived(operationContext.IncomingMessage);
 
-                    throw FxTrace
-                        .Exception
-                        .AsError(new FaultException(new DurableDispatcherAddressingFault()));
+                    throw FxTrace.Exception.AsError(
+                        new FaultException(new DurableDispatcherAddressingFault())
+                    );
                 }
             }
         }
@@ -498,29 +497,25 @@ namespace System.ServiceModel.Activities.Dispatcher
                             && this.instanceKey.IsValid
                         )
                         {
-                            result = this.invoker
-                                .instanceManager
-                                .BeginGetInstance(
-                                    this.instanceKey,
-                                    this.additionalKeys,
-                                    this.getInstanceContext,
-                                    this.invoker.persistTimeout,
-                                    this.PrepareAsyncCompletion(handleEndGetInstance),
-                                    this
-                                );
+                            result = this.invoker.instanceManager.BeginGetInstance(
+                                this.instanceKey,
+                                this.additionalKeys,
+                                this.getInstanceContext,
+                                this.invoker.persistTimeout,
+                                this.PrepareAsyncCompletion(handleEndGetInstance),
+                                this
+                            );
                         }
                         else
                         {
-                            result = this.invoker
-                                .instanceManager
-                                .BeginGetInstance(
-                                    this.instanceId,
-                                    this.getInstanceContext,
-                                    this.updatedIdentity,
-                                    this.invoker.persistTimeout,
-                                    this.PrepareAsyncCompletion(handleEndGetInstance),
-                                    this
-                                );
+                            result = this.invoker.instanceManager.BeginGetInstance(
+                                this.instanceId,
+                                this.getInstanceContext,
+                                this.updatedIdentity,
+                                this.invoker.persistTimeout,
+                                this.PrepareAsyncCompletion(handleEndGetInstance),
+                                this
+                            );
                         }
                         shouldAbandon = false;
                     }
@@ -544,9 +539,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                         if (exception is InstanceKeyNotReadyException)
                         {
-                            this.invoker
-                                .host
-                                .RaiseUnknownMessageReceived(this.operationContext.IncomingMessage);
+                            this.invoker.host.RaiseUnknownMessageReceived(
+                                this.operationContext.IncomingMessage
+                            );
                         }
 
                         this.invoker.host.FaultServiceHostIfNecessary(exception);
@@ -555,18 +550,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                     catch (InstanceUpdateException)
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new FaultException(
-                                    OperationExecutionFault.CreateUpdateFailedFault(
-                                        SR.WorkflowInstanceUpdateFailed(
-                                            this.instanceId,
-                                            this.updatedIdentity.Identity
-                                        )
+                        throw FxTrace.Exception.AsError(
+                            new FaultException(
+                                OperationExecutionFault.CreateUpdateFailedFault(
+                                    SR.WorkflowInstanceUpdateFailed(
+                                        this.instanceId,
+                                        this.updatedIdentity.Identity
                                     )
                                 )
-                            );
+                            )
+                        );
                     }
                 }
                 catch (Exception exception)
@@ -594,15 +587,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 if (this.invoker.BufferedReceiveManager != null)
                 {
                     Fx.Assert(this.receiveContext != null, "receiveContext must not be null!");
-                    bool bufferSuccess = this.invoker
-                        .BufferedReceiveManager
-                        .BufferReceive(
-                            this.operationContext,
-                            this.receiveContext,
-                            this.invoker.StaticBookmarkName,
-                            BufferedReceiveState.WaitingOnInstance,
-                            retry
-                        );
+                    bool bufferSuccess = this.invoker.BufferedReceiveManager.BufferReceive(
+                        this.operationContext,
+                        this.receiveContext,
+                        this.invoker.StaticBookmarkName,
+                        BufferedReceiveState.WaitingOnInstance,
+                        retry
+                    );
                     if (bufferSuccess)
                     {
                         if (TD.BufferOutOfOrderMessageNoInstanceIsEnabled())
@@ -625,10 +616,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     try
                     {
-                        thisPtr.workflowServiceInstance = thisPtr
-                            .invoker
-                            .instanceManager
-                            .EndGetInstance(result);
+                        thisPtr.workflowServiceInstance =
+                            thisPtr.invoker.instanceManager.EndGetInstance(result);
                         shouldAbandon = false;
                     }
                     catch (InstanceLockedException exception)
@@ -656,12 +645,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                         if (exception is InstanceKeyNotReadyException)
                         {
-                            thisPtr
-                                .invoker
-                                .host
-                                .RaiseUnknownMessageReceived(
-                                    thisPtr.operationContext.IncomingMessage
-                                );
+                            thisPtr.invoker.host.RaiseUnknownMessageReceived(
+                                thisPtr.operationContext.IncomingMessage
+                            );
                         }
 
                         thisPtr.invoker.host.FaultServiceHostIfNecessary(exception);
@@ -670,18 +656,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                     catch (InstanceUpdateException)
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new FaultException(
-                                    OperationExecutionFault.CreateUpdateFailedFault(
-                                        SR.WorkflowInstanceUpdateFailed(
-                                            thisPtr.instanceId,
-                                            thisPtr.updatedIdentity.Identity
-                                        )
+                        throw FxTrace.Exception.AsError(
+                            new FaultException(
+                                OperationExecutionFault.CreateUpdateFailedFault(
+                                    SR.WorkflowInstanceUpdateFailed(
+                                        thisPtr.instanceId,
+                                        thisPtr.updatedIdentity.Identity
                                     )
                                 )
-                            );
+                            )
+                        );
                     }
                 }
                 catch (Exception exception)
@@ -710,9 +694,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     )
                     {
                         outgoingContextMessageProperty = new ContextMessageProperty();
-                        outgoingContextMessageProperty
-                            .Context
-                            .Add(ContextMessageProperty.InstanceIdKey, Guid.NewGuid().ToString());
+                        outgoingContextMessageProperty.Context.Add(
+                            ContextMessageProperty.InstanceIdKey,
+                            Guid.NewGuid().ToString()
+                        );
                         outgoingContextMessageProperty.AddOrReplaceInMessageProperties(
                             thisPtr.operationContext.OutgoingMessageProperties
                         );
@@ -806,17 +791,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 )
                             )
                             {
-                                throw FxTrace
-                                    .Exception
-                                    .AsError(
-                                        new FaultException(
-                                            OperationExecutionFault.CreateUpdateFailedFault(
-                                                SR.CannotUpdateLoadedInstance(
-                                                    this.workflowServiceInstance.Id
-                                                )
+                                throw FxTrace.Exception.AsError(
+                                    new FaultException(
+                                        OperationExecutionFault.CreateUpdateFailedFault(
+                                            SR.CannotUpdateLoadedInstance(
+                                                this.workflowServiceInstance.Id
                                             )
                                         )
-                                    );
+                                    )
+                                );
                             }
                             if (this.workflowServiceInstance.IsActive)
                             {
@@ -954,13 +937,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                     //User operation
                     try
                     {
-                        thisPtr.returnValue = thisPtr
-                            .invoker
-                            .OnEndServiceOperation(
-                                thisPtr.workflowServiceInstance,
-                                out thisPtr.outputs,
-                                result
-                            );
+                        thisPtr.returnValue = thisPtr.invoker.OnEndServiceOperation(
+                            thisPtr.workflowServiceInstance,
+                            out thisPtr.outputs,
+                            result
+                        );
                     }
                     catch (FaultException)
                     {
@@ -1090,13 +1071,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new InvalidOperationException(
-                                SR.FailedToGetInstanceIdForControlOperation
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.FailedToGetInstanceIdForControlOperation)
+                    );
                 }
             }
 
@@ -1111,13 +1088,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new InvalidOperationException(
-                                SR.FailedToGetWorkflowIdentityForControlOperation
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.FailedToGetWorkflowIdentityForControlOperation
+                        )
+                    );
                 }
             }
 
@@ -1138,9 +1113,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 if (
                     endpointXName != null
                     && exception.SerializableInstanceOwnerMetadata != null
-                    && exception
-                        .SerializableInstanceOwnerMetadata
-                        .TryGetValue(endpointXName, out redirectViaObject)
+                    && exception.SerializableInstanceOwnerMetadata.TryGetValue(
+                        endpointXName,
+                        out redirectViaObject
+                    )
                 )
                 {
                     redirectVia = redirectViaObject as Uri;
@@ -1248,14 +1224,12 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 bool Run()
                 {
-                    IAsyncResult result = this.control
-                        .workflowServiceInstance
-                        .BeginRun(
-                            this.control.transaction,
-                            this.timeoutHelper.RemainingTime(),
-                            PrepareAsyncCompletion(handleEndRun),
-                            this
-                        );
+                    IAsyncResult result = this.control.workflowServiceInstance.BeginRun(
+                        this.control.transaction,
+                        this.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(handleEndRun),
+                        this
+                    );
                     return SyncContinue(result);
                 }
 
@@ -1269,16 +1243,14 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 bool Suspend()
                 {
-                    IAsyncResult result = this.control
-                        .workflowServiceInstance
-                        .BeginSuspend(
-                            false,
-                            SR.DefaultCreateOnlyReason,
-                            this.control.transaction,
-                            this.timeoutHelper.RemainingTime(),
-                            PrepareAsyncCompletion(handleEndSuspend),
-                            this
-                        );
+                    IAsyncResult result = this.control.workflowServiceInstance.BeginSuspend(
+                        false,
+                        SR.DefaultCreateOnlyReason,
+                        this.control.transaction,
+                        this.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(handleEndSuspend),
+                        this
+                    );
                     return SyncContinue(result);
                 }
 
@@ -1292,10 +1264,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 bool GetResponse()
                 {
-                    IAsyncResult result = this.control
-                        .getInstanceContext
-                        .WorkflowHostingResponseContext
-                        .BeginGetResponse(
+                    IAsyncResult result =
+                        this.control.getInstanceContext.WorkflowHostingResponseContext.BeginGetResponse(
                             this.timeoutHelper.RemainingTime(),
                             PrepareAsyncCompletion(handleEndGetResponse),
                             this
@@ -1307,11 +1277,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     RunAndGetResponseAsyncResult thisPtr = (RunAndGetResponseAsyncResult)
                         result.AsyncState;
-                    thisPtr.returnValue = thisPtr
-                        .control
-                        .getInstanceContext
-                        .WorkflowHostingResponseContext
-                        .EndGetResponse(result, out thisPtr.outputs);
+                    thisPtr.returnValue =
+                        thisPtr.control.getInstanceContext.WorkflowHostingResponseContext.EndGetResponse(
+                            result,
+                            out thisPtr.outputs
+                        );
                     return true;
                 }
             }
@@ -1449,9 +1419,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     using (new OperationContextScopeHelper(thisPtr.operationContext))
                     {
-                        thisPtr.returnValue = thisPtr
-                            .innerInvoker
-                            .InvokeEnd(thisPtr.durableInstance, out thisPtr.outputs, result);
+                        thisPtr.returnValue = thisPtr.innerInvoker.InvokeEnd(
+                            thisPtr.durableInstance,
+                            out thisPtr.outputs,
+                            result
+                        );
                         return true;
                     }
                 }

@@ -242,25 +242,23 @@ namespace Microsoft.CodeAnalysis.Telemetry
                 //
                 // numeric data will show up in ES with measurement prefix.
 
-                telemetryEvent
-                    .Properties
-                    .Add(
-                        GetPropertyName(functionId, name),
-                        value switch
-                        {
-                            PiiValue pii => new TelemetryPiiProperty(pii.Value),
-                            IEnumerable<object> items
-                                => new TelemetryComplexProperty(
-                                    items.Select(
-                                        item =>
-                                            (item is PiiValue pii)
-                                                ? new TelemetryPiiProperty(pii.Value)
-                                                : item
-                                    )
-                                ),
-                            _ => value
-                        }
-                    );
+                telemetryEvent.Properties.Add(
+                    GetPropertyName(functionId, name),
+                    value switch
+                    {
+                        PiiValue pii => new TelemetryPiiProperty(pii.Value),
+                        IEnumerable<object> items
+                            => new TelemetryComplexProperty(
+                                items.Select(
+                                    item =>
+                                        (item is PiiValue pii)
+                                            ? new TelemetryPiiProperty(pii.Value)
+                                            : item
+                                )
+                            ),
+                        _ => value
+                    }
+                );
             }
         }
     }

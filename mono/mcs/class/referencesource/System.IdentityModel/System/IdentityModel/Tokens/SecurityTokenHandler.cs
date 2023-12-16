@@ -118,13 +118,11 @@ namespace System.IdentityModel.Tokens
         /// <returns>SecurityToken instance.</returns>
         public virtual SecurityToken ReadToken(XmlReader reader)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID4008, "SecurityTokenHandler", "ReadToken")
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "ReadToken")
+                )
+            );
         }
 
         /// <summary>
@@ -151,13 +149,11 @@ namespace System.IdentityModel.Tokens
         /// <returns>SecurityToken instance which represents the serialized token.</returns>
         public virtual SecurityToken ReadToken(string tokenString)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID4008, "SecurityTokenHandler", "ReadToken")
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "ReadToken")
+                )
+            );
         }
 
         /// <summary>
@@ -167,13 +163,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="token">A token of type TokenType.</param>
         public virtual void WriteToken(XmlWriter writer, SecurityToken token)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID4008, "SecurityTokenHandler", "WriteToken")
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "WriteToken")
+                )
+            );
         }
 
         /// <summary>
@@ -183,13 +177,11 @@ namespace System.IdentityModel.Tokens
         /// <returns>The serialized token.</returns>
         public virtual string WriteToken(SecurityToken token)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID4008, "SecurityTokenHandler", "WriteToken")
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "WriteToken")
+                )
+            );
         }
 
         /// <summary>
@@ -212,13 +204,11 @@ namespace System.IdentityModel.Tokens
         /// <returns>SecurityKeyIdentifierClause instance.</returns>
         public virtual SecurityKeyIdentifierClause ReadKeyIdentifierClause(XmlReader reader)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID4008, "SecurityTokenHandler", "ReadKeyIdentifierClause")
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "ReadKeyIdentifierClause")
+                )
+            );
         }
 
         /// <summary>
@@ -244,13 +234,11 @@ namespace System.IdentityModel.Tokens
             SecurityKeyIdentifierClause securityKeyIdentifierClause
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID4008, "SecurityTokenHandler", "WriteKeyIdentifierClause")
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "WriteKeyIdentifierClause")
+                )
+            );
         }
 
         /// <summary>
@@ -262,13 +250,11 @@ namespace System.IdentityModel.Tokens
         /// <returns>A SecurityToken that matches the properties of the token descriptor.</returns>
         public virtual SecurityToken CreateToken(SecurityTokenDescriptor tokenDescriptor)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID4008, "SecurityTokenHandler", "CreateToken")
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "CreateToken")
+                )
+            );
         }
 
         /// <summary>
@@ -284,17 +270,11 @@ namespace System.IdentityModel.Tokens
             bool attached
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(
-                            SR.ID4008,
-                            "SecurityTokenHandler",
-                            "CreateSecurityTokenReference"
-                        )
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "CreateSecurityTokenReference")
+                )
+            );
         }
 
         /// <summary>
@@ -317,13 +297,11 @@ namespace System.IdentityModel.Tokens
         /// <remarks>Derived types will validate specific tokens.</remarks>
         public virtual ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID4008, "SecurityTokenHandler", "ValidateToken")
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID4008, "SecurityTokenHandler", "ValidateToken")
+                )
+            );
         }
 
         /// <summary>
@@ -339,13 +317,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
+                )
+            );
         }
 
         protected void TraceTokenValidationSuccess(SecurityToken token)

@@ -92,22 +92,18 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
         public Task WaitForStartAsync(CancellationToken cancellationToken)
         {
             cancellationToken.Register(() => _delayStart.TrySetCanceled());
-            ApplicationLifetime
-                .ApplicationStarted
-                .Register(() =>
-                {
-                    Logger.LogInformation(
-                        "Application started. Hosting environment: {EnvName}; Content root path: {ContentRoot}",
-                        Environment.EnvironmentName,
-                        Environment.ContentRootPath
-                    );
-                });
-            ApplicationLifetime
-                .ApplicationStopping
-                .Register(() =>
-                {
-                    Logger.LogInformation("Application is shutting down...");
-                });
+            ApplicationLifetime.ApplicationStarted.Register(() =>
+            {
+                Logger.LogInformation(
+                    "Application started. Hosting environment: {EnvName}; Content root path: {ContentRoot}",
+                    Environment.EnvironmentName,
+                    Environment.ContentRootPath
+                );
+            });
+            ApplicationLifetime.ApplicationStopping.Register(() =>
+            {
+                Logger.LogInformation("Application is shutting down...");
+            });
             ApplicationLifetime.ApplicationStopped.Register(_delayStop.Set);
 
             Thread thread = new Thread(Run);

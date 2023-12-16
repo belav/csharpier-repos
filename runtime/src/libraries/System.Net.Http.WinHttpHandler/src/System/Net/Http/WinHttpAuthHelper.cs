@@ -90,14 +90,12 @@ namespace System.Net.Http
                     // We pass the schemes to ChooseAuthScheme which will pick the scheme
                     // based on most secure scheme to least secure scheme ordering.
                     if (
-                        !Interop
-                            .WinHttp
-                            .WinHttpQueryAuthSchemes(
-                                state.RequestHandle,
-                                out supportedSchemes,
-                                out _,
-                                out authTarget
-                            )
+                        !Interop.WinHttp.WinHttpQueryAuthSchemes(
+                            state.RequestHandle,
+                            out supportedSchemes,
+                            out _,
+                            out authTarget
+                        )
                     )
                     {
                         // WinHTTP returns an error for schemes it doesn't handle.
@@ -156,14 +154,12 @@ namespace System.Net.Http
                     // We pass the schemes to ChooseAuthScheme which will pick the scheme
                     // based on most secure scheme to least secure scheme ordering.
                     if (
-                        !Interop
-                            .WinHttp
-                            .WinHttpQueryAuthSchemes(
-                                state.RequestHandle,
-                                out supportedSchemes,
-                                out _,
-                                out authTarget
-                            )
+                        !Interop.WinHttp.WinHttpQueryAuthSchemes(
+                            state.RequestHandle,
+                            out supportedSchemes,
+                            out _,
+                            out authTarget
+                        )
                     )
                     {
                         // WinHTTP returns an error for schemes it doesn't handle.
@@ -347,13 +343,11 @@ namespace System.Net.Http
                 : Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_HIGH;
 
             if (
-                !Interop
-                    .WinHttp
-                    .WinHttpSetOption(
-                        requestHandle,
-                        Interop.WinHttp.WINHTTP_OPTION_AUTOLOGON_POLICY,
-                        ref optionData
-                    )
+                !Interop.WinHttp.WinHttpSetOption(
+                    requestHandle,
+                    Interop.WinHttp.WINHTTP_OPTION_AUTOLOGON_POLICY,
+                    ref optionData
+                )
             )
             {
                 WinHttpException.ThrowExceptionUsingLastError(
@@ -431,16 +425,14 @@ namespace System.Net.Http
             }
 
             if (
-                !Interop
-                    .WinHttp
-                    .WinHttpSetCredentials(
-                        requestHandle,
-                        authTarget,
-                        authScheme,
-                        userName,
-                        password,
-                        IntPtr.Zero
-                    )
+                !Interop.WinHttp.WinHttpSetCredentials(
+                    requestHandle,
+                    authTarget,
+                    authScheme,
+                    userName,
+                    password,
+                    IntPtr.Zero
+                )
             )
             {
                 WinHttpException.ThrowExceptionUsingLastError(

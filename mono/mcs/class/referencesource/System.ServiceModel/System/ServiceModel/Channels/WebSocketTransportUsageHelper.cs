@@ -19,15 +19,13 @@ namespace System.ServiceModel.Channels
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidEnumArgumentException(
-                            "value",
-                            (int)value,
-                            typeof(WebSocketTransportUsage)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(WebSocketTransportUsage)
+                    )
+                );
             }
         }
     }

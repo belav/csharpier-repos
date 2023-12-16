@@ -687,9 +687,10 @@ namespace System.Runtime.Caching
                     // note that HttpExceptions are ExternalExceptions
                     errorCode =
                         "_hr=0x"
-                        + ((ExternalException)e)
-                            .ErrorCode
-                            .ToString("x", CultureInfo.InvariantCulture);
+                        + ((ExternalException)e).ErrorCode.ToString(
+                            "x",
+                            CultureInfo.InvariantCulture
+                        );
                 }
 
                 // Use e.ToString() in order to get inner exception

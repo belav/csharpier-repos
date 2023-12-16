@@ -109,9 +109,8 @@ namespace System.ServiceModel.Channels
 
             if (httpResponseMessage.RequestMessage != null)
             {
-                bufferedHttpResponseMessage.RequestMessage = httpResponseMessage
-                    .RequestMessage
-                    .CreateBufferedCopy();
+                bufferedHttpResponseMessage.RequestMessage =
+                    httpResponseMessage.RequestMessage.CreateBufferedCopy();
             }
 
             foreach (
@@ -155,16 +154,11 @@ namespace System.ServiceModel.Channels
                 && headerInfo.IsResponseHeader
             )
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.RequestHeaderWithResponseHeadersCollection,
-                                headerInfo.Name
-                            )
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.RequestHeaderWithResponseHeadersCollection, headerInfo.Name)
+                    )
+                );
             }
         }
 

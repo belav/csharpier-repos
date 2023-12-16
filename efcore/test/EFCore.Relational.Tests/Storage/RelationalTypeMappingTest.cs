@@ -689,12 +689,10 @@ public abstract class RelationalTypeMappingTest
         Assert.Equal(
             typeof(short),
             context
-                .Model
-                .FindEntityType(typeof(Banana))
+                .Model.FindEntityType(typeof(Banana))
                 .FindProperty("Id")
                 .GetTypeMapping()
-                .Converter
-                .ProviderClrType
+                .Converter.ProviderClrType
         );
         Assert.Null(
             context.Model.FindEntityType(typeof(Kiwi)).FindProperty("Id").GetTypeMapping().Converter

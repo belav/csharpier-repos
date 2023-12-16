@@ -280,8 +280,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 get
                 {
-                    return this.MemberGroup
-                        .WhereAsArray(s => s.Kind == SymbolKind.Method)
+                    return this.MemberGroup.WhereAsArray(s => s.Kind == SymbolKind.Method)
                         .SelectAsArray(s => (IMethodSymbol)s);
                 }
             }
@@ -577,8 +576,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 .GroupBy(
                     annotation =>
                         annotation
-                            .Expression
-                            .Ancestors()
+                            .Expression.Ancestors()
                             .OfType<BaseMethodDeclarationSyntax>()
                             .First()
                 )
@@ -606,9 +604,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                                 annotation.IsConverted
                                     ? typeInfo.ConvertedNullability
                                     : typeInfo.Nullability
-                            )
-                                .FlowState
-                                .ToInternalFlowState()
+                            ).FlowState.ToInternalFlowState()
                         )
                         .ToTypeWithAnnotations(compilation);
                     return type.ToDisplayString(TypeWithAnnotations.TestDisplayFormat);

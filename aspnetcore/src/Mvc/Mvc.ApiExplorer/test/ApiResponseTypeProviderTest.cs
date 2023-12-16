@@ -665,14 +665,9 @@ public class ApiResponseTypeProviderTest
             typeof(TestController),
             nameof(TestController.PutModel)
         );
-        actionDescriptor
-            .FilterDescriptors
-            .Add(
-                new FilterDescriptor(
-                    new ProducesAttribute("application/json"),
-                    FilterScope.Controller
-                )
-            );
+        actionDescriptor.FilterDescriptors.Add(
+            new FilterDescriptor(new ProducesAttribute("application/json"), FilterScope.Controller)
+        );
         actionDescriptor.Properties[typeof(ApiConventionResult)] = new ApiConventionResult(
             new IApiResponseMetadataProvider[]
             {
@@ -732,14 +727,12 @@ public class ApiResponseTypeProviderTest
             typeof(TestController),
             nameof(TestController.PutModel)
         );
-        actionDescriptor
-            .FilterDescriptors
-            .Add(
-                new FilterDescriptor(
-                    new ProducesAttribute("application/json") { Type = typeof(string) },
-                    FilterScope.Controller
-                )
-            );
+        actionDescriptor.FilterDescriptors.Add(
+            new FilterDescriptor(
+                new ProducesAttribute("application/json") { Type = typeof(string) },
+                FilterScope.Controller
+            )
+        );
         actionDescriptor.Properties[typeof(ApiConventionResult)] = new ApiConventionResult(
             new IApiResponseMetadataProvider[]
             {
@@ -815,11 +808,9 @@ public class ApiResponseTypeProviderTest
             typeof(TestController),
             nameof(TestController.GetUser)
         );
-        actionDescriptor
-            .FilterDescriptors
-            .Add(
-                new FilterDescriptor(new ProducesAttribute("application/pdf"), FilterScope.Action)
-            );
+        actionDescriptor.FilterDescriptors.Add(
+            new FilterDescriptor(new ProducesAttribute("application/pdf"), FilterScope.Action)
+        );
 
         var provider = GetProvider();
 
@@ -854,41 +845,35 @@ public class ApiResponseTypeProviderTest
             typeof(TestController),
             nameof(TestController.GetUser)
         );
-        actionDescriptor
-            .FilterDescriptors
-            .Add(
-                new FilterDescriptor(
-                    new ProducesAttribute("text/xml") { Type = typeof(BaseModel) },
-                    FilterScope.Action
-                )
-            );
-        actionDescriptor
-            .FilterDescriptors
-            .Add(
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(
-                        typeof(ValidationProblemDetails),
-                        400,
-                        "application/problem+json"
-                    ),
-                    FilterScope.Action
-                )
-            );
-        actionDescriptor
-            .FilterDescriptors
-            .Add(
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(
-                        typeof(ProblemDetails),
-                        404,
-                        "application/problem+json"
-                    ),
-                    FilterScope.Action
-                )
-            );
-        actionDescriptor
-            .FilterDescriptors
-            .Add(new FilterDescriptor(new ProducesResponseTypeAttribute(409), FilterScope.Action));
+        actionDescriptor.FilterDescriptors.Add(
+            new FilterDescriptor(
+                new ProducesAttribute("text/xml") { Type = typeof(BaseModel) },
+                FilterScope.Action
+            )
+        );
+        actionDescriptor.FilterDescriptors.Add(
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(
+                    typeof(ValidationProblemDetails),
+                    400,
+                    "application/problem+json"
+                ),
+                FilterScope.Action
+            )
+        );
+        actionDescriptor.FilterDescriptors.Add(
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(
+                    typeof(ProblemDetails),
+                    404,
+                    "application/problem+json"
+                ),
+                FilterScope.Action
+            )
+        );
+        actionDescriptor.FilterDescriptors.Add(
+            new FilterDescriptor(new ProducesResponseTypeAttribute(409), FilterScope.Action)
+        );
 
         var provider = new ApiResponseTypeProvider(
             new EmptyModelMetadataProvider(),
@@ -970,8 +955,7 @@ public class ApiResponseTypeProviderTest
     private static IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
         return apiResponseType
-            .ApiResponseFormats
-            .OrderBy(format => format.MediaType)
+            .ApiResponseFormats.OrderBy(format => format.MediaType)
             .Select(format => format.MediaType);
     }
 
@@ -986,9 +970,9 @@ public class ApiResponseTypeProviderTest
 
         foreach (var filterAttribute in method.GetCustomAttributes().OfType<IFilterMetadata>())
         {
-            actionDescriptor
-                .FilterDescriptors
-                .Add(new FilterDescriptor(filterAttribute, FilterScope.Action));
+            actionDescriptor.FilterDescriptors.Add(
+                new FilterDescriptor(filterAttribute, FilterScope.Action)
+            );
         }
 
         return actionDescriptor;

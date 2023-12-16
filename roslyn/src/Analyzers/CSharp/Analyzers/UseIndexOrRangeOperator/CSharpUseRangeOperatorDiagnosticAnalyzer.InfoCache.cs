@@ -119,8 +119,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     // has an int32 'Length' or 'Count' property, and has a suitable indexer,
                     // so we don't have to.
                     var overloadWithTwoArguments = method
-                        .ContainingType
-                        .GetMembers(method.Name)
+                        .ContainingType.GetMembers(method.Name)
                         .OfType<IMethodSymbol>()
                         .FirstOrDefault(s => IsTwoArgumentSliceLikeMethod(s));
                     if (overloadWithTwoArguments is null)
@@ -181,8 +180,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     // Also, look to see if the type has a `.Slice(int start, int length)` method.
                     // This is also a method the compiler knows to look for when a user writes `x[a..b]`
                     var actualSliceMethod = sliceLikeMethod
-                        .ContainingType
-                        .GetMembers(nameof(Span<int>.Slice))
+                        .ContainingType.GetMembers(nameof(Span<int>.Slice))
                         .OfType<IMethodSymbol>()
                         .FirstOrDefault(s => IsTwoArgumentSliceLikeMethod(s));
                     if (actualSliceMethod != null)

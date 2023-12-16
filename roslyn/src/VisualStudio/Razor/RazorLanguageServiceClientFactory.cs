@@ -40,8 +40,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 if (!x64)
                 {
                     x64 = workspace
-                        .Services
-                        .GetService<IExperimentationService>()
+                        .Services.GetService<IExperimentationService>()
                         .IsExperimentEnabled(WellKnownExperimentNames.RoslynOOP64bit);
                 }
 

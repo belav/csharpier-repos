@@ -92,31 +92,25 @@ namespace System.ServiceModel.Activities
                 || this.definitionCollection.ContainsKey(identityKey)
             )
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DuplicateDefinitionIdentity(
-                                identityKey.Identity == null
-                                    ? "null"
-                                    : identityKey.Identity.ToString()
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DuplicateDefinitionIdentity(
+                            identityKey.Identity == null ? "null" : identityKey.Identity.ToString()
                         )
-                    );
+                    )
+                );
             }
 
             if (workflowService.Name != this.defaultWorkflowService.Name)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DifferentWorkflowServiceNameNotSupported(
-                                workflowService.Name,
-                                this.defaultWorkflowService.Name
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DifferentWorkflowServiceNameNotSupported(
+                            workflowService.Name,
+                            this.defaultWorkflowService.Name
                         )
-                    );
+                    )
+                );
             }
 
             this.ThrowIfNotConfigurable();
@@ -155,13 +149,11 @@ namespace System.ServiceModel.Activities
         {
             if (!this.wfsh.IsConfigurable)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.WorkflowServiceHostCannotAddOrRemoveServiceDefinitionAfterOpen
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.WorkflowServiceHostCannotAddOrRemoveServiceDefinitionAfterOpen
+                    )
+                );
             }
         }
 
@@ -254,10 +246,10 @@ namespace System.ServiceModel.Activities
 
             public void CopyTo(WorkflowService[] array, int arrayIndex)
             {
-                this.workflowDefinitionProvider
-                    .definitionCollection
-                    .Values
-                    .CopyTo(array, arrayIndex);
+                this.workflowDefinitionProvider.definitionCollection.Values.CopyTo(
+                    array,
+                    arrayIndex
+                );
             }
 
             public int Count

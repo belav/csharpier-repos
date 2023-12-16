@@ -21,10 +21,9 @@ public class SkipStatusCodePagesAttributeTest
             new IFilterMetadata[] { skipStatusCodeAttribute }
         );
         var statusCodePagesFeature = new TestStatusCodeFeature();
-        resourceExecutingContext
-            .HttpContext
-            .Features
-            .Set<IStatusCodePagesFeature>(statusCodePagesFeature);
+        resourceExecutingContext.HttpContext.Features.Set<IStatusCodePagesFeature>(
+            statusCodePagesFeature
+        );
 
         // Act
         skipStatusCodeAttribute.OnResourceExecuting(resourceExecutingContext);

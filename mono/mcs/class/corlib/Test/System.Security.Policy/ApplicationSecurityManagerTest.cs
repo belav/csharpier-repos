@@ -45,8 +45,7 @@ namespace MonoTests.System.Security.Policy
         public void FixtureSetUp()
         {
             defaultTrustManagerTypeName = ApplicationSecurityManager
-                .ApplicationTrustManager
-                .GetType()
+                .ApplicationTrustManager.GetType()
                 .AssemblyQualifiedName;
         }
 
@@ -88,18 +87,20 @@ namespace MonoTests.System.Security.Policy
         [ExpectedException(typeof(ArgumentNullException))]
         public void DefaultTrustManager_DetermineApplicationTrust_Null_Null()
         {
-            ApplicationSecurityManager
-                .ApplicationTrustManager
-                .DetermineApplicationTrust(null, null);
+            ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust(
+                null,
+                null
+            );
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void DefaultTrustManager_DetermineApplicationTrust_Null_TrustManagerContext()
         {
-            ApplicationSecurityManager
-                .ApplicationTrustManager
-                .DetermineApplicationTrust(null, new TrustManagerContext());
+            ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust(
+                null,
+                new TrustManagerContext()
+            );
         }
 
         [Test]

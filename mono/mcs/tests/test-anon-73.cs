@@ -22,15 +22,11 @@ class T
 
     static void Test_1()
     {
-        System
-            .Threading
-            .ThreadPool
-            .QueueUserWorkItem(
-                delegate(object o)
-                {
-                    using (System.Threading.Timer t = new System.Threading.Timer(null, null, 1, 1))
-                    { }
-                }
-            );
+        System.Threading.ThreadPool.QueueUserWorkItem(
+            delegate(object o)
+            {
+                using (System.Threading.Timer t = new System.Threading.Timer(null, null, 1, 1)) { }
+            }
+        );
     }
 }

@@ -25,9 +25,9 @@ namespace System.CommandLine.Tests
             _fruitOption.CompletionSources.Add("apple", "banana", "cherry");
 
             _vegetableOption = new CliOption<string>("--vegetable");
-            _vegetableOption
-                .CompletionSources
-                .Add(_ => new[] { "asparagus", "broccoli", "carrot" });
+            _vegetableOption.CompletionSources.Add(
+                _ => new[] { "asparagus", "broccoli", "carrot" }
+            );
 
             _eatCommand = new CliCommand("eat") { _fruitOption, _vegetableOption };
         }
@@ -95,8 +95,7 @@ namespace System.CommandLine.Tests
             await result.InvokeAsync();
 
             config
-                .Output
-                .ToString()
+                .Output.ToString()
                 .Should()
                 .Be(
                     $"--fruit{NewLine}--help{NewLine}--vegetable{NewLine}--version{NewLine}-?{NewLine}-h{NewLine}/?{NewLine}/h{NewLine}"
@@ -113,8 +112,7 @@ namespace System.CommandLine.Tests
             await result.InvokeAsync();
 
             config
-                .Output
-                .ToString()
+                .Output.ToString()
                 .Should()
                 .Be(
                     $"--help{NewLine}--version{NewLine}-?{NewLine}-h{NewLine}/?{NewLine}/h{NewLine}eat{NewLine}"

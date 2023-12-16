@@ -73,8 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             {
                 var languageName = Workspace.Projects.First().Language;
                 var contentType = Workspace
-                    .Services
-                    .GetLanguageServices(languageName)
+                    .Services.GetLanguageServices(languageName)
                     .GetRequiredService<IContentTypeLanguageService>()
                     .GetDefaultContentType();
                 _createdTextView = EditorFactory.CreateView(
@@ -87,23 +86,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             }
             else
             {
-                var cursorDocument = Workspace
-                    .Documents
-                    .First(d => d.CursorPosition.HasValue || d.SelectedSpans.Any(ss => ss.IsEmpty));
+                var cursorDocument = Workspace.Documents.First(
+                    d => d.CursorPosition.HasValue || d.SelectedSpans.Any(ss => ss.IsEmpty)
+                );
                 _textView = cursorDocument.GetTextView();
                 _subjectBuffer = cursorDocument.GetTextBuffer();
 
                 var cursorPosition =
                     cursorDocument.CursorPosition
                     ?? cursorDocument.SelectedSpans.First(ss => ss.IsEmpty).Start;
-                _textView
-                    .Caret
-                    .MoveTo(new SnapshotPoint(_subjectBuffer.CurrentSnapshot, cursorPosition));
+                _textView.Caret.MoveTo(
+                    new SnapshotPoint(_subjectBuffer.CurrentSnapshot, cursorPosition)
+                );
 
                 if (
-                    cursorDocument
-                        .AnnotatedSpans
-                        .TryGetValue("Selection", out var selectionSpanList)
+                    cursorDocument.AnnotatedSpans.TryGetValue(
+                        "Selection",
+                        out var selectionSpanList
+                    )
                 )
                 {
                     var firstSpan = selectionSpanList.First();
@@ -153,12 +153,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                         isReversed = cursorPosition == firstSpan.End;
                     }
 
-                    _textView
-                        .Selection
-                        .Select(
-                            new SnapshotSpan(boxSelectionStart, boxSelectionEnd),
-                            isReversed: isReversed
-                        );
+                    _textView.Selection.Select(
+                        new SnapshotSpan(boxSelectionStart, boxSelectionEnd),
+                        isReversed: isReversed
+                    );
                 }
             }
 
@@ -166,10 +164,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 .GetEditorOperations(_textView);
             this.UndoHistoryRegistry = GetService<ITextUndoHistoryRegistry>();
 
-            _textView
-                .Options
-                .GlobalOptions
-                .SetOptionValue(DefaultOptions.IndentStyleId, IndentingStyle.Smart);
+            _textView.Options.GlobalOptions.SetOptionValue(
+                DefaultOptions.IndentStyleId,
+                IndentingStyle.Smart
+            );
         }
 
         public void Dispose()
@@ -278,9 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         /// </summary>
         public void AssertNoAsynchronousOperationsRunning()
         {
-            var provider = Workspace
-                .ExportProvider
-                .GetExportedValue<AsynchronousOperationListenerProvider>();
+            var provider =
+                Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
             Assert.False(
                 provider.HasPendingWaiter(
                     FeatureAttribute.EventHookup,
@@ -294,9 +291,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         // This one is not used by the completion but used by SignatureHelp.
         public async Task WaitForAsynchronousOperationsAsync()
         {
-            var provider = Workspace
-                .ExportProvider
-                .GetExportedValue<AsynchronousOperationListenerProvider>();
+            var provider =
+                Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
             await provider.WaitAllDispatcherOperationAndTasksAsync(
                 Workspace,
                 FeatureAttribute.EventHookup,

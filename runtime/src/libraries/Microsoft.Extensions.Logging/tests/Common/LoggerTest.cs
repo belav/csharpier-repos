@@ -240,9 +240,9 @@ namespace Microsoft.Extensions.Logging.Test
             var factory = TestLoggerBuilder.Create(builder =>
             {
                 builder.AddProvider(provider.Object);
-                builder
-                    .Services
-                    .Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
+                builder.Services.Configure<LoggerFilterOptions>(
+                    options => options.CaptureScopes = false
+                );
             });
 
             var newLogger = factory.CreateLogger("Logger");
@@ -278,9 +278,9 @@ namespace Microsoft.Extensions.Logging.Test
             var factory = TestLoggerBuilder.Create(builder =>
             {
                 builder.AddProvider(provider.Object);
-                builder
-                    .Services
-                    .Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
+                builder.Services.Configure<LoggerFilterOptions>(
+                    options => options.CaptureScopes = false
+                );
             });
 
             var newLogger = factory.CreateLogger("Logger");

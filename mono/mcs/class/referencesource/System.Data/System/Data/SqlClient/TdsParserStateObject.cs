@@ -42,10 +42,9 @@ namespace System.Data.SqlClient
         private const long CheckConnectionWindow = 50000;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
-            .Interlocked
-            .Increment(ref _objectTypeCount);
+        internal readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref _objectTypeCount
+        );
 
         internal int ObjectID
         {
@@ -681,14 +680,11 @@ namespace System.Data.SqlClient
                                 {
                                     try
                                     {
-                                        _parser
-                                            .Connection
-                                            ._parserLock
-                                            .Wait(
-                                                canReleaseFromAnyThread: false,
-                                                timeout: _waitForCancellationLockPollTimeout,
-                                                lockTaken: ref hasParserLock
-                                            );
+                                        _parser.Connection._parserLock.Wait(
+                                            canReleaseFromAnyThread: false,
+                                            timeout: _waitForCancellationLockPollTimeout,
+                                            lockTaken: ref hasParserLock
+                                        );
                                         if (hasParserLock)
                                         {
                                             _parser.Connection.ThreadHasParserLockForClose = true;

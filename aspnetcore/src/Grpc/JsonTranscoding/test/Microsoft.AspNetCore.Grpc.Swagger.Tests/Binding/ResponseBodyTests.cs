@@ -65,8 +65,7 @@ public class ResponseBodyTests
         Assert.Equal(5, enumSchema.Enum.Count);
 
         var enumValues = enumSchema
-            .Enum
-            .Select(e => ((OpenApiString)e).Value)
+            .Enum.Select(e => ((OpenApiString)e).Value)
             .OrderBy(s => s)
             .ToList();
         Assert.Collection(

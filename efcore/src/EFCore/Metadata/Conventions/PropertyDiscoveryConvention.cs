@@ -110,8 +110,7 @@ public class PropertyDiscoveryConvention
         structuralType is IConventionComplexType
             ? structuralType
                 .GetRuntimeProperties()
-                .Values
-                .Cast<MemberInfo>()
+                .Values.Cast<MemberInfo>()
                 .Concat(structuralType.GetRuntimeFields().Values)
             : structuralType.GetRuntimeProperties().Values.Cast<MemberInfo>();
 
@@ -126,14 +125,12 @@ public class PropertyDiscoveryConvention
         IConventionTypeBase structuralType,
         out CoreTypeMapping? mapping
     ) =>
-        Dependencies
-            .MemberClassifier
-            .IsCandidatePrimitiveProperty(
-                memberInfo,
-                structuralType.Model,
-                UseAttributes,
-                out mapping
-            )
+        Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(
+            memberInfo,
+            structuralType.Model,
+            UseAttributes,
+            out mapping
+        )
         && ((Model)structuralType.Model).FindIsComplexConfigurationSource(
             memberInfo.GetMemberType().UnwrapNullableType()
         ) == null;

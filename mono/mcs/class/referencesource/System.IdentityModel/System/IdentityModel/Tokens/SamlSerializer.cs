@@ -64,11 +64,9 @@ namespace System.IdentityModel.Tokens
                 outOfBandTokenResolver
             );
             if (assertion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAssertion))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAssertion))
+                );
 
             //if (assertion.Signature == null)
             //    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SamlTokenMissingSignature)));
@@ -147,13 +145,11 @@ namespace System.IdentityModel.Tokens
                 return doNotCacheCondition;
             }
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)
+                    )
+                );
         }
 
         public virtual SamlConditions LoadConditions(
@@ -235,13 +231,11 @@ namespace System.IdentityModel.Tokens
                 return authDecisionStatement;
             }
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)
+                    )
+                );
         }
 
         public virtual SamlAttribute LoadAttribute(
@@ -264,25 +258,21 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (tokenSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull(
-                        "tokenSerializer",
-                        SR.GetString(SR.SamlSerializerRequiresExternalSerializers)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tokenSerializer",
+                    SR.GetString(SR.SamlSerializerRequiresExternalSerializers)
+                );
 
             if (tokenSerializer.CanReadKeyIdentifier(reader))
             {
                 return tokenSerializer.ReadKeyIdentifier(reader);
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SamlSerializerUnableToReadSecurityKeyIdentifier)
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.SamlSerializerUnableToReadSecurityKeyIdentifier)
+                )
+            );
         }
 
         internal static void WriteSecurityKeyIdentifier(
@@ -292,12 +282,10 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (tokenSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull(
-                        "tokenSerializer",
-                        SR.GetString(SR.SamlSerializerRequiresExternalSerializers)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tokenSerializer",
+                    SR.GetString(SR.SamlSerializerRequiresExternalSerializers)
+                );
 
             bool keyWritten = false;
             if (tokenSerializer.CanWriteKeyIdentifier(ski))
@@ -307,16 +295,14 @@ namespace System.IdentityModel.Tokens
             }
 
             if (!keyWritten)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SamlSerializerUnableToWriteSecurityKeyIdentifier,
-                                ski.ToString()
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SamlSerializerUnableToWriteSecurityKeyIdentifier,
+                            ski.ToString()
                         )
-                    );
+                    )
+                );
         }
 
         internal static SecurityKey ResolveSecurityKey(

@@ -30,23 +30,15 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("FullyQualifiedName: <Unknown>")
-                .And
-                .HaveStdOutContaining("Name: <Unknown>")
-                .And
-                .HaveStdOutContaining("CodeBase NotSupported")
-                .And
-                .NotHaveStdOutContaining("SingleFileApiTests.deps.json")
-                .And
-                .NotHaveStdOutContaining("Microsoft.NETCore.App.deps.json")
+                .And.HaveStdOutContaining("FullyQualifiedName: <Unknown>")
+                .And.HaveStdOutContaining("Name: <Unknown>")
+                .And.HaveStdOutContaining("CodeBase NotSupported")
+                .And.NotHaveStdOutContaining("SingleFileApiTests.deps.json")
+                .And.NotHaveStdOutContaining("Microsoft.NETCore.App.deps.json")
                 // For single-file, Environment.GetCommandLineArgs[0] should return the file path of the host.
-                .And
-                .HaveStdOutContaining($"Command line args: {singleFile}")
-                .And
-                .HaveStdOutContaining($"ExecutingAssembly.Location: {Environment.NewLine}")
-                .And
-                .HaveStdOutContaining(
+                .And.HaveStdOutContaining($"Command line args: {singleFile}")
+                .And.HaveStdOutContaining($"ExecutingAssembly.Location: {Environment.NewLine}")
+                .And.HaveStdOutContaining(
                     $"AppContext.BaseDirectory: {Path.GetDirectoryName(singleFile)}"
                 );
         }
@@ -73,31 +65,20 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining(
+                .And.HaveStdOutContaining(
                     $"FullyQualifiedName: {Path.Combine(extractionDir, "System.Private.CoreLib.dll")}"
                 )
-                .And
-                .HaveStdOutContaining("Name: System.Private.CoreLib.dll")
-                .And
-                .NotHaveStdOutContaining("CodeBase NotSupported") // CodeBase should point to extraction directory
-                .And
-                .HaveStdOutContaining("SingleFileApiTests.dll")
-                .And
-                .HaveStdOutContaining("SingleFileApiTests.deps.json") // The app's .deps.json should be available
-                .And
-                .NotHaveStdOutContaining("Microsoft.NETCore.App.deps.json") // No framework - it's self-contained
+                .And.HaveStdOutContaining("Name: System.Private.CoreLib.dll")
+                .And.NotHaveStdOutContaining("CodeBase NotSupported") // CodeBase should point to extraction directory
+                .And.HaveStdOutContaining("SingleFileApiTests.dll")
+                .And.HaveStdOutContaining("SingleFileApiTests.deps.json") // The app's .deps.json should be available
+                .And.NotHaveStdOutContaining("Microsoft.NETCore.App.deps.json") // No framework - it's self-contained
                 // For single-file, Environment.GetCommandLineArgs[0] should return the file path of the host.
-                .And
-                .HaveStdOutContaining($"Command line args: {singleFile}")
-                .And
-                .HaveStdOutContaining($"ExecutingAssembly.Location: {extractionDir}") // Should point to the extracted app's dll
-                .And
-                .HaveStdOutContaining($"AppContext.BaseDirectory: {extractionDir}")
-                .And
-                .HaveStdOutContaining(Path.Combine(extractionDir, "System.Runtime.dll")) // TPA should contain extracted framework assembly
-                .And
-                .HaveStdOutContaining("System.Console location: " + extractionDir); // System.Console should be from extracted location
+                .And.HaveStdOutContaining($"Command line args: {singleFile}")
+                .And.HaveStdOutContaining($"ExecutingAssembly.Location: {extractionDir}") // Should point to the extracted app's dll
+                .And.HaveStdOutContaining($"AppContext.BaseDirectory: {extractionDir}")
+                .And.HaveStdOutContaining(Path.Combine(extractionDir, "System.Runtime.dll")) // TPA should contain extracted framework assembly
+                .And.HaveStdOutContaining("System.Console location: " + extractionDir); // System.Console should be from extracted location
         }
 
         [Fact]
@@ -120,10 +101,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining(bundleDir)
-                .And
-                .NotHaveStdOutContaining(extractionRoot);
+                .And.HaveStdOutContaining(bundleDir)
+                .And.NotHaveStdOutContaining(extractionRoot);
         }
 
         [Fact]
@@ -150,10 +129,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining(extractionDir)
-                .And
-                .HaveStdOutContaining(bundleDir);
+                .And.HaveStdOutContaining(extractionDir)
+                .And.HaveStdOutContaining(bundleDir);
         }
 
         public class SharedTestState : IDisposable

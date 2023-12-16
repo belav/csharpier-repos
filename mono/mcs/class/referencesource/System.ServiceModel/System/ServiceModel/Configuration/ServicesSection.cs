@@ -73,32 +73,28 @@ namespace System.ServiceModel.Configuration
                         {
                             if (!string.IsNullOrEmpty(endpoint.EndpointConfiguration))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new ConfigurationErrorsException(
-                                            SR.GetString(
-                                                SR.ConfigInvalidAttribute,
-                                                "endpointConfiguration",
-                                                "endpoint",
-                                                "kind"
-                                            )
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ConfigurationErrorsException(
+                                        SR.GetString(
+                                            SR.ConfigInvalidAttribute,
+                                            "endpointConfiguration",
+                                            "endpoint",
+                                            "kind"
                                         )
-                                    );
+                                    )
+                                );
                             }
                             if (string.IsNullOrEmpty(endpoint.Binding))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new ConfigurationErrorsException(
-                                            SR.GetString(
-                                                SR.RequiredAttributeMissing,
-                                                "binding",
-                                                "endpoint"
-                                            )
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ConfigurationErrorsException(
+                                        SR.GetString(
+                                            SR.RequiredAttributeMissing,
+                                            "binding",
+                                            "endpoint"
                                         )
-                                    );
+                                    )
+                                );
                             }
                         }
                         if (
@@ -106,18 +102,16 @@ namespace System.ServiceModel.Configuration
                             && !string.IsNullOrEmpty(endpoint.BindingConfiguration)
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new ConfigurationErrorsException(
-                                        SR.GetString(
-                                            SR.ConfigInvalidAttribute,
-                                            "bindingConfiguration",
-                                            "endpoint",
-                                            "binding"
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.ConfigInvalidAttribute,
+                                        "bindingConfiguration",
+                                        "endpoint",
+                                        "binding"
                                     )
-                                );
+                                )
+                            );
                         }
                         BehaviorsSection.ValidateEndpointBehaviorReference(
                             endpoint.BehaviorConfiguration,

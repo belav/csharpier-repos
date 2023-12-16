@@ -709,8 +709,7 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                 .Throws<InvalidOperationException>(
                     () => context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
                 )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
     }
@@ -727,8 +726,7 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                 .Throws<InvalidOperationException>(
                     () => context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
                 )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
     }
@@ -754,8 +752,7 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                             .Where(e => e.Roles.Contains(sameRole))
                             .ToList()
                 )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
     }
@@ -856,15 +853,15 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                                     {
                                         d.Id,
                                         d.Name,
-                                        Layouts = d.Layouts
-                                            .Select(l => new { H = l.Height, W = l.Width })
+                                        Layouts = d.Layouts.Select(
+                                            l => new { H = l.Height, W = l.Width }
+                                        )
                                             .ToList()
                                     }
                             )
                             .ToList()
                 )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
     }

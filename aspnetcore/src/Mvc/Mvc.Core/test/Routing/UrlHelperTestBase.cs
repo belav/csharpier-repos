@@ -1002,11 +1002,9 @@ public abstract class UrlHelperTestBase
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper
-            .ActionContext
-            .HttpContext
-            .Features
-            .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });
+        urlHelper.ActionContext.HttpContext.Features.Set<IRouteValuesFeature>(
+            new RouteValuesFeature { RouteValues = routeData.Values }
+        );
 
         // Act
         //
@@ -1052,11 +1050,9 @@ public abstract class UrlHelperTestBase
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper
-            .ActionContext
-            .HttpContext
-            .Features
-            .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });
+        urlHelper.ActionContext.HttpContext.Features.Set<IRouteValuesFeature>(
+            new RouteValuesFeature { RouteValues = routeData.Values }
+        );
 
         // Act
         //
@@ -1103,11 +1099,9 @@ public abstract class UrlHelperTestBase
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper
-            .ActionContext
-            .HttpContext
-            .Features
-            .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });
+        urlHelper.ActionContext.HttpContext.Features.Set<IRouteValuesFeature>(
+            new RouteValuesFeature { RouteValues = routeData.Values }
+        );
 
         // Act
         //

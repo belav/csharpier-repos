@@ -374,8 +374,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 );
                 return method.WithParameterList(
                     method
-                        .ParameterList
-                        .WithParameters(updatedParameters)
+                        .ParameterList.WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -389,8 +388,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 );
                 return typeWithParameters.WithParameterList(
                     typeWithParameters
-                        .ParameterList
-                        .WithParameters(updatedParameters)
+                        .ParameterList.WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -404,8 +402,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 );
                 return localFunction.WithParameterList(
                     localFunction
-                        .ParameterList
-                        .WithParameters(updatedParameters)
+                        .ParameterList.WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -419,8 +416,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 );
                 return constructor.WithParameterList(
                     constructor
-                        .ParameterList
-                        .WithParameters(updatedParameters)
+                        .ParameterList.WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -434,8 +430,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 );
                 return indexer.WithParameterList(
                     indexer
-                        .ParameterList
-                        .WithParameters(updatedParameters)
+                        .ParameterList.WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -449,8 +444,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 );
                 return delegateDeclaration.WithParameterList(
                     delegateDeclaration
-                        .ParameterList
-                        .WithParameters(updatedParameters)
+                        .ParameterList.WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -470,8 +464,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 );
                 return anonymousMethod.WithParameterList(
                     anonymousMethod
-                        .ParameterList
-                        .WithParameters(updatedParameters)
+                        .ParameterList.WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -1100,12 +1093,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             var i = 0;
             foreach (var paramNode in paramNodes)
             {
-                var nameAttribute = paramNode
-                    .StartTag
-                    .Attributes
-                    .FirstOrDefault(
-                        a => a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)
-                    );
+                var nameAttribute = paramNode.StartTag.Attributes.FirstOrDefault(
+                    a => a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)
+                );
                 if (nameAttribute == null)
                 {
                     return ImmutableArray<SyntaxNode>.Empty;

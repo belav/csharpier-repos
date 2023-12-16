@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         ) =>
             expression is ObjectCreationExpressionSyntax objectCreationExpression
             && ForEachInfo
-                .SemanticModel
-                .GetSymbolInfo(objectCreationExpression.Type, cancellationToken)
+                .SemanticModel.GetSymbolInfo(objectCreationExpression.Type, cancellationToken)
                 .Symbol
                 is ITypeSymbol typeSymbol
             && CSharpConvertForEachToLinqQueryProvider.TypeSymbolIsList(

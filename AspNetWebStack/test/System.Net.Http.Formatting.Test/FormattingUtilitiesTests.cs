@@ -178,12 +178,10 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
-                .HasProperties(
-                    typeof(FormattingUtilities),
-                    TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
-                );
+            Assert.Type.HasProperties(
+                typeof(FormattingUtilities),
+                TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
+            );
         }
 
         [Fact]

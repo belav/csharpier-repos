@@ -71,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                     if (value is NamingStyle prevStyle)
                     {
                         var allCurrentStyles = result
-                            .Rules
-                            .Select(x => x.NamingScheme)
+                            .Rules.Select(x => x.NamingScheme)
                             .Distinct()
                             .Select(x => (x, style: x.AsNamingStyle()));
                         var styleParseResult = TryGetStyleParseResult(prevStyle, allCurrentStyles);

@@ -322,14 +322,12 @@ namespace System.Data.Objects.Internal
                                 );
                         }
 
-                        tracking
-                            .ColumnDefinitions
-                            .Add(
-                                new KeyValuePair<string, DbExpression>(
-                                    tracking.ColumnNames.Next(),
-                                    columnDef
-                                )
-                            );
+                        tracking.ColumnDefinitions.Add(
+                            new KeyValuePair<string, DbExpression>(
+                                tracking.ColumnNames.Next(),
+                                columnDef
+                            )
+                        );
 
                         tracking.SpannedColumns[idx] = relSpan.Value;
 
@@ -347,15 +345,13 @@ namespace System.Data.Objects.Internal
             }
 
             // Add the original entity-producing expression as the first (root) span column.
-            tracking
-                .ColumnDefinitions
-                .Insert(
-                    0,
-                    new KeyValuePair<string, DbExpression>(
-                        string.Format(CultureInfo.InvariantCulture, "Span{0}_SpanRoot", thisSpan),
-                        expression
-                    )
-                );
+            tracking.ColumnDefinitions.Insert(
+                0,
+                new KeyValuePair<string, DbExpression>(
+                    string.Format(CultureInfo.InvariantCulture, "Span{0}_SpanRoot", thisSpan),
+                    expression
+                )
+            );
 
             // Create the span row-producing NewInstanceExpression from which the span RowType can be retrieved.
             DbExpression spannedExpression = DbExpressionBuilder.NewRow(tracking.ColumnDefinitions);
@@ -684,9 +680,9 @@ namespace System.Data.Objects.Internal
             {
                 // Consider all Association types...
                 foreach (
-                    AssociationType association in _tree
-                        .MetadataWorkspace
-                        .GetItems<AssociationType>(DataSpace.CSpace)
+                    AssociationType association in _tree.MetadataWorkspace.GetItems<AssociationType>(
+                        DataSpace.CSpace
+                    )
                 )
                 {
                     // ... which have exactly two ends
@@ -987,9 +983,10 @@ namespace System.Data.Objects.Internal
                 {
                     DbVariableReferenceExpression varRef = (DbVariableReferenceExpression)testExpr;
                     if (
-                        varRef
-                            .VariableName
-                            .Equals(expression.Input.VariableName, StringComparison.Ordinal)
+                        varRef.VariableName.Equals(
+                            expression.Input.VariableName,
+                            StringComparison.Ordinal
+                        )
                     )
                     {
                         DbExpression found = Find(expression.Input.Expression);

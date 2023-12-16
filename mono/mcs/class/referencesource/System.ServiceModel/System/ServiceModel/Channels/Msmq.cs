@@ -92,20 +92,18 @@ namespace System.ServiceModel.Channels
                 if (Msmq.Version < longhornVersion)
                 {
                     return new MsmqDefaultLockingQueue(
-                        receiver
-                            .MsmqReceiveParameters
-                            .AddressTranslator
-                            .UriToFormatName(receiver.ListenUri),
+                        receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(
+                            receiver.ListenUri
+                        ),
                         UnsafeNativeMethods.MQ_RECEIVE_ACCESS
                     );
                 }
                 else
                 {
                     return new MsmqSubqueueLockingQueue(
-                        receiver
-                            .MsmqReceiveParameters
-                            .AddressTranslator
-                            .UriToFormatName(receiver.ListenUri),
+                        receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(
+                            receiver.ListenUri
+                        ),
                         receiver.ListenUri.Host,
                         UnsafeNativeMethods.MQ_RECEIVE_ACCESS
                     );
@@ -114,10 +112,9 @@ namespace System.ServiceModel.Channels
             else
             {
                 return new MsmqQueue(
-                    receiver
-                        .MsmqReceiveParameters
-                        .AddressTranslator
-                        .UriToFormatName(receiver.ListenUri),
+                    receiver.MsmqReceiveParameters.AddressTranslator.UriToFormatName(
+                        receiver.ListenUri
+                    ),
                     UnsafeNativeMethods.MQ_RECEIVE_ACCESS
                 );
             }

@@ -30,8 +30,7 @@ public abstract class ExpressionMutator
                     m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
                     && m.GetParameters()[0].ParameterType.GetGenericArguments()[1].IsGenericType
                     && m.GetParameters()[0]
-                        .ParameterType
-                        .GetGenericArguments()[1]
+                        .ParameterType.GetGenericArguments()[1]
                         .GetGenericTypeDefinition() == typeof(IEnumerable<>)
             )
             .Single();

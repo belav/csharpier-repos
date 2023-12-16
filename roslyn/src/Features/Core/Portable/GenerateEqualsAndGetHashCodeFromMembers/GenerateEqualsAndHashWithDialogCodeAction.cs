@@ -51,11 +51,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             {
                 var service =
                     _service._pickMembersService_forTestingPurposes
-                    ?? _document
-                        .Project
-                        .Solution
-                        .Services
-                        .GetRequiredService<IPickMembersService>();
+                    ?? _document.Project.Solution.Services.GetRequiredService<IPickMembersService>();
                 return service.PickMembers(
                     FeaturesResources.Pick_members_to_be_used_in_Equals_GetHashCode,
                     _viableMembers,
@@ -78,12 +74,12 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 // If we presented the user any options, then persist whatever values
                 // the user chose to the global options.  That way we'll keep that as the default for the
                 // next time the user opens the dialog.
-                var implementIEqutableOption = result
-                    .Options
-                    .FirstOrDefault(o => o.Id == ImplementIEquatableId);
-                var generateOperatorsOption = result
-                    .Options
-                    .FirstOrDefault(o => o.Id == GenerateOperatorsId);
+                var implementIEqutableOption = result.Options.FirstOrDefault(
+                    o => o.Id == ImplementIEquatableId
+                );
+                var generateOperatorsOption = result.Options.FirstOrDefault(
+                    o => o.Id == GenerateOperatorsId
+                );
                 if (generateOperatorsOption != null || implementIEqutableOption != null)
                 {
                     if (generateOperatorsOption != null)

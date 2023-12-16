@@ -404,13 +404,11 @@ namespace System.Buffers
                     left,
                     Vector128.Create(15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).AsByte()
                 );
-                return AdvSimd
-                    .Arm64
-                    .VectorTableLookupExtension(
-                        leftShifted,
-                        right,
-                        Vector128.Create(0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
-                    );
+                return AdvSimd.Arm64.VectorTableLookupExtension(
+                    leftShifted,
+                    right,
+                    Vector128.Create(0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
+                );
             }
         }
 
@@ -439,13 +437,11 @@ namespace System.Buffers
                     left,
                     Vector128.Create(14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).AsByte()
                 );
-                return AdvSimd
-                    .Arm64
-                    .VectorTableLookupExtension(
-                        leftShifted,
-                        right,
-                        Vector128.Create(0xFF, 0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
-                    );
+                return AdvSimd.Arm64.VectorTableLookupExtension(
+                    leftShifted,
+                    right,
+                    Vector128.Create(0xFF, 0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+                );
             }
         }
 

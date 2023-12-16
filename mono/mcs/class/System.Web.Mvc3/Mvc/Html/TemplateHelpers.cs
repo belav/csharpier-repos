@@ -96,9 +96,10 @@
                 }
                 else
                 {
-                    ViewEngineResult viewEngineResult = ViewEngines
-                        .Engines
-                        .FindPartialView(html.ViewContext, fullViewName);
+                    ViewEngineResult viewEngineResult = ViewEngines.Engines.FindPartialView(
+                        html.ViewContext,
+                        fullViewName
+                    );
                     if (viewEngineResult.View != null)
                     {
                         actionCache[fullViewName] = new ActionCacheViewItem
@@ -108,18 +109,16 @@
 
                         using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                         {
-                            viewEngineResult
-                                .View
-                                .Render(
-                                    new ViewContext(
-                                        html.ViewContext,
-                                        viewEngineResult.View,
-                                        viewData,
-                                        html.ViewContext.TempData,
-                                        writer
-                                    ),
+                            viewEngineResult.View.Render(
+                                new ViewContext(
+                                    html.ViewContext,
+                                    viewEngineResult.View,
+                                    viewData,
+                                    html.ViewContext.TempData,
                                     writer
-                                );
+                                ),
+                                writer
+                            );
                             return writer.ToString();
                         }
                     }
@@ -390,11 +389,9 @@
             // don't check to make sure that the object hasn't already been displayed
             object visitedObjectsKey = metadata.Model ?? metadata.RealModelType;
             if (
-                html.ViewDataContainer
-                    .ViewData
-                    .TemplateInfo
-                    .VisitedObjects
-                    .Contains(visitedObjectsKey)
+                html.ViewDataContainer.ViewData.TemplateInfo.VisitedObjects.Contains(
+                    visitedObjectsKey
+                )
             )
             { // DDB #224750
                 return String.Empty;
@@ -407,10 +404,9 @@
                 TemplateInfo = new TemplateInfo
                 {
                     FormattedModelValue = formattedModelValue,
-                    HtmlFieldPrefix = html.ViewContext
-                        .ViewData
-                        .TemplateInfo
-                        .GetFullHtmlFieldName(htmlFieldName),
+                    HtmlFieldPrefix = html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                        htmlFieldName
+                    ),
                     VisitedObjects = new HashSet<object>(
                         html.ViewContext.ViewData.TemplateInfo.VisitedObjects
                     ), // DDB #224750
@@ -476,23 +472,22 @@
 
             public override string Execute(HtmlHelper html, ViewDataDictionary viewData)
             {
-                ViewEngineResult viewEngineResult = ViewEngines
-                    .Engines
-                    .FindPartialView(html.ViewContext, ViewName);
+                ViewEngineResult viewEngineResult = ViewEngines.Engines.FindPartialView(
+                    html.ViewContext,
+                    ViewName
+                );
                 using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                 {
-                    viewEngineResult
-                        .View
-                        .Render(
-                            new ViewContext(
-                                html.ViewContext,
-                                viewEngineResult.View,
-                                viewData,
-                                html.ViewContext.TempData,
-                                writer
-                            ),
+                    viewEngineResult.View.Render(
+                        new ViewContext(
+                            html.ViewContext,
+                            viewEngineResult.View,
+                            viewData,
+                            html.ViewContext.TempData,
                             writer
-                        );
+                        ),
+                        writer
+                    );
                     return writer.ToString();
                 }
             }

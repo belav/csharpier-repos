@@ -42,23 +42,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
                 var project = workspace.CurrentSolution.Projects.Single();
                 var document = project.Documents.Single().Id;
 
-                var serviceProvider = workspace
-                    .ExportProvider
-                    .GetExportedValue<MockServiceProvider>();
+                var serviceProvider =
+                    workspace.ExportProvider.GetExportedValue<MockServiceProvider>();
                 var componentModel = new MockComponentModel(workspace.ExportProvider);
                 WrapperPolicy.s_ComWrapperFactory = MockComWrapperFactory.Instance;
 
-                var visualStudioWorkspaceMock = workspace
-                    .ExportProvider
-                    .GetExportedValue<MockVisualStudioWorkspace>();
+                var visualStudioWorkspaceMock =
+                    workspace.ExportProvider.GetExportedValue<MockVisualStudioWorkspace>();
                 visualStudioWorkspaceMock.SetWorkspace(workspace);
 
-                var threadingContext = workspace
-                    .ExportProvider
-                    .GetExportedValue<IThreadingContext>();
-                var listenerProvider = workspace
-                    .ExportProvider
-                    .GetExportedValue<AsynchronousOperationListenerProvider>();
+                var threadingContext =
+                    workspace.ExportProvider.GetExportedValue<IThreadingContext>();
+                var listenerProvider =
+                    workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
 
                 var state = new CodeModelState(
                     threadingContext,

@@ -1236,8 +1236,7 @@ namespace System.Web.Hosting
         {
             return "MapPath_"
                 + virtualPath
-                    .VirtualPathString
-                    .ToLowerInvariant()
+                    .VirtualPathString.ToLowerInvariant()
                     .GetHashCode()
                     .ToString(CultureInfo.InvariantCulture);
         }

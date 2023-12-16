@@ -31,11 +31,12 @@ namespace System.ServiceModel
                 messageVersion.Addressing.Namespace
             );
             string reason = this.Message;
-            return System
-                .ServiceModel
-                .Channels
-                .Message
-                .CreateMessage(messageVersion, code, reason, messageVersion.Addressing.FaultAction);
+            return System.ServiceModel.Channels.Message.CreateMessage(
+                messageVersion,
+                code,
+                reason,
+                messageVersion.Addressing.FaultAction
+            );
         }
     }
 }

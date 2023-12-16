@@ -24,11 +24,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == source)
             {
@@ -118,15 +116,13 @@ namespace System.ServiceModel.Configuration
         {
             if (this.XmlElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigXmlElementMustBeSet),
-                            this.ElementInformation.Source,
-                            this.ElementInformation.LineNumber
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigXmlElementMustBeSet),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
         }
 

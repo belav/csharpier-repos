@@ -90,21 +90,17 @@ namespace Microsoft.CodeAnalysis.Options
             );
             Debug.Assert(
                 LanguageName is LanguageNames.CSharp
-                    == Definition
-                        .ConfigName
-                        .StartsWith(
-                            OptionDefinition.CSharpConfigNamePrefix,
-                            StringComparison.Ordinal
-                        )
+                    == Definition.ConfigName.StartsWith(
+                        OptionDefinition.CSharpConfigNamePrefix,
+                        StringComparison.Ordinal
+                    )
             );
             Debug.Assert(
                 LanguageName is LanguageNames.VisualBasic
-                    == Definition
-                        .ConfigName
-                        .StartsWith(
-                            OptionDefinition.VisualBasicConfigNamePrefix,
-                            StringComparison.Ordinal
-                        )
+                    == Definition.ConfigName.StartsWith(
+                        OptionDefinition.VisualBasicConfigNamePrefix,
+                        StringComparison.Ordinal
+                    )
             );
         }
 

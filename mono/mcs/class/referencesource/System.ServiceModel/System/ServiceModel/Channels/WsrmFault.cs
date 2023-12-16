@@ -719,13 +719,11 @@ namespace System.ServiceModel.Channels
                         || (maxMessageNumber <= 0)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new XmlException(
-                                    SR.GetString(SR.InvalidSequenceNumber, maxMessageNumber)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(SR.InvalidSequenceNumber, maxMessageNumber)
+                            )
+                        );
                     }
                     // otherwise ignore value
 

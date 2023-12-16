@@ -17,9 +17,7 @@ public class FallbackOnTypeBasedMatchController : Controller
     {
         _mvcOptions = mvcOptions;
         _jsonOutputFormatter = mvcOptions
-            .Value
-            .OutputFormatters
-            .OfType<NewtonsoftJsonOutputFormatter>()
+            .Value.OutputFormatters.OfType<NewtonsoftJsonOutputFormatter>()
             .First();
     }
 

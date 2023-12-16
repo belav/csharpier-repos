@@ -124,9 +124,9 @@ namespace System.Runtime.Serialization.Json
             else
                 ReadClass(classContract);
             if (
-                Globals
-                    .TypeOfIDeserializationCallback
-                    .IsAssignableFrom(classContract.UnderlyingType)
+                Globals.TypeOfIDeserializationCallback.IsAssignableFrom(
+                    classContract.UnderlyingType
+                )
             )
                 ((IDeserializationCallback)objectLocal).OnDeserialization(null);
             InvokeOnDeserialized(classContract);
@@ -223,9 +223,10 @@ namespace System.Runtime.Serialization.Json
             if (classContract.BaseContract != null)
                 InvokeOnDeserializing(classContract.BaseContract);
             if (classContract.OnDeserializing != null)
-                classContract
-                    .OnDeserializing
-                    .Invoke(objectLocal, new object[] { context.GetStreamingContext() });
+                classContract.OnDeserializing.Invoke(
+                    objectLocal,
+                    new object[] { context.GetStreamingContext() }
+                );
         }
 
         void InvokeOnDeserialized(ClassDataContract classContract)
@@ -233,9 +234,10 @@ namespace System.Runtime.Serialization.Json
             if (classContract.BaseContract != null)
                 InvokeOnDeserialized(classContract.BaseContract);
             if (classContract.OnDeserialized != null)
-                classContract
-                    .OnDeserialized
-                    .Invoke(objectLocal, new object[] { context.GetStreamingContext() });
+                classContract.OnDeserialized.Invoke(
+                    objectLocal,
+                    new object[] { context.GetStreamingContext() }
+                );
         }
 
         bool HasFactoryMethod(ClassDataContract classContract)
@@ -259,28 +261,21 @@ namespace System.Runtime.Serialization.Json
 
         void ReadISerializable(ClassDataContract classContract)
         {
-            ConstructorInfo ctor = classContract
-                .UnderlyingType
-                .GetConstructor(
-                    Globals.ScanAllMembers,
-                    null,
-                    JsonFormatGeneratorStatics.SerInfoCtorArgs,
-                    null
-                );
+            ConstructorInfo ctor = classContract.UnderlyingType.GetConstructor(
+                Globals.ScanAllMembers,
+                null,
+                JsonFormatGeneratorStatics.SerInfoCtorArgs,
+                null
+            );
             if (ctor == null)
-                throw System
-                    .Runtime
-                    .Serialization
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(
-                                SR.SerializationInfo_ConstructorNotFound,
-                                DataContract.GetClrTypeFullName(classContract.UnderlyingType)
-                            )
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(
+                            SR.SerializationInfo_ConstructorNotFound,
+                            DataContract.GetClrTypeFullName(classContract.UnderlyingType)
                         )
-                    );
+                    )
+                );
             context.ReadSerializationInfo(xmlReader, classContract.UnderlyingType);
             ctor.Invoke(objectLocal, new object[] { context.GetStreamingContext() });
         }
@@ -496,9 +491,10 @@ namespace System.Runtime.Serialization.Json
                         && primitiveContract.UnderlyingType != Globals.TypeOfObject
                     )
                     {
-                        value = primitiveContract
-                            .XmlFormatReaderMethod
-                            .Invoke(xmlReader, new object[0]);
+                        value = primitiveContract.XmlFormatReaderMethod.Invoke(
+                            xmlReader,
+                            new object[0]
+                        );
                         if (!type.IsValueType)
                             context.AddNewObject(value);
                     }
@@ -578,9 +574,9 @@ namespace System.Runtime.Serialization.Json
                 switch (collectionContract.Kind)
                 {
                     case CollectionKind.GenericDictionary:
-                        type = Globals
-                            .TypeOfDictionaryGeneric
-                            .MakeGenericType(itemType.GetGenericArguments());
+                        type = Globals.TypeOfDictionaryGeneric.MakeGenericType(
+                            itemType.GetGenericArguments()
+                        );
                         constructor = type.GetConstructor(
                             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
                             null,
@@ -653,9 +649,10 @@ namespace System.Runtime.Serialization.Json
                             object value = ReadCollectionItem(collectionContract, itemType);
                             if (isArray)
                             {
-                                MethodInfo ensureArraySizeMethod = XmlFormatGeneratorStatics
-                                    .EnsureArraySizeMethod
-                                    .MakeGenericMethod(itemType);
+                                MethodInfo ensureArraySizeMethod =
+                                    XmlFormatGeneratorStatics.EnsureArraySizeMethod.MakeGenericMethod(
+                                        itemType
+                                    );
                                 growingCollection = ensureArraySizeMethod.Invoke(
                                     null,
                                     new object[] { growingCollection, i }
@@ -680,9 +677,10 @@ namespace System.Runtime.Serialization.Json
 
                     if (isArray)
                     {
-                        MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics
-                            .TrimArraySizeMethod
-                            .MakeGenericMethod(itemType);
+                        MethodInfo trimArraySizeMethod =
+                            XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(
+                                itemType
+                            );
                         objectLocal = trimArraySizeMethod.Invoke(
                             null,
                             new object[] { growingCollection, i }
@@ -761,9 +759,10 @@ namespace System.Runtime.Serialization.Json
                     else if (keyParseMode == KeyParseMode.UsingParseEnum)
                         key = Enum.Parse(keyType, jsonMemberName);
                     else if (keyParseMode == KeyParseMode.UsingCustomParse)
-                        key = keyDataContract
-                            .ParseMethod
-                            .Invoke(null, new object[] { jsonMemberName });
+                        key = keyDataContract.ParseMethod.Invoke(
+                            null,
+                            new object[] { jsonMemberName }
+                        );
 
                     if (keyTypeNullableDepth > 0)
                     {

@@ -90,9 +90,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 inNamespaceOrType
             );
 
-            _escapeKeywordIdentifiers = format
-                .MiscellaneousOptions
-                .IncludesOption(SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers);
+            _escapeKeywordIdentifiers = format.MiscellaneousOptions.IncludesOption(
+                SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+            );
         }
 
         public override void Free()
@@ -203,9 +203,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 IsFirstSymbolVisited
-                && Format
-                    .KindOptions
-                    .IncludesOption(SymbolDisplayKindOptions.IncludeNamespaceKeyword)
+                && Format.KindOptions.IncludesOption(
+                    SymbolDisplayKindOptions.IncludeNamespaceKeyword
+                )
             )
             {
                 AddKeyword(SyntaxKind.NamespaceKeyword);
@@ -514,9 +514,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 namedType.IsScriptClass
-                && !Format
-                    .CompilerInternalOptions
-                    .IncludesOption(SymbolDisplayCompilerInternalOptions.IncludeScriptType)
+                && !Format.CompilerInternalOptions.IncludesOption(
+                    SymbolDisplayCompilerInternalOptions.IncludeScriptType
+                )
             )
             {
                 return false;

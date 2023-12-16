@@ -81,8 +81,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             if (info.Symbol != null)
             {
                 var options = _globalOptions.GetSymbolDescriptionOptions(document.Project.Language);
-                var description = await info.Symbol
-                    .GetDescriptionAsync(document, options, cancellationToken)
+                var description = await info.Symbol.GetDescriptionAsync(
+                    document,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (description.Any())
                 {

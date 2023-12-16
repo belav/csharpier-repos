@@ -159,18 +159,16 @@ internal static unsafe class XmlEncryptionExtensions
             // <enc:encryptedSecret decryptorType="{type}" xmlns:enc="{ns}">
             //   <element />
             // </enc:encryptedSecret>
-            entry
-                .Key
-                .ReplaceWith(
-                    new XElement(
-                        XmlConstants.EncryptedSecretElementName,
-                        new XAttribute(
-                            XmlConstants.DecryptorTypeAttributeName,
-                            entry.Value.DecryptorType.AssemblyQualifiedName!
-                        ),
-                        entry.Value.EncryptedElement
-                    )
-                );
+            entry.Key.ReplaceWith(
+                new XElement(
+                    XmlConstants.EncryptedSecretElementName,
+                    new XAttribute(
+                        XmlConstants.DecryptorTypeAttributeName,
+                        entry.Value.DecryptorType.AssemblyQualifiedName!
+                    ),
+                    entry.Value.EncryptedElement
+                )
+            );
         }
         return doc.Root;
     }

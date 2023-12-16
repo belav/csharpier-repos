@@ -234,9 +234,8 @@ namespace System.IdentityModel
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer
-                                        .unmanagedToken
-                                        .DangerousGetHandle();
+                                    inUnmanagedBuffer[index].token =
+                                        securityBuffer.unmanagedToken.DangerousGetHandle();
                                 }
                                 else if (
                                     securityBuffer.token == null
@@ -311,9 +310,9 @@ namespace System.IdentityModel
                         outSecBuffer.type = outUnmanagedBuffer[0].type;
                         if (outSecBuffer.size > 0)
                         {
-                            outSecBuffer.token = DiagnosticUtility
-                                .Utility
-                                .AllocateByteArray(outSecBuffer.size);
+                            outSecBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(
+                                outSecBuffer.size
+                            );
                             Marshal.Copy(
                                 outUnmanagedBuffer[0].token,
                                 outSecBuffer.token,
@@ -543,9 +542,8 @@ namespace System.IdentityModel
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer
-                                        .unmanagedToken
-                                        .DangerousGetHandle();
+                                    inUnmanagedBuffer[index].token =
+                                        securityBuffer.unmanagedToken.DangerousGetHandle();
                                 }
                                 else if (
                                     securityBuffer.token == null
@@ -614,9 +612,9 @@ namespace System.IdentityModel
                         outSecBuffer.type = outUnmanagedBuffer[0].type;
                         if (outSecBuffer.size > 0)
                         {
-                            outSecBuffer.token = DiagnosticUtility
-                                .Utility
-                                .AllocateByteArray(outSecBuffer.size);
+                            outSecBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(
+                                outSecBuffer.size
+                            );
                             Marshal.Copy(
                                 outUnmanagedBuffer[0].token,
                                 outSecBuffer.token,
@@ -886,11 +884,9 @@ namespace System.IdentityModel
             const uint SECQOP_WRAP_NO_ENCRYPT = 0x80000001;
             if (status == 0 && qop == SECQOP_WRAP_NO_ENCRYPT)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.SspiPayloadNotEncrypted))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SspiPayloadNotEncrypted))
+                );
             }
 
             return status;
@@ -1524,14 +1520,9 @@ namespace System.IdentityModel
         {
             if (cb < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "cb",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("cb", SR.GetString(SR.ValueMustBeNonNegative))
+                );
             }
 
             SafeHGlobalHandle result = new SafeHGlobalHandle();

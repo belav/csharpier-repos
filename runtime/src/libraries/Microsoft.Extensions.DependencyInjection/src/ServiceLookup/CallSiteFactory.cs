@@ -163,12 +163,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     );
                 }
 
-                bool serviceHasNewConstraint = serviceGenericType
-                    .GenericParameterAttributes
-                    .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
-                bool implementationHasNewConstraint = implementationGenericType
-                    .GenericParameterAttributes
-                    .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
+                bool serviceHasNewConstraint =
+                    serviceGenericType.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.DefaultConstructorConstraint
+                    );
+                bool implementationHasNewConstraint =
+                    implementationGenericType.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.DefaultConstructorConstraint
+                    );
                 if (implementationHasNewConstraint && !serviceHasNewConstraint)
                 {
                     throw new ArgumentException(

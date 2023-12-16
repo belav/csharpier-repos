@@ -300,8 +300,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Relative order between compilations is not important, cycles do not cross compilation boundaries.
                 fieldsInvolvedInCycles.AddRange(
                     graph
-                        .Keys
-                        .GroupBy(static f => f.DeclaringCompilation)
+                        .Keys.GroupBy(static f => f.DeclaringCompilation)
                         .SelectMany(
                             static g =>
                                 g.OrderByDescending(

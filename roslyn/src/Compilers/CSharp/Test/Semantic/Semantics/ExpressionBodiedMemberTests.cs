@@ -631,8 +631,7 @@ public class C
                         .DescendantNodes()
                         .OfType<ConstructorDeclarationSyntax>()
                         .Single()
-                        .Body
-                        .Position
+                        .Body.Position
                 )
             );
 
@@ -640,8 +639,7 @@ public class C
                 .DescendantNodes()
                 .OfType<ConstructorDeclarationSyntax>()
                 .Single()
-                .Body
-                .DescendantNodes()
+                .Body.DescendantNodes()
                 .OfType<AssignmentExpressionSyntax>()
                 .Single()
                 .Left;
@@ -703,8 +701,7 @@ public class C
                         .DescendantNodes()
                         .OfType<DestructorDeclarationSyntax>()
                         .Single()
-                        .Body
-                        .Position
+                        .Body.Position
                 )
             );
 
@@ -712,8 +709,7 @@ public class C
                 .DescendantNodes()
                 .OfType<DestructorDeclarationSyntax>()
                 .Single()
-                .Body
-                .DescendantNodes()
+                .Body.DescendantNodes()
                 .OfType<AssignmentExpressionSyntax>()
                 .Single()
                 .Left;

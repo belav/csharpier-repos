@@ -82,13 +82,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             // Map the hierarchy to a ProjectId. For hierarchies mapping to multitargeted projects, we first try to
             // get the project in the most recent active context, but fall back to the first target framework if no
             // active context is available.
-            var hierarchyToProjectMap = _workspace
-                .Services
-                .GetRequiredService<IHierarchyItemToProjectIdMap>();
+            var hierarchyToProjectMap =
+                _workspace.Services.GetRequiredService<IHierarchyItemToProjectIdMap>();
 
-            await _threadingContext
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(context.OperationContext.UserCancellationToken);
+            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                context.OperationContext.UserCancellationToken
+            );
 
             ProjectId? projectId = null;
             if (
@@ -287,17 +286,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         )
         {
             using (
-                var scope = context
-                    .OperationContext
-                    .AddScope(
-                        allowCancellation: true,
-                        EditorFeaturesResources.Waiting_for_background_work_to_finish
-                    )
+                var scope = context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Waiting_for_background_work_to_finish
+                )
             )
             {
-                var workspaceStatusService = workspace
-                    .Services
-                    .GetService<IWorkspaceStatusService>();
+                var workspaceStatusService =
+                    workspace.Services.GetService<IWorkspaceStatusService>();
                 if (workspaceStatusService != null)
                 {
                     await workspaceStatusService
@@ -307,12 +303,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             }
 
             using (
-                var scope = context
-                    .OperationContext
-                    .AddScope(
-                        allowCancellation: true,
-                        description: EditorFeaturesResources.Applying_changes
-                    )
+                var scope = context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    description: EditorFeaturesResources.Applying_changes
+                )
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
@@ -321,9 +315,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                 var solution = await applyFixAsync(progress, cancellationToken)
                     .ConfigureAwait(true);
 
-                await _threadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 return workspace.TryApplyChanges(solution, progress);
             }

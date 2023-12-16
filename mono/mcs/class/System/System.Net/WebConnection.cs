@@ -193,15 +193,13 @@ namespace System.Net
                          *
                          * Explicitly use our implementation from SocketTaskExtensions.cs here.
                          */
-                        await Task.Factory
-                            .FromAsync(
-                                (targetEndPoint, callback, state) =>
-                                    ((Socket)state).BeginConnect(targetEndPoint, callback, state),
-                                asyncResult =>
-                                    ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
-                                remote,
-                                socket
-                            )
+                        await Task.Factory.FromAsync(
+                            (targetEndPoint, callback, state) =>
+                                ((Socket)state).BeginConnect(targetEndPoint, callback, state),
+                            asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
+                            remote,
+                            socket
+                        )
                             .ConfigureAwait(false);
                     }
                     catch (ObjectDisposedException)

@@ -112,26 +112,20 @@ namespace Microsoft.Extensions.Hosting.Tests
             {
                 IHostApplicationLifetime lifetime = provider.GetService<IHostApplicationLifetime>();
 
-                lifetime
-                    .ApplicationStarted
-                    .Register(() =>
-                    {
-                        _applicationStartedOrder = ++_callCount;
-                    });
+                lifetime.ApplicationStarted.Register(() =>
+                {
+                    _applicationStartedOrder = ++_callCount;
+                });
 
-                lifetime
-                    .ApplicationStopping
-                    .Register(() =>
-                    {
-                        _applicationStoppingOrder = ++_callCount;
-                    });
+                lifetime.ApplicationStopping.Register(() =>
+                {
+                    _applicationStoppingOrder = ++_callCount;
+                });
 
-                lifetime
-                    .ApplicationStopped
-                    .Register(() =>
-                    {
-                        _applicationStoppedOrder = ++_callCount;
-                    });
+                lifetime.ApplicationStopped.Register(() =>
+                {
+                    _applicationStoppedOrder = ++_callCount;
+                });
             }
 
             Task IHostLifetime.WaitForStartAsync(CancellationToken cancellationToken)

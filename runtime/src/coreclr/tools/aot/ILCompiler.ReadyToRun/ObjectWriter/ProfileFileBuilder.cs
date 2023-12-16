@@ -254,9 +254,10 @@ namespace ILCompiler.PEWriter
                             kvpCalleeCount.Key,
                             out ISymbolDefinitionNode calleeSymbol
                         )
-                        && _outputInfoBuilder
-                            .NodeSymbolMap
-                            .TryGetValue(calleeSymbol, out calleeNode)
+                        && _outputInfoBuilder.NodeSymbolMap.TryGetValue(
+                            calleeSymbol,
+                            out calleeNode
+                        )
                     )
                     {
                         calleeRVA =

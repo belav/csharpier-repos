@@ -189,13 +189,11 @@ namespace System.ServiceModel.Channels
         {
             if (this.InnerChannelListener == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())
+                    )
+                );
             }
         }
 
@@ -205,13 +203,11 @@ namespace System.ServiceModel.Channels
 
             if (innerChannelListener == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())
+                    )
+                );
             }
 
             return innerChannelListener;

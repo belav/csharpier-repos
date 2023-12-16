@@ -29,9 +29,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task AlignOpenBraceWithMethodDeclaration()
         {
             await using (
-                var telemetry = await TestServices
-                    .Telemetry
-                    .EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken)
+                var telemetry = await TestServices.Telemetry.EnableTestTelemetryChannelAsync(
+                    HangMitigatingCancellationToken
+                )
             )
             {
                 await SetUpEditorAsync(
@@ -46,18 +46,16 @@ $$class C
                 );
 
                 await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
-                    .TextContainsAsync(
-                        @"
+                await TestServices.EditorVerifier.TextContainsAsync(
+                    @"
 class C
 {
     void Main()
     {
     }
 }",
-                        cancellationToken: HangMitigatingCancellationToken
-                    );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
                 await telemetry.VerifyFiredAsync(
                     ["vs/ide/vbcs/commandhandler/formatcommand"],
                     HangMitigatingCancellationToken
@@ -82,13 +80,12 @@ public class C
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
-                .SendAsync([VirtualKeyCode.BACK, ';'], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.Input.SendAsync(
+                [VirtualKeyCode.BACK, ';'],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 public class C
 {
     void Goo()
@@ -98,8 +95,8 @@ public class C
                 select x;
     }
 }",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -114,24 +111,20 @@ public class C {
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Editor
-                .SelectTextInCurrentDocumentAsync(
-                    "public void M( ) {",
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.Editor.SelectTextInCurrentDocumentAsync(
+                "public void M( ) {",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatSelectionAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 public class C {
     public void M()
     {
     }
 }",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -155,20 +148,16 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Editor
-                .PasteAsync(
-                    @"        Action b = () =>
+            await TestServices.Editor.PasteAsync(
+                @"        Action b = () =>
         {
 
             };",
-                    HangMitigatingCancellationToken
-                );
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using System;
 class Program
 {
@@ -186,16 +175,15 @@ class Program
         };
     }
 }",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
             // Undo should only undo the formatting
-            await TestServices
-                .Shell
-                .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.Undo,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using System;
 class Program
 {
@@ -213,8 +201,8 @@ class Program
         };
     }
 }",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -238,20 +226,16 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Editor
-                .PasteAsync(
-                    @"        Action<int> b = n =>
+            await TestServices.Editor.PasteAsync(
+                @"        Action<int> b = n =>
         {
             Console.Writeline(n);
         };",
-                    HangMitigatingCancellationToken
-                );
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using System;
 class Program
 {
@@ -269,8 +253,8 @@ class Program
         };
     }
 }",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -294,20 +278,16 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Editor
-                .PasteAsync(
-                    @"        D d = delegate(int x)
+            await TestServices.Editor.PasteAsync(
+                @"        D d = delegate(int x)
 {
     return 2 * x;
 };",
-                    HangMitigatingCancellationToken
-                );
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using System;
 class Program
 {
@@ -325,8 +305,8 @@ class Program
         };
     }
 }",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -343,22 +323,16 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(
-                    FeatureAttribute.Workspace,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendAsync(
-                    ["(ba", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "// comment"],
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.Workspace,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendAsync(
+                ["(ba", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "// comment"],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 class Program
 {
     object M(object bar)
@@ -367,8 +341,8 @@ class Program
         // comment
     }
 }",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -401,9 +375,11 @@ class C
   }
 }";
 
-            await TestServices
-                .SolutionExplorer
-                .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                ProjectName,
+                "Class1.cs",
+                HangMitigatingCancellationToken
+            );
 
             MarkupTestFile.GetSpans(markup, out var expectedTextFourSpaceIndent, out _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
@@ -413,17 +389,15 @@ class C
              * no .editorconfig is available.
              */
 
-            await TestServices
-                .Workspace
-                .WaitForAllAsyncOperationsAsync(
-                    [
-                        FeatureAttribute.Workspace,
-                        FeatureAttribute.SolutionCrawlerLegacy,
-                        FeatureAttribute.DiagnosticService,
-                        FeatureAttribute.ErrorSquiggles
-                    ],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles
+                ],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
 
             Assert.Equal(
@@ -443,27 +417,23 @@ class C
 indent_size = 2
 ";
 
-            await TestServices
-                .SolutionExplorer
-                .AddFileAsync(
-                    ProjectName,
-                    ".editorconfig",
-                    editorConfig,
-                    open: false,
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.SolutionExplorer.AddFileAsync(
+                ProjectName,
+                ".editorconfig",
+                editorConfig,
+                open: false,
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices
-                .Workspace
-                .WaitForAllAsyncOperationsAsync(
-                    [
-                        FeatureAttribute.Workspace,
-                        FeatureAttribute.SolutionCrawlerLegacy,
-                        FeatureAttribute.DiagnosticService,
-                        FeatureAttribute.ErrorSquiggles
-                    ],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles
+                ],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
 
             Assert.Equal(
@@ -476,26 +446,22 @@ indent_size = 2
              * and verifies that the next Format Document operation adheres to the updated formatting.
              */
 
-            await TestServices
-                .SolutionExplorer
-                .SetFileContentsAsync(
-                    ProjectName,
-                    ".editorconfig",
-                    editorConfig.Replace("2", "4"),
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.SolutionExplorer.SetFileContentsAsync(
+                ProjectName,
+                ".editorconfig",
+                editorConfig.Replace("2", "4"),
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices
-                .Workspace
-                .WaitForAllAsyncOperationsAsync(
-                    [
-                        FeatureAttribute.Workspace,
-                        FeatureAttribute.SolutionCrawlerLegacy,
-                        FeatureAttribute.DiagnosticService,
-                        FeatureAttribute.ErrorSquiggles
-                    ],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles
+                ],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
 
             Assert.Equal(

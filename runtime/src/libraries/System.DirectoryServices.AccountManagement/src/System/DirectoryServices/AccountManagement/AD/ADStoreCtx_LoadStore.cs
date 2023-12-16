@@ -323,13 +323,11 @@ namespace System.DirectoryServices.AccountManagement
                         )
                     )
                     {
-                        constructedContext = SDSCache
-                            .Domain
-                            .GetContext(
-                                dnsDomainName,
-                                this.Credentials,
-                                this.OwningContext.Options
-                            );
+                        constructedContext = SDSCache.Domain.GetContext(
+                            dnsDomainName,
+                            this.Credentials,
+                            this.OwningContext.Options
+                        );
                     }
 
                     if (targetIsFromGC)

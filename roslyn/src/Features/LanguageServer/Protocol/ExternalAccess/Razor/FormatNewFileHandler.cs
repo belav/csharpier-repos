@@ -54,16 +54,9 @@ internal sealed class FormatNewFileHandler : ILspServiceRequestHandler<FormatNew
         var source = SourceText.From(request.Contents);
         var fileLoader = new SourceTextLoader(source, filePath);
         var documentId = DocumentId.CreateNewId(project.Id);
-        var solution = project
-            .Solution
-            .AddDocument(
-                DocumentInfo.Create(
-                    documentId,
-                    name: filePath,
-                    loader: fileLoader,
-                    filePath: filePath
-                )
-            );
+        var solution = project.Solution.AddDocument(
+            DocumentInfo.Create(documentId, name: filePath, loader: fileLoader, filePath: filePath)
+        );
 
         var document = solution.GetRequiredDocument(documentId);
 

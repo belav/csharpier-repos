@@ -125,9 +125,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
                 return null;
 
             var dimensions = projectContainerKey
-                .Value
-                .Dimensions
-                .Add($"{nameof(DocumentKey)}.{nameof(DocumentKey.Name)}", documentKey.Name)
+                .Value.Dimensions.Add(
+                    $"{nameof(DocumentKey)}.{nameof(DocumentKey.Name)}",
+                    documentKey.Name
+                )
                 .Add($"{nameof(DocumentKey)}.{nameof(DocumentKey.FilePath)}", relativePath);
 
             return new CacheContainerKey("Roslyn.Document", dimensions);

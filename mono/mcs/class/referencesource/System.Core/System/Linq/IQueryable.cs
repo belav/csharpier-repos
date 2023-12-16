@@ -132,15 +132,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Where, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Where, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static IQueryable<TSource> Where<TSource>(
@@ -152,45 +150,39 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Where, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Where, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static IQueryable<TResult> OfType<TResult>(this IQueryable source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.OfType<TResult>, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.OfType<TResult>, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static IQueryable<TResult> Cast<TResult>(this IQueryable source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Cast<TResult>, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Cast<TResult>, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static IQueryable<TResult> Select<TSource, TResult>(
@@ -202,15 +194,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Select, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Select, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static IQueryable<TResult> Select<TSource, TResult>(
@@ -222,15 +212,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Select, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Select, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static IQueryable<TResult> SelectMany<TSource, TResult>(
@@ -242,15 +230,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.SelectMany, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SelectMany, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static IQueryable<TResult> SelectMany<TSource, TResult>(
@@ -262,15 +248,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.SelectMany, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SelectMany, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static IQueryable<TResult> SelectMany<TSource, TCollection, TResult>(
@@ -285,25 +269,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("collectionSelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.SelectMany,
-                            source,
-                            collectionSelector,
-                            resultSelector
-                        ),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(collectionSelector),
-                            Expression.Quote(resultSelector)
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SelectMany, source, collectionSelector, resultSelector),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(collectionSelector),
+                        Expression.Quote(resultSelector)
+                    }
+                )
+            );
         }
 
         public static IQueryable<TResult> SelectMany<TSource, TCollection, TResult>(
@@ -318,25 +295,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("collectionSelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.SelectMany,
-                            source,
-                            collectionSelector,
-                            resultSelector
-                        ),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(collectionSelector),
-                            Expression.Quote(resultSelector)
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SelectMany, source, collectionSelector, resultSelector),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(collectionSelector),
+                        Expression.Quote(resultSelector)
+                    }
+                )
+            );
         }
 
         private static Expression GetSourceExpression<TSource>(IEnumerable<TSource> source)
@@ -365,29 +335,27 @@ namespace System.Linq
                 throw Error.ArgumentNull("innerKeySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return outer
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.Join,
-                            outer,
-                            inner,
-                            outerKeySelector,
-                            innerKeySelector,
-                            resultSelector
-                        ),
-                        new Expression[]
-                        {
-                            outer.Expression,
-                            GetSourceExpression(inner),
-                            Expression.Quote(outerKeySelector),
-                            Expression.Quote(innerKeySelector),
-                            Expression.Quote(resultSelector)
-                        }
-                    )
-                );
+            return outer.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(
+                        Queryable.Join,
+                        outer,
+                        inner,
+                        outerKeySelector,
+                        innerKeySelector,
+                        resultSelector
+                    ),
+                    new Expression[]
+                    {
+                        outer.Expression,
+                        GetSourceExpression(inner),
+                        Expression.Quote(outerKeySelector),
+                        Expression.Quote(innerKeySelector),
+                        Expression.Quote(resultSelector)
+                    }
+                )
+            );
         }
 
         public static IQueryable<TResult> Join<TOuter, TInner, TKey, TResult>(
@@ -409,31 +377,29 @@ namespace System.Linq
                 throw Error.ArgumentNull("innerKeySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return outer
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.Join,
-                            outer,
-                            inner,
-                            outerKeySelector,
-                            innerKeySelector,
-                            resultSelector,
-                            comparer
-                        ),
-                        new Expression[]
-                        {
-                            outer.Expression,
-                            GetSourceExpression(inner),
-                            Expression.Quote(outerKeySelector),
-                            Expression.Quote(innerKeySelector),
-                            Expression.Quote(resultSelector),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                        }
-                    )
-                );
+            return outer.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(
+                        Queryable.Join,
+                        outer,
+                        inner,
+                        outerKeySelector,
+                        innerKeySelector,
+                        resultSelector,
+                        comparer
+                    ),
+                    new Expression[]
+                    {
+                        outer.Expression,
+                        GetSourceExpression(inner),
+                        Expression.Quote(outerKeySelector),
+                        Expression.Quote(innerKeySelector),
+                        Expression.Quote(resultSelector),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
@@ -454,29 +420,27 @@ namespace System.Linq
                 throw Error.ArgumentNull("innerKeySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return outer
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.GroupJoin,
-                            outer,
-                            inner,
-                            outerKeySelector,
-                            innerKeySelector,
-                            resultSelector
-                        ),
-                        new Expression[]
-                        {
-                            outer.Expression,
-                            GetSourceExpression(inner),
-                            Expression.Quote(outerKeySelector),
-                            Expression.Quote(innerKeySelector),
-                            Expression.Quote(resultSelector)
-                        }
-                    )
-                );
+            return outer.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(
+                        Queryable.GroupJoin,
+                        outer,
+                        inner,
+                        outerKeySelector,
+                        innerKeySelector,
+                        resultSelector
+                    ),
+                    new Expression[]
+                    {
+                        outer.Expression,
+                        GetSourceExpression(inner),
+                        Expression.Quote(outerKeySelector),
+                        Expression.Quote(innerKeySelector),
+                        Expression.Quote(resultSelector)
+                    }
+                )
+            );
         }
 
         public static IQueryable<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
@@ -498,56 +462,52 @@ namespace System.Linq
                 throw Error.ArgumentNull("innerKeySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return outer
-                .Provider
-                .CreateQuery<TResult>(
+            return outer.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(
+                        Queryable.GroupJoin,
+                        outer,
+                        inner,
+                        outerKeySelector,
+                        innerKeySelector,
+                        resultSelector,
+                        comparer
+                    ),
+                    new Expression[]
+                    {
+                        outer.Expression,
+                        GetSourceExpression(inner),
+                        Expression.Quote(outerKeySelector),
+                        Expression.Quote(innerKeySelector),
+                        Expression.Quote(resultSelector),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                    }
+                )
+            );
+        }
+
+        public static IOrderedQueryable<TSource> OrderBy<TSource, TKey>(
+            this IQueryable<TSource> source,
+            Expression<Func<TSource, TKey>> keySelector
+        )
+        {
+            if (source == null)
+                throw Error.ArgumentNull("source");
+            if (keySelector == null)
+                throw Error.ArgumentNull("keySelector");
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
                     Expression.Call(
                         null,
-                        GetMethodInfo(
-                            Queryable.GroupJoin,
-                            outer,
-                            inner,
-                            outerKeySelector,
-                            innerKeySelector,
-                            resultSelector,
-                            comparer
-                        ),
-                        new Expression[]
-                        {
-                            outer.Expression,
-                            GetSourceExpression(inner),
-                            Expression.Quote(outerKeySelector),
-                            Expression.Quote(innerKeySelector),
-                            Expression.Quote(resultSelector),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                        }
+                        GetMethodInfo(Queryable.OrderBy, source, keySelector),
+                        new Expression[] { source.Expression, Expression.Quote(keySelector) }
                     )
                 );
         }
 
         public static IOrderedQueryable<TSource> OrderBy<TSource, TKey>(
             this IQueryable<TSource> source,
-            Expression<Func<TSource, TKey>> keySelector
-        )
-        {
-            if (source == null)
-                throw Error.ArgumentNull("source");
-            if (keySelector == null)
-                throw Error.ArgumentNull("keySelector");
-            return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            GetMethodInfo(Queryable.OrderBy, source, keySelector),
-                            new Expression[] { source.Expression, Expression.Quote(keySelector) }
-                        )
-                    );
-        }
-
-        public static IOrderedQueryable<TSource> OrderBy<TSource, TKey>(
-            this IQueryable<TSource> source,
             Expression<Func<TSource, TKey>> keySelector,
             IComparer<TKey> comparer
         )
@@ -557,20 +517,18 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            GetMethodInfo(Queryable.OrderBy, source, keySelector, comparer),
-                            new Expression[]
-                            {
-                                source.Expression,
-                                Expression.Quote(keySelector),
-                                Expression.Constant(comparer, typeof(IComparer<TKey>))
-                            }
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        GetMethodInfo(Queryable.OrderBy, source, keySelector, comparer),
+                        new Expression[]
+                        {
+                            source.Expression,
+                            Expression.Quote(keySelector),
+                            Expression.Constant(comparer, typeof(IComparer<TKey>))
+                        }
+                    )
+                );
         }
 
         public static IOrderedQueryable<TSource> OrderByDescending<TSource, TKey>(
@@ -583,15 +541,13 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            GetMethodInfo(Queryable.OrderByDescending, source, keySelector),
-                            new Expression[] { source.Expression, Expression.Quote(keySelector) }
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        GetMethodInfo(Queryable.OrderByDescending, source, keySelector),
+                        new Expression[] { source.Expression, Expression.Quote(keySelector) }
+                    )
+                );
         }
 
         public static IOrderedQueryable<TSource> OrderByDescending<TSource, TKey>(
@@ -605,25 +561,18 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            GetMethodInfo(
-                                Queryable.OrderByDescending,
-                                source,
-                                keySelector,
-                                comparer
-                            ),
-                            new Expression[]
-                            {
-                                source.Expression,
-                                Expression.Quote(keySelector),
-                                Expression.Constant(comparer, typeof(IComparer<TKey>))
-                            }
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        GetMethodInfo(Queryable.OrderByDescending, source, keySelector, comparer),
+                        new Expression[]
+                        {
+                            source.Expression,
+                            Expression.Quote(keySelector),
+                            Expression.Constant(comparer, typeof(IComparer<TKey>))
+                        }
+                    )
+                );
         }
 
         public static IOrderedQueryable<TSource> ThenBy<TSource, TKey>(
@@ -636,15 +585,13 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            GetMethodInfo(Queryable.ThenBy, source, keySelector),
-                            new Expression[] { source.Expression, Expression.Quote(keySelector) }
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        GetMethodInfo(Queryable.ThenBy, source, keySelector),
+                        new Expression[] { source.Expression, Expression.Quote(keySelector) }
+                    )
+                );
         }
 
         public static IOrderedQueryable<TSource> ThenBy<TSource, TKey>(
@@ -658,20 +605,18 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            GetMethodInfo(Queryable.ThenBy, source, keySelector, comparer),
-                            new Expression[]
-                            {
-                                source.Expression,
-                                Expression.Quote(keySelector),
-                                Expression.Constant(comparer, typeof(IComparer<TKey>))
-                            }
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        GetMethodInfo(Queryable.ThenBy, source, keySelector, comparer),
+                        new Expression[]
+                        {
+                            source.Expression,
+                            Expression.Quote(keySelector),
+                            Expression.Constant(comparer, typeof(IComparer<TKey>))
+                        }
+                    )
+                );
         }
 
         public static IOrderedQueryable<TSource> ThenByDescending<TSource, TKey>(
@@ -684,15 +629,13 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            GetMethodInfo(Queryable.ThenByDescending, source, keySelector),
-                            new Expression[] { source.Expression, Expression.Quote(keySelector) }
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        GetMethodInfo(Queryable.ThenByDescending, source, keySelector),
+                        new Expression[] { source.Expression, Expression.Quote(keySelector) }
+                    )
+                );
         }
 
         public static IOrderedQueryable<TSource> ThenByDescending<TSource, TKey>(
@@ -706,40 +649,31 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            GetMethodInfo(
-                                Queryable.ThenByDescending,
-                                source,
-                                keySelector,
-                                comparer
-                            ),
-                            new Expression[]
-                            {
-                                source.Expression,
-                                Expression.Quote(keySelector),
-                                Expression.Constant(comparer, typeof(IComparer<TKey>))
-                            }
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        GetMethodInfo(Queryable.ThenByDescending, source, keySelector, comparer),
+                        new Expression[]
+                        {
+                            source.Expression,
+                            Expression.Quote(keySelector),
+                            Expression.Constant(comparer, typeof(IComparer<TKey>))
+                        }
+                    )
+                );
         }
 
         public static IQueryable<TSource> Take<TSource>(this IQueryable<TSource> source, int count)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Take, source, count),
-                        new Expression[] { source.Expression, Expression.Constant(count) }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Take, source, count),
+                    new Expression[] { source.Expression, Expression.Constant(count) }
+                )
+            );
         }
 
         public static IQueryable<TSource> TakeWhile<TSource>(
@@ -751,15 +685,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.TakeWhile, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.TakeWhile, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static IQueryable<TSource> TakeWhile<TSource>(
@@ -771,30 +703,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.TakeWhile, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.TakeWhile, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static IQueryable<TSource> Skip<TSource>(this IQueryable<TSource> source, int count)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Skip, source, count),
-                        new Expression[] { source.Expression, Expression.Constant(count) }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Skip, source, count),
+                    new Expression[] { source.Expression, Expression.Constant(count) }
+                )
+            );
         }
 
         public static IQueryable<TSource> SkipWhile<TSource>(
@@ -806,15 +734,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.SkipWhile, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SkipWhile, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static IQueryable<TSource> SkipWhile<TSource>(
@@ -826,15 +752,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.SkipWhile, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SkipWhile, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static IQueryable<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
@@ -846,15 +770,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
-            return source
-                .Provider
-                .CreateQuery<IGrouping<TKey, TSource>>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.GroupBy, source, keySelector),
-                        new Expression[] { source.Expression, Expression.Quote(keySelector) }
-                    )
-                );
+            return source.Provider.CreateQuery<IGrouping<TKey, TSource>>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.GroupBy, source, keySelector),
+                    new Expression[] { source.Expression, Expression.Quote(keySelector) }
+                )
+            );
         }
 
         public static IQueryable<IGrouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
@@ -869,20 +791,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("keySelector");
             if (elementSelector == null)
                 throw Error.ArgumentNull("elementSelector");
-            return source
-                .Provider
-                .CreateQuery<IGrouping<TKey, TElement>>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.GroupBy, source, keySelector, elementSelector),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Quote(elementSelector)
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<IGrouping<TKey, TElement>>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.GroupBy, source, keySelector, elementSelector),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Quote(elementSelector)
+                    }
+                )
+            );
         }
 
         public static IQueryable<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
@@ -895,20 +815,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
-            return source
-                .Provider
-                .CreateQuery<IGrouping<TKey, TSource>>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.GroupBy, source, keySelector, comparer),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<IGrouping<TKey, TSource>>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.GroupBy, source, keySelector, comparer),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<IGrouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
@@ -924,27 +842,25 @@ namespace System.Linq
                 throw Error.ArgumentNull("keySelector");
             if (elementSelector == null)
                 throw Error.ArgumentNull("elementSelector");
-            return source
-                .Provider
-                .CreateQuery<IGrouping<TKey, TElement>>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.GroupBy,
-                            source,
-                            keySelector,
-                            elementSelector,
-                            comparer
-                        ),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Quote(elementSelector),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<IGrouping<TKey, TElement>>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(
+                        Queryable.GroupBy,
+                        source,
+                        keySelector,
+                        elementSelector,
+                        comparer
+                    ),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Quote(elementSelector),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
@@ -962,27 +878,25 @@ namespace System.Linq
                 throw Error.ArgumentNull("elementSelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.GroupBy,
-                            source,
-                            keySelector,
-                            elementSelector,
-                            resultSelector
-                        ),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Quote(elementSelector),
-                            Expression.Quote(resultSelector)
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(
+                        Queryable.GroupBy,
+                        source,
+                        keySelector,
+                        elementSelector,
+                        resultSelector
+                    ),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Quote(elementSelector),
+                        Expression.Quote(resultSelector)
+                    }
+                )
+            );
         }
 
         public static IQueryable<TResult> GroupBy<TSource, TKey, TResult>(
@@ -997,20 +911,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("keySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.GroupBy, source, keySelector, resultSelector),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Quote(resultSelector)
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.GroupBy, source, keySelector, resultSelector),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Quote(resultSelector)
+                    }
+                )
+            );
         }
 
         public static IQueryable<TResult> GroupBy<TSource, TKey, TResult>(
@@ -1026,27 +938,19 @@ namespace System.Linq
                 throw Error.ArgumentNull("keySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.GroupBy,
-                            source,
-                            keySelector,
-                            resultSelector,
-                            comparer
-                        ),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Quote(resultSelector),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.GroupBy, source, keySelector, resultSelector, comparer),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Quote(resultSelector),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
@@ -1065,44 +969,40 @@ namespace System.Linq
                 throw Error.ArgumentNull("elementSelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(
-                            Queryable.GroupBy,
-                            source,
-                            keySelector,
-                            elementSelector,
-                            resultSelector,
-                            comparer
-                        ),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Quote(elementSelector),
-                            Expression.Quote(resultSelector),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(
+                        Queryable.GroupBy,
+                        source,
+                        keySelector,
+                        elementSelector,
+                        resultSelector,
+                        comparer
+                    ),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Quote(elementSelector),
+                        Expression.Quote(resultSelector),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<TSource> Distinct<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Distinct, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Distinct, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static IQueryable<TSource> Distinct<TSource>(
@@ -1112,19 +1012,17 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Distinct, source, comparer),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Distinct, source, comparer),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<TSource> Concat<TSource>(
@@ -1136,15 +1034,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Concat, source1, source2),
-                        new Expression[] { source1.Expression, GetSourceExpression(source2) }
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Concat, source1, source2),
+                    new Expression[] { source1.Expression, GetSourceExpression(source2) }
+                )
+            );
         }
 
         public static IQueryable<TResult> Zip<TFirst, TSecond, TResult>(
@@ -1159,20 +1055,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("source2");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source1
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Zip, source1, source2, resultSelector),
-                        new Expression[]
-                        {
-                            source1.Expression,
-                            GetSourceExpression(source2),
-                            Expression.Quote(resultSelector)
-                        }
-                    )
-                );
+            return source1.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Zip, source1, source2, resultSelector),
+                    new Expression[]
+                    {
+                        source1.Expression,
+                        GetSourceExpression(source2),
+                        Expression.Quote(resultSelector)
+                    }
+                )
+            );
         }
 
         public static IQueryable<TSource> Union<TSource>(
@@ -1184,15 +1078,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Union, source1, source2),
-                        new Expression[] { source1.Expression, GetSourceExpression(source2) }
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Union, source1, source2),
+                    new Expression[] { source1.Expression, GetSourceExpression(source2) }
+                )
+            );
         }
 
         public static IQueryable<TSource> Union<TSource>(
@@ -1205,20 +1097,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Union, source1, source2, comparer),
-                        new Expression[]
-                        {
-                            source1.Expression,
-                            GetSourceExpression(source2),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                        }
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Union, source1, source2, comparer),
+                    new Expression[]
+                    {
+                        source1.Expression,
+                        GetSourceExpression(source2),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<TSource> Intersect<TSource>(
@@ -1230,15 +1120,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Intersect, source1, source2),
-                        new Expression[] { source1.Expression, GetSourceExpression(source2) }
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Intersect, source1, source2),
+                    new Expression[] { source1.Expression, GetSourceExpression(source2) }
+                )
+            );
         }
 
         public static IQueryable<TSource> Intersect<TSource>(
@@ -1251,20 +1139,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Intersect, source1, source2, comparer),
-                        new Expression[]
-                        {
-                            source1.Expression,
-                            GetSourceExpression(source2),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                        }
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Intersect, source1, source2, comparer),
+                    new Expression[]
+                    {
+                        source1.Expression,
+                        GetSourceExpression(source2),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<TSource> Except<TSource>(
@@ -1276,15 +1162,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Except, source1, source2),
-                        new Expression[] { source1.Expression, GetSourceExpression(source2) }
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Except, source1, source2),
+                    new Expression[] { source1.Expression, GetSourceExpression(source2) }
+                )
+            );
         }
 
         public static IQueryable<TSource> Except<TSource>(
@@ -1297,35 +1181,31 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Except, source1, source2, comparer),
-                        new Expression[]
-                        {
-                            source1.Expression,
-                            GetSourceExpression(source2),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                        }
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Except, source1, source2, comparer),
+                    new Expression[]
+                    {
+                        source1.Expression,
+                        GetSourceExpression(source2),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                    }
+                )
+            );
         }
 
         public static TSource First<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.First, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.First, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static TSource First<TSource>(
@@ -1337,30 +1217,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.First, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.First, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static TSource FirstOrDefault<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.FirstOrDefault, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static TSource FirstOrDefault<TSource>(
@@ -1372,30 +1248,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.FirstOrDefault, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static TSource Last<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Last, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Last, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static TSource Last<TSource>(
@@ -1407,30 +1279,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Last, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Last, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static TSource LastOrDefault<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.LastOrDefault, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.LastOrDefault, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static TSource LastOrDefault<TSource>(
@@ -1442,30 +1310,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.LastOrDefault, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.LastOrDefault, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static TSource Single<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Single, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Single, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static TSource Single<TSource>(
@@ -1477,30 +1341,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Single, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Single, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static TSource SingleOrDefault<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.SingleOrDefault, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SingleOrDefault, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static TSource SingleOrDefault<TSource>(
@@ -1512,15 +1372,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.SingleOrDefault, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SingleOrDefault, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static TSource ElementAt<TSource>(this IQueryable<TSource> source, int index)
@@ -1529,15 +1387,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (index < 0)
                 throw Error.ArgumentOutOfRange("index");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.ElementAt, source, index),
-                        new Expression[] { source.Expression, Expression.Constant(index) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.ElementAt, source, index),
+                    new Expression[] { source.Expression, Expression.Constant(index) }
+                )
+            );
         }
 
         public static TSource ElementAtOrDefault<TSource>(
@@ -1547,30 +1403,26 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.ElementAtOrDefault, source, index),
-                        new Expression[] { source.Expression, Expression.Constant(index) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.ElementAtOrDefault, source, index),
+                    new Expression[] { source.Expression, Expression.Constant(index) }
+                )
+            );
         }
 
         public static IQueryable<TSource> DefaultIfEmpty<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.DefaultIfEmpty, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.DefaultIfEmpty, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static IQueryable<TSource> DefaultIfEmpty<TSource>(
@@ -1580,38 +1432,34 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.DefaultIfEmpty, source, defaultValue),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Constant(defaultValue, typeof(TSource))
-                        }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.DefaultIfEmpty, source, defaultValue),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Constant(defaultValue, typeof(TSource))
+                    }
+                )
+            );
         }
 
         public static bool Contains<TSource>(this IQueryable<TSource> source, TSource item)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Contains, source, item),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Constant(item, typeof(TSource))
-                        }
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Contains, source, item),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Constant(item, typeof(TSource))
+                    }
+                )
+            );
         }
 
         public static bool Contains<TSource>(
@@ -1622,35 +1470,31 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Contains, source, item, comparer),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Constant(item, typeof(TSource)),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                        }
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Contains, source, item, comparer),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Constant(item, typeof(TSource)),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                    }
+                )
+            );
         }
 
         public static IQueryable<TSource> Reverse<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Reverse, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Reverse, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static bool SequenceEqual<TSource>(
@@ -1662,15 +1506,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.SequenceEqual, source1, source2),
-                        new Expression[] { source1.Expression, GetSourceExpression(source2) }
-                    )
-                );
+            return source1.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SequenceEqual, source1, source2),
+                    new Expression[] { source1.Expression, GetSourceExpression(source2) }
+                )
+            );
         }
 
         public static bool SequenceEqual<TSource>(
@@ -1683,35 +1525,31 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.SequenceEqual, source1, source2, comparer),
-                        new Expression[]
-                        {
-                            source1.Expression,
-                            GetSourceExpression(source2),
-                            Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                        }
-                    )
-                );
+            return source1.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.SequenceEqual, source1, source2, comparer),
+                    new Expression[]
+                    {
+                        source1.Expression,
+                        GetSourceExpression(source2),
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                    }
+                )
+            );
         }
 
         public static bool Any<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Any, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Any, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static bool Any<TSource>(
@@ -1723,15 +1561,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Any, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Any, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static bool All<TSource>(
@@ -1743,30 +1579,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.All, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.All, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static int Count<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<int>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Count, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<int>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Count, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static int Count<TSource>(
@@ -1778,30 +1610,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<int>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Count, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<int>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Count, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static long LongCount<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<long>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.LongCount, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.LongCount, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static long LongCount<TSource>(
@@ -1813,30 +1641,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
-                .Execute<long>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.LongCount, source, predicate),
-                        new Expression[] { source.Expression, Expression.Quote(predicate) }
-                    )
-                );
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.LongCount, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                )
+            );
         }
 
         public static TSource Min<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Min, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Min, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static TResult Min<TSource, TResult>(
@@ -1848,30 +1672,26 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Min, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Min, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static TSource Max<TSource>(this IQueryable<TSource> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Max, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Max, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static TResult Max<TSource, TResult>(
@@ -1883,165 +1703,143 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Max, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Max, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static int Sum(this IQueryable<int> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<int>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<int>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static int? Sum(this IQueryable<int?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<int?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<int?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static long Sum(this IQueryable<long> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<long>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static long? Sum(this IQueryable<long?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<long?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<long?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static float Sum(this IQueryable<float> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<float>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<float>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static float? Sum(this IQueryable<float?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<float?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<float?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static double Sum(this IQueryable<double> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static double? Sum(this IQueryable<double?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static decimal Sum(this IQueryable<decimal> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<decimal>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<decimal>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static decimal? Sum(this IQueryable<decimal?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<decimal?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<decimal?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static int Sum<TSource>(
@@ -2053,15 +1851,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<int>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<int>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static int? Sum<TSource>(
@@ -2073,15 +1869,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<int?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<int?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static long Sum<TSource>(
@@ -2093,15 +1887,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<long>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static long? Sum<TSource>(
@@ -2113,15 +1905,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<long?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<long?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static float Sum<TSource>(
@@ -2133,15 +1923,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<float>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<float>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static float? Sum<TSource>(
@@ -2153,15 +1941,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<float?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<float?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static double Sum<TSource>(
@@ -2173,15 +1959,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static double? Sum<TSource>(
@@ -2193,15 +1977,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static decimal Sum<TSource>(
@@ -2213,15 +1995,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<decimal>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<decimal>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static decimal? Sum<TSource>(
@@ -2233,165 +2013,143 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<decimal?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Sum, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<decimal?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Sum, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static double Average(this IQueryable<int> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static double? Average(this IQueryable<int?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static double Average(this IQueryable<long> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static double? Average(this IQueryable<long?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static float Average(this IQueryable<float> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<float>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<float>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static float? Average(this IQueryable<float?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<float?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<float?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static double Average(this IQueryable<double> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static double? Average(this IQueryable<double?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static decimal Average(this IQueryable<decimal> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<decimal>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<decimal>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static decimal? Average(this IQueryable<decimal?> source)
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
-                .Execute<decimal?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source),
-                        new Expression[] { source.Expression }
-                    )
-                );
+            return source.Provider.Execute<decimal?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source),
+                    new Expression[] { source.Expression }
+                )
+            );
         }
 
         public static double Average<TSource>(
@@ -2403,15 +2161,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static double? Average<TSource>(
@@ -2423,15 +2179,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static float Average<TSource>(
@@ -2443,15 +2197,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<float>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<float>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static float? Average<TSource>(
@@ -2463,15 +2215,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<float?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<float?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static double Average<TSource>(
@@ -2483,15 +2233,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static double? Average<TSource>(
@@ -2503,15 +2251,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static double Average<TSource>(
@@ -2523,15 +2269,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static double? Average<TSource>(
@@ -2543,15 +2287,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static decimal Average<TSource>(
@@ -2563,15 +2305,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<decimal>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<decimal>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static decimal? Average<TSource>(
@@ -2583,15 +2323,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<decimal?>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Average, source, selector),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    )
-                );
+            return source.Provider.Execute<decimal?>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Average, source, selector),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                )
+            );
         }
 
         public static TSource Aggregate<TSource>(
@@ -2603,15 +2341,13 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (func == null)
                 throw Error.ArgumentNull("func");
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Aggregate, source, func),
-                        new Expression[] { source.Expression, Expression.Quote(func) }
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Aggregate, source, func),
+                    new Expression[] { source.Expression, Expression.Quote(func) }
+                )
+            );
         }
 
         public static TAccumulate Aggregate<TSource, TAccumulate>(
@@ -2624,20 +2360,18 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (func == null)
                 throw Error.ArgumentNull("func");
-            return source
-                .Provider
-                .Execute<TAccumulate>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Aggregate, source, seed, func),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Constant(seed),
-                            Expression.Quote(func)
-                        }
-                    )
-                );
+            return source.Provider.Execute<TAccumulate>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Aggregate, source, seed, func),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Constant(seed),
+                        Expression.Quote(func)
+                    }
+                )
+            );
         }
 
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
@@ -2653,21 +2387,19 @@ namespace System.Linq
                 throw Error.ArgumentNull("func");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
-                .Execute<TResult>(
-                    Expression.Call(
-                        null,
-                        GetMethodInfo(Queryable.Aggregate, source, seed, func, selector),
-                        new Expression[]
-                        {
-                            source.Expression,
-                            Expression.Constant(seed),
-                            Expression.Quote(func),
-                            Expression.Quote(selector)
-                        }
-                    )
-                );
+            return source.Provider.Execute<TResult>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Aggregate, source, seed, func, selector),
+                    new Expression[]
+                    {
+                        source.Expression,
+                        Expression.Constant(seed),
+                        Expression.Quote(func),
+                        Expression.Quote(selector)
+                    }
+                )
+            );
         }
     }
 }

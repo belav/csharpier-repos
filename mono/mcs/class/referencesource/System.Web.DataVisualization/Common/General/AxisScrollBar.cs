@@ -1218,13 +1218,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
                             }
 
                             // Scroll scaleView into the new position
-                            this.axis
-                                .ScaleView
-                                .Scroll(
-                                    this._lastClickViewPosition
-                                        + ((this.axis.IsReversed) ? -1 : 1) * distance,
-                                    true
-                                );
+                            this.axis.ScaleView.Scroll(
+                                this._lastClickViewPosition
+                                    + ((this.axis.IsReversed) ? -1 : 1) * distance,
+                                true
+                            );
                         }
                         break;
                     }

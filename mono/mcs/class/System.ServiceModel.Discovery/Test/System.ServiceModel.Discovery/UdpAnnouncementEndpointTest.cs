@@ -55,8 +55,7 @@ namespace MonoTests.System.ServiceModel.Discovery
             Assert.IsNotNull(de.Binding, "#12");
             TransportBindingElement tbe = null;
             Assert.IsTrue(
-                de.Binding
-                    .CreateBindingElements()
+                de.Binding.CreateBindingElements()
                     .Any(
                         be =>
                             (tbe = be as TransportBindingElement) != null

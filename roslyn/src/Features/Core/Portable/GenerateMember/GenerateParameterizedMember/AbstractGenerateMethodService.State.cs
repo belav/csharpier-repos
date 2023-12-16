@@ -181,9 +181,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     return false;
                 }
 
-                var syntaxFacts = semanticDocument
-                    .Document
-                    .GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts =
+                    semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
                 if (syntaxFacts.IsLeftSideOfAnyAssignment(simpleNameOrMemberAccessExpression))
                     return false;
 
@@ -216,9 +215,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
                 else
                 {
-                    var typeInference = semanticDocument
-                        .Document
-                        .GetLanguageService<ITypeInferenceService>();
+                    var typeInference =
+                        semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
                     var delegateInvokeMethod = typeInference
                         .InferDelegateType(
                             semanticModel,
@@ -321,9 +319,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     return false;
                 }
 
-                var semanticFacts = semanticDocument
-                    .Document
-                    .GetLanguageService<ISemanticFactsService>();
+                var semanticFacts =
+                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
                 IsWrittenTo = semanticFacts.IsWrittenTo(
                     semanticModel,
                     InvocationExpressionOpt ?? SimpleNameOrMemberAccessExpression,

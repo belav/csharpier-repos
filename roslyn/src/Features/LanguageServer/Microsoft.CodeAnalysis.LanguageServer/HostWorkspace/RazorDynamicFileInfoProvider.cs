@@ -74,9 +74,8 @@ internal class RazorDynamicFileInfoProvider : IDynamicFileInfoProvider
             LanguageServerHost.Instance,
             "We don't have an LSP channel yet to send this request through."
         );
-        var clientLanguageServerManager = LanguageServerHost
-            .Instance
-            .GetRequiredLspService<IClientLanguageServerManager>();
+        var clientLanguageServerManager =
+            LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
 
         var response = await clientLanguageServerManager.SendRequestAsync<
             ProvideDynamicFileParams,
@@ -121,9 +120,8 @@ internal class RazorDynamicFileInfoProvider : IDynamicFileInfoProvider
             LanguageServerHost.Instance,
             "We don't have an LSP channel yet to send this request through."
         );
-        var clientLanguageServerManager = LanguageServerHost
-            .Instance
-            .GetRequiredLspService<IClientLanguageServerManager>();
+        var clientLanguageServerManager =
+            LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
 
         return clientLanguageServerManager
             .SendNotificationAsync(

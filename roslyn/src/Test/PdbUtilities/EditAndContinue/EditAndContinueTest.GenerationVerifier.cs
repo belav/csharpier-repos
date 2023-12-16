@@ -99,16 +99,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             internal void VerifyDeletedMembers(params string[] expected)
             {
-                var actual = _generationInfo
-                    .Baseline
-                    .DeletedMembers
-                    .Select(
-                        e =>
-                            e.Key.ToString()
-                            + ": {"
-                            + string.Join(", ", e.Value.Select(v => v.Name))
-                            + "}"
-                    );
+                var actual = _generationInfo.Baseline.DeletedMembers.Select(
+                    e =>
+                        e.Key.ToString()
+                        + ": {"
+                        + string.Join(", ", e.Value.Select(v => v.Name))
+                        + "}"
+                );
                 AssertEx.SetEqual(
                     expected,
                     actual,
@@ -181,16 +178,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             public void VerifySynthesizedMembers(params string[] expected)
             {
-                var actual = _generationInfo
-                    .Baseline
-                    .SynthesizedMembers
-                    .Select(
-                        e =>
-                            e.Key.ToString()
-                            + ": {"
-                            + string.Join(", ", e.Value.Select(v => v.Name))
-                            + "}"
-                    );
+                var actual = _generationInfo.Baseline.SynthesizedMembers.Select(
+                    e =>
+                        e.Key.ToString()
+                        + ": {"
+                        + string.Join(", ", e.Value.Select(v => v.Name))
+                        + "}"
+                );
 
                 AssertEx.SetEqual(
                     expected,
@@ -206,11 +200,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             )
             {
                 var actual = _generationInfo
-                    .Baseline
-                    .SynthesizedMembers
-                    .Single(e => e.Key.ToString() == typeName)
-                    .Value
-                    .Where(s => s.Kind == SymbolKind.Field)
+                    .Baseline.SynthesizedMembers.Single(e => e.Key.ToString() == typeName)
+                    .Value.Where(s => s.Kind == SymbolKind.Field)
                     .Select(s => (IFieldSymbol)s.GetISymbol())
                     .Select(f => f.Name + ": " + f.Type);
 
@@ -245,9 +236,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 string qualifiedMemberName,
                 string expectedILWithSequencePoints
             ) =>
-                _generationInfo
-                    .CompilationVerifier!
-                    .VerifyMethodBody(qualifiedMemberName, expectedILWithSequencePoints);
+                _generationInfo.CompilationVerifier!.VerifyMethodBody(
+                    qualifiedMemberName,
+                    expectedILWithSequencePoints
+                );
 
             internal void VerifyPdb(IEnumerable<int> methodTokens, string expectedPdb) =>
                 _generationInfo.CompilationDifference!.VerifyPdb(methodTokens, expectedPdb);
@@ -257,9 +249,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 string expectedPdb,
                 PdbValidationOptions options = default
             ) =>
-                _generationInfo
-                    .CompilationVerifier!
-                    .VerifyPdb(qualifiedMemberName, expectedPdb, options: options);
+                _generationInfo.CompilationVerifier!.VerifyPdb(
+                    qualifiedMemberName,
+                    expectedPdb,
+                    options: options
+                );
 
             internal void VerifyIL(string expectedIL)
             {

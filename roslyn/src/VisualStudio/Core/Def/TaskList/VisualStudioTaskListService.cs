@@ -99,9 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
             {
                 // Don't bother doing anything until the workspace has actually loaded.  We don't want to add to any
                 // startup costs by doing work too early.
-                var workspaceStatus = workspace
-                    .Services
-                    .GetRequiredService<IWorkspaceStatusService>();
+                var workspaceStatus =
+                    workspace.Services.GetRequiredService<IWorkspaceStatusService>();
                 await workspaceStatus
                     .WaitUntilFullyLoadedAsync(_threadingContext.DisposalToken)
                     .ConfigureAwait(false);

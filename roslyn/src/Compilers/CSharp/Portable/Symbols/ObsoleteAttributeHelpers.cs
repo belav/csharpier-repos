@@ -63,9 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool ignoreRequiredMemberMarker
         )
         {
-            var obsoleteAttributeData = containingModule
-                .Module
-                .TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
+            var obsoleteAttributeData =
+                containingModule.Module.TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
                     token,
                     new MetadataDecoder(containingModule),
                     ignoreByRefLikeMarker,

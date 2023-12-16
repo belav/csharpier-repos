@@ -723,9 +723,13 @@ namespace System.Security.Cryptography
 
             int parameterSize = 0;
             if (
-                !CapiNative
-                    .UnsafeNativeMethods
-                    .CryptGetHashParam(hashHandle, parameter, null, ref parameterSize, 0)
+                !CapiNative.UnsafeNativeMethods.CryptGetHashParam(
+                    hashHandle,
+                    parameter,
+                    null,
+                    ref parameterSize,
+                    0
+                )
             )
             {
                 throw new CryptographicException(Marshal.GetLastWin32Error());
@@ -734,9 +738,13 @@ namespace System.Security.Cryptography
             Debug.Assert(0 < parameterSize, "Invalid parameter size returned");
             byte[] parameterValue = new byte[parameterSize];
             if (
-                !CapiNative
-                    .UnsafeNativeMethods
-                    .CryptGetHashParam(hashHandle, parameter, parameterValue, ref parameterSize, 0)
+                !CapiNative.UnsafeNativeMethods.CryptGetHashParam(
+                    hashHandle,
+                    parameter,
+                    parameterValue,
+                    ref parameterSize,
+                    0
+                )
             )
             {
                 throw new CryptographicException(Marshal.GetLastWin32Error());

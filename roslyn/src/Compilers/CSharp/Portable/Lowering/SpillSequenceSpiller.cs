@@ -752,12 +752,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && receiverRefLocal.Type.IsTypeParameter()
                 && !receiverRefLocal.Type.IsReferenceType
                 && !receiverRefLocal.Type.IsValueType
-                && valueTypeReceiver
-                    .Type
-                    .Equals(receiverRefLocal.Type, TypeCompareKind.AllIgnoreOptions)
-                && referenceTypeReceiver
-                    .Type
-                    .Equals(receiverRefLocal.Type, TypeCompareKind.AllIgnoreOptions)
+                && valueTypeReceiver.Type.Equals(
+                    receiverRefLocal.Type,
+                    TypeCompareKind.AllIgnoreOptions
+                )
+                && referenceTypeReceiver.Type.Equals(
+                    receiverRefLocal.Type,
+                    TypeCompareKind.AllIgnoreOptions
+                )
             )
             {
                 outReceiverRefLocal = receiverRefLocal;

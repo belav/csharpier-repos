@@ -74,10 +74,12 @@ namespace Mono.CSharp
 
                 if (IsReservedName(name))
                 {
-                    mc.Module
-                        .Compiler
-                        .Report
-                        .Error(8126, loc, "The tuple element name `{0}' is reserved", name);
+                    mc.Module.Compiler.Report.Error(
+                        8126,
+                        loc,
+                        "The tuple element name `{0}' is reserved",
+                        name
+                    );
                     names[i] = null;
                     continue;
                 }
@@ -96,16 +98,13 @@ namespace Mono.CSharp
                         && value != i + 1
                     )
                     {
-                        mc.Module
-                            .Compiler
-                            .Report
-                            .Error(
-                                8125,
-                                loc,
-                                "The tuple element name `{0}' can only be used at position {1}",
-                                name,
-                                idx
-                            );
+                        mc.Module.Compiler.Report.Error(
+                            8125,
+                            loc,
+                            "The tuple element name `{0}' can only be used at position {1}",
+                            name,
+                            idx
+                        );
                         names[i] = null;
                         continue;
                     }
@@ -121,10 +120,12 @@ namespace Mono.CSharp
                 {
                     if (name == names[ii])
                     {
-                        mc.Module
-                            .Compiler
-                            .Report
-                            .Error(8127, loc, "The tuple element name `{0}' is a duplicate", name);
+                        mc.Module.Compiler.Report.Error(
+                            8127,
+                            loc,
+                            "The tuple element name `{0}' is a duplicate",
+                            name
+                        );
                         names[i] = null;
                         break;
                     }
@@ -228,16 +229,13 @@ namespace Mono.CSharp
                 );
                 if (ms == null)
                 {
-                    mc.Module
-                        .Compiler
-                        .Report
-                        .Error(
-                            8128,
-                            loc,
-                            "Member `{0}' was not found on type '{1}'",
-                            member_name,
-                            tuple.GetSignatureForError()
-                        );
+                    mc.Module.Compiler.Report.Error(
+                        8128,
+                        loc,
+                        "Member `{0}' was not found on type '{1}'",
+                        member_name,
+                        tuple.GetSignatureForError()
+                    );
                     return null;
                 }
 

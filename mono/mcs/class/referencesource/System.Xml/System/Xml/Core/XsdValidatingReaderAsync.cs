@@ -122,9 +122,11 @@ namespace System.Xml
                 }
                 else
                 {
-                    return XmlUntypedConverter
-                        .Untyped
-                        .ChangeType(typedValue, returnType, namespaceResolver);
+                    return XmlUntypedConverter.Untyped.ChangeType(
+                        typedValue,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
             }
             catch (FormatException e)
@@ -253,15 +255,19 @@ namespace System.Xml
                     {
                         typedValue = originalStringValue;
                     }
-                    return xmlType
-                        .ValueConverter
-                        .ChangeType(typedValue, returnType, namespaceResolver);
+                    return xmlType.ValueConverter.ChangeType(
+                        typedValue,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
                 else
                 {
-                    return XmlUntypedConverter
-                        .Untyped
-                        .ChangeType(typedValue, returnType, namespaceResolver);
+                    return XmlUntypedConverter.Untyped.ChangeType(
+                        typedValue,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
             }
             catch (FormatException e)

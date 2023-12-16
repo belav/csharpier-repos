@@ -146,10 +146,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                 dteProject.Properties.Item("TargetFrameworkMoniker").Value;
             var relativeOutputPath = (string)
                 dteProject
-                    .ConfigurationManager
-                    .ActiveConfiguration
-                    .Properties
-                    .Item("OutputPath")
+                    .ConfigurationManager.ActiveConfiguration.Properties.Item("OutputPath")
                     .Value;
 
             Debug.Assert(!string.IsNullOrEmpty(projectDir));
@@ -198,10 +195,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         }
 
         internal Project GetProjectFromHierarchy(IVsHierarchy hierarchy) =>
-            _workspace
-                .CurrentSolution
-                .Projects
-                .FirstOrDefault(proj => _workspace.GetHierarchy(proj.Id) == hierarchy);
+            _workspace.CurrentSolution.Projects.FirstOrDefault(
+                proj => _workspace.GetHierarchy(proj.Id) == hierarchy
+            );
 
         private static InteractiveHostPlatform? GetInteractiveHostPlatform(
             string targetFrameworkMoniker,
@@ -286,9 +282,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             foreach (var possibleGacName in possibleGacNames)
             {
                 if (
-                    DesktopAssemblyIdentityComparer
-                        .Default
-                        .ReferenceMatchesDefinition(identity, possibleGacName)
+                    DesktopAssemblyIdentityComparer.Default.ReferenceMatchesDefinition(
+                        identity,
+                        possibleGacName
+                    )
                 )
                 {
                     foundEquivalent = true;
@@ -358,10 +355,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IInteractiveWindow interactiveWindow
         )
         {
-            var document = interactiveWindow
-                .CurrentLanguageBuffer
-                .CurrentSnapshot
-                .GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                interactiveWindow.CurrentLanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             var compilation = await document.Project.GetCompilationAsync().ConfigureAwait(true);
             return namespacesToImport.Where(
                 ns => compilation.GlobalNamespace.GetQualifiedNamespace(ns) != null

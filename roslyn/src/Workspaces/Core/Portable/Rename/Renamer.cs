@@ -278,8 +278,7 @@ namespace Microsoft.CodeAnalysis.Rename
 
                         if (result.HasValue && result.Value != null)
                             return await result
-                                .Value
-                                .RehydrateAsync(solution, cancellationToken)
+                                .Value.RehydrateAsync(solution, cancellationToken)
                                 .ConfigureAwait(false);
 
                         // TODO: do not fall back to in-proc if client is available (https://github.com/dotnet/roslyn/issues/47557)

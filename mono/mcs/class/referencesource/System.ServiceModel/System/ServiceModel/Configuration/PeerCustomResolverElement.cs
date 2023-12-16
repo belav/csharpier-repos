@@ -97,13 +97,11 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(SR.PeerResolverInvalid, this.ResolverType)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.PeerResolverInvalid, this.ResolverType)
+                        )
+                    );
                 }
             }
         }

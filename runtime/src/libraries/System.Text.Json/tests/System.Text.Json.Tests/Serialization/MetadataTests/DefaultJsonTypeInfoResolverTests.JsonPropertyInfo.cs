@@ -124,9 +124,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonSerializerOptions options =
                 new() { TypeInfoResolver = JsonSerializerOptions.Default.TypeInfoResolver };
-            JsonTypeInfo typeInfo = options
-                .TypeInfoResolver
-                .GetTypeInfo(typeof(TestClassWithCustomConverterOnProperty), options);
+            JsonTypeInfo typeInfo = options.TypeInfoResolver.GetTypeInfo(
+                typeof(TestClassWithCustomConverterOnProperty),
+                options
+            );
             JsonPropertyInfo propertyInfo = typeInfo.CreateJsonPropertyInfo(
                 typeof(MyClass),
                 "test"
@@ -139,9 +140,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonPropertyInfoCustomConverterIsNotNullForPropertyWithCustomConverter()
         {
             JsonSerializerOptions options = JsonSerializerOptions.Default;
-            JsonTypeInfo typeInfo = options
-                .TypeInfoResolver
-                .GetTypeInfo(typeof(TestClassWithCustomConverterOnProperty), options);
+            JsonTypeInfo typeInfo = options.TypeInfoResolver.GetTypeInfo(
+                typeof(TestClassWithCustomConverterOnProperty),
+                options
+            );
             Assert.Equal(1, typeInfo.Properties.Count);
             JsonPropertyInfo propertyInfo = typeInfo.Properties[0];
 
@@ -281,9 +283,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonPropertyInfoGetIsNullAndMutableWhenUsingCreateJsonPropertyInfo()
         {
             JsonSerializerOptions options = JsonSerializerOptions.Default;
-            JsonTypeInfo typeInfo = options
-                .TypeInfoResolver
-                .GetTypeInfo(typeof(TestClassWithCustomConverterOnProperty), options);
+            JsonTypeInfo typeInfo = options.TypeInfoResolver.GetTypeInfo(
+                typeof(TestClassWithCustomConverterOnProperty),
+                options
+            );
             JsonPropertyInfo propertyInfo = typeInfo.CreateJsonPropertyInfo(
                 typeof(MyClass),
                 "test"
@@ -302,9 +305,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonPropertyInfoGetIsNotNullForDefaultResolver()
         {
             JsonSerializerOptions options = JsonSerializerOptions.Default;
-            JsonTypeInfo typeInfo = options
-                .TypeInfoResolver
-                .GetTypeInfo(typeof(TestClassWithCustomConverterOnProperty), options);
+            JsonTypeInfo typeInfo = options.TypeInfoResolver.GetTypeInfo(
+                typeof(TestClassWithCustomConverterOnProperty),
+                options
+            );
             JsonPropertyInfo propertyInfo = typeInfo.Properties[0];
 
             Assert.NotNull(propertyInfo.Get);
@@ -413,9 +417,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonPropertyInfoSetIsNullAndMutableWhenUsingCreateJsonPropertyInfo()
         {
             JsonSerializerOptions options = JsonSerializerOptions.Default;
-            JsonTypeInfo typeInfo = options
-                .TypeInfoResolver
-                .GetTypeInfo(typeof(TestClassWithCustomConverterOnProperty), options);
+            JsonTypeInfo typeInfo = options.TypeInfoResolver.GetTypeInfo(
+                typeof(TestClassWithCustomConverterOnProperty),
+                options
+            );
             JsonPropertyInfo propertyInfo = typeInfo.CreateJsonPropertyInfo(
                 typeof(MyClass),
                 "test"
@@ -434,9 +439,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonPropertyInfoSetIsNotNullForDefaultResolver()
         {
             JsonSerializerOptions options = JsonSerializerOptions.Default;
-            JsonTypeInfo typeInfo = options
-                .TypeInfoResolver
-                .GetTypeInfo(typeof(TestClassWithCustomConverterOnProperty), options);
+            JsonTypeInfo typeInfo = options.TypeInfoResolver.GetTypeInfo(
+                typeof(TestClassWithCustomConverterOnProperty),
+                options
+            );
             Assert.Equal(1, typeInfo.Properties.Count);
             JsonPropertyInfo propertyInfo = typeInfo.Properties[0];
 
@@ -558,26 +564,24 @@ namespace System.Text.Json.Serialization.Tests
         public static void AddingNumberHandlingToPropertyIsRespected()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithNumber))
                     {
-                        if (ti.Type == typeof(TestClassWithNumber))
-                        {
-                            Assert.Equal(1, ti.Properties.Count);
-                            Assert.Null(ti.Properties[0].NumberHandling);
-                            ti.Properties[0].NumberHandling =
-                                JsonNumberHandling.WriteAsString
-                                | JsonNumberHandling.AllowReadingFromString;
-                            Assert.Equal(
-                                JsonNumberHandling.WriteAsString
-                                    | JsonNumberHandling.AllowReadingFromString,
-                                ti.Properties[0].NumberHandling
-                            );
-                        }
+                        Assert.Equal(1, ti.Properties.Count);
+                        Assert.Null(ti.Properties[0].NumberHandling);
+                        ti.Properties[0].NumberHandling =
+                            JsonNumberHandling.WriteAsString
+                            | JsonNumberHandling.AllowReadingFromString;
+                        Assert.Equal(
+                            JsonNumberHandling.WriteAsString
+                                | JsonNumberHandling.AllowReadingFromString,
+                            ti.Properties[0].NumberHandling
+                        );
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = resolver;
@@ -607,24 +611,22 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithNumberHandlingOnProperty))
                     {
-                        if (ti.Type == typeof(TestClassWithNumberHandlingOnProperty))
-                        {
-                            Assert.Equal(1, ti.Properties.Count);
-                            Assert.Equal(
-                                JsonNumberHandling.WriteAsString
-                                    | JsonNumberHandling.AllowReadingFromString,
-                                ti.Properties[0].NumberHandling
-                            );
-                            ti.Properties[0].NumberHandling = numberHandling;
-                            Assert.Equal(numberHandling, ti.Properties[0].NumberHandling);
-                        }
+                        Assert.Equal(1, ti.Properties.Count);
+                        Assert.Equal(
+                            JsonNumberHandling.WriteAsString
+                                | JsonNumberHandling.AllowReadingFromString,
+                            ti.Properties[0].NumberHandling
+                        );
+                        ti.Properties[0].NumberHandling = numberHandling;
+                        Assert.Equal(numberHandling, ti.Properties[0].NumberHandling);
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = resolver;
@@ -651,23 +653,18 @@ namespace System.Text.Json.Serialization.Tests
         public static void NumberHandlingFromTypeDoesntFlowToPropertyAndOverrideIsRespected()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithNumberHandling))
                     {
-                        if (ti.Type == typeof(TestClassWithNumberHandling))
-                        {
-                            Assert.Equal(1, ti.Properties.Count);
-                            Assert.Null(ti.Properties[0].NumberHandling);
-                            ti.Properties[0].NumberHandling = JsonNumberHandling.Strict;
-                            Assert.Equal(
-                                JsonNumberHandling.Strict,
-                                ti.Properties[0].NumberHandling
-                            );
-                        }
+                        Assert.Equal(1, ti.Properties.Count);
+                        Assert.Null(ti.Properties[0].NumberHandling);
+                        ti.Properties[0].NumberHandling = JsonNumberHandling.Strict;
+                        Assert.Equal(JsonNumberHandling.Strict, ti.Properties[0].NumberHandling);
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = resolver;
@@ -694,22 +691,17 @@ namespace System.Text.Json.Serialization.Tests
         public static void NumberHandlingFromOptionsDoesntFlowToPropertyAndOverrideIsRespected()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithNumber))
                     {
-                        if (ti.Type == typeof(TestClassWithNumber))
-                        {
-                            Assert.Null(ti.Properties[0].NumberHandling);
-                            ti.Properties[0].NumberHandling = JsonNumberHandling.Strict;
-                            Assert.Equal(
-                                JsonNumberHandling.Strict,
-                                ti.Properties[0].NumberHandling
-                            );
-                        }
+                        Assert.Null(ti.Properties[0].NumberHandling);
+                        ti.Properties[0].NumberHandling = JsonNumberHandling.Strict;
+                        Assert.Equal(JsonNumberHandling.Strict, ti.Properties[0].NumberHandling);
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.NumberHandling =
@@ -788,25 +780,23 @@ namespace System.Text.Json.Serialization.Tests
             TestClassWithNumber obj = new() { IntProperty = 3, };
 
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithNumber))
                     {
-                        if (ti.Type == typeof(TestClassWithNumber))
+                        Assert.Equal(1, ti.Properties.Count);
+                        Assert.Null(ti.Properties[0].ShouldSerialize);
+                        ti.Properties[0].ShouldSerialize = (o, val) =>
                         {
-                            Assert.Equal(1, ti.Properties.Count);
-                            Assert.Null(ti.Properties[0].ShouldSerialize);
-                            ti.Properties[0].ShouldSerialize = (o, val) =>
-                            {
-                                Assert.Same(obj, o);
-                                int intValue = (int)val;
-                                Assert.Equal(obj.IntProperty, intValue);
-                                return intValue != 3;
-                            };
-                        }
+                            Assert.Same(obj, o);
+                            int intValue = (int)val;
+                            Assert.Equal(obj.IntProperty, intValue);
+                            return intValue != 3;
+                        };
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = resolver;
@@ -829,37 +819,35 @@ namespace System.Text.Json.Serialization.Tests
             TestClassWithNumberAndIgnoreConditionOnProperty obj = new() { IntProperty = 37, };
 
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithNumberAndIgnoreConditionOnProperty))
                     {
-                        if (ti.Type == typeof(TestClassWithNumberAndIgnoreConditionOnProperty))
-                        {
-                            Assert.Equal(1, ti.Properties.Count);
-                            Assert.NotNull(ti.Properties[0].ShouldSerialize);
-                            Assert.False(ti.Properties[0].ShouldSerialize(null, 0));
-                            Assert.True(ti.Properties[0].ShouldSerialize(null, 1));
-                            Assert.True(ti.Properties[0].ShouldSerialize(null, -1));
-                            Assert.True(ti.Properties[0].ShouldSerialize(null, 3));
+                        Assert.Equal(1, ti.Properties.Count);
+                        Assert.NotNull(ti.Properties[0].ShouldSerialize);
+                        Assert.False(ti.Properties[0].ShouldSerialize(null, 0));
+                        Assert.True(ti.Properties[0].ShouldSerialize(null, 1));
+                        Assert.True(ti.Properties[0].ShouldSerialize(null, -1));
+                        Assert.True(ti.Properties[0].ShouldSerialize(null, 3));
 
-                            if (removeShouldSerialize)
+                        if (removeShouldSerialize)
+                        {
+                            ti.Properties[0].ShouldSerialize = null;
+                        }
+                        else
+                        {
+                            ti.Properties[0].ShouldSerialize = (o, val) =>
                             {
-                                ti.Properties[0].ShouldSerialize = null;
-                            }
-                            else
-                            {
-                                ti.Properties[0].ShouldSerialize = (o, val) =>
-                                {
-                                    Assert.Same(obj, o);
-                                    int intValue = (int)val;
-                                    Assert.Equal(obj.IntProperty, intValue);
-                                    return intValue != 3;
-                                };
-                            }
+                                Assert.Same(obj, o);
+                                int intValue = (int)val;
+                                Assert.Equal(obj.IntProperty, intValue);
+                                return intValue != 3;
+                            };
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = resolver;
@@ -895,25 +883,23 @@ namespace System.Text.Json.Serialization.Tests
             TestClassWithNumber obj = new() { IntProperty = 37, };
 
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithNumber))
                     {
-                        if (ti.Type == typeof(TestClassWithNumber))
+                        Assert.Equal(1, ti.Properties.Count);
+                        Assert.Null(ti.Properties[0].ShouldSerialize);
+                        ti.Properties[0].ShouldSerialize = (o, val) =>
                         {
-                            Assert.Equal(1, ti.Properties.Count);
-                            Assert.Null(ti.Properties[0].ShouldSerialize);
-                            ti.Properties[0].ShouldSerialize = (o, val) =>
-                            {
-                                Assert.Same(obj, o);
-                                int intValue = (int)val;
-                                Assert.Equal(obj.IntProperty, intValue);
-                                return intValue != 3;
-                            };
-                        }
+                            Assert.Same(obj, o);
+                            int intValue = (int)val;
+                            Assert.Equal(obj.IntProperty, intValue);
+                            return intValue != 3;
+                        };
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
@@ -937,27 +923,25 @@ namespace System.Text.Json.Serialization.Tests
             TestClassWithNumberAndIgnoreConditionOnProperty obj = new() { IntProperty = 37, };
 
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithNumber))
                     {
-                        if (ti.Type == typeof(TestClassWithNumber))
+                        Assert.Equal(1, ti.Properties.Count);
+                        Assert.Null(ti.Properties[0].ShouldSerialize);
+                        ti.Properties[0].ShouldSerialize = (o, val) =>
                         {
-                            Assert.Equal(1, ti.Properties.Count);
-                            Assert.Null(ti.Properties[0].ShouldSerialize);
-                            ti.Properties[0].ShouldSerialize = (o, val) =>
-                            {
-                                Assert.Same(obj, o);
-                                int intValue = (int)val;
-                                Assert.Equal(obj.IntProperty, intValue);
-                                return intValue != 3;
-                            };
+                            Assert.Same(obj, o);
+                            int intValue = (int)val;
+                            Assert.Equal(obj.IntProperty, intValue);
+                            return intValue != 3;
+                        };
 
-                            ti.Properties[0].ShouldSerialize = null;
-                        }
+                        ti.Properties[0].ShouldSerialize = null;
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
@@ -1021,35 +1005,34 @@ namespace System.Text.Json.Serialization.Tests
             bool modifierTestRun = false;
 
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(ti =>
-                {
-                    if (ti.Type != typeof(TestClassWithEveryPossibleJsonIgnore))
-                        return;
+            resolver.Modifiers.Add(ti =>
+            {
+                if (ti.Type != typeof(TestClassWithEveryPossibleJsonIgnore))
+                    return;
 
-                    Assert.Equal(5, ti.Properties.Count);
-                    Assert.False(modifierTestRun);
-                    modifierTestRun = true;
-                    foreach (var property in ti.Properties)
-                    {
-                        string jsonIgnoreValue = property
-                            .Name
-                            .Substring(0, property.Name.Length - "Property".Length);
-                        JsonIgnoreCondition? ignoreConditionOnProperty = string.IsNullOrEmpty(
-                            jsonIgnoreValue
-                        )
-                            ? null
-                            : (JsonIgnoreCondition)
-                                Enum.Parse(typeof(JsonIgnoreCondition), jsonIgnoreValue);
-                        TestJsonIgnoreConditionDelegate(
-                            defaultIgnoreCondition,
-                            ignoreConditionOnProperty,
-                            property,
-                            modify
-                        );
-                    }
-                });
+                Assert.Equal(5, ti.Properties.Count);
+                Assert.False(modifierTestRun);
+                modifierTestRun = true;
+                foreach (var property in ti.Properties)
+                {
+                    string jsonIgnoreValue = property.Name.Substring(
+                        0,
+                        property.Name.Length - "Property".Length
+                    );
+                    JsonIgnoreCondition? ignoreConditionOnProperty = string.IsNullOrEmpty(
+                        jsonIgnoreValue
+                    )
+                        ? null
+                        : (JsonIgnoreCondition)
+                            Enum.Parse(typeof(JsonIgnoreCondition), jsonIgnoreValue);
+                    TestJsonIgnoreConditionDelegate(
+                        defaultIgnoreCondition,
+                        ignoreConditionOnProperty,
+                        property,
+                        modify
+                    );
+                }
+            });
 
             JsonSerializerOptions options = new();
             options.TypeInfoResolver = resolver;
@@ -1934,9 +1917,9 @@ namespace System.Text.Json.Serialization.Tests
             JsonTestHelper.AssertJsonEqual("{}", json);
 
             // Metadata is reported as expected
-            JsonTypeInfo jti = JsonSerializerOptions
-                .Default
-                .GetTypeInfo(typeof(PocoWithIgnoredUnsupportedType));
+            JsonTypeInfo jti = JsonSerializerOptions.Default.GetTypeInfo(
+                typeof(PocoWithIgnoredUnsupportedType)
+            );
             Assert.Equal(1, jti.Properties.Count);
             JsonPropertyInfo propertyInfo = jti.Properties[0];
             Assert.Null(propertyInfo.Get);

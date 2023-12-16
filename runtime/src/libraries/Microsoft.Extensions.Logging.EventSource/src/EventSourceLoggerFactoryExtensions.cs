@@ -44,27 +44,21 @@ namespace Microsoft.Extensions.Logging
             ThrowHelper.ThrowIfNull(builder);
 
             builder.Services.TryAddSingleton(LoggingEventSource.Instance);
-            builder
-                .Services
-                .TryAddEnumerable(
-                    ServiceDescriptor.Singleton<ILoggerProvider, EventSourceLoggerProvider>()
-                );
-            builder
-                .Services
-                .TryAddEnumerable(
-                    ServiceDescriptor.Singleton<
-                        IConfigureOptions<LoggerFilterOptions>,
-                        EventLogFiltersConfigureOptions
-                    >()
-                );
-            builder
-                .Services
-                .TryAddEnumerable(
-                    ServiceDescriptor.Singleton<
-                        IOptionsChangeTokenSource<LoggerFilterOptions>,
-                        EventLogFiltersConfigureOptionsChangeSource
-                    >()
-                );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<ILoggerProvider, EventSourceLoggerProvider>()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<LoggerFilterOptions>,
+                    EventLogFiltersConfigureOptions
+                >()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IOptionsChangeTokenSource<LoggerFilterOptions>,
+                    EventLogFiltersConfigureOptionsChangeSource
+                >()
+            );
             return builder;
         }
     }

@@ -149,9 +149,8 @@ namespace ILCompiler.DependencyAnalysis
                         else
                         {
                             // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
-                            GenericLookupResult nonGcRegionLookup = factory
-                                .GenericLookup
-                                .TypeNonGCStaticBase(target);
+                            GenericLookupResult nonGcRegionLookup =
+                                factory.GenericLookup.TypeNonGCStaticBase(target);
                             EmitDictionaryLookup(
                                 factory,
                                 ref encoder,
@@ -218,9 +217,8 @@ namespace ILCompiler.DependencyAnalysis
                         {
                             // There is a lazy class constructor. We need the non-GC static base because that's where the
                             // class constructor context lives.
-                            GenericLookupResult nonGcRegionLookup = factory
-                                .GenericLookup
-                                .TypeNonGCStaticBase(target);
+                            GenericLookupResult nonGcRegionLookup =
+                                factory.GenericLookup.TypeNonGCStaticBase(target);
                             EmitDictionaryLookup(
                                 factory,
                                 ref encoder,

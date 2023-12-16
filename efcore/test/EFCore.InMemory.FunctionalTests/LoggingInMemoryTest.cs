@@ -24,8 +24,7 @@ public class LoggingInMemoryTest : LoggingTestBase
 
     protected override string ProviderVersion =>
         typeof(InMemoryOptionsExtension)
-            .Assembly
-            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             ?.InformationalVersion;
 
     protected override string DefaultOptions => "StoreName=LoggingInMemoryTest ";

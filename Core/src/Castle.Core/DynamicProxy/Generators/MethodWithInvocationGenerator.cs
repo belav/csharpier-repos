@@ -123,15 +123,12 @@ namespace Castle.DynamicProxy.Generators
                     namingScope.GetUniqueName("token_" + MethodToOverride.Name),
                     typeof(MethodInfo)
                 );
-                @class
-                    .ClassConstructor
-                    .CodeBuilder
-                    .AddStatement(
-                        new AssignStatement(
-                            proxiedMethodToken,
-                            new MethodTokenExpression(MethodToOverride)
-                        )
-                    );
+                @class.ClassConstructor.CodeBuilder.AddStatement(
+                    new AssignStatement(
+                        proxiedMethodToken,
+                        new MethodTokenExpression(MethodToOverride)
+                    )
+                );
 
                 proxiedMethodTokenExpression = proxiedMethodToken;
             }
@@ -155,14 +152,12 @@ namespace Castle.DynamicProxy.Generators
             var ctorArguments = ModifyArguments(@class, arguments);
 
             var invocationLocal = emitter.CodeBuilder.DeclareLocal(invocationType);
-            emitter
-                .CodeBuilder
-                .AddStatement(
-                    new AssignStatement(
-                        invocationLocal,
-                        new NewInstanceExpression(constructor, ctorArguments)
-                    )
-                );
+            emitter.CodeBuilder.AddStatement(
+                new AssignStatement(
+                    invocationLocal,
+                    new NewInstanceExpression(constructor, ctorArguments)
+                )
+            );
 
             if (MethodToOverride.ContainsGenericParameters)
             {
@@ -214,25 +209,21 @@ namespace Castle.DynamicProxy.Generators
                     LocalReference returnValue = emitter.CodeBuilder.DeclareLocal(typeof(object));
                     emitter.CodeBuilder.AddStatement(new AssignStatement(returnValue, getRetVal));
 
-                    emitter
-                        .CodeBuilder
-                        .AddStatement(
-                            new IfNullExpression(
-                                returnValue,
-                                new ThrowStatement(
-                                    typeof(InvalidOperationException),
-                                    "Interceptors failed to set a return value, or swallowed the exception thrown by the target"
-                                )
+                    emitter.CodeBuilder.AddStatement(
+                        new IfNullExpression(
+                            returnValue,
+                            new ThrowStatement(
+                                typeof(InvalidOperationException),
+                                "Interceptors failed to set a return value, or swallowed the exception thrown by the target"
                             )
-                        );
+                        )
+                    );
                 }
 
                 // Emit code to return with cast from ReturnValue
-                emitter
-                    .CodeBuilder
-                    .AddStatement(
-                        new ReturnStatement(new ConvertExpression(emitter.ReturnType, getRetVal))
-                    );
+                emitter.CodeBuilder.AddStatement(
+                    new ReturnStatement(new ConvertExpression(emitter.ReturnType, getRetVal))
+                );
             }
             else
             {
@@ -287,20 +278,15 @@ namespace Castle.DynamicProxy.Generators
                 VirtualCall = true
             };
 
-            emitter
-                .CodeBuilder
-                .AddStatement(
-                    new IfNullExpression(
+            emitter.CodeBuilder.AddStatement(
+                new IfNullExpression(
+                    methodInterceptorsField,
+                    new AssignStatement(
                         methodInterceptorsField,
-                        new AssignStatement(
-                            methodInterceptorsField,
-                            new NullCoalescingOperatorExpression(
-                                selectInterceptors,
-                                emptyInterceptors
-                            )
-                        )
+                        new NullCoalescingOperatorExpression(selectInterceptors, emptyInterceptors)
                     )
-                );
+                )
+            );
 
             return methodInterceptorsField;
         }
@@ -316,36 +302,30 @@ namespace Castle.DynamicProxy.Generators
                 t => t.IsGenericParameter
             );
             var genericParamsArrayLocal = methodEmitter.CodeBuilder.DeclareLocal(typeof(Type[]));
-            methodEmitter
-                .CodeBuilder
-                .AddStatement(
-                    new AssignStatement(
-                        genericParamsArrayLocal,
-                        new NewArrayExpression(genericParameters.Length, typeof(Type))
-                    )
-                );
+            methodEmitter.CodeBuilder.AddStatement(
+                new AssignStatement(
+                    genericParamsArrayLocal,
+                    new NewArrayExpression(genericParameters.Length, typeof(Type))
+                )
+            );
 
             for (var i = 0; i < genericParameters.Length; ++i)
             {
-                methodEmitter
-                    .CodeBuilder
-                    .AddStatement(
-                        new AssignArrayStatement(
-                            genericParamsArrayLocal,
-                            i,
-                            new TypeTokenExpression(genericParameters[i])
-                        )
-                    );
-            }
-            methodEmitter
-                .CodeBuilder
-                .AddStatement(
-                    new MethodInvocationExpression(
-                        invocationLocal,
-                        InvocationMethods.SetGenericMethodArguments,
-                        genericParamsArrayLocal
+                methodEmitter.CodeBuilder.AddStatement(
+                    new AssignArrayStatement(
+                        genericParamsArrayLocal,
+                        i,
+                        new TypeTokenExpression(genericParameters[i])
                     )
                 );
+            }
+            methodEmitter.CodeBuilder.AddStatement(
+                new MethodInvocationExpression(
+                    invocationLocal,
+                    InvocationMethods.SetGenericMethodArguments,
+                    genericParamsArrayLocal
+                )
+            );
         }
 
         private IExpression[] GetCtorArguments(

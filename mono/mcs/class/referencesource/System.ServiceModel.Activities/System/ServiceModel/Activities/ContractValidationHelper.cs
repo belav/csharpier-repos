@@ -25,13 +25,11 @@ namespace System.ServiceModel.Activities
 
             if (receive1.Action != receive2.Action)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.TwoReceivesWithSameNameButDifferentAction(receiveOperationName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.TwoReceivesWithSameNameButDifferentAction(receiveOperationName)
+                    )
+                );
             }
 
             if (
@@ -64,13 +62,11 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.ReceiveAndReceiveParametersHaveSameName(receiveOperationName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.ReceiveAndReceiveParametersHaveSameName(receiveOperationName)
+                    )
+                );
             }
 
             if (receive1.HasReply && receive2.HasReply)
@@ -84,13 +80,11 @@ namespace System.ServiceModel.Activities
                 (receive1.HasReply || receive1.HasFault) != (receive2.HasReply || receive2.HasFault)
             )
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.TwoReceivesWithSameNameButDifferentIsOneWay(receiveOperationName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.TwoReceivesWithSameNameButDifferentIsOneWay(receiveOperationName)
+                    )
+                );
             }
 
             if (
@@ -110,15 +104,11 @@ namespace System.ServiceModel.Activities
                 )
             )
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.TwoReceivesWithSameNameButDifferentTxProperties(
-                                receiveOperationName
-                            )
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.TwoReceivesWithSameNameButDifferentTxProperties(receiveOperationName)
+                    )
+                );
             }
         }
 
@@ -132,13 +122,11 @@ namespace System.ServiceModel.Activities
 
             if (receive1.InternalDeclaredMessageType != receive2.InternalDeclaredMessageType)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.TwoReceivesWithSameNameButDifferentValueType(receiveOperationName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.TwoReceivesWithSameNameButDifferentValueType(receiveOperationName)
+                    )
+                );
             }
         }
 
@@ -156,41 +144,35 @@ namespace System.ServiceModel.Activities
             int count = receiveParameters1.ArgumentNames.Length;
             if (count != receiveParameters2.ArgumentNames.Length)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.TwoReceiveParametersWithSameNameButDifferentParameterCount(
-                                receiveOperationName
-                            )
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.TwoReceiveParametersWithSameNameButDifferentParameterCount(
+                            receiveOperationName
                         )
-                    );
+                    )
+                );
             }
             for (int i = 0; i < count; i++)
             {
                 if (receiveParameters1.ArgumentNames[i] != receiveParameters2.ArgumentNames[i])
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new ValidationException(
-                                SR2.TwoReceiveParametersWithSameNameButDifferentParameterName(
-                                    receiveOperationName
-                                )
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR2.TwoReceiveParametersWithSameNameButDifferentParameterName(
+                                receiveOperationName
                             )
-                        );
+                        )
+                    );
                 }
                 if (receiveParameters1.ArgumentTypes[i] != receiveParameters2.ArgumentTypes[i])
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new ValidationException(
-                                SR2.TwoReceiveParametersWithSameNameButDifferentParameterType(
-                                    receiveOperationName
-                                )
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR2.TwoReceiveParametersWithSameNameButDifferentParameterType(
+                                receiveOperationName
                             )
-                        );
+                        )
+                    );
                 }
             }
         }
@@ -209,13 +191,11 @@ namespace System.ServiceModel.Activities
 
             if (sendReply1.Action != sendReply2.Action)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.TwoSendRepliesWithSameNameButDifferentAction(operationName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.TwoSendRepliesWithSameNameButDifferentAction(operationName)
+                    )
+                );
             }
 
             if (
@@ -231,13 +211,11 @@ namespace System.ServiceModel.Activities
                     != sendMessage2.InternalDeclaredMessageType
                 )
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new ValidationException(
-                                SR2.TwoSendRepliesWithSameNameButDifferentValueType(operationName)
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR2.TwoSendRepliesWithSameNameButDifferentValueType(operationName)
+                        )
+                    );
                 }
             }
             else if (
@@ -253,15 +231,13 @@ namespace System.ServiceModel.Activities
                 int count = sendReplyParameters1.ArgumentNames.Length;
                 if (count != sendReplyParameters2.ArgumentNames.Length)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new ValidationException(
-                                SR2.TwoSendReplyParametersWithSameNameButDifferentParameterCount(
-                                    operationName
-                                )
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR2.TwoSendReplyParametersWithSameNameButDifferentParameterCount(
+                                operationName
                             )
-                        );
+                        )
+                    );
                 }
                 for (int i = 0; i < count; i++)
                 {
@@ -270,42 +246,36 @@ namespace System.ServiceModel.Activities
                         != sendReplyParameters2.ArgumentNames[i]
                     )
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new ValidationException(
-                                    SR2.TwoSendReplyParametersWithSameNameButDifferentParameterName(
-                                        operationName
-                                    )
+                        throw FxTrace.Exception.AsError(
+                            new ValidationException(
+                                SR2.TwoSendReplyParametersWithSameNameButDifferentParameterName(
+                                    operationName
                                 )
-                            );
+                            )
+                        );
                     }
                     if (
                         sendReplyParameters1.ArgumentTypes[i]
                         != sendReplyParameters2.ArgumentTypes[i]
                     )
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new ValidationException(
-                                    SR2.TwoSendReplyParametersWithSameNameButDifferentParameterType(
-                                        operationName
-                                    )
+                        throw FxTrace.Exception.AsError(
+                            new ValidationException(
+                                SR2.TwoSendReplyParametersWithSameNameButDifferentParameterType(
+                                    operationName
                                 )
-                            );
+                            )
+                        );
                     }
                 }
             }
             else
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ValidationException(
-                            SR2.ReceivePairedWithSendReplyAndSendReplyParameters(operationName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.ReceivePairedWithSendReplyAndSendReplyParameters(operationName)
+                    )
+                );
             }
         }
 
@@ -515,11 +485,9 @@ namespace System.ServiceModel.Activities
                             );
                         }
                         else if (
-                            !targetMessage
-                                .Body
-                                .ReturnValue
-                                .Type
-                                .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
+                            !targetMessage.Body.ReturnValue.Type.IsAssignableFrom(
+                                typeof(System.ServiceModel.Channels.Message)
+                            )
                         )
                         {
                             Constraint.AddValidationError(
@@ -566,10 +534,10 @@ namespace System.ServiceModel.Activities
                         {
                             if (
                                 !targetMessage
-                                    .Body
-                                    .Parts[0]
-                                    .Type
-                                    .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
+                                    .Body.Parts[0]
+                                    .Type.IsAssignableFrom(
+                                        typeof(System.ServiceModel.Channels.Message)
+                                    )
                             )
                             {
                                 Constraint.AddValidationError(
@@ -655,14 +623,15 @@ namespace System.ServiceModel.Activities
 
                 if (serializerOption == SerializerOption.DataContractSerializer)
                 {
-                    XmlQualifiedName xmlQualifiedName = MessageBuilder
-                        .XsdDataContractExporter
-                        .GetRootElementName(declaredMessageType);
+                    XmlQualifiedName xmlQualifiedName =
+                        MessageBuilder.XsdDataContractExporter.GetRootElementName(
+                            declaredMessageType
+                        );
                     if (xmlQualifiedName == null)
                     {
-                        xmlQualifiedName = MessageBuilder
-                            .XsdDataContractExporter
-                            .GetSchemaTypeName(declaredMessageType);
+                        xmlQualifiedName = MessageBuilder.XsdDataContractExporter.GetSchemaTypeName(
+                            declaredMessageType
+                        );
                     }
 
                     if (!xmlQualifiedName.IsEmpty)
@@ -679,9 +648,8 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    XmlTypeMapping xmlTypeMapping = MessageBuilder
-                        .XmlReflectionImporter
-                        .ImportTypeMapping(declaredMessageType);
+                    XmlTypeMapping xmlTypeMapping =
+                        MessageBuilder.XmlReflectionImporter.ImportTypeMapping(declaredMessageType);
                     partName = xmlTypeMapping.ElementName;
                     partNamespace = xmlTypeMapping.Namespace;
                 }
@@ -1071,9 +1039,9 @@ namespace System.ServiceModel.Activities
                             }
                             // Indicating it is a untyped message contract
                             if (
-                                !messagePart
-                                    .Type
-                                    .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
+                                !messagePart.Type.IsAssignableFrom(
+                                    typeof(System.ServiceModel.Channels.Message)
+                                )
                             )
                             {
                                 contentIsParameter = true;
@@ -1097,19 +1065,16 @@ namespace System.ServiceModel.Activities
                 if (
                     (
                         message.Body.ReturnValue != null
-                        && message
-                            .Body
-                            .ReturnValue
-                            .Type
-                            .IsDefined(typeof(MessageContractAttribute), false)
+                        && message.Body.ReturnValue.Type.IsDefined(
+                            typeof(MessageContractAttribute),
+                            false
+                        )
                     )
                     || (
                         message.Body.ReturnValue != null
-                        && message
-                            .Body
-                            .ReturnValue
-                            .Type
-                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
+                        && message.Body.ReturnValue.Type.IsAssignableFrom(
+                            typeof(System.ServiceModel.Channels.Message)
+                        )
                     )
                 )
                 {
@@ -1121,10 +1086,9 @@ namespace System.ServiceModel.Activities
                         operation.Messages[1].MessageType != null
                         || operation
                             .Messages[1]
-                            .Body
-                            .ReturnValue
-                            .Type
-                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
+                            .Body.ReturnValue.Type.IsAssignableFrom(
+                                typeof(System.ServiceModel.Channels.Message)
+                            )
                     )
                     {
                         contentIsParameter = false;
@@ -1168,11 +1132,9 @@ namespace System.ServiceModel.Activities
                     )
                     {
                         if (
-                            !message
-                                .Body
-                                .ReturnValue
-                                .Type
-                                .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
+                            !message.Body.ReturnValue.Type.IsAssignableFrom(
+                                typeof(System.ServiceModel.Channels.Message)
+                            )
                         )
                         {
                             contentIsParameter = true;
@@ -1197,11 +1159,9 @@ namespace System.ServiceModel.Activities
                                     break;
                                 }
                                 if (
-                                    !messagePart
-                                        .Type
-                                        .IsAssignableFrom(
-                                            typeof(System.ServiceModel.Channels.Message)
-                                        )
+                                    !messagePart.Type.IsAssignableFrom(
+                                        typeof(System.ServiceModel.Channels.Message)
+                                    )
                                 )
                                 {
                                     contentIsParameter = true;
@@ -1230,10 +1190,8 @@ namespace System.ServiceModel.Activities
                         && operation.Messages[0].Body.Parts.Count == 1
                         && operation
                             .Messages[0]
-                            .Body
-                            .Parts[0]
-                            .Type
-                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
+                            .Body.Parts[0]
+                            .Type.IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                     )
                     {
                         contentIsParameter = false;

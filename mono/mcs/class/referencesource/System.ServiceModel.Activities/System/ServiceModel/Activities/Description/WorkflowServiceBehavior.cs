@@ -45,9 +45,8 @@ namespace System.ServiceModel.Activities.Description
                 new DurableInstanceContextProvider(serviceHostBase);
             DurableInstanceProvider instanceProvider = new DurableInstanceProvider(serviceHostBase);
 
-            ServiceDebugBehavior serviceDebugBehavior = serviceDescription
-                .Behaviors
-                .Find<ServiceDebugBehavior>();
+            ServiceDebugBehavior serviceDebugBehavior =
+                serviceDescription.Behaviors.Find<ServiceDebugBehavior>();
 
             bool includeExceptionDetailInFaults =
                 serviceDebugBehavior != null
@@ -120,10 +119,9 @@ namespace System.ServiceModel.Activities.Description
                 {
                     //User defined Std Endpoint with WorkflowContractBehaviorAttribute.
                     return serviceEndpoint is WorkflowHostingEndpoint
-                        || serviceEndpoint
-                            .Contract
-                            .Behaviors
-                            .Contains(typeof(WorkflowContractBehaviorAttribute));
+                        || serviceEndpoint.Contract.Behaviors.Contains(
+                            typeof(WorkflowContractBehaviorAttribute)
+                        );
                 }
                 return false; //Some Einstein scenario where EndpointDispatcher is added explicitly without associated ServiceEndpoint.
             }

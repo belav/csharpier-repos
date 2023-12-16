@@ -58,8 +58,7 @@ namespace Mono.Linker.Steps
                 return;
 
             var attrsToRemove = provider
-                .CustomAttributes
-                .Where(IsCustomAttributeForSecurity)
+                .CustomAttributes.Where(IsCustomAttributeForSecurity)
                 .ToArray();
             foreach (var remove in attrsToRemove)
                 provider.CustomAttributes.Remove(remove);

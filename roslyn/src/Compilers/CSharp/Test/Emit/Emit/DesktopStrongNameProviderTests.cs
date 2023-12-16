@@ -47,8 +47,7 @@ class C
             );
 
             var options = TestOptions
-                .DebugExe
-                .WithStrongNameProvider(provider)
+                .DebugExe.WithStrongNameProvider(provider)
                 .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
             var comp = CreateCompilation(src, options: options);
             comp.VerifyEmitDiagnostics();
@@ -68,8 +67,7 @@ class C
                 new VirtualizedStrongNameFileSystem()
             );
             var options = TestOptions
-                .DebugExe
-                .WithStrongNameProvider(provider)
+                .DebugExe.WithStrongNameProvider(provider)
                 .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
             var comp = CreateCompilation(src, options: options);
             comp.VerifyEmitDiagnostics();

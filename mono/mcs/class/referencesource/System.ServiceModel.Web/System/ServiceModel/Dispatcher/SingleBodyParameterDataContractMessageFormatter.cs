@@ -124,12 +124,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.useJsonFormat)
             {
-                message
-                    .Properties
-                    .Add(
-                        WebBodyFormatMessageProperty.Name,
-                        WebBodyFormatMessageProperty.JsonProperty
-                    );
+                message.Properties.Add(
+                    WebBodyFormatMessageProperty.Name,
+                    WebBodyFormatMessageProperty.JsonProperty
+                );
             }
         }
 
@@ -151,19 +149,17 @@ namespace System.ServiceModel.Dispatcher
                         // if the parameterType is a collection interface, ensure the type implements it
                         if (!this.parameterDataContractType.IsAssignableFrom(type))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new SerializationException(
-                                        SR2.GetString(
-                                            SR2.TypeIsNotParameterTypeAndIsNotPresentInKnownTypes,
-                                            type,
-                                            this.OperationName,
-                                            this.ContractName,
-                                            parameterDataContractType
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new SerializationException(
+                                    SR2.GetString(
+                                        SR2.TypeIsNotParameterTypeAndIsNotPresentInKnownTypes,
+                                        type,
+                                        this.OperationName,
+                                        this.ContractName,
+                                        parameterDataContractType
                                     )
-                                );
+                                )
+                            );
                         }
                         typeForSerializer = this.parameterDataContractType;
                     }
@@ -217,35 +213,31 @@ namespace System.ServiceModel.Dispatcher
                 );
                 if (formatProperty == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperWarning(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.MessageFormatPropertyNotFound,
-                                    this.OperationName,
-                                    this.ContractName,
-                                    this.ContractNs
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.MessageFormatPropertyNotFound,
+                                this.OperationName,
+                                this.ContractName,
+                                this.ContractNs
                             )
-                        );
+                        )
+                    );
                 }
                 if (formatProperty.Format != WebContentFormat.Json)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperWarning(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.InvalidHttpMessageFormat,
-                                    this.OperationName,
-                                    this.ContractName,
-                                    this.ContractNs,
-                                    formatProperty.Format,
-                                    WebContentFormat.Json
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.InvalidHttpMessageFormat,
+                                this.OperationName,
+                                this.ContractName,
+                                this.ContractNs,
+                                formatProperty.Format,
+                                WebContentFormat.Json
                             )
-                        );
+                        )
+                    );
                 }
             }
             else

@@ -22,8 +22,7 @@ public abstract class StoreValueGenerationSqlServerFixtureBase : StoreValueGener
 
         var helper = context.GetService<ISqlGenerationHelper>();
         var tables = context
-            .Model
-            .GetEntityTypes()
+            .Model.GetEntityTypes()
             .SelectMany(
                 e =>
                     e.GetTableMappings()
@@ -37,8 +36,7 @@ public abstract class StoreValueGenerationSqlServerFixtureBase : StoreValueGener
 
         foreach (
             var sequence in context
-                .Model
-                .GetSequences()
+                .Model.GetSequences()
                 .Select(s => helper.DelimitIdentifier(s.Name, s.Schema))
         )
         {

@@ -645,18 +645,11 @@ namespace System.Web.Caching
             )
             {
                 // file dependencies have not changed--cache them with callback to remove OutputCacheEntry if they change
-                HttpRuntime
-                    .Cache
-                    .InternalCache
-                    .Insert(
-                        depKey,
-                        new DependencyCacheEntry(oceKey, kernelKey, providerName),
-                        new CacheInsertOptions()
-                        {
-                            Dependencies = dep,
-                            OnRemovedCallback = callback
-                        }
-                    );
+                HttpRuntime.Cache.InternalCache.Insert(
+                    depKey,
+                    new DependencyCacheEntry(oceKey, kernelKey, providerName),
+                    new CacheInsertOptions() { Dependencies = dep, OnRemovedCallback = callback }
+                );
 #if DBG
                 Debug.Trace(
                     "OutputCache",
@@ -1052,19 +1045,16 @@ namespace System.Web.Caching
             // Now insert into the cache (use cache provider if possible, otherwise use internal cache)
             if (!useProvider)
             {
-                HttpRuntime
-                    .Cache
-                    .InternalCache
-                    .Insert(
-                        fragmentKey,
-                        fragment,
-                        new CacheInsertOptions()
-                        {
-                            Dependencies = dependencies,
-                            AbsoluteExpiration = absExp,
-                            SlidingExpiration = slidingExp
-                        }
-                    );
+                HttpRuntime.Cache.InternalCache.Insert(
+                    fragmentKey,
+                    fragment,
+                    new CacheInsertOptions()
+                    {
+                        Dependencies = dependencies,
+                        AbsoluteExpiration = absExp,
+                        SlidingExpiration = slidingExp
+                    }
+                );
             }
             else
             {
@@ -1079,19 +1069,16 @@ namespace System.Web.Caching
                 if (dependencies != null)
                 {
                     // use Add and dispose dependencies if there's already one in the cache
-                    Object d = HttpRuntime
-                        .Cache
-                        .InternalCache
-                        .Add(
-                            depKey,
-                            new DependencyCacheEntry(fragmentKey, null, provider.Name),
-                            new CacheInsertOptions()
-                            {
-                                Dependencies = dependencies,
-                                AbsoluteExpiration = absExp,
-                                OnRemovedCallback = s_dependencyRemovedCallbackForFragment
-                            }
-                        );
+                    Object d = HttpRuntime.Cache.InternalCache.Add(
+                        depKey,
+                        new DependencyCacheEntry(fragmentKey, null, provider.Name),
+                        new CacheInsertOptions()
+                        {
+                            Dependencies = dependencies,
+                            AbsoluteExpiration = absExp,
+                            OnRemovedCallback = s_dependencyRemovedCallbackForFragment
+                        }
+                    );
                     if (d != null)
                     {
                         dependencies.Dispose();
@@ -1216,20 +1203,17 @@ namespace System.Web.Caching
             // Now insert into the cache (use cache provider if possible, otherwise use internal cache)
             if (!useProvider)
             {
-                HttpRuntime
-                    .Cache
-                    .InternalCache
-                    .Insert(
-                        rawResponseKey,
-                        rawResponse,
-                        new CacheInsertOptions()
-                        {
-                            Dependencies = dependencies,
-                            AbsoluteExpiration = absExp,
-                            SlidingExpiration = slidingExp,
-                            OnRemovedCallback = s_entryRemovedCallback
-                        }
-                    );
+                HttpRuntime.Cache.InternalCache.Insert(
+                    rawResponseKey,
+                    rawResponse,
+                    new CacheInsertOptions()
+                    {
+                        Dependencies = dependencies,
+                        AbsoluteExpiration = absExp,
+                        SlidingExpiration = slidingExp,
+                        OnRemovedCallback = s_entryRemovedCallback
+                    }
+                );
 
                 IncrementCount();
 
@@ -1250,23 +1234,16 @@ namespace System.Web.Caching
                 if (dependencies != null)
                 {
                     // use Add and dispose dependencies if there's already one in the cache
-                    Object d = HttpRuntime
-                        .Cache
-                        .InternalCache
-                        .Add(
-                            depKey,
-                            new DependencyCacheEntry(
-                                rawResponseKey,
-                                oce.KernelCacheUrl,
-                                provider.Name
-                            ),
-                            new CacheInsertOptions()
-                            {
-                                Dependencies = dependencies,
-                                AbsoluteExpiration = absExp,
-                                OnRemovedCallback = s_dependencyRemovedCallbackForFragment
-                            }
-                        );
+                    Object d = HttpRuntime.Cache.InternalCache.Add(
+                        depKey,
+                        new DependencyCacheEntry(rawResponseKey, oce.KernelCacheUrl, provider.Name),
+                        new CacheInsertOptions()
+                        {
+                            Dependencies = dependencies,
+                            AbsoluteExpiration = absExp,
+                            OnRemovedCallback = s_dependencyRemovedCallbackForFragment
+                        }
+                    );
                     if (d != null)
                     {
                         dependencies.Dispose();

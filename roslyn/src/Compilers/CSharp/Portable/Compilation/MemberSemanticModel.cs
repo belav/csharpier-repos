@@ -603,14 +603,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
-            return binder
-                .Conversions
-                .ClassifyConversionFromExpression(
-                    boundExpression,
-                    csdestination,
-                    isChecked: binder.CheckOverflowAtRuntime,
-                    ref discardedUseSiteInfo
-                );
+            return binder.Conversions.ClassifyConversionFromExpression(
+                boundExpression,
+                csdestination,
+                isChecked: binder.CheckOverflowAtRuntime,
+                ref discardedUseSiteInfo
+            );
         }
 
         internal override Conversion ClassifyConversionForCast(
@@ -638,15 +636,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
-            return binder
-                .Conversions
-                .ClassifyConversionFromExpression(
-                    boundExpression,
-                    destination,
-                    isChecked: binder.CheckOverflowAtRuntime,
-                    ref discardedUseSiteInfo,
-                    forCast: true
-                );
+            return binder.Conversions.ClassifyConversionFromExpression(
+                boundExpression,
+                destination,
+                isChecked: binder.CheckOverflowAtRuntime,
+                ref discardedUseSiteInfo,
+                forCast: true
+            );
         }
 
         /// <summary>

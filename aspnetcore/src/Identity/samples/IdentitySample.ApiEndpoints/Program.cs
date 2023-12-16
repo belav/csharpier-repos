@@ -16,8 +16,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 builder
-    .Services
-    .AddIdentityApiEndpoints<IdentityUser>()
+    .Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();

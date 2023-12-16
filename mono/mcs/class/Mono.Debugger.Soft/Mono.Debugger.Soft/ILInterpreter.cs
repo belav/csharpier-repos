@@ -614,9 +614,10 @@ namespace Mono.Debugger.Soft
                         {
                             try
                             {
-                                res = method
-                                    .VirtualMachine
-                                    .CreateEnumMirror(method.ReturnType, primitive);
+                                res = method.VirtualMachine.CreateEnumMirror(
+                                    method.ReturnType,
+                                    primitive
+                                );
                             }
                             catch
                             {

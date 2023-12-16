@@ -68,8 +68,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         )
         {
             var location = await definitionItem
-                .UnderlyingObject
-                .GetNavigableLocationAsync(workspace, cancellationToken)
+                .UnderlyingObject.GetNavigableLocationAsync(workspace, cancellationToken)
                 .ConfigureAwait(false);
             return location != null
                 && await location

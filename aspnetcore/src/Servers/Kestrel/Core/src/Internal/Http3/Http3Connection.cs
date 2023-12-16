@@ -56,13 +56,11 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         _context = context;
         _streamLifetimeHandler = this;
         MetricsContext = context
-            .ConnectionFeatures
-            .GetRequiredFeature<IConnectionMetricsContextFeature>()
+            .ConnectionFeatures.GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
 
-        _errorCodeFeature = context
-            .ConnectionFeatures
-            .GetRequiredFeature<IProtocolErrorCodeFeature>();
+        _errorCodeFeature =
+            context.ConnectionFeatures.GetRequiredFeature<IProtocolErrorCodeFeature>();
 
         var httpLimits = context.ServiceContext.ServerOptions.Limits;
 
@@ -190,12 +188,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
             {
                 if (ex.InnerException is not null)
                 {
-                    session
-                        .Value
-                        .Abort(
-                            new ConnectionAbortedException(ex.Message, ex.InnerException),
-                            errorCode
-                        );
+                    session.Value.Abort(
+                        new ConnectionAbortedException(ex.Message, ex.InnerException),
+                        errorCode
+                    );
                 }
                 else
                 {
@@ -284,11 +280,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         // 2. When a stream finished and is waiting for underlying transport to drain.
         //    Uses MinResponseDataRate.
         var serviceContext = _context.ServiceContext;
-        var requestHeadersTimeout = serviceContext
-            .ServerOptions
-            .Limits
-            .RequestHeadersTimeout
-            .ToTicks(serviceContext.TimeProvider);
+        var requestHeadersTimeout =
+            serviceContext.ServerOptions.Limits.RequestHeadersTimeout.ToTicks(
+                serviceContext.TimeProvider
+            );
 
         lock (_unidentifiedStreams)
         {
@@ -435,9 +430,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                         continue;
                     }
 
-                    var streamDirectionFeature = streamContext
-                        .Features
-                        .Get<IStreamDirectionFeature>();
+                    var streamDirectionFeature =
+                        streamContext.Features.Get<IStreamDirectionFeature>();
                     var streamIdFeature = streamContext.Features.Get<IStreamIdFeature>();
 
                     Debug.Assert(streamDirectionFeature != null);

@@ -69,18 +69,16 @@ namespace System.Runtime.InteropServices
 
             fixed (char* pwzChar = s)
             {
-                nb = Interop
-                    .Kernel32
-                    .WideCharToMultiByte(
-                        Interop.Kernel32.CP_ACP,
-                        flags,
-                        pwzChar,
-                        s.Length,
-                        buffer,
-                        bufferLength,
-                        null,
-                        throwOnUnmappableChar ? &defaultCharUsed : null
-                    );
+                nb = Interop.Kernel32.WideCharToMultiByte(
+                    Interop.Kernel32.CP_ACP,
+                    flags,
+                    pwzChar,
+                    s.Length,
+                    buffer,
+                    bufferLength,
+                    null,
+                    throwOnUnmappableChar ? &defaultCharUsed : null
+                );
             }
 
             if (defaultCharUsed != Interop.BOOL.FALSE)
@@ -105,18 +103,16 @@ namespace System.Runtime.InteropServices
             {
                 fixed (char* pChars = chars)
                 {
-                    byteLength = Interop
-                        .Kernel32
-                        .WideCharToMultiByte(
-                            Interop.Kernel32.CP_ACP,
-                            Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
-                            pChars,
-                            chars.Length,
-                            null,
-                            0,
-                            null,
-                            null
-                        );
+                    byteLength = Interop.Kernel32.WideCharToMultiByte(
+                        Interop.Kernel32.CP_ACP,
+                        Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
+                        pChars,
+                        chars.Length,
+                        null,
+                        0,
+                        null,
+                        null
+                    );
                     if (byteLength <= 0)
                         throw new ArgumentException();
                 }
@@ -139,18 +135,16 @@ namespace System.Runtime.InteropServices
                 fixed (char* pChars = chars)
                 fixed (byte* pBytes = bytes)
                 {
-                    byteLength = Interop
-                        .Kernel32
-                        .WideCharToMultiByte(
-                            Interop.Kernel32.CP_ACP,
-                            Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
-                            pChars,
-                            chars.Length,
-                            pBytes,
-                            bytes.Length,
-                            null,
-                            null
-                        );
+                    byteLength = Interop.Kernel32.WideCharToMultiByte(
+                        Interop.Kernel32.CP_ACP,
+                        Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
+                        pChars,
+                        chars.Length,
+                        pBytes,
+                        bytes.Length,
+                        null,
+                        null
+                    );
                     if (byteLength <= 0)
                         throw new ArgumentException();
                 }

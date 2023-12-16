@@ -2680,8 +2680,7 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 if (!duplicate)
                 {
-                    MethodInfo mi = host.RootComponent
-                        .GetType()
+                    MethodInfo mi = host.RootComponent.GetType()
                         .GetMethod(uniqueName, bindingFlags, null, dti.ParameterTypes, null);
                     if (mi != null && !mi.IsPrivate)
                         duplicate = true;
@@ -2782,22 +2781,12 @@ namespace System.Workflow.ComponentModel.Design
                             {
                                 string rulesText =
                                     (expression != null)
-                                        ? expressionPropertyDescriptor
-                                            .Converter
-                                            .ConvertTo(
-                                                new TypeDescriptorContext(
-                                                    activity.Site,
-                                                    null,
-                                                    value
-                                                ),
-                                                System
-                                                    .Threading
-                                                    .Thread
-                                                    .CurrentThread
-                                                    .CurrentUICulture,
-                                                expression,
-                                                typeof(string)
-                                            ) as string
+                                        ? expressionPropertyDescriptor.Converter.ConvertTo(
+                                            new TypeDescriptorContext(activity.Site, null, value),
+                                            System.Threading.Thread.CurrentThread.CurrentUICulture,
+                                            expression,
+                                            typeof(string)
+                                        ) as string
                                         : null;
                                 if (rulesText == null)
                                     rulesText = string.Empty;

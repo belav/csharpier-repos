@@ -77,27 +77,23 @@ namespace System.Threading
             else
             {
                 result = (int)
-                    Interop
-                        .Kernel32
-                        .WaitForMultipleObjectsEx(
-                            (uint)numHandles,
-                            (IntPtr)pHandles,
-                            waitAll ? Interop.BOOL.TRUE : Interop.BOOL.FALSE,
-                            (uint)millisecondsTimeout,
-                            Interop.BOOL.FALSE
-                        );
-            }
-#else
-            int result = (int)
-                Interop
-                    .Kernel32
-                    .WaitForMultipleObjectsEx(
+                    Interop.Kernel32.WaitForMultipleObjectsEx(
                         (uint)numHandles,
                         (IntPtr)pHandles,
                         waitAll ? Interop.BOOL.TRUE : Interop.BOOL.FALSE,
                         (uint)millisecondsTimeout,
                         Interop.BOOL.FALSE
                     );
+            }
+#else
+            int result = (int)
+                Interop.Kernel32.WaitForMultipleObjectsEx(
+                    (uint)numHandles,
+                    (IntPtr)pHandles,
+                    waitAll ? Interop.BOOL.TRUE : Interop.BOOL.FALSE,
+                    (uint)millisecondsTimeout,
+                    Interop.BOOL.FALSE
+                );
 #endif
             currentThread.ClearWaitSleepJoinState();
 
@@ -148,14 +144,12 @@ namespace System.Threading
             Debug.Assert(millisecondsTimeout >= -1);
 
             int ret = (int)
-                Interop
-                    .Kernel32
-                    .SignalObjectAndWait(
-                        handleToSignal,
-                        handleToWaitOn,
-                        (uint)millisecondsTimeout,
-                        Interop.BOOL.FALSE
-                    );
+                Interop.Kernel32.SignalObjectAndWait(
+                    handleToSignal,
+                    handleToWaitOn,
+                    (uint)millisecondsTimeout,
+                    Interop.BOOL.FALSE
+                );
 
             if (ret == Interop.Kernel32.WAIT_FAILED)
             {

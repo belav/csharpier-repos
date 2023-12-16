@@ -811,11 +811,9 @@ namespace System.Security
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
                 // This can happen when you create delegates over functions that need the REQ_SQ
-                System
-                    .Environment
-                    .FailFast(
-                        Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
-                    );
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {
@@ -849,11 +847,9 @@ namespace System.Security
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
                 // This can happen when you create delegates over functions that need the REQ_SQ
-                System
-                    .Environment
-                    .FailFast(
-                        Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
-                    );
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {
@@ -877,11 +873,9 @@ namespace System.Security
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
                 // This can happen when you create delegates over functions that need the REQ_SQ
-                System
-                    .Environment
-                    .FailFast(
-                        Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
-                    );
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {

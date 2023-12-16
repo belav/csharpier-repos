@@ -299,9 +299,11 @@ namespace System.IO
                     try
                     {
                         // Do the Read and return the number of bytes read
-                        return thisTask
-                            ._stream
-                            .Read(thisTask._buffer!, thisTask._offset, thisTask._count);
+                        return thisTask._stream.Read(
+                            thisTask._buffer!,
+                            thisTask._offset,
+                            thisTask._count
+                        );
                     }
                     finally
                     {
@@ -689,9 +691,11 @@ namespace System.IO
                     try
                     {
                         // Do the Write
-                        thisTask
-                            ._stream
-                            .Write(thisTask._buffer!, thisTask._offset, thisTask._count);
+                        thisTask._stream.Write(
+                            thisTask._buffer!,
+                            thisTask._offset,
+                            thisTask._count
+                        );
                         return 0; // not used, but signature requires a value be returned
                     }
                     finally

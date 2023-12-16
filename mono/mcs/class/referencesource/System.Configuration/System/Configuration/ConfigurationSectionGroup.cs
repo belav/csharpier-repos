@@ -41,9 +41,10 @@ namespace System.Configuration
                 FactoryRecord parentFactoryRecord = null;
                 if (!configRecord.Parent.IsRootConfig)
                 {
-                    parentFactoryRecord = configRecord
-                        .Parent
-                        .FindFactoryRecord(factoryRecord.ConfigKey, true);
+                    parentFactoryRecord = configRecord.Parent.FindFactoryRecord(
+                        factoryRecord.ConfigKey,
+                        true
+                    );
                 }
 
                 _declarationRequired = (

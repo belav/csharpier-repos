@@ -113,9 +113,10 @@ namespace System.Web.Services.Protocols
                     type_info.SoapExtensions[1]
                 );
 
-                ainfo
-                    .Request
-                    .BeginGetRequestStream(new AsyncCallback(AsyncGetRequestStreamDone), ainfo);
+                ainfo.Request.BeginGetRequestStream(
+                    new AsyncCallback(AsyncGetRequestStreamDone),
+                    ainfo
+                );
                 RegisterMapping(asyncState, ainfo);
             }
             catch (Exception ex)

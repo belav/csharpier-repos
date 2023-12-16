@@ -115,27 +115,23 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
                 this.serviceTokenLifetime = value;
             }
@@ -149,14 +145,12 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(SR.ValueMustBeNonNegative)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.maximumCachedNegotiationState = value;
             }
@@ -170,14 +164,12 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(SR.ValueMustBeNonNegative)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.maximumConcurrentNegotiations = value;
             }
@@ -191,27 +183,23 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
                 this.negotiationTimeout = value;
             }
@@ -448,11 +436,9 @@ namespace System.ServiceModel.Security
             this.CommunicationObject.ThrowIfClosedOrNotOpen();
             if (this.securityStateEncoder == null && isCookieMode)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.SctCookieNotSupported))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SctCookieNotSupported))
+                );
             }
             byte[] cookieBlob =
                 (isCookieMode)
@@ -544,43 +530,35 @@ namespace System.ServiceModel.Security
         {
             if (this.IssuerBindingContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())
+                    )
+                );
             }
             if (this.IssuedSecurityTokenParameters == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.IssuedSecurityTokenParametersNotSet, this.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.IssuedSecurityTokenParametersNotSet, this.GetType())
+                    )
+                );
             }
             if (this.SecurityAlgorithmSuite == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())
+                    )
+                );
             }
             if (this.IssuedTokenCache == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.IssuedTokenCacheNotSet, this.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.IssuedTokenCacheNotSet, this.GetType())
+                    )
+                );
             }
 
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
@@ -885,18 +863,16 @@ namespace System.ServiceModel.Security
                     }
                     catch (QuotaExceededException e)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new SecurityNegotiationException(
-                                    SR.GetString(
-                                        SR.SecurityNegotiationMessageTooLarge,
-                                        action,
-                                        this.maxMessageSize
-                                    ),
-                                    e
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(
+                                    SR.SecurityNegotiationMessageTooLarge,
+                                    action,
+                                    this.maxMessageSize
+                                ),
+                                e
+                            )
+                        );
                     }
                 }
                 try
@@ -920,13 +896,11 @@ namespace System.ServiceModel.Security
                         {
                             if (negotiationState != null)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperWarning(
-                                        new SecurityNegotiationException(
-                                            SR.GetString(SR.NegotiationStateAlreadyPresent, context)
-                                        )
-                                    );
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                                    new SecurityNegotiationException(
+                                        SR.GetString(SR.NegotiationStateAlreadyPresent, context)
+                                    )
+                                );
                             }
                             replyBody = this.ProcessRequestSecurityToken(
                                 request,
@@ -964,13 +938,11 @@ namespace System.ServiceModel.Security
                         {
                             if (negotiationState == null)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperWarning(
-                                        new SecurityNegotiationException(
-                                            SR.GetString(SR.CannotFindNegotiationState, context)
-                                        )
-                                    );
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                                    new SecurityNegotiationException(
+                                        SR.GetString(SR.CannotFindNegotiationState, context)
+                                    )
+                                );
                             }
                             lock (negotiationState.ThisLock)
                             {
@@ -1251,13 +1223,11 @@ namespace System.ServiceModel.Security
                 );
                 if (listener == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.CannotCreateTwoWayListenerForNegotiation)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.CannotCreateTwoWayListenerForNegotiation)
+                        )
+                    );
                 }
                 ChannelDispatcher channelDispatcher = new ChannelDispatcher(
                     listener,
@@ -1351,16 +1321,16 @@ namespace System.ServiceModel.Security
                     object state
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
                 }
 
                 public object InvokeEnd(object instance, out object[] outputs, IAsyncResult result)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
                 }
             }
         }

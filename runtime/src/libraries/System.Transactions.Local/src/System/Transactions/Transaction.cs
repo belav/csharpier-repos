@@ -474,9 +474,9 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                internalPromotedToken = _internalTransaction
-                    .State
-                    .PromotedToken(_internalTransaction);
+                internalPromotedToken = _internalTransaction.State.PromotedToken(
+                    _internalTransaction
+                );
             }
 
             byte[] toReturn = new byte[internalPromotedToken.Length];
@@ -524,15 +524,13 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
-                    .EnlistDurable(
-                        _internalTransaction,
-                        resourceManagerIdentifier,
-                        enlistmentNotification,
-                        enlistmentOptions,
-                        this
-                    );
+                Enlistment enlistment = _internalTransaction.State.EnlistDurable(
+                    _internalTransaction,
+                    resourceManagerIdentifier,
+                    enlistmentNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -585,15 +583,13 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
-                    .EnlistDurable(
-                        _internalTransaction,
-                        resourceManagerIdentifier,
-                        singlePhaseNotification,
-                        enlistmentOptions,
-                        this
-                    );
+                Enlistment enlistment = _internalTransaction.State.EnlistDurable(
+                    _internalTransaction,
+                    resourceManagerIdentifier,
+                    singlePhaseNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -690,14 +686,12 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
-                    .EnlistVolatile(
-                        _internalTransaction,
-                        enlistmentNotification,
-                        enlistmentOptions,
-                        this
-                    );
+                Enlistment enlistment = _internalTransaction.State.EnlistVolatile(
+                    _internalTransaction,
+                    enlistmentNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -740,14 +734,12 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
-                    .EnlistVolatile(
-                        _internalTransaction,
-                        singlePhaseNotification,
-                        enlistmentOptions,
-                        this
-                    );
+                Enlistment enlistment = _internalTransaction.State.EnlistVolatile(
+                    _internalTransaction,
+                    singlePhaseNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -879,9 +871,10 @@ namespace System.Transactions
                 {
                     _internalTransaction._transactionCompletedDelegate =
                         (TransactionCompletedEventHandler?)
-                            System
-                                .Delegate
-                                .Remove(_internalTransaction._transactionCompletedDelegate, value);
+                            System.Delegate.Remove(
+                                _internalTransaction._transactionCompletedDelegate,
+                                value
+                            );
                 }
             }
         }
@@ -1034,14 +1027,12 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                succeeded = _internalTransaction
-                    .State
-                    .EnlistPromotableSinglePhase(
-                        _internalTransaction,
-                        promotableSinglePhaseNotification,
-                        this,
-                        promoterType
-                    );
+                succeeded = _internalTransaction.State.EnlistPromotableSinglePhase(
+                    _internalTransaction,
+                    promotableSinglePhaseNotification,
+                    this,
+                    promoterType
+                );
             }
 
             if (etwLog.IsEnabled())
@@ -1094,16 +1085,14 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
-                    .PromoteAndEnlistDurable(
-                        _internalTransaction,
-                        resourceManagerIdentifier,
-                        promotableNotification,
-                        enlistmentNotification,
-                        enlistmentOptions,
-                        this
-                    );
+                Enlistment enlistment = _internalTransaction.State.PromoteAndEnlistDurable(
+                    _internalTransaction,
+                    resourceManagerIdentifier,
+                    promotableNotification,
+                    enlistmentNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -1142,13 +1131,11 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                _internalTransaction
-                    .State
-                    .SetDistributedTransactionId(
-                        _internalTransaction,
-                        promotableNotification,
-                        distributedTransactionIdentifier
-                    );
+                _internalTransaction.State.SetDistributedTransactionId(
+                    _internalTransaction,
+                    promotableNotification,
+                    distributedTransactionIdentifier
+                );
 
                 if (etwLog.IsEnabled())
                 {

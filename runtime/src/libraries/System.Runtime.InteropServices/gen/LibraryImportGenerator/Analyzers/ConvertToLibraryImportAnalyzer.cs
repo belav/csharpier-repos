@@ -53,17 +53,13 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCompilationStartAction(context =>
             {
                 // Nothing to do if the LibraryImportAttribute is not in the compilation
-                INamedTypeSymbol? libraryImportAttrType = context
-                    .Compilation
-                    .GetBestTypeByMetadataName(TypeNames.LibraryImportAttribute);
+                INamedTypeSymbol? libraryImportAttrType =
+                    context.Compilation.GetBestTypeByMetadataName(TypeNames.LibraryImportAttribute);
                 if (libraryImportAttrType == null)
                     return;
 
-                TargetFrameworkSettings targetFramework = context
-                    .Options
-                    .AnalyzerConfigOptionsProvider
-                    .GlobalOptions
-                    .GetTargetFrameworkSettings();
+                TargetFrameworkSettings targetFramework =
+                    context.Options.AnalyzerConfigOptionsProvider.GlobalOptions.GetTargetFrameworkSettings();
 
                 StubEnvironment env = new StubEnvironment(
                     context.Compilation,
@@ -115,9 +111,10 @@ namespace Microsoft.Interop.Analyzers
             foreach (AttributeData attr in method.GetAttributes())
             {
                 if (
-                    SymbolEqualityComparer
-                        .Default
-                        .Equals(attr.AttributeClass, libraryImportAttrType)
+                    SymbolEqualityComparer.Default.Equals(
+                        attr.AttributeClass,
+                        libraryImportAttrType
+                    )
                 )
                 {
                     return;
@@ -233,8 +230,7 @@ namespace Microsoft.Interop.Analyzers
             }
 
             AttributeData? bestFitMappingContainingType = method
-                .ContainingType
-                .GetAttributes()
+                .ContainingType.GetAttributes()
                 .FirstOrDefault(
                     attr =>
                         attr.AttributeClass.ToDisplayString()
@@ -246,8 +242,7 @@ namespace Microsoft.Interop.Analyzers
             }
 
             AttributeData? bestFitMappingContainingAssembly = method
-                .ContainingAssembly
-                .GetAttributes()
+                .ContainingAssembly.GetAttributes()
                 .FirstOrDefault(
                     attr =>
                         attr.AttributeClass.ToDisplayString()

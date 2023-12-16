@@ -141,12 +141,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             decoded.Subject = rebindSpan.Overlaps(tmpSpan, out offset)
                 ? rebind.Slice(offset, tmpSpan.Length)
                 : tmpSpan.ToArray();
-            System
-                .Security
-                .Cryptography
-                .Asn1
-                .SubjectPublicKeyInfoAsn
-                .Decode(ref sequenceReader, rebind, out decoded.SubjectPublicKeyInfo);
+            System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.SubjectPublicKeyInfo
+            );
 
             // Decode SEQUENCE OF for Attributes
             {
@@ -158,12 +157,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System
-                        .Security
-                        .Cryptography
-                        .Asn1
-                        .AttributeAsn
-                        .Decode(ref collectionReader, rebind, out tmpItem);
+                    System.Security.Cryptography.Asn1.AttributeAsn.Decode(
+                        ref collectionReader,
+                        rebind,
+                        out tmpItem
+                    );
                     tmpList.Add(tmpItem);
                 }
 

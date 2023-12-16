@@ -97,9 +97,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     );
 
                     var testAccessor = GetAccessor(await TryGetDialogAsync(cancellationToken));
-                    var success = await testAccessor
-                        .NamespaceBox
-                        .SimulateSelectItemAsync(JoinableTaskFactory, @namespace, mustExist: false);
+                    var success = await testAccessor.NamespaceBox.SimulateSelectItemAsync(
+                        JoinableTaskFactory,
+                        @namespace,
+                        mustExist: false
+                    );
                     Contract.ThrowIfFalse(success);
                 });
             }

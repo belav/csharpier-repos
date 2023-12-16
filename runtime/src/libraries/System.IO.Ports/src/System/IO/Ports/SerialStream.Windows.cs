@@ -210,14 +210,12 @@ namespace System.IO.Ports
 
                 // then set the actual pin
                 if (
-                    !Interop
-                        .Kernel32
-                        .EscapeCommFunction(
-                            _handle,
-                            value
-                                ? Interop.Kernel32.CommFunctions.SETDTR
-                                : Interop.Kernel32.CommFunctions.CLRDTR
-                        )
+                    !Interop.Kernel32.EscapeCommFunction(
+                        _handle,
+                        value
+                            ? Interop.Kernel32.CommFunctions.SETDTR
+                            : Interop.Kernel32.CommFunctions.CLRDTR
+                    )
                 )
                     throw Win32Marshal.GetExceptionForLastWin32Error();
             }
@@ -509,14 +507,12 @@ namespace System.IO.Ports
                     }
 
                     if (
-                        !Interop
-                            .Kernel32
-                            .EscapeCommFunction(
-                                _handle,
-                                value
-                                    ? Interop.Kernel32.CommFunctions.SETRTS
-                                    : Interop.Kernel32.CommFunctions.CLRRTS
-                            )
+                        !Interop.Kernel32.EscapeCommFunction(
+                            _handle,
+                            value
+                                ? Interop.Kernel32.CommFunctions.SETRTS
+                                : Interop.Kernel32.CommFunctions.CLRRTS
+                        )
                     )
                         throw Win32Marshal.GetExceptionForLastWin32Error();
                 }
@@ -874,9 +870,10 @@ namespace System.IO.Ports
                     // turn off all events and signal WaitCommEvent
                     Interop.Kernel32.SetCommMask(_handle, 0);
                     if (
-                        !Interop
-                            .Kernel32
-                            .EscapeCommFunction(_handle, Interop.Kernel32.CommFunctions.CLRDTR)
+                        !Interop.Kernel32.EscapeCommFunction(
+                            _handle,
+                            Interop.Kernel32.CommFunctions.CLRDTR
+                        )
                     )
                     {
                         int hr = Marshal.GetLastPInvokeError();
@@ -1018,13 +1015,11 @@ namespace System.IO.Ports
         internal void DiscardInBuffer()
         {
             if (
-                Interop
-                    .Kernel32
-                    .PurgeComm(
-                        _handle,
-                        Interop.Kernel32.PurgeFlags.PURGE_RXCLEAR
-                            | Interop.Kernel32.PurgeFlags.PURGE_RXABORT
-                    ) == false
+                Interop.Kernel32.PurgeComm(
+                    _handle,
+                    Interop.Kernel32.PurgeFlags.PURGE_RXCLEAR
+                        | Interop.Kernel32.PurgeFlags.PURGE_RXABORT
+                ) == false
             )
                 throw Win32Marshal.GetExceptionForLastWin32Error();
         }
@@ -1033,13 +1028,11 @@ namespace System.IO.Ports
         internal void DiscardOutBuffer()
         {
             if (
-                Interop
-                    .Kernel32
-                    .PurgeComm(
-                        _handle,
-                        Interop.Kernel32.PurgeFlags.PURGE_TXCLEAR
-                            | Interop.Kernel32.PurgeFlags.PURGE_TXABORT
-                    ) == false
+                Interop.Kernel32.PurgeComm(
+                    _handle,
+                    Interop.Kernel32.PurgeFlags.PURGE_TXCLEAR
+                        | Interop.Kernel32.PurgeFlags.PURGE_TXABORT
+                ) == false
             )
                 throw Win32Marshal.GetExceptionForLastWin32Error();
         }
@@ -1716,13 +1709,21 @@ namespace System.IO.Ports
             fixed (byte* p = bytes)
             {
                 if (_isAsync)
-                    r = Interop
-                        .Kernel32
-                        .ReadFile(_handle, p + offset, count, IntPtr.Zero, overlapped);
+                    r = Interop.Kernel32.ReadFile(
+                        _handle,
+                        p + offset,
+                        count,
+                        IntPtr.Zero,
+                        overlapped
+                    );
                 else
-                    r = Interop
-                        .Kernel32
-                        .ReadFile(_handle, p + offset, count, out numBytesRead, IntPtr.Zero);
+                    r = Interop.Kernel32.ReadFile(
+                        _handle,
+                        p + offset,
+                        count,
+                        out numBytesRead,
+                        IntPtr.Zero
+                    );
             }
 
             if (r == 0)
@@ -1774,13 +1775,21 @@ namespace System.IO.Ports
             fixed (byte* p = bytes)
             {
                 if (_isAsync)
-                    r = Interop
-                        .Kernel32
-                        .WriteFile(_handle, p + offset, count, IntPtr.Zero, overlapped);
+                    r = Interop.Kernel32.WriteFile(
+                        _handle,
+                        p + offset,
+                        count,
+                        IntPtr.Zero,
+                        overlapped
+                    );
                 else
-                    r = Interop
-                        .Kernel32
-                        .WriteFile(_handle, p + offset, count, out numBytesWritten, IntPtr.Zero);
+                    r = Interop.Kernel32.WriteFile(
+                        _handle,
+                        p + offset,
+                        count,
+                        out numBytesWritten,
+                        IntPtr.Zero
+                    );
             }
 
             if (r == 0)
@@ -1915,9 +1924,8 @@ namespace System.IO.Ports
                             asyncResult,
                             null
                         );
-                        intOverlapped->EventHandle = waitCommEventWaitHandle
-                            .SafeWaitHandle
-                            .DangerousGetHandle();
+                        intOverlapped->EventHandle =
+                            waitCommEventWaitHandle.SafeWaitHandle.DangerousGetHandle();
                     }
 
                     fixed (int* eventsOccurredPtr = &eventsOccurred)
@@ -1960,14 +1968,12 @@ namespace System.IO.Ports
                                 do
                                 {
                                     // NOTE: GetOverlappedResult will modify the original pointer passed into WaitCommEvent.
-                                    success = Interop
-                                        .Kernel32
-                                        .GetOverlappedResult(
-                                            handle,
-                                            intOverlapped,
-                                            ref unused,
-                                            false
-                                        );
+                                    success = Interop.Kernel32.GetOverlappedResult(
+                                        handle,
+                                        intOverlapped,
+                                        ref unused,
+                                        false
+                                    );
                                     error = Marshal.GetLastPInvokeError();
                                 } while (
                                     error == Interop.Errors.ERROR_IO_INCOMPLETE

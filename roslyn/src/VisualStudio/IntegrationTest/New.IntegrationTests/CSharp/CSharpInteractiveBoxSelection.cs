@@ -16,19 +16,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-            await TestServices
-                .InteractiveWindow
-                .SubmitTextAsync("#cls", HangMitigatingCancellationToken);
+            await TestServices.InteractiveWindow.SubmitTextAsync(
+                "#cls",
+                HangMitigatingCancellationToken
+            );
         }
 
         public override async Task DisposeAsync()
         {
-            await TestServices
-                .Shell
-                .ExecuteCommandAsync(
-                    WellKnownCommands.Edit.SelectionCancel,
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.SelectionCancel,
+                HangMitigatingCancellationToken
+            );
             await base.DisposeAsync();
         }
 
@@ -37,25 +36,23 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             await InsertInputWithXAtLeftAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(">", 1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "x",
-                    0,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    ["__", VirtualKeyCode.ESCAPE, "|"],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                ">",
+                1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "x",
+                0,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["__", VirtualKeyCode.ESCAPE, "|"],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"__234567890ABCDEF
@@ -66,9 +63,9 @@ __234567890ABCDEF
 __234567890ABCDEF
 __|234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -76,25 +73,23 @@ __|234567890ABCDEF
         public async Task BottomRightTopLeftPromptToSymbol()
         {
             await InsertInputWithXAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("x", 0, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    ">",
-                    1,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    ["__", VirtualKeyCode.ESCAPE, "|"],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "x",
+                0,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                ">",
+                1,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["__", VirtualKeyCode.ESCAPE, "|"],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"__|234567890ABCDEF
@@ -105,9 +100,9 @@ __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -115,25 +110,23 @@ __234567890ABCDEF
         public async Task TopRightBottomLeftPromptToSymbol()
         {
             await InsertInputWithXAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(">", 3, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "x",
-                    -2,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    ["__", VirtualKeyCode.ESCAPE, "|"],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                ">",
+                3,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "x",
+                -2,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["__", VirtualKeyCode.ESCAPE, "|"],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"__234567890ABCDEF
@@ -144,9 +137,9 @@ __234567890ABCDEF
 __234567890ABCDEF
 __|234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -154,25 +147,23 @@ __|234567890ABCDEF
         public async Task BottomLeftTopRightPromptToSymbol()
         {
             await InsertInputWithXAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("x", -2, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    ">",
-                    3,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    ["__", VirtualKeyCode.ESCAPE, "|"],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "x",
+                -2,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                ">",
+                3,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["__", VirtualKeyCode.ESCAPE, "|"],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"__|234567890ABCDEF
@@ -183,9 +174,9 @@ __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -193,25 +184,23 @@ __234567890ABCDEF
         public async Task TopLeftBottomRightSymbolToSymbol()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("s", -1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "e",
-                    1,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    ["__", VirtualKeyCode.ESCAPE, "|"],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                1,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["__", VirtualKeyCode.ESCAPE, "|"],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"1234567890ABCDEF
@@ -222,9 +211,9 @@ __234567890ABCDEF
 __234567890ABCDEF
 __|234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -232,25 +221,23 @@ __|234567890ABCDEF
         public async Task BottomRightTopLeftSymbolToSymbol()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("e", 1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "s",
-                    -1,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    ["__", VirtualKeyCode.ESCAPE, "|"],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -1,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["__", VirtualKeyCode.ESCAPE, "|"],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"1234567890ABCDEF
@@ -261,9 +248,9 @@ __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -271,25 +258,23 @@ __234567890ABCDEF
         public async Task TopRightBottomLeftSymbolToSymbol()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("s", 1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "e",
-                    -1,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    ["__", VirtualKeyCode.ESCAPE, "|"],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                -1,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["__", VirtualKeyCode.ESCAPE, "|"],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"1234567890ABCDEF
@@ -300,9 +285,9 @@ __234567890ABCDEF
 __234567890ABCDEF
 __|234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -310,25 +295,23 @@ __|234567890ABCDEF
         public async Task BottomLeftTopRightSymbolToSymbol()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("e", -1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "s",
-                    1,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    ["__", VirtualKeyCode.ESCAPE, "|"],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                -1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                1,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["__", VirtualKeyCode.ESCAPE, "|"],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"1234567890ABCDEF
@@ -339,9 +322,9 @@ __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -349,19 +332,19 @@ __234567890ABCDEF
         public async Task TopLeftBottomRightSelection1()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("s", -3, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "e",
-                    2,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -3,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                2,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
             await TestServices.Input.SendWithoutActivateAsync("_", HangMitigatingCancellationToken);
 
             Assert.Equal(
@@ -373,9 +356,9 @@ _34567890ABCDEF
 _34567890ABCDEF
 _34567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -383,19 +366,19 @@ _34567890ABCDEF
         public async Task TopLeftBottomRightSelection2()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("e", -2, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "s",
-                    -3,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                -2,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -3,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
             await TestServices.Input.SendWithoutActivateAsync("_", HangMitigatingCancellationToken);
 
             await VerifyOriginalCodeWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
@@ -405,19 +388,19 @@ _34567890ABCDEF
         public async Task TopRightBottomLeftSelection()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("s", -2, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "e",
-                    -3,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -2,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                -3,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
             await TestServices.Input.SendWithoutActivateAsync("_", HangMitigatingCancellationToken);
 
             await VerifyOriginalCodeWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
@@ -427,19 +410,19 @@ _34567890ABCDEF
         public async Task BottomLeftTopRightSelection()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("e", -3, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "s",
-                    -2,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                -3,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -2,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
             await TestServices.Input.SendWithoutActivateAsync("_", HangMitigatingCancellationToken);
 
             await VerifyOriginalCodeWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
@@ -449,22 +432,23 @@ _34567890ABCDEF
         public async Task SelectionTouchingSubmissionBuffer()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("s", -2, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "e",
-                    -1,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync("__", HangMitigatingCancellationToken);
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -2,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                -1,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                "__",
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"1234567890ABCDEF
@@ -475,9 +459,9 @@ __1234567890ABCDEF
 __1234567890ABCDEF
 __e234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -485,22 +469,23 @@ __e234567890ABCDEF
         public async Task PrimaryPromptLongerThanSecondaryZeroWidthNextToPromptSelection()
         {
             await InsertInputWithSAndEAtLeftAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("s", -1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "e",
-                    -1,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync("__", HangMitigatingCancellationToken);
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                -1,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                "__",
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"1234567890ABCDEF
@@ -511,9 +496,9 @@ __1234567890ABCDEF
 __1234567890ABCDEF
 __e234567890ABCDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -521,25 +506,23 @@ __e234567890ABCDEF
         public async Task Backspace()
         {
             await InsertInputWithSAndEInTheMiddleAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("s", -1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "e",
-                    0,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    [VirtualKeyCode.BACK, VirtualKeyCode.BACK],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "s",
+                -1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                0,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                [VirtualKeyCode.BACK, VirtualKeyCode.BACK],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"1CDEF
@@ -550,9 +533,9 @@ __e234567890ABCDEF
 1CDEF
 1CDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
@@ -560,25 +543,23 @@ __e234567890ABCDEF
         public async Task BackspaceBehavesLikeDelete()
         {
             await InsertInputWithEInTheMiddleAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(">", 0, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    "e",
-                    0,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(
-                    [VirtualKeyCode.BACK, VirtualKeyCode.BACK],
-                    HangMitigatingCancellationToken
-                );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                ">",
+                0,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "e",
+                0,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                [VirtualKeyCode.BACK, VirtualKeyCode.BACK],
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"CDEF
@@ -589,111 +570,115 @@ CDEF
 CDEF
 CDEF
 1234567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
         [IdeFact]
         public async Task LeftToRightReversedBackspace()
         {
-            await TestServices
-                .InteractiveWindow
-                .InsertCodeAsync("1234567890ABCDEF", HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("2", -5, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    ">",
-                    8,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(VirtualKeyCode.BACK, HangMitigatingCancellationToken);
+            await TestServices.InteractiveWindow.InsertCodeAsync(
+                "1234567890ABCDEF",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "2",
+                -5,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                ">",
+                8,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                VirtualKeyCode.BACK,
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"7890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
         [IdeFact]
         public async Task LeftToRightReversedDelete()
         {
-            await TestServices
-                .InteractiveWindow
-                .InsertCodeAsync("1234567890ABCDEF", HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("1", -1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    ">",
-                    5,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(VirtualKeyCode.DELETE, HangMitigatingCancellationToken);
+            await TestServices.InteractiveWindow.InsertCodeAsync(
+                "1234567890ABCDEF",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "1",
+                -1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                ">",
+                5,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                VirtualKeyCode.DELETE,
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"4567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
         [IdeFact]
         public async Task LeftToRightReversedTypeCharacter()
         {
-            await TestServices
-                .InteractiveWindow
-                .InsertCodeAsync("1234567890ABCDEF", HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync("1", -1, HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
-                .PlaceCaretAsync(
-                    ">",
-                    5,
-                    occurrence: 0,
-                    extendSelection: true,
-                    selectBlock: true,
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync("__", HangMitigatingCancellationToken);
+            await TestServices.InteractiveWindow.InsertCodeAsync(
+                "1234567890ABCDEF",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                "1",
+                -1,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.InteractiveWindow.PlaceCaretAsync(
+                ">",
+                5,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: true,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                "__",
+                HangMitigatingCancellationToken
+            );
 
             Assert.Equal(
                 @"__4567890ABCDEF",
-                await TestServices
-                    .InteractiveWindow
-                    .GetLastReplInputAsync(HangMitigatingCancellationToken)
+                await TestServices.InteractiveWindow.GetLastReplInputAsync(
+                    HangMitigatingCancellationToken
+                )
             );
         }
 
         private async Task InsertInputWithXAtLeftAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .InteractiveWindow
-                .InsertCodeAsync(
-                    @"1234567890ABCDEF
+            await TestServices.InteractiveWindow.InsertCodeAsync(
+                @"1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
@@ -701,16 +686,14 @@ CDEF
 1234567890ABCDEF
 x234567890ABCDEF
 1234567890ABCDEF",
-                    cancellationToken
-                );
+                cancellationToken
+            );
         }
 
         private async Task InsertInputWithSAndEAtLeftAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .InteractiveWindow
-                .InsertCodeAsync(
-                    @"1234567890ABCDEF
+            await TestServices.InteractiveWindow.InsertCodeAsync(
+                @"1234567890ABCDEF
 1234567890ABCDEF
 s234567890ABCDEF
 1234567890ABCDEF
@@ -718,16 +701,14 @@ s234567890ABCDEF
 1234567890ABCDEF
 e234567890ABCDEF
 1234567890ABCDEF",
-                    cancellationToken
-                );
+                cancellationToken
+            );
         }
 
         private async Task InsertInputWithSAndEInTheMiddleAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .InteractiveWindow
-                .InsertCodeAsync(
-                    @"12s4567890ABCDEF
+            await TestServices.InteractiveWindow.InsertCodeAsync(
+                @"12s4567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
@@ -735,16 +716,14 @@ e234567890ABCDEF
 1234567890ABCDEF
 1234567890AeCDEF
 1234567890ABCDEF",
-                    cancellationToken
-                );
+                cancellationToken
+            );
         }
 
         private async Task InsertInputWithEInTheMiddleAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .InteractiveWindow
-                .InsertCodeAsync(
-                    @"1234567890ABCDEF
+            await TestServices.InteractiveWindow.InsertCodeAsync(
+                @"1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
@@ -752,8 +731,8 @@ e234567890ABCDEF
 1234567890ABCDEF
 1234567890AeCDEF
 1234567890ABCDEF",
-                    cancellationToken
-                );
+                cancellationToken
+            );
         }
 
         private async Task VerifyOriginalCodeWithSAndEAtLeftAsync(

@@ -610,9 +610,11 @@ public class DefaultEditorTemplatesTest
 
         // Template ignores FormattedModelValue, ModelState and ViewData.
         templateInfo.FormattedModelValue = "Formatted string";
-        viewData
-            .ModelState
-            .SetModelValue("FieldPrefix", "Raw model string", "Attempted model string");
+        viewData.ModelState.SetModelValue(
+            "FieldPrefix",
+            "Raw model string",
+            "Attempted model string"
+        );
         viewData["FieldPrefix"] = "ViewData string";
 
         // Act

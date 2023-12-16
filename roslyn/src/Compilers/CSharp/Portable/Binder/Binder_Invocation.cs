@@ -2295,9 +2295,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression defaultValue;
                 if (callerSourceLocation is object && parameter.IsCallerLineNumber)
                 {
-                    int line = callerSourceLocation
-                        .SourceTree
-                        .GetDisplayLineNumber(callerSourceLocation.SourceSpan);
+                    int line = callerSourceLocation.SourceTree.GetDisplayLineNumber(
+                        callerSourceLocation.SourceSpan
+                    );
                     defaultValue = new BoundLiteral(
                         syntax,
                         ConstantValue.Create(line),
@@ -2309,12 +2309,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (callerSourceLocation is object && parameter.IsCallerFilePath)
                 {
-                    string path = callerSourceLocation
-                        .SourceTree
-                        .GetDisplayPath(
-                            callerSourceLocation.SourceSpan,
-                            Compilation.Options.SourceReferenceResolver
-                        );
+                    string path = callerSourceLocation.SourceTree.GetDisplayPath(
+                        callerSourceLocation.SourceSpan,
+                        Compilation.Options.SourceReferenceResolver
+                    );
                     defaultValue = new BoundLiteral(
                         syntax,
                         ConstantValue.Create(path),
@@ -2591,12 +2589,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         ErrorCode.WRN_PrimaryConstructorParameterIsShadowedAndNotPassedToBase
                                 && !(
                                     d.Arguments is [ParameterSymbol shadowedParameter]
-                                    && shadowedParameter
-                                        .Type
-                                        .Equals(
-                                            typeOrValue.Data.ValueExpression.Type,
-                                            TypeCompareKind.AllIgnoreOptions
-                                        )
+                                    && shadowedParameter.Type.Equals(
+                                        typeOrValue.Data.ValueExpression.Type,
+                                        TypeCompareKind.AllIgnoreOptions
+                                    )
                                 )
                             ) // If the type and the name match, we would resolve to the same type rather than a value at the end.
                             {

@@ -130,12 +130,10 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
             // is generating code that it doesn't want errors shown for.
             var buffer = snapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer
-                .Properties
-                .TryGetProperty(
-                    PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
-                    out suppressedDiagnosticsSpans
-                );
+            buffer.Properties.TryGetProperty(
+                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                out suppressedDiagnosticsSpans
+            );
 
             var sourceText = snapshot.AsText();
 
@@ -166,8 +164,7 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
                             .GetLocationsToTag(diagnosticData)
                             .Select(
                                 loc =>
-                                    loc.UnmappedFileSpan
-                                        .GetClampedTextSpan(sourceText)
+                                    loc.UnmappedFileSpan.GetClampedTextSpan(sourceText)
                                         .ToSnapshotSpan(snapshot)
                             );
                         foreach (var diagnosticSpan in diagnosticSpans)

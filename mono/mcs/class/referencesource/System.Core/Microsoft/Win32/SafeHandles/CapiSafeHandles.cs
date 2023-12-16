@@ -337,9 +337,12 @@ namespace Microsoft.Win32.SafeHandles
             try
             {
                 if (
-                    !CapiNative
-                        .UnsafeNativeMethods
-                        .CryptDuplicateKey(this, IntPtr.Zero, 0, out duplicate)
+                    !CapiNative.UnsafeNativeMethods.CryptDuplicateKey(
+                        this,
+                        IntPtr.Zero,
+                        0,
+                        out duplicate
+                    )
                 )
                 {
                     throw new CryptographicException(Marshal.GetLastWin32Error());

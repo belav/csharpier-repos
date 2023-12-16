@@ -90,9 +90,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     // be set to false.
                     networkStream.Socket.Blocking = false;
                     if (
-                        networkStream
-                            .Socket
-                            .Receive(new byte[1], 0, 1, System.Net.Sockets.SocketFlags.Peek) == 0
+                        networkStream.Socket.Receive(
+                            new byte[1],
+                            0,
+                            1,
+                            System.Net.Sockets.SocketFlags.Peek
+                        ) == 0
                     )
                         connected = false;
 
@@ -100,9 +103,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     // A closed connection should raise exception, but then socket connected state should
                     // be set to false.
                     if (connected)
-                        networkStream
-                            .Socket
-                            .Send(Array.Empty<byte>(), 0, System.Net.Sockets.SocketFlags.None);
+                        networkStream.Socket.Send(
+                            Array.Empty<byte>(),
+                            0,
+                            System.Net.Sockets.SocketFlags.None
+                        );
                 }
                 catch (Exception)
                 {
@@ -286,8 +291,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 // If that happens we need to remove endpoint since it might indicate a unresponsive runtime.
                 connectTimeoutTokenSource.CancelAfter(TcpServerTimeoutMs);
                 tcpServerStream = await _tcpServerEndpointInfo
-                    .Endpoint
-                    .ConnectAsync(connectTokenSource.Token)
+                    .Endpoint.ConnectAsync(connectTokenSource.Token)
                     .ConfigureAwait(false);
             }
             catch (OperationCanceledException)
@@ -466,8 +470,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     {
                         return clientSocket.BeginConnect(remoteEP, callback, state);
                     };
-                    await Task.Factory
-                        .FromAsync(beginConnect, clientSocket.EndConnect, this)
+                    await Task.Factory.FromAsync(beginConnect, clientSocket.EndConnect, this)
                         .ConfigureAwait(false);
                 }
                 // When the socket is closed, the FromAsync logic will try to call EndAccept on the socket,

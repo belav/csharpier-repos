@@ -49,33 +49,31 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             }.Select(path => new AnalyzerFileReference(path, analyzerAssemblyLoader));
 
             var analyzersByLanguage = new Dictionary<string, AnalyzersAndFixers>();
-            return solution
-                .Projects
-                .ToImmutableDictionary(
-                    project => project.Id,
-                    project =>
-                    {
-                        if (
-                            !analyzersByLanguage.TryGetValue(
-                                project.Language,
-                                out var analyzersAndFixers
-                            )
+            return solution.Projects.ToImmutableDictionary(
+                project => project.Id,
+                project =>
+                {
+                    if (
+                        !analyzersByLanguage.TryGetValue(
+                            project.Language,
+                            out var analyzersAndFixers
                         )
-                        {
-                            var analyzers = references
-                                .SelectMany(reference => reference.GetAnalyzers(project.Language))
-                                .ToImmutableArray();
-                            var codeFixes = AnalyzerFinderHelpers.LoadFixers(
-                                references.Select(reference => reference.GetAssembly()),
-                                project.Language
-                            );
-                            analyzersAndFixers = new AnalyzersAndFixers(analyzers, codeFixes);
-                            analyzersByLanguage.Add(project.Language, analyzersAndFixers);
-                        }
-
-                        return analyzersAndFixers;
+                    )
+                    {
+                        var analyzers = references
+                            .SelectMany(reference => reference.GetAnalyzers(project.Language))
+                            .ToImmutableArray();
+                        var codeFixes = AnalyzerFinderHelpers.LoadFixers(
+                            references.Select(reference => reference.GetAssembly()),
+                            project.Language
+                        );
+                        analyzersAndFixers = new AnalyzersAndFixers(analyzers, codeFixes);
+                        analyzersByLanguage.Add(project.Language, analyzersAndFixers);
                     }
-                );
+
+                    return analyzersAndFixers;
+                }
+            );
         }
 
         public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) =>

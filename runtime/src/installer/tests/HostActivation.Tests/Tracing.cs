@@ -34,10 +34,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .NotHaveStdErrContaining(ExpectedInfoMessage)
-                .And
-                .NotHaveStdErrContaining(ExpectedVerboseMessage);
+                .And.NotHaveStdErrContaining(ExpectedInfoMessage)
+                .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
         }
 
         [Fact]
@@ -53,12 +51,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdErrContaining(ExpectedInfoMessage)
-                .And
-                .HaveStdErrContaining(ExpectedVerboseMessage);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdErrContaining(ExpectedInfoMessage)
+                .And.HaveStdErrContaining(ExpectedVerboseMessage);
         }
 
         [Fact]
@@ -75,12 +70,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdErrContaining(ExpectedInfoMessage)
-                .And
-                .HaveStdErrContaining(ExpectedVerboseMessage);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdErrContaining(ExpectedInfoMessage)
+                .And.HaveStdErrContaining(ExpectedVerboseMessage);
         }
 
         [Fact]
@@ -97,12 +89,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdErrContaining(ExpectedInfoMessage)
-                .And
-                .NotHaveStdErrContaining(ExpectedVerboseMessage);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdErrContaining(ExpectedInfoMessage)
+                .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
         }
 
         [Fact]
@@ -119,12 +108,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .NotHaveStdErrContaining(ExpectedInfoMessage)
-                .And
-                .NotHaveStdErrContaining(ExpectedVerboseMessage);
+                .And.HaveStdOutContaining("Hello World")
+                .And.NotHaveStdErrContaining(ExpectedInfoMessage)
+                .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
         }
 
         [Fact]
@@ -143,16 +129,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .NotHaveStdErrContaining(ExpectedInfoMessage)
-                .And
-                .NotHaveStdErrContaining(ExpectedVerboseMessage)
-                .And
-                .FileExists(traceFilePath)
-                .And
-                .FileContains(traceFilePath, ExpectedVerboseMessage);
+                .And.HaveStdOutContaining("Hello World")
+                .And.NotHaveStdErrContaining(ExpectedInfoMessage)
+                .And.NotHaveStdErrContaining(ExpectedVerboseMessage)
+                .And.FileExists(traceFilePath)
+                .And.FileContains(traceFilePath, ExpectedVerboseMessage);
 
             FileUtils.DeleteFileIfPossible(traceFilePath);
         }
@@ -174,14 +155,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdErrContaining(ExpectedInfoMessage)
-                .And
-                .HaveStdErrContaining(ExpectedVerboseMessage)
-                .And
-                .HaveStdErrContaining(ExpectedBadPathMessage);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdErrContaining(ExpectedInfoMessage)
+                .And.HaveStdErrContaining(ExpectedVerboseMessage)
+                .And.HaveStdErrContaining(ExpectedBadPathMessage);
         }
 
         public class SharedTestState : IDisposable

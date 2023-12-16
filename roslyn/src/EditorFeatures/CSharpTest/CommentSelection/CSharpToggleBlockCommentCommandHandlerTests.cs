@@ -233,8 +233,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         {
             return (AbstractCommentSelectionBase<ValueTuple>)
                 workspace
-                    .ExportProvider
-                    .GetExportedValues<ICommandHandler>()
+                    .ExportProvider.GetExportedValues<ICommandHandler>()
                     .First(
                         export =>
                             typeof(CSharpToggleBlockCommentCommandHandler).Equals(export.GetType())

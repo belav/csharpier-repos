@@ -36,13 +36,11 @@ namespace System.ServiceModel.Security
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TrustDriverVersionDoesNotSupportIssuedTokens)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TrustDriverVersionDoesNotSupportIssuedTokens)
+                    )
+                );
             }
         }
 
@@ -53,13 +51,11 @@ namespace System.ServiceModel.Security
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TrustDriverVersionDoesNotSupportIssuedTokens)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TrustDriverVersionDoesNotSupportIssuedTokens)
+                    )
+                );
             }
         }
 
@@ -82,13 +78,11 @@ namespace System.ServiceModel.Security
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TrustDriverVersionDoesNotSupportSession)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TrustDriverVersionDoesNotSupportSession)
+                    )
+                );
             }
         }
 
@@ -101,13 +95,11 @@ namespace System.ServiceModel.Security
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TrustDriverVersionDoesNotSupportSession)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TrustDriverVersionDoesNotSupportSession)
+                    )
+                );
             }
         }
 

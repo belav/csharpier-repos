@@ -350,10 +350,8 @@ public class Http3ConnectionTests : Http3TestBase
 
         var controlStream = await Http3Api.CreateControlStream(id: 0);
         await controlStream.SendSettingsAsync(new List<Http3PeerSetting>());
-        var lifetime = Http3Api
-            .MultiplexedConnectionContext
-            .Features
-            .Get<IConnectionLifetimeNotificationFeature>();
+        var lifetime =
+            Http3Api.MultiplexedConnectionContext.Features.Get<IConnectionLifetimeNotificationFeature>();
         lifetime.ConnectionClosedRequested.Register(() => completionSource.TrySetResult());
         Assert.False(lifetime.ConnectionClosedRequested.IsCancellationRequested);
 
@@ -420,8 +418,7 @@ public class Http3ConnectionTests : Http3TestBase
         );
 
         var maxFieldSetting = await Http3Api
-            .ServerReceivedSettingsReader
-            .ReadAsync()
+            .ServerReceivedSettingsReader.ReadAsync()
             .DefaultTimeout();
 
         Assert.Equal(Http3SettingType.MaxFieldSectionSize, maxFieldSetting.Key);

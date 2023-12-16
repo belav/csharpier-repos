@@ -154,14 +154,12 @@ namespace System.Net.Http
                     lock (_state.Lock)
                     {
                         if (
-                            !Interop
-                                .WinHttp
-                                .WinHttpReadData(
-                                    _requestHandle,
-                                    Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0),
-                                    (uint)Math.Min(bytesAvailable, buffer.Length),
-                                    IntPtr.Zero
-                                )
+                            !Interop.WinHttp.WinHttpReadData(
+                                _requestHandle,
+                                Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0),
+                                (uint)Math.Min(bytesAvailable, buffer.Length),
+                                IntPtr.Zero
+                            )
                         )
                         {
                             throw new IOException(
@@ -301,14 +299,12 @@ namespace System.Net.Http
                 {
                     Debug.Assert(!_requestHandle.IsInvalid);
                     if (
-                        !Interop
-                            .WinHttp
-                            .WinHttpReadData(
-                                _requestHandle,
-                                Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
-                                (uint)Math.Min(bytesAvailable, count),
-                                IntPtr.Zero
-                            )
+                        !Interop.WinHttp.WinHttpReadData(
+                            _requestHandle,
+                            Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
+                            (uint)Math.Min(bytesAvailable, count),
+                            IntPtr.Zero
+                        )
                     )
                     {
                         throw new IOException(

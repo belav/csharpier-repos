@@ -425,11 +425,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
-                        .CallOnPrePaint(
-                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                        );
+                    common.Chart.CallOnPrePaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
 
                 //************************************************************
@@ -616,13 +614,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         }
 
                         if (point.MarkerImage.Length > 0)
-                            common
-                                .ImageLoader
-                                .GetAdjustedImageSize(
-                                    point.MarkerImage,
-                                    graph.Graphics,
-                                    ref markerSize
-                                );
+                            common.ImageLoader.GetAdjustedImageSize(
+                                point.MarkerImage,
+                                graph.Graphics,
+                                ref markerSize
+                            );
 
                         // Get marker position
                         PointF markerPosition = PointF.Empty;
@@ -674,35 +670,31 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                     circCoord[1] = markerPosition.Y;
                                     circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                                    common
-                                        .HotRegionsList
-                                        .AddHotRegion(
-                                            insertIndex,
-                                            graph,
-                                            circCoord[0],
-                                            circCoord[1],
-                                            circCoord[2],
-                                            point,
-                                            ser.Name,
-                                            index - 1
-                                        );
+                                    common.HotRegionsList.AddHotRegion(
+                                        insertIndex,
+                                        graph,
+                                        circCoord[0],
+                                        circCoord[1],
+                                        circCoord[2],
+                                        point,
+                                        ser.Name,
+                                        index - 1
+                                    );
                                 }
                                 // All other markers represented as rectangles
                                 else
                                 {
-                                    common
-                                        .HotRegionsList
-                                        .AddHotRegion(
-                                            new RectangleF(
-                                                markerPosition.X - relativeMarkerSize.Width / 2f,
-                                                markerPosition.Y - relativeMarkerSize.Height / 2f,
-                                                relativeMarkerSize.Width,
-                                                relativeMarkerSize.Height
-                                            ),
-                                            point,
-                                            ser.Name,
-                                            index - 1
-                                        );
+                                    common.HotRegionsList.AddHotRegion(
+                                        new RectangleF(
+                                            markerPosition.X - relativeMarkerSize.Width / 2f,
+                                            markerPosition.Y - relativeMarkerSize.Height / 2f,
+                                            relativeMarkerSize.Width,
+                                            relativeMarkerSize.Height
+                                        ),
+                                        point,
+                                        ser.Name,
+                                        index - 1
+                                    );
                                 }
                             }
                         }
@@ -733,11 +725,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
-                        .CallOnPostPaint(
-                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                        );
+                    common.Chart.CallOnPostPaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
             }
         }
@@ -1173,13 +1163,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             }
 
                             if (point.MarkerImage.Length > 0)
-                                common
-                                    .ImageLoader
-                                    .GetAdjustedImageSize(
-                                        point.MarkerImage,
-                                        graph.Graphics,
-                                        ref markerSize
-                                    );
+                                common.ImageLoader.GetAdjustedImageSize(
+                                    point.MarkerImage,
+                                    graph.Graphics,
+                                    ref markerSize
+                                );
 
                             // Get point label style attribute
                             markerSize = graph.GetRelativeSize(markerSize);
@@ -1352,11 +1340,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
-                        .CallOnPrePaint(
-                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                        );
+                    common.Chart.CallOnPrePaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
 
                 //************************************************************
@@ -1601,13 +1587,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         }
 
                         if (point.MarkerImage.Length > 0)
-                            common
-                                .ImageLoader
-                                .GetAdjustedImageSize(
-                                    point.MarkerImage,
-                                    graph.Graphics,
-                                    ref markerSize
-                                );
+                            common.ImageLoader.GetAdjustedImageSize(
+                                point.MarkerImage,
+                                graph.Graphics,
+                                ref markerSize
+                            );
 
                         // Get marker position
                         PointF markerPosition = PointF.Empty;
@@ -1659,35 +1643,31 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                     circCoord[1] = markerPosition.Y;
                                     circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                                    common
-                                        .HotRegionsList
-                                        .AddHotRegion(
-                                            insertIndex,
-                                            graph,
-                                            circCoord[0],
-                                            circCoord[1],
-                                            circCoord[2],
-                                            point,
-                                            ser.Name,
-                                            index - 1
-                                        );
+                                    common.HotRegionsList.AddHotRegion(
+                                        insertIndex,
+                                        graph,
+                                        circCoord[0],
+                                        circCoord[1],
+                                        circCoord[2],
+                                        point,
+                                        ser.Name,
+                                        index - 1
+                                    );
                                 }
                                 // All other markers represented as rectangles
                                 else
                                 {
-                                    common
-                                        .HotRegionsList
-                                        .AddHotRegion(
-                                            new RectangleF(
-                                                markerPosition.X - relativeMarkerSize.Width / 2f,
-                                                markerPosition.Y - relativeMarkerSize.Height / 2f,
-                                                relativeMarkerSize.Width,
-                                                relativeMarkerSize.Height
-                                            ),
-                                            point,
-                                            ser.Name,
-                                            index - 1
-                                        );
+                                    common.HotRegionsList.AddHotRegion(
+                                        new RectangleF(
+                                            markerPosition.X - relativeMarkerSize.Width / 2f,
+                                            markerPosition.Y - relativeMarkerSize.Height / 2f,
+                                            relativeMarkerSize.Width,
+                                            relativeMarkerSize.Height
+                                        ),
+                                        point,
+                                        ser.Name,
+                                        index - 1
+                                    );
                                 }
                             }
                         }
@@ -1705,11 +1685,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
-                        .CallOnPostPaint(
-                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                        );
+                    common.Chart.CallOnPostPaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
             }
         }
@@ -2206,13 +2184,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
                 if (point.MarkerImage.Length > 0)
                     if (common.graph != null)
-                        common
-                            .ImageLoader
-                            .GetAdjustedImageSize(
-                                point.MarkerImage,
-                                common.graph.Graphics,
-                                ref markerSize
-                            );
+                        common.ImageLoader.GetAdjustedImageSize(
+                            point.MarkerImage,
+                            common.graph.Graphics,
+                            ref markerSize
+                        );
 
                 // Transform marker position in 3D space
                 if (area.Area3DStyle.Enable3D)

@@ -427,9 +427,10 @@ public class AttributeRouteModel
                                     token,
                                     string.Join(
                                         ", ",
-                                        values
-                                            .Keys
-                                            .OrderBy(k => k, StringComparer.OrdinalIgnoreCase)
+                                        values.Keys.OrderBy(
+                                            k => k,
+                                            StringComparer.OrdinalIgnoreCase
+                                        )
                                     )
                                 );
                             throw new InvalidOperationException(message);

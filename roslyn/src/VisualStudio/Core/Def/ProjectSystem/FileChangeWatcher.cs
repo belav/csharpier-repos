@@ -453,19 +453,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 foreach (var watchedDirectory in watchedDirectories)
                 {
-                    _fileChangeWatcher
-                        ._taskQueue
-                        .AddWork(
-                            watchedDirectories.Select(
-                                watchedDirectory =>
-                                    WatcherOperation.WatchDirectory(
-                                        watchedDirectory.Path,
-                                        watchedDirectory.ExtensionFilter,
-                                        this,
-                                        _directoryWatchCookies
-                                    )
-                            )
-                        );
+                    _fileChangeWatcher._taskQueue.AddWork(
+                        watchedDirectories.Select(
+                            watchedDirectory =>
+                                WatcherOperation.WatchDirectory(
+                                    watchedDirectory.Path,
+                                    watchedDirectory.ExtensionFilter,
+                                    this,
+                                    _directoryWatchCookies
+                                )
+                        )
+                    );
                 }
             }
 
@@ -481,12 +479,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _disposed = true;
                 }
 
-                _fileChangeWatcher
-                    ._taskQueue
-                    .AddWork(WatcherOperation.UnwatchDirectories(_directoryWatchCookies));
-                _fileChangeWatcher
-                    ._taskQueue
-                    .AddWork(WatcherOperation.UnwatchFiles(_activeFileWatchingTokens));
+                _fileChangeWatcher._taskQueue.AddWork(
+                    WatcherOperation.UnwatchDirectories(_directoryWatchCookies)
+                );
+                _fileChangeWatcher._taskQueue.AddWork(
+                    WatcherOperation.UnwatchFiles(_activeFileWatchingTokens)
+                );
             }
 
             public IWatchedFile EnqueueWatchingFile(string filePath)
@@ -508,16 +506,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _activeFileWatchingTokens.Add(token);
                 }
 
-                _fileChangeWatcher
-                    ._taskQueue
-                    .AddWork(
-                        WatcherOperation.WatchFile(
-                            filePath,
-                            _VSFILECHANGEFLAGS.VSFILECHG_Size | _VSFILECHANGEFLAGS.VSFILECHG_Time,
-                            this,
-                            token
-                        )
-                    );
+                _fileChangeWatcher._taskQueue.AddWork(
+                    WatcherOperation.WatchFile(
+                        filePath,
+                        _VSFILECHANGEFLAGS.VSFILECHG_Size | _VSFILECHANGEFLAGS.VSFILECHG_Time,
+                        this,
+                        token
+                    )
+                );
 
                 return token;
             }

@@ -112,12 +112,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if (
                         _equalityContract.IsStatic
-                        || !_equalityContract
-                            .Type
-                            .Equals(
-                                DeclaringCompilation.GetWellKnownType(WellKnownType.System_Type),
-                                TypeCompareKind.AllIgnoreOptions
-                            )
+                        || !_equalityContract.Type.Equals(
+                            DeclaringCompilation.GetWellKnownType(WellKnownType.System_Type),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                     )
                     {
                         // There is a signature mismatch, an error was reported elsewhere
@@ -160,12 +158,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if (
                         baseEquals is null
-                        || !baseEquals
-                            .ContainingType
-                            .Equals(
-                                ContainingType.BaseTypeNoUseSiteDiagnostics,
-                                TypeCompareKind.AllIgnoreOptions
-                            )
+                        || !baseEquals.ContainingType.Equals(
+                            ContainingType.BaseTypeNoUseSiteDiagnostics,
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                         || baseEquals.ReturnType.SpecialType != SpecialType.System_Boolean
                     )
                     {

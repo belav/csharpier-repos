@@ -86,8 +86,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                 }
 
                 return await serializedDefinition
-                    .Value
-                    .RehydrateAsync(solution, cancellationToken)
+                    .Value.RehydrateAsync(solution, cancellationToken)
                     .ConfigureAwait(false);
             }
 

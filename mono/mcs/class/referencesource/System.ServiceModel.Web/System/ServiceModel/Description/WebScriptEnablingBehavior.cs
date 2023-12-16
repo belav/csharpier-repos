@@ -37,20 +37,16 @@ namespace System.ServiceModel.Description
             {
                 if (value != webScriptBodyStyle)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new NotSupportedException(
-                                SR2.GetString(
-                                    SR2.BodyStyleNotSupportedByWebScript,
-                                    value,
-                                    this.GetType().Name,
-                                    webScriptBodyStyle
-                                )
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.GetString(
+                                SR2.BodyStyleNotSupportedByWebScript,
+                                value,
+                                this.GetType().Name,
+                                webScriptBodyStyle
                             )
-                        );
+                        )
+                    );
                 }
             }
         }
@@ -62,11 +58,9 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.requestMessageFormat = value;
             }
@@ -79,11 +73,9 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.responseMessageFormat = value;
             }
@@ -96,15 +88,9 @@ namespace System.ServiceModel.Description
             {
                 if (value)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new NotSupportedException(
-                                SR2.GetString(SR2.HelpPageNotSupportedInScripts)
-                            )
-                        );
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(SR2.GetString(SR2.HelpPageNotSupportedInScripts))
+                    );
                 }
             }
         }
@@ -116,15 +102,11 @@ namespace System.ServiceModel.Description
             {
                 if (value)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new NotSupportedException(
-                                SR2.GetString(SR2.AutomaticFormatSelectionNotSupportedInScripts)
-                            )
-                        );
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.GetString(SR2.AutomaticFormatSelectionNotSupportedInScripts)
+                        )
+                    );
                 }
             }
         }
@@ -136,15 +118,11 @@ namespace System.ServiceModel.Description
             {
                 if (value)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new NotSupportedException(
-                                SR2.GetString(SR2.FaultExceptionEnabledNotSupportedInScripts)
-                            )
-                        );
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.GetString(SR2.FaultExceptionEnabledNotSupportedInScripts)
+                        )
+                    );
                 }
             }
         }
@@ -175,21 +153,17 @@ namespace System.ServiceModel.Description
             catch (XmlException exception)
             {
                 // Microsoft, need to reference this resource string although fix for 13332 was removed
-                throw System
-                    .ServiceModel
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new NotSupportedException(
-                            SR2.GetString(
-                                SR2.InvalidXmlCharactersInNameUsedWithPOSTMethod,
-                                string.Empty,
-                                string.Empty,
-                                string.Empty
-                            ),
-                            exception
-                        )
-                    );
+                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR2.GetString(
+                            SR2.InvalidXmlCharactersInNameUsedWithPOSTMethod,
+                            string.Empty,
+                            string.Empty,
+                            string.Empty
+                        ),
+                        exception
+                    )
+                );
             }
         }
 
@@ -203,92 +177,71 @@ namespace System.ServiceModel.Description
             {
                 if (operation.Behaviors.Find<XmlSerializerOperationBehavior>() != null)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.WebScriptNotSupportedForXmlSerializerFormat,
-                                    typeof(XmlSerializerFormatAttribute).Name,
-                                    this.GetType().ToString()
-                                )
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WebScriptNotSupportedForXmlSerializerFormat,
+                                typeof(XmlSerializerFormatAttribute).Name,
+                                this.GetType().ToString()
                             )
-                        );
+                        )
+                    );
                 }
                 string method = WebHttpBehavior.GetWebMethod(operation);
                 if (method != WebHttpBehavior.GET && method != WebHttpBehavior.POST)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.WebScriptInvalidHttpRequestMethod,
-                                    operation.Name,
-                                    endpoint.Contract.Name,
-                                    method,
-                                    this.GetType().ToString()
-                                )
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WebScriptInvalidHttpRequestMethod,
+                                operation.Name,
+                                endpoint.Contract.Name,
+                                method,
+                                this.GetType().ToString()
                             )
-                        );
+                        )
+                    );
                 }
                 WebGetAttribute webGetAttribute = operation.Behaviors.Find<WebGetAttribute>();
                 if (webGetAttribute != null && webGetAttribute.UriTemplate != null)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.WebScriptNotSupportedForXmlSerializerFormat,
-                                    typeof(UriTemplate).Name,
-                                    this.GetType().ToString()
-                                )
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WebScriptNotSupportedForXmlSerializerFormat,
+                                typeof(UriTemplate).Name,
+                                this.GetType().ToString()
                             )
-                        );
+                        )
+                    );
                 }
-                WebInvokeAttribute webInvokeAttribute = operation
-                    .Behaviors
-                    .Find<WebInvokeAttribute>();
+                WebInvokeAttribute webInvokeAttribute =
+                    operation.Behaviors.Find<WebInvokeAttribute>();
                 if (webInvokeAttribute != null && webInvokeAttribute.UriTemplate != null)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.WebScriptNotSupportedForXmlSerializerFormat,
-                                    typeof(UriTemplate).Name,
-                                    this.GetType().ToString()
-                                )
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WebScriptNotSupportedForXmlSerializerFormat,
+                                typeof(UriTemplate).Name,
+                                this.GetType().ToString()
                             )
-                        );
+                        )
+                    );
                 }
                 WebMessageBodyStyle bodyStyle = GetBodyStyle(operation);
                 if (bodyStyle != webScriptBodyStyle)
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new NotSupportedException(
-                                SR2.GetString(
-                                    SR2.BodyStyleNotSupportedByWebScript,
-                                    bodyStyle,
-                                    this.GetType().Name,
-                                    webScriptBodyStyle
-                                )
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.GetString(
+                                SR2.BodyStyleNotSupportedByWebScript,
+                                bodyStyle,
+                                this.GetType().Name,
+                                webScriptBodyStyle
                             )
-                        );
+                        )
+                    );
                 }
 
                 foreach (MessageDescription messageDescription in operation.Messages)
@@ -299,19 +252,15 @@ namespace System.ServiceModel.Description
                         && (messageDescription.Body.Parts.Count > 0)
                     )
                     {
-                        throw System
-                            .ServiceModel
-                            .DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR2.GetString(
-                                        SR2.WebScriptOutRefOperationsNotSupported,
-                                        operation.Name,
-                                        endpoint.Contract.Name
-                                    )
+                        throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.WebScriptOutRefOperationsNotSupported,
+                                    operation.Name,
+                                    endpoint.Contract.Name
                                 )
-                            );
+                            )
+                        );
                     }
                 }
             }
@@ -374,25 +323,18 @@ namespace System.ServiceModel.Description
         {
             if (endpointDispatcher.ChannelDispatcher == null)
             {
-                throw System
-                    .ServiceModel
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "endpointDispatcher",
-                        SR2.GetString(SR2.ChannelDispatcherMustBePresent)
-                    );
+                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "endpointDispatcher",
+                    SR2.GetString(SR2.ChannelDispatcherMustBePresent)
+                );
             }
 #pragma warning disable 56506 // Microsoft, endpointDispatcher.ChannelDispatcher.ErrorHandlers never null
-            endpointDispatcher
-                .ChannelDispatcher
-                .ErrorHandlers
-                .Add(
-                    new JsonErrorHandler(
-                        endpoint,
-                        endpointDispatcher.ChannelDispatcher.IncludeExceptionDetailInFaults
-                    )
-                );
+            endpointDispatcher.ChannelDispatcher.ErrorHandlers.Add(
+                new JsonErrorHandler(
+                    endpoint,
+                    endpointDispatcher.ChannelDispatcher.IncludeExceptionDetailInFaults
+                )
+            );
 #pragma warning restore 56506
         }
 
@@ -434,28 +376,23 @@ namespace System.ServiceModel.Description
                     )
                 ) //  ignoreCase //  includeHostNameInComparison
                 {
-                    throw System
-                        .ServiceModel
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.JsonNoEndpointAtMetadataAddress,
-                                    this.GetType().ToString(),
-                                    serviceEndpoint.Address,
-                                    serviceEndpoint.Name,
-                                    host.Description.Name
-                                )
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.JsonNoEndpointAtMetadataAddress,
+                                this.GetType().ToString(),
+                                serviceEndpoint.Address,
+                                serviceEndpoint.Name,
+                                host.Description.Name
                             )
-                        );
+                        )
+                    );
                 }
             }
 
             HttpTransportBindingElement transportBindingElement;
             HttpTransportBindingElement existingTransportBindingElement = endpoint
-                .Binding
-                .CreateBindingElements()
+                .Binding.CreateBindingElements()
                 .Find<HttpTransportBindingElement>();
 
             if (existingTransportBindingElement != null)
@@ -561,56 +498,35 @@ namespace System.ServiceModel.Description
                             {
                                 if (faultDetail.ExceptionDetail != null)
                                 {
-                                    throw System
-                                        .ServiceModel
-                                        .DiagnosticUtility
-                                        .ExceptionUtility
-                                        .ThrowHelperError(
-                                            new FaultException<ExceptionDetail>(
-                                                faultDetail.ExceptionDetail,
-                                                faultDetail.Message,
-                                                faultCode
-                                            )
-                                        );
+                                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new FaultException<ExceptionDetail>(
+                                            faultDetail.ExceptionDetail,
+                                            faultDetail.Message,
+                                            faultCode
+                                        )
+                                    );
                                 }
                                 else
                                 {
-                                    throw System
-                                        .ServiceModel
-                                        .DiagnosticUtility
-                                        .ExceptionUtility
-                                        .ThrowHelperError(
-                                            new FaultException(
-                                                MessageFault.CreateFault(
-                                                    faultCode,
-                                                    faultDetail.Message
-                                                )
-                                            )
-                                        );
+                                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new FaultException(
+                                            MessageFault.CreateFault(faultCode, faultDetail.Message)
+                                        )
+                                    );
                                 }
                             }
                             else
                             {
-                                throw System
-                                    .ServiceModel
-                                    .DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new FaultException(
-                                            MessageFault.CreateFault(
-                                                faultCode,
-                                                System
-                                                    .ServiceModel
-                                                    .SR
-                                                    .GetString(
-                                                        System
-                                                            .ServiceModel
-                                                            .SR
-                                                            .SFxInternalServerError
-                                                    )
+                                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new FaultException(
+                                        MessageFault.CreateFault(
+                                            faultCode,
+                                            System.ServiceModel.SR.GetString(
+                                                System.ServiceModel.SR.SFxInternalServerError
                                             )
                                         )
-                                    );
+                                    )
+                                );
                             }
                         }
                     }
@@ -630,8 +546,7 @@ namespace System.ServiceModel.Description
             public JsonErrorHandler(ServiceEndpoint endpoint, bool includeExceptionDetailInFaults)
             {
                 WebMessageEncodingBindingElement webMEBE = endpoint
-                    .Binding
-                    .CreateBindingElements()
+                    .Binding.CreateBindingElements()
                     .Find<WebMessageEncodingBindingElement>();
                 outgoingContentType = JsonMessageEncoderFactory.GetContentType(webMEBE);
                 this.includeExceptionDetailInFaults = includeExceptionDetailInFaults;
@@ -685,9 +600,10 @@ namespace System.ServiceModel.Description
 
                     object property = null;
                     if (
-                        newMessage
-                            .Properties
-                            .TryGetValue(HttpResponseMessageProperty.Name, out property)
+                        newMessage.Properties.TryGetValue(
+                            HttpResponseMessageProperty.Name,
+                            out property
+                        )
                     )
                     {
                         responseProperty = (HttpResponseMessageProperty)property;
@@ -695,9 +611,10 @@ namespace System.ServiceModel.Description
                     else
                     {
                         responseProperty = new HttpResponseMessageProperty();
-                        newMessage
-                            .Properties
-                            .Add(HttpResponseMessageProperty.Name, responseProperty);
+                        newMessage.Properties.Add(
+                            HttpResponseMessageProperty.Name,
+                            responseProperty
+                        );
                     }
 
                     fault.Close();
@@ -709,12 +626,10 @@ namespace System.ServiceModel.Description
 
                 object bodyFormatPropertyObject;
                 if (
-                    fault
-                        .Properties
-                        .TryGetValue(
-                            WebBodyFormatMessageProperty.Name,
-                            out bodyFormatPropertyObject
-                        )
+                    fault.Properties.TryGetValue(
+                        WebBodyFormatMessageProperty.Name,
+                        out bodyFormatPropertyObject
+                    )
                 )
                 {
                     WebBodyFormatMessageProperty bodyFormatProperty =
@@ -730,12 +645,10 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    fault
-                        .Properties
-                        .Add(
-                            WebBodyFormatMessageProperty.Name,
-                            WebBodyFormatMessageProperty.JsonProperty
-                        );
+                    fault.Properties.Add(
+                        WebBodyFormatMessageProperty.Name,
+                        WebBodyFormatMessageProperty.JsonProperty
+                    );
                 }
             }
 
@@ -762,19 +675,19 @@ namespace System.ServiceModel.Description
                             }
                             catch (SerializationException exception)
                             {
-                                System
-                                    .ServiceModel
-                                    .DiagnosticUtility
-                                    .TraceHandledException(exception, TraceEventType.Information);
+                                System.ServiceModel.DiagnosticUtility.TraceHandledException(
+                                    exception,
+                                    TraceEventType.Information
+                                );
                                 // A SerializationException will be thrown if the detail isn't of type ExceptionDetail
                                 // In that case, we want to just move on.
                             }
                             catch (SecurityException exception)
                             {
-                                System
-                                    .ServiceModel
-                                    .DiagnosticUtility
-                                    .TraceHandledException(exception, TraceEventType.Information);
+                                System.ServiceModel.DiagnosticUtility.TraceHandledException(
+                                    exception,
+                                    TraceEventType.Information
+                                );
                                 // A SecurityException will be thrown if the detail can't be obtained in partial trust
                                 // (This is guaranteed to happen unless there's an Assert for MemberAccessPermission, since ExceptionDetail
                                 //     has DataMembers that have private setters.)
@@ -784,10 +697,9 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        faultDetail.Message = System
-                            .ServiceModel
-                            .SR
-                            .GetString(System.ServiceModel.SR.SFxInternalServerError);
+                        faultDetail.Message = System.ServiceModel.SR.GetString(
+                            System.ServiceModel.SR.SFxInternalServerError
+                        );
                     }
                 }
 

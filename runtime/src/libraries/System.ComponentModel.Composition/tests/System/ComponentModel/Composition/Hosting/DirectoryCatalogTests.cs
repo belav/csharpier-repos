@@ -590,8 +590,7 @@ namespace System.ComponentModel.Composition
 
             IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> expectedMatchingExports =
                 catalog
-                    .Parts
-                    .SelectMany(
+                    .Parts.SelectMany(
                         part => part.ExportDefinitions,
                         (part, export) =>
                             new Tuple<ComposablePartDefinition, ExportDefinition>(part, export)

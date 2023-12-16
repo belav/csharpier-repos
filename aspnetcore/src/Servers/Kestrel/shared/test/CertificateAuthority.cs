@@ -289,9 +289,9 @@ internal sealed class CertificateAuthority : IDisposable
         }
 
         request.CertificateExtensions.Add(_akidExtension);
-        request
-            .CertificateExtensions
-            .Add(new X509SubjectKeyIdentifierExtension(request.PublicKey, false));
+        request.CertificateExtensions.Add(
+            new X509SubjectKeyIdentifierExtension(request.PublicKey, false)
+        );
 
         byte[] serial = new byte[sizeof(long)];
         RandomNumberGenerator.Fill(serial);
@@ -784,8 +784,7 @@ certs            [0] EXPLICIT SEQUENCE OF Certificate OPTIONAL }
     private X509AuthorityKeyIdentifierExtension CreateAkidExtension()
     {
         X509SubjectKeyIdentifierExtension skid = _cert
-            .Extensions
-            .OfType<X509SubjectKeyIdentifierExtension>()
+            .Extensions.OfType<X509SubjectKeyIdentifierExtension>()
             .SingleOrDefault();
 
         if (skid is null)
@@ -920,8 +919,7 @@ certs            [0] EXPLICIT SEQUENCE OF Certificate OPTIONAL }
                 }
 
                 X509SubjectKeyIdentifierExtension intermedSkid = intermedCert
-                    .Extensions
-                    .OfType<X509SubjectKeyIdentifierExtension>()
+                    .Extensions.OfType<X509SubjectKeyIdentifierExtension>()
                     .Single();
 
                 certUrl = $"{responder.UriPrefix}cert/{intermedSkid.SubjectKeyIdentifier}.cer";

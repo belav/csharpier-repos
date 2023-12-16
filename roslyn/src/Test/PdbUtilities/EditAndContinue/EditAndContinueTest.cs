@@ -105,8 +105,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var previousSource = _sources[^1];
 
             var compilation = previousGeneration
-                .Compilation
-                .RemoveAllSyntaxTrees()
+                .Compilation.RemoveAllSyntaxTrees()
                 .AddSyntaxTrees(markedSource.Tree);
             var unmappedNodes = new List<SyntaxNode>();
 

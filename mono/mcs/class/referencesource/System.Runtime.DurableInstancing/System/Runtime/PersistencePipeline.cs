@@ -321,8 +321,7 @@ namespace System.Runtime
                     if (this.keys == null)
                     {
                         this.keys = new List<XName>(
-                            this.basis
-                                .Where(value => value.Value.IsWriteOnly() == this.writeOnly)
+                            this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
                                 .Select(value => value.Key)
                         );
                     }
@@ -337,8 +336,7 @@ namespace System.Runtime
                     if (this.values == null)
                     {
                         this.values = new List<object>(
-                            this.basis
-                                .Where(value => value.Value.IsWriteOnly() == this.writeOnly)
+                            this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
                                 .Select(value => value.Value.Value)
                         );
                     }
@@ -437,8 +435,7 @@ namespace System.Runtime
 
             public IEnumerator<KeyValuePair<XName, object>> GetEnumerator()
             {
-                return this.basis
-                    .Where(value => value.Value.IsWriteOnly() == this.writeOnly)
+                return this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
                     .Select(value => new KeyValuePair<XName, object>(value.Key, value.Value.Value))
                     .GetEnumerator();
             }
@@ -479,9 +476,7 @@ namespace System.Runtime
             {
                 this.pipeline = pipeline;
                 this.isLoad = isLoad;
-                this.pendingModules = this.pipeline
-                    .modules
-                    .Where(value => value.IsIOParticipant)
+                this.pendingModules = this.pipeline.modules.Where(value => value.IsIOParticipant)
                     .ToArray();
                 this.remainingModules = this.pendingModules.Length;
 

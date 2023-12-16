@@ -79,9 +79,11 @@ namespace System.Security.Cryptography.X509Certificates
                 }
             }
 
-            SafeCFArrayHandle certs = Interop
-                .AppleCrypto
-                .X509ImportCollection(rawData, contentType, password);
+            SafeCFArrayHandle certs = Interop.AppleCrypto.X509ImportCollection(
+                rawData,
+                contentType,
+                password
+            );
 
             using (certs)
             {
@@ -205,9 +207,11 @@ namespace System.Security.Cryptography.X509Certificates
                 SafeSecIdentityHandle identityHandle;
 
                 if (
-                    Interop
-                        .AppleCrypto
-                        .X509DemuxAndRetainHandle(handle, out certHandle, out identityHandle)
+                    Interop.AppleCrypto.X509DemuxAndRetainHandle(
+                        handle,
+                        out certHandle,
+                        out identityHandle
+                    )
                 )
                 {
                     X509Certificate2 cert;

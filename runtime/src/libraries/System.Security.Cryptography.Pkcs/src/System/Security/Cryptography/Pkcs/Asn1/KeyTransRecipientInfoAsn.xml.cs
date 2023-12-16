@@ -104,19 +104,16 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System
-                .Security
-                .Cryptography
-                .Pkcs
-                .Asn1
-                .RecipientIdentifierAsn
-                .Decode(ref sequenceReader, rebind, out decoded.Rid);
-            System
-                .Security
-                .Cryptography
-                .Asn1
-                .AlgorithmIdentifierAsn
-                .Decode(ref sequenceReader, rebind, out decoded.KeyEncryptionAlgorithm);
+            System.Security.Cryptography.Pkcs.Asn1.RecipientIdentifierAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.Rid
+            );
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.KeyEncryptionAlgorithm
+            );
 
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {

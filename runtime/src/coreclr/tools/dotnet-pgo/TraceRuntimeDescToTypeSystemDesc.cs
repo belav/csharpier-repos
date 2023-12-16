@@ -138,9 +138,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             _clrInstanceID = clrInstanceID;
 
             foreach (
-                var methodIDDetailsData in traceProcess
-                    .EventsInProcess
-                    .ByEventType<MethodDetailsTraceData>()
+                var methodIDDetailsData in traceProcess.EventsInProcess.ByEventType<MethodDetailsTraceData>()
             )
             {
                 MethodDescInfo currentInfo;
@@ -296,9 +294,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             Dictionary<long, bool> assemblyToIsDynamic = new Dictionary<long, bool>();
 
             foreach (
-                var assemblyLoadTrace in _traceProcess
-                    .EventsInProcess
-                    .ByEventType<AssemblyLoadUnloadTraceData>()
+                var assemblyLoadTrace in _traceProcess.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
             )
             {
                 assemblyToCLRInstanceIDMap[assemblyLoadTrace.AssemblyID] =
@@ -555,12 +551,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                 if (instantiation[i] == null)
                                     return null;
                             }
-                            tinfo.Type = uninstantiatedType
-                                .Context
-                                .GetInstantiatedType(
-                                    uninstantiatedType,
-                                    new Instantiation(instantiation)
-                                );
+                            tinfo.Type = uninstantiatedType.Context.GetInstantiatedType(
+                                uninstantiatedType,
+                                new Instantiation(instantiation)
+                            );
                         }
                         else
                         {

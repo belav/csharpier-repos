@@ -336,9 +336,10 @@ namespace Microsoft.Extensions.Hosting
                 Justification = "Calling IConfiguration.GetValue is safe when the T is bool."
             )]
             static bool GetReloadConfigOnChangeValue(HostBuilderContext hostingContext) =>
-                hostingContext
-                    .Configuration
-                    .GetValue("hostBuilder:reloadConfigOnChange", defaultValue: true);
+                hostingContext.Configuration.GetValue(
+                    "hostBuilder:reloadConfigOnChange",
+                    defaultValue: true
+                );
         }
 
         internal static void AddCommandLineConfig(

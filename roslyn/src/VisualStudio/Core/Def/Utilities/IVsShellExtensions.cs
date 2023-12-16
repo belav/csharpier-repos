@@ -28,9 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 {
                     await joinableTaskFactory.SwitchToMainThreadAsync();
 
-                    var shell = ServiceProvider
-                        .GlobalProvider
-                        .GetService<SVsShell, IVsShell>(joinableTaskFactory);
+                    var shell = ServiceProvider.GlobalProvider.GetService<SVsShell, IVsShell>(
+                        joinableTaskFactory
+                    );
                     return
                         (shell != null)
                         && ErrorHandler.Succeeded(

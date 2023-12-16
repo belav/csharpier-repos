@@ -210,11 +210,9 @@ namespace System.Data.EntityClient
                 if (value != null && !Helper.IsScalarType(value))
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .EntityClient_EntityParameterEdmTypeNotScalar(value.FullName)
+                        System.Data.Entity.Strings.EntityClient_EntityParameterEdmTypeNotScalar(
+                            value.FullName
+                        )
                     );
                 }
                 PropertyChanging();
@@ -417,14 +415,10 @@ namespace System.Data.EntityClient
             if (!this.IsTypeConsistent)
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .EntityClient_EntityParameterInconsistentEdmType(
-                            _edmType.FullName,
-                            _parameterName
-                        )
+                    System.Data.Entity.Strings.EntityClient_EntityParameterInconsistentEdmType(
+                        _edmType.FullName,
+                        _parameterName
+                    )
                 );
             }
 
@@ -439,24 +433,24 @@ namespace System.Data.EntityClient
                 if (
                     this.DbType == DbType.Object
                     && this.Value != null
-                    && ClrProviderManifest
-                        .Instance
-                        .TryGetPrimitiveType(this.Value.GetType(), out primitiveParameterType)
+                    && ClrProviderManifest.Instance.TryGetPrimitiveType(
+                        this.Value.GetType(),
+                        out primitiveParameterType
+                    )
                     && Helper.IsSpatialType(primitiveParameterType)
                 )
                 {
-                    typeUsage = EdmProviderManifest
-                        .Instance
-                        .GetCanonicalModelTypeUsage(primitiveParameterType.PrimitiveTypeKind);
+                    typeUsage = EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(
+                        primitiveParameterType.PrimitiveTypeKind
+                    );
                 }
                 else
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .EntityClient_UnsupportedDbType(this.DbType.ToString(), ParameterName)
+                        System.Data.Entity.Strings.EntityClient_UnsupportedDbType(
+                            this.DbType.ToString(),
+                            ParameterName
+                        )
                     );
                 }
             }

@@ -80,8 +80,9 @@ namespace System.Composition.Convention.Tests
                 .ForTypesMatching(
                     (t) =>
                         t.GetTypeInfo()
-                            .ImplementedInterfaces
-                            .Where((iface) => iface != typeof(System.IDisposable))
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
                             .Count() == 0
                 )
                 .Export();
@@ -127,8 +128,9 @@ namespace System.Composition.Convention.Tests
                 .ForTypesMatching(
                     (t) =>
                         t.GetTypeInfo()
-                            .ImplementedInterfaces
-                            .Where((iface) => iface != typeof(System.IDisposable))
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
                             .Count() == 0
                 )
                 .Export();
@@ -177,8 +179,9 @@ namespace System.Composition.Convention.Tests
                 .ForTypesMatching(
                     (t) =>
                         t.GetTypeInfo()
-                            .ImplementedInterfaces
-                            .Where((iface) => iface != typeof(System.IDisposable))
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
                             .Count() == 0
                 )
                 .Export();

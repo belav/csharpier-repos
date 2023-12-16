@@ -474,15 +474,13 @@ class Class
                         )
                     );
                     workspace.TryApplyChanges(
-                        workspace
-                            .CurrentSolution
-                            .WithAnalyzerReferences(new[] { analyzerReference })
+                        workspace.CurrentSolution.WithAnalyzerReferences(
+                            new[] { analyzerReference }
+                        )
                     );
 
                     Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
-                        workspace
-                            .ExportProvider
-                            .GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+                        workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
                     );
                     var diagnosticService = Assert.IsType<DiagnosticAnalyzerService>(
                         workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
@@ -1328,8 +1326,7 @@ class Class
                                 // Report diagnostic on each descendant comment trivia
                                 foreach (
                                     var trivia in context
-                                        .Node
-                                        .DescendantTrivia()
+                                        .Node.DescendantTrivia()
                                         .Where(
                                             t =>
                                                 t.Kind()

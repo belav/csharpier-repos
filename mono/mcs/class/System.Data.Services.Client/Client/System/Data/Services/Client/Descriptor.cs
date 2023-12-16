@@ -75,16 +75,13 @@ namespace System.Data.Services.Client
         {
             get
             {
-                System
-                    .Diagnostics
-                    .Debug
-                    .Assert(
-                        (EntityStates.Added == this.state)
-                            || (EntityStates.Modified == this.state)
-                            || (EntityStates.Unchanged == this.state)
-                            || (EntityStates.Deleted == this.state),
-                        "entity state is not valid"
-                    );
+                System.Diagnostics.Debug.Assert(
+                    (EntityStates.Added == this.state)
+                        || (EntityStates.Modified == this.state)
+                        || (EntityStates.Unchanged == this.state)
+                        || (EntityStates.Deleted == this.state),
+                    "entity state is not valid"
+                );
 
                 return (EntityStates.Unchanged != this.state);
             }

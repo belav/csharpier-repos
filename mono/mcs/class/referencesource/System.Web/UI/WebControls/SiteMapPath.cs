@@ -619,11 +619,9 @@ namespace System.Web.UI.WebControls
                     {
                         link.NavigateUrl =
                             Context != null
-                                ? Context
-                                    .Response
-                                    .ApplyAppPathModifier(
-                                        ResolveClientUrl(HttpUtility.UrlPathEncode(node.Url))
-                                    )
+                                ? Context.Response.ApplyAppPathModifier(
+                                    ResolveClientUrl(HttpUtility.UrlPathEncode(node.Url))
+                                )
                                 : node.Url;
                     }
                     link.Text = HttpUtility.HtmlEncode(node.Title);

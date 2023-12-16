@@ -144,9 +144,9 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 var semanticModel = await _document
                     .GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var equatableType = semanticModel
-                    .Compilation
-                    .GetTypeByMetadataName(typeof(IEquatable<>).FullName!);
+                var equatableType = semanticModel.Compilation.GetTypeByMetadataName(
+                    typeof(IEquatable<>).FullName!
+                );
                 if (equatableType == null)
                     return null;
 
@@ -193,8 +193,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             )
             {
                 var compilation = await _document
-                    .Project
-                    .GetRequiredCompilationAsync(cancellationToken)
+                    .Project.GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();

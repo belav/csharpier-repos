@@ -332,9 +332,12 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .NativeNTSSPI
-                        .EncryptMessage(ref context._handle, 0, inputOutput, sequenceNumber);
+                    status = UnsafeNclNativeMethods.NativeNTSSPI.EncryptMessage(
+                        ref context._handle,
+                        0,
+                        inputOutput,
+                        sequenceNumber
+                    );
                     context.DangerousRelease();
                 }
             }
@@ -368,9 +371,12 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .NativeNTSSPI
-                        .DecryptMessage(ref context._handle, inputOutput, sequenceNumber, null);
+                    status = UnsafeNclNativeMethods.NativeNTSSPI.DecryptMessage(
+                        ref context._handle,
+                        inputOutput,
+                        sequenceNumber,
+                        null
+                    );
                     context.DangerousRelease();
                 }
             }
@@ -695,9 +701,12 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .NativeNTSSPI
-                        .EncryptMessage(ref context._handle, 0, inputOutput, sequenceNumber);
+                    status = UnsafeNclNativeMethods.NativeNTSSPI.EncryptMessage(
+                        ref context._handle,
+                        0,
+                        inputOutput,
+                        sequenceNumber
+                    );
                     context.DangerousRelease();
                 }
             }
@@ -733,9 +742,12 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .NativeNTSSPI
-                        .DecryptMessage(ref context._handle, inputOutput, sequenceNumber, &qop);
+                    status = UnsafeNclNativeMethods.NativeNTSSPI.DecryptMessage(
+                        ref context._handle,
+                        inputOutput,
+                        sequenceNumber,
+                        &qop
+                    );
                     context.DangerousRelease();
                 }
             }
@@ -785,14 +797,12 @@ namespace System.Net
                 if (b)
                 {
                     const uint SECQOP_WRAP_NO_ENCRYPT = 0x80000001;
-                    status = UnsafeNclNativeMethods
-                        .NativeNTSSPI
-                        .EncryptMessage(
-                            ref context._handle,
-                            SECQOP_WRAP_NO_ENCRYPT,
-                            inputOutput,
-                            sequenceNumber
-                        );
+                    status = UnsafeNclNativeMethods.NativeNTSSPI.EncryptMessage(
+                        ref context._handle,
+                        SECQOP_WRAP_NO_ENCRYPT,
+                        inputOutput,
+                        sequenceNumber
+                    );
                     context.DangerousRelease();
                 }
             }
@@ -828,9 +838,12 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .NativeNTSSPI
-                        .DecryptMessage(ref context._handle, inputOutput, sequenceNumber, &qop);
+                    status = UnsafeNclNativeMethods.NativeNTSSPI.DecryptMessage(
+                        ref context._handle,
+                        inputOutput,
+                        sequenceNumber,
+                        &qop
+                    );
                     context.DangerousRelease();
                 }
             }
@@ -950,9 +963,10 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .SafeNetHandles
-                        .QuerySecurityContextToken(ref phContext._handle, out safeHandle);
+                    status = UnsafeNclNativeMethods.SafeNetHandles.QuerySecurityContextToken(
+                        ref phContext._handle,
+                        out safeHandle
+                    );
                     phContext.DangerousRelease();
                 }
             }

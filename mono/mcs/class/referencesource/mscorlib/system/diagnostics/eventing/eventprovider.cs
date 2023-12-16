@@ -178,9 +178,12 @@ namespace System.Diagnostics.Tracing
             {
                 try
                 {
-                    status = UnsafeNativeMethods
-                        .ManifestEtw
-                        .EventSetInformation(m_regHandle, eventInfoClass, data, dataSize);
+                    status = UnsafeNativeMethods.ManifestEtw.EventSetInformation(
+                        m_regHandle,
+                        eventInfoClass,
+                        data,
+                        dataSize
+                    );
                 }
                 catch (TypeLoadException)
                 {
@@ -350,16 +353,16 @@ namespace System.Diagnostics.Tracing
                                 int valueEnd = FindNull(data, valueIdx);
                                 if (valueEnd < data.Length)
                                 {
-                                    string key = System
-                                        .Text
-                                        .Encoding
-                                        .UTF8
-                                        .GetString(data, keyIndex, keyEnd - keyIndex);
-                                    string value = System
-                                        .Text
-                                        .Encoding
-                                        .UTF8
-                                        .GetString(data, valueIdx, valueEnd - valueIdx);
+                                    string key = System.Text.Encoding.UTF8.GetString(
+                                        data,
+                                        keyIndex,
+                                        keyEnd - keyIndex
+                                    );
+                                    string value = System.Text.Encoding.UTF8.GetString(
+                                        data,
+                                        valueIdx,
+                                        valueEnd - valueIdx
+                                    );
                                     args[key] = value;
                                 }
                                 keyIndex = valueEnd + 1;
@@ -546,19 +549,14 @@ namespace System.Diagnostics.Tracing
 
                 fixed (Guid* provider = &m_providerId)
                 {
-                    hr = UnsafeNativeMethods
-                        .ManifestEtw
-                        .EnumerateTraceGuidsEx(
-                            UnsafeNativeMethods
-                                .ManifestEtw
-                                .TRACE_QUERY_INFO_CLASS
-                                .TraceGuidQueryInfo,
-                            provider,
-                            sizeof(Guid),
-                            buffer,
-                            buffSize,
-                            ref buffSize
-                        );
+                    hr = UnsafeNativeMethods.ManifestEtw.EnumerateTraceGuidsEx(
+                        UnsafeNativeMethods.ManifestEtw.TRACE_QUERY_INFO_CLASS.TraceGuidQueryInfo,
+                        provider,
+                        sizeof(Guid),
+                        buffer,
+                        buffSize,
+                        ref buffSize
+                    );
                 }
                 if (hr == 0)
                     break;
@@ -1180,16 +1178,14 @@ namespace System.Diagnostics.Tracing
                                 userDataPtr[refObjPosition[7]].Ptr = (ulong)v7;
                             }
 
-                            status = UnsafeNativeMethods
-                                .ManifestEtw
-                                .EventWriteTransferWrapper(
-                                    m_regHandle,
-                                    ref eventDescriptor,
-                                    activityID,
-                                    childActivityID,
-                                    argCount,
-                                    userData
-                                );
+                            status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(
+                                m_regHandle,
+                                ref eventDescriptor,
+                                activityID,
+                                childActivityID,
+                                argCount,
+                                userData
+                            );
                         }
                     }
                     else
@@ -1215,16 +1211,14 @@ namespace System.Diagnostics.Tracing
                             }
                         }
 
-                        status = UnsafeNativeMethods
-                            .ManifestEtw
-                            .EventWriteTransferWrapper(
-                                m_regHandle,
-                                ref eventDescriptor,
-                                activityID,
-                                childActivityID,
-                                argCount,
-                                userData
-                            );
+                        status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(
+                            m_regHandle,
+                            ref eventDescriptor,
+                            activityID,
+                            childActivityID,
+                            argCount,
+                            userData
+                        );
 
                         for (int i = 0; i < refObjIndex; ++i)
                         {
@@ -1286,16 +1280,14 @@ namespace System.Diagnostics.Tracing
                 );
             }
 
-            int status = UnsafeNativeMethods
-                .ManifestEtw
-                .EventWriteTransferWrapper(
-                    m_regHandle,
-                    ref eventDescriptor,
-                    activityID,
-                    childActivityID,
-                    dataCount,
-                    (EventData*)data
-                );
+            int status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(
+                m_regHandle,
+                ref eventDescriptor,
+                activityID,
+                childActivityID,
+                dataCount,
+                (EventData*)data
+            );
 
             if (status != 0)
             {
@@ -1320,16 +1312,14 @@ namespace System.Diagnostics.Tracing
         {
             int status;
 
-            status = UnsafeNativeMethods
-                .ManifestEtw
-                .EventWriteTransferWrapper(
-                    m_regHandle,
-                    ref eventDescriptor,
-                    activityID,
-                    relatedActivityID,
-                    dataCount,
-                    (EventData*)data
-                );
+            status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(
+                m_regHandle,
+                ref eventDescriptor,
+                activityID,
+                relatedActivityID,
+                dataCount,
+                (EventData*)data
+            );
 
             if (status != 0)
             {
@@ -1349,9 +1339,12 @@ namespace System.Diagnostics.Tracing
         {
             m_providerId = providerId;
             m_etwCallback = enableCallback;
-            return UnsafeNativeMethods
-                .ManifestEtw
-                .EventRegister(ref providerId, enableCallback, null, ref m_regHandle);
+            return UnsafeNativeMethods.ManifestEtw.EventRegister(
+                ref providerId,
+                enableCallback,
+                null,
+                ref m_regHandle
+            );
         }
 
         [SecurityCritical]

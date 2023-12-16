@@ -227,8 +227,7 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
             else
             {
                 return DbExpressionBuilder.NewRow(
-                    this.Slots
-                        .Where(slot => slot.IsRequiredByParent)
+                    this.Slots.Where(slot => slot.IsRequiredByParent)
                         .Select(
                             slot =>
                                 new KeyValuePair<string, DbExpression>(

@@ -26,8 +26,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             stackLayout.Render(renderer, new Region(0, 0, 10, 2));
 
             terminal
-                .Events
-                .Should()
+                .Events.Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
                     new TestTerminal.ContentWritten("The quick"),
@@ -51,8 +50,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             stackLayout.Render(renderer, new Region(0, 0, 10, 1));
 
             terminal
-                .Events
-                .Should()
+                .Events.Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
                     new TestTerminal.ContentWritten("The quick")
@@ -74,8 +72,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             stackLayout.Render(renderer, new Region(0, 0, 5, 4));
 
             terminal
-                .Events
-                .Should()
+                .Events.Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
                     new TestTerminal.ContentWritten("The  "),
@@ -103,8 +100,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             stackLayout.Render(renderer, new Region(0, 0, 18, 1));
 
             terminal
-                .Events
-                .Should()
+                .Events.Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
                     new TestTerminal.ContentWritten("The quick         "),
@@ -128,8 +124,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             stackLayout.Render(renderer, new Region(0, 0, 16, 1));
 
             terminal
-                .Events
-                .Should()
+                .Events.Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
                     new TestTerminal.ContentWritten("The quick       "),
@@ -153,8 +148,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             stackLayout.Render(renderer, new Region(0, 0, 14, 2));
 
             terminal
-                .Events
-                .Should()
+                .Events.Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
                     new TestTerminal.ContentWritten("The quick     "),

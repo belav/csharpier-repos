@@ -28,12 +28,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 interfaceProperty.ContainingType,
                 aliasQualifierOpt: null
             );
-            Parameters = interfaceProperty
-                .Parameters
-                .SelectAsArray(
-                    static (p, t) => SynthesizedParameterSymbol.DeriveParameter(t, p),
-                    this
-                );
+            Parameters = interfaceProperty.Parameters.SelectAsArray(
+                static (p, t) => SynthesizedParameterSymbol.DeriveParameter(t, p),
+                this
+            );
             GetMethod = new SynthesizedReadOnlyListMethod(
                 containingType,
                 interfaceProperty.GetMethod,

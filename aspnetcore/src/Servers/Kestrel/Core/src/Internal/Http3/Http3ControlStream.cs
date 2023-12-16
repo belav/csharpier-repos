@@ -49,12 +49,10 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
         _context = context;
         _serverPeerSettings = context.ServerPeerSettings;
         _streamIdFeature = context.ConnectionFeatures.GetRequiredFeature<IStreamIdFeature>();
-        _streamClosedFeature = context
-            .ConnectionFeatures
-            .GetRequiredFeature<IStreamClosedFeature>();
-        _errorCodeFeature = context
-            .ConnectionFeatures
-            .GetRequiredFeature<IProtocolErrorCodeFeature>();
+        _streamClosedFeature =
+            context.ConnectionFeatures.GetRequiredFeature<IStreamClosedFeature>();
+        _errorCodeFeature =
+            context.ConnectionFeatures.GetRequiredFeature<IProtocolErrorCodeFeature>();
         _headerType = headerType ?? -1;
 
         _frameWriter = new Http3FrameWriter(
@@ -433,9 +431,10 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
             case (long)Http3SettingType.QPackBlockedStreams:
             case (long)Http3SettingType.EnableWebTransport:
             case (long)Http3SettingType.H3Datagram:
-                _context
-                    .StreamLifetimeHandler
-                    .OnInboundControlStreamSetting((Http3SettingType)id, value);
+                _context.StreamLifetimeHandler.OnInboundControlStreamSetting(
+                    (Http3SettingType)id,
+                    value
+                );
                 break;
             default:
                 // Ignore all unknown settings.
@@ -451,9 +450,7 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
         // StopProcessingNextRequest must be called before RequestClose to ensure it's considered client initiated.
         _context.Connection.StopProcessingNextRequest(serverInitiated: false);
         _context
-            .ConnectionContext
-            .Features
-            .Get<IConnectionLifetimeNotificationFeature>()
+            .ConnectionContext.Features.Get<IConnectionLifetimeNotificationFeature>()
             ?.RequestClose();
 
         // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#name-goaway

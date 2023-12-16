@@ -111,14 +111,12 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 SortOption sortOption
             ) =>
                 (ImmutableArray<DocumentSymbolDataViewModel>)
-                    DocumentSymbolDataViewModelSorter
-                        .Instance
-                        .Convert(
-                            [items, sortOption],
-                            typeof(ImmutableArray<DocumentSymbolDataViewModel>),
-                            parameter: null,
-                            CultureInfo.CurrentCulture
-                        );
+                    DocumentSymbolDataViewModelSorter.Instance.Convert(
+                        [items, sortOption],
+                        typeof(ImmutableArray<DocumentSymbolDataViewModel>),
+                        parameter: null,
+                        CultureInfo.CurrentCulture
+                    );
 
             static DocumentSymbolDataViewModel ReplaceChildren(
                 DocumentSymbolDataViewModel symbolToUpdate,

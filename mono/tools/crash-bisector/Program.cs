@@ -246,11 +246,9 @@ namespace crashbisector
     {
         static void UsageAndExit(int exitCode)
         {
-            Console
-                .Error
-                .WriteLine(
-                    "Usage: crash-bisector.exe --mono MONO-EXECUTABLE --opt OPTION-NAME -- MONO-ARG ..."
-                );
+            Console.Error.WriteLine(
+                "Usage: crash-bisector.exe --mono MONO-EXECUTABLE --opt OPTION-NAME -- MONO-ARG ..."
+            );
             Environment.Exit(exitCode);
         }
 

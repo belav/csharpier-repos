@@ -27,10 +27,9 @@ namespace Test_NUnit.Internals
         {
             //Andrus pointed out that one of the internal classes that help with reflection
             //returns fields in duplicate, which kills SQL SELECT and UPDATEs.
-            System.Reflection.MemberInfo[] members = DbLinq
-                .Util
-                .AttribHelper
-                .GetMemberFields(typeof(Class2));
+            System.Reflection.MemberInfo[] members = DbLinq.Util.AttribHelper.GetMemberFields(
+                typeof(Class2)
+            );
             Assert.IsTrue(members.Length == 3);
         }
 
@@ -39,10 +38,9 @@ namespace Test_NUnit.Internals
         {
             //Andrus pointed out that one of the internal classes that help with reflection
             //returns fields in duplicate, which kills SQL SELECT and UPDATEs.
-            System.Reflection.MemberInfo[] members = DbLinq
-                .Util
-                .AttribHelper
-                .GetMemberFields(typeof(Class1));
+            System.Reflection.MemberInfo[] members = DbLinq.Util.AttribHelper.GetMemberFields(
+                typeof(Class1)
+            );
             Assert.IsTrue(members.Length == 2);
         }
 #endif

@@ -58,9 +58,9 @@ namespace System.IdentityModel.Selectors
 #pragma warning suppress 56503
             get
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
         }
 
@@ -86,12 +86,10 @@ namespace System.IdentityModel.Selectors
             if (certificate == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("certificate");
             if (certificate.Handle == IntPtr.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "certificate",
-                        SR.GetString(SR.ArgumentInvalidCertificate)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "certificate",
+                    SR.GetString(SR.ArgumentInvalidCertificate)
+                );
 
             SafeCertChainHandle safeCertChainHandle = SafeCertChainHandle.InvalidHandle;
             X509ChainPolicy chainPolicy = this.ChainPolicy;
@@ -150,25 +148,23 @@ namespace System.IdentityModel.Selectors
             )
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new CryptographicException(error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(error)
+                );
             }
 
             if (PolicyStatus.dwError != CAPI.S_OK)
             {
                 int error = (int)PolicyStatus.dwError;
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityTokenValidationException(
-                            SR.GetString(
-                                SR.X509ChainBuildFail,
-                                SecurityUtils.GetCertificateId(certificate),
-                                new CryptographicException(error).Message
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(
+                        SR.GetString(
+                            SR.X509ChainBuildFail,
+                            SecurityUtils.GetCertificateId(certificate),
+                            new CryptographicException(error).Message
                         )
-                    );
+                    )
+                );
             }
 
             return true;
@@ -240,9 +236,9 @@ namespace System.IdentityModel.Selectors
                 )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new CryptographicException(error));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(error)
+                    );
                 }
             }
             finally
@@ -290,9 +286,9 @@ namespace System.IdentityModel.Selectors
             if (certStoreHandle == null || certStoreHandle.IsInvalid)
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new CryptographicException(error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(error)
+                );
             }
 
             //
@@ -315,9 +311,9 @@ namespace System.IdentityModel.Selectors
                     )
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new CryptographicException(error));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CryptographicException(error)
+                        );
                     }
                 }
             }
@@ -372,9 +368,9 @@ namespace System.IdentityModel.Selectors
                             )
                             {
                                 int error = Marshal.GetLastWin32Error();
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(new CryptographicException(error));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new CryptographicException(error)
+                                );
                             }
                         }
                     }
@@ -439,11 +435,9 @@ namespace System.IdentityModel.Selectors
                 if (ansiOid.Length != oidStrs[index].Length)
                 {
                     // We assumed single byte characters, fail if this is not the case.  The exception is not ideal.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.CollectionWasModified))
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.CollectionWasModified))
+                    );
                 }
 
                 Marshal.Copy(ansiOid, 0, pOid, ansiOid.Length);

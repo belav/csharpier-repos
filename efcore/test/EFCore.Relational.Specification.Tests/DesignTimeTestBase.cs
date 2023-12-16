@@ -35,8 +35,7 @@ public abstract class DesignTimeTestBase<TFixture> : IClassFixture<TFixture>
 
         var reverseEngineerScaffolder = services
             .CreateScope()
-            .ServiceProvider
-            .GetService<IReverseEngineerScaffolder>();
+            .ServiceProvider.GetService<IReverseEngineerScaffolder>();
 
         Assert.NotNull(reverseEngineerScaffolder);
     }
@@ -63,8 +62,7 @@ public abstract class DesignTimeTestBase<TFixture> : IClassFixture<TFixture>
 
         var migrationsScaffolder = services
             .CreateScope()
-            .ServiceProvider
-            .GetService<IMigrationsScaffolder>();
+            .ServiceProvider.GetService<IMigrationsScaffolder>();
 
         Assert.NotNull(migrationsScaffolder);
     }

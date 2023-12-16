@@ -68,7 +68,6 @@ public abstract class Database : IDatabase
         bool async
     ) =>
         Dependencies
-            .QueryCompilationContextFactory
-            .Create(async)
+            .QueryCompilationContextFactory.Create(async)
             .CreateQueryExecutor<TResult>(query);
 }

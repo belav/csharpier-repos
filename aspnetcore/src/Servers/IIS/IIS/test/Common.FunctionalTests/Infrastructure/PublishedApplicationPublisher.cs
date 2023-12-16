@@ -63,8 +63,7 @@ public class PublishedApplicationPublisher : ApplicationPublisher
 #pragma warning restore 0618
         var configuration = this.GetType()
             .GetTypeInfo()
-            .Assembly
-            .GetCustomAttribute<AssemblyConfigurationAttribute>()
+            .Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()
             .Configuration;
         var path = Path.Combine(
             testAssetsBasePath,

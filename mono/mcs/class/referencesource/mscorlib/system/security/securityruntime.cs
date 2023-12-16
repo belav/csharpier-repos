@@ -173,11 +173,9 @@ namespace System.Security
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                System
-                    .Environment
-                    .FailFast(
-                        Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
-                    );
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {
@@ -205,11 +203,9 @@ namespace System.Security
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                System
-                    .Environment
-                    .FailFast(
-                        Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
-                    );
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {
@@ -244,11 +240,9 @@ namespace System.Security
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                System
-                    .Environment
-                    .FailFast(
-                        Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
-                    );
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {
@@ -276,11 +270,9 @@ namespace System.Security
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                System
-                    .Environment
-                    .FailFast(
-                        Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
-                    );
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {

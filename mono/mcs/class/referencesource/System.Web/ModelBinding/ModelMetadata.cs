@@ -382,9 +382,7 @@
             else if (viewData.ModelMetadata != null)
             {
                 ModelMetadata propertyMetadata = viewData
-                    .ModelMetadata
-                    .Properties
-                    .Where(p => p.PropertyName == expression)
+                    .ModelMetadata.Properties.Where(p => p.PropertyName == expression)
                     .FirstOrDefault();
                 if (propertyMetadata != null)
                 {

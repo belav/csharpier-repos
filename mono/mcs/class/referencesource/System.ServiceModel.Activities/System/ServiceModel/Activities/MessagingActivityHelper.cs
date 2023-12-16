@@ -176,16 +176,14 @@ namespace System.ServiceModel.Activities
                 {
                     if (context.DefaultBookmarkScope.Id != instanceKey.Value)
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new InvalidOperationException(
-                                    SR2.CorrelationHandleInUse(
-                                        context.DefaultBookmarkScope.Id,
-                                        instanceKey.Value
-                                    )
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR2.CorrelationHandleInUse(
+                                    context.DefaultBookmarkScope.Id,
+                                    instanceKey.Value
                                 )
-                            );
+                            )
+                        );
                     }
                 }
                 else
@@ -229,13 +227,11 @@ namespace System.ServiceModel.Activities
                                 }
                                 else
                                 {
-                                    throw FxTrace
-                                        .Exception
-                                        .AsError(
-                                            new InvalidOperationException(
-                                                SR2.QueryCorrelationInitializerCannotBeInitialized
-                                            )
-                                        );
+                                    throw FxTrace.Exception.AsError(
+                                        new InvalidOperationException(
+                                            SR2.QueryCorrelationInitializerCannotBeInitialized
+                                        )
+                                    );
                                 }
                             }
                             handle.InitializeBookmarkScope(context, key);

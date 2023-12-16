@@ -845,21 +845,19 @@ namespace Mono.CSharp
 
         protected void DefineBuilders(MemberKind kind, ParametersCompiled parameters)
         {
-            PropertyBuilder = Parent
-                .TypeBuilder
-                .DefineProperty(
-                    GetFullName(MemberName),
-                    PropertyAttributes.None,
+            PropertyBuilder = Parent.TypeBuilder.DefineProperty(
+                GetFullName(MemberName),
+                PropertyAttributes.None,
 #if !BOOTSTRAP_BASIC	// Requires trunk version mscorlib
-                    IsStatic ? 0 : CallingConventions.HasThis,
+                IsStatic ? 0 : CallingConventions.HasThis,
 #endif
-                    MemberType.GetMetaInfo(),
-                    null,
-                    null,
-                    parameters.GetMetaInfo(),
-                    null,
-                    null
-                );
+                MemberType.GetMetaInfo(),
+                null,
+                null,
+                parameters.GetMetaInfo(),
+                null,
+                null
+            );
 
             PropertySpec spec;
             if (kind == MemberKind.Indexer)
@@ -918,18 +916,20 @@ namespace Mono.CSharp
             }
             else if (member_type.HasDynamicElement)
             {
-                Module
-                    .PredefinedAttributes
-                    .Dynamic
-                    .EmitAttribute(PropertyBuilder, member_type, Location);
+                Module.PredefinedAttributes.Dynamic.EmitAttribute(
+                    PropertyBuilder,
+                    member_type,
+                    Location
+                );
             }
 
             if (member_type.HasNamedTupleElement)
             {
-                Module
-                    .PredefinedAttributes
-                    .TupleElementNames
-                    .EmitAttribute(PropertyBuilder, member_type, Location);
+                Module.PredefinedAttributes.TupleElementNames.EmitAttribute(
+                    PropertyBuilder,
+                    member_type,
+                    Location
+                );
             }
 
             ConstraintChecker.Check(this, member_type, type_expr.Location);
@@ -1948,13 +1948,11 @@ namespace Mono.CSharp
             add.Define(Parent);
             remove.Define(Parent);
 
-            EventBuilder = Parent
-                .TypeBuilder
-                .DefineEvent(
-                    GetFullName(MemberName),
-                    EventAttributes.None,
-                    MemberType.GetMetaInfo()
-                );
+            EventBuilder = Parent.TypeBuilder.DefineEvent(
+                GetFullName(MemberName),
+                EventAttributes.None,
+                MemberType.GetMetaInfo()
+            );
 
             spec = new EventSpec(
                 Parent.Definition,
@@ -2288,9 +2286,8 @@ namespace Mono.CSharp
 
             if (InterfaceType != null)
             {
-                string base_IndexerName = InterfaceType
-                    .MemberDefinition
-                    .GetAttributeDefaultMember();
+                string base_IndexerName =
+                    InterfaceType.MemberDefinition.GetAttributeDefaultMember();
                 if (base_IndexerName != ShortName)
                 {
                     SetMemberName(

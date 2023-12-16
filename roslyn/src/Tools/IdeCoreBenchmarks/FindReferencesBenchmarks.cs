@@ -66,8 +66,7 @@ namespace IdeCoreBenchmarks
             Console.WriteLine("Found Compilers.slnf: " + Process.GetCurrentProcess().Id);
 
             var assemblies = MSBuildMefHostServices
-                .DefaultAssemblies
-                .Add(typeof(AnalyzerRunnerHelper).Assembly)
+                .DefaultAssemblies.Add(typeof(AnalyzerRunnerHelper).Assembly)
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
 

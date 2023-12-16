@@ -68,12 +68,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static readonly SemanticTokensSchema s_vsTokenSchema =
             new(
                 ClassificationTypeNames
-                    .AllTypeNames
-                    .Where(
+                    .AllTypeNames.Where(
                         classificationTypeName =>
-                            !ClassificationTypeNames
-                                .AdditiveTypeNames
-                                .Contains(classificationTypeName)
+                            !ClassificationTypeNames.AdditiveTypeNames.Contains(
+                                classificationTypeName
+                            )
                     )
                     .ToImmutableDictionary(
                         classificationTypeName => classificationTypeName,
@@ -93,12 +92,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         private static readonly SemanticTokensSchema s_pureLspTokenSchema =
             new(
                 ClassificationTypeNames
-                    .AllTypeNames
-                    .Where(
+                    .AllTypeNames.Where(
                         classificationTypeName =>
-                            !ClassificationTypeNames
-                                .AdditiveTypeNames
-                                .Contains(classificationTypeName)
+                            !ClassificationTypeNames.AdditiveTypeNames.Contains(
+                                classificationTypeName
+                            )
                     )
                     .ToImmutableDictionary(
                         classificationTypeName => classificationTypeName,
@@ -136,8 +134,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
             // Get all custom token type names that don't directly map to an built-in LSP semantic token type.
             var customTokenTypes = TokenTypeMap
-                .Values
-                .Where(tokenType => !SemanticTokenTypes.AllTypes.Contains(tokenType))
+                .Values.Where(tokenType => !SemanticTokenTypes.AllTypes.Contains(tokenType))
                 .Order()
                 .ToImmutableArray();
 

@@ -552,18 +552,15 @@ namespace System.Data.Linq.SqlClient
             Expression sourceExpression
         )
         {
-            System
-                .Diagnostics
-                .Debug
-                .Assert(
-                    !targetSqlType.IsRuntimeOnlyType,
-                    "Attempted coversion to a runtime type: from = "
-                        + expression.SqlType.ToQueryString()
-                        + "; to = "
-                        + targetSqlType.ToQueryString()
-                        + "; source = "
-                        + sourceExpression.ToString()
-                );
+            System.Diagnostics.Debug.Assert(
+                !targetSqlType.IsRuntimeOnlyType,
+                "Attempted coversion to a runtime type: from = "
+                    + expression.SqlType.ToQueryString()
+                    + "; to = "
+                    + targetSqlType.ToQueryString()
+                    + "; source = "
+                    + sourceExpression.ToString()
+            );
             return new SqlUnary(
                 SqlNodeType.Convert,
                 targetClrType,

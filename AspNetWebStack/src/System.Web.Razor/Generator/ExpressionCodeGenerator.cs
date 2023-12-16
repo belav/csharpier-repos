@@ -16,8 +16,7 @@ namespace System.Web.Razor.Generator
             )
             {
                 Span contentSpan = target
-                    .Children
-                    .OfType<Span>()
+                    .Children.OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
 
@@ -89,8 +88,7 @@ namespace System.Web.Razor.Generator
             )
             {
                 Span contentSpan = target
-                    .Children
-                    .OfType<Span>()
+                    .Children.OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
 

@@ -900,8 +900,7 @@ namespace System.Tests
         {
             // ToList is called here so we copy the data and raise an assert if ToArray modifies the underlying array.
             List<int> expected = arraySegment
-                .Array
-                .Skip(arraySegment.Offset)
+                .Array.Skip(arraySegment.Offset)
                 .Take(arraySegment.Count)
                 .ToList();
             Assert.Equal(expected, arraySegment.ToArray());

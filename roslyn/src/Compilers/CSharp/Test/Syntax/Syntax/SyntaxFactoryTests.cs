@@ -283,13 +283,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 );
                 var actualGreen = actualRed.Node;
 
-                var expectedGreen = InternalSyntax
-                    .SyntaxFactory
-                    .Token(
-                        InternalSyntax.SyntaxFactory.ElasticZeroSpace,
-                        kind,
-                        InternalSyntax.SyntaxFactory.ElasticZeroSpace
-                    );
+                var expectedGreen = InternalSyntax.SyntaxFactory.Token(
+                    InternalSyntax.SyntaxFactory.ElasticZeroSpace,
+                    kind,
+                    InternalSyntax.SyntaxFactory.ElasticZeroSpace
+                );
 
                 Assert.Same(expectedGreen, actualGreen); // Don't create a new token if we don't have to.
             }

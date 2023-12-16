@@ -420,9 +420,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
             RemoveExistingInfoBar();
 
             if (

@@ -39,9 +39,11 @@ namespace System.Runtime.InteropServices.Marshalling
             }
             if (!ComWrappers.TryGetComInstance(managed, out nint unknown))
             {
-                unknown = StrategyBasedComWrappers
-                    .DefaultMarshallingInstance
-                    .GetOrCreateComInterfaceForObject(managed, CreateComInterfaceFlags.None);
+                unknown =
+                    StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(
+                        managed,
+                        CreateComInterfaceFlags.None
+                    );
             }
             return ComInterfaceMarshaller<T>.CastIUnknownToInterfaceType(unknown);
         }
@@ -61,12 +63,10 @@ namespace System.Runtime.InteropServices.Marshalling
                 return default;
             }
             return (T)
-                StrategyBasedComWrappers
-                    .DefaultMarshallingInstance
-                    .GetOrCreateObjectForComInstance(
-                        (nint)unmanaged,
-                        CreateObjectFlags.UniqueInstance
-                    );
+                StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance(
+                    (nint)unmanaged,
+                    CreateObjectFlags.UniqueInstance
+                );
         }
 
         /// <summary>

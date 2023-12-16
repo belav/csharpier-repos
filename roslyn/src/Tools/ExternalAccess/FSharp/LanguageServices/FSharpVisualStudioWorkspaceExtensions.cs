@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
             DateTime snapshotTimestamp
         )
         {
-            var metadataReferenceProvider = workspace
-                .Services
-                .GetRequiredService<VisualStudioMetadataReferenceManager>();
+            var metadataReferenceProvider =
+                workspace.Services.GetRequiredService<VisualStudioMetadataReferenceManager>();
             return metadataReferenceProvider.GetMetadata(fullPath, snapshotTimestamp);
         }
 
@@ -32,9 +31,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
         )
         {
             var projects = workspace
-                .CurrentSolution
-                .Projects
-                .Where(
+                .CurrentSolution.Projects.Where(
                     p =>
                         string.Equals(
                             p.OutputFilePath,
@@ -67,9 +64,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
             // a random ProjectId, which is sufficient for their needs. They'll simply observe there is no project with that ID, and then go and create a
             // new project. Then they call this function again, and fetch the real ID.
             return workspace
-                    .CurrentSolution
-                    .Projects
-                    .FirstOrDefault(p => p.FilePath == filePath)
+                    .CurrentSolution.Projects.FirstOrDefault(p => p.FilePath == filePath)
                     ?.Id ?? ProjectId.CreateNewId("ProjectNotFound");
         }
 

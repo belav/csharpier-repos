@@ -106,8 +106,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     .Where(c => c.CustomerID.StartsWith("W"))
                     .OrderByDescending(
                         c =>
-                            c.Orders
-                                .OrderByDescending(oo => oo.OrderDate)
+                            c.Orders.OrderByDescending(oo => oo.OrderDate)
                                 .FirstOrDefault()
                                 .OrderDate
                     ),
@@ -494,8 +493,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     .Where(c => c.CustomerID.StartsWith("W"))
                     .OrderByDescending(
                         c =>
-                            c.Orders
-                                .OrderByDescending(oo => oo.OrderDate)
+                            c.Orders.OrderByDescending(oo => oo.OrderDate)
                                 .FirstOrDefault()
                                 .OrderDate
                     ),
@@ -577,8 +575,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     .Where(c => c.CustomerID == "ALFKI")
                     .OrderBy(
                         c =>
-                            c.Orders
-                                .OrderBy(o => o.EmployeeID)
+                            c.Orders.OrderBy(o => o.EmployeeID)
                                 .Select(o => o.OrderDate)
                                 .FirstOrDefault()
                     ),
@@ -796,8 +793,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                         )
                 )
             )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
 
@@ -1842,8 +1838,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .Include(
                         c =>
-                            c.Orders
-                                .OrderBy(o => o.OrderID)
+                            c.Orders.OrderBy(o => o.OrderID)
                                 .Skip(1)
                                 .OrderByDescending(o => o.OrderDate)
                     ),

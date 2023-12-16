@@ -81,9 +81,9 @@ namespace System.IdentityModel.Tokens
         {
             if (samlSecurityTokenRequirement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("samlSecurityTokenRequirement");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "samlSecurityTokenRequirement"
+                );
             }
             _samlSecurityTokenRequirement = samlSecurityTokenRequirement;
         }
@@ -98,9 +98,9 @@ namespace System.IdentityModel.Tokens
         {
             if (customConfigElements == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("customConfigElements");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "customConfigElements"
+                );
             }
 
             List<XmlElement> configNodes = XmlUtil.GetXmlElements(customConfigElements);
@@ -163,9 +163,9 @@ namespace System.IdentityModel.Tokens
             SamlAssertion assertion = CreateAssertion(issuerName, conditions, advice, statements);
             if (assertion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4013)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4013))
+                );
             }
 
             assertion.SigningCredentials = GetSigningCredentials(tokenDescriptor);
@@ -210,9 +210,9 @@ namespace System.IdentityModel.Tokens
 
                 if (encryptingCredentials.SecurityKey is AsymmetricSecurityKey)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4178)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.ID4178))
+                    );
                 }
             }
 
@@ -329,13 +329,9 @@ namespace System.IdentityModel.Tokens
 
             if (!string.IsNullOrEmpty(relyingPartyAddress))
             {
-                conditions
-                    .Conditions
-                    .Add(
-                        new SamlAudienceRestrictionCondition(
-                            new Uri[] { new Uri(relyingPartyAddress) }
-                        )
-                    );
+                conditions.Conditions.Add(
+                    new SamlAudienceRestrictionCondition(new Uri[] { new Uri(relyingPartyAddress) })
+                );
             }
 
             return conditions;
@@ -679,11 +675,9 @@ namespace System.IdentityModel.Tokens
                         // Do not allow multiple name identifier claim.
                         if (null != identityClaim)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new InvalidOperationException(SR.GetString(SR.ID4139))
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.ID4139))
+                            );
                         }
                         identityClaim = claim;
                     }
@@ -702,9 +696,9 @@ namespace System.IdentityModel.Tokens
                 }
 
                 if (
-                    identityClaim
-                        .Properties
-                        .ContainsKey(ClaimProperties.SamlNameIdentifierNameQualifier)
+                    identityClaim.Properties.ContainsKey(
+                        ClaimProperties.SamlNameIdentifierNameQualifier
+                    )
                 )
                 {
                     samlSubject.NameQualifier = identityClaim.Properties[
@@ -802,15 +796,17 @@ namespace System.IdentityModel.Tokens
 
             if ((lastSlashIndex == 0) || (lastSlashIndex == -1))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument("claimType", SR.GetString(SR.ID4216, claim.Type));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "claimType",
+                    SR.GetString(SR.ID4216, claim.Type)
+                );
             }
             else if (lastSlashIndex == claim.Type.Length - 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument("claimType", SR.GetString(SR.ID4216, claim.Type));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "claimType",
+                    SR.GetString(SR.ID4216, claim.Type)
+                );
             }
             else
             {
@@ -837,13 +833,15 @@ namespace System.IdentityModel.Tokens
                 //
                 if (attributeNamespace.EndsWith("/", StringComparison.Ordinal))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument("claim", SR.GetString(SR.ID4213, claim.Type));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "claim",
+                        SR.GetString(SR.ID4213, claim.Type)
+                    );
                 }
-                attributeName = claim
-                    .Type
-                    .Substring(lastSlashIndex + 1, claim.Type.Length - (lastSlashIndex + 1));
+                attributeName = claim.Type.Substring(
+                    lastSlashIndex + 1,
+                    claim.Type.Length - (lastSlashIndex + 1)
+                );
             }
 
             SamlAttribute attribute = new SamlAttribute(
@@ -918,12 +916,10 @@ namespace System.IdentityModel.Tokens
             SamlSecurityToken samlToken = token as SamlSecurityToken;
             if (null == samlToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "token",
-                        SR.GetString(SR.ID1067, token.GetType().ToString())
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID1067, token.GetType().ToString())
+                );
             }
 
             //
@@ -947,11 +943,9 @@ namespace System.IdentityModel.Tokens
 
             if (string.IsNullOrEmpty(samlToken.Assertion.AssertionId))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityTokenValidationException(SR.GetString(SR.ID1063))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(SR.GetString(SR.ID1063))
+                );
             }
 
             StringBuilder stringBuilder = new StringBuilder();
@@ -987,48 +981,41 @@ namespace System.IdentityModel.Tokens
             {
                 if (string.IsNullOrEmpty(samlToken.Assertion.Issuer))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenReplayDetectedException(
-                                SR.GetString(
-                                    SR.ID1062,
-                                    typeof(SamlSecurityToken).ToString(),
-                                    samlToken.Assertion.AssertionId,
-                                    ""
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenReplayDetectedException(
+                            SR.GetString(
+                                SR.ID1062,
+                                typeof(SamlSecurityToken).ToString(),
+                                samlToken.Assertion.AssertionId,
+                                ""
                             )
-                        );
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenReplayDetectedException(
-                                SR.GetString(
-                                    SR.ID1062,
-                                    typeof(SamlSecurityToken).ToString(),
-                                    samlToken.Assertion.AssertionId,
-                                    samlToken.Assertion.Issuer
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenReplayDetectedException(
+                            SR.GetString(
+                                SR.ID1062,
+                                typeof(SamlSecurityToken).ToString(),
+                                samlToken.Assertion.AssertionId,
+                                samlToken.Assertion.Issuer
                             )
-                        );
+                        )
+                    );
                 }
             }
             else
             {
-                Configuration
-                    .Caches
-                    .TokenReplayCache
-                    .AddOrUpdate(
-                        key,
-                        token,
-                        DateTimeUtil.Add(
-                            GetTokenReplayCacheEntryExpirationTime(samlToken),
-                            Configuration.MaxClockSkew
-                        )
-                    );
+                Configuration.Caches.TokenReplayCache.AddOrUpdate(
+                    key,
+                    token,
+                    DateTimeUtil.Add(
+                        GetTokenReplayCacheEntryExpirationTime(samlToken),
+                        Configuration.MaxClockSkew
+                    )
+                );
             }
         }
 
@@ -1057,17 +1044,15 @@ namespace System.IdentityModel.Tokens
             // If the token validity period is greater than the TokenReplayCacheExpirationPeriod, throw
             if (DateTime.Compare(maximumExpirationTime, token.ValidTo) < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityTokenValidationException(
-                            SR.GetString(
-                                SR.ID1069,
-                                token.ValidTo.ToString(),
-                                Configuration.TokenReplayCacheExpirationPeriod.ToString()
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(
+                        SR.GetString(
+                            SR.ID1069,
+                            token.ValidTo.ToString(),
+                            Configuration.TokenReplayCacheExpirationPeriod.ToString()
                         )
-                    );
+                    )
+                );
             }
 
             return token.ValidTo;
@@ -1098,13 +1083,11 @@ namespace System.IdentityModel.Tokens
                     && DateTimeUtil.Add(now, Configuration.MaxClockSkew) < conditions.NotBefore
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenNotYetValidException(
-                                SR.GetString(SR.ID4222, conditions.NotBefore, now)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenNotYetValidException(
+                            SR.GetString(SR.ID4222, conditions.NotBefore, now)
+                        )
+                    );
                 }
 
                 if (
@@ -1113,13 +1096,11 @@ namespace System.IdentityModel.Tokens
                         >= conditions.NotOnOrAfter
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenExpiredException(
-                                SR.GetString(SR.ID4223, conditions.NotOnOrAfter, now)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenExpiredException(
+                            SR.GetString(SR.ID4223, conditions.NotOnOrAfter, now)
+                        )
+                    );
                 }
             }
 
@@ -1133,9 +1114,9 @@ namespace System.IdentityModel.Tokens
                     || this.Configuration.AudienceRestriction.AllowedAudienceUris.Count == 0
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID1032)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ID1032))
+                    );
                 }
 
                 //
@@ -1165,11 +1146,9 @@ namespace System.IdentityModel.Tokens
 
                 if (!foundAudienceRestriction)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new AudienceUriValidationFailedException(SR.GetString(SR.ID1035))
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new AudienceUriValidationFailedException(SR.GetString(SR.ID1035))
+                    );
                 }
             }
         }
@@ -1195,12 +1174,10 @@ namespace System.IdentityModel.Tokens
             SamlSecurityToken samlToken = token as SamlSecurityToken;
             if (samlToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "token",
-                        SR.GetString(SR.ID1033, token.GetType().ToString())
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID1033, token.GetType().ToString())
+                );
             }
 
             if (this.Configuration == null)
@@ -1212,9 +1189,10 @@ namespace System.IdentityModel.Tokens
             {
                 if (samlToken.Assertion == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument("token", SR.GetString(SR.ID1034));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "token",
+                        SR.GetString(SR.ID1034)
+                    );
                 }
 
                 TraceUtility.TraceEvent(
@@ -1229,11 +1207,9 @@ namespace System.IdentityModel.Tokens
                 // Ensure token was signed and verified at some point
                 if (samlToken.Assertion.SigningToken == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenValidationException(SR.GetString(SR.ID4220))
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(SR.GetString(SR.ID4220))
+                    );
                 }
 
                 this.ValidateConditions(
@@ -1264,17 +1240,15 @@ namespace System.IdentityModel.Tokens
                     }
                     catch (SecurityTokenValidationException e)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new SecurityTokenValidationException(
-                                    SR.GetString(
-                                        SR.ID4257,
-                                        X509Util.GetCertificateId(x509IssuerToken.Certificate)
-                                    ),
-                                    e
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenValidationException(
+                                SR.GetString(
+                                    SR.ID4257,
+                                    X509Util.GetCertificateId(x509IssuerToken.Certificate)
+                                ),
+                                e
+                            )
+                        );
                     }
                 }
 
@@ -1374,16 +1348,17 @@ namespace System.IdentityModel.Tokens
         {
             if (samlSecurityToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("samlSecurityToken");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "samlSecurityToken"
+                );
             }
 
             if (samlSecurityToken.Assertion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument("samlSecurityToken", SR.GetString(SR.ID1034));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "samlSecurityToken",
+                    SR.GetString(SR.ID1034)
+                );
             }
 
             //
@@ -1411,18 +1386,16 @@ namespace System.IdentityModel.Tokens
             // SamlAssertion. The SigningToken may or may not be null.
             // The default IssuerNameRegistry will throw if null.
             // This callout is provided for extensibility scenarios with custom IssuerNameRegistry.
-            issuer = this.Configuration
-                .IssuerNameRegistry
-                .GetIssuerName(
-                    samlSecurityToken.Assertion.SigningToken,
-                    samlSecurityToken.Assertion.Issuer
-                );
+            issuer = this.Configuration.IssuerNameRegistry.GetIssuerName(
+                samlSecurityToken.Assertion.SigningToken,
+                samlSecurityToken.Assertion.Issuer
+            );
 
             if (string.IsNullOrEmpty(issuer))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4175)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4175))
+                );
             }
 
             ProcessStatement(samlSecurityToken.Assertion.Statements, subject, issuer);
@@ -1562,14 +1535,15 @@ namespace System.IdentityModel.Tokens
                     claimType = attr.Name;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
-                        .Equals(attr.Name, SamlConstants.ElementNames.NameIdentifier)
+                    StringComparer.Ordinal.Equals(
+                        attr.Name,
+                        SamlConstants.ElementNames.NameIdentifier
+                    )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID4094)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.ID4094))
+                    );
                 }
                 else
                 {
@@ -1965,9 +1939,9 @@ namespace System.IdentityModel.Tokens
                 string action = reader.ReadString();
                 if (string.IsNullOrEmpty(action))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new XmlException(SR.GetString(SR.ID4073)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(SR.GetString(SR.ID4073))
+                    );
                 }
 
                 reader.MoveToContent();
@@ -1977,19 +1951,17 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4065,
-                                SamlConstants.ElementNames.Action,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4065,
+                            SamlConstants.ElementNames.Action,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -2044,19 +2016,17 @@ namespace System.IdentityModel.Tokens
 
             if (!reader.IsStartElement(SamlConstants.ElementNames.Advice, SamlConstants.Namespace))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4065,
-                                SamlConstants.ElementNames.Advice,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4065,
+                            SamlConstants.ElementNames.Advice,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             // SAML Advice is an optional element and all its child elements are optional
@@ -2140,9 +2110,9 @@ namespace System.IdentityModel.Tokens
                 {
                     if (string.IsNullOrEmpty(assertionIdReference))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4079)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenException(SR.GetString(SR.ID4079))
+                        );
                     }
                     writer.WriteElementString(
                         SamlConstants.Prefix,
@@ -2207,19 +2177,17 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4065,
-                                SamlConstants.ElementNames.Assertion,
-                                SamlConstants.Namespace,
-                                wrappedReader.LocalName,
-                                wrappedReader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4065,
+                            SamlConstants.ElementNames.Assertion,
+                            SamlConstants.Namespace,
+                            wrappedReader.LocalName,
+                            wrappedReader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             string attributeValue = wrappedReader.GetAttribute(
@@ -2228,13 +2196,11 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(attributeValue))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.ID4075, SamlConstants.AttributeNames.MajorVersion)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.ID4075, SamlConstants.AttributeNames.MajorVersion)
+                    )
+                );
             }
 
             int majorVersion = XmlConvert.ToInt32(attributeValue);
@@ -2245,13 +2211,11 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(attributeValue))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.ID4075, SamlConstants.AttributeNames.MinorVersion)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.ID4075, SamlConstants.AttributeNames.MinorVersion)
+                    )
+                );
             }
 
             int minorVersion = XmlConvert.ToInt32(attributeValue);
@@ -2261,19 +2225,17 @@ namespace System.IdentityModel.Tokens
                 || (minorVersion != SamlConstants.MinorVersionValue)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4076,
-                                majorVersion,
-                                minorVersion,
-                                SamlConstants.MajorVersionValue,
-                                SamlConstants.MinorVersionValue
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4076,
+                            majorVersion,
+                            minorVersion,
+                            SamlConstants.MajorVersionValue,
+                            SamlConstants.MinorVersionValue
                         )
-                    );
+                    )
+                );
             }
 
             attributeValue = wrappedReader.GetAttribute(
@@ -2282,20 +2244,18 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(attributeValue))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.ID4075, SamlConstants.AttributeNames.AssertionId)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.ID4075, SamlConstants.AttributeNames.AssertionId)
+                    )
+                );
             }
 
             if (!XmlUtil.IsValidXmlIDValue(attributeValue))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4077, attributeValue)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4077, attributeValue))
+                );
             }
 
             assertion.AssertionId = attributeValue;
@@ -2303,13 +2263,9 @@ namespace System.IdentityModel.Tokens
             attributeValue = wrappedReader.GetAttribute(SamlConstants.AttributeNames.Issuer, null);
             if (string.IsNullOrEmpty(attributeValue))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.ID4075, SamlConstants.AttributeNames.Issuer)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4075, SamlConstants.AttributeNames.Issuer))
+                );
             }
 
             assertion.Issuer = attributeValue;
@@ -2360,9 +2316,9 @@ namespace System.IdentityModel.Tokens
 
             if (assertion.Statements.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4078)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4078))
+                );
             }
 
             wrappedReader.MoveToContent();
@@ -2446,8 +2402,7 @@ namespace System.IdentityModel.Tokens
                 SamlConstants.AttributeNames.IssueInstant,
                 null,
                 assertion
-                    .IssueInstant
-                    .ToUniversalTime()
+                    .IssueInstant.ToUniversalTime()
                     .ToString(DateTimeFormats.Generated, CultureInfo.InvariantCulture)
             );
 
@@ -2574,8 +2529,7 @@ namespace System.IdentityModel.Tokens
                     SamlConstants.AttributeNames.NotBefore,
                     null,
                     conditions
-                        .NotBefore
-                        .ToUniversalTime()
+                        .NotBefore.ToUniversalTime()
                         .ToString(DateTimeFormats.Generated, DateTimeFormatInfo.InvariantInfo)
                 );
             }
@@ -2589,8 +2543,7 @@ namespace System.IdentityModel.Tokens
                     SamlConstants.AttributeNames.NotOnOrAfter,
                     null,
                     conditions
-                        .NotOnOrAfter
-                        .ToUniversalTime()
+                        .NotOnOrAfter.ToUniversalTime()
                         .ToString(DateTimeFormats.Generated, DateTimeFormatInfo.InvariantInfo)
                 );
             }
@@ -2637,13 +2590,9 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.ID4080, reader.LocalName, reader.NamespaceURI)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4080, reader.LocalName, reader.NamespaceURI))
+                );
             }
         }
 
@@ -2677,11 +2626,9 @@ namespace System.IdentityModel.Tokens
                 return;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.ID4081, condition.GetType()))
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SecurityTokenException(SR.GetString(SR.ID4081, condition.GetType()))
+            );
         }
 
         /// <summary>
@@ -2707,19 +2654,17 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4082,
-                                SamlConstants.ElementNames.AudienceRestrictionCondition,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4082,
+                            SamlConstants.ElementNames.AudienceRestrictionCondition,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             reader.ReadStartElement();
@@ -2738,40 +2683,38 @@ namespace System.IdentityModel.Tokens
                     string audience = reader.ReadString();
                     if (string.IsNullOrEmpty(audience))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new XmlException(SR.GetString(SR.ID4083)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.ID4083))
+                        );
                     }
 
-                    audienceRestrictionCondition
-                        .Audiences
-                        .Add(new Uri(audience, UriKind.RelativeOrAbsolute));
+                    audienceRestrictionCondition.Audiences.Add(
+                        new Uri(audience, UriKind.RelativeOrAbsolute)
+                    );
                     reader.MoveToContent();
                     reader.ReadEndElement();
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(
-                                    SR.ID4082,
-                                    SamlConstants.ElementNames.Audience,
-                                    SamlConstants.Namespace,
-                                    reader.LocalName,
-                                    reader.NamespaceURI
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.ID4082,
+                                SamlConstants.ElementNames.Audience,
+                                SamlConstants.Namespace,
+                                reader.LocalName,
+                                reader.NamespaceURI
                             )
-                        );
+                        )
+                    );
                 }
             }
 
             if (audienceRestrictionCondition.Audiences.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4084)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4084))
+                );
             }
 
             reader.MoveToContent();
@@ -2804,9 +2747,9 @@ namespace System.IdentityModel.Tokens
             // Schema requires at least one audience.
             if (condition.Audiences == null || condition.Audiences.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4269)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4269))
+                );
             }
 
             writer.WriteStartElement(
@@ -2849,19 +2792,17 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4082,
-                                SamlConstants.ElementNames.DoNotCacheCondition,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4082,
+                            SamlConstants.ElementNames.DoNotCacheCondition,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             SamlDoNotCacheCondition doNotCacheCondition = new SamlDoNotCacheCondition();
@@ -2954,13 +2895,9 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.ID4085, reader.LocalName, reader.NamespaceURI)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4085, reader.LocalName, reader.NamespaceURI))
+                );
             }
         }
 
@@ -3006,11 +2943,9 @@ namespace System.IdentityModel.Tokens
                 return;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.ID4086, statement.GetType()))
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SecurityTokenException(SR.GetString(SR.ID4086, statement.GetType()))
+            );
         }
 
         /// <summary>
@@ -3029,19 +2964,17 @@ namespace System.IdentityModel.Tokens
 
             if (!reader.IsStartElement(SamlConstants.ElementNames.Subject, SamlConstants.Namespace))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4082,
-                                SamlConstants.ElementNames.Subject,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4082,
+                            SamlConstants.ElementNames.Subject,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             SamlSubject subject = new SamlSubject();
@@ -3068,9 +3001,9 @@ namespace System.IdentityModel.Tokens
 
                 if (string.IsNullOrEmpty(subject.Name))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new XmlException(SR.GetString(SR.ID4087)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(SR.GetString(SR.ID4087))
+                    );
                 }
             }
 
@@ -3093,9 +3026,9 @@ namespace System.IdentityModel.Tokens
                     string method = reader.ReadElementString();
                     if (string.IsNullOrEmpty(method))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new XmlException(SR.GetString(SR.ID4088)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.ID4088))
+                        );
                     }
 
                     subject.ConfirmationMethods.Add(method);
@@ -3105,9 +3038,9 @@ namespace System.IdentityModel.Tokens
                 {
                     // A SubjectConfirmaton clause should specify at least one
                     // ConfirmationMethod.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new XmlException(SR.GetString(SR.ID4088)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(SR.GetString(SR.ID4088))
+                    );
                 }
 
                 if (
@@ -3148,9 +3081,9 @@ namespace System.IdentityModel.Tokens
                     (subject.ConfirmationMethods.Count == 0) && (string.IsNullOrEmpty(subject.Name))
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new XmlException(SR.GetString(SR.ID4089)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(SR.GetString(SR.ID4089))
+                    );
                 }
 
                 reader.MoveToContent();
@@ -3269,9 +3202,9 @@ namespace System.IdentityModel.Tokens
                 return KeyInfoSerializer.ReadKeyIdentifier(reader);
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(new XmlException(SR.GetString(SR.ID4090)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new XmlException(SR.GetString(SR.ID4090))
+            );
         }
 
         /// <summary>
@@ -3301,9 +3234,10 @@ namespace System.IdentityModel.Tokens
                 return;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperArgument("subjectSki", SR.GetString(SR.ID4091, subjectSki.GetType()));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                "subjectSki",
+                SR.GetString(SR.ID4091, subjectSki.GetType())
+            );
         }
 
         /// <summary>
@@ -3328,19 +3262,17 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4082,
-                                SamlConstants.ElementNames.AttributeStatement,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4082,
+                            SamlConstants.ElementNames.AttributeStatement,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             reader.ReadStartElement();
@@ -3353,9 +3285,9 @@ namespace System.IdentityModel.Tokens
             else
             {
                 // SAML Subject is a required Attribute Statement clause.
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4092)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4092))
+                );
             }
 
             while (reader.IsStartElement())
@@ -3380,9 +3312,9 @@ namespace System.IdentityModel.Tokens
             if (attributeStatement.Attributes.Count == 0)
             {
                 // Each Attribute statement should have at least one attribute.
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4093)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4093))
+                );
             }
 
             reader.MoveToContent();
@@ -3447,9 +3379,9 @@ namespace System.IdentityModel.Tokens
             attribute.Name = reader.GetAttribute(SamlConstants.AttributeNames.AttributeName, null);
             if (string.IsNullOrEmpty(attribute.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4094)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4094))
+                );
             }
 
             attribute.Namespace = reader.GetAttribute(
@@ -3458,9 +3390,9 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(attribute.Namespace))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4095)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4095))
+                );
             }
 
             //
@@ -3484,9 +3416,9 @@ namespace System.IdentityModel.Tokens
 
             if (originalIssuer == String.Empty)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4252)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4252))
+                );
             }
             attribute.OriginalIssuer = originalIssuer;
 
@@ -3573,9 +3505,9 @@ namespace System.IdentityModel.Tokens
 
             if (attribute.AttributeValues.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4212)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4212))
+                );
             }
 
             reader.MoveToContent();
@@ -3705,9 +3637,10 @@ namespace System.IdentityModel.Tokens
             string xsiTypeSuffix = null;
             if (
                 SamlAttribute != null
-                && !StringComparer
-                    .Ordinal
-                    .Equals(SamlAttribute.AttributeValueXsiType, ClaimValueTypes.String)
+                && !StringComparer.Ordinal.Equals(
+                    SamlAttribute.AttributeValueXsiType,
+                    ClaimValueTypes.String
+                )
             )
             {
                 // ClaimValueTypes are URIs of the form prefix#suffix, while xsi:type should be a QName.
@@ -3721,9 +3654,9 @@ namespace System.IdentityModel.Tokens
             {
                 if (attribute.AttributeValues[i] == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4096)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.ID4096))
+                    );
                 }
 
                 writer.WriteStartElement(
@@ -3799,19 +3732,17 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4082,
-                                SamlConstants.ElementNames.AuthenticationStatement,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4082,
+                            SamlConstants.ElementNames.AuthenticationStatement,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             SamlAuthenticationStatement authnStatement = new SamlAuthenticationStatement();
@@ -3821,9 +3752,9 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(authInstance))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4097)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4097))
+                );
             }
             authnStatement.AuthenticationInstant = DateTime
                 .ParseExact(
@@ -3840,9 +3771,9 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(authnStatement.AuthenticationMethod))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4098)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4098))
+                );
             }
 
             reader.MoveToContent();
@@ -3855,9 +3786,9 @@ namespace System.IdentityModel.Tokens
             else
             {
                 // Subject is a required element for a Authentication Statement clause.
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4099)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4099))
+                );
             }
 
             if (
@@ -3903,19 +3834,17 @@ namespace System.IdentityModel.Tokens
                 else
                 {
                     // We do not understand this element.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(
-                                    SR.ID4082,
-                                    SamlConstants.ElementNames.AuthorityBinding,
-                                    SamlConstants.Namespace,
-                                    reader.LocalName,
-                                    reader.NamespaceURI
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.ID4082,
+                                SamlConstants.ElementNames.AuthorityBinding,
+                                SamlConstants.Namespace,
+                                reader.LocalName,
+                                reader.NamespaceURI
                             )
-                        );
+                        )
+                    );
                 }
             }
 
@@ -4025,17 +3954,17 @@ namespace System.IdentityModel.Tokens
             string authKind = reader.GetAttribute(SamlConstants.AttributeNames.AuthorityKind, null);
             if (string.IsNullOrEmpty(authKind))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4200)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4200))
+                );
             }
 
             string[] authKindParts = authKind.Split(':');
             if (authKindParts.Length > 2)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4201, authKind)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4201, authKind))
+                );
             }
 
             string localName;
@@ -4062,9 +3991,9 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(authorityBinding.Binding))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4202)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4202))
+                );
             }
 
             authorityBinding.Location = reader.GetAttribute(
@@ -4073,9 +4002,9 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(authorityBinding.Location))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4203)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4203))
+                );
             }
 
             if (reader.IsEmptyElement)
@@ -4187,13 +4116,11 @@ namespace System.IdentityModel.Tokens
             SamlSecurityToken samlSecurityToken = token as SamlSecurityToken;
             if (samlSecurityToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(SR.ID4217, token.GetType(), typeof(SamlSecurityToken))
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(SR.ID4217, token.GetType(), typeof(SamlSecurityToken))
+                    )
+                );
             }
 
             WriteAssertion(writer, samlSecurityToken.Assertion);
@@ -4223,19 +4150,17 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4082,
-                                SamlConstants.ElementNames.AuthorizationDecisionStatement,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4082,
+                            SamlConstants.ElementNames.AuthorizationDecisionStatement,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             SamlAuthorizationDecisionStatement authzStatement =
@@ -4246,9 +4171,9 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(authzStatement.Resource))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4205)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4205))
+                );
             }
 
             string decisionString = reader.GetAttribute(
@@ -4257,9 +4182,9 @@ namespace System.IdentityModel.Tokens
             );
             if (string.IsNullOrEmpty(decisionString))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.ID4204)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4204))
+                );
             }
 
             if (
@@ -4294,9 +4219,9 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4206)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4206))
+                );
             }
 
             while (reader.IsStartElement())
@@ -4319,30 +4244,28 @@ namespace System.IdentityModel.Tokens
                 {
                     if (authzStatement.Evidence != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4207)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenException(SR.GetString(SR.ID4207))
+                        );
                     }
 
                     authzStatement.Evidence = ReadEvidence(reader);
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.ID4208, reader.LocalName, reader.NamespaceURI)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.ID4208, reader.LocalName, reader.NamespaceURI)
+                        )
+                    );
                 }
             }
 
             if (authzStatement.SamlActions.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4209)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4209))
+                );
             }
 
             reader.MoveToContent();
@@ -4424,19 +4347,17 @@ namespace System.IdentityModel.Tokens
                 !reader.IsStartElement(SamlConstants.ElementNames.Evidence, SamlConstants.Namespace)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4082,
-                                SamlConstants.ElementNames.Evidence,
-                                SamlConstants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4082,
+                            SamlConstants.ElementNames.Evidence,
+                            SamlConstants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             SamlEvidence evidence = new SamlEvidence();
@@ -4464,21 +4385,19 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.ID4210, reader.LocalName, reader.NamespaceURI)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.ID4210, reader.LocalName, reader.NamespaceURI)
+                        )
+                    );
                 }
             }
 
             if ((evidence.AssertionIdReferences.Count == 0) && (evidence.Assertions.Count == 0))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4211)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4211))
+                );
             }
 
             reader.MoveToContent();
@@ -4541,9 +4460,9 @@ namespace System.IdentityModel.Tokens
         {
             if (subjectKeyIdentifier == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("subjectKeyIdentifier");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "subjectKeyIdentifier"
+                );
             }
 
             if (this.Configuration == null)
@@ -4604,9 +4523,9 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4220)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4220))
+                );
             }
         }
 
@@ -4707,9 +4626,9 @@ namespace System.IdentityModel.Tokens
 
             if (signingKeyIdentifier == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("signingKeyIdentifier");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "signingKeyIdentifier"
+                );
             }
 
             if (KeyInfoSerializer.CanWriteKeyIdentifier(signingKeyIdentifier))
@@ -4771,9 +4690,10 @@ namespace System.IdentityModel.Tokens
                 if (
                     !StringComparer.Ordinal.Equals(subject.Name, requiredSubjectName)
                     || !StringComparer.Ordinal.Equals(subject.NameFormat, requiredSubjectFormat)
-                    || !StringComparer
-                        .Ordinal
-                        .Equals(subject.NameQualifier, requiredSubjectQualifier)
+                    || !StringComparer.Ordinal.Equals(
+                        subject.NameQualifier,
+                        requiredSubjectQualifier
+                    )
                 )
                 {
                     //
@@ -4912,9 +4832,9 @@ namespace System.IdentityModel.Tokens
                 XmlReader reader
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             protected override SecurityKeyIdentifier ReadKeyIdentifierCore(XmlReader reader)
@@ -4927,9 +4847,9 @@ namespace System.IdentityModel.Tokens
                 SecurityTokenResolver tokenResolver
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             protected override void WriteKeyIdentifierClauseCore(
@@ -4937,9 +4857,9 @@ namespace System.IdentityModel.Tokens
                 SecurityKeyIdentifierClause keyIdentifierClause
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             protected override void WriteKeyIdentifierCore(
@@ -4952,9 +4872,9 @@ namespace System.IdentityModel.Tokens
 
             protected override void WriteTokenCore(XmlWriter writer, SecurityToken token)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
         }
     }

@@ -223,14 +223,12 @@ namespace System.Reflection.Runtime.TypeInfos
             if (IsSZArray && interfaceType.IsGenericType)
                 throw new ArgumentException(SR.Argument_ArrayGetInterfaceMap);
 
-            ReflectionCoreExecution
-                .ExecutionEnvironment
-                .GetInterfaceMap(
-                    this.ToType(),
-                    interfaceType,
-                    out MethodInfo[] interfaceMethods,
-                    out MethodInfo[] targetMethods
-                );
+            ReflectionCoreExecution.ExecutionEnvironment.GetInterfaceMap(
+                this.ToType(),
+                interfaceType,
+                out MethodInfo[] interfaceMethods,
+                out MethodInfo[] targetMethods
+            );
 
             InterfaceMapping im;
             im.InterfaceType = interfaceType;
@@ -535,9 +533,9 @@ namespace System.Reflection.Runtime.TypeInfos
                 // representation of the type is in the native metadata and there's no MethodTable at the runtime side.
                 // If you squint hard, this is a missing metadata situation - the metadata is missing on the runtime side - and
                 // the action for the user to take is the same: go mess with RD.XML.
-                throw ReflectionCoreExecution
-                    .ExecutionEnvironment
-                    .CreateMissingMetadataException(this.ToType());
+                throw ReflectionCoreExecution.ExecutionEnvironment.CreateMissingMetadataException(
+                    this.ToType()
+                );
             }
         }
 

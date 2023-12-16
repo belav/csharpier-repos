@@ -289,8 +289,7 @@ namespace Microsoft.CodeAnalysis
 
                 var syntaxTree = await this.GetRequiredSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var compilation = await this.Project
-                    .GetRequiredCompilationAsync(cancellationToken)
+                var compilation = await this.Project.GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var result = compilation.GetSemanticModel(syntaxTree);
@@ -344,18 +343,18 @@ namespace Microsoft.CodeAnalysis
         /// Creates a new instance of this document updated to have the text specified.
         /// </summary>
         public Document WithText(SourceText text) =>
-            this.Project
-                .Solution
-                .WithDocumentText(this.Id, text, PreservationMode.PreserveIdentity)
+            this.Project.Solution.WithDocumentText(this.Id, text, PreservationMode.PreserveIdentity)
                 .GetDocument(this.Id)!;
 
         /// <summary>
         /// Creates a new instance of this document updated to have a syntax tree rooted by the specified syntax node.
         /// </summary>
         public Document WithSyntaxRoot(SyntaxNode root) =>
-            this.Project
-                .Solution
-                .WithDocumentSyntaxRoot(this.Id, root, PreservationMode.PreserveIdentity)
+            this.Project.Solution.WithDocumentSyntaxRoot(
+                this.Id,
+                root,
+                PreservationMode.PreserveIdentity
+            )
                 .GetDocument(this.Id)!;
 
         /// <summary>
@@ -497,9 +496,8 @@ namespace Microsoft.CodeAnalysis
             // as partial semantics don't make sense otherwise.
             if (solution.PartialSemanticsEnabled && this.Project.SupportsCompilation)
             {
-                var newSolution = this.Project
-                    .Solution
-                    .WithFrozenPartialCompilationIncludingSpecificDocument(
+                var newSolution =
+                    this.Project.Solution.WithFrozenPartialCompilationIncludingSpecificDocument(
                         this.Id,
                         cancellationToken
                     );

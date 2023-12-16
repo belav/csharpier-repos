@@ -24,8 +24,7 @@ public class AsWithMissingMap : NonValidatingSpecBase
     public void Should_report_missing_map() =>
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<InvalidOperationException>()
-            .Message
-            .ShouldBe(
+            .Message.ShouldBe(
                 "Missing map from AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TModel to AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TConcrete. Create using CreateMap<TModel, TConcrete>."
             );
 }

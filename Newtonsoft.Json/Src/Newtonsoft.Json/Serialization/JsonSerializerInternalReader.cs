@@ -1198,9 +1198,10 @@ namespace Newtonsoft.Json.Serialization
                 Type specifiedType;
                 try
                 {
-                    specifiedType = Serializer
-                        ._serializationBinder
-                        .BindToType(typeNameKey.Value1, typeNameKey.Value2);
+                    specifiedType = Serializer._serializationBinder.BindToType(
+                        typeNameKey.Value1,
+                        typeNameKey.Value2
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -1702,9 +1703,10 @@ namespace Newtonsoft.Json.Serialization
                 property.PropertyContract = GetContractSafe(property.PropertyType);
             }
 
-            ObjectCreationHandling objectCreationHandling = property
-                .ObjectCreationHandling
-                .GetValueOrDefault(Serializer._objectCreationHandling);
+            ObjectCreationHandling objectCreationHandling =
+                property.ObjectCreationHandling.GetValueOrDefault(
+                    Serializer._objectCreationHandling
+                );
 
             if (
                 (objectCreationHandling != ObjectCreationHandling.Replace)
@@ -1767,15 +1769,15 @@ namespace Newtonsoft.Json.Serialization
             // test tokenType here because default value might not be convertible to actual type, e.g. default of "" for DateTime
             if (
                 HasFlag(
-                    property
-                        .DefaultValueHandling
-                        .GetValueOrDefault(Serializer._defaultValueHandling),
+                    property.DefaultValueHandling.GetValueOrDefault(
+                        Serializer._defaultValueHandling
+                    ),
                     DefaultValueHandling.Ignore
                 )
                 && !HasFlag(
-                    property
-                        .DefaultValueHandling
-                        .GetValueOrDefault(Serializer._defaultValueHandling),
+                    property.DefaultValueHandling.GetValueOrDefault(
+                        Serializer._defaultValueHandling
+                    ),
                     DefaultValueHandling.Populate
                 )
                 && JsonTokenUtils.IsPrimitiveToken(tokenType)
@@ -1865,15 +1867,15 @@ namespace Newtonsoft.Json.Serialization
 
             if (
                 HasFlag(
-                    property
-                        .DefaultValueHandling
-                        .GetValueOrDefault(Serializer._defaultValueHandling),
+                    property.DefaultValueHandling.GetValueOrDefault(
+                        Serializer._defaultValueHandling
+                    ),
                     DefaultValueHandling.Ignore
                 )
                 && !HasFlag(
-                    property
-                        .DefaultValueHandling
-                        .GetValueOrDefault(Serializer._defaultValueHandling),
+                    property.DefaultValueHandling.GetValueOrDefault(
+                        Serializer._defaultValueHandling
+                    ),
                     DefaultValueHandling.Populate
                 )
                 && MiscellaneousUtils.ValueEquals(value, property.GetResolvedDefaultValue())
@@ -2930,9 +2932,9 @@ namespace Newtonsoft.Json.Serialization
                             }
 
                             // first attempt to find a settable property, otherwise fall back to a dynamic set without type
-                            JsonProperty? property = contract
-                                .Properties
-                                .GetClosestMatchProperty(memberName);
+                            JsonProperty? property = contract.Properties.GetClosestMatchProperty(
+                                memberName
+                            );
 
                             if (property != null && property.Writable && !property.Ignored)
                             {
@@ -3176,12 +3178,10 @@ namespace Newtonsoft.Json.Serialization
                 JsonProperty? constructorProperty = context.ConstructorProperty;
                 if (constructorProperty == null && context.Property != null)
                 {
-                    constructorProperty = contract
-                        .CreatorParameters
-                        .ForgivingCaseSensitiveFind(
-                            p => p.PropertyName!,
-                            context.Property.UnderlyingName!
-                        );
+                    constructorProperty = contract.CreatorParameters.ForgivingCaseSensitiveFind(
+                        p => p.PropertyName!,
+                        context.Property.UnderlyingName!
+                    );
                 }
 
                 if (constructorProperty != null && !constructorProperty.Ignored)
@@ -3204,9 +3204,9 @@ namespace Newtonsoft.Json.Serialization
 
                             if (
                                 HasFlag(
-                                    constructorProperty
-                                        .DefaultValueHandling
-                                        .GetValueOrDefault(Serializer._defaultValueHandling),
+                                    constructorProperty.DefaultValueHandling.GetValueOrDefault(
+                                        Serializer._defaultValueHandling
+                                    ),
                                     DefaultValueHandling.Populate
                                 )
                             )
@@ -3262,9 +3262,9 @@ namespace Newtonsoft.Json.Serialization
                 else if (!property.Writable && value != null)
                 {
                     // handle readonly collection/dictionary properties
-                    JsonContract propertyContract = Serializer
-                        ._contractResolver
-                        .ResolveContract(property.PropertyType!);
+                    JsonContract propertyContract = Serializer._contractResolver.ResolveContract(
+                        property.PropertyType!
+                    );
 
                     if (propertyContract.ContractType == JsonContractType.Array)
                     {
@@ -3276,9 +3276,9 @@ namespace Newtonsoft.Json.Serialization
                             && !propertyArrayContract.IsReadOnlyOrFixedSize
                         )
                         {
-                            object? createdObjectCollection = property
-                                .ValueProvider!
-                                .GetValue(createdObject);
+                            object? createdObjectCollection = property.ValueProvider!.GetValue(
+                                createdObject
+                            );
                             if (createdObjectCollection != null)
                             {
                                 propertyArrayContract = (JsonArrayContract)GetContract(
@@ -3315,9 +3315,9 @@ namespace Newtonsoft.Json.Serialization
 
                         if (!dictionaryContract.IsReadOnlyOrFixedSize)
                         {
-                            object? createdObjectDictionary = property
-                                .ValueProvider!
-                                .GetValue(createdObject);
+                            object? createdObjectDictionary = property.ValueProvider!.GetValue(
+                                createdObject
+                            );
                             if (createdObjectDictionary != null)
                             {
                                 IDictionary targetDictionary =
@@ -3462,9 +3462,8 @@ namespace Newtonsoft.Json.Serialization
                             memberName
                         )
                         {
-                            ConstructorProperty = contract
-                                .CreatorParameters
-                                .GetClosestMatchProperty(memberName),
+                            ConstructorProperty =
+                                contract.CreatorParameters.GetClosestMatchProperty(memberName),
                             Property = contract.Properties.GetClosestMatchProperty(memberName)
                         };
                         propertyValues.Add(creatorPropertyContext);
@@ -3759,9 +3758,9 @@ namespace Newtonsoft.Json.Serialization
                         {
                             // attempt exact case match first
                             // then try match ignoring case
-                            JsonProperty? property = contract
-                                .Properties
-                                .GetClosestMatchProperty(propertyName);
+                            JsonProperty? property = contract.Properties.GetClosestMatchProperty(
+                                propertyName
+                            );
 
                             if (property == null)
                             {
@@ -4096,25 +4095,23 @@ namespace Newtonsoft.Json.Serialization
 
                                 if (
                                     HasFlag(
-                                        property
-                                            .DefaultValueHandling
-                                            .GetValueOrDefault(Serializer._defaultValueHandling),
+                                        property.DefaultValueHandling.GetValueOrDefault(
+                                            Serializer._defaultValueHandling
+                                        ),
                                         DefaultValueHandling.Populate
                                     ) && property.Writable
                                 )
                                 {
-                                    property
-                                        .ValueProvider!
-                                        .SetValue(
-                                            newObject,
-                                            EnsureType(
-                                                reader,
-                                                property.GetResolvedDefaultValue(),
-                                                CultureInfo.InvariantCulture,
-                                                property.PropertyContract!,
-                                                property.PropertyType
-                                            )
-                                        );
+                                    property.ValueProvider!.SetValue(
+                                        newObject,
+                                        EnsureType(
+                                            reader,
+                                            property.GetResolvedDefaultValue(),
+                                            CultureInfo.InvariantCulture,
+                                            property.PropertyContract!,
+                                            property.PropertyType
+                                        )
+                                    );
                                 }
                             }
                             break;

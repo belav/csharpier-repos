@@ -47,13 +47,11 @@ namespace System.ServiceModel.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                SR2.GetString(SR2.PersistenceOperationTimeoutOutOfRange)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            SR2.GetString(SR2.PersistenceOperationTimeoutOutOfRange)
+                        )
+                    );
                 }
                 this.persistenceOperationTimeout = value;
             }

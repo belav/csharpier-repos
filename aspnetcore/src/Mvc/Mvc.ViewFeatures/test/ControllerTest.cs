@@ -23,8 +23,7 @@ public class ControllerTest
         {
             return typeof(Controller)
                 .GetTypeInfo()
-                .DeclaredMethods
-                .Where(
+                .DeclaredMethods.Where(
                     method =>
                         method.IsPublic
                         && !method.IsSpecialName

@@ -841,9 +841,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
             if (pr._memberValueEnum == InternalMemberValueE.Null)
             {
                 // Value is Null
-                objectPr
-                    ._objectInfo
-                    .AddValue(pr._name, null, ref objectPr._si, ref objectPr._memberData);
+                objectPr._objectInfo.AddValue(
+                    pr._name,
+                    null,
+                    ref objectPr._si,
+                    ref objectPr._memberData
+                );
             }
             else if (pr._memberValueEnum == InternalMemberValueE.Nested)
             {
@@ -863,9 +866,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 }
                 else
                 {
-                    objectPr
-                        ._objectInfo
-                        .AddValue(pr._name, pr._newObj, ref objectPr._si, ref objectPr._memberData);
+                    objectPr._objectInfo.AddValue(
+                        pr._name,
+                        pr._newObj,
+                        ref objectPr._si,
+                        ref objectPr._memberData
+                    );
                 }
             }
             else if (pr._memberValueEnum == InternalMemberValueE.Reference)
@@ -875,16 +881,22 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 object? refObj = _objectManager.GetObject(pr._idRef);
                 if (refObj == null)
                 {
-                    objectPr
-                        ._objectInfo
-                        .AddValue(pr._name, null, ref objectPr._si, ref objectPr._memberData);
+                    objectPr._objectInfo.AddValue(
+                        pr._name,
+                        null,
+                        ref objectPr._si,
+                        ref objectPr._memberData
+                    );
                     objectPr._objectInfo.RecordFixup(objectPr._objectId, pr._name, pr._idRef); // Object not instantiated
                 }
                 else
                 {
-                    objectPr
-                        ._objectInfo
-                        .AddValue(pr._name, refObj, ref objectPr._si, ref objectPr._memberData);
+                    objectPr._objectInfo.AddValue(
+                        pr._name,
+                        refObj,
+                        ref objectPr._si,
+                        ref objectPr._memberData
+                    );
                 }
             }
             else if (pr._memberValueEnum == InternalMemberValueE.InlineValue)
@@ -893,9 +905,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 if (ReferenceEquals(pr._dtType, Converter.s_typeofString))
                 {
                     ParseString(pr, objectPr);
-                    objectPr
-                        ._objectInfo
-                        .AddValue(pr._name, pr._value, ref objectPr._si, ref objectPr._memberData);
+                    objectPr._objectInfo.AddValue(
+                        pr._name,
+                        pr._value,
+                        ref objectPr._si,
+                        ref objectPr._memberData
+                    );
                 }
                 else if (pr._dtTypeCode == InternalPrimitiveTypeE.Invalid)
                 {
@@ -903,14 +918,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     if (pr._arrayTypeEnum == InternalArrayTypeE.Base64)
                     {
                         Debug.Assert(pr._value != null);
-                        objectPr
-                            ._objectInfo
-                            .AddValue(
-                                pr._name,
-                                Convert.FromBase64String(pr._value),
-                                ref objectPr._si,
-                                ref objectPr._memberData
-                            );
+                        objectPr._objectInfo.AddValue(
+                            pr._name,
+                            Convert.FromBase64String(pr._value),
+                            ref objectPr._si,
+                            ref objectPr._memberData
+                        );
                     }
                     else if (ReferenceEquals(pr._dtType, Converter.s_typeofObject))
                     {
@@ -925,36 +938,35 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         // only special case where AddValue is needed?
                         if (ReferenceEquals(pr._dtType, Converter.s_typeofSystemVoid))
                         {
-                            objectPr
-                                ._objectInfo
-                                .AddValue(
-                                    pr._name,
-                                    pr._dtType,
-                                    ref objectPr._si,
-                                    ref objectPr._memberData
-                                );
+                            objectPr._objectInfo.AddValue(
+                                pr._name,
+                                pr._dtType,
+                                ref objectPr._si,
+                                ref objectPr._memberData
+                            );
                         }
                         else if (objectPr._objectInfo._isSi)
                         {
                             // ISerializable are added as strings, the conversion to type is done by the
                             // ISerializable object
-                            objectPr
-                                ._objectInfo
-                                .AddValue(
-                                    pr._name,
-                                    pr._value,
-                                    ref objectPr._si,
-                                    ref objectPr._memberData
-                                );
+                            objectPr._objectInfo.AddValue(
+                                pr._name,
+                                pr._value,
+                                ref objectPr._si,
+                                ref objectPr._memberData
+                            );
                         }
                     }
                 }
                 else
                 {
                     object? var = pr._varValue ?? Converter.FromString(pr._value, pr._dtTypeCode);
-                    objectPr
-                        ._objectInfo
-                        .AddValue(pr._name, var, ref objectPr._si, ref objectPr._memberData);
+                    objectPr._objectInfo.AddValue(
+                        pr._name,
+                        var,
+                        ref objectPr._si,
+                        ref objectPr._memberData
+                    );
                 }
             }
             else

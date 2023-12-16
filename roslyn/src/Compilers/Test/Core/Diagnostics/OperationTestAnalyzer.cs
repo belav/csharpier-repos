@@ -92,12 +92,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 (operationContext) =>
                 {
                     if (
-                        operationContext
-                            .Operation
-                            .HasErrors(
-                                operationContext.Compilation,
-                                operationContext.CancellationToken
-                            )
+                        operationContext.Operation.HasErrors(
+                            operationContext.Compilation,
+                            operationContext.CancellationToken
+                        )
                     )
                     {
                         operationContext.ReportDiagnostic(
@@ -1147,9 +1145,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     }
 
                     foreach (
-                        var decl in declarationStatement
-                            .Declarations
-                            .SelectMany(multiDecl => multiDecl.Declarators)
+                        var decl in declarationStatement.Declarations.SelectMany(
+                            multiDecl => multiDecl.Declarators
+                        )
                     )
                     {
                         var initializer = decl.GetVariableInitializer();

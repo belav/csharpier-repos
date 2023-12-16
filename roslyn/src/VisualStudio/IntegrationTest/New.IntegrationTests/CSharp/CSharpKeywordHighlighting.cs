@@ -118,18 +118,16 @@ class C
         )
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
-                .WaitForAllAsyncOperationsAsync(
-                    [
-                        FeatureAttribute.Workspace,
-                        FeatureAttribute.SolutionCrawlerLegacy,
-                        FeatureAttribute.DiagnosticService,
-                        FeatureAttribute.Classification,
-                        FeatureAttribute.KeywordHighlighting,
-                    ],
-                    cancellationToken
-                );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                    FeatureAttribute.KeywordHighlighting,
+                ],
+                cancellationToken
+            );
 
             var tags = await TestServices.Editor.GetTagsAsync<ITextMarkerTag>(cancellationToken);
             var tagSpans = tags.SelectAsArray(

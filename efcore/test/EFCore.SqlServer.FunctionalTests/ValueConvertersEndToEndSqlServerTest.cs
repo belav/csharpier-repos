@@ -171,8 +171,7 @@ public class ValueConvertersEndToEndSqlServerTest
         using var context = CreateContext();
 
         var property = context
-            .Model
-            .FindEntityType(typeof(ConvertingEntity))!
+            .Model.FindEntityType(typeof(ConvertingEntity))!
             .FindProperty(propertyName);
 
         Assert.Equal(databaseType, property!.GetColumnType());
@@ -232,8 +231,7 @@ WHERE CAST(DATALENGTH(CAST(N'' AS nvarchar(max))) AS int) = 1
 
         var mapping = context
             .Set<SqlServerConvertingEntity>()
-            .EntityType
-            .FindProperty(nameof(SqlServerConvertingEntity.GuidToFixedLengthString))!
+            .EntityType.FindProperty(nameof(SqlServerConvertingEntity.GuidToFixedLengthString))!
             .FindRelationalTypeMapping()!;
 
         Assert.Equal("nchar(40)", mapping.StoreType);
@@ -267,8 +265,7 @@ WHERE [s].[GuidToFixedLengthString] <> @__guid_0
 
         var mapping = context
             .Set<SqlServerConvertingEntity>()
-            .EntityType
-            .FindProperty(nameof(SqlServerConvertingEntity.GuidToDbTypeString))!
+            .EntityType.FindProperty(nameof(SqlServerConvertingEntity.GuidToDbTypeString))!
             .FindRelationalTypeMapping()!;
 
         Assert.Equal(DbType.AnsiStringFixedLength, mapping.DbType!);

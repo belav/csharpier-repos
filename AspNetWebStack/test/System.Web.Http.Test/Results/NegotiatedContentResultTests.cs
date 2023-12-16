@@ -445,9 +445,10 @@ namespace System.Web.Http.Results
                     );
 
                     IContentNegotiator expectedContentNegotiator = CreateContentNegotiator();
-                    configuration
-                        .Services
-                        .Replace(typeof(IContentNegotiator), expectedContentNegotiator);
+                    configuration.Services.Replace(
+                        typeof(IContentNegotiator),
+                        expectedContentNegotiator
+                    );
 
                     // Act
                     IContentNegotiator contentNegotiator = result.ContentNegotiator;
@@ -571,9 +572,10 @@ namespace System.Web.Http.Results
 
                 IContentNegotiator ignore = result.ContentNegotiator;
 
-                configuration
-                    .Services
-                    .Replace(typeof(IContentNegotiator), CreateContentNegotiator());
+                configuration.Services.Replace(
+                    typeof(IContentNegotiator),
+                    CreateContentNegotiator()
+                );
 
                 // Act
                 IContentNegotiator contentNegotiator = result.ContentNegotiator;

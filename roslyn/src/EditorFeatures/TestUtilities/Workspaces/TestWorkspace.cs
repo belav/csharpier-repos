@@ -556,8 +556,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         document.GetTextBuffer().CurrentSnapshot
                     );
                     var mappedSpan = projectionBuffer
-                        .CurrentSnapshot
-                        .MapFromSourceSnapshot(snapshotSpan)
+                        .CurrentSnapshot.MapFromSourceSnapshot(snapshotSpan)
                         .Single();
                     mappedSpans[string.Empty] = mappedSpans[string.Empty].Add(
                         mappedSpan.ToTextSpan()
@@ -583,8 +582,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                             document.GetTextBuffer().CurrentSnapshot
                         );
                         var mappedSpan = projectionBuffer
-                            .CurrentSnapshot
-                            .MapFromSourceSnapshot(snapshotSpan)
+                            .CurrentSnapshot.MapFromSourceSnapshot(snapshotSpan)
                             .Cast<Span?>()
                             .SingleOrDefault();
                         if (mappedSpan == null)
@@ -689,8 +687,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 var span = new Span(matchingSpan.Start, matchingSpan.Length);
                 var trackingSpan = documentWithSpan
                     .GetTextBuffer()
-                    .CurrentSnapshot
-                    .CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
+                    .CurrentSnapshot.CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
 
                 projectionBufferSpans.Add(trackingSpan);
                 projectionBufferSpanStartingPositions.Add(currentPositionInProjectionBuffer);

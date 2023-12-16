@@ -160,9 +160,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     ch = '\u0008';
                     break;
                 case 'e':
-                    var info = MessageID
-                        .IDS_StringEscapeCharacter
-                        .GetFeatureAvailabilityDiagnosticInfo(this.Options);
+                    var info =
+                        MessageID.IDS_StringEscapeCharacter.GetFeatureAvailabilityDiagnosticInfo(
+                            this.Options
+                        );
                     if (info != null)
                         this.AddError(
                             start,

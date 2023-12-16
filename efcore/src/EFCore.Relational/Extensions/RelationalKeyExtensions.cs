@@ -150,8 +150,7 @@ public static class RelationalKeyExtensions
             IReadOnlyKey? linkedKey = null;
             foreach (
                 var otherKey in rootKey
-                    .DeclaringEntityType
-                    .FindRowInternalForeignKeys(storeObject)
+                    .DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
                     .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
             )
             {

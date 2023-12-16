@@ -93,16 +93,17 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
                 // issues. There's no need to add the actual cshtml file to the workspace - so filter those out.
                 // This is also the case for files for which TypeScript adds the generated TypeScript buffer to a different project.
                 var filesTasks = project
-                    .SourceFiles
-                    .Where(f => f.Scheme != SystemUriSchemeExternal)
+                    .SourceFiles.Where(f => f.Scheme != SystemUriSchemeExternal)
                     .Where(
                         f => !_secondaryBufferFileExtensions.Any(ext => f.LocalPath.EndsWith(ext))
                     )
                     .Select(
                         f =>
-                            lspClient
-                                .ProtocolConverter
-                                .FromProtocolUriAsync(f, false, cancellationToken)
+                            lspClient.ProtocolConverter.FromProtocolUriAsync(
+                                f,
+                                false,
+                                cancellationToken
+                            )
                     );
                 var files = await Task.WhenAll(filesTasks).ConfigureAwait(false);
                 var projectInfo = CreateProjectInfo(

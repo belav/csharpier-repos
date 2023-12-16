@@ -212,12 +212,9 @@ namespace System.Xml
                 case ValueHandleType.TimeSpan:
                     return typeof(TimeSpan);
                 default:
-                    throw System
-                        .Runtime
-                        .Serialization
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new InvalidOperationException());
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException()
+                    );
             }
         }
 
@@ -487,11 +484,9 @@ namespace System.Xml
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(exception.Message, exception.InnerException)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(exception.Message, exception.InnerException)
+                );
             }
         }
 
@@ -554,12 +549,9 @@ namespace System.Xml
                 case ValueHandleType.ConstString:
                     return constStrings[offset];
                 default:
-                    throw System
-                        .Runtime
-                        .Serialization
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new InvalidOperationException());
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException()
+                    );
             }
         }
 
@@ -694,12 +686,9 @@ namespace System.Xml
                 case ValueHandleType.TimeSpan:
                     return ToTimeSpan();
                 default:
-                    throw System
-                        .Runtime
-                        .Serialization
-                        .DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new InvalidOperationException());
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException()
+                    );
             }
         }
 
@@ -874,16 +863,14 @@ namespace System.Xml
                 }
                 catch (FormatException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            XmlExceptionHelper.CreateEncodingException(
-                                bytes,
-                                byteOffset,
-                                byteCount,
-                                exception
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateEncodingException(
+                            bytes,
+                            byteOffset,
+                            byteCount,
+                            exception
+                        )
+                    );
                 }
 
                 // Advance

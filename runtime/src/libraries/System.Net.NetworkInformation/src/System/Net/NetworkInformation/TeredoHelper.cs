@@ -56,15 +56,13 @@ namespace System.Net.NetworkInformation
             TeredoHelper? helper = new TeredoHelper(callback, state);
             try
             {
-                uint err = Interop
-                    .IpHlpApi
-                    .NotifyStableUnicastIpAddressTable(
-                        AddressFamily.Unspecified,
-                        out SafeFreeMibTable table,
-                        &OnStabilized,
-                        GCHandle.ToIntPtr(helper._gcHandle),
-                        out helper._cancelHandle
-                    );
+                uint err = Interop.IpHlpApi.NotifyStableUnicastIpAddressTable(
+                    AddressFamily.Unspecified,
+                    out SafeFreeMibTable table,
+                    &OnStabilized,
+                    GCHandle.ToIntPtr(helper._gcHandle),
+                    out helper._cancelHandle
+                );
 
                 table.Dispose();
 

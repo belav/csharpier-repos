@@ -2694,9 +2694,10 @@ namespace Microsoft.CSharp
                 // other attributes.
 
                 if (
-                    current
-                        .Name
-                        .Equals("system.paramarrayattribute", StringComparison.OrdinalIgnoreCase)
+                    current.Name.Equals(
+                        "system.paramarrayattribute",
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 )
                 {
                     paramArray = true;

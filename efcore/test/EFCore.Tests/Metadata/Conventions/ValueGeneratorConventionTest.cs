@@ -623,8 +623,7 @@ public class ValueGeneratorConventionTest
 
     private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
         InMemoryTestHelpers
-            .Instance
-            .CreateContextServices()
+            .Instance.CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private static InternalModelBuilder CreateInternalModelBuilder()
@@ -635,9 +634,7 @@ public class ValueGeneratorConventionTest
             serviceProvider.GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         // Use public API to add conventions, issue #214
-        conventionSet
-            .EntityTypeAddedConventions
-            .Add(new PropertyDiscoveryConvention(dependencies));
+        conventionSet.EntityTypeAddedConventions.Add(new PropertyDiscoveryConvention(dependencies));
         conventionSet.EntityTypeAddedConventions.Add(new KeyDiscoveryConvention(dependencies));
 
         var keyConvention = new ValueGenerationConvention(dependencies);

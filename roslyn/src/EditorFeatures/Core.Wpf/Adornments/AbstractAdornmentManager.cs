@@ -197,17 +197,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                 {
                     // schedule an update
                     _threadingContext
-                        .JoinableTaskFactory
-                        .WithPriority(TextView.VisualElement.Dispatcher, DispatcherPriority.Render)
+                        .JoinableTaskFactory.WithPriority(
+                            TextView.VisualElement.Dispatcher,
+                            DispatcherPriority.Render
+                        )
                         .RunAsync(async () =>
                         {
                             using (
                                 _asyncListener.BeginAsyncOperation(GetType() + ".OnTagsChanged.2")
                             )
                             {
-                                await _threadingContext
-                                    .JoinableTaskFactory
-                                    .SwitchToMainThreadAsync(alwaysYield: true);
+                                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                    alwaysYield: true
+                                );
                                 UpdateInvalidSpans();
                             }
                         });
@@ -328,23 +330,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IMappingTagSpan<T> mappingTagSpan
         )
         {
-            var point = mappingTagSpan
-                .Span
-                .End
-                .GetPoint(snapshotSpan.Snapshot, PositionAffinity.Predecessor);
+            var point = mappingTagSpan.Span.End.GetPoint(
+                snapshotSpan.Snapshot,
+                PositionAffinity.Predecessor
+            );
             if (point == null)
             {
                 return null;
             }
 
-            var mappedPoint = TextView
-                .BufferGraph
-                .MapUpToSnapshot(
-                    point.Value,
-                    PointTrackingMode.Negative,
-                    PositionAffinity.Predecessor,
-                    TextView.TextSnapshot
-                );
+            var mappedPoint = TextView.BufferGraph.MapUpToSnapshot(
+                point.Value,
+                PointTrackingMode.Negative,
+                PositionAffinity.Predecessor,
+                TextView.TextSnapshot
+            );
             if (mappedPoint == null)
             {
                 return null;
@@ -371,12 +371,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             if (viewSnapshot != null && mappingSpan.AnchorBuffer == viewSnapshot.TextBuffer)
             {
                 var mappedStart = mappingSpan
-                    .Start
-                    .GetPoint(viewSnapshot, PositionAffinity.Predecessor)
+                    .Start.GetPoint(viewSnapshot, PositionAffinity.Predecessor)
                     .Value;
                 var mappedEnd = mappingSpan
-                    .End
-                    .GetPoint(viewSnapshot, PositionAffinity.Successor)
+                    .End.GetPoint(viewSnapshot, PositionAffinity.Successor)
                     .Value;
                 span = new SnapshotSpan(mappedStart, mappedEnd);
                 return true;

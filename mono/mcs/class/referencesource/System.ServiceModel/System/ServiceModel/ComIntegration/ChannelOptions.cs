@@ -24,11 +24,9 @@ namespace System.ServiceModel.ComIntegration
         )
         {
             if (channelBuilderSettings == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.CannotCreateChannelOption))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.CannotCreateChannelOption))
+                );
 
             ChannelOptions channelOptions = null;
             ComProxy proxy = null;

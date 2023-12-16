@@ -199,9 +199,10 @@ namespace Internal.Reflection.Core.Execution
                 genericMethodTypeArgumentHandles
             );
             if (methodInvoker == null)
-                exception = ReflectionCoreExecution
-                    .ExecutionEnvironment
-                    .CreateNonInvokabilityException(exceptionPertainant);
+                exception =
+                    ReflectionCoreExecution.ExecutionEnvironment.CreateNonInvokabilityException(
+                        exceptionPertainant
+                    );
             return methodInvoker;
         }
 

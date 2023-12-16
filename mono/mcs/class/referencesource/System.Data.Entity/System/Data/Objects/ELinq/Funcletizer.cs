@@ -249,12 +249,10 @@ namespace System.Data.Objects.ELinq
                     // support construction of primitive types
                     PrimitiveType primitiveType;
                     if (
-                        !ClrProviderManifest
-                            .Instance
-                            .TryGetPrimitiveType(
-                                TypeSystem.GetNonNullableType(expression.Type),
-                                out primitiveType
-                            )
+                        !ClrProviderManifest.Instance.TryGetPrimitiveType(
+                            TypeSystem.GetNonNullableType(expression.Type),
+                            out primitiveType
+                        )
                     )
                     {
                         return false;
@@ -332,13 +330,11 @@ namespace System.Data.Objects.ELinq
             EntityUtil.CheckArgumentNull(type, "type");
 
             if (
-                _rootContext
-                    .Perspective
-                    .TryGetTypeByName(
-                        TypeSystem.GetNonNullableType(type).FullName,
-                        false, // bIgnoreCase
-                        out typeUsage
-                    ) && (TypeSemantics.IsScalarType(typeUsage))
+                _rootContext.Perspective.TryGetTypeByName(
+                    TypeSystem.GetNonNullableType(type).FullName,
+                    false, // bIgnoreCase
+                    out typeUsage
+                ) && (TypeSemantics.IsScalarType(typeUsage))
             )
             {
                 return true;

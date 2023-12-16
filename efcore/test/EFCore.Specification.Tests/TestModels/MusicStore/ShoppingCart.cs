@@ -19,9 +19,9 @@ public class ShoppingCart
     public async Task AddToCart(Album album)
     {
         // Get the matching cart and album instances
-        var cartItem = await _dbContext
-            .CartItems
-            .SingleOrDefaultAsync(c => c.CartId == _shoppingCartId && c.AlbumId == album.AlbumId);
+        var cartItem = await _dbContext.CartItems.SingleOrDefaultAsync(
+            c => c.CartId == _shoppingCartId && c.AlbumId == album.AlbumId
+        );
 
         if (cartItem == null)
         {
@@ -46,9 +46,9 @@ public class ShoppingCart
     public int RemoveFromCart(int id)
     {
         // Get the cart
-        var cartItem = _dbContext
-            .CartItems
-            .SingleOrDefault(cart => cart.CartId == _shoppingCartId && cart.CartItemId == id);
+        var cartItem = _dbContext.CartItems.SingleOrDefault(
+            cart => cart.CartId == _shoppingCartId && cart.CartItemId == id
+        );
 
         var itemCount = 0;
 
@@ -71,8 +71,7 @@ public class ShoppingCart
     public async Task EmptyCart()
     {
         var cartItems = await _dbContext
-            .CartItems
-            .Where(cart => cart.CartId == _shoppingCartId)
+            .CartItems.Where(cart => cart.CartId == _shoppingCartId)
             .ToArrayAsync();
 
         _dbContext.CartItems.RemoveRange(cartItems);
@@ -80,15 +79,13 @@ public class ShoppingCart
 
     public Task<List<CartItem>> GetCartItems() =>
         _dbContext
-            .CartItems
-            .Where(cart => cart.CartId == _shoppingCartId)
+            .CartItems.Where(cart => cart.CartId == _shoppingCartId)
             .Include(c => c.Album)
             .ToListAsync();
 
     public Task<List<string>> GetCartAlbumTitles() =>
         _dbContext
-            .CartItems
-            .Where(cart => cart.CartId == _shoppingCartId)
+            .CartItems.Where(cart => cart.CartId == _shoppingCartId)
             .Select(c => c.Album.Title)
             .OrderBy(n => n)
             .ToListAsync();
@@ -97,8 +94,7 @@ public class ShoppingCart
         // Get the count of each item in the cart and sum them up
         =>
         _dbContext
-            .CartItems
-            .Where(c => c.CartId == _shoppingCartId)
+            .CartItems.Where(c => c.CartId == _shoppingCartId)
             .Select(c => c.Count)
             .SumAsync();
 
@@ -110,8 +106,7 @@ public class ShoppingCart
         =>
         (
             await _dbContext
-                .CartItems
-                .Where(c => c.CartId == _shoppingCartId)
+                .CartItems.Where(c => c.CartId == _shoppingCartId)
                 .Select(c => c.Album.Price * c.Count)
                 .ToListAsync()
         ).Sum();

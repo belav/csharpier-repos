@@ -20,14 +20,12 @@ namespace System.Globalization
             return ParseNumbers.IntToString(n, 10, digits, '0', 0);
         }
 
-        internal static readonly FormatLiterals PositiveInvariantFormatLiterals = TimeSpanFormat
-            .FormatLiterals
-            .InitInvariant(
+        internal static readonly FormatLiterals PositiveInvariantFormatLiterals =
+            TimeSpanFormat.FormatLiterals.InitInvariant(
                 false /*isNegative*/
             );
-        internal static readonly FormatLiterals NegativeInvariantFormatLiterals = TimeSpanFormat
-            .FormatLiterals
-            .InitInvariant(
+        internal static readonly FormatLiterals NegativeInvariantFormatLiterals =
+            TimeSpanFormat.FormatLiterals.InitInvariant(
                 true /*isNegative*/
             );
 

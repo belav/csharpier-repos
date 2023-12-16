@@ -80,8 +80,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             var node = root.FindToken(identifierLocation.SourceSpan.Start).Parent;
 
             var syntaxFactsService = workspace
-                .Services
-                .GetLanguageServices(root.Language)
+                .Services.GetLanguageServices(root.Language)
                 .GetService<ISyntaxFactsService>();
 
             switch (symbol.Kind)

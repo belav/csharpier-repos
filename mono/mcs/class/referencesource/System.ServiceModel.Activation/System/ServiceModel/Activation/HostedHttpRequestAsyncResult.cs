@@ -532,15 +532,13 @@ namespace System.ServiceModel.Activation
                 )
                 {
                     // Wrap the exception into HttpException
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new HttpException(
-                                (int)HttpStatusCode.NotFound,
-                                exception.Message,
-                                exception
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            (int)HttpStatusCode.NotFound,
+                            exception.Message,
+                            exception
+                        )
+                    );
                 }
 
                 SetStatusCode((int)HttpStatusCode.NotFound);
@@ -698,24 +696,20 @@ namespace System.ServiceModel.Activation
             {
                 if (hostedException.WebEventCode == WebEventCodes.RuntimeErrorPostTooLarge)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            HttpInput.CreateHttpProtocolException(
-                                SR.Hosting_MaxRequestLengthExceeded,
-                                HttpStatusCode.RequestEntityTooLarge,
-                                null,
-                                hostedException
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        HttpInput.CreateHttpProtocolException(
+                            SR.Hosting_MaxRequestLengthExceeded,
+                            HttpStatusCode.RequestEntityTooLarge,
+                            null,
+                            hostedException
+                        )
+                    );
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new CommunicationException(hostedException.Message, hostedException)
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationException(hostedException.Message, hostedException)
+                    );
                 }
             }
         }
@@ -863,20 +857,18 @@ namespace System.ServiceModel.Activation
                 if (!Fx.IsFatal(exception))
                 {
                     // Log the exception.
-                    DiagnosticUtility
-                        .EventLog
-                        .LogEvent(
-                            TraceEventType.Error,
-                            (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
-                            (uint)
-                                System
-                                    .Runtime
-                                    .Diagnostics
-                                    .EventLogEventId
-                                    .WebHostFailedToProcessRequest,
-                            TraceUtility.CreateSourceString(result),
-                            exception == null ? string.Empty : exception.ToString()
-                        );
+                    DiagnosticUtility.EventLog.LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
+                        (uint)
+                            System
+                                .Runtime
+                                .Diagnostics
+                                .EventLogEventId
+                                .WebHostFailedToProcessRequest,
+                        TraceUtility.CreateSourceString(result),
+                        exception == null ? string.Empty : exception.ToString()
+                    );
                 }
                 throw;
             }
@@ -1019,16 +1011,14 @@ namespace System.ServiceModel.Activation
                     activationException
                 );
             }
-            DiagnosticUtility
-                .UnsafeEventLog
-                .UnsafeLogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostFailedToProcessRequest,
-                    true,
-                    TraceUtility.CreateSourceString(this),
-                    activationException.ToString()
-                );
+            DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
+                TraceEventType.Error,
+                (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
+                (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostFailedToProcessRequest,
+                true,
+                TraceUtility.CreateSourceString(this),
+                activationException.ToString()
+            );
         }
 
         [Fx.Tag.SecurityNote(
@@ -1074,9 +1064,10 @@ namespace System.ServiceModel.Activation
         [SecuritySafeCritical]
         internal void SetContentEncoding(string contentEncoding)
         {
-            this.context
-                .Response
-                .AddHeader(HttpChannelUtilities.ContentEncodingHeader, contentEncoding);
+            this.context.Response.AddHeader(
+                HttpChannelUtilities.ContentEncodingHeader,
+                contentEncoding
+            );
         }
 
         [Fx.Tag.SecurityNote(

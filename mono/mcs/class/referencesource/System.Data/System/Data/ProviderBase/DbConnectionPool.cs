@@ -88,10 +88,9 @@ namespace System.Data.ProviderBase
             DbConnectionPool _pool;
 
             private static int _objectTypeCount; // Bid counter
-            internal readonly int _objectID = System
-                .Threading
-                .Interlocked
-                .Increment(ref _objectTypeCount);
+            internal readonly int _objectID = System.Threading.Interlocked.Increment(
+                ref _objectTypeCount
+            );
 
             internal TransactedConnectionPool(DbConnectionPool pool)
             {
@@ -562,10 +561,9 @@ namespace System.Data.ProviderBase
         private int _totalObjects;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
-            .Interlocked
-            .Increment(ref _objectTypeCount);
+        internal readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref _objectTypeCount
+        );
 
         // only created by DbConnectionPoolGroup.GetConnectionPool
         internal DbConnectionPool(
@@ -1717,11 +1715,9 @@ namespace System.Data.ProviderBase
                                     if (onlyOneCheckConnection)
                                     {
                                         if (
-                                            _waitHandles
-                                                .CreationSemaphore
-                                                .WaitOne(
-                                                    unchecked((int)waitForMultipleObjectsTimeout)
-                                                )
+                                            _waitHandles.CreationSemaphore.WaitOne(
+                                                unchecked((int)waitForMultipleObjectsTimeout)
+                                            )
                                         )
                                         {
                                             RuntimeHelpers.PrepareConstrainedRegions();

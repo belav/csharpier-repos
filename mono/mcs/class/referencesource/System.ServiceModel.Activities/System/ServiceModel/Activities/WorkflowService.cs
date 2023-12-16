@@ -139,13 +139,9 @@ namespace System.ServiceModel.Activities
 
                         if (this.Body.DisplayName.Length == 0)
                         {
-                            throw FxTrace
-                                .Exception
-                                .AsError(
-                                    new InvalidOperationException(
-                                        SR.MissingDisplayNameInRootActivity
-                                    )
-                                );
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(SR.MissingDisplayNameInRootActivity)
+                            );
                         }
 
                         this.inferedServiceName = XName.Get(
@@ -198,9 +194,10 @@ namespace System.ServiceModel.Activities
         {
             IList<Constraint> constraintList;
             if (
-                workflowServiceSettings
-                    .AdditionalConstraints
-                    .TryGetValue(constraintType, out constraintList)
+                workflowServiceSettings.AdditionalConstraints.TryGetValue(
+                    constraintType,
+                    out constraintList
+                )
             )
             {
                 constraintList.Add(constraint);
@@ -306,9 +303,10 @@ namespace System.ServiceModel.Activities
             {
                 if (constrants.Key != null && constrants.Value != null)
                 {
-                    clonedSettings
-                        .AdditionalConstraints
-                        .Add(constrants.Key, new List<Constraint>(constrants.Value));
+                    clonedSettings.AdditionalConstraints.Add(
+                        constrants.Key,
+                        new List<Constraint>(constrants.Value)
+                    );
                 }
             }
 
@@ -659,13 +657,11 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new ValidationException(
-                                SR.OperationNotFound(contractXName, receive.OperationName)
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR.OperationNotFound(contractXName, receive.OperationName)
+                        )
+                    );
                 }
             }
         }
@@ -706,9 +702,9 @@ namespace System.ServiceModel.Activities
 
             if (this.Body == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new ValidationException(SR.MissingBodyInWorkflowService));
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(SR.MissingBodyInWorkflowService)
+                );
             }
 
             // Validate the activity tree
@@ -748,9 +744,9 @@ namespace System.ServiceModel.Activities
 
             if (doesErrorExist)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new InvalidWorkflowException(exceptionMessage.ToString()));
+                throw FxTrace.Exception.AsError(
+                    new InvalidWorkflowException(exceptionMessage.ToString())
+                );
             }
 
             this.knownServiceActivities = new List<Receive>();
@@ -1316,9 +1312,8 @@ namespace System.ServiceModel.Activities
                 OperationDescription targetOperation
             )
             {
-                TransactionFlowAttribute transactionFlowAttribute = targetOperation
-                    .Behaviors
-                    .Find<TransactionFlowAttribute>();
+                TransactionFlowAttribute transactionFlowAttribute =
+                    targetOperation.Behaviors.Find<TransactionFlowAttribute>();
                 Activity parent = null;
 
                 // we know it's IList<Activity>
@@ -1394,9 +1389,9 @@ namespace System.ServiceModel.Activities
                 OperationDescription targetOperation
             )
             {
-                SerializerOption targetSerializerOption = targetOperation
-                    .Behaviors
-                    .Contains(typeof(XmlSerializerOperationBehavior))
+                SerializerOption targetSerializerOption = targetOperation.Behaviors.Contains(
+                    typeof(XmlSerializerOperationBehavior)
+                )
                     ? SerializerOption.XmlSerializer
                     : SerializerOption.DataContractSerializer;
                 if (receiveActivity.SerializerOption != targetSerializerOption)
@@ -1484,14 +1479,12 @@ namespace System.ServiceModel.Activities
                 }
 
                 this.ValidateTransactionBehavior(context, receiveActivity, targetOperation);
-                receiveActivity
-                    .InternalContent
-                    .ValidateContract(
-                        context,
-                        targetOperation,
-                        receiveActivity,
-                        MessageDirection.Input
-                    );
+                receiveActivity.InternalContent.ValidateContract(
+                    context,
+                    targetOperation,
+                    receiveActivity,
+                    MessageDirection.Input
+                );
             }
         }
 
@@ -1586,9 +1579,9 @@ namespace System.ServiceModel.Activities
                             {
                                 if (!property.Operation.IsOneWay)
                                 {
-                                    property
-                                        .ImplementingSendRepliesRequests
-                                        .Add(sendReplyActivity.Request);
+                                    property.ImplementingSendRepliesRequests.Add(
+                                        sendReplyActivity.Request
+                                    );
                                     Fx.Assert(
                                         property.Operation != null,
                                         "OperationProperty.Operation should not be null!"
@@ -1623,9 +1616,12 @@ namespace System.ServiceModel.Activities
                 OperationDescription targetOperation
             )
             {
-                sendReply
-                    .InternalContent
-                    .ValidateContract(context, targetOperation, sendReply, MessageDirection.Output);
+                sendReply.InternalContent.ValidateContract(
+                    context,
+                    targetOperation,
+                    sendReply,
+                    MessageDirection.Output
+                );
             }
         }
     }

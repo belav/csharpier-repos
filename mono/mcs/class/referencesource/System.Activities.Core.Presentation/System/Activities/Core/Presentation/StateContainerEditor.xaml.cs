@@ -294,9 +294,8 @@ namespace System.Activities.Core.Presentation
         {
             get
             {
-                ViewStateService viewStateService = this.Context
-                    .Services
-                    .GetService<ViewStateService>();
+                ViewStateService viewStateService =
+                    this.Context.Services.GetService<ViewStateService>();
                 return viewStateService;
             }
         }
@@ -408,9 +407,8 @@ namespace System.Activities.Core.Presentation
                 this.ModelItem.PropertyChanged += new PropertyChangedEventHandler(
                     this.OnModelPropertyChanged
                 );
-                ModelTreeManager modelTreeManager = this.Context
-                    .Services
-                    .GetService<ModelTreeManager>();
+                ModelTreeManager modelTreeManager =
+                    this.Context.Services.GetService<ModelTreeManager>();
                 modelTreeManager.EditingScopeCompleted += new EventHandler<EditingScopeEventArgs>(
                     this.OnEditingScopeCompleted
                 );
@@ -508,9 +506,8 @@ namespace System.Activities.Core.Presentation
                 this.ModelItem.PropertyChanged -= new PropertyChangedEventHandler(
                     this.OnModelPropertyChanged
                 );
-                ModelTreeManager modelTreeManager = this.Context
-                    .Services
-                    .GetService<ModelTreeManager>();
+                ModelTreeManager modelTreeManager =
+                    this.Context.Services.GetService<ModelTreeManager>();
                 modelTreeManager.EditingScopeCompleted -= new EventHandler<EditingScopeEventArgs>(
                     this.OnEditingScopeCompleted
                 );
@@ -662,9 +659,7 @@ namespace System.Activities.Core.Presentation
             UIElement element;
             if (!this.modelItemToUIElement.TryGetValue(model, out element))
             {
-                element = this.Context
-                    .Services
-                    .GetService<VirtualizedContainerService>()
+                element = this.Context.Services.GetService<VirtualizedContainerService>()
                     .GetContainer(model, this);
                 if (element is VirtualizedContainerService.VirtualizingContainer)
                 {
@@ -2621,9 +2616,7 @@ namespace System.Activities.Core.Presentation
                                 if (view == null)
                                 {
                                     view =
-                                        this.Context
-                                            .Services
-                                            .GetService<ViewService>()
+                                        this.Context.Services.GetService<ViewService>()
                                             .GetView(droppedModelItem) as WorkflowViewElement;
                                     ViewUtilities.MeasureView(view as WorkflowViewElement, true);
                                 }
@@ -2682,9 +2675,9 @@ namespace System.Activities.Core.Presentation
                                     );
                                 Fx.Assert(container != null, "container should not be null");
                                 Point oldLocation = (Point)viewState;
-                                oldLocation = srcContainer
-                                    .panel
-                                    .GetLocationRelativeToOutmostPanel(oldLocation);
+                                oldLocation = srcContainer.panel.GetLocationRelativeToOutmostPanel(
+                                    oldLocation
+                                );
                                 Point newLocation = this.panel.GetLocationRelativeToOutmostPanel(
                                     shapeLocation
                                 );
@@ -2835,10 +2828,7 @@ namespace System.Activities.Core.Presentation
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.ItemMove))
             {
                 foreach (
-                    ModelItem selectedModelItem in this.Context
-                        .Items
-                        .GetValue<Selection>()
-                        .SelectedObjects
+                    ModelItem selectedModelItem in this.Context.Items.GetValue<Selection>().SelectedObjects
                 )
                 {
                     UIElement shapeToMove = this.modelItemToUIElement[selectedModelItem];
@@ -2900,14 +2890,12 @@ namespace System.Activities.Core.Presentation
             }
             else if (
                 (new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
-                && currentSelection
-                    .SelectedObjects
-                    .All<ModelItem>(
-                        (p) =>
-                        {
-                            return this.modelItemToUIElement.ContainsKey(p);
-                        }
-                    )
+                && currentSelection.SelectedObjects.All<ModelItem>(
+                    (p) =>
+                    {
+                        return this.modelItemToUIElement.ContainsKey(p);
+                    }
+                )
             )
             {
                 this.KeyboardMove(e.Key);
@@ -3246,15 +3234,13 @@ namespace System.Activities.Core.Presentation
                     {
                         trasitionModelItem = sourceModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
-                            .Collection
-                            .Insert(insertIndex, transition);
+                            .Collection.Insert(insertIndex, transition);
                     }
                     else
                     {
                         trasitionModelItem = sourceModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
-                            .Collection
-                            .Add(transition);
+                            .Collection.Add(transition);
                     }
                     Fx.Assert(trasitionModelItem != null, "trasitionModelItem");
                     return trasitionModelItem;
@@ -3262,9 +3248,9 @@ namespace System.Activities.Core.Presentation
                 // auto-connect from the initial node
                 else if (sourceModelItem.ItemType == typeof(StartNode))
                 {
-                    this.ModelItem
-                        .Properties[StateMachineDesigner.InitialStatePropertyName]
-                        .SetValue(droppedModelItem);
+                    this.ModelItem.Properties[
+                        StateMachineDesigner.InitialStatePropertyName
+                    ].SetValue(droppedModelItem);
                     return this.ModelItem;
                 }
             }
@@ -3450,12 +3436,10 @@ namespace System.Activities.Core.Presentation
                         ref srcConnectionPoint,
                         ref desConnectionPoint
                     );
-                    this.OldViewState = editor
-                        .ViewStateService
-                        .RetrieveViewState(
-                            this.ViewStateOwnerModelItem,
-                            ConnectorLocationViewStateKey
-                        );
+                    this.OldViewState = editor.ViewStateService.RetrieveViewState(
+                        this.ViewStateOwnerModelItem,
+                        ConnectorLocationViewStateKey
+                    );
                     this.NewViewState = points;
 
                     // compare old and new values, if they're the same, return false
@@ -3476,13 +3460,11 @@ namespace System.Activities.Core.Presentation
                     this.ShouldCreateConnector = false;
                 }
 
-                editor
-                    .ViewStateService
-                    .StoreViewState(
-                        this.ViewStateOwnerModelItem,
-                        ConnectorLocationViewStateKey,
-                        this.NewViewState
-                    );
+                editor.ViewStateService.StoreViewState(
+                    this.ViewStateOwnerModelItem,
+                    ConnectorLocationViewStateKey,
+                    this.NewViewState
+                );
                 return true;
             }
 
@@ -3584,8 +3566,7 @@ namespace System.Activities.Core.Presentation
                         );
                         droppedModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
-                            .Collection
-                            .Add(
+                            .Collection.Add(
                                 new Transition()
                                 {
                                     DisplayName = StateContainerEditor.GenerateTransitionName(
@@ -3605,9 +3586,7 @@ namespace System.Activities.Core.Presentation
                     // of the new transition from the dropped state. So the visual of the transition will be created twice. To solve that problem,
                     // we need to suppress adding connector when adding state visual (in the UI reaction for step 1).
                     // And to support redo, we must place the suppression in the undo stack.
-                    this.Context
-                        .Services
-                        .GetService<ModelTreeManager>()
+                    this.Context.Services.GetService<ModelTreeManager>()
                         .AddToCurrentEditingScope(
                             new SuppressAddingConnectorWhenAddingStateVisual()
                         );

@@ -579,8 +579,7 @@ namespace System.Net
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
             return await Task<Stream>
-                .Factory
-                .FromAsync(
+                .Factory.FromAsync(
                     (callback, state) =>
                         ((WebRequest)state!).BeginGetRequestStream(callback, state),
                     iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
@@ -595,8 +594,7 @@ namespace System.Net
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
             return await Task<WebResponse>
-                .Factory
-                .FromAsync(
+                .Factory.FromAsync(
                     (callback, state) => ((WebRequest)state!).BeginGetResponse(callback, state),
                     iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
                     this

@@ -126,14 +126,12 @@ public sealed class AcceptedAtRoute<TValue>
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder
-            .Metadata
-            .Add(
-                new ProducesResponseTypeMetadata(
-                    StatusCodes.Status202Accepted,
-                    typeof(TValue),
-                    new[] { "application/json" }
-                )
-            );
+        builder.Metadata.Add(
+            new ProducesResponseTypeMetadata(
+                StatusCodes.Status202Accepted,
+                typeof(TValue),
+                new[] { "application/json" }
+            )
+        );
     }
 }

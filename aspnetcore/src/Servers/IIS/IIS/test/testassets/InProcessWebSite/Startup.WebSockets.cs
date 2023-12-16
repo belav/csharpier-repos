@@ -76,14 +76,12 @@ public partial class Startup
         {
             var messages = new List<string>();
 
-            context
-                .Response
-                .OnStarting(() =>
-                {
-                    context.Response.Headers["custom-header"] = "value";
-                    messages.Add("OnStarting");
-                    return Task.CompletedTask;
-                });
+            context.Response.OnStarting(() =>
+            {
+                context.Response.Headers["custom-header"] = "value";
+                messages.Add("OnStarting");
+                return Task.CompletedTask;
+            });
 
             var ws = await Upgrade(context);
             messages.Add("Upgraded");

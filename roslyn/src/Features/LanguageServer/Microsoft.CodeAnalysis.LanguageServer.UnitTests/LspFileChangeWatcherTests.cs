@@ -137,8 +137,7 @@ public class LspFileChangeWatcherTests : AbstractLanguageServerHostTests
     private static async Task WaitForFileWatcherAsync(TestLspServer testLspServer)
     {
         await testLspServer
-            .ExportProvider
-            .GetExportedValue<AsynchronousOperationListenerProvider>()
+            .ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>()
             .GetWaiter(FeatureAttribute.Workspace)
             .ExpeditedWaitAsync();
     }

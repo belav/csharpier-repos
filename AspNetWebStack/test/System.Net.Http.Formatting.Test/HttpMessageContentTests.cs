@@ -121,12 +121,10 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
-                .HasProperties<HttpMessageContent, HttpContent>(
-                    TypeAssert.TypeProperties.IsPublicVisibleClass
-                        | TypeAssert.TypeProperties.IsDisposable
-                );
+            Assert.Type.HasProperties<HttpMessageContent, HttpContent>(
+                TypeAssert.TypeProperties.IsPublicVisibleClass
+                    | TypeAssert.TypeProperties.IsDisposable
+            );
         }
 
         [Fact]

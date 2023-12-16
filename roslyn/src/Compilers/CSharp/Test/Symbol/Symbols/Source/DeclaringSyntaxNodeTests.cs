@@ -202,8 +202,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             int position = code.IndexOf(textToSearchFor, StringComparison.Ordinal);
             var node = tree.GetCompilationUnitRoot()
                 .FindToken(position)
-                .Parent
-                .FirstAncestorOrSelf<TNode>();
+                .Parent.FirstAncestorOrSelf<TNode>();
             var sym = model.GetSymbolInfo(node).Symbol as IMethodSymbol;
 
             Assert.NotNull(sym);
@@ -322,8 +321,7 @@ class C1 {
 
             var declaratorA1 = tree.GetCompilationUnitRoot()
                 .FindToken(posA1)
-                .Parent
-                .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+                .Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             var localA1 = (ILocalSymbol)model.GetDeclaredSymbol(declaratorA1);
             var localA1Type = localA1.Type;
             Assert.True(localA1Type.IsAnonymousType);
@@ -374,8 +372,7 @@ class C1 {
             int posQ = text.IndexOf('q');
             var declaratorQ = tree.GetCompilationUnitRoot()
                 .FindToken(posQ)
-                .Parent
-                .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+                .Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             CheckAnonymousType(
                 model,
                 (ILocalSymbol)model.GetDeclaredSymbol(declaratorQ),
@@ -386,8 +383,7 @@ class C1 {
             int posX = text.IndexOf('x');
             var declaratorX = tree.GetCompilationUnitRoot()
                 .FindToken(posX)
-                .Parent
-                .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+                .Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             CheckAnonymousType(
                 model,
                 (ILocalSymbol)model.GetDeclaredSymbol(declaratorX),
@@ -398,8 +394,7 @@ class C1 {
             int posZ = text.IndexOf('z');
             var declaratorZ = tree.GetCompilationUnitRoot()
                 .FindToken(posZ)
-                .Parent
-                .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+                .Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             CheckAnonymousType(
                 model,
                 (ILocalSymbol)model.GetDeclaredSymbol(declaratorZ),

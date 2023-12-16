@@ -114,17 +114,15 @@ internal partial class SyntacticClassificationTaggerProvider
         {
             taggerProvider._threadingContext.ThrowIfNotOnUIThread();
 
-            var tagComputer = subjectBuffer
-                .Properties
-                .GetOrCreateSingletonProperty(
-                    s_uniqueKey,
-                    () =>
-                        new TagComputer(
-                            taggerProvider,
-                            subjectBuffer,
-                            TaggerDelay.NearImmediate.ComputeTimeDelay()
-                        )
-                );
+            var tagComputer = subjectBuffer.Properties.GetOrCreateSingletonProperty(
+                s_uniqueKey,
+                () =>
+                    new TagComputer(
+                        taggerProvider,
+                        subjectBuffer,
+                        TaggerDelay.NearImmediate.ComputeTimeDelay()
+                    )
+            );
 
             tagComputer.IncrementReferenceCount();
             return tagComputer;
@@ -158,9 +156,9 @@ internal partial class SyntacticClassificationTaggerProvider
 
         private void OnWorkspaceRegistrationChanged(object? sender, EventArgs e)
         {
-            var token = _taggerProvider
-                ._listener
-                .BeginAsyncOperation(nameof(OnWorkspaceRegistrationChanged));
+            var token = _taggerProvider._listener.BeginAsyncOperation(
+                nameof(OnWorkspaceRegistrationChanged)
+            );
             var task = SwitchToMainThreadAndHookupWorkspaceAsync();
             task.CompletesAsyncOperation(token);
         }
@@ -169,10 +167,9 @@ internal partial class SyntacticClassificationTaggerProvider
         {
             try
             {
-                await _taggerProvider
-                    ._threadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(_disposalCancellationSource.Token);
+                await _taggerProvider._threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    _disposalCancellationSource.Token
+                );
 
                 // We both try to connect synchronously, and register for workspace registration events.
                 // It's possible (particularly in tests), to connect in the startup path, but then get a
@@ -566,9 +563,9 @@ internal partial class SyntacticClassificationTaggerProvider
             var root = lastProcessedDocumentOrRoot.TryGetFirst(out var tempRoot)
                 ? tempRoot
                 : lastProcessedDocumentOrRoot.Second.SupportsSyntaxTree
-                    ? lastProcessedDocumentOrRoot
-                        .Second
-                        .GetSyntaxRootSynchronously(cancellationToken)
+                    ? lastProcessedDocumentOrRoot.Second.GetSyntaxRootSynchronously(
+                        cancellationToken
+                    )
                     : null;
 
             if (root != null)
@@ -642,9 +639,9 @@ internal partial class SyntacticClassificationTaggerProvider
                 {
                     // 2) Translate those classifications forward so that they correspond to the true
                     //    requested snapshot.
-                    var lastSnapshotSpan = lastClassifiedSpan
-                        .TextSpan
-                        .ToSnapshotSpan(lastProcessedSnapshot);
+                    var lastSnapshotSpan = lastClassifiedSpan.TextSpan.ToSnapshotSpan(
+                        lastProcessedSnapshot
+                    );
                     var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(
                         currentSnapshot,
                         SpanTrackingMode.EdgeInclusive

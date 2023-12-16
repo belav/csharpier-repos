@@ -102,13 +102,11 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
+                    )
+                );
             }
         }
 
@@ -152,13 +150,11 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
+                    )
+                );
             }
 
             hashStream.FlushHash();
@@ -211,17 +207,15 @@ namespace System.IdentityModel
             );
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new CryptographicException(
-                            SR.GetString(
-                                SR.ID0001,
-                                dictionaryManager.XmlSignatureDictionary.Algorithm,
-                                reader.LocalName
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(
+                        SR.GetString(
+                            SR.ID0001,
+                            dictionaryManager.XmlSignatureDictionary.Algorithm,
+                            reader.LocalName
                         )
-                    );
+                    )
+                );
             }
 
             if (
@@ -240,11 +234,9 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new CryptographicException(SR.GetString(SR.ID6005, algorithm))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(SR.GetString(SR.ID6005, algorithm))
+                );
             }
 
             reader.Read();

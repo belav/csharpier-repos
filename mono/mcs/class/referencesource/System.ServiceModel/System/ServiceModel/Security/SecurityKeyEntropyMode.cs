@@ -28,15 +28,13 @@ namespace System.ServiceModel.Security
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidEnumArgumentException(
-                            "value",
-                            (int)value,
-                            typeof(SecurityKeyEntropyMode)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(SecurityKeyEntropyMode)
+                    )
+                );
             }
         }
     }

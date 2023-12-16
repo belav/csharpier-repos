@@ -410,8 +410,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
             }
 
             var leadingTrivia = openParenToken
-                .LeadingTrivia
-                .Concat(openParenToken.TrailingTrivia)
+                .LeadingTrivia.Concat(openParenToken.TrailingTrivia)
                 .Where(t => !syntaxFacts.IsElastic(t))
                 .Concat(operand.GetLeadingTrivia());
 

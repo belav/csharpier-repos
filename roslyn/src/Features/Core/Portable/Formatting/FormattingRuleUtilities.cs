@@ -16,9 +16,8 @@ internal static class FormattingRuleUtilities
         IEnumerable<AbstractFormattingRule>? additionalRules
     )
     {
-        var formattingRuleFactory = document
-            .SolutionServices
-            .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+        var formattingRuleFactory =
+            document.SolutionServices.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
         // Not sure why this is being done... there aren't any docs on CreateRule either.
         var position = (span.Start + span.End) / 2;
 

@@ -1821,8 +1821,7 @@ namespace System.IO.Packaging.Tests
                     {
                         xdMain = XDocument.Load(partStream);
                         var lastPara = xdMain
-                            .Root
-                            .Elements(W + "body")
+                            .Root.Elements(W + "body")
                             .Elements(W + "p")
                             .LastOrDefault();
                         lastPara.AddAfterSelf(
@@ -2843,8 +2842,7 @@ namespace System.IO.Packaging.Tests
                 {
                     xdMain = XDocument.Load(partStream);
                     var lastPara = xdMain
-                        .Root
-                        .Elements(W + "body")
+                        .Root.Elements(W + "body")
                         .Elements(W + "p")
                         .LastOrDefault();
                     lastPara.AddAfterSelf(

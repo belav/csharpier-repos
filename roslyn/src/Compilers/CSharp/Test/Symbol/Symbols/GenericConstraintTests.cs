@@ -6186,8 +6186,7 @@ interface I6<U> : I3<I<U>, I<U>> { }";
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module
-                    .GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("I1")
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("I1")
                     .GetMember<MethodSymbol>("M");
                 CheckConstraints(
                     method.TypeParameters[0],
@@ -6201,8 +6200,7 @@ interface I6<U> : I3<I<U>, I<U>> { }";
                 );
 
                 method = module
-                    .GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("I2")
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("I2")
                     .GetMember<MethodSymbol>("M");
                 CheckConstraints(
                     method.TypeParameters[0],
@@ -6217,8 +6215,7 @@ interface I6<U> : I3<I<U>, I<U>> { }";
                 );
 
                 method = module
-                    .GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("I3")
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("I3")
                     .GetMember<MethodSymbol>("M");
                 CheckConstraints(
                     method.TypeParameters[0],
@@ -6232,8 +6229,7 @@ interface I6<U> : I3<I<U>, I<U>> { }";
                 );
 
                 method = module
-                    .GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("I4")
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("I4")
                     .Interfaces()[0]
                     .GetMember<MethodSymbol>("M");
                 CheckConstraints(
@@ -6247,8 +6243,7 @@ interface I6<U> : I3<I<U>, I<U>> { }";
                 );
 
                 method = module
-                    .GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("I5")
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("I5")
                     .Interfaces()[0]
                     .GetMember<MethodSymbol>("M");
                 CheckConstraints(
@@ -6263,8 +6258,7 @@ interface I6<U> : I3<I<U>, I<U>> { }";
                 );
 
                 method = module
-                    .GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("I6")
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("I6")
                     .Interfaces()[0]
                     .GetMember<MethodSymbol>("M");
                 CheckConstraints(
@@ -6868,8 +6862,7 @@ class A1 : A<C>
                     "C"
                 );
                 var method = module
-                    .GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("A0")
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("A0")
                     .GetMember<MethodSymbol>("M");
                 CheckConstraints(
                     method.TypeParameters[0],
@@ -6880,8 +6873,7 @@ class A1 : A<C>
                     "object"
                 );
                 method = module
-                    .GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("A1")
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("A1")
                     .GetMember<MethodSymbol>("M");
                 CheckConstraints(
                     method.TypeParameters[0],

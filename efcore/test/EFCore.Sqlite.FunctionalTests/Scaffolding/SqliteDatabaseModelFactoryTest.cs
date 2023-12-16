@@ -1479,8 +1479,7 @@ CREATE TABLE DependentTable (
             dbModel =>
             {
                 var foreignKeys = dbModel
-                    .Tables
-                    .Single(t => t.Name == "DependentTable")
+                    .Tables.Single(t => t.Name == "DependentTable")
                     .ForeignKeys;
 
                 Assert.Equal(2, foreignKeys.Count);

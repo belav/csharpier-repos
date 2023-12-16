@@ -101,9 +101,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 
             // If two view models are in the same location (across edits), we consider them the same.  We want to treat
             // things like name edits as just mutating a model, not producing a new one.
-            var translatedRangeSpan = this.Data
-                .RangeSpan
-                .TranslateTo(other.Data.RangeSpan.Snapshot, SpanTrackingMode.EdgeInclusive);
+            var translatedRangeSpan = this.Data.RangeSpan.TranslateTo(
+                other.Data.RangeSpan.Snapshot,
+                SpanTrackingMode.EdgeInclusive
+            );
             return translatedRangeSpan == other.Data.RangeSpan;
         }
 

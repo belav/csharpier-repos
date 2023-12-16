@@ -642,14 +642,12 @@ namespace System.Security.AccessControl
             try
             {
                 if (
-                    !Interop
-                        .Advapi32
-                        .ConvertStringSdToSd(
-                            sddlForm,
-                            GenericSecurityDescriptor.Revision,
-                            out byteArray,
-                            ref byteArraySize
-                        )
+                    !Interop.Advapi32.ConvertStringSdToSd(
+                        sddlForm,
+                        GenericSecurityDescriptor.Revision,
+                        out byteArray,
+                        ref byteArraySize
+                    )
                 )
                 {
                     error = Marshal.GetLastPInvokeError();

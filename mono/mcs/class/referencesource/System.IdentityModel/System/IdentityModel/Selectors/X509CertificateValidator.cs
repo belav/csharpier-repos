@@ -109,13 +109,11 @@ namespace System.IdentityModel.Selectors
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
+                )
+            );
         }
 
         class NoneX509CertificateValidator : X509CertificateValidator
@@ -258,17 +256,15 @@ namespace System.IdentityModel.Selectors
 
                 if (!chain.Build(certificate))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenValidationException(
-                                SR.GetString(
-                                    SR.X509ChainBuildFail,
-                                    SecurityUtils.GetCertificateId(certificate),
-                                    GetChainStatusInformation(chain.ChainStatus)
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(
+                                SR.X509ChainBuildFail,
+                                SecurityUtils.GetCertificateId(certificate),
+                                GetChainStatusInformation(chain.ChainStatus)
                             )
-                        );
+                        )
+                    );
                 }
             }
 
@@ -323,13 +319,9 @@ namespace System.IdentityModel.Selectors
                 }
                 catch (SecurityTokenValidationException ex)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenValidationException(
-                                exception.Message + " " + ex.Message
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(exception.Message + " " + ex.Message)
+                    );
                 }
             }
         }

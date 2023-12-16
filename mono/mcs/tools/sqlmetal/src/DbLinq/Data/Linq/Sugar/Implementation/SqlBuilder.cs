@@ -140,15 +140,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             if (selectExpression.NextSelectExpression != null)
             {
                 var nextLiteralSelect = Build(selectExpression.NextSelectExpression, queryContext);
-                select = queryContext
-                    .DataContext
-                    .Vendor
-                    .SqlProvider
-                    .GetLiteral(
-                        selectExpression.NextSelectExpressionOperator,
-                        select,
-                        nextLiteralSelect
-                    );
+                select = queryContext.DataContext.Vendor.SqlProvider.GetLiteral(
+                    selectExpression.NextSelectExpressionOperator,
+                    select,
+                    nextLiteralSelect
+                );
             }
 
             return select;
@@ -600,22 +596,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         select.OffsetAndLimit,
                         queryContext
                     );
-                    return queryContext
-                        .DataContext
-                        .Vendor
-                        .SqlProvider
-                        .GetLiteralLimit(
-                            literalSelect,
-                            literalLimit,
-                            literalOffset,
-                            literalOffsetAndLimit
-                        );
+                    return queryContext.DataContext.Vendor.SqlProvider.GetLiteralLimit(
+                        literalSelect,
+                        literalLimit,
+                        literalOffset,
+                        literalOffsetAndLimit
+                    );
                 }
-                return queryContext
-                    .DataContext
-                    .Vendor
-                    .SqlProvider
-                    .GetLiteralLimit(literalSelect, literalLimit);
+                return queryContext.DataContext.Vendor.SqlProvider.GetLiteralLimit(
+                    literalSelect,
+                    literalLimit
+                );
             }
             return literalSelect;
         }

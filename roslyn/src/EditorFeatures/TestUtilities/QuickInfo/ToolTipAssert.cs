@@ -72,12 +72,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
             Assert.Equal(expected.Style, actual.Style);
             Assert.Equal(expected.Elements.Count(), actual.Elements.Count());
             foreach (
-                var (expectedElement, actualElement) in expected
-                    .Elements
-                    .Zip(
-                        actual.Elements,
-                        (expectedElement, actualElement) => (expectedElement, actualElement)
-                    )
+                var (expectedElement, actualElement) in expected.Elements.Zip(
+                    actual.Elements,
+                    (expectedElement, actualElement) => (expectedElement, actualElement)
+                )
             )
             {
                 EqualContent(expectedElement, actualElement);
@@ -98,9 +96,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
         {
             Assert.Equal(expected.Runs.Count(), actual.Runs.Count());
             foreach (
-                var (expectedRun, actualRun) in expected
-                    .Runs
-                    .Zip(actual.Runs, (expectedRun, actualRun) => (expectedRun, actualRun))
+                var (expectedRun, actualRun) in expected.Runs.Zip(
+                    actual.Runs,
+                    (expectedRun, actualRun) => (expectedRun, actualRun)
+                )
             )
             {
                 EqualClassifiedTextRun(expectedRun, actualRun);

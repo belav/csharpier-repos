@@ -428,8 +428,7 @@ namespace System.Globalization
             // Return our calendar
             return CultureInfo
                 .GetCultureInfo(culture)
-                ._cultureData
-                .GetCalendar(calendarId)
+                ._cultureData.GetCalendar(calendarId)
                 .iCurrentEra;
         }
 

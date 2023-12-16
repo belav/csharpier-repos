@@ -22,9 +22,10 @@ public class RelationshipDiscoveryConventionTest
     public void Entity_type_is_not_discovered_if_ignored()
     {
         var entityBuilder = CreateInternalEntityBuilder<OneToManyDependent>();
-        entityBuilder
-            .ModelBuilder
-            .Ignore(typeof(OneToManyPrincipal).FullName, ConfigurationSource.DataAnnotation);
+        entityBuilder.ModelBuilder.Ignore(
+            typeof(OneToManyPrincipal).FullName,
+            ConfigurationSource.DataAnnotation
+        );
 
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
@@ -76,9 +77,10 @@ public class RelationshipDiscoveryConventionTest
     public void One_to_many_unidirectional_is_upgraded_to_one_to_one_bidirectional()
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToOnePrincipal>();
-        var dependentEntityBuilder = principalEntityBuilder
-            .ModelBuilder
-            .Entity(typeof(OneToOneDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = principalEntityBuilder.ModelBuilder.Entity(
+            typeof(OneToOneDependent),
+            ConfigurationSource.Convention
+        );
 
         principalEntityBuilder
             .HasRelationship(
@@ -103,9 +105,10 @@ public class RelationshipDiscoveryConventionTest
     public void Two_one_to_many_unidirectional_are_upgraded_to_one_to_one_bidirectional()
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToOnePrincipal>();
-        var dependentEntityBuilder = principalEntityBuilder
-            .ModelBuilder
-            .Entity(typeof(OneToOneDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = principalEntityBuilder.ModelBuilder.Entity(
+            typeof(OneToOneDependent),
+            ConfigurationSource.Convention
+        );
 
         principalEntityBuilder
             .HasRelationship(
@@ -139,9 +142,10 @@ public class RelationshipDiscoveryConventionTest
     public void One_to_many_unidirectional_is_not_upgraded_to_one_to_one_bidirectional_if_higher_source()
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToOnePrincipal>();
-        var dependentEntityBuilder = principalEntityBuilder
-            .ModelBuilder
-            .Entity(typeof(OneToOneDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = principalEntityBuilder.ModelBuilder.Entity(
+            typeof(OneToOneDependent),
+            ConfigurationSource.Convention
+        );
 
         principalEntityBuilder
             .HasRelationship(
@@ -185,9 +189,10 @@ public class RelationshipDiscoveryConventionTest
     public void One_to_many_unidirectional_is_upgraded_to_one_to_many_bidirectional()
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToManyPrincipal>();
-        var dependentEntityBuilder = principalEntityBuilder
-            .ModelBuilder
-            .Entity(typeof(OneToManyDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = principalEntityBuilder.ModelBuilder.Entity(
+            typeof(OneToManyDependent),
+            ConfigurationSource.Convention
+        );
 
         dependentEntityBuilder.HasRelationship(
             principalEntityBuilder.Metadata,
@@ -210,9 +215,10 @@ public class RelationshipDiscoveryConventionTest
     public void One_to_many_unidirectional_is_not_upgraded_to_one_to_many_bidirectional_if_higher_source()
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToManyPrincipal>();
-        var dependentEntityBuilder = principalEntityBuilder
-            .ModelBuilder
-            .Entity(typeof(OneToManyDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = principalEntityBuilder.ModelBuilder.Entity(
+            typeof(OneToManyDependent),
+            ConfigurationSource.Convention
+        );
 
         dependentEntityBuilder.HasRelationship(
             principalEntityBuilder.Metadata,
@@ -270,9 +276,10 @@ public class RelationshipDiscoveryConventionTest
     public void Many_to_one_unidirectional_is_upgraded_to_many_to_one_bidirectional()
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToManyPrincipal>();
-        var dependentEntityBuilder = principalEntityBuilder
-            .ModelBuilder
-            .Entity(typeof(OneToManyDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = principalEntityBuilder.ModelBuilder.Entity(
+            typeof(OneToManyDependent),
+            ConfigurationSource.Convention
+        );
 
         dependentEntityBuilder.HasRelationship(
             principalEntityBuilder.Metadata,
@@ -295,9 +302,10 @@ public class RelationshipDiscoveryConventionTest
     public void Many_to_one_unidirectional_is_not_upgraded_to_many_to_one_bidirectional_if_higher_source()
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToManyPrincipal>();
-        var dependentEntityBuilder = principalEntityBuilder
-            .ModelBuilder
-            .Entity(typeof(OneToManyDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = principalEntityBuilder.ModelBuilder.Entity(
+            typeof(OneToManyDependent),
+            ConfigurationSource.Convention
+        );
 
         dependentEntityBuilder.HasRelationship(
             principalEntityBuilder.Metadata,
@@ -443,9 +451,10 @@ public class RelationshipDiscoveryConventionTest
         var entityBuilderFirst = CreateInternalEntityBuilder<MultipleNavigationsFirst>(
             MultipleNavigationsSecond.IgnoreCollectionNavigation
         );
-        var entityBuilderSecond = entityBuilderFirst
-            .ModelBuilder
-            .Entity(typeof(MultipleNavigationsSecond), ConfigurationSource.Convention);
+        var entityBuilderSecond = entityBuilderFirst.ModelBuilder.Entity(
+            typeof(MultipleNavigationsSecond),
+            ConfigurationSource.Convention
+        );
 
         entityBuilderFirst.HasRelationship(
             entityBuilderSecond.Metadata,
@@ -468,9 +477,10 @@ public class RelationshipDiscoveryConventionTest
         var entityBuilderFirst = CreateInternalEntityBuilder<MultipleNavigationsFirst>(
             MultipleNavigationsSecond.IgnoreCollectionNavigation
         );
-        var entityBuilderSecond = entityBuilderFirst
-            .ModelBuilder
-            .Entity(typeof(MultipleNavigationsSecond), ConfigurationSource.Convention);
+        var entityBuilderSecond = entityBuilderFirst.ModelBuilder.Entity(
+            typeof(MultipleNavigationsSecond),
+            ConfigurationSource.Convention
+        );
 
         entityBuilderFirst.HasRelationship(
             entityBuilderSecond.Metadata,
@@ -482,17 +492,17 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilderFirst, RunConvention(entityBuilderFirst));
 
         VerifyRelationship(
-            entityBuilderFirst
-                .Metadata
-                .FindNavigation(MultipleNavigationsFirst.CollectionNavigationProperty.Name),
+            entityBuilderFirst.Metadata.FindNavigation(
+                MultipleNavigationsFirst.CollectionNavigationProperty.Name
+            ),
             null,
             unique: false,
             singleRelationship: false
         );
         VerifyRelationship(
-            entityBuilderFirst
-                .Metadata
-                .FindNavigation(MultipleNavigationsFirst.NonCollectionNavigationProperty.Name),
+            entityBuilderFirst.Metadata.FindNavigation(
+                MultipleNavigationsFirst.NonCollectionNavigationProperty.Name
+            ),
             nameof(MultipleNavigationsSecond.MultipleNavigationsFirst),
             unique: true,
             singleRelationship: false
@@ -506,9 +516,10 @@ public class RelationshipDiscoveryConventionTest
         var entityBuilderFirst = CreateInternalEntityBuilder<MultipleNavigationsSecond>(
             MultipleNavigationsSecond.IgnoreCollectionNavigation
         );
-        var entityBuilderSecond = entityBuilderFirst
-            .ModelBuilder
-            .Entity(typeof(MultipleNavigationsSecond), ConfigurationSource.Convention);
+        var entityBuilderSecond = entityBuilderFirst.ModelBuilder.Entity(
+            typeof(MultipleNavigationsSecond),
+            ConfigurationSource.Convention
+        );
 
         Assert.Same(entityBuilderFirst, RunConvention(entityBuilderFirst));
 
@@ -524,9 +535,10 @@ public class RelationshipDiscoveryConventionTest
         var entityBuilderFirst = CreateInternalEntityBuilder<MultipleNavigationsFirst>(
             MultipleNavigationsSecond.IgnoreCollectionNavigation
         );
-        var entityBuilderSecond = entityBuilderFirst
-            .ModelBuilder
-            .Entity(typeof(MultipleNavigationsSecond), ConfigurationSource.Convention);
+        var entityBuilderSecond = entityBuilderFirst.ModelBuilder.Entity(
+            typeof(MultipleNavigationsSecond),
+            ConfigurationSource.Convention
+        );
 
         entityBuilderFirst.HasRelationship(
             entityBuilderSecond.Metadata,
@@ -563,9 +575,10 @@ public class RelationshipDiscoveryConventionTest
         var entityBuilderFirst = CreateInternalEntityBuilder<MultipleNavigationsFirst>(
             MultipleNavigationsSecond.IgnoreCollectionNavigation
         );
-        var entityBuilderSecond = entityBuilderFirst
-            .ModelBuilder
-            .Entity(typeof(MultipleNavigationsSecond), ConfigurationSource.Convention);
+        var entityBuilderSecond = entityBuilderFirst.ModelBuilder.Entity(
+            typeof(MultipleNavigationsSecond),
+            ConfigurationSource.Convention
+        );
 
         entityBuilderFirst.HasRelationship(
             entityBuilderSecond.Metadata,
@@ -577,17 +590,17 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilderSecond, RunConvention(entityBuilderSecond));
 
         VerifyRelationship(
-            entityBuilderFirst
-                .Metadata
-                .FindNavigation(MultipleNavigationsFirst.CollectionNavigationProperty.Name),
+            entityBuilderFirst.Metadata.FindNavigation(
+                MultipleNavigationsFirst.CollectionNavigationProperty.Name
+            ),
             null,
             unique: false,
             singleRelationship: false
         );
         VerifyRelationship(
-            entityBuilderFirst
-                .Metadata
-                .FindNavigation(MultipleNavigationsFirst.NonCollectionNavigationProperty.Name),
+            entityBuilderFirst.Metadata.FindNavigation(
+                MultipleNavigationsFirst.NonCollectionNavigationProperty.Name
+            ),
             nameof(MultipleNavigationsSecond.MultipleNavigationsFirst),
             unique: true,
             singleRelationship: false
@@ -602,9 +615,10 @@ public class RelationshipDiscoveryConventionTest
             MultipleNavigationsSecond.IgnoreCollectionNavigation,
             MultipleNavigationsSecond.IgnoreNonCollectionNavigation
         );
-        entityBuilder
-            .ModelBuilder
-            .Entity(typeof(MultipleNavigationsSecond), ConfigurationSource.DataAnnotation);
+        entityBuilder.ModelBuilder.Entity(
+            typeof(MultipleNavigationsSecond),
+            ConfigurationSource.DataAnnotation
+        );
 
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
@@ -655,13 +669,11 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
         var baseFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.Base))
             .ForeignKey;
         var derivedFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.DerivedOne))
             .ForeignKey;
         Assert.Empty(baseFk.FindNavigationsTo(entityBuilder.Metadata));
@@ -685,13 +697,11 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
         var baseFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.Base))
             .ForeignKey;
         var derivedFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.DerivedOne))
             .ForeignKey;
         Assert.Equal(
@@ -718,13 +728,11 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
         var baseFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.Base))
             .ForeignKey;
         var derivedFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.DerivedTwo))
             .ForeignKey;
         Assert.Equal(
@@ -751,13 +759,11 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
         var baseFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.Base))
             .ForeignKey;
         var derivedFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.DerivedOne))
             .ForeignKey;
         Assert.Empty(baseFk.FindNavigationsTo(entityBuilder.Metadata));
@@ -786,13 +792,11 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
         var baseFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.Base))
             .ForeignKey;
         var derivedFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.DerivedOne))
             .ForeignKey;
         Assert.Equal(
@@ -1022,8 +1026,7 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
         var derivedFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.DerivedOne))
             .ForeignKey;
         Assert.Equal(
@@ -1050,8 +1053,7 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
         var derivedFk = entityBuilder
-            .Metadata
-            .GetNavigations()
+            .Metadata.GetNavigations()
             .Single(n => n.Name == nameof(NavigationsToBaseAndDerived.DerivedOne))
             .ForeignKey;
         Assert.Equal(
@@ -1095,8 +1097,7 @@ public class RelationshipDiscoveryConventionTest
         Assert.Same(entityBuilder, RunConvention(entityBuilder));
 
         var derivedFk = entityBuilder
-            .Metadata
-            .FindNavigation(nameof(NavigationsToBaseAndDerived.DerivedOne))
+            .Metadata.FindNavigation(nameof(NavigationsToBaseAndDerived.DerivedOne))
             .ForeignKey;
         Assert.Equal(
             nameof(DerivedOne.BaseNavigation),
@@ -1591,8 +1592,7 @@ public class RelationshipDiscoveryConventionTest
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
         InMemoryTestHelpers
-            .Instance
-            .CreateContextServices()
+            .Instance.CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
         {
             Logger = CreateLogger()

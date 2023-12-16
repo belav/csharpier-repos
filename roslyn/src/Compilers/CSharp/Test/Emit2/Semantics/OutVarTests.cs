@@ -226,8 +226,7 @@ public class Cls
 
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -491,8 +490,7 @@ public class Cls
 
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -542,8 +540,7 @@ public class Cls
             );
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -594,8 +591,7 @@ public class Cls
             );
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -646,8 +642,7 @@ public class Cls
             );
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -698,8 +693,7 @@ public class Cls
             );
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -750,8 +744,7 @@ public class Cls
             );
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -821,8 +814,7 @@ public class Cls
 
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -870,8 +862,7 @@ public class Cls
             CompileAndVerify(compilation, expectedOutput: "123");
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -922,8 +913,7 @@ public class Cls
             );
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -977,8 +967,7 @@ public class Cls
 
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -1028,8 +1017,7 @@ public class Cls
             CompileAndVerify(compilation, expectedOutput: "123");
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -1082,8 +1070,7 @@ public class Cls
             );
             Assert.False(
                 compilation
-                    .SyntaxTrees
-                    .Single()
+                    .SyntaxTrees.Single()
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
@@ -1805,8 +1792,7 @@ public class Cls
                     != null
                 && forStatement.Incrementors.Span.Contains(decl.Position)
                 && forStatement
-                    .Statement
-                    .DescendantNodes()
+                    .Statement.DescendantNodes()
                     .OfType<ForStatementSyntax>()
                     .Any(f => f.Condition == null)
             )
@@ -7092,9 +7078,7 @@ public class X
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                )
-                    .Type
-                    .ToTestDisplayString()
+                ).Type.ToTestDisplayString()
             );
         }
 
@@ -15291,9 +15275,7 @@ public class X
                             compilation
                                 .GetSemanticModel(tree)
                                 .GetDeclaredSymbol(GetVariableDesignation(yDecl))
-                    )
-                        .Type
-                        .ToTestDisplayString()
+                    ).Type.ToTestDisplayString()
                 );
             }
         }
@@ -21132,9 +21114,9 @@ public class Cls
 
             Assert.Equal(
                 "Cls.var",
-                ((ILocalSymbol)model.GetDeclaredSymbol(GetVariableDesignation(x1Decl)))
-                    .Type
-                    .ToTestDisplayString()
+                (
+                    (ILocalSymbol)model.GetDeclaredSymbol(GetVariableDesignation(x1Decl))
+                ).Type.ToTestDisplayString()
             );
         }
 
@@ -21612,9 +21594,7 @@ public class Cls
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                )
-                    .Type
-                    .ToTestDisplayString()
+                ).Type.ToTestDisplayString()
             );
 
             CreateCompilation(
@@ -21707,9 +21687,7 @@ public class Cls
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                )
-                    .Type
-                    .ToTestDisplayString()
+                ).Type.ToTestDisplayString()
             );
 
             CreateCompilation(
@@ -21779,9 +21757,7 @@ public class Cls
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                )
-                    .Type
-                    .ToTestDisplayString()
+                ).Type.ToTestDisplayString()
             );
         }
 
@@ -21837,9 +21813,7 @@ public class Cls
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                )
-                    .Type
-                    .ToTestDisplayString()
+                ).Type.ToTestDisplayString()
             );
         }
 
@@ -23872,8 +23846,7 @@ class B
                     compilation
                         .GetSemanticModel(tree)
                         .GetTypeInfo(x1Ref[0])
-                        .Type
-                        .ToTestDisplayString()
+                        .Type.ToTestDisplayString()
                 );
 
                 var x2Decl = GetOutVarDeclarations(tree, "x2").Single();
@@ -23885,8 +23858,7 @@ class B
                     compilation
                         .GetSemanticModel(tree)
                         .GetTypeInfo(x2Ref[0])
-                        .Type
-                        .ToTestDisplayString()
+                        .Type.ToTestDisplayString()
                 );
 
                 var x3Decl = GetOutVarDeclarations(tree, "x3").Single();
@@ -23898,8 +23870,7 @@ class B
                     compilation
                         .GetSemanticModel(tree)
                         .GetTypeInfo(x3Ref[0])
-                        .Type
-                        .ToTestDisplayString()
+                        .Type.ToTestDisplayString()
                 );
 
                 var x4Decl = GetOutVarDeclarations(tree, "x4").Single();
@@ -23911,8 +23882,7 @@ class B
                     compilation
                         .GetSemanticModel(tree)
                         .GetTypeInfo(x4Ref[0])
-                        .Type
-                        .ToTestDisplayString()
+                        .Type.ToTestDisplayString()
                 );
 
                 CompileAndVerify(
@@ -24610,8 +24580,7 @@ public class X
                 decl.Ancestors()
                     .OfType<VariableDeclaratorSyntax>()
                     .First()
-                    .ArgumentList
-                    .Contains(decl)
+                    .ArgumentList.Contains(decl)
             );
         }
 
@@ -31022,9 +30991,7 @@ class H
                             compilation
                                 .GetSemanticModel(tree)
                                 .GetDeclaredSymbol(x1Decl.VariableDesignation())
-                    )
-                        .Type
-                        .ToTestDisplayString()
+                    ).Type.ToTestDisplayString()
                 );
 
                 var x2Decl = GetOutVarDeclarations(tree, "x2").Single();
@@ -31781,9 +31748,7 @@ class H
                             compilation
                                 .GetSemanticModel(tree)
                                 .GetDeclaredSymbol(x1Decl.VariableDesignation())
-                    )
-                        .Type
-                        .ToTestDisplayString()
+                    ).Type.ToTestDisplayString()
                 );
 
                 var x2Decl = GetOutVarDeclarations(tree, "x2").Single();
@@ -38811,42 +38776,49 @@ class Program
                     if (dataFlow.Succeeded)
                     {
                         Assert.False(
-                            dataFlow
-                                .VariablesDeclared
-                                .Contains(symbol, ReferenceEqualityComparer.Instance)
+                            dataFlow.VariablesDeclared.Contains(
+                                symbol,
+                                ReferenceEqualityComparer.Instance
+                            )
                         );
                         Assert.False(
-                            dataFlow
-                                .AlwaysAssigned
-                                .Contains(symbol, ReferenceEqualityComparer.Instance)
+                            dataFlow.AlwaysAssigned.Contains(
+                                symbol,
+                                ReferenceEqualityComparer.Instance
+                            )
                         );
                         Assert.False(
-                            dataFlow
-                                .WrittenInside
-                                .Contains(symbol, ReferenceEqualityComparer.Instance)
+                            dataFlow.WrittenInside.Contains(
+                                symbol,
+                                ReferenceEqualityComparer.Instance
+                            )
                         );
                         Assert.False(
-                            dataFlow
-                                .DataFlowsIn
-                                .Contains(symbol, ReferenceEqualityComparer.Instance)
+                            dataFlow.DataFlowsIn.Contains(
+                                symbol,
+                                ReferenceEqualityComparer.Instance
+                            )
                         );
                         Assert.False(
                             dataFlow.ReadInside.Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow
-                                .DataFlowsOut
-                                .Contains(symbol, ReferenceEqualityComparer.Instance)
+                            dataFlow.DataFlowsOut.Contains(
+                                symbol,
+                                ReferenceEqualityComparer.Instance
+                            )
                         );
                         Assert.False(
-                            dataFlow
-                                .ReadOutside
-                                .Contains(symbol, ReferenceEqualityComparer.Instance)
+                            dataFlow.ReadOutside.Contains(
+                                symbol,
+                                ReferenceEqualityComparer.Instance
+                            )
                         );
                         Assert.False(
-                            dataFlow
-                                .WrittenOutside
-                                .Contains(symbol, ReferenceEqualityComparer.Instance)
+                            dataFlow.WrittenOutside.Contains(
+                                symbol,
+                                ReferenceEqualityComparer.Instance
+                            )
                         );
                     }
                 }

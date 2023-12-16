@@ -253,9 +253,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             return snippets.SelectAsArray(snippet =>
             {
-                var rules = CompletionItemRules
-                    .Default
-                    .WithFormatOnCommit(service.ShouldFormatSnippet(snippet));
+                var rules = CompletionItemRules.Default.WithFormatOnCommit(
+                    service.ShouldFormatSnippet(snippet)
+                );
 
                 return CommonCompletionItem.Create(
                     displayText: isPreProcessorContext ? snippet.Shortcut[1..] : snippet.Shortcut,

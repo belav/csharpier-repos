@@ -47,21 +47,18 @@ public class HotReloadServiceTests
         Assert.Equal("/server", endpoint.RoutePattern.RawText);
 
         // Act - 2
-        endpointDataSource
-            .Builder
-            .Pages
-            .AddFromLibraryInfo(
-                "TestAssembly2",
-                new[]
+        endpointDataSource.Builder.Pages.AddFromLibraryInfo(
+            "TestAssembly2",
+            new[]
+            {
+                new PageComponentBuilder
                 {
-                    new PageComponentBuilder
-                    {
-                        AssemblyName = "TestAssembly2",
-                        PageType = typeof(StaticComponent),
-                        RouteTemplates = new List<string> { "/app/test" }
-                    }
+                    AssemblyName = "TestAssembly2",
+                    PageType = typeof(StaticComponent),
+                    RouteTemplates = new List<string> { "/app/test" }
                 }
-            );
+            }
+        );
         HotReloadService.UpdateApplication(null);
 
         // Assert - 2

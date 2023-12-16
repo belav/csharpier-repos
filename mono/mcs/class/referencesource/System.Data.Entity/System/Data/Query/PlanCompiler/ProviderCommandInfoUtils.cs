@@ -121,8 +121,7 @@ namespace System.Data.Query.PlanCompiler
 
             IEnumerator<md.EdmProperty> propertyEnumerator = TypeHelpers
                 .GetEdmType<md.RowType>(outputType)
-                .Properties
-                .GetEnumerator();
+                .Properties.GetEnumerator();
             IEnumerator<Var> varEnumerator = projectOp.Outputs.GetEnumerator();
             while (true)
             {

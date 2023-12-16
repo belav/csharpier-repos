@@ -79,24 +79,20 @@ namespace System.IO
             attrList.commonAttr = Interop.libc.AttrList.ATTR_CMN_CRTIME;
 
             int result = handle is not null
-                ? Interop
-                    .libc
-                    .fsetattrlist(
-                        handle,
-                        &attrList,
-                        &timeSpec,
-                        sizeof(Interop.Sys.TimeSpec),
-                        new CULong(Interop.libc.FSOPT_NOFOLLOW)
-                    )
-                : Interop
-                    .libc
-                    .setattrlist(
-                        path!,
-                        &attrList,
-                        &timeSpec,
-                        sizeof(Interop.Sys.TimeSpec),
-                        new CULong(Interop.libc.FSOPT_NOFOLLOW)
-                    );
+                ? Interop.libc.fsetattrlist(
+                    handle,
+                    &attrList,
+                    &timeSpec,
+                    sizeof(Interop.Sys.TimeSpec),
+                    new CULong(Interop.libc.FSOPT_NOFOLLOW)
+                )
+                : Interop.libc.setattrlist(
+                    path!,
+                    &attrList,
+                    &timeSpec,
+                    sizeof(Interop.Sys.TimeSpec),
+                    new CULong(Interop.libc.FSOPT_NOFOLLOW)
+                );
 
             return result == 0 ? Interop.Error.SUCCESS : Interop.Sys.GetLastErrorInfo().Error;
         }

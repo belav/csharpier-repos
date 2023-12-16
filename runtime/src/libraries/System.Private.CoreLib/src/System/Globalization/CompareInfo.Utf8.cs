@@ -114,9 +114,7 @@ namespace System.Globalization
                 if (sourceUtf16Array != null)
                 {
                     // Return rented buffers if necessary
-                    ArrayPool<char>
-                        .Shared
-                        .Return(sourceUtf16Array);
+                    ArrayPool<char>.Shared.Return(sourceUtf16Array);
                 }
 
                 return false;

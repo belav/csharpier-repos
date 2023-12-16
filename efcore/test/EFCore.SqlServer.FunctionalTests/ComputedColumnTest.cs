@@ -145,8 +145,9 @@ public class ComputedColumnTest : IDisposable
         context.Database.EnsureCreatedResiliently();
 
         var entity = context
-            .EnumItems
-            .Add(new EnumItem { FlagEnum = FlagEnum.AValue, OptionalFlagEnum = FlagEnum.BValue })
+            .EnumItems.Add(
+                new EnumItem { FlagEnum = FlagEnum.AValue, OptionalFlagEnum = FlagEnum.BValue }
+            )
             .Entity;
         context.SaveChanges();
 

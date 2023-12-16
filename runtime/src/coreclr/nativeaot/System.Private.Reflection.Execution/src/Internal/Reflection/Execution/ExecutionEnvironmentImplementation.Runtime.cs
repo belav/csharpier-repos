@@ -103,9 +103,8 @@ namespace Internal.Reflection.Execution
                 typeDefHandle = RuntimeAugments.GetGenericDefinition(typeHandle);
             }
 
-            QTypeDefinition qTypeDefinition = ReflectionExecution
-                .ExecutionEnvironment
-                .GetMetadataForNamedType(typeDefHandle);
+            QTypeDefinition qTypeDefinition =
+                ReflectionExecution.ExecutionEnvironment.GetMetadataForNamedType(typeDefHandle);
 
             if (qTypeDefinition.IsNativeFormatMetadataBased)
             {

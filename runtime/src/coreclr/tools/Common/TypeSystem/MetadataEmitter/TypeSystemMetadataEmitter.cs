@@ -634,9 +634,9 @@ namespace Internal.TypeSystem
                         {
                             string indexData = string.Join(".", _indexStack);
 
-                            var unmanagedCallConvPossibility = _embeddedData[_embeddedDataIndex]
-                                .index
-                                .Split('|');
+                            var unmanagedCallConvPossibility = _embeddedData[
+                                _embeddedDataIndex
+                            ].index.Split('|');
                             if (unmanagedCallConvPossibility[0] == indexData)
                             {
                                 callConv = (SignatureCallingConvention)
@@ -665,9 +665,9 @@ namespace Internal.TypeSystem
                         {
                             string indexData = string.Join(".", _indexStack);
 
-                            var arrayShapePossibility = _embeddedData[_embeddedDataIndex]
-                                .index
-                                .Split('|');
+                            var arrayShapePossibility = _embeddedData[
+                                _embeddedDataIndex
+                            ].index.Split('|');
                             if (arrayShapePossibility[0] == indexData)
                             {
                                 string[] boundsStr = arrayShapePossibility[1].Split(

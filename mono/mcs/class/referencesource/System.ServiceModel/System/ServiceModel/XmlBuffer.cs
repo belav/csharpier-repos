@@ -58,15 +58,13 @@ namespace System.ServiceModel
         public XmlBuffer(int maxBufferSize)
         {
             if (maxBufferSize < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "maxBufferSize",
-                            maxBufferSize,
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "maxBufferSize",
+                        maxBufferSize,
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             int initialBufferSize = Math.Min(512, maxBufferSize);
             stream = new BufferManagerOutputStream(
                 SR.XmlBufferQuotaExceeded,
@@ -97,9 +95,9 @@ namespace System.ServiceModel
         public XmlDictionaryWriter OpenSection(XmlDictionaryReaderQuotas quotas)
         {
             if (bufferState != BufferState.Created)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(CreateInvalidStateException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidStateException()
+                );
             bufferState = BufferState.Writing;
             this.quotas = new XmlDictionaryReaderQuotas();
             quotas.CopyTo(this.quotas);
@@ -127,9 +125,9 @@ namespace System.ServiceModel
         public void CloseSection()
         {
             if (bufferState != BufferState.Writing)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(CreateInvalidStateException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidStateException()
+                );
             this.writer.Close();
             bufferState = BufferState.Created;
             int size = (int)stream.Length - offset;
@@ -140,9 +138,9 @@ namespace System.ServiceModel
         public void Close()
         {
             if (bufferState != BufferState.Created)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(CreateInvalidStateException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidStateException()
+                );
             bufferState = BufferState.Reading;
             int bufferSize;
             buffer = stream.ToArray(out bufferSize);
@@ -158,9 +156,9 @@ namespace System.ServiceModel
         public XmlDictionaryReader GetReader(int sectionIndex)
         {
             if (bufferState != BufferState.Reading)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(CreateInvalidStateException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidStateException()
+                );
             Section section = sections[sectionIndex];
             XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
                 buffer,
@@ -178,9 +176,9 @@ namespace System.ServiceModel
         public void WriteTo(int sectionIndex, XmlWriter writer)
         {
             if (bufferState != BufferState.Reading)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(CreateInvalidStateException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidStateException()
+                );
             XmlDictionaryReader reader = GetReader(sectionIndex);
             try
             {

@@ -44,17 +44,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier
-                .Compilation
-                .VerifyPdb(
-                    expectedPdb,
-                    embeddedTexts,
-                    debugEntryPoint,
-                    format,
-                    options,
-                    expectedValueSourceLine,
-                    expectedValueSourcePath
-                );
+            verifier.Compilation.VerifyPdb(
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
             return verifier;
         }
 
@@ -69,17 +67,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier
-                .Compilation
-                .VerifyPdb(
-                    expectedPdb,
-                    embeddedTexts,
-                    debugEntryPoint,
-                    format,
-                    options,
-                    expectedValueSourceLine,
-                    expectedValueSourcePath
-                );
+            verifier.Compilation.VerifyPdb(
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
             return verifier;
         }
 
@@ -95,18 +91,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier
-                .Compilation
-                .VerifyPdb(
-                    qualifiedMethodName,
-                    expectedPdb,
-                    embeddedTexts,
-                    debugEntryPoint,
-                    format,
-                    options,
-                    expectedValueSourceLine,
-                    expectedValueSourcePath
-                );
+            verifier.Compilation.VerifyPdb(
+                qualifiedMethodName,
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
             return verifier;
         }
 
@@ -122,18 +116,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier
-                .Compilation
-                .VerifyPdb(
-                    qualifiedMethodName,
-                    expectedPdb,
-                    embeddedTexts,
-                    debugEntryPoint,
-                    format,
-                    options,
-                    expectedValueSourceLine,
-                    expectedValueSourcePath
-                );
+            verifier.Compilation.VerifyPdb(
+                qualifiedMethodName,
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
             return verifier;
         }
 
@@ -749,11 +741,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool portable
         )
         {
-            var emitOptions = EmitOptions
-                .Default
-                .WithDebugInformationFormat(
-                    portable ? DebugInformationFormat.PortablePdb : DebugInformationFormat.Pdb
-                );
+            var emitOptions = EmitOptions.Default.WithDebugInformationFormat(
+                portable ? DebugInformationFormat.PortablePdb : DebugInformationFormat.Pdb
+            );
 
             var result = compilation.Emit(
                 peStream,

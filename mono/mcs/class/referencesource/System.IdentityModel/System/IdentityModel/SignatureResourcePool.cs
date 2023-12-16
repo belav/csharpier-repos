@@ -61,12 +61,10 @@ namespace System.IdentityModel
             {
                 if (string.IsNullOrEmpty(algorithm))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            algorithm,
-                            SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        algorithm,
+                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                    );
                 }
 
                 this.hashAlgorithm = CryptoHelper.CreateHashAlgorithm(algorithm);

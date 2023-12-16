@@ -91,8 +91,7 @@ internal sealed partial class ManagedHotReloadLanguageService : IManagedHotReloa
 
     private static Solution GetCurrentCompileTimeSolution(Solution currentDesignTimeSolution) =>
         currentDesignTimeSolution
-            .Services
-            .GetRequiredService<ICompileTimeSolutionProvider>()
+            .Services.GetRequiredService<ICompileTimeSolutionProvider>()
             .GetCompileTimeSolution(currentDesignTimeSolution);
 
     public async ValueTask StartSessionAsync(CancellationToken cancellationToken)

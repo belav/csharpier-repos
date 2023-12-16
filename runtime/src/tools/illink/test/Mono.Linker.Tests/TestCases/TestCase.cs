@@ -23,8 +23,7 @@ namespace Mono.Linker.Tests.TestCases
             Name = sourceFile.FileNameWithoutExtension;
             var displayNameBase = sourceFile
                 .RelativeTo(rootCasesDirectory)
-                .Parent
-                .ToString(SlashMode.Forward)
+                .Parent.ToString(SlashMode.Forward)
                 .Replace('/', '.');
             DisplayName =
                 sourceFile.FileNameWithoutExtension == "Program"
@@ -40,8 +39,7 @@ namespace Mono.Linker.Tests.TestCases
 
             var firstParentRelativeToRoot = SourceFile
                 .RelativeTo(rootCasesDirectory)
-                .Elements
-                .First();
+                .Elements.First();
             TestSuiteDirectory = rootCasesDirectory.Combine(firstParentRelativeToRoot);
         }
 
@@ -79,9 +77,9 @@ namespace Mono.Linker.Tests.TestCases
 
         public TypeDefinition FindTypeDefinition(AssemblyDefinition caseAssemblyDefinition)
         {
-            var typeDefinition = caseAssemblyDefinition
-                .MainModule
-                .GetType(reconstructedFullTypeName);
+            var typeDefinition = caseAssemblyDefinition.MainModule.GetType(
+                reconstructedFullTypeName
+            );
 
             // For all of the Test Cases, the full type name we constructed from the directory structure will be correct and we can successfully find
             // the type from GetType.

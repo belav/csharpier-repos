@@ -444,20 +444,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                             RSASignaturePadding.Pkcs1
                         );
 
-                        rootReq
-                            .CertificateExtensions
-                            .Add(new X509BasicConstraintsExtension(true, false, 0, true));
-                        rootReq
-                            .CertificateExtensions
-                            .Add(new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false));
-                        rootReq
-                            .CertificateExtensions
-                            .Add(
-                                new X509KeyUsageExtension(
-                                    X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
-                                    false
-                                )
-                            );
+                        rootReq.CertificateExtensions.Add(
+                            new X509BasicConstraintsExtension(true, false, 0, true)
+                        );
+                        rootReq.CertificateExtensions.Add(
+                            new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false)
+                        );
+                        rootReq.CertificateExtensions.Add(
+                            new X509KeyUsageExtension(
+                                X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
+                                false
+                            )
+                        );
 
                         using (
                             CertificateAuthority unrelated = new CertificateAuthority(
@@ -550,20 +548,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                             RSASignaturePadding.Pkcs1
                         );
 
-                        rootReq
-                            .CertificateExtensions
-                            .Add(new X509BasicConstraintsExtension(true, false, 0, true));
-                        rootReq
-                            .CertificateExtensions
-                            .Add(new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false));
-                        rootReq
-                            .CertificateExtensions
-                            .Add(
-                                new X509KeyUsageExtension(
-                                    X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
-                                    false
-                                )
-                            );
+                        rootReq.CertificateExtensions.Add(
+                            new X509BasicConstraintsExtension(true, false, 0, true)
+                        );
+                        rootReq.CertificateExtensions.Add(
+                            new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false)
+                        );
+                        rootReq.CertificateExtensions.Add(
+                            new X509KeyUsageExtension(
+                                X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
+                                false
+                            )
+                        );
 
                         using (
                             CertificateAuthority unrelated = new CertificateAuthority(

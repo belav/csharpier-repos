@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ITypeParameterSymbol typeParameter
         ) =>
             typeParameter
-                .ConstraintTypes
-                .Select(GetNamedTypeSymbol)
+                .ConstraintTypes.Select(GetNamedTypeSymbol)
                 .WhereNotNull()
                 .FirstOrDefault();
 

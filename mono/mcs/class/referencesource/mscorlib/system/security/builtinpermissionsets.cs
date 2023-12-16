@@ -455,14 +455,10 @@ namespace System.Security
             // minimal parsing.
             SecurityElement firstPermission = (SecurityElement)se.Children[0];
             if (
-                System
-                    .Security
-                    .Util
-                    .XMLUtil
-                    .GetClassFromElement(
-                        firstPermission, /*ignoreTypeLoadFailures*/
-                        true
-                    ) != null
+                System.Security.Util.XMLUtil.GetClassFromElement(
+                    firstPermission, /*ignoreTypeLoadFailures*/
+                    true
+                ) != null
             )
             {
                 PermissionSet extensions = new NamedPermissionSet(se);

@@ -34,15 +34,16 @@ namespace System.ServiceModel.Discovery
 
             if (this.ValidateAndInsertDiscoveryClientBindingElement(binding))
             {
-                this.FindCriteria
-                    .ContractTypeNames
-                    .Add(new XmlQualifiedName(contract.Name, contract.Namespace));
+                this.FindCriteria.ContractTypeNames.Add(
+                    new XmlQualifiedName(contract.Name, contract.Namespace)
+                );
             }
             else
             {
-                throw FxTrace
-                    .Exception
-                    .Argument("binding", SR.DiscoveryClientBindingElementPresentInDynamicEndpoint);
+                throw FxTrace.Exception.Argument(
+                    "binding",
+                    SR.DiscoveryClientBindingElementPresentInDynamicEndpoint
+                );
             }
         }
 

@@ -249,8 +249,7 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
         items.SelectMany(
             i =>
                 Dependencies
-                    .AnnotationCodeGenerator
-                    .FilterIgnoredAnnotations(i.GetAnnotations())
+                    .AnnotationCodeGenerator.FilterIgnoredAnnotations(i.GetAnnotations())
                     .Where(a => a.Value != null)
                     .Select(a => new { Annotatable = i, Annotation = a })
                     .SelectMany(

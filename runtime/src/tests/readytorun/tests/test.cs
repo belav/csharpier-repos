@@ -828,10 +828,9 @@ public class ILInliningVersioningTest<T>
         public MyLoadContext()
             : base(
                 System
-                    .Runtime
-                    .Loader
-                    .AssemblyLoadContext
-                    .GetLoadContext(Assembly.GetExecutingAssembly())
+                    .Runtime.Loader.AssemblyLoadContext.GetLoadContext(
+                        Assembly.GetExecutingAssembly()
+                    )
                     .IsCollectible
             ) { }
 

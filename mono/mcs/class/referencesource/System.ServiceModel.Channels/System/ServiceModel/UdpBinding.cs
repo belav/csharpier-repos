@@ -33,17 +33,15 @@ namespace System.ServiceModel
             UdpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidBindingConfigurationName,
-                                configurationName,
-                                UdpTransportConfigurationStrings.UdpBindingElementName
-                            )
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            UdpTransportConfigurationStrings.UdpBindingElementName
                         )
-                    );
+                    )
+                );
             }
             else
             {

@@ -393,189 +393,203 @@ namespace StaticTestGenerator
         )
         {
             // Create the dictionary containing all tests and associated test cases.
-            Dictionary<IXunitTestCase, List<TestCase>> testCases = sink.TestCases
-                .Cast<IXunitTestCase>()
-                .Select(tc =>
-                {
-                    MethodInfo testMethod = ((ReflectionMethodInfo)tc.Method).MethodInfo;
-                    Type testMethodType = testMethod.ReflectedType!;
-
-                    var cases = new List<TestCase>();
-
-                    if (testMethod.GetParameters().Length > 0)
+            Dictionary<IXunitTestCase, List<TestCase>> testCases =
+                sink.TestCases.Cast<IXunitTestCase>()
+                    .Select(tc =>
                     {
-                        // The test method has arguments, so look for all of the standard data attributes we can use to invoke the theory.
-                        foreach (
-                            DataAttribute attr in testMethod.GetCustomAttributes<DataAttribute>(
-                                inherit: true
+                        MethodInfo testMethod = ((ReflectionMethodInfo)tc.Method).MethodInfo;
+                        Type testMethodType = testMethod.ReflectedType!;
+
+                        var cases = new List<TestCase>();
+
+                        if (testMethod.GetParameters().Length > 0)
+                        {
+                            // The test method has arguments, so look for all of the standard data attributes we can use to invoke the theory.
+                            foreach (
+                                DataAttribute attr in testMethod.GetCustomAttributes<DataAttribute>(
+                                    inherit: true
+                                )
                             )
-                        )
-                        {
-                            try
                             {
-                                // DataAttributes can themselves be marked to be skipped.  Ignore the attribute if it is.
-                                if (!string.IsNullOrWhiteSpace(attr.Skip))
+                                try
                                 {
-                                    continue;
-                                }
+                                    // DataAttributes can themselves be marked to be skipped.  Ignore the attribute if it is.
+                                    if (!string.IsNullOrWhiteSpace(attr.Skip))
+                                    {
+                                        continue;
+                                    }
 
-                                switch (attr)
-                                {
-                                    case MemberDataAttribute memberData:
-                                        // For a [MemberData(...)], it might point to a method, property, or field; get the right
-                                        // piece of metadata.  Also, for methods, there might be data to pass to the method
-                                        // when invoking it; store that as well.
-                                        Type memberDataType =
-                                            memberData.MemberType ?? testMethod.DeclaringType!;
+                                    switch (attr)
+                                    {
+                                        case MemberDataAttribute memberData:
+                                            // For a [MemberData(...)], it might point to a method, property, or field; get the right
+                                            // piece of metadata.  Also, for methods, there might be data to pass to the method
+                                            // when invoking it; store that as well.
+                                            Type memberDataType =
+                                                memberData.MemberType ?? testMethod.DeclaringType!;
 
-                                        MethodInfo? testDataMethod = memberDataType.GetMethod(
-                                            memberData.MemberName,
-                                            BindingFlags.Public
-                                                | BindingFlags.NonPublic
-                                                | BindingFlags.Static
-                                                | BindingFlags.FlattenHierarchy
-                                        );
-                                        if (testDataMethod != null)
-                                        {
-                                            cases.Add(
-                                                new TestCase
-                                                {
-                                                    MemberDataMember = testDataMethod,
-                                                    Values = memberData.Parameters
-                                                }
+                                            MethodInfo? testDataMethod = memberDataType.GetMethod(
+                                                memberData.MemberName,
+                                                BindingFlags.Public
+                                                    | BindingFlags.NonPublic
+                                                    | BindingFlags.Static
+                                                    | BindingFlags.FlattenHierarchy
+                                            );
+                                            if (testDataMethod != null)
+                                            {
+                                                cases.Add(
+                                                    new TestCase
+                                                    {
+                                                        MemberDataMember = testDataMethod,
+                                                        Values = memberData.Parameters
+                                                    }
+                                                );
+                                                break;
+                                            }
+
+                                            PropertyInfo? testDataProperty =
+                                                memberDataType.GetProperty(
+                                                    memberData.MemberName,
+                                                    BindingFlags.Public
+                                                        | BindingFlags.NonPublic
+                                                        | BindingFlags.Static
+                                                        | BindingFlags.FlattenHierarchy
+                                                );
+                                            if (testDataProperty != null)
+                                            {
+                                                cases.Add(
+                                                    new TestCase
+                                                    {
+                                                        MemberDataMember = testDataProperty
+                                                    }
+                                                );
+                                                break;
+                                            }
+
+                                            FieldInfo? testDataField = memberDataType.GetField(
+                                                memberData.MemberName,
+                                                BindingFlags.Public
+                                                    | BindingFlags.NonPublic
+                                                    | BindingFlags.Static
+                                                    | BindingFlags.FlattenHierarchy
+                                            );
+                                            if (testDataField != null)
+                                            {
+                                                cases.Add(
+                                                    new TestCase
+                                                    {
+                                                        MemberDataMember = testDataField
+                                                    }
+                                                );
+                                                break;
+                                            }
+
+                                            Log(
+                                                $"Error finding {memberData.MemberName} in MemberData on {testMethod.Name}"
                                             );
                                             break;
-                                        }
 
-                                        PropertyInfo? testDataProperty = memberDataType.GetProperty(
-                                            memberData.MemberName,
-                                            BindingFlags.Public
-                                                | BindingFlags.NonPublic
-                                                | BindingFlags.Static
-                                                | BindingFlags.FlattenHierarchy
-                                        );
-                                        if (testDataProperty != null)
-                                        {
-                                            cases.Add(
-                                                new TestCase { MemberDataMember = testDataProperty }
+                                        case ClassDataAttribute classData:
+                                            if (classData.Class != null)
+                                            {
+                                                cases.Add(
+                                                    new TestCase
+                                                    {
+                                                        MemberDataMember = classData.Class
+                                                    }
+                                                );
+                                            }
+                                            break;
+
+                                        case InlineDataAttribute inlineData:
+                                            cases.AddRange(
+                                                from values in attr.GetData(testMethod)
+                                                select new TestCase { Values = values }
                                             );
                                             break;
-                                        }
-
-                                        FieldInfo? testDataField = memberDataType.GetField(
-                                            memberData.MemberName,
-                                            BindingFlags.Public
-                                                | BindingFlags.NonPublic
-                                                | BindingFlags.Static
-                                                | BindingFlags.FlattenHierarchy
-                                        );
-                                        if (testDataField != null)
-                                        {
-                                            cases.Add(
-                                                new TestCase { MemberDataMember = testDataField }
-                                            );
-                                            break;
-                                        }
-
-                                        Log(
-                                            $"Error finding {memberData.MemberName} in MemberData on {testMethod.Name}"
-                                        );
-                                        break;
-
-                                    case ClassDataAttribute classData:
-                                        if (classData.Class != null)
-                                        {
-                                            cases.Add(
-                                                new TestCase { MemberDataMember = classData.Class }
-                                            );
-                                        }
-                                        break;
-
-                                    case InlineDataAttribute inlineData:
-                                        cases.AddRange(
-                                            from values in attr.GetData(testMethod)
-                                            select new TestCase { Values = values }
-                                        );
-                                        break;
+                                    }
                                 }
-                            }
-                            catch (Exception e)
-                            {
-                                Log(
-                                    $"Error processing {attr} on test method {testMethod.Name}: {e.Message}."
-                                );
-                            }
-                        }
-
-                        // There may also be custom data attributes.  We can't just use their GetData methods, as they
-                        // may return data we can't serialize into the .cs file.  That means we need to be able to serialize
-                        // the construction of the attribute itself into the source file, so that we can effectively treat it
-                        // like we do a member info.  To do that, we enumerate attribute datas.
-                        foreach (CustomAttributeData cad in testMethod.GetCustomAttributesData())
-                        {
-                            try
-                            {
-                                Type attrType = cad.AttributeType;
-
-                                if (!attrType.IsSubclassOf(typeof(DataAttribute)))
-                                {
-                                    // We only care about DataAttribute-derived types.
-                                    continue;
-                                }
-
-                                if (
-                                    typeof(MemberDataAttribute).IsAssignableFrom(attrType)
-                                    || typeof(ClassDataAttribute).IsAssignableFrom(attrType)
-                                    || typeof(InlineDataAttribute).IsAssignableFrom(attrType)
-                                )
-                                {
-                                    // Already handled these in the previous loop.
-                                    continue;
-                                }
-
-                                // Skip attributes we can't handle
-                                if (
-                                    !attrType.IsPublic
-                                    || !cad.Constructor.IsPublic
-                                    || !cad.ConstructorArguments.All(c => c.ArgumentType.IsPublic)
-                                )
+                                catch (Exception e)
                                 {
                                     Log(
-                                        $"Unsupported custom data attribute {cad.AttributeType} on test method {testMethod.Name}."
+                                        $"Error processing {attr} on test method {testMethod.Name}: {e.Message}."
                                     );
-                                    continue;
                                 }
-
-                                // Store the attribute type and the ctor values for it.
-                                object[] values = (object[])UnwrapCustomAttributeTypedArguments(
-                                    typeof(object),
-                                    cad.ConstructorArguments
-                                );
-                                cases.Add(
-                                    new TestCase
-                                    {
-                                        MemberDataMember = cad.Constructor,
-                                        Values = values
-                                    }
-                                );
                             }
-                            catch (Exception e)
+
+                            // There may also be custom data attributes.  We can't just use their GetData methods, as they
+                            // may return data we can't serialize into the .cs file.  That means we need to be able to serialize
+                            // the construction of the attribute itself into the source file, so that we can effectively treat it
+                            // like we do a member info.  To do that, we enumerate attribute datas.
+                            foreach (
+                                CustomAttributeData cad in testMethod.GetCustomAttributesData()
+                            )
                             {
-                                Log(
-                                    $"Error processing {cad.AttributeType} on test method {testMethod.Name}: {e.Message}."
-                                );
+                                try
+                                {
+                                    Type attrType = cad.AttributeType;
+
+                                    if (!attrType.IsSubclassOf(typeof(DataAttribute)))
+                                    {
+                                        // We only care about DataAttribute-derived types.
+                                        continue;
+                                    }
+
+                                    if (
+                                        typeof(MemberDataAttribute).IsAssignableFrom(attrType)
+                                        || typeof(ClassDataAttribute).IsAssignableFrom(attrType)
+                                        || typeof(InlineDataAttribute).IsAssignableFrom(attrType)
+                                    )
+                                    {
+                                        // Already handled these in the previous loop.
+                                        continue;
+                                    }
+
+                                    // Skip attributes we can't handle
+                                    if (
+                                        !attrType.IsPublic
+                                        || !cad.Constructor.IsPublic
+                                        || !cad.ConstructorArguments.All(
+                                            c => c.ArgumentType.IsPublic
+                                        )
+                                    )
+                                    {
+                                        Log(
+                                            $"Unsupported custom data attribute {cad.AttributeType} on test method {testMethod.Name}."
+                                        );
+                                        continue;
+                                    }
+
+                                    // Store the attribute type and the ctor values for it.
+                                    object[] values = (object[])UnwrapCustomAttributeTypedArguments(
+                                        typeof(object),
+                                        cad.ConstructorArguments
+                                    );
+                                    cases.Add(
+                                        new TestCase
+                                        {
+                                            MemberDataMember = cad.Constructor,
+                                            Values = values
+                                        }
+                                    );
+                                }
+                                catch (Exception e)
+                                {
+                                    Log(
+                                        $"Error processing {cad.AttributeType} on test method {testMethod.Name}: {e.Message}."
+                                    );
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        // There are no arguments to the method, so we just add a single test case to represent invoking the method.
-                        cases.Add(new TestCase());
-                    }
+                        else
+                        {
+                            // There are no arguments to the method, so we just add a single test case to represent invoking the method.
+                            cases.Add(new TestCase());
+                        }
 
-                    return KeyValuePair.Create(tc, cases);
-                })
-                .ToDictionary(k => k.Key, k => k.Value);
+                        return KeyValuePair.Create(tc, cases);
+                    })
+                    .ToDictionary(k => k.Key, k => k.Value);
 
             return testCases;
         }

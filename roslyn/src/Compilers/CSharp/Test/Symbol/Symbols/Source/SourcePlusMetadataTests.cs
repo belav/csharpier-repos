@@ -191,8 +191,7 @@ namespace NS
 ";
             var compilation = CreateEmptyCompilation(text, new[] { MscorlibRef });
             var srcSym = compilation
-                .GlobalNamespace
-                .GetTypeMembers("BaseTypeSpecifierClass")
+                .GlobalNamespace.GetTypeMembers("BaseTypeSpecifierClass")
                 .Single();
 
             var ref2 = TestReferences.SymbolsTests.InheritIComparable;

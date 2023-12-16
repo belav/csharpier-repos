@@ -33,9 +33,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [Kept]
             public static void Test()
             {
-                typeof(KnownType_Derived)
-                    .BaseType
-                    .GetMethod("UsedViaReflection", BindingFlags.NonPublic | BindingFlags.Static);
+                typeof(KnownType_Derived).BaseType.GetMethod(
+                    "UsedViaReflection",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
                 typeof(KnownType_Derived).BaseType.GetConstructor(Type.EmptyTypes);
             }
         }

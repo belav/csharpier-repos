@@ -52,9 +52,11 @@ namespace System.Runtime.InteropServices
             out bool exists
         )
             where TKey : notnull =>
-            ref Dictionary<TKey, TValue>
-                .CollectionsMarshalHelper
-                .GetValueRefOrAddDefault(dictionary, key, out exists);
+            ref Dictionary<TKey, TValue>.CollectionsMarshalHelper.GetValueRefOrAddDefault(
+                dictionary,
+                key,
+                out exists
+            );
 
         /// <summary>
         /// Sets the count of the <see cref="List{T}"/> to the specified value.

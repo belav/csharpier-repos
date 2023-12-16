@@ -44,8 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveNewModifier
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var root = await context
-                .Document
-                .GetRequiredSyntaxRootAsync(context.CancellationToken)
+                .Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
 
             var diagnostic = context.Diagnostics.First();

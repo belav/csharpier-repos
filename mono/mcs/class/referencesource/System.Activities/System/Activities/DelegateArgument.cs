@@ -52,13 +52,9 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DelegateArgumentMustBeReferenced(this.Name)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.DelegateArgumentMustBeReferenced(this.Name))
+                );
             }
         }
 
@@ -119,25 +115,21 @@ namespace System.Activities
 
             if (!context.AllowChainedEnvironmentAccess)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DelegateArgumentDoesNotExist(this.runtimeArgument.Name)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DelegateArgumentDoesNotExist(this.runtimeArgument.Name)
+                    )
+                );
             }
 
             Location location;
             if (!context.Environment.TryGetLocation(this.Id, this.Owner, out location))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DelegateArgumentDoesNotExist(this.runtimeArgument.Name)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DelegateArgumentDoesNotExist(this.runtimeArgument.Name)
+                    )
+                );
             }
 
             return location;
@@ -151,13 +143,11 @@ namespace System.Activities
             Location location;
             if (!environment.TryGetLocation(this.Id, this.Owner, out location))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.DelegateArgumentDoesNotExist(this.runtimeArgument.Name)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DelegateArgumentDoesNotExist(this.runtimeArgument.Name)
+                    )
+                );
             }
             return location;
         }

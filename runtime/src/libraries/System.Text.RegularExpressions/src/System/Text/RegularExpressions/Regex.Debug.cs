@@ -86,15 +86,13 @@ namespace System.Text.RegularExpressions
                 throw new NotSupportedException();
             }
 
-            srmFactory
-                ._matcher
-                .Explore(
-                    includeDotStarred,
-                    includeReverse,
-                    includeOriginal,
-                    exploreDfa,
-                    exploreNfa
-                );
+            srmFactory._matcher.Explore(
+                includeDotStarred,
+                includeReverse,
+                includeOriginal,
+                exploreDfa,
+                exploreNfa
+            );
         }
     }
 }

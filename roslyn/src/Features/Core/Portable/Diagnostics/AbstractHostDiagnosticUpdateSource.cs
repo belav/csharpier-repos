@@ -240,9 +240,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             internal ImmutableArray<DiagnosticData> GetReportedDiagnostics() =>
                 _abstractHostDiagnosticUpdateSource
-                    ._analyzerHostDiagnosticsMap
-                    .Values
-                    .Flatten()
+                    ._analyzerHostDiagnosticsMap.Values.Flatten()
                     .ToImmutableArray();
 
             internal ImmutableHashSet<DiagnosticData> GetReportedDiagnostics(
@@ -250,9 +248,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             )
             {
                 if (
-                    !_abstractHostDiagnosticUpdateSource
-                        ._analyzerHostDiagnosticsMap
-                        .TryGetValue(analyzer, out var diagnostics)
+                    !_abstractHostDiagnosticUpdateSource._analyzerHostDiagnosticsMap.TryGetValue(
+                        analyzer,
+                        out var diagnostics
+                    )
                 )
                 {
                     diagnostics = ImmutableHashSet<DiagnosticData>.Empty;

@@ -44,21 +44,19 @@ namespace System.ServiceModel.Dispatcher
 #pragma warning disable 56506 // Microsoft, message.Properties is never null
             if (message == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.HttpUnhandledOperationInvokerCalledWithoutMessage)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.HttpUnhandledOperationInvokerCalledWithoutMessage)
+                    )
+                );
             }
             // We might be here because we desire a redirect...
             Uri newLocation = null;
             Uri to = message.Headers.To;
             if (
-                message
-                    .Properties
-                    .ContainsKey(WebHttpDispatchOperationSelector.RedirectPropertyName)
+                message.Properties.ContainsKey(
+                    WebHttpDispatchOperationSelector.RedirectPropertyName
+                )
             )
             {
                 newLocation =
@@ -68,15 +66,13 @@ namespace System.ServiceModel.Dispatcher
             if (newLocation != null && to != null)
             {
                 // ...redirect
-                Message redirectResult = WebOperationContext
-                    .Current
-                    .CreateStreamResponse(
-                        s =>
-                            HelpHtmlBuilder
-                                .CreateTransferRedirectPage(to.AbsoluteUri, newLocation.AbsoluteUri)
-                                .Save(s, SaveOptions.OmitDuplicateNamespaces),
-                        Atom10Constants.HtmlMediaType
-                    );
+                Message redirectResult = WebOperationContext.Current.CreateStreamResponse(
+                    s =>
+                        HelpHtmlBuilder
+                            .CreateTransferRedirectPage(to.AbsoluteUri, newLocation.AbsoluteUri)
+                            .Save(s, SaveOptions.OmitDuplicateNamespaces),
+                    Atom10Constants.HtmlMediaType
+                );
                 WebOperationContext.Current.OutgoingResponse.Location = newLocation.AbsoluteUri;
                 WebOperationContext.Current.OutgoingResponse.StatusCode =
                     HttpStatusCode.TemporaryRedirect;
@@ -96,11 +92,9 @@ namespace System.ServiceModel.Dispatcher
             // otherwise we are here to issue either a 404 or a 405
             bool uriMatched = false;
             if (
-                message
-                    .Properties
-                    .ContainsKey(
-                        WebHttpDispatchOperationSelector.HttpOperationSelectorUriMatchedPropertyName
-                    )
+                message.Properties.ContainsKey(
+                    WebHttpDispatchOperationSelector.HttpOperationSelectorUriMatchedPropertyName
+                )
             )
             {
                 uriMatched = (bool)
@@ -121,38 +115,32 @@ namespace System.ServiceModel.Dispatcher
             {
                 WebHttpDispatchOperationSelectorData allowedMethodsData = null;
                 if (
-                    message
-                        .Properties
-                        .TryGetValue(
-                            WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
-                            out allowedMethodsData
-                        )
+                    message.Properties.TryGetValue(
+                        WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
+                        out allowedMethodsData
+                    )
                 )
                 {
                     WebOperationContext.Current.OutgoingResponse.Headers[HttpResponseHeader.Allow] =
                         allowedMethodsData.AllowHeader;
                 }
-                result = WebOperationContext
-                    .Current
-                    .CreateStreamResponse(
-                        s =>
-                            HelpHtmlBuilder
-                                .CreateMethodNotAllowedPage(helpUri)
-                                .Save(s, SaveOptions.OmitDuplicateNamespaces),
-                        Atom10Constants.HtmlMediaType
-                    );
+                result = WebOperationContext.Current.CreateStreamResponse(
+                    s =>
+                        HelpHtmlBuilder
+                            .CreateMethodNotAllowedPage(helpUri)
+                            .Save(s, SaveOptions.OmitDuplicateNamespaces),
+                    Atom10Constants.HtmlMediaType
+                );
             }
             else
             {
-                result = WebOperationContext
-                    .Current
-                    .CreateStreamResponse(
-                        s =>
-                            HelpHtmlBuilder
-                                .CreateEndpointNotFound(helpUri)
-                                .Save(s, SaveOptions.OmitDuplicateNamespaces),
-                        Atom10Constants.HtmlMediaType
-                    );
+                result = WebOperationContext.Current.CreateStreamResponse(
+                    s =>
+                        HelpHtmlBuilder
+                            .CreateEndpointNotFound(helpUri)
+                            .Save(s, SaveOptions.OmitDuplicateNamespaces),
+                    Atom10Constants.HtmlMediaType
+                );
             }
             WebOperationContext.Current.OutgoingResponse.StatusCode = uriMatched
                 ? HttpStatusCode.MethodNotAllowed
@@ -165,16 +153,14 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (Debugger.IsAttached)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperWarning(
-                                new InvalidOperationException(
-                                    SR2.GetString(
-                                        SR2.WebRequestDidNotMatchOperation,
-                                        OperationContext.Current.IncomingMessageHeaders.To
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.WebRequestDidNotMatchOperation,
+                                    OperationContext.Current.IncomingMessageHeaders.To
                                 )
-                            );
+                            )
+                        );
                     }
                     else
                     {
@@ -193,17 +179,15 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (Debugger.IsAttached)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperWarning(
-                                new InvalidOperationException(
-                                    SR2.GetString(
-                                        SR2.WebRequestDidNotMatchMethod,
-                                        WebOperationContext.Current.IncomingRequest.Method,
-                                        OperationContext.Current.IncomingMessageHeaders.To
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.WebRequestDidNotMatchMethod,
+                                    WebOperationContext.Current.IncomingRequest.Method,
+                                    OperationContext.Current.IncomingMessageHeaders.To
                                 )
-                            );
+                            )
+                        );
                     }
                     else
                     {

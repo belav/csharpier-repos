@@ -35,15 +35,13 @@ namespace System.Activities
         {
             if (!IsDefined(modifiers))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidEnumArgumentException(
-                            argumentName,
-                            (int)modifiers,
-                            typeof(VariableModifiers)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidEnumArgumentException(
+                        argumentName,
+                        (int)modifiers,
+                        typeof(VariableModifiers)
+                    )
+                );
             }
         }
     }

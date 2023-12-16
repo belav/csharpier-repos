@@ -379,8 +379,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetSeparatorParts(),
                 GetPostambleParts(),
                 indexer
-                    .Parameters
-                    .Select(
+                    .Parameters.Select(
                         p =>
                             Convert(
                                 p,

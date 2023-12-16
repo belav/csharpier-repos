@@ -406,25 +406,21 @@ namespace System.ServiceModel.Description
                 isEmpty = false;
                 if (cd == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            SR.GetString(SR.SFxMetadataResolverKnownContractsCannotContainNull)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.SFxMetadataResolverKnownContractsCannotContainNull)
+                    );
                 }
 
                 XmlQualifiedName qname = WsdlExporter.WsdlNamingHelper.GetPortTypeQName(cd);
                 if (qnames.Contains(qname))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxMetadataResolverKnownContractsUniqueQNames,
-                                qname.Name,
-                                qname.Namespace
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.SFxMetadataResolverKnownContractsUniqueQNames,
+                            qname.Name,
+                            qname.Namespace
+                        )
+                    );
                 }
 
                 qnames.Add(qname);
@@ -432,11 +428,9 @@ namespace System.ServiceModel.Description
 
             if (isEmpty)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        SR.GetString(SR.SFxMetadataResolverKnownContractsArgumentCannotBeEmpty)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.SFxMetadataResolverKnownContractsArgumentCannotBeEmpty)
+                );
             }
         }
 

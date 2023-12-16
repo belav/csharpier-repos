@@ -335,9 +335,10 @@ namespace System.Workflow.ComponentModel.Serialization
                         reader.LookupNamespace(reader.Prefix)
                     );
                     if (
-                        xmlQualifiedName
-                            .Namespace
-                            .Equals(StandardXomlKeys.Definitions_XmlNs, StringComparison.Ordinal)
+                        xmlQualifiedName.Namespace.Equals(
+                            StandardXomlKeys.Definitions_XmlNs,
+                            StringComparison.Ordinal
+                        )
                         && !IsMarkupExtension(xmlQualifiedName)
                         && !ExtendedPropertyInfo.IsExtendedProperty(
                             serializationManager,
@@ -495,9 +496,10 @@ namespace System.Workflow.ComponentModel.Serialization
                         reader.LookupNamespace(reader.Prefix)
                     );
                     if (
-                        xmlQualifiedName
-                            .Namespace
-                            .Equals(StandardXomlKeys.Definitions_XmlNs, StringComparison.Ordinal)
+                        xmlQualifiedName.Namespace.Equals(
+                            StandardXomlKeys.Definitions_XmlNs,
+                            StringComparison.Ordinal
+                        )
                         && !IsMarkupExtension(xmlQualifiedName)
                         && !ExtendedPropertyInfo.IsExtendedProperty(
                             serializationManager,
@@ -723,9 +725,9 @@ namespace System.Workflow.ComponentModel.Serialization
                                 )
                             )
                             {
-                                string propertyName = reader
-                                    .LocalName
-                                    .Substring(reader.LocalName.IndexOf('.') + 1);
+                                string propertyName = reader.LocalName.Substring(
+                                    reader.LocalName.IndexOf('.') + 1
+                                );
                                 PropertyInfo property = WorkflowMarkupSerializer.LookupProperty(
                                     props,
                                     propertyName
@@ -1124,9 +1126,9 @@ namespace System.Workflow.ComponentModel.Serialization
                 {
                     if (
                         obj is DependencyObject
-                        && ((DependencyObject)obj)
-                            .UserData
-                            .Contains(UserDataKeys.DesignTimeTypeNames)
+                        && ((DependencyObject)obj).UserData.Contains(
+                            UserDataKeys.DesignTimeTypeNames
+                        )
                     )
                         designTimeTypeNames =
                             ((DependencyObject)obj).UserData[UserDataKeys.DesignTimeTypeNames]
@@ -1737,9 +1739,9 @@ namespace System.Workflow.ComponentModel.Serialization
                                             {
                                                 if (dictionaryEntry)
                                                 {
-                                                    serializationManager
-                                                        .WorkflowMarkupStack
-                                                        .Push(childObj);
+                                                    serializationManager.WorkflowMarkupStack.Push(
+                                                        childObj
+                                                    );
                                                     childObj2 = ((DictionaryEntry)childObj2).Value;
                                                 }
                                                 childObj2 = GetMarkupExtensionFromValue(childObj2);
@@ -2298,9 +2300,9 @@ namespace System.Workflow.ComponentModel.Serialization
                     DependencyProperty dependencyProperty in dependencyObject.MetaDependencyProperties
                 )
                 {
-                    Attribute[] visibilityAttrs = dependencyProperty
-                        .DefaultMetadata
-                        .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
+                    Attribute[] visibilityAttrs = dependencyProperty.DefaultMetadata.GetAttributes(
+                        typeof(DesignerSerializationVisibilityAttribute)
+                    );
                     if (
                         visibilityAttrs.Length > 0
                         && ((DesignerSerializationVisibilityAttribute)visibilityAttrs[0]).Visibility
@@ -2317,9 +2319,10 @@ namespace System.Workflow.ComponentModel.Serialization
                         ) == DependencyPropertyOptions.ReadOnly
                     )
                     {
-                        object[] serializationVisibilityAttribute = dependencyProperty
-                            .DefaultMetadata
-                            .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
+                        object[] serializationVisibilityAttribute =
+                            dependencyProperty.DefaultMetadata.GetAttributes(
+                                typeof(DesignerSerializationVisibilityAttribute)
+                            );
                         if (
                             serializationVisibilityAttribute == null
                             || serializationVisibilityAttribute.Length == 0
@@ -2398,9 +2401,9 @@ namespace System.Workflow.ComponentModel.Serialization
                         .Keys
                 )
                 {
-                    Attribute[] visibilityAttrs = dependencyProperty
-                        .DefaultMetadata
-                        .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
+                    Attribute[] visibilityAttrs = dependencyProperty.DefaultMetadata.GetAttributes(
+                        typeof(DesignerSerializationVisibilityAttribute)
+                    );
                     if (
                         visibilityAttrs.Length > 0
                         && ((DesignerSerializationVisibilityAttribute)visibilityAttrs[0]).Visibility
@@ -2427,20 +2430,16 @@ namespace System.Workflow.ComponentModel.Serialization
             if (dependencyProperty.IsEvent)
             {
                 if (
-                    dependencyProperty
-                        .OwnerType
-                        .GetField(
-                            dependencyProperty.Name + "Event",
-                            BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly
-                        ) == null
+                    dependencyProperty.OwnerType.GetField(
+                        dependencyProperty.Name + "Event",
+                        BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly
+                    ) == null
                 )
                     return false;
-                MethodInfo methodInfo = dependencyProperty
-                    .OwnerType
-                    .GetMethod(
-                        "Add" + dependencyProperty.Name + "Handler",
-                        BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
-                    );
+                MethodInfo methodInfo = dependencyProperty.OwnerType.GetMethod(
+                    "Add" + dependencyProperty.Name + "Handler",
+                    BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
+                );
                 if (methodInfo == null)
                     return false;
                 ParameterInfo[] parameters = methodInfo.GetParameters();
@@ -2455,20 +2454,16 @@ namespace System.Workflow.ComponentModel.Serialization
             else
             {
                 if (
-                    dependencyProperty
-                        .OwnerType
-                        .GetField(
-                            dependencyProperty.Name + "Property",
-                            BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly
-                        ) == null
+                    dependencyProperty.OwnerType.GetField(
+                        dependencyProperty.Name + "Property",
+                        BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly
+                    ) == null
                 )
                     return false;
-                MethodInfo methodInfo = dependencyProperty
-                    .OwnerType
-                    .GetMethod(
-                        "Set" + dependencyProperty.Name,
-                        BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
-                    );
+                MethodInfo methodInfo = dependencyProperty.OwnerType.GetMethod(
+                    "Set" + dependencyProperty.Name,
+                    BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
+                );
                 if (methodInfo == null)
                     return false;
                 ParameterInfo[] parameters = methodInfo.GetParameters();
@@ -2505,12 +2500,10 @@ namespace System.Workflow.ComponentModel.Serialization
                     dependencyObject.SetBinding(dependencyProperty, value as ActivityBind);
                 else if (dependencyProperty.IsAttached)
                 {
-                    MethodInfo methodInfo = dependencyProperty
-                        .OwnerType
-                        .GetMethod(
-                            "Add" + dependencyProperty.Name + "Handler",
-                            BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
-                        );
+                    MethodInfo methodInfo = dependencyProperty.OwnerType.GetMethod(
+                        "Add" + dependencyProperty.Name + "Handler",
+                        BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
+                    );
                     if (methodInfo != null)
                     {
                         ParameterInfo[] parameters = methodInfo.GetParameters();
@@ -2557,12 +2550,10 @@ namespace System.Workflow.ComponentModel.Serialization
                     Helpers.SetDesignTimeTypeName(obj, dependencyProperty, value as string);
                 else if (dependencyProperty.IsAttached)
                 {
-                    MethodInfo methodInfo = dependencyProperty
-                        .OwnerType
-                        .GetMethod(
-                            "Set" + dependencyProperty.Name,
-                            BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
-                        );
+                    MethodInfo methodInfo = dependencyProperty.OwnerType.GetMethod(
+                        "Set" + dependencyProperty.Name,
+                        BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
+                    );
                     if (methodInfo != null)
                     {
                         ParameterInfo[] parameters = methodInfo.GetParameters();
@@ -2690,9 +2681,10 @@ namespace System.Workflow.ComponentModel.Serialization
 
             List<WorkflowMarkupSerializerMapping> xmlnsMappings = null;
             if (
-                !serializationManager
-                    .XmlNamespaceBasedMappings
-                    .TryGetValue(xmlns, out xmlnsMappings)
+                !serializationManager.XmlNamespaceBasedMappings.TryGetValue(
+                    xmlns,
+                    out xmlnsMappings
+                )
                 || xmlnsMappings.Count == 0
             )
                 return xmlQualifiedName.Namespace + "." + xmlQualifiedName.Name;
@@ -3415,9 +3407,9 @@ namespace System.Workflow.ComponentModel.Serialization
                 dependencyProperty = fieldInfo.GetValue(attachedObj) as DependencyProperty;
                 if (dependencyProperty != null)
                 {
-                    object[] attributes = dependencyProperty
-                        .DefaultMetadata
-                        .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
+                    object[] attributes = dependencyProperty.DefaultMetadata.GetAttributes(
+                        typeof(DesignerSerializationVisibilityAttribute)
+                    );
                     if (attributes.Length > 0)
                     {
                         DesignerSerializationVisibilityAttribute serializationVisibilityAttribute =
@@ -4578,9 +4570,10 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             string typeName = xmlQualifiedName.Name;
             if (
-                xmlQualifiedName
-                    .Namespace
-                    .Equals(StandardXomlKeys.Definitions_XmlNs, StringComparison.Ordinal)
+                xmlQualifiedName.Namespace.Equals(
+                    StandardXomlKeys.Definitions_XmlNs,
+                    StringComparison.Ordinal
+                )
             )
             {
                 if (typeName.Equals(typeof(Array).Name, StringComparison.Ordinal))
@@ -4602,9 +4595,10 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             bool markupExtension = false;
             if (
-                xmlQualifiedName
-                    .Namespace
-                    .Equals(StandardXomlKeys.Definitions_XmlNs, StringComparison.Ordinal)
+                xmlQualifiedName.Namespace.Equals(
+                    StandardXomlKeys.Definitions_XmlNs,
+                    StringComparison.Ordinal
+                )
             )
             {
                 if (

@@ -1326,9 +1326,10 @@ namespace ILCompiler.DependencyAnalysis
         {
             get
             {
-                return _systemArrayOfTClass ??= _context
-                    .SystemModule
-                    .GetKnownType("System", "Array`1");
+                return _systemArrayOfTClass ??= _context.SystemModule.GetKnownType(
+                    "System",
+                    "Array`1"
+                );
             }
         }
 
@@ -1339,9 +1340,11 @@ namespace ILCompiler.DependencyAnalysis
             {
                 // This type is optional, but it's fine for this cache to be ineffective if that happens.
                 // Those scenarios are rare and typically deal with small compilations.
-                return _systemArrayOfTEnumeratorType ??= _context
-                    .SystemModule
-                    .GetType("System", "SZGenericArrayEnumerator`1", throwIfNotFound: false);
+                return _systemArrayOfTEnumeratorType ??= _context.SystemModule.GetType(
+                    "System",
+                    "SZGenericArrayEnumerator`1",
+                    throwIfNotFound: false
+                );
             }
         }
 

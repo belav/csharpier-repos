@@ -27,8 +27,7 @@ class C
 "
             );
             var fieldA = compilation
-                .GlobalNamespace
-                .GetMember<TypeSymbol>("C")
+                .GlobalNamespace.GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             var typeVar = compilation.GlobalNamespace.GetMember<TypeSymbol>("var");
 
@@ -49,8 +48,7 @@ class C
 "
             );
             var fieldA = compilation
-                .GlobalNamespace
-                .GetMember<TypeSymbol>("C")
+                .GlobalNamespace.GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
 
             Assert.Equal(SpecialType.System_Int32, fieldA.Type.SpecialType);

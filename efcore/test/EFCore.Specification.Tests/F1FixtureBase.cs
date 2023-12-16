@@ -270,8 +270,9 @@ public abstract class F1FixtureBase<TRowVersion> : SharedStoreFixtureBase<F1Cont
         entityType.ConstructorBinding = new ConstructorBinding(
             typeof(TEntity)
                 .GetTypeInfo()
-                .DeclaredConstructors
-                .Single(c => c.GetParameters().Length == parameterBindings.Count),
+                .DeclaredConstructors.Single(
+                    c => c.GetParameters().Length == parameterBindings.Count
+                ),
             parameterBindings
         );
     }

@@ -217,12 +217,10 @@ namespace Internal.TypeSystem
             else
             {
                 Debug.Assert(typeInHierarchy is InstantiatedType);
-                return _typeDef
-                    .Context
-                    .GetMethodForInstantiatedType(
-                        typicalFinalizer.GetTypicalMethodDefinition(),
-                        (InstantiatedType)typeInHierarchy
-                    );
+                return _typeDef.Context.GetMethodForInstantiatedType(
+                    typicalFinalizer.GetTypicalMethodDefinition(),
+                    (InstantiatedType)typeInHierarchy
+                );
             }
         }
 

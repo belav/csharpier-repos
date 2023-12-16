@@ -53,9 +53,11 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(optionsBuilder);
 
-            optionsBuilder
-                .Services
-                .Configure<TOptions>(optionsBuilder.Name, config, configureBinder);
+            optionsBuilder.Services.Configure<TOptions>(
+                optionsBuilder.Name,
+                config,
+                configureBinder
+            );
             return optionsBuilder;
         }
 
@@ -100,18 +102,16 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
             );
 
-            optionsBuilder
-                .Services
-                .AddSingleton<
-                    IOptionsChangeTokenSource<TOptions>,
-                    ConfigurationChangeTokenSource<TOptions>
-                >(sp =>
-                {
-                    return new ConfigurationChangeTokenSource<TOptions>(
-                        optionsBuilder.Name,
-                        sp.GetRequiredService<IConfiguration>()
-                    );
-                });
+            optionsBuilder.Services.AddSingleton<
+                IOptionsChangeTokenSource<TOptions>,
+                ConfigurationChangeTokenSource<TOptions>
+            >(sp =>
+            {
+                return new ConfigurationChangeTokenSource<TOptions>(
+                    optionsBuilder.Name,
+                    sp.GetRequiredService<IConfiguration>()
+                );
+            });
 
             return optionsBuilder;
         }

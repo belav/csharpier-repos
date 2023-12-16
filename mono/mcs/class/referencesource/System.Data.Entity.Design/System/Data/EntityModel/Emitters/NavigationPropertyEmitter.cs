@@ -100,14 +100,12 @@ namespace System.Data.EntityModel.Emitters
             }
             else
             {
-                Generator
-                    .AttributeEmitter
-                    .EmitNavigationPropertyAttributes(
-                        Generator,
-                        target,
-                        property,
-                        eventArgs.AdditionalAttributes
-                    );
+                Generator.AttributeEmitter.EmitNavigationPropertyAttributes(
+                    Generator,
+                    target,
+                    property,
+                    eventArgs.AdditionalAttributes
+                );
 
                 // Only reference navigation properties are currently currently supported with XML serialization
                 // and thus we should use the XmlIgnore and SoapIgnore attributes on other property types.
@@ -222,11 +220,9 @@ namespace System.Data.EntityModel.Emitters
                         new CodeMethodReferenceExpression();
                     initReferenceMethod.MethodName = "InitializeRelatedReference";
 
-                    initReferenceMethod
-                        .TypeArguments
-                        .Add(
-                            Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target))
-                        );
+                    initReferenceMethod.TypeArguments.Add(
+                        Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target))
+                    );
                     initReferenceMethod.TargetObject = new CodePropertyReferenceExpression(
                         new CodeCastExpression(
                             TypeReference.IEntityWithRelationshipsTypeBaseClass,
@@ -241,26 +237,24 @@ namespace System.Data.EntityModel.Emitters
                         .DeclaringType
                         .FullName;
 
-                    property
-                        .SetStatements
-                        .Add(
-                            new CodeConditionStatement(
-                                EmitExpressionDoesNotEqualNull(valueRef),
-                                new CodeExpressionStatement(
-                                    new CodeMethodInvokeExpression(
-                                        initReferenceMethod,
-                                        new CodeExpression[]
-                                        {
-                                            new CodePrimitiveExpression(
-                                                cspaceNamespaceNameQualifiedRelationshipName
-                                            ),
-                                            new CodePrimitiveExpression(target.Name),
-                                            valueRef
-                                        }
-                                    )
+                    property.SetStatements.Add(
+                        new CodeConditionStatement(
+                            EmitExpressionDoesNotEqualNull(valueRef),
+                            new CodeExpressionStatement(
+                                new CodeMethodInvokeExpression(
+                                    initReferenceMethod,
+                                    new CodeExpression[]
+                                    {
+                                        new CodePrimitiveExpression(
+                                            cspaceNamespaceNameQualifiedRelationshipName
+                                        ),
+                                        new CodePrimitiveExpression(target.Name),
+                                        valueRef
+                                    }
                                 )
                             )
-                        );
+                        )
+                    );
                 }
                 else
                 {
@@ -293,9 +287,9 @@ namespace System.Data.EntityModel.Emitters
                     new CodeMethodReferenceExpression();
                 initCollectionMethod.MethodName = "InitializeRelatedCollection";
 
-                initCollectionMethod
-                    .TypeArguments
-                    .Add(Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target)));
+                initCollectionMethod.TypeArguments.Add(
+                    Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target))
+                );
                 initCollectionMethod.TargetObject = new CodePropertyReferenceExpression(
                     new CodeCastExpression(
                         TypeReference.IEntityWithRelationshipsTypeBaseClass,
@@ -308,26 +302,24 @@ namespace System.Data.EntityModel.Emitters
                 // or we can't find the relationship again later
                 string cspaceNamespaceNameQualifiedRelationshipName = target.DeclaringType.FullName;
 
-                property
-                    .SetStatements
-                    .Add(
-                        new CodeConditionStatement(
-                            EmitExpressionDoesNotEqualNull(valueRef),
-                            new CodeExpressionStatement(
-                                new CodeMethodInvokeExpression(
-                                    initCollectionMethod,
-                                    new CodeExpression[]
-                                    {
-                                        new CodePrimitiveExpression(
-                                            cspaceNamespaceNameQualifiedRelationshipName
-                                        ),
-                                        new CodePrimitiveExpression(target.Name),
-                                        valueRef
-                                    }
-                                )
+                property.SetStatements.Add(
+                    new CodeConditionStatement(
+                        EmitExpressionDoesNotEqualNull(valueRef),
+                        new CodeExpressionStatement(
+                            new CodeMethodInvokeExpression(
+                                initCollectionMethod,
+                                new CodeExpression[]
+                                {
+                                    new CodePrimitiveExpression(
+                                        cspaceNamespaceNameQualifiedRelationshipName
+                                    ),
+                                    new CodePrimitiveExpression(target.Name),
+                                    valueRef
+                                }
                             )
                         )
-                    );
+                    )
+                );
             }
 
             // if additional Get statements were specified by the event subscriber, insert them now
@@ -445,9 +437,9 @@ namespace System.Data.EntityModel.Emitters
             else
                 getMethod.MethodName = "GetRelatedCollection";
 
-            getMethod
-                .TypeArguments
-                .Add(Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target)));
+            getMethod.TypeArguments.Add(
+                Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target))
+            );
             getMethod.TargetObject = new CodePropertyReferenceExpression(
                 new CodeCastExpression(
                     TypeReference.IEntityWithRelationshipsTypeBaseClass,

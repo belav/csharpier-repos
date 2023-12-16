@@ -55,9 +55,10 @@ internal static class OmniSharpNavigateToSearcher
         )
         {
             var document = await result
-                .NavigableItem
-                .Document
-                .GetRequiredDocumentAsync(project.Solution, cancellationToken)
+                .NavigableItem.Document.GetRequiredDocumentAsync(
+                    project.Solution,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
             var omniSharpResult = new OmniSharpNavigateToSearchResult(
                 result.AdditionalInformation,

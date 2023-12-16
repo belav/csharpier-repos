@@ -750,12 +750,10 @@ namespace System
             if (target == EnvironmentVariableTarget.Machine)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .LocalMachine
-                        .OpenSubKey(
-                            @"System\CurrentControlSet\Control\Session Manager\Environment",
-                            false
-                        )
+                    RegistryKey environmentKey = Registry.LocalMachine.OpenSubKey(
+                        @"System\CurrentControlSet\Control\Session Manager\Environment",
+                        false
+                    )
                 )
                 {
                     Contract.Assert(
@@ -774,9 +772,10 @@ namespace System
             else if (target == EnvironmentVariableTarget.User)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .CurrentUser
-                        .OpenSubKey("Environment", false)
+                    RegistryKey environmentKey = Registry.CurrentUser.OpenSubKey(
+                        "Environment",
+                        false
+                    )
                 )
                 {
                     Contract.Assert(environmentKey != null, @"HKCU\Environment is missing!");
@@ -985,12 +984,10 @@ namespace System
             if (target == EnvironmentVariableTarget.Machine)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .LocalMachine
-                        .OpenSubKey(
-                            @"System\CurrentControlSet\Control\Session Manager\Environment",
-                            false
-                        )
+                    RegistryKey environmentKey = Registry.LocalMachine.OpenSubKey(
+                        @"System\CurrentControlSet\Control\Session Manager\Environment",
+                        false
+                    )
                 )
                 {
                     return GetRegistryKeyNameValuePairs(environmentKey);
@@ -999,9 +996,10 @@ namespace System
             else if (target == EnvironmentVariableTarget.User)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .CurrentUser
-                        .OpenSubKey("Environment", false)
+                    RegistryKey environmentKey = Registry.CurrentUser.OpenSubKey(
+                        "Environment",
+                        false
+                    )
                 )
                 {
                     return GetRegistryKeyNameValuePairs(environmentKey);
@@ -1151,12 +1149,10 @@ namespace System
             if (target == EnvironmentVariableTarget.Machine)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .LocalMachine
-                        .OpenSubKey(
-                            @"System\CurrentControlSet\Control\Session Manager\Environment",
-                            true
-                        )
+                    RegistryKey environmentKey = Registry.LocalMachine.OpenSubKey(
+                        @"System\CurrentControlSet\Control\Session Manager\Environment",
+                        true
+                    )
                 )
                 {
                     Contract.Assert(
@@ -1183,9 +1179,10 @@ namespace System
                     );
                 }
                 using (
-                    RegistryKey environmentKey = Registry
-                        .CurrentUser
-                        .OpenSubKey("Environment", true)
+                    RegistryKey environmentKey = Registry.CurrentUser.OpenSubKey(
+                        "Environment",
+                        true
+                    )
                 )
                 {
                     Contract.Assert(environmentKey != null, @"HKCU\Environment is missing!");

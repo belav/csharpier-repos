@@ -94,8 +94,9 @@ internal class DefinitionContextTracker(
         if (
             reason == ConnectionReason.TextViewLifetime
             || !textView
-                .BufferGraph
-                .GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType))
+                .BufferGraph.GetTextBuffers(
+                    b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
+                )
                 .Any()
         )
         {
@@ -121,12 +122,10 @@ internal class DefinitionContextTracker(
         _currentUpdateCancellationToken?.Cancel();
 
         // See if we moved somewhere else in a projection that we care about
-        var pointInRoslynSnapshot = caretPosition
-            .Point
-            .GetPoint(
-                tb => tb.ContentType.IsOfType(ContentTypeNames.RoslynContentType),
-                caretPosition.Affinity
-            );
+        var pointInRoslynSnapshot = caretPosition.Point.GetPoint(
+            tb => tb.ContentType.IsOfType(ContentTypeNames.RoslynContentType),
+            caretPosition.Affinity
+        );
         if (pointInRoslynSnapshot == null)
         {
             return;
@@ -201,13 +200,13 @@ internal class DefinitionContextTracker(
             .ConfigureAwait(false);
         if (navigableItems.Length > 0)
         {
-            var navigationService = workspace
-                .Services
-                .GetRequiredService<IDocumentNavigationService>();
+            var navigationService =
+                workspace.Services.GetRequiredService<IDocumentNavigationService>();
 
-            using var _ = PooledObjects
-                .ArrayBuilder<CodeDefinitionWindowLocation>
-                .GetInstance(navigableItems.Length, out var builder);
+            using var _ = PooledObjects.ArrayBuilder<CodeDefinitionWindowLocation>.GetInstance(
+                navigableItems.Length,
+                out var builder
+            );
             foreach (var item in navigableItems)
             {
                 if (
@@ -221,8 +220,10 @@ internal class DefinitionContextTracker(
                         .ConfigureAwait(false)
                 )
                 {
-                    var text = await item.Document
-                        .GetTextAsync(document.Project.Solution, cancellationToken)
+                    var text = await item.Document.GetTextAsync(
+                        document.Project.Solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var linePositionSpan = text.Lines.GetLinePositionSpan(item.SourceSpan);
 
@@ -254,9 +255,8 @@ internal class DefinitionContextTracker(
             return ImmutableArray<CodeDefinitionWindowLocation>.Empty;
         }
 
-        var symbolNavigationService = workspace
-            .Services
-            .GetRequiredService<ISymbolNavigationService>();
+        var symbolNavigationService =
+            workspace.Services.GetRequiredService<ISymbolNavigationService>();
         var definitionItem = symbol.ToNonClassifiedDefinitionItem(
             document.Project.Solution,
             includeHiddenLocations: false

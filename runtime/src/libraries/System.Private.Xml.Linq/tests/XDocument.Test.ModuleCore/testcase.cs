@@ -103,9 +103,9 @@ namespace Microsoft.Test.ModuleCore
                             }
                             if (!string.IsNullOrWhiteSpace(tse.Message))
                             {
-                                System
-                                    .Console
-                                    .WriteLine(indent + " SKIPPED" + ", Msg:" + tse.Message);
+                                System.Console.WriteLine(
+                                    indent + " SKIPPED" + ", Msg:" + tse.Message
+                                );
                             }
                             module.SkipCount++;
                         }

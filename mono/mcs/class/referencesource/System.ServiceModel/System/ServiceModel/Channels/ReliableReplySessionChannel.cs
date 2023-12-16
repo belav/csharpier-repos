@@ -713,9 +713,9 @@ namespace System.ServiceModel.Channels
                     MessageNumberRolloverFault fault = new MessageNumberRolloverFault(
                         this.session.OutputID
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(fault.CreateException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        fault.CreateException()
+                    );
                 }
                 context.SetReplySequenceNumber(++this.nextReplySequenceNumber);
 
@@ -1682,13 +1682,11 @@ namespace System.ServiceModel.Channels
                         if (this.Aborted)
                         {
                             needAbort = false;
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new CommunicationObjectAbortedException(
-                                        SR.GetString(SR.RequestContextAborted)
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.RequestContextAborted)
+                                )
+                            );
                         }
 
                         if (this.outcomeKnown)
@@ -1822,13 +1820,11 @@ namespace System.ServiceModel.Channels
                         if (this.Aborted)
                         {
                             needAbort = false;
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new CommunicationObjectAbortedException(
-                                        SR.GetString(SR.RequestContextAborted)
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.RequestContextAborted)
+                                )
+                            );
                         }
 
                         if (this.outcomeKnown)
@@ -2021,29 +2017,27 @@ namespace System.ServiceModel.Channels
                         if (this.context.bufferedReply != null)
                         {
                             this.reply = this.context.bufferedReply.CreateMessage();
-                            this.context
-                                .channel
-                                .PrepareReplyMessage(
-                                    this.context.replySequenceNumber,
-                                    this.context.isLastReply,
-                                    this.context.ranges,
-                                    this.reply
-                                );
+                            this.context.channel.PrepareReplyMessage(
+                                this.context.replySequenceNumber,
+                                this.context.isLastReply,
+                                this.context.ranges,
+                                this.reply
+                            );
                         }
                         else
                         {
-                            this.reply = this.context
-                                .channel
-                                .CreateAcknowledgement(this.context.ranges);
+                            this.reply = this.context.channel.CreateAcknowledgement(
+                                this.context.ranges
+                            );
                         }
 
                         RequestContext thisInnerContext = this.context.innerContexts[
                             this.currentContext
                         ];
-                        this.context
-                            .channel
-                            .binder
-                            .SetMaskingMode(thisInnerContext, MaskingMode.Handled);
+                        this.context.channel.binder.SetMaskingMode(
+                            thisInnerContext,
+                            MaskingMode.Handled
+                        );
 
                         IAsyncResult result = thisInnerContext.BeginReply(
                             this.reply,

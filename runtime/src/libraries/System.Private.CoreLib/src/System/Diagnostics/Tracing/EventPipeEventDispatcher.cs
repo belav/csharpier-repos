@@ -238,16 +238,14 @@ namespace System.Diagnostics.Tracing
                             syncTimeQPC,
                             timeQPCFrequency
                         );
-                        NativeRuntimeEventSource
-                            .Log
-                            .ProcessEvent(
-                                instanceData.EventID,
-                                instanceData.ThreadID,
-                                dateTimeStamp,
-                                instanceData.ActivityId,
-                                instanceData.ChildActivityId,
-                                payload
-                            );
+                        NativeRuntimeEventSource.Log.ProcessEvent(
+                            instanceData.EventID,
+                            instanceData.ThreadID,
+                            dateTimeStamp,
+                            instanceData.ActivityId,
+                            instanceData.ChildActivityId,
+                            payload
+                        );
                     }
                 }
 

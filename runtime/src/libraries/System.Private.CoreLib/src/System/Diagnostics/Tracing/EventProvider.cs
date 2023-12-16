@@ -952,14 +952,12 @@ namespace System.Diagnostics.Tracing
             long registrationHandle = 0;
             _providerId = eventSource.Guid;
             Guid providerId = _providerId;
-            uint status = Interop
-                .Advapi32
-                .EventRegister(
-                    &providerId,
-                    &Callback,
-                    (void*)GCHandle.ToIntPtr(_gcHandle),
-                    &registrationHandle
-                );
+            uint status = Interop.Advapi32.EventRegister(
+                &providerId,
+                &Callback,
+                (void*)GCHandle.ToIntPtr(_gcHandle),
+                &registrationHandle
+            );
             if (status != 0)
             {
                 _gcHandle.Free();
@@ -995,16 +993,14 @@ namespace System.Diagnostics.Tracing
             EventProvider.EventData* userData
         )
         {
-            int error = Interop
-                .Advapi32
-                .EventWriteTransfer(
-                    _registrationHandle,
-                    in eventDescriptor,
-                    activityId,
-                    relatedActivityId,
-                    userDataCount,
-                    userData
-                );
+            int error = Interop.Advapi32.EventWriteTransfer(
+                _registrationHandle,
+                in eventDescriptor,
+                activityId,
+                relatedActivityId,
+                userDataCount,
+                userData
+            );
 
             switch (error)
             {
@@ -1055,9 +1051,12 @@ namespace System.Diagnostics.Tracing
             {
                 try
                 {
-                    status = Interop
-                        .Advapi32
-                        .EventSetInformation(_registrationHandle, eventInfoClass, data, dataSize);
+                    status = Interop.Advapi32.EventSetInformation(
+                        _registrationHandle,
+                        eventInfoClass,
+                        data,
+                        dataSize
+                    );
                 }
                 catch (TypeLoadException)
                 {
@@ -1225,16 +1224,14 @@ namespace System.Diagnostics.Tracing
 
                     fixed (Guid* provider = &_providerId)
                     {
-                        hr = Interop
-                            .Advapi32
-                            .EnumerateTraceGuidsEx(
-                                Interop.Advapi32.TRACE_QUERY_INFO_CLASS.TraceGuidQueryInfo,
-                                provider,
-                                sizeof(Guid),
-                                buffer,
-                                buffSize,
-                                out buffSize
-                            );
+                        hr = Interop.Advapi32.EnumerateTraceGuidsEx(
+                            Interop.Advapi32.TRACE_QUERY_INFO_CLASS.TraceGuidQueryInfo,
+                            provider,
+                            sizeof(Guid),
+                            buffer,
+                            buffSize,
+                            out buffSize
+                        );
                     }
                     if (hr == 0)
                         break;
@@ -1523,12 +1520,16 @@ namespace System.Diagnostics.Tracing
                     int valueEnd = FindNull(data, valueIdx);
                     if (valueEnd < data.Length)
                     {
-                        string key = Text.Encoding
-                            .UTF8
-                            .GetString(data, dataStart, keyEnd - dataStart);
-                        string value = Text.Encoding
-                            .UTF8
-                            .GetString(data, valueIdx, valueEnd - valueIdx);
+                        string key = Text.Encoding.UTF8.GetString(
+                            data,
+                            dataStart,
+                            keyEnd - dataStart
+                        );
+                        string value = Text.Encoding.UTF8.GetString(
+                            data,
+                            valueIdx,
+                            valueEnd - valueIdx
+                        );
                         args[key] = value;
                     }
                     dataStart = valueEnd + 1;

@@ -285,9 +285,10 @@ namespace System.Data.Query.PlanCompiler
             ColumnMapTranslatorTranslationDelegate translationDelegate
         )
         {
-            ColumnMap newEntitySetColumnMap = entityIdentity
-                .EntitySetColumnMap
-                .Accept(this, translationDelegate);
+            ColumnMap newEntitySetColumnMap = entityIdentity.EntitySetColumnMap.Accept(
+                this,
+                translationDelegate
+            );
             VisitList(entityIdentity.Keys, translationDelegate);
 
             if (newEntitySetColumnMap != entityIdentity.EntitySetColumnMap)
@@ -420,9 +421,10 @@ namespace System.Data.Query.PlanCompiler
             ColumnMapTranslatorTranslationDelegate translationDelegate
         )
         {
-            ColumnMap newTypeDiscriminator = columnMap
-                .TypeDiscriminator
-                .Accept(this, translationDelegate);
+            ColumnMap newTypeDiscriminator = columnMap.TypeDiscriminator.Accept(
+                this,
+                translationDelegate
+            );
 
             // NOTE: we're using Copy-On-Write logic to avoid allocation if we don't
             //       need to change things.
@@ -471,15 +473,10 @@ namespace System.Data.Query.PlanCompiler
         {
             // At this time, we shouldn't ever see this type here; it's for SPROCS which don't use
             // the plan compiler.
-            System
-                .Data
-                .Query
-                .PlanCompiler
-                .PlanCompiler
-                .Assert(
-                    false,
-                    "unexpected MultipleDiscriminatorPolymorphicColumnMap in ColumnMapTranslator"
-                );
+            System.Data.Query.PlanCompiler.PlanCompiler.Assert(
+                false,
+                "unexpected MultipleDiscriminatorPolymorphicColumnMap in ColumnMapTranslator"
+            );
             return null;
         }
 

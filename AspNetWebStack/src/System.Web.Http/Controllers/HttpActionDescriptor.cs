@@ -282,9 +282,8 @@ namespace System.Web.Http.Controllers
 
         private Collection<FilterInfo> InitializeFilterPipeline()
         {
-            IEnumerable<IFilterProvider> filterProviders = _configuration
-                .Services
-                .GetFilterProviders();
+            IEnumerable<IFilterProvider> filterProviders =
+                _configuration.Services.GetFilterProviders();
 
             IEnumerable<FilterInfo> filters = filterProviders
                 .SelectMany(fp => fp.GetFilters(_configuration, this))

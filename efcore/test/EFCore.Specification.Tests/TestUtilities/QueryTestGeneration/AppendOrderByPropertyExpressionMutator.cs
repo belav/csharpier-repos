@@ -10,8 +10,7 @@ public class AppendOrderByPropertyExpressionMutator : ExpressionMutator
 
     private bool HasValidPropertyToOrderBy(Expression expression) =>
         expression
-            .Type
-            .GetGenericArguments()[0]
+            .Type.GetGenericArguments()[0]
             .GetProperties()
             .Where(p => !p.GetMethod.IsStatic)
             .Any(p => IsOrderedableType(p.PropertyType));
@@ -32,9 +31,10 @@ public class AppendOrderByPropertyExpressionMutator : ExpressionMutator
 
         var isDescending = random.Next(3) == 0;
         var orderBy = isDescending
-            ? QueryableMethods
-                .OrderByDescending
-                .MakeGenericMethod(typeArgument, properties[i].PropertyType)
+            ? QueryableMethods.OrderByDescending.MakeGenericMethod(
+                typeArgument,
+                properties[i].PropertyType
+            )
             : QueryableMethods.OrderBy.MakeGenericMethod(typeArgument, properties[i].PropertyType);
 
         var prm = Expression.Parameter(typeArgument, "prm");
@@ -54,9 +54,10 @@ public class AppendOrderByPropertyExpressionMutator : ExpressionMutator
             );
 
             orderBy = isDescending
-                ? QueryableMethods
-                    .OrderByDescending
-                    .MakeGenericMethod(typeArgument, nullablePropertyType)
+                ? QueryableMethods.OrderByDescending.MakeGenericMethod(
+                    typeArgument,
+                    nullablePropertyType
+                )
                 : QueryableMethods.OrderBy.MakeGenericMethod(typeArgument, nullablePropertyType);
 
             lambdaBody = Expression.Convert(lambdaBody, nullablePropertyType);

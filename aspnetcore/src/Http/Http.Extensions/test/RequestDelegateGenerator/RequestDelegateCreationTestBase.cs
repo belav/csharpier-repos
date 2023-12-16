@@ -243,8 +243,7 @@ public abstract class RequestDelegateCreationTestBase : LoggedTest
         foreach (var endpoint in endpoints)
         {
             var generatedCodeAttribute = endpoint
-                .Metadata
-                .OfType<GeneratedCodeAttribute>()
+                .Metadata.OfType<GeneratedCodeAttribute>()
                 .SingleOrDefault();
 
             if (expectGeneratedCode)
@@ -299,17 +298,17 @@ public abstract class RequestDelegateCreationTestBase : LoggedTest
     )
     {
         var httpContext = CreateHttpContext(serviceProvider);
-        httpContext
-            .Features
-            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.Request.Headers["Content-Type"] = "application/json";
 
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(requestData);
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream
-            .Length
-            .ToString(CultureInfo.InvariantCulture);
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
         return httpContext;
     }
 
@@ -424,8 +423,7 @@ public static class {{className}}
             compilationOptions = modifyCompilationOptions(compilationOptions);
         }
         var project = new AdhocWorkspace()
-            .CurrentSolution
-            .AddProject(projectName, projectName, LanguageNames.CSharp)
+            .CurrentSolution.AddProject(projectName, projectName, LanguageNames.CSharp)
             .WithCompilationOptions(compilationOptions)
             .WithParseOptions(ParseOptions);
 
@@ -473,8 +471,7 @@ public static class {{className}}
         }
 
         var baselineFilePathMetadataValue = typeof(RequestDelegateCreationTestBase)
-            .Assembly
-            .GetCustomAttributes<AssemblyMetadataAttribute>()
+            .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
             .Single(d => d.Key == "RequestDelegateGeneratorTestBaselines")
             .Value;
         var baselineFilePathRoot = SkipOnHelixAttribute.OnHelix()

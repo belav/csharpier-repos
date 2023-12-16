@@ -56,11 +56,9 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
+                );
             }
         }
 
@@ -221,18 +219,16 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TransactionException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ProtocolException(e.Message, e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(e.Message, e)
+                    );
                 }
             }
             else if (txFlowOption == TransactionFlowOption.Mandatory)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ProtocolException(SR.GetString(SR.SFxTransactionFlowRequired))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ProtocolException(SR.GetString(SR.SFxTransactionFlowRequired))
+                );
             }
         }
 

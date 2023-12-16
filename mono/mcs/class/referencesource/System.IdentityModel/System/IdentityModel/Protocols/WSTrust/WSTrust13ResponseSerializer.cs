@@ -255,9 +255,10 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
 
             if (
-                StringComparer
-                    .Ordinal
-                    .Equals(elementName, WSTrust13Constants.ElementNames.KeyWrapAlgorithm)
+                StringComparer.Ordinal.Equals(
+                    elementName,
+                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm
+                )
             )
             {
                 writer.WriteElementString(

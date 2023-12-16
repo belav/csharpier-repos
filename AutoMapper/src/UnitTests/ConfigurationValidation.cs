@@ -39,8 +39,7 @@ public class ConstructorMappingValidation : NonValidatingSpecBase
             AssertConfigurationIsValid
         ).ShouldThrowException<AutoMapperConfigurationException>(
             ex =>
-                ex.MemberMap
-                    .ToString()
+                ex.MemberMap.ToString()
                     .ShouldBe("Void .ctor(ComplexType), parameter myComplexMember")
         );
 }
@@ -887,8 +886,7 @@ public class When_configuring_a_resolver : AutoMapperSpecBase
         )
         {
             return source
-                .Details
-                .Select(d => new KeyValuePair<string, string>(d.ToString(), d.ToString()))
+                .Details.Select(d => new KeyValuePair<string, string>(d.ToString(), d.ToString()))
                 .ToList();
         }
     }

@@ -250,8 +250,11 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         if (
             (adding || oldState is EntityState.Detached)
             && await StateManager
-                .ValueGenerationManager
-                .GenerateAsync(this, includePrimaryKey: adding, cancellationToken)
+                .ValueGenerationManager.GenerateAsync(
+                    this,
+                    includePrimaryKey: adding,
+                    cancellationToken
+                )
                 .ConfigureAwait(false)
             && fallbackState.HasValue
         )
@@ -308,8 +311,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         if (adding || (oldState == EntityState.Detached && keyUnknown))
         {
             var principalEntry = await StateManager
-                .ValueGenerationManager
-                .PropagateAsync(this, cancellationToken)
+                .ValueGenerationManager.PropagateAsync(this, cancellationToken)
                 .ConfigureAwait(false);
 
             entityState = ForceState(
@@ -579,13 +581,11 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             {
                 var service =
                     this[serviceProperty]
-                    ?? serviceProperty
-                        .ParameterBinding
-                        .ServiceDelegate(
-                            new MaterializationContext(ValueBuffer.Empty, Context),
-                            EntityType,
-                            Entity
-                        );
+                    ?? serviceProperty.ParameterBinding.ServiceDelegate(
+                        new MaterializationContext(ValueBuffer.Empty, Context),
+                        EntityType,
+                        Entity
+                    );
 
                 if (service == null)
                 {
@@ -606,13 +606,11 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             {
                 foreach (var serviceProperty in dependentServices)
                 {
-                    this[serviceProperty] = serviceProperty
-                        .ParameterBinding
-                        .ServiceDelegate(
-                            new MaterializationContext(ValueBuffer.Empty, Context),
-                            EntityType,
-                            Entity
-                        );
+                    this[serviceProperty] = serviceProperty.ParameterBinding.ServiceDelegate(
+                        new MaterializationContext(ValueBuffer.Empty, Context),
+                        EntityType,
+                        Entity
+                    );
                 }
             }
             else if (newState == EntityState.Detached)
@@ -645,9 +643,11 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
 
         _stateData.EntityState = EntityState.Unchanged;
 
-        StateManager
-            .InternalEntityEntryNotifier
-            .StateChanged(this, EntityState.Detached, fromQuery: true);
+        StateManager.InternalEntityEntryNotifier.StateChanged(
+            this,
+            EntityState.Detached,
+            fromQuery: true
+        );
 
         StateManager.OnTracked(this, fromQuery: true);
 
@@ -1677,9 +1677,11 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
                     SetIsLoaded(navigation, value != null);
                 }
 
-                StateManager
-                    .InternalEntityEntryNotifier
-                    .PropertyChanged(this, propertyBase, setModified);
+                StateManager.InternalEntityEntryNotifier.PropertyChanged(
+                    this,
+                    propertyBase,
+                    setModified
+                );
             }
         }
     }
@@ -1984,19 +1986,19 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
 
             if (StateManager.SensitiveLoggingEnabled)
             {
-                StateManager
-                    .UpdateLogger
-                    .CascadeDeleteOrphanSensitive(
-                        this,
-                        cascadeFk.PrincipalEntityType,
-                        cascadeState
-                    );
+                StateManager.UpdateLogger.CascadeDeleteOrphanSensitive(
+                    this,
+                    cascadeFk.PrincipalEntityType,
+                    cascadeState
+                );
             }
             else
             {
-                StateManager
-                    .UpdateLogger
-                    .CascadeDeleteOrphan(this, cascadeFk.PrincipalEntityType, cascadeState);
+                StateManager.UpdateLogger.CascadeDeleteOrphan(
+                    this,
+                    cascadeFk.PrincipalEntityType,
+                    cascadeState
+                );
             }
 
             SetEntityState(cascadeState);
@@ -2215,10 +2217,10 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
                 && GetCurrentValue(navigation) != null
             )
             {
-                StateManager
-                    .Dependencies
-                    .InternalEntityEntrySubscriber
-                    .UnsubscribeCollectionChanged(this, navigation);
+                StateManager.Dependencies.InternalEntityEntrySubscriber.UnsubscribeCollectionChanged(
+                    this,
+                    navigation
+                );
             }
         }
     }
@@ -2233,19 +2235,21 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     {
         foreach (var propertyBase in GetNotificationProperties(EntityType, eventArgs.PropertyName))
         {
-            StateManager
-                .InternalEntityEntryNotifier
-                .PropertyChanged(this, propertyBase, setModified: true);
+            StateManager.InternalEntityEntryNotifier.PropertyChanged(
+                this,
+                propertyBase,
+                setModified: true
+            );
 
             if (
                 propertyBase is INavigationBase { IsCollection: true } navigation
                 && GetCurrentValue(navigation) != null
             )
             {
-                StateManager
-                    .Dependencies
-                    .InternalEntityEntrySubscriber
-                    .SubscribeCollectionChanged(this, navigation);
+                StateManager.Dependencies.InternalEntityEntrySubscriber.SubscribeCollectionChanged(
+                    this,
+                    navigation
+                );
             }
         }
     }
@@ -2312,34 +2316,28 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             switch (eventArgs.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    StateManager
-                        .InternalEntityEntryNotifier
-                        .NavigationCollectionChanged(
-                            this,
-                            navigation,
-                            eventArgs.NewItems!.OfType<object>(),
-                            Enumerable.Empty<object>()
-                        );
+                    StateManager.InternalEntityEntryNotifier.NavigationCollectionChanged(
+                        this,
+                        navigation,
+                        eventArgs.NewItems!.OfType<object>(),
+                        Enumerable.Empty<object>()
+                    );
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    StateManager
-                        .InternalEntityEntryNotifier
-                        .NavigationCollectionChanged(
-                            this,
-                            navigation,
-                            Enumerable.Empty<object>(),
-                            eventArgs.OldItems!.OfType<object>()
-                        );
+                    StateManager.InternalEntityEntryNotifier.NavigationCollectionChanged(
+                        this,
+                        navigation,
+                        Enumerable.Empty<object>(),
+                        eventArgs.OldItems!.OfType<object>()
+                    );
                     break;
                 case NotifyCollectionChangedAction.Replace:
-                    StateManager
-                        .InternalEntityEntryNotifier
-                        .NavigationCollectionChanged(
-                            this,
-                            navigation,
-                            eventArgs.NewItems!.OfType<object>(),
-                            eventArgs.OldItems!.OfType<object>()
-                        );
+                    StateManager.InternalEntityEntryNotifier.NavigationCollectionChanged(
+                        this,
+                        navigation,
+                        eventArgs.NewItems!.OfType<object>(),
+                        eventArgs.OldItems!.OfType<object>()
+                    );
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     throw new InvalidOperationException(CoreStrings.ResetNotSupported);

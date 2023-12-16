@@ -48,9 +48,10 @@ namespace System.ServiceModel.Configuration
                     {
                         reader.MoveToAttribute(i);
                         if (
-                            reader
-                                .Name
-                                .Equals(ConfigurationStrings.NodeQuota, StringComparison.Ordinal)
+                            reader.Name.Equals(
+                                ConfigurationStrings.NodeQuota,
+                                StringComparison.Ordinal
+                            )
                         )
                         {
                             nodeQuotaStringValue = reader.Value;
@@ -59,12 +60,10 @@ namespace System.ServiceModel.Configuration
                         {
                             if (reader.Name.Contains(":"))
                             {
-                                string[] attributeName = reader
-                                    .Name
-                                    .Split(
-                                        new char[] { ':' },
-                                        StringSplitOptions.RemoveEmptyEntries
-                                    );
+                                string[] attributeName = reader.Name.Split(
+                                    new char[] { ':' },
+                                    StringSplitOptions.RemoveEmptyEntries
+                                );
                                 tempWriter.WriteAttributeString(
                                     attributeName[0],
                                     attributeName[1],
@@ -86,13 +85,11 @@ namespace System.ServiceModel.Configuration
                 filterString = filterString.Trim();
                 if (String.IsNullOrEmpty(filterString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.ConfigXPathFilterMustNotBeEmpty)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ConfigXPathFilterMustNotBeEmpty)
+                        )
+                    );
                 }
                 tempWriter.WriteString(filterString);
                 tempWriter.WriteEndElement();

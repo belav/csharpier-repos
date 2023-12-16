@@ -33,13 +33,11 @@ namespace System.IdentityModel.Selectors
             {
                 // warning 56506: Parameter 'token' to this public method must be validated:  A null-dereference can occur here.
 #pragma warning suppress 56506
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityTokenValidationException(
-                            SR.GetString(SR.CannotValidateSecurityTokenType, this, token.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(
+                        SR.GetString(SR.CannotValidateSecurityTokenType, this, token.GetType())
+                    )
+                );
             }
 
             EventTraceActivity eventTraceActivity = null;
@@ -71,9 +69,9 @@ namespace System.IdentityModel.Selectors
                     TD.TokenValidationFailure(eventTraceActivity, tokenType, token.Id, errorMsg);
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new SecurityTokenValidationException(errorMsg));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(errorMsg)
+                );
             }
 
             if (TD.TokenValidationSuccessIsEnabled())

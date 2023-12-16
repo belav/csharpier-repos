@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && !candidate.IsStatic
                         && candidate
                             .Parameters[0]
-                            .Type
-                            .Equals(ContainingType, TypeCompareKind.AllIgnoreOptions)
+                            .Type.Equals(ContainingType, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
                         equals = candidate;

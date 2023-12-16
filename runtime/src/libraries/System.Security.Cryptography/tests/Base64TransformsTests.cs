@@ -273,9 +273,11 @@ namespace System.Security.Cryptography.Tests
             {
                 cs.Write(inputBytes, 0, inputBytes.Length);
                 cs.FlushFinalBlock();
-                string outputString = Text.Encoding
-                    .ASCII
-                    .GetString(outputBytes, 0, (int)ms.Position);
+                string outputString = Text.Encoding.ASCII.GetString(
+                    outputBytes,
+                    0,
+                    (int)ms.Position
+                );
                 Assert.Equal(expected, outputString);
             }
         }
@@ -294,9 +296,11 @@ namespace System.Security.Cryptography.Tests
                     0,
                     inputBytes.Length
                 );
-                string outputString = Text.Encoding
-                    .ASCII
-                    .GetString(outputBytes, 0, outputBytes.Length);
+                string outputString = Text.Encoding.ASCII.GetString(
+                    outputBytes,
+                    0,
+                    outputBytes.Length
+                );
                 Assert.Equal(expected, outputString);
             }
         }
@@ -315,9 +319,11 @@ namespace System.Security.Cryptography.Tests
                     0,
                     inputBytes.Length
                 );
-                string outputString = Text.Encoding
-                    .ASCII
-                    .GetString(outputBytes, 0, outputBytes.Length);
+                string outputString = Text.Encoding.ASCII.GetString(
+                    outputBytes,
+                    0,
+                    outputBytes.Length
+                );
                 Assert.Equal(expected, outputString);
             }
         }

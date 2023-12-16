@@ -86,8 +86,7 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                     {
                         var commentText = GetTextContextOfComment(trivia);
                         var triviaStringParts = commentText
-                            .Span
-                            .Trim()
+                            .Span.Trim()
                             .ToString()
                             .Replace("\r\n", "\n")
                             .Split('\n');

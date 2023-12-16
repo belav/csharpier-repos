@@ -226,9 +226,8 @@ namespace System.Net.Security
             if (validationCallback == null)
             {
                 validationCallback = callback;
-                settings.RemoteCertificateValidationCallback = MNS.Private
-                    .CallbackHelpers
-                    .PublicToMono(callback);
+                settings.RemoteCertificateValidationCallback =
+                    MNS.Private.CallbackHelpers.PublicToMono(callback);
             }
             else if (
                 (callback != null && validationCallback != callback)

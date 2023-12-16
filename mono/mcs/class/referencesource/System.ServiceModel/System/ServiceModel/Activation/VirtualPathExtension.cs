@@ -29,13 +29,11 @@ namespace System.ServiceModel.Activation
 
         public void Detach(ServiceHostBase owner)
         {
-            throw FxTrace
-                .Exception
-                .AsError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.Hosting_VirtualPathExtenstionCanNotBeDetached)
-                    )
-                );
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(
+                    SR.GetString(SR.Hosting_VirtualPathExtenstionCanNotBeDetached)
+                )
+            );
         }
     }
 }

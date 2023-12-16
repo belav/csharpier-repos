@@ -390,15 +390,13 @@ namespace MonoTests.stand_alone.WebHarness
                                         (
                                             tmpXmlElement
                                                 .Attributes[tmpIgnoreAttr.Name]
-                                                .Value
-                                                .ToLower()
+                                                .Value.ToLower()
                                                 .IndexOf("javascript") >= 0
                                         )
                                         || (
                                             tmpXmlElement
                                                 .Attributes[tmpIgnoreAttr.Name]
-                                                .Value
-                                                .ToLower()
+                                                .Value.ToLower()
                                                 .IndexOf("dopostback") >= 0
                                         )
                                     )

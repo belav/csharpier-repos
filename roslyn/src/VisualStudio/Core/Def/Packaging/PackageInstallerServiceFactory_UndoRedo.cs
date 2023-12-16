@@ -45,9 +45,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             if (installed)
             {
                 // if the install succeeded, then add an uninstall item to the undo manager.
-                await this.ThreadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(cancellationToken);
+                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
                 undoManager?.Add(
                     new UninstallPackageUndoUnit(
                         this,
@@ -91,9 +91,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             if (uninstalled)
             {
                 // if the install succeeded, then add an uninstall item to the undo manager.
-                await this.ThreadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(cancellationToken);
+                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
                 undoManager?.Add(
                     new InstallPackageUndoUnit(
                         this,
@@ -152,9 +152,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
 
             public void Do(IOleUndoManager pUndoManager)
             {
-                var token = this.packageInstallerService
-                    ._listener
-                    .BeginAsyncOperation($"{GetType().Name}.{nameof(Do)}");
+                var token = this.packageInstallerService._listener.BeginAsyncOperation(
+                    $"{GetType().Name}.{nameof(Do)}"
+                );
                 DoAsync(pUndoManager).CompletesAsyncOperation(token);
             }
 
@@ -202,14 +202,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             protected override async Task DoWorkerAsync(IOleUndoManager pUndoManager)
             {
                 var description = string.Format(ServicesVSResources.Uninstalling_0, packageName);
-                using var context = this.packageInstallerService
-                    ._operationExecutor
-                    .BeginExecute(
-                        NugetTitle,
-                        description,
-                        allowCancellation: true,
-                        showProgress: false
-                    );
+                using var context = this.packageInstallerService._operationExecutor.BeginExecute(
+                    NugetTitle,
+                    description,
+                    allowCancellation: true,
+                    showProgress: false
+                );
                 using var scope = context.AddScope(allowCancellation: true, description);
 
                 await packageInstallerService
@@ -263,14 +261,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             protected override async Task DoWorkerAsync(IOleUndoManager pUndoManager)
             {
                 var description = string.Format(ServicesVSResources.Installing_0, packageName);
-                using var context = this.packageInstallerService
-                    ._operationExecutor
-                    .BeginExecute(
-                        NugetTitle,
-                        description,
-                        allowCancellation: true,
-                        showProgress: false
-                    );
+                using var context = this.packageInstallerService._operationExecutor.BeginExecute(
+                    NugetTitle,
+                    description,
+                    allowCancellation: true,
+                    showProgress: false
+                );
                 using var scope = context.AddScope(allowCancellation: true, description);
 
                 await packageInstallerService

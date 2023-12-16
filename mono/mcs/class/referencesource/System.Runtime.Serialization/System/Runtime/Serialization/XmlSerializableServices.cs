@@ -19,12 +19,9 @@ namespace System.Runtime.Serialization
         public static XmlNode[] ReadNodes(XmlReader xmlReader)
         {
             if (xmlReader == null)
-                throw System
-                    .Runtime
-                    .Serialization
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("xmlReader");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "xmlReader"
+                );
             XmlDocument doc = new XmlDocument();
             List<XmlNode> nodeList = new List<XmlNode>();
             if (xmlReader.MoveToFirstAttribute())
@@ -35,16 +32,11 @@ namespace System.Runtime.Serialization
                     {
                         XmlNode node = doc.ReadNode(xmlReader);
                         if (node == null)
-                            throw System
-                                .Runtime
-                                .Serialization
-                                .DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    XmlObjectSerializer.CreateSerializationException(
-                                        SR.GetString(SR.UnexpectedEndOfFile)
-                                    )
-                                );
+                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                XmlObjectSerializer.CreateSerializationException(
+                                    SR.GetString(SR.UnexpectedEndOfFile)
+                                )
+                            );
                         nodeList.Add(node);
                     }
                 } while (xmlReader.MoveToNextAttribute());
@@ -58,16 +50,11 @@ namespace System.Runtime.Serialization
                 {
                     XmlNode node = doc.ReadNode(xmlReader);
                     if (node == null)
-                        throw System
-                            .Runtime
-                            .Serialization
-                            .DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                XmlObjectSerializer.CreateSerializationException(
-                                    SR.GetString(SR.UnexpectedEndOfFile)
-                                )
-                            );
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(SR.UnexpectedEndOfFile)
+                            )
+                        );
                     nodeList.Add(node);
                 }
             }
@@ -87,12 +74,9 @@ namespace System.Runtime.Serialization
         public static void WriteNodes(XmlWriter xmlWriter, XmlNode[] nodes)
         {
             if (xmlWriter == null)
-                throw System
-                    .Runtime
-                    .Serialization
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("xmlWriter");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "xmlWriter"
+                );
             if (nodes != null)
                 for (int i = 0; i < nodes.Length; i++)
                     if (nodes[i] != null)
@@ -104,19 +88,13 @@ namespace System.Runtime.Serialization
         public static void AddDefaultSchema(XmlSchemaSet schemas, XmlQualifiedName typeQName)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
-                    .Serialization
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("schemas");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "schemas"
+                );
             if (typeQName == null)
-                throw System
-                    .Runtime
-                    .Serialization
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("typeQName");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "typeQName"
+                );
             SchemaExporter.AddDefaultXmlType(schemas, typeQName.Name, typeQName.Namespace);
         }
     }

@@ -956,9 +956,10 @@ namespace System.Data.Objects
         )
         {
             // Call GetRelatedEnd to retrieve the related end on the source entity that points to the target entity
-            RelatedEnd relatedEnd = wrappedSource
-                .RelationshipManager
-                .GetRelatedEndInternal(sourceMember.DeclaringType.FullName, targetMember.Name);
+            RelatedEnd relatedEnd = wrappedSource.RelationshipManager.GetRelatedEndInternal(
+                sourceMember.DeclaringType.FullName,
+                targetMember.Name
+            );
 
             // EntityReference can only have one value
             if (targetMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
@@ -1110,14 +1111,14 @@ namespace System.Data.Objects
                 && wrappedSource.Context.ObjectStateManager.TransactionManager.IsAttachTracking
             )
             {
-                wrappedSource
-                    .Context
-                    .ObjectStateManager
-                    .TrackPromotedRelationship(relatedEnd, wrappedTarget);
-                wrappedSource
-                    .Context
-                    .ObjectStateManager
-                    .TrackPromotedRelationship(targetRelatedEnd, wrappedSource);
+                wrappedSource.Context.ObjectStateManager.TrackPromotedRelationship(
+                    relatedEnd,
+                    wrappedTarget
+                );
+                wrappedSource.Context.ObjectStateManager.TrackPromotedRelationship(
+                    targetRelatedEnd,
+                    wrappedSource
+                );
             }
         }
 
@@ -1197,9 +1198,8 @@ namespace System.Data.Objects
                 {
                     if (mergeOption == MergeOption.NoTracking)
                     {
-                        RelatedEnd relatedEnd = wrappedSource
-                            .RelationshipManager
-                            .GetRelatedEndInternal(
+                        RelatedEnd relatedEnd =
+                            wrappedSource.RelationshipManager.GetRelatedEndInternal(
                                 sourceMember.DeclaringType.FullName,
                                 targetMember.Name
                             );
@@ -1354,9 +1354,10 @@ namespace System.Data.Objects
             AssociationEndMember targetMember
         )
         {
-            RelatedEnd relatedEnd = wrappedSource
-                .RelationshipManager
-                .GetRelatedEndInternal(sourceMember.DeclaringType.FullName, targetMember.Name);
+            RelatedEnd relatedEnd = wrappedSource.RelationshipManager.GetRelatedEndInternal(
+                sourceMember.DeclaringType.FullName,
+                targetMember.Name
+            );
             AssociationEndMember endMember = (AssociationEndMember)(relatedEnd.ToEndMember);
             if (
                 endMember != null
@@ -1401,9 +1402,9 @@ namespace System.Data.Objects
             if (mergeOption == MergeOption.OverwriteChanges)
             {
                 foreach (
-                    RelationshipEntry relationshipEntry in context
-                        .ObjectStateManager
-                        .FindRelationshipsByKey(sourceKey)
+                    RelationshipEntry relationshipEntry in context.ObjectStateManager.FindRelationshipsByKey(
+                        sourceKey
+                    )
                 )
                 {
                     // We only care about the relationships that match the incoming associationset and role for the source entity
@@ -1423,9 +1424,9 @@ namespace System.Data.Objects
             {
                 // Leave any Added relationships for this entity, but remove Unchanged and Deleted ones
                 foreach (
-                    RelationshipEntry relationshipEntry in context
-                        .ObjectStateManager
-                        .FindRelationshipsByKey(sourceKey)
+                    RelationshipEntry relationshipEntry in context.ObjectStateManager.FindRelationshipsByKey(
+                        sourceKey
+                    )
                 )
                 {
                     // We only care about the relationships that match the incoming associationset and role for the source entity
@@ -1761,13 +1762,10 @@ namespace System.Data.Objects
             if (entry.WrappedEntity.Entity != null)
             {
                 EntityReference reference =
-                    entry
-                        .WrappedEntity
-                        .RelationshipManager
-                        .GetRelatedEndInternal(
-                            ((AssociationSet)relationshipEntry.EntitySet).ElementType.FullName,
-                            targetRoleName
-                        ) as EntityReference;
+                    entry.WrappedEntity.RelationshipManager.GetRelatedEndInternal(
+                        ((AssociationSet)relationshipEntry.EntitySet).ElementType.FullName,
+                        targetRoleName
+                    ) as EntityReference;
                 if (reference != null)
                 {
                     reference.SetIsLoaded(false);
@@ -2812,10 +2810,10 @@ namespace System.Data.Objects
                 out removedConvert
             );
             RelatedEnd relatedEnd = (RelatedEnd)
-                sourceEntry
-                    .WrappedEntity
-                    .RelationshipManager
-                    .GetRelatedEnd(navigationProperty, throwArgumentException: removedConvert);
+                sourceEntry.WrappedEntity.RelationshipManager.GetRelatedEnd(
+                    navigationProperty,
+                    throwArgumentException: removedConvert
+                );
 
             return this.ChangeRelationshipState(
                 sourceEntry,
@@ -2855,10 +2853,11 @@ namespace System.Data.Objects
                 out targetEntry
             );
 
-            RelatedEnd relatedEnd = sourceEntry
-                .WrappedEntity
-                .RelationshipManager
-                .GetRelatedEndInternal(relationshipName, targetRoleName);
+            RelatedEnd relatedEnd =
+                sourceEntry.WrappedEntity.RelationshipManager.GetRelatedEndInternal(
+                    relationshipName,
+                    targetRoleName
+                );
 
             return this.ChangeRelationshipState(
                 sourceEntry,
@@ -3835,13 +3834,9 @@ namespace System.Data.Objects
             else
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .Mapping_CannotMapCLRTypeMultipleTimes(
-                            typeMetadata.CdmMetadata.EdmType.FullName
-                        )
+                    System.Data.Entity.Strings.Mapping_CannotMapCLRTypeMultipleTimes(
+                        typeMetadata.CdmMetadata.EdmType.FullName
+                    )
                 );
             }
             return typeMetadata;
@@ -3979,14 +3974,10 @@ namespace System.Data.Objects
                             if (pair.Value.Count > 1)
                             {
                                 throw new InvalidOperationException(
-                                    System
-                                        .Data
-                                        .Entity
-                                        .Strings
-                                        .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
-                                            pair.Key.RelationshipNavigation.To,
-                                            pair.Key.RelationshipNavigation.RelationshipName
-                                        )
+                                    System.Data.Entity.Strings.ObjectStateManager_ConflictingChangesOfRelationshipDetected(
+                                        pair.Key.RelationshipNavigation.To,
+                                        pair.Key.RelationshipNavigation.RelationshipName
+                                    )
                                 );
                             }
                         }
@@ -4030,14 +4021,10 @@ namespace System.Data.Objects
                             if (pair.Value.Count > 1)
                             {
                                 throw new InvalidOperationException(
-                                    System
-                                        .Data
-                                        .Entity
-                                        .Strings
-                                        .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
-                                            pair.Key.RelationshipNavigation.To,
-                                            pair.Key.RelationshipNavigation.RelationshipName
-                                        )
+                                    System.Data.Entity.Strings.ObjectStateManager_ConflictingChangesOfRelationshipDetected(
+                                        pair.Key.RelationshipNavigation.To,
+                                        pair.Key.RelationshipNavigation.RelationshipName
+                                    )
                                 );
                             }
                             else if (pair.Value.Count == 1)
@@ -4088,16 +4075,10 @@ namespace System.Data.Objects
                                     if (addedKey != newFks.First())
                                     {
                                         throw new InvalidOperationException(
-                                            System
-                                                .Data
-                                                .Entity
-                                                .Strings
-                                                .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
-                                                    reference.RelationshipNavigation.To,
-                                                    reference
-                                                        .RelationshipNavigation
-                                                        .RelationshipName
-                                                )
+                                            System.Data.Entity.Strings.ObjectStateManager_ConflictingChangesOfRelationshipDetected(
+                                                reference.RelationshipNavigation.To,
+                                                reference.RelationshipNavigation.RelationshipName
+                                            )
                                         );
                                     }
                                 }
@@ -4127,16 +4108,12 @@ namespace System.Data.Objects
                                             if (removedKeys.Count > 0)
                                             {
                                                 throw new InvalidOperationException(
-                                                    System
-                                                        .Data
-                                                        .Entity
-                                                        .Strings
-                                                        .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
-                                                            reference.RelationshipNavigation.To,
-                                                            reference
-                                                                .RelationshipNavigation
-                                                                .RelationshipName
-                                                        )
+                                                    System.Data.Entity.Strings.ObjectStateManager_ConflictingChangesOfRelationshipDetected(
+                                                        reference.RelationshipNavigation.To,
+                                                        reference
+                                                            .RelationshipNavigation
+                                                            .RelationshipName
+                                                    )
                                                 );
                                             }
                                         }
@@ -4662,17 +4639,19 @@ namespace System.Data.Objects
                     Dictionary<RelatedEnd, HashSet<IEntityWrapper>> deletedRelationshipsByGraph;
                     // There must be a foreign key and graph change on the dependent side to know if we need to preserve the FK
                     if (
-                        TransactionManager
-                            .DeletedRelationshipsByForeignKey
-                            .TryGetValue(relatedEntity, out deletedRelationshipsByForeignKey)
+                        TransactionManager.DeletedRelationshipsByForeignKey.TryGetValue(
+                            relatedEntity,
+                            out deletedRelationshipsByForeignKey
+                        )
                         && deletedRelationshipsByForeignKey.TryGetValue(
                             otherEnd,
                             out entityKeysOfDeletedObjects
                         )
                         && entityKeysOfDeletedObjects.Count > 0
-                        && TransactionManager
-                            .DeletedRelationshipsByGraph
-                            .TryGetValue(relatedEntity, out deletedRelationshipsByGraph)
+                        && TransactionManager.DeletedRelationshipsByGraph.TryGetValue(
+                            relatedEntity,
+                            out deletedRelationshipsByGraph
+                        )
                         && deletedRelationshipsByGraph.TryGetValue(otherEnd, out entitiesToDelete)
                     )
                     {
@@ -4708,9 +4687,10 @@ namespace System.Data.Objects
             HashSet<IEntityWrapper> entitiesToAdd = null;
             if (
                 reference != null
-                && TransactionManager
-                    .AddedRelationshipsByGraph
-                    .TryGetValue(wrappedOwner, out addedRelationshipsByGraph)
+                && TransactionManager.AddedRelationshipsByGraph.TryGetValue(
+                    wrappedOwner,
+                    out addedRelationshipsByGraph
+                )
                 && addedRelationshipsByGraph.TryGetValue(reference, out entitiesToAdd)
                 && entitiesToAdd.Count > 0
             )

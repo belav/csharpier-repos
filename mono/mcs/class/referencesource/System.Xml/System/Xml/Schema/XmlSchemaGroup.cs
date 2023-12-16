@@ -89,13 +89,10 @@ namespace System.Xml.Schema
 
         internal override XmlSchemaObject Clone()
         {
-            System
-                .Diagnostics
-                .Debug
-                .Assert(
-                    false,
-                    "Should never call Clone() on XmlSchemaGroup. Call Clone(XmlSchema) instead."
-                );
+            System.Diagnostics.Debug.Assert(
+                false,
+                "Should never call Clone() on XmlSchemaGroup. Call Clone(XmlSchema) instead."
+            );
             return Clone(null);
         }
 

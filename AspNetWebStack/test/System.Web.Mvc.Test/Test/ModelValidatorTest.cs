@@ -15,9 +15,10 @@ namespace System.Web.Mvc.Test
         public void ConstructorGuards()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(null, typeof(object));
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                null,
+                typeof(object)
+            );
             ControllerContext context = new ControllerContext();
 
             // Act & Assert
@@ -32,9 +33,11 @@ namespace System.Web.Mvc.Test
         public void ValuesSet()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => 15,
+                typeof(string),
+                "Length"
+            );
             ControllerContext context = new ControllerContext();
 
             // Act
@@ -49,9 +52,11 @@ namespace System.Web.Mvc.Test
         public void NoClientRulesByDefault()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => 15,
+                typeof(string),
+                "Length"
+            );
             ControllerContext context = new ControllerContext();
 
             // Act
@@ -65,9 +70,11 @@ namespace System.Web.Mvc.Test
         public void IsRequiredFalseByDefault()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => 15,
+                typeof(string),
+                "Length"
+            );
             ControllerContext context = new ControllerContext();
 
             // Act
@@ -80,9 +87,8 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void GetModelValidator_DoesNotReadPropertyValues()
         {
-            ModelValidatorProvider[] originalProviders = ModelValidatorProviders
-                .Providers
-                .ToArray();
+            ModelValidatorProvider[] originalProviders =
+                ModelValidatorProviders.Providers.ToArray();
             try
             {
                 // Arrange
@@ -166,9 +172,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             ControllerContext context = new ControllerContext();
             DataErrorInfo1 model = new DataErrorInfo1 { Error = "Some Type Error" };
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => model, model.GetType());
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
             ModelValidator validator = ModelValidator.GetModelValidator(metadata, context);
 
             // Act
@@ -186,9 +193,10 @@ namespace System.Web.Mvc.Test
             ControllerContext context = new ControllerContext();
             DataErrorInfo1 model = new DataErrorInfo1();
             model["SomeStringProperty"] = "Some Property Error";
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => model, model.GetType());
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
             ModelValidator validator = ModelValidator.GetModelValidator(metadata, context);
 
             // Act
@@ -207,9 +215,10 @@ namespace System.Web.Mvc.Test
             DataErrorInfo1 model = new DataErrorInfo1 { Error = "Some Type Error" };
             model["SomeStringProperty"] = "Some Property Error";
             model["SomeOtherStringProperty"] = "Some Other Property Error";
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => model, model.GetType());
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
             ModelValidator validator = ModelValidator.GetModelValidator(metadata, context);
 
             // Act

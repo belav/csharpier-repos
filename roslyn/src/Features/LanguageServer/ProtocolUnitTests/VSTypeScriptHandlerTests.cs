@@ -112,10 +112,10 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
 
         await using var testLspServer = await CreateTsTestLspServerAsync(workspaceXml);
         var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
-        var simplifierOptions = testLspServer
-            .TestWorkspace
-            .GlobalOptions
-            .GetSimplifierOptions(document.Project.Services, fallbackOptions: null);
+        var simplifierOptions = testLspServer.TestWorkspace.GlobalOptions.GetSimplifierOptions(
+            document.Project.Services,
+            fallbackOptions: null
+        );
         Assert.Same(SimplifierOptions.CommonDefaults, simplifierOptions);
     }
 
@@ -151,12 +151,10 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
         TestWorkspace workspace
     )
     {
-        var capabilitiesProvider = workspace
-            .ExportProvider
-            .GetExportedValue<ExperimentalCapabilitiesProvider>();
-        var servicesProvider = workspace
-            .ExportProvider
-            .GetExportedValue<VSTypeScriptLspServiceProvider>();
+        var capabilitiesProvider =
+            workspace.ExportProvider.GetExportedValue<ExperimentalCapabilitiesProvider>();
+        var servicesProvider =
+            workspace.ExportProvider.GetExportedValue<VSTypeScriptLspServiceProvider>();
 
         var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(outputStream, inputStream))
         {

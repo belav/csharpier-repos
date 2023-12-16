@@ -167,10 +167,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     .ApplyChangeToWorkspaceAsync(
                         async w =>
                         {
-                            await _foregroundAffinitization
-                                .ThreadingContext
-                                .JoinableTaskFactory
-                                .SwitchToMainThreadAsync(cancellationToken);
+                            await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                cancellationToken
+                            );
                             if (
                                 TryOpeningDocumentsForFilePathCore(
                                     w,
@@ -219,10 +218,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 if (hierarchy != null)
                     _foregroundAffinitization.AssertIsForeground();
 
-                var documentIds = _projectSystemProjectFactory
-                    .Workspace
-                    .CurrentSolution
-                    .GetDocumentIdsWithFilePath(moniker);
+                var documentIds =
+                    _projectSystemProjectFactory.Workspace.CurrentSolution.GetDocumentIdsWithFilePath(
+                        moniker
+                    );
                 if (documentIds.IsDefaultOrEmpty)
                 {
                     return false;
@@ -404,9 +403,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 _projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
                 {
-                    var documentIds = _workspace
-                        .CurrentSolution
-                        .GetDocumentIdsWithFilePath(moniker);
+                    var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
+                        moniker
+                    );
                     if (documentIds.IsDefaultOrEmpty || documentIds.Length == 1)
                     {
                         return;
@@ -466,9 +465,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     {
                         if (
                             w.IsDocumentOpen(documentId)
-                            && !_projectSystemProjectFactory
-                                .DocumentsNotFromFiles
-                                .Contains(documentId)
+                            && !_projectSystemProjectFactory.DocumentsNotFromFiles.Contains(
+                                documentId
+                            )
                         )
                         {
                             var solution = w.CurrentSolution;
@@ -605,10 +604,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 // It's possible that Roslyn is loading asynchronously after documents were already opened by the user; this is a one-time check for
                 // any of those -- after this point, we are subscribed to events so we'll know of anything else.
-                await _foregroundAffinitization
-                    .ThreadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(cancellationToken);
+                await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 foreach (
                     var (

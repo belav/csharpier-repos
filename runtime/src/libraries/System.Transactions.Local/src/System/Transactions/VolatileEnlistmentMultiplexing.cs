@@ -33,8 +33,7 @@ namespace System.Transactions
             {
                 volatiles
                     ._volatileEnlistments[i]
-                    ._twoPhaseState!
-                    .InternalCommitted(volatiles._volatileEnlistments[i]);
+                    ._twoPhaseState!.InternalCommitted(volatiles._volatileEnlistments[i]);
             }
         }
 
@@ -46,8 +45,7 @@ namespace System.Transactions
             {
                 volatiles
                     ._volatileEnlistments[i]
-                    ._twoPhaseState!
-                    .InternalAborted(volatiles._volatileEnlistments[i]);
+                    ._twoPhaseState!.InternalAborted(volatiles._volatileEnlistments[i]);
             }
         }
 
@@ -58,8 +56,7 @@ namespace System.Transactions
             {
                 volatiles
                     ._volatileEnlistments[i]
-                    ._twoPhaseState!
-                    .InternalIndoubt(volatiles._volatileEnlistments[i]);
+                    ._twoPhaseState!.InternalIndoubt(volatiles._volatileEnlistments[i]);
             }
         }
 

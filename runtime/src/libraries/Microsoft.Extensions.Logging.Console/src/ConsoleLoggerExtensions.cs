@@ -49,31 +49,25 @@ namespace Microsoft.Extensions.Logging
                 ConsoleFormatterConfigureOptions
             >();
 
-            builder
-                .Services
-                .TryAddEnumerable(
-                    ServiceDescriptor.Singleton<ILoggerProvider, ConsoleLoggerProvider>()
-                );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<ILoggerProvider, ConsoleLoggerProvider>()
+            );
 
-            builder
-                .Services
-                .TryAddEnumerable(
-                    ServiceDescriptor.Singleton<
-                        IConfigureOptions<ConsoleLoggerOptions>,
-                        ConsoleLoggerConfigureOptions
-                    >()
-                );
-            builder
-                .Services
-                .TryAddEnumerable(
-                    ServiceDescriptor.Singleton<
-                        IOptionsChangeTokenSource<ConsoleLoggerOptions>,
-                        LoggerProviderOptionsChangeTokenSource<
-                            ConsoleLoggerOptions,
-                            ConsoleLoggerProvider
-                        >
-                    >()
-                );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<ConsoleLoggerOptions>,
+                    ConsoleLoggerConfigureOptions
+                >()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IOptionsChangeTokenSource<ConsoleLoggerOptions>,
+                    LoggerProviderOptionsChangeTokenSource<
+                        ConsoleLoggerOptions,
+                        ConsoleLoggerProvider
+                    >
+                >()
+            );
 
             return builder;
         }
@@ -241,22 +235,18 @@ namespace Microsoft.Extensions.Logging
         {
             builder.AddConfiguration();
 
-            builder
-                .Services
-                .TryAddEnumerable(ServiceDescriptor.Singleton<ConsoleFormatter, TFormatter>());
-            builder
-                .Services
-                .TryAddEnumerable(
-                    ServiceDescriptor.Singleton<IConfigureOptions<TOptions>, TConfigureOptions>()
-                );
-            builder
-                .Services
-                .TryAddEnumerable(
-                    ServiceDescriptor.Singleton<
-                        IOptionsChangeTokenSource<TOptions>,
-                        ConsoleLoggerFormatterOptionsChangeTokenSource<TFormatter, TOptions>
-                    >()
-                );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<ConsoleFormatter, TFormatter>()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IConfigureOptions<TOptions>, TConfigureOptions>()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IOptionsChangeTokenSource<TOptions>,
+                    ConsoleLoggerFormatterOptionsChangeTokenSource<TFormatter, TOptions>
+                >()
+            );
 
             return builder;
         }

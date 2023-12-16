@@ -130,13 +130,11 @@ namespace System.Activities.Expressions
             TOperand operandValue = this.Operand.Get(context);
             if (operandValue == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)
+                    )
+                );
             }
 
             return new IndexerLocation(
@@ -197,13 +195,11 @@ namespace System.Activities.Expressions
                     {
                         return (TItem)this.getMethod.Invoke(this.operand, indices);
                     }
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new InvalidOperationException(
-                                SR.SpecialMethodNotFound("get_Item", typeof(TOperand).Name)
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.SpecialMethodNotFound("get_Item", typeof(TOperand).Name)
+                        )
+                    );
                 }
                 set
                 {

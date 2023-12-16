@@ -160,9 +160,10 @@ public class ManyToManyJoinEntityTypeConvention
     {
         var model = skipNavigation.DeclaringEntityType.Model;
 
-        var joinEntityTypeBuilder = model
-            .Builder
-            .SharedTypeEntity(joinEntityTypeName, Model.DefaultPropertyBagType)!;
+        var joinEntityTypeBuilder = model.Builder.SharedTypeEntity(
+            joinEntityTypeName,
+            Model.DefaultPropertyBagType
+        )!;
 
         var inverseSkipNavigation = skipNavigation.Inverse!;
         CreateSkipNavigationForeignKey(skipNavigation, joinEntityTypeBuilder);

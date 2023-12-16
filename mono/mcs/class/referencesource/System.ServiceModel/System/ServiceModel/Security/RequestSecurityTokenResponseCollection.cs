@@ -35,23 +35,17 @@ namespace System.ServiceModel.Security
             foreach (RequestSecurityTokenResponse rstr in rstrCollection)
             {
                 if (rstr == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgumentNull(
-                            String.Format(
-                                CultureInfo.InvariantCulture,
-                                "rstrCollection[{0}]",
-                                index
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        String.Format(CultureInfo.InvariantCulture, "rstrCollection[{0}]", index)
+                    );
                 ++index;
             }
             this.rstrCollection = rstrCollection;
             if (standardsManager == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("standardsManager"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("standardsManager")
+                );
             }
             this.standardsManager = standardsManager;
         }
@@ -63,9 +57,10 @@ namespace System.ServiceModel.Security
 
         public void WriteTo(XmlWriter writer)
         {
-            this.standardsManager
-                .TrustDriver
-                .WriteRequestSecurityTokenResponseCollection(this, writer);
+            this.standardsManager.TrustDriver.WriteRequestSecurityTokenResponseCollection(
+                this,
+                writer
+            );
         }
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)

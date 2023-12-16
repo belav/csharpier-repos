@@ -72,12 +72,10 @@ namespace System.Web.Http.ModelBinding.Binders
                 );
             }
 
-            newBindingContext
-                .ValidationNode
-                .Validate(
-                    actionContext,
-                    null /* parentNode */
-                );
+            newBindingContext.ValidationNode.Validate(
+                actionContext,
+                null /* parentNode */
+            );
             bindingContext.Model = newBindingContext.Model;
             return true;
         }

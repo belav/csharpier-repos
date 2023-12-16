@@ -490,8 +490,10 @@ namespace System.ServiceModel.Description
                             );
                     }
                 }
-                var knownTypeAtts = cd.ContractType
-                    .GetCustomAttributes(typeof(ServiceKnownTypeAttribute), false)
+                var knownTypeAtts = cd.ContractType.GetCustomAttributes(
+                    typeof(ServiceKnownTypeAttribute),
+                    false
+                )
                     .Union(mi.GetCustomAttributes(typeof(ServiceKnownTypeAttribute), false))
                     .Union(
                         serviceMethod.GetCustomAttributes(typeof(ServiceKnownTypeAttribute), false)

@@ -113,11 +113,9 @@ namespace Tracing.Tests.ReverseValidation
                             config,
                             out var sessionId
                         );
-                        Logger
-                            .logger
-                            .Log(
-                                $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                            );
+                        Logger.logger.Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                        );
                         using var source = new EventPipeEventSource(stream);
                         Task readerTask = Task.Run(() => source.Process());
                         await Task.Delay(500);
@@ -165,11 +163,9 @@ namespace Tracing.Tests.ReverseValidation
                         config,
                         out var sessionId
                     );
-                    Logger
-                        .logger
-                        .Log(
-                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                        );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
                     using var source = new EventPipeEventSource(stream);
                     Task readerTask = Task.Run(() => source.Process());
                     await Task.Delay(500);
@@ -216,11 +212,9 @@ namespace Tracing.Tests.ReverseValidation
                         config,
                         out var sessionId
                     );
-                    Logger
-                        .logger
-                        .Log(
-                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                        );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
                     using var source = new EventPipeEventSource(stream);
                     Task readerTask = Task.Run(() => source.Process());
                     await Task.Delay(500);
@@ -264,11 +258,9 @@ namespace Tracing.Tests.ReverseValidation
                         config,
                         out var sessionId
                     );
-                    Logger
-                        .logger
-                        .Log(
-                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                        );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
                     using var source = new EventPipeEventSource(stream);
                     Task readerTask = Task.Run(() => source.Process());
                     await Task.Delay(500);

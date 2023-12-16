@@ -1107,9 +1107,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             {
                 // Check if there's a 'new()' constraint.  If there isn't, or we're before it, then
                 // this is a type parameter constraint context.
-                var firstConstructorConstraint = constraintClause
-                    .Constraints
-                    .FirstOrDefault(t => t is ConstructorConstraintSyntax);
+                var firstConstructorConstraint = constraintClause.Constraints.FirstOrDefault(
+                    t => t is ConstructorConstraintSyntax
+                );
                 if (
                     firstConstructorConstraint == null
                     || firstConstructorConstraint.SpanStart > token.Span.End
@@ -1337,11 +1337,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
             if (
                 token.IsKind(SyntaxKind.OpenParenToken)
-                && token
-                    .Parent
-                    .IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(
-                        includeOperators
-                    )
+                && token.Parent.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(
+                    includeOperators
+                )
             )
             {
                 parameterIndex = 0;
@@ -3596,9 +3594,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
                     if (
                         parentMemberAccess.Parent.IsKind(SyntaxKind.Argument)
-                        && parentMemberAccess
-                            .Parent
-                            .IsChildNode<ArgumentListSyntax>(a => a.Arguments.FirstOrDefault())
+                        && parentMemberAccess.Parent.IsChildNode<ArgumentListSyntax>(
+                            a => a.Arguments.FirstOrDefault()
+                        )
                     )
                     {
                         token = (
@@ -3618,9 +3616,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
                     if (
                         parentQualifiedName.Parent.IsKind(SyntaxKind.Argument)
-                        && parentQualifiedName
-                            .Parent
-                            .IsChildNode<ArgumentListSyntax>(a => a.Arguments.FirstOrDefault())
+                        && parentQualifiedName.Parent.IsChildNode<ArgumentListSyntax>(
+                            a => a.Arguments.FirstOrDefault()
+                        )
                     )
                     {
                         token = (
@@ -3764,9 +3762,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     //
                     // 'async' will look like a normal identifier.  But we don't want to follow it
                     // with 'is' or 'as' or 'with' if it's actually the start of a lambda.
-                    var delegateType = CSharpTypeInferenceService
-                        .Instance
-                        .InferDelegateType(semanticModel, token.SpanStart, cancellationToken);
+                    var delegateType = CSharpTypeInferenceService.Instance.InferDelegateType(
+                        semanticModel,
+                        token.SpanStart,
+                        cancellationToken
+                    );
                     if (delegateType != null)
                     {
                         return false;

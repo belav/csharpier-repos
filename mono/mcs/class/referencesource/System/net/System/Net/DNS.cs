@@ -467,13 +467,11 @@ namespace System.Net
                     | ((uint)addressAsInt >> 24)
                 );
 #endif
-                IntPtr nativePointer = UnsafeNclNativeMethods
-                    .OSSOCK
-                    .gethostbyaddr(
-                        ref addressAsInt,
-                        Marshal.SizeOf(typeof(int)),
-                        ProtocolFamily.InterNetwork
-                    );
+                IntPtr nativePointer = UnsafeNclNativeMethods.OSSOCK.gethostbyaddr(
+                    ref addressAsInt,
+                    Marshal.SizeOf(typeof(int)),
+                    ProtocolFamily.InterNetwork
+                );
 
                 if (nativePointer != IntPtr.Zero)
                 {
@@ -519,9 +517,10 @@ namespace System.Net
 
             Socket.InitializeSockets();
             StringBuilder sb = new StringBuilder(HostNameBufferLength);
-            SocketError errorCode = UnsafeNclNativeMethods
-                .OSSOCK
-                .gethostname(sb, HostNameBufferLength);
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.gethostname(
+                sb,
+                HostNameBufferLength
+            );
 
             //
             // if the call failed throw a SocketException()
@@ -1318,25 +1317,34 @@ namespace System.Net
         [HostProtection(ExternalThreading = true)]
         public static Task<IPAddress[]> GetHostAddressesAsync(string hostNameOrAddress)
         {
-            return Task<IPAddress[]>
-                .Factory
-                .FromAsync(BeginGetHostAddresses, EndGetHostAddresses, hostNameOrAddress, null);
+            return Task<IPAddress[]>.Factory.FromAsync(
+                BeginGetHostAddresses,
+                EndGetHostAddresses,
+                hostNameOrAddress,
+                null
+            );
         }
 
         [HostProtection(ExternalThreading = true)]
         public static Task<IPHostEntry> GetHostEntryAsync(IPAddress address)
         {
-            return Task<IPHostEntry>
-                .Factory
-                .FromAsync(BeginGetHostEntry, EndGetHostEntry, address, null);
+            return Task<IPHostEntry>.Factory.FromAsync(
+                BeginGetHostEntry,
+                EndGetHostEntry,
+                address,
+                null
+            );
         }
 
         [HostProtection(ExternalThreading = true)]
         public static Task<IPHostEntry> GetHostEntryAsync(string hostNameOrAddress)
         {
-            return Task<IPHostEntry>
-                .Factory
-                .FromAsync(BeginGetHostEntry, EndGetHostEntry, hostNameOrAddress, null);
+            return Task<IPHostEntry>.Factory.FromAsync(
+                BeginGetHostEntry,
+                EndGetHostEntry,
+                hostNameOrAddress,
+                null
+            );
         }
 
         private static unsafe IPHostEntry GetAddrInfo(string name)
@@ -1496,17 +1504,15 @@ namespace System.Net
             int flags = (int)NameInfoFlags.NI_NAMEREQD;
 
             Socket.InitializeSockets();
-            errorCode = UnsafeNclNativeMethods
-                .OSSOCK
-                .GetNameInfoW(
-                    address.m_Buffer,
-                    address.m_Size,
-                    hostname,
-                    hostname.Capacity,
-                    null, // We don't want a service name
-                    0, // so no need for buffer or length
-                    flags
-                );
+            errorCode = UnsafeNclNativeMethods.OSSOCK.GetNameInfoW(
+                address.m_Buffer,
+                address.m_Size,
+                hostname,
+                hostname.Capacity,
+                null, // We don't want a service name
+                0, // so no need for buffer or length
+                flags
+            );
 
             if (errorCode != SocketError.Success)
             {

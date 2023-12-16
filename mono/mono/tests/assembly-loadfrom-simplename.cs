@@ -17,9 +17,11 @@ public class TestAssemblyLoad
             var p = asm.Location;
             if (p != null && p.Contains(partialPath))
             {
-                Console
-                    .Error
-                    .WriteLine("Assembly {0} was unexpectedly loaded from '{1}'", asm.FullName, p);
+                Console.Error.WriteLine(
+                    "Assembly {0} was unexpectedly loaded from '{1}'",
+                    asm.FullName,
+                    p
+                );
                 result = true;
             }
         }

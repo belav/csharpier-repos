@@ -623,16 +623,14 @@ namespace System.Net
         private static void InitializeCallback(object state)
         {
             InitializeCallbackContext context = (InitializeCallbackContext)state;
-            context
-                .thisPtr
-                .Initialize(
-                    context.isServer,
-                    context.package,
-                    context.credential,
-                    context.spn,
-                    context.requestedContextFlags,
-                    context.channelBinding
-                );
+            context.thisPtr.Initialize(
+                context.isServer,
+                context.package,
+                context.credential,
+                context.spn,
+                context.requestedContextFlags,
+                context.channelBinding
+            );
         }
 
         //
@@ -690,9 +688,8 @@ namespace System.Net
                     SafeSspiAuthDataHandle authData = null;
                     try
                     {
-                        SecurityStatus result = UnsafeNclNativeMethods
-                            .SspiHelper
-                            .SspiEncodeStringsAsAuthIdentity(
+                        SecurityStatus result =
+                            UnsafeNclNativeMethods.SspiHelper.SspiEncodeStringsAsAuthIdentity(
                                 credential.InternalGetUserName(),
                                 credential.InternalGetDomain(),
                                 credential.InternalGetPassword(),
@@ -1423,9 +1420,11 @@ namespace System.Net
             string outgoingBlob = null;
             if (decodedOutgoingBlob != null && decodedOutgoingBlob.Length > 0)
             {
-                outgoingBlob = WebHeaderCollection
-                    .HeaderEncoding
-                    .GetString(decodedOutgoingBlob, 0, outSecurityBuffer.size);
+                outgoingBlob = WebHeaderCollection.HeaderEncoding.GetString(
+                    decodedOutgoingBlob,
+                    0,
+                    outSecurityBuffer.size
+                );
             }
             GlobalLog.Leave(
                 "NTAuthentication#" + ValidationHelper.HashString(this) + "::GetOutgoingDigestBlob",

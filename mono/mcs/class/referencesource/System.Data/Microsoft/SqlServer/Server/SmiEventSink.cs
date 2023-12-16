@@ -45,11 +45,9 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3- and hasn't implemented V200 yet.
             //  2) Server didn't implement V200 on some interface, but negotiated V200+.
-            System
-                .Data
-                .Common
-                .ADP
-                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
+            System.Data.Common.ADP.InternalError(
+                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
+            );
         }
 
         // Called when the server database context changes (ENVCHANGE token)
@@ -76,11 +74,9 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3- and hasn't implemented V200 yet.
             //  2) Server didn't implement V200 on some interface, but negotiated V200+.
-            System
-                .Data
-                .Common
-                .ADP
-                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
+            System.Data.Common.ADP.InternalError(
+                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
+            );
         }
 
         // Called when any statement completes on server (DONE token)
@@ -121,11 +117,9 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V200+ and dropped support for V200-.
             //  2) Server didn't implement V3- on some interface and negotiated V3-.
-            System
-                .Data
-                .Common
-                .ADP
-                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
+            System.Data.Common.ADP.InternalError(
+                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
+            );
         }
 
         // Called when a new row arrives (ROW token)
@@ -137,11 +131,9 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V200+ and dropped support for V200-.
             //  2) Server didn't implement V3- on some interface and negotiated V3-.
-            System
-                .Data
-                .Common
-                .ADP
-                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
+            System.Data.Common.ADP.InternalError(
+                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
+            );
         }
 
         #endregion
@@ -156,11 +148,9 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            System
-                .Data
-                .Common
-                .ADP
-                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
+            System.Data.Common.ADP.InternalError(
+                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
+            );
         }
 
         #endregion

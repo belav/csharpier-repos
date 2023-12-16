@@ -199,17 +199,15 @@ namespace System.Activities.DurableInstancing
             }
             else
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InstancePersistenceCommandException(
-                            SR.DatabaseUpgradeRequiredForCommand(
-                                this.Store.DatabaseVersion,
-                                this.InstancePersistenceCommand,
-                                this.targetVersion
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InstancePersistenceCommandException(
+                        SR.DatabaseUpgradeRequiredForCommand(
+                            this.Store.DatabaseVersion,
+                            this.InstancePersistenceCommand,
+                            this.targetVersion
                         )
-                    );
+                    )
+                );
             }
         }
     }

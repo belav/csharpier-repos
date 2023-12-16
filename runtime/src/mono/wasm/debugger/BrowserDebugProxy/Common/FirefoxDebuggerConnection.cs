@@ -85,8 +85,7 @@ internal sealed class FirefoxDebuggerConnection : WasmDebuggerConnection
     public override Task SendAsync(byte[] bytes, CancellationToken token)
     {
         byte[]? bytesWithHeader = Encoding
-            .UTF8
-            .GetBytes($"{bytes.Length}:")
+            .UTF8.GetBytes($"{bytes.Length}:")
             .Concat(bytes)
             .ToArray();
         NetworkStream toStream = TcpClient.GetStream();

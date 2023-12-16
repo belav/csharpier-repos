@@ -274,9 +274,9 @@ namespace System.ServiceModel.Dispatcher
 
                     public void Reset()
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new NotSupportedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException()
+                        );
                     }
                 }
             }
@@ -351,11 +351,8 @@ namespace System.ServiceModel.Dispatcher
 
                 public Enumerator(Enumerable<TSource, TResult> enumerable)
                 {
-                    this.outerEnumerator = enumerable
-                        .table
-                        .collectionsByType
-                        .Values
-                        .GetEnumerator();
+                    this.outerEnumerator =
+                        enumerable.table.collectionsByType.Values.GetEnumerator();
                     this.enumerable = enumerable;
                 }
 
@@ -395,9 +392,9 @@ namespace System.ServiceModel.Dispatcher
 
                 public void Reset()
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
                 }
             }
         }

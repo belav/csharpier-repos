@@ -516,15 +516,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 cancellationToken,
                                 out var configuredValue
                             )
-                            || analyzerExecutor
-                                .AnalyzerOptions
-                                .TryGetSeverityFromBulkConfiguration(
-                                    tree,
-                                    analyzerExecutor.Compilation,
-                                    descriptor,
-                                    cancellationToken,
-                                    out configuredValue
-                                )
+                            || analyzerExecutor.AnalyzerOptions.TryGetSeverityFromBulkConfiguration(
+                                tree,
+                                analyzerExecutor.Compilation,
+                                descriptor,
+                                cancellationToken,
+                                out configuredValue
+                            )
                         )
                         {
                             if (
@@ -608,9 +606,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     )
                     || (
                         options.SyntaxTreeOptionsProvider is object
-                        && options
-                            .SyntaxTreeOptionsProvider
-                            .TryGetGlobalDiagnosticValue(diag.Id, cancellationToken, out severity)
+                        && options.SyntaxTreeOptionsProvider.TryGetGlobalDiagnosticValue(
+                            diag.Id,
+                            cancellationToken,
+                            out severity
+                        )
                     )
                 )
                 {

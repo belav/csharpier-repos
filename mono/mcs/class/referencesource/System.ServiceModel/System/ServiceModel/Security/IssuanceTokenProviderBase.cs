@@ -114,14 +114,12 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= 0 || value > 100)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(SR.ValueMustBeInRange, 1, 100)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeInRange, 1, 100)
+                        )
+                    );
                 }
                 this.serviceTokenValidityThresholdPercentage = value;
             }
@@ -145,27 +143,23 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.maxServiceTokenCachingTime = value;
@@ -266,23 +260,19 @@ namespace System.ServiceModel.Security
         {
             if (this.targetAddress == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TargetAddressIsNotSet, this.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TargetAddressIsNotSet, this.GetType())
+                    )
+                );
             }
             if (this.SecurityAlgorithmSuite == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())
+                    )
+                );
             }
             this.sctUri = this.StandardsManager.SecureConversationDriver.TokenTypeUri;
         }
@@ -309,18 +299,16 @@ namespace System.ServiceModel.Security
                 AddressHeader header = target.Headers[i];
                 if (channelEncryptionParts.IsHeaderIncluded(header.Name, header.Namespace))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityNegotiationException(
-                                SR.GetString(
-                                    SR.SecurityNegotiationCannotProtectConfidentialEndpointHeader,
-                                    target,
-                                    header.Name,
-                                    header.Namespace
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(
+                                SR.SecurityNegotiationCannotProtectConfidentialEndpointHeader,
+                                target,
+                                header.Name,
+                                header.Namespace
                             )
-                        );
+                        )
+                    );
                 }
             }
         }
@@ -597,13 +585,11 @@ namespace System.ServiceModel.Security
                             incomingMessage = rstChannel.Request(nextOutgoingMessage, timeLeft);
                             if (incomingMessage == null)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new CommunicationException(
-                                            SR.GetString(SR.FailToRecieveReplyFromNegotiation)
-                                        )
-                                    );
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new CommunicationException(
+                                        SR.GetString(SR.FailToRecieveReplyFromNegotiation)
+                                    )
+                                );
                             }
 
                             if (
@@ -685,9 +671,9 @@ namespace System.ServiceModel.Security
                 }
                 EndpointAddress temp =
                     (negotiationState == null) ? null : negotiationState.RemoteAddress;
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(WrapExceptionIfRequired(e, temp, this.issuerAddress));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    WrapExceptionIfRequired(e, temp, this.issuerAddress)
+                );
             }
             finally
             {
@@ -821,25 +807,21 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new SecurityNegotiationException(
-                                    SR.GetString(SR.InvalidIssuedTokenKeySize, symmetricKey.KeySize)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.InvalidIssuedTokenKeySize, symmetricKey.KeySize)
+                            )
+                        );
                     }
                 }
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityNegotiationException(
-                            SR.GetString(SR.CannotObtainIssuedTokenKeySize)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.CannotObtainIssuedTokenKeySize)
+                    )
+                );
             }
         }
 
@@ -975,9 +957,9 @@ namespace System.ServiceModel.Security
                     {
                         throw;
                     }
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(this.OnSyncNegotiationFailure(e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        this.OnSyncNegotiationFailure(e)
+                    );
                 }
                 if (completeSelf)
                 {
@@ -1232,13 +1214,11 @@ namespace System.ServiceModel.Security
                     {
                         if (incomingMessage == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new SecurityNegotiationException(
-                                        SR.GetString(SR.FailToRecieveReplyFromNegotiation)
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new SecurityNegotiationException(
+                                    SR.GetString(SR.FailToRecieveReplyFromNegotiation)
+                                )
+                            );
                         }
                         return this.DoNegotiation(incomingMessage);
                     }
@@ -1274,13 +1254,11 @@ namespace System.ServiceModel.Security
                     {
                         if (incomingMessage == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new SecurityNegotiationException(
-                                        SR.GetString(SR.FailToRecieveReplyFromNegotiation)
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new SecurityNegotiationException(
+                                    SR.GetString(SR.FailToRecieveReplyFromNegotiation)
+                                )
+                            );
                         }
                         completeSelf = self.DoNegotiation(incomingMessage);
                     }

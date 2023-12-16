@@ -26,11 +26,9 @@ namespace Microsoft.CodeAnalysis.Scripting
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[]
                 {
-                    CSharp
-                        .SyntaxFactory
-                        .ParseSyntaxTree(
-                            SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
-                        )
+                    CSharp.SyntaxFactory.ParseSyntaxTree(
+                        SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
+                    )
                 },
                 new[] { NetStandard13.SystemRuntime },
                 new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
@@ -46,11 +44,9 @@ namespace Microsoft.CodeAnalysis.Scripting
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[]
                 {
-                    VisualBasic
-                        .SyntaxFactory
-                        .ParseSyntaxTree(
-                            SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
-                        )
+                    VisualBasic.SyntaxFactory.ParseSyntaxTree(
+                        SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
+                    )
                 },
                 new[] { NetStandard13.SystemRuntime },
                 new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
@@ -68,11 +64,9 @@ namespace Microsoft.CodeAnalysis.Scripting
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[]
                 {
-                    CSharp
-                        .SyntaxFactory
-                        .ParseSyntaxTree(
-                            SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
-                        )
+                    CSharp.SyntaxFactory.ParseSyntaxTree(
+                        SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
+                    )
                 },
                 references,
                 options ?? new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)

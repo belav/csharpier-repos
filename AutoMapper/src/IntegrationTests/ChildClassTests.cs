@@ -44,15 +44,13 @@
         {
             protected override void Seed(TestContext testContext)
             {
-                testContext
-                    .Bases
-                    .Add(
-                        new Base()
-                        {
-                            Base1 = "base1",
-                            Sub = new Sub() { Sub1 = "sub1" }
-                        }
-                    );
+                testContext.Bases.Add(
+                    new Base()
+                    {
+                        Base1 = "base1",
+                        Sub = new Sub() { Sub1 = "sub1" }
+                    }
+                );
 
                 base.Seed(testContext);
             }
@@ -81,8 +79,7 @@
                 using (var context = new TestContext())
                 {
                     var baseDTO = context
-                        .Bases
-                        .Select(
+                        .Bases.Select(
                             b =>
                                 new BaseDTO
                                 {
@@ -107,8 +104,7 @@
             public void MapShouldThrow() =>
                 new Action(() => Mapper.Map<SubDTO>(new Sub()))
                     .ShouldThrow<AutoMapperConfigurationException>()
-                    .Message
-                    .ShouldBe("CreateProjection works with ProjectTo, not with Map.");
+                    .Message.ShouldBe("CreateProjection works with ProjectTo, not with Map.");
         }
     }
 }

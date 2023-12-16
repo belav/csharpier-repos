@@ -113,8 +113,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             catch (Exception e)
             {
                 var listenerProvider = GetComponentModel()
-                    .DefaultExportProvider
-                    .GetExportedValue<IAsynchronousOperationListenerProvider>();
+                    .DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
                 var messageBuilder = new StringBuilder(
                     "Failed to clean up listeners in a timely manner."
                 );
@@ -159,9 +158,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 LoadRoslynPackage();
 
-                var hook = _visualStudioWorkspace
-                    .Services
-                    .GetRequiredService<IWorkpacePartialSolutionsTestHook>();
+                var hook =
+                    _visualStudioWorkspace.Services.GetRequiredService<IWorkpacePartialSolutionsTestHook>();
                 hook.IsPartialSolutionDisabled = true;
             });
 
@@ -204,8 +202,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             InvokeOnUIThread(cancellationToken =>
             {
                 var provider = GetComponentModel()
-                    .DefaultExportProvider
-                    .GetExportedValue<IAsynchronousOperationListenerProvider>();
+                    .DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
                 if (provider == null)
                 {

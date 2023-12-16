@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             CancellationToken cancellationToken
         )
         {
-            var location = await this.DocumentSpan
-                .GetNavigableLocationAsync(cancellationToken)
+            var location = await this.DocumentSpan.GetNavigableLocationAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (location != null)
                 await location

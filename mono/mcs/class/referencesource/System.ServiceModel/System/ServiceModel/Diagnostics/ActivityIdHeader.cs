@@ -43,12 +43,10 @@ namespace System.ServiceModel.Diagnostics
                     && message.Headers != null
                 )
                 {
-                    int index = message
-                        .Headers
-                        .FindHeader(
-                            DiagnosticStrings.ActivityId,
-                            DiagnosticStrings.DiagnosticsNamespace
-                        );
+                    int index = message.Headers.FindHeader(
+                        DiagnosticStrings.ActivityId,
+                        DiagnosticStrings.DiagnosticsNamespace
+                    );
 
                     // Check the state again, in case the message was closed after we found the header
                     if (index >= 0)
@@ -101,12 +99,10 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (message.State != MessageState.Closed && message.Headers != null)
                 {
-                    int index = message
-                        .Headers
-                        .FindHeader(
-                            DiagnosticStrings.ActivityId,
-                            DiagnosticStrings.DiagnosticsNamespace
-                        );
+                    int index = message.Headers.FindHeader(
+                        DiagnosticStrings.ActivityId,
+                        DiagnosticStrings.DiagnosticsNamespace
+                    );
 
                     // Check the state again, in case the message was closed after we found the header
                     if (index >= 0)
@@ -156,12 +152,10 @@ namespace System.ServiceModel.Diagnostics
                 && message.Headers.MessageVersion.Envelope != EnvelopeVersion.None
             )
             {
-                int index = message
-                    .Headers
-                    .FindHeader(
-                        DiagnosticStrings.ActivityId,
-                        DiagnosticStrings.DiagnosticsNamespace
-                    );
+                int index = message.Headers.FindHeader(
+                    DiagnosticStrings.ActivityId,
+                    DiagnosticStrings.DiagnosticsNamespace
+                );
                 if (index < 0)
                 {
                     message.Headers.Add(this);

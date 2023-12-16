@@ -46,10 +46,11 @@ internal sealed class IdentityRedirectManager(NavigationManager navigationManage
     [DoesNotReturn]
     public void RedirectToWithStatus(string uri, string message, HttpContext context)
     {
-        context
-            .Response
-            .Cookies
-            .Append(StatusCookieName, message, StatusCookieBuilder.Build(context));
+        context.Response.Cookies.Append(
+            StatusCookieName,
+            message,
+            StatusCookieBuilder.Build(context)
+        );
         RedirectTo(uri);
     }
 

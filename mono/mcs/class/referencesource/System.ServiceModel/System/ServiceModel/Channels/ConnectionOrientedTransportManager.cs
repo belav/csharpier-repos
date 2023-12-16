@@ -149,13 +149,11 @@ namespace System.ServiceModel.Channels
                     serverSingletonPreambleReader.SendFault(
                         FramingEncodingString.UnsupportedModeFault
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(SR.FramingModeNotSupported, FramingMode.Singleton)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.FramingModeNotSupported, FramingMode.Singleton)
+                        )
+                    );
                 }
             }
             else
@@ -163,11 +161,9 @@ namespace System.ServiceModel.Channels
                 serverSingletonPreambleReader.SendFault(
                     FramingEncodingString.EndpointNotFoundFault
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new EndpointNotFoundException(SR.GetString(SR.EndpointNotFound, via))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new EndpointNotFoundException(SR.GetString(SR.EndpointNotFound, via))
+                );
             }
         }
 
@@ -199,25 +195,21 @@ namespace System.ServiceModel.Channels
                     serverSessionPreambleReader.SendFault(
                         FramingEncodingString.UnsupportedModeFault
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(SR.FramingModeNotSupported, FramingMode.Duplex)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.FramingModeNotSupported, FramingMode.Duplex)
+                        )
+                    );
                 }
             }
             else
             {
                 serverSessionPreambleReader.SendFault(FramingEncodingString.EndpointNotFoundFault);
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new EndpointNotFoundException(
-                            SR.GetString(SR.DuplexSessionListenerNotFound, via.ToString())
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new EndpointNotFoundException(
+                        SR.GetString(SR.DuplexSessionListenerNotFound, via.ToString())
+                    )
+                );
             }
         }
 

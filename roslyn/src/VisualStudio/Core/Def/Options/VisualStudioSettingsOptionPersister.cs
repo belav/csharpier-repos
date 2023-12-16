@@ -96,19 +96,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 )
             )
             {
-                var fallbackResult = lazyReadFallback
-                    .Value
-                    .TryRead(
-                        optionKey.Language,
-                        (altStorageKey, altStorageType, altDefaultValue) =>
-                            TryReadAndMonitorOptionValue(
-                                optionKey,
-                                storageKey,
-                                altStorageKey,
-                                altStorageType,
-                                altDefaultValue
-                            )
-                    );
+                var fallbackResult = lazyReadFallback.Value.TryRead(
+                    optionKey.Language,
+                    (altStorageKey, altStorageType, altDefaultValue) =>
+                        TryReadAndMonitorOptionValue(
+                            optionKey,
+                            storageKey,
+                            altStorageKey,
+                            altStorageType,
+                            altDefaultValue
+                        )
+                );
 
                 if (fallbackResult.HasValue)
                 {

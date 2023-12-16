@@ -1042,8 +1042,7 @@ namespace Microsoft.Cci
             else
             {
                 var compilerVersion = typeof(Compilation)
-                    .Assembly
-                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                     .InformationalVersion;
                 WriteValue(
                     CompilationOptionNames.CompilationOptionsVersion,
@@ -1117,8 +1116,7 @@ namespace Microsoft.Cci
                 WriteValue(CompilationOptionNames.Platform, platform.ToString());
 
                 var runtimeVersion = typeof(object)
-                    .Assembly
-                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                     ?.InformationalVersion;
                 WriteValue(CompilationOptionNames.RuntimeVersion, runtimeVersion);
 

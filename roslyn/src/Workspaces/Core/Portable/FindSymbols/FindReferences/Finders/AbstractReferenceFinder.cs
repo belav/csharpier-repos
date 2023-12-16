@@ -265,9 +265,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             string identifier,
             CancellationToken cancellationToken
         ) =>
-            state
-                .Cache
-                .FindMatchingIdentifierTokensAsync(state.Document, identifier, cancellationToken);
+            state.Cache.FindMatchingIdentifierTokensAsync(
+                state.Document,
+                identifier,
+                cancellationToken
+            );
 
         protected static async ValueTask<
             ImmutableArray<FinderLocation>
@@ -670,18 +672,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 if (!state.SyntaxFacts.IsObjectCollectionInitializer(node))
                     return;
 
-                var expressions = state
-                    .SyntaxFacts
-                    .GetExpressionsOfObjectCollectionInitializer(node);
+                var expressions = state.SyntaxFacts.GetExpressionsOfObjectCollectionInitializer(
+                    node
+                );
                 foreach (var expression in expressions)
                 {
-                    var info = state
-                        .SemanticFacts
-                        .GetCollectionInitializerSymbolInfo(
-                            state.SemanticModel,
-                            expression,
-                            cancellationToken
-                        );
+                    var info = state.SemanticFacts.GetCollectionInitializerSymbolInfo(
+                        state.SemanticModel,
+                        expression,
+                        cancellationToken
+                    );
 
                     if (Matches(info, symbol))
                     {
@@ -793,9 +793,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 ArrayBuilder<FinderLocation> locations
             )
             {
-                var awaitExpressionMethod = state
-                    .SemanticFacts
-                    .GetGetAwaiterMethod(state.SemanticModel, node);
+                var awaitExpressionMethod = state.SemanticFacts.GetGetAwaiterMethod(
+                    state.SemanticModel,
+                    node
+                );
 
                 if (Matches(awaitExpressionMethod, symbol))
                 {
@@ -895,12 +896,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     .Equals(notNullOriginalUnreducedSymbol2)
             );
             return symbol1 != null
-                && SymbolEquivalenceComparer
-                    .Instance
-                    .Equals(
-                        symbol1.GetOriginalUnreducedDefinition(),
-                        notNullOriginalUnreducedSymbol2
-                    );
+                && SymbolEquivalenceComparer.Instance.Equals(
+                    symbol1.GetOriginalUnreducedDefinition(),
+                    notNullOriginalUnreducedSymbol2
+                );
         }
 
         protected static SymbolUsageInfo GetSymbolUsageInfo(

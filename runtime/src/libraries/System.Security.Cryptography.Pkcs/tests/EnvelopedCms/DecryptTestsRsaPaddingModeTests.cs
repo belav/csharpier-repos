@@ -42,9 +42,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 privateCert = Certificates
-                    .RSA2048Sha256KeyTransfer1
-                    .TryGetCertificateWithPrivateKey()
+                X509Certificate2 privateCert =
+                    Certificates.RSA2048Sha256KeyTransfer1.TryGetCertificateWithPrivateKey()
             )
             {
                 if (privateCert == null)
@@ -69,9 +68,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 X509Certificate2 issuerSerialCert = Certificates.RSAKeyTransfer1.GetCertificate()
             )
             using (
-                X509Certificate2 explicitSkiCert = Certificates
-                    .RSAKeyTransfer_ExplicitSki
-                    .GetCertificate()
+                X509Certificate2 explicitSkiCert =
+                    Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate()
             )
             {
                 // CmsRecipients have different identifiers to test multiple identifier encryption.
@@ -98,9 +96,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 privateIssuerSerialCert = Certificates
-                    .RSAKeyTransfer1
-                    .TryGetCertificateWithPrivateKey()
+                X509Certificate2 privateIssuerSerialCert =
+                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
             )
             {
                 if (privateIssuerSerialCert != null)
@@ -110,9 +107,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             }
 
             using (
-                X509Certificate2 privateExplicitSkiCert = Certificates
-                    .RSAKeyTransfer_ExplicitSki
-                    .TryGetCertificateWithPrivateKey()
+                X509Certificate2 privateExplicitSkiCert =
+                    Certificates.RSAKeyTransfer_ExplicitSki.TryGetCertificateWithPrivateKey()
             )
             {
                 if (privateExplicitSkiCert != null)

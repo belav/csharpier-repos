@@ -106,9 +106,7 @@ namespace System.Web.WebPages.Razor.Test
 
             // Assert
             CodeMemberProperty appInstance = context
-                .GeneratedClass
-                .Members
-                .OfType<CodeMemberProperty>()
+                .GeneratedClass.Members.OfType<CodeMemberProperty>()
                 .Where(p => p.Name.Equals("ApplicationInstance"))
                 .SingleOrDefault();
             Assert.NotNull(appInstance);

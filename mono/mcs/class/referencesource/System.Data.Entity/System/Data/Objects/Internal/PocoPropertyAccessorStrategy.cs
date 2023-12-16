@@ -62,14 +62,10 @@ namespace System.Data.Objects.Internal
                     if (propertyInfo == null)
                     {
                         throw new EntityException(
-                            System
-                                .Data
-                                .Entity
-                                .Strings
-                                .PocoEntityWrapper_UnableToSetFieldOrProperty(
-                                    relatedEnd.TargetAccessor.PropertyName,
-                                    type.FullName
-                                )
+                            System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                                relatedEnd.TargetAccessor.PropertyName,
+                                type.FullName
+                            )
                         );
                     }
                     EntityProxyFactory factory = new EntityProxyFactory();
@@ -85,14 +81,10 @@ namespace System.Data.Objects.Internal
                 catch (Exception ex)
                 {
                     throw new EntityException(
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .PocoEntityWrapper_UnableToSetFieldOrProperty(
-                                relatedEnd.TargetAccessor.PropertyName,
-                                _entity.GetType().FullName
-                            ),
+                        System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                            relatedEnd.TargetAccessor.PropertyName,
+                            _entity.GetType().FullName
+                        ),
                         ex
                     );
                 }
@@ -119,14 +111,10 @@ namespace System.Data.Objects.Internal
                     if (propertyInfo == null)
                     {
                         throw new EntityException(
-                            System
-                                .Data
-                                .Entity
-                                .Strings
-                                .PocoEntityWrapper_UnableToSetFieldOrProperty(
-                                    relatedEnd.TargetAccessor.PropertyName,
-                                    type.FullName
-                                )
+                            System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                                relatedEnd.TargetAccessor.PropertyName,
+                                type.FullName
+                            )
                         );
                     }
                     EntityProxyFactory factory = new EntityProxyFactory();
@@ -142,14 +130,10 @@ namespace System.Data.Objects.Internal
                 catch (Exception ex)
                 {
                     throw new EntityException(
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .PocoEntityWrapper_UnableToSetFieldOrProperty(
-                                relatedEnd.TargetAccessor.PropertyName,
-                                _entity.GetType().FullName
-                            ),
+                        System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                            relatedEnd.TargetAccessor.PropertyName,
+                            _entity.GetType().FullName
+                        ),
                         ex
                     );
                 }
@@ -162,13 +146,8 @@ namespace System.Data.Objects.Internal
             {
                 EntityType declaringEntityType = (EntityType)
                     relatedEnd.NavigationProperty.DeclaringType;
-                ObjectTypeMapping mapping = System
-                    .Data
-                    .Common
-                    .Internal
-                    .Materialization
-                    .Util
-                    .GetObjectMapping(
+                ObjectTypeMapping mapping =
+                    System.Data.Common.Internal.Materialization.Util.GetObjectMapping(
                         declaringEntityType,
                         relatedEnd.WrappedOwner.Context.MetadataWorkspace
                     );
@@ -198,14 +177,10 @@ namespace System.Data.Objects.Internal
                 else
                 {
                     throw new EntityException(
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .PocoEntityWrapper_UnableToSetFieldOrProperty(
-                                propertyName,
-                                entityType.FullName
-                            )
+                        System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                            propertyName,
+                            entityType.FullName
+                        )
                     );
                 }
             }
@@ -253,14 +228,10 @@ namespace System.Data.Objects.Internal
             catch (Exception ex)
             {
                 throw new EntityException(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .PocoEntityWrapper_UnableToSetFieldOrProperty(
-                            relatedEnd.TargetAccessor.PropertyName,
-                            entity.GetType().FullName
-                        ),
+                    System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                        relatedEnd.TargetAccessor.PropertyName,
+                        entity.GetType().FullName
+                    ),
                     ex
                 );
             }
@@ -327,14 +298,10 @@ namespace System.Data.Objects.Internal
             catch (Exception ex)
             {
                 throw new EntityException(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .PocoEntityWrapper_UnableToSetFieldOrProperty(
-                            relatedEnd.TargetAccessor.PropertyName,
-                            entity.GetType().FullName
-                        ),
+                    System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                        relatedEnd.TargetAccessor.PropertyName,
+                        entity.GetType().FullName
+                    ),
                     ex
                 );
             }
@@ -414,14 +381,10 @@ namespace System.Data.Objects.Internal
             if (typeToInstantiate == null)
             {
                 throw new EntityException(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .PocoEntityWrapper_UnableToMaterializeArbitaryNavPropType(
-                            propName,
-                            navigationPropertyType
-                        )
+                    System.Data.Entity.Strings.PocoEntityWrapper_UnableToMaterializeArbitaryNavPropType(
+                        propName,
+                        navigationPropertyType
+                    )
                 );
             }
 

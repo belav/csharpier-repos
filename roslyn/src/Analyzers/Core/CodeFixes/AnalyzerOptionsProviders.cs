@@ -24,8 +24,7 @@ internal static partial class AnalyzerOptionsProviders
             .ConfigureAwait(false);
         var analyzerOptions = document.Project.AnalyzerOptions;
         var configOptions = analyzerOptions
-            .AnalyzerConfigOptionsProvider
-            .GetOptions(syntaxTree)
+            .AnalyzerConfigOptionsProvider.GetOptions(syntaxTree)
             .GetOptionsReader();
 
         return new AnalyzerOptionsProvider(

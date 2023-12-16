@@ -61,9 +61,12 @@ namespace System.ComponentModel.Tests
         {
             Assert.Throws<InvalidCastException>(
                 () =>
-                    TypeListConverterTests
-                        .s_converter
-                        .ConvertTo(TypeConverterTests.s_context, null, 3, typeof(string))
+                    TypeListConverterTests.s_converter.ConvertTo(
+                        TypeConverterTests.s_context,
+                        null,
+                        3,
+                        typeof(string)
+                    )
             );
         }
     }

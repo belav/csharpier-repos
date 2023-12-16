@@ -253,8 +253,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             var changedSolution = solution
                 .AddProject("P3", "P3", LanguageNames.CSharp)
                 .AddDocument("D1", "")
-                .Project
-                .Solution;
+                .Project.Solution;
 
             var expectedDocumentEvents = 1;
 
@@ -524,9 +523,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var newSolution = workspace
-                .CurrentSolution
-                .WithProjectOutputFilePath(project.Id, "/newPath");
+            var newSolution = workspace.CurrentSolution.WithProjectOutputFilePath(
+                project.Id,
+                "/newPath"
+            );
             var worker = await ExecuteOperationAsync(
                 workspace,
                 w => w.ChangeProjectAsync(project.Id, newSolution)
@@ -570,9 +570,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var newSolution = workspace
-                .CurrentSolution
-                .WithProjectOutputRefFilePath(project.Id, "/newPath");
+            var newSolution = workspace.CurrentSolution.WithProjectOutputRefFilePath(
+                project.Id,
+                "/newPath"
+            );
             var worker = await ExecuteOperationAsync(
                 workspace,
                 w => w.ChangeProjectAsync(project.Id, newSolution)
@@ -616,12 +617,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var newSolution = workspace
-                .CurrentSolution
-                .WithProjectCompilationOutputInfo(
-                    project.Id,
-                    new CompilationOutputInfo(assemblyPath: "/newPath")
-                );
+            var newSolution = workspace.CurrentSolution.WithProjectCompilationOutputInfo(
+                project.Id,
+                new CompilationOutputInfo(assemblyPath: "/newPath")
+            );
             var worker = await ExecuteOperationAsync(
                 workspace,
                 w => w.ChangeProjectAsync(project.Id, newSolution)
@@ -969,9 +968,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             await WaitWaiterAsync(workspace.ExportProvider);
 
             var lazyWorker = Assert.Single(
-                workspace
-                    .ExportProvider
-                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
+                workspace.ExportProvider.GetExports<
+                    IIncrementalAnalyzerProvider,
+                    IncrementalAnalyzerProviderMetadata
+                >()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var worker = Assert.IsType<Analyzer>(
@@ -1217,9 +1217,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             await WaitWaiterAsync(workspace.ExportProvider);
 
             var lazyWorker = Assert.Single(
-                workspace
-                    .ExportProvider
-                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
+                workspace.ExportProvider.GetExports<
+                    IIncrementalAnalyzerProvider,
+                    IncrementalAnalyzerProviderMetadata
+                >()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var analyzer = Assert.IsType<Analyzer>(
@@ -1300,9 +1301,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             var expectedDocumentSemanticEvents = 5;
 
             var lazyWorker = Assert.Single(
-                workspace
-                    .ExportProvider
-                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
+                workspace.ExportProvider.GetExports<
+                    IIncrementalAnalyzerProvider,
+                    IncrementalAnalyzerProviderMetadata
+                >()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var analyzer = Assert.IsType<Analyzer>(
@@ -1368,9 +1370,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             var id = workspace.CurrentSolution.Projects.First().DocumentIds[0];
 
             var lazyWorker = Assert.Single(
-                workspace
-                    .ExportProvider
-                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
+                workspace.ExportProvider.GetExports<
+                    IIncrementalAnalyzerProvider,
+                    IncrementalAnalyzerProviderMetadata
+                >()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var analyzer = Assert.IsType<Analyzer>(
@@ -1956,9 +1959,8 @@ class C
                 }
             };
 
-            var registrationService = workspace
-                .Services
-                .GetService<ISolutionCrawlerRegistrationService>();
+            var registrationService =
+                workspace.Services.GetService<ISolutionCrawlerRegistrationService>();
             registrationService.Register(workspace);
 
             // first mutation
@@ -2033,9 +2035,10 @@ class C
 
             // add analyzer
             var lazyWorker = Assert.Single(
-                workspace
-                    .ExportProvider
-                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
+                workspace.ExportProvider.GetExports<
+                    IIncrementalAnalyzerProvider,
+                    IncrementalAnalyzerProviderMetadata
+                >()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var worker = Assert.IsType<Analyzer2>(
@@ -2074,11 +2077,8 @@ class C
             // let the test not care about cancellation or work not enqueued yet.
 
             // block solution cralwer from processing.
-            var globalOperation = workspace
-                .Services
-                .SolutionServices
-                .ExportProvider
-                .GetExportedValue<IGlobalOperationNotificationService>();
+            var globalOperation =
+                workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOperationNotificationService>();
             using (var operation = globalOperation.Start("Block SolutionCrawler"))
             {
                 // make sure global operaiton is actually started
@@ -2150,8 +2150,7 @@ class C
                 parseOptions: null,
                 [code],
                 composition: EditorTestCompositions
-                    .EditorFeatures
-                    .AddExcludedPartTypes(typeof(IIncrementalAnalyzerProvider))
+                    .EditorFeatures.AddExcludedPartTypes(typeof(IIncrementalAnalyzerProvider))
                     .AddParts(typeof(AnalyzerProviderNoWaitNoBlock)),
                 workspaceKind: SolutionCrawlerWorkspaceKind
             );
@@ -2160,9 +2159,10 @@ class C
             var textBuffer = testDocument.GetTextBuffer();
 
             var lazyWorker = Assert.Single(
-                workspace
-                    .ExportProvider
-                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
+                workspace.ExportProvider.GetExports<
+                    IIncrementalAnalyzerProvider,
+                    IncrementalAnalyzerProviderMetadata
+                >()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var analyzer = Assert.IsType<Analyzer>(
@@ -2211,9 +2211,10 @@ class C
         )
         {
             var lazyWorker = Assert.Single(
-                workspace
-                    .ExportProvider
-                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
+                workspace.ExportProvider.GetExports<
+                    IIncrementalAnalyzerProvider,
+                    IncrementalAnalyzerProviderMetadata
+                >()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var worker = Assert.IsType<Analyzer>(
@@ -2413,8 +2414,7 @@ class C
         private class WorkCoordinatorWorkspace : TestWorkspace
         {
             private static readonly TestComposition s_composition = EditorTestCompositions
-                .EditorFeatures
-                .AddParts(typeof(TestDocumentTrackingService))
+                .EditorFeatures.AddParts(typeof(TestDocumentTrackingService))
                 .AddExcludedPartTypes(typeof(IIncrementalAnalyzerProvider));
 
             private readonly IAsynchronousOperationWaiter _workspaceWaiter;
@@ -2455,11 +2455,8 @@ class C
                     incrementalAnalyzer
                 );
 
-                var globalOptions = workspace
-                    .Services
-                    .SolutionServices
-                    .ExportProvider
-                    .GetExportedValue<IGlobalOptionService>();
+                var globalOptions =
+                    workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
                 globalOptions.SetGlobalOption(
                     SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
                     LanguageNames.CSharp,

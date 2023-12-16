@@ -385,10 +385,9 @@ public class SaveTempDataFilterTest
     {
         public Task ExecuteResultAsync(ActionContext context)
         {
-            return context
-                .HttpContext
-                .Response
-                .WriteAsync($"Hello from {nameof(TestActionResult)}");
+            return context.HttpContext.Response.WriteAsync(
+                $"Hello from {nameof(TestActionResult)}"
+            );
         }
     }
 
@@ -396,10 +395,9 @@ public class SaveTempDataFilterTest
     {
         public Task ExecuteResultAsync(ActionContext context)
         {
-            return context
-                .HttpContext
-                .Response
-                .WriteAsync($"Hello from {nameof(TestKeepTempDataActionResult)}");
+            return context.HttpContext.Response.WriteAsync(
+                $"Hello from {nameof(TestKeepTempDataActionResult)}"
+            );
         }
     }
 

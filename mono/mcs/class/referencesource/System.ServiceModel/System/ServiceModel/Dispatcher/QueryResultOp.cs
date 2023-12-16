@@ -235,27 +235,18 @@ namespace System.ServiceModel.Dispatcher
                     throw Fx.AssertAndThrow("Unexpected result type.");
             }
 
-            context
-                .Processor
-                .ResultSet
-                .Add(
-                    new KeyValuePair<MessageQuery, XPathResult>(
-                        (MessageQuery)this.results[0],
-                        result
-                    )
-                );
+            context.Processor.ResultSet.Add(
+                new KeyValuePair<MessageQuery, XPathResult>((MessageQuery)this.results[0], result)
+            );
 
             for (int i = 1; i < this.results.Count; i++)
             {
-                context
-                    .Processor
-                    .ResultSet
-                    .Add(
-                        new KeyValuePair<MessageQuery, XPathResult>(
-                            (MessageQuery)this.results[i],
-                            result.Copy()
-                        )
-                    );
+                context.Processor.ResultSet.Add(
+                    new KeyValuePair<MessageQuery, XPathResult>(
+                        (MessageQuery)this.results[i],
+                        result.Copy()
+                    )
+                );
             }
 
             context.PopFrame();

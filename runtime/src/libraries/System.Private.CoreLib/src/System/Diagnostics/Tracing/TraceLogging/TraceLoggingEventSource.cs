@@ -510,16 +510,14 @@ namespace System.Diagnostics.Tracing
 
                 try
                 {
-                    DataCollector
-                        .ThreadInstance
-                        .Enable(
-                            scratch,
-                            eventTypes.scratchSize,
-                            descriptors + 3,
-                            eventTypes.dataCount,
-                            pins,
-                            pinCount
-                        );
+                    DataCollector.ThreadInstance.Enable(
+                        scratch,
+                        eventTypes.scratchSize,
+                        descriptors + 3,
+                        eventTypes.dataCount,
+                        pins,
+                        pinCount
+                    );
 
                     for (int i = 0; i < eventTypes.typeInfos.Length; i++)
                     {
@@ -758,16 +756,14 @@ namespace System.Diagnostics.Tracing
 
                         try
                         {
-                            DataCollector
-                                .ThreadInstance
-                                .Enable(
-                                    scratch,
-                                    eventTypes.scratchSize,
-                                    descriptors + 3,
-                                    eventTypes.dataCount,
-                                    pins,
-                                    pinCount
-                                );
+                            DataCollector.ThreadInstance.Enable(
+                                scratch,
+                                eventTypes.scratchSize,
+                                descriptors + 3,
+                                eventTypes.dataCount,
+                                pins,
+                                pinCount
+                            );
 
                             TraceLoggingTypeInfo info = eventTypes.typeInfos[0];
                             info.WriteData(info.PropertyValueFactory(data));

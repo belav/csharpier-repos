@@ -619,9 +619,10 @@ namespace System.Web.UI
                 dependencies = new List<string>();
 
             if (combinePaths)
-                filename = HostingEnvironment
-                    .VirtualPathProvider
-                    .CombineVirtualPaths(VirtualPath.Absolute, filename);
+                filename = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths(
+                    VirtualPath.Absolute,
+                    filename
+                );
 
             if (!dependencies.Contains(filename))
                 dependencies.Add(filename);

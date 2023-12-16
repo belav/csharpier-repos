@@ -181,8 +181,7 @@ namespace System.CommandLine
             {
                 if (
                     command
-                        .Parents
-                        .FlattenBreadthFirst(c => c.Parents)
+                        .Parents.FlattenBreadthFirst(c => c.Parents)
                         .Any(ancestor => ancestor == command)
                 )
                 {

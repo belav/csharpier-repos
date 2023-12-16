@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || list.InputType.IsErrorType()
                     || input.Type.Equals(list.InputType, TypeCompareKind.AllIgnoreOptions)
                         && input
-                            .Type
-                            .StrippedType()
+                            .Type.StrippedType()
                             .Equals(list.NarrowedType, TypeCompareKind.ConsiderEverything)
                         && list.Subpatterns.Count(p => p.Kind == BoundKind.SlicePattern)
                             == (list.HasSlice ? 1 : 0)

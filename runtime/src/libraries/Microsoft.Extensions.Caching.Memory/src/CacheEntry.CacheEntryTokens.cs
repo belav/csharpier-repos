@@ -138,14 +138,12 @@ namespace Microsoft.Extensions.Caching.Memory
 
                     try
                     {
-                        registration
-                            .EvictionCallback
-                            ?.Invoke(
-                                entry.Key,
-                                entry.Value,
-                                entry.EvictionReason,
-                                registration.State
-                            );
+                        registration.EvictionCallback?.Invoke(
+                            entry.Key,
+                            entry.Value,
+                            entry.EvictionReason,
+                            registration.State
+                        );
                     }
                     catch (Exception e)
                     {

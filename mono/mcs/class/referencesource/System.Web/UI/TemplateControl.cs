@@ -1137,9 +1137,10 @@ namespace System.Web.UI
         /// <internalonly/>
         int IFilterResolutionService.CompareFilters(string filter1, string filter2)
         {
-            return BrowserCapabilitiesCompiler
-                .BrowserCapabilitiesFactory
-                .CompareFilters(filter1, filter2);
+            return BrowserCapabilitiesCompiler.BrowserCapabilitiesFactory.CompareFilters(
+                filter1,
+                filter2
+            );
         }
         #endregion
 

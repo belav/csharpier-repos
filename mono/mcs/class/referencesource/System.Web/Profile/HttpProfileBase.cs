@@ -907,15 +907,13 @@ namespace System.Web.Profile
             if (_DatesRetrieved || ProfileManager.Provider == null)
                 return;
             int totalRecords;
-            ProfileInfoCollection coll = ProfileManager
-                .Provider
-                .FindProfilesByUserName(
-                    ProfileAuthenticationOption.All,
-                    _UserName,
-                    0,
-                    1,
-                    out totalRecords
-                );
+            ProfileInfoCollection coll = ProfileManager.Provider.FindProfilesByUserName(
+                ProfileAuthenticationOption.All,
+                _UserName,
+                0,
+                1,
+                out totalRecords
+            );
             foreach (ProfileInfo p in coll)
             {
                 _LastActivityDate = p.LastActivityDate.ToUniversalTime();

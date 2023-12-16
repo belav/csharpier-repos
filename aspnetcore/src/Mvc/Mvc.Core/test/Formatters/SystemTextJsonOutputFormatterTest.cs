@@ -314,12 +314,10 @@ public partial class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTest
     )
     {
         var options = new RemoteInvokeOptions();
-        options
-            .RuntimeConfigurationOptions
-            .Add(
-                "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
-                isReflectionEnabledByDefault.ToString()
-            );
+        options.RuntimeConfigurationOptions.Add(
+            "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
+            isReflectionEnabledByDefault.ToString()
+        );
 
         using var remoteHandle = RemoteExecutor.Invoke(
             static () =>

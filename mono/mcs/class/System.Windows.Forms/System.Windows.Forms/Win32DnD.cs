@@ -564,9 +564,10 @@ namespace System.Windows.Forms
 
                 assembly = new AssemblyName();
                 assembly.Name = "XplatUIWin32.FuncPtrInterface";
-                assembly_builder = AppDomain
-                    .CurrentDomain
-                    .DefineDynamicAssembly(assembly, AssemblyBuilderAccess.Run);
+                assembly_builder = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    assembly,
+                    AssemblyBuilderAccess.Run
+                );
 
                 MethodArguments = new object[6];
                 GetDataMethod = CreateFuncPtrInterface(

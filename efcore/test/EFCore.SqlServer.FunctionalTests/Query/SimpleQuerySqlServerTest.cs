@@ -20,13 +20,14 @@ public class SimpleQuerySqlServerTest : SimpleQueryRelationalTestBase
         var contextFactory = await InitializeAsync<Context27427>();
         using var context = contextFactory.CreateContext();
         var query = context
-            .DemoEntities
-            .FromSqlRaw("SELECT * FROM DemoEntities WHERE Id = {0}", new SqlParameter { Value = 1 })
+            .DemoEntities.FromSqlRaw(
+                "SELECT * FROM DemoEntities WHERE Id = {0}",
+                new SqlParameter { Value = 1 }
+            )
             .Select(e => e.Id);
 
         var query2 = context
-            .DemoEntities
-            .Where(e => query.Contains(e.Id))
+            .DemoEntities.Where(e => query.Contains(e.Id))
             .GroupBy(e => e.Id)
             .Select(g => new { g.Key, Aggregate = g.Count() });
 
@@ -124,8 +125,7 @@ FROM [Entities] FOR SYSTEM_TIME ALL AS [e]
         var contextFactory = await InitializeAsync<Context30478>(seed: x => x.Seed());
         using var context = contextFactory.CreateContext();
         var query = context
-            .Entities
-            .TemporalAsOf(new DateTime(2010, 1, 1))
+            .Entities.TemporalAsOf(new DateTime(2010, 1, 1))
             .Select(x => x.Reference);
 
         var result = async ? await query.ToListAsync() : query.ToList();
@@ -148,8 +148,7 @@ FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
         var contextFactory = await InitializeAsync<Context30478>(seed: x => x.Seed());
         using var context = contextFactory.CreateContext();
         var query = context
-            .Entities
-            .TemporalAsOf(new DateTime(2010, 1, 1))
+            .Entities.TemporalAsOf(new DateTime(2010, 1, 1))
             .Select(x => x.Collection);
 
         var result = async ? await query.ToListAsync() : query.ToList();

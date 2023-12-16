@@ -1074,13 +1074,11 @@ namespace System.Runtime.DurableInstancing
                     else
                     {
                         if (
-                            !transactionWait
-                                .WaitForHostTransaction
-                                .WaitAsync(
-                                    AcquireContextAsyncResult.onHostTransaction,
-                                    this,
-                                    waitTimeout
-                                )
+                            !transactionWait.WaitForHostTransaction.WaitAsync(
+                                AcquireContextAsyncResult.onHostTransaction,
+                                this,
+                                waitTimeout
+                            )
                         )
                         {
                             return;

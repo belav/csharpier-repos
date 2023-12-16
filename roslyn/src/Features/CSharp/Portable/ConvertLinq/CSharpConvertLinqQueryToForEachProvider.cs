@@ -168,8 +168,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         return SyntaxFactory.Block(
                             SyntaxFactory.IfStatement(
                                 ((WhereClauseSyntax)node)
-                                    .Condition
-                                    .WithAdditionalAnnotations(Simplifier.Annotation)
+                                    .Condition.WithAdditionalAnnotations(Simplifier.Annotation)
                                     .WithoutTrivia(),
                                 statement
                             )
@@ -296,9 +295,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                                                     joinClause.LeftExpression
                                                                 ),
                                                                 SyntaxFactory.Argument(
-                                                                    joinClause
-                                                                        .RightExpression
-                                                                        .WithoutTrailingTrivia()
+                                                                    joinClause.RightExpression.WithoutTrailingTrivia()
                                                                 )
                                                             }
                                                         )
@@ -762,8 +759,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 var typeSyntax = generateTypeFromExpression
                     ? _semanticModel
                         .GetTypeInfo(expression, _cancellationToken)
-                        .ConvertedType
-                        .GenerateTypeSyntax()
+                        .ConvertedType.GenerateTypeSyntax()
                     : VarNameIdentifier;
                 return SyntaxFactory
                     .LocalDeclarationStatement(
@@ -957,9 +953,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         lastSelectExpression is IdentifierNameSyntax identifierName
                         && forEachStatement.Identifier.ValueText
                             == identifierName.Identifier.ValueText
-                        && queryExpressionProcessingInfo
-                            .IdentifierNames
-                            .Contains(identifierName.Identifier.ValueText)
+                        && queryExpressionProcessingInfo.IdentifierNames.Contains(
+                            identifierName.Identifier.ValueText
+                        )
                     )
                     {
                         var forEachStatementTypeSymbolType = _semanticModel
@@ -1267,8 +1263,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     if (
                         _semanticModel
                             .GetTypeInfo(selectClause.Expression, _cancellationToken)
-                            .Type
-                            .ContainsAnonymousType()
+                            .Type.ContainsAnonymousType()
                     )
                     {
                         return false;

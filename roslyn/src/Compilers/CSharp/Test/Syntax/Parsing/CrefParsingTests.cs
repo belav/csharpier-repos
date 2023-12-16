@@ -1556,8 +1556,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             UsingNode(
                 "A(readonly ref B)",
                 TestOptions
-                    .Regular
-                    .WithLanguageVersion(languageVersion)
+                    .Regular.WithLanguageVersion(languageVersion)
                     .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(readonly ref B)'
                 // /// <see cref="A(readonly ref B)"/>
@@ -1599,8 +1598,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             UsingNode(
                 "A(readonly B)",
                 TestOptions
-                    .Regular
-                    .WithLanguageVersion(languageVersion)
+                    .Regular.WithLanguageVersion(languageVersion)
                     .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(readonly B)'
                 // /// <see cref="A(readonly B)"/>
@@ -1642,8 +1640,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             UsingNode(
                 "A(in readonly B)",
                 TestOptions
-                    .Regular
-                    .WithLanguageVersion(languageVersion)
+                    .Regular.WithLanguageVersion(languageVersion)
                     .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(in readonly B)'
                 // /// <see cref="A(in readonly B)"/>
@@ -1693,8 +1690,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             UsingNode(
                 "A(out readonly B)",
                 TestOptions
-                    .Regular
-                    .WithLanguageVersion(languageVersion)
+                    .Regular.WithLanguageVersion(languageVersion)
                     .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(out readonly B)'
                 // /// <see cref="A(out readonly B)"/>
@@ -1744,8 +1740,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             UsingNode(
                 "A(ref readonly readonly B)",
                 TestOptions
-                    .Regular
-                    .WithLanguageVersion(languageVersion)
+                    .Regular.WithLanguageVersion(languageVersion)
                     .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(ref readonly readonly B)'
                 // /// <see cref="A(ref readonly readonly B)"/>
@@ -1801,8 +1796,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             UsingNode(
                 "A(readonly ref B)",
                 TestOptions
-                    .Regular
-                    .WithLanguageVersion(languageVersion)
+                    .Regular.WithLanguageVersion(languageVersion)
                     .WithDocumentationMode(DocumentationMode.Diagnose),
                 // (1,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'A(readonly ref B)'
                 // /// <see cref="A(readonly ref B)"/>

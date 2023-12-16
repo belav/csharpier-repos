@@ -54,18 +54,16 @@ namespace System.Security.Cryptography
                 fixed (byte* pDestination = destination)
                 {
                     int digestSize;
-                    int ret = Interop
-                        .AppleCrypto
-                        .HmacOneShot(
-                            algorithm,
-                            pKey,
-                            key.Length,
-                            pSource,
-                            source.Length,
-                            pDestination,
-                            destination.Length,
-                            &digestSize
-                        );
+                    int ret = Interop.AppleCrypto.HmacOneShot(
+                        algorithm,
+                        pKey,
+                        key.Length,
+                        pSource,
+                        source.Length,
+                        pDestination,
+                        destination.Length,
+                        &digestSize
+                    );
 
                     if (ret != 1)
                     {
@@ -105,16 +103,14 @@ namespace System.Security.Cryptography
                 fixed (byte* pDestination = destination)
                 {
                     int digestSize;
-                    int ret = Interop
-                        .AppleCrypto
-                        .DigestOneShot(
-                            algorithm,
-                            pSource,
-                            source.Length,
-                            pDestination,
-                            destination.Length,
-                            &digestSize
-                        );
+                    int ret = Interop.AppleCrypto.DigestOneShot(
+                        algorithm,
+                        pSource,
+                        source.Length,
+                        pDestination,
+                        destination.Length,
+                        &digestSize
+                    );
 
                     if (ret != 1)
                     {

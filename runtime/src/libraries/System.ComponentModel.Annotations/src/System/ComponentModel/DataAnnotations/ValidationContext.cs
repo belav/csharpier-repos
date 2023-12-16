@@ -187,9 +187,8 @@ namespace System.ComponentModel.DataAnnotations
 
                 if (propertyType is null && MemberName != null)
                 {
-                    _propertyType = propertyType = ValidationAttributeStore
-                        .Instance
-                        .GetPropertyType(this);
+                    _propertyType = propertyType =
+                        ValidationAttributeStore.Instance.GetPropertyType(this);
                 }
 
                 return propertyType;

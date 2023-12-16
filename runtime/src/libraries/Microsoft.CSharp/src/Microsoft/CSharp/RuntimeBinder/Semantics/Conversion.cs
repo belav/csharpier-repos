@@ -1001,10 +1001,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     // Decimal is a SimpleType represented in a FT_STRUCT
                     throw ErrorHandling.Error(
                         ErrorCode.ERR_ConstOutOfRange,
-                        ((ExprConstant)exprConst)
-                            .Val
-                            .DecimalVal
-                            .ToString(CultureInfo.InvariantCulture),
+                        ((ExprConstant)exprConst).Val.DecimalVal.ToString(
+                            CultureInfo.InvariantCulture
+                        ),
                         dest
                     );
                 }
@@ -1041,9 +1040,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         case FUNDTYPE.FT_I2:
                         case FUNDTYPE.FT_I4:
                         case FUNDTYPE.FT_I8:
-                            value = ((ExprConstant)exprConst)
-                                .Int64Value
-                                .ToString(CultureInfo.InvariantCulture);
+                            value = ((ExprConstant)exprConst).Int64Value.ToString(
+                                CultureInfo.InvariantCulture
+                            );
                             break;
 
                         default:
@@ -1051,10 +1050,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 exprType <= FUNDTYPE.FT_LASTNUMERIC,
                                 "Error in constant conversion logic!"
                             );
-                            value = ((ExprConstant)exprConst)
-                                .Val
-                                .DoubleVal
-                                .ToString(CultureInfo.InvariantCulture);
+                            value = ((ExprConstant)exprConst).Val.DoubleVal.ToString(
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                     }
 

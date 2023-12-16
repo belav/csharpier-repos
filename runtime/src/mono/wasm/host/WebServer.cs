@@ -91,53 +91,50 @@ public static class ServerURLsProvider
         string? debugPath = null
     )
     {
-        applicationLifetime
-            .ApplicationStarted
-            .Register(() =>
+        applicationLifetime.ApplicationStarted.Register(() =>
+        {
+            TaskCompletionSource<ServerURLs> tcs = realUrlsAvailableTcs;
+            try
             {
-                TaskCompletionSource<ServerURLs> tcs = realUrlsAvailableTcs;
-                try
-                {
-                    ICollection<string>? addresses = app.ServerFeatures
-                        .Get<IServerAddressesFeature>()
-                        ?.Addresses;
+                ICollection<string>? addresses =
+                    app.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
 
-                    string? ipAddress = null;
-                    string? ipAddressSecure = null;
-                    if (addresses is not null)
-                    {
-                        ipAddress = GetHttpServerAddress(addresses, secure: false);
-                        ipAddressSecure = GetHttpServerAddress(addresses, secure: true);
-                    }
-
-                    if (ipAddress == null)
-                        tcs.SetException(
-                            new InvalidOperationException(
-                                "Failed to determine web server's IP address or port"
-                            )
-                        );
-                    else
-                        tcs.SetResult(new ServerURLs(ipAddress, ipAddressSecure, debugPath));
-                }
-                catch (Exception ex)
+                string? ipAddress = null;
+                string? ipAddressSecure = null;
+                if (addresses is not null)
                 {
-                    logger?.LogError($"Failed to get urls for the webserver: {ex}");
-                    tcs.TrySetException(ex);
-                    throw;
+                    ipAddress = GetHttpServerAddress(addresses, secure: false);
+                    ipAddressSecure = GetHttpServerAddress(addresses, secure: true);
                 }
 
-                static string? GetHttpServerAddress(ICollection<string> addresses, bool secure) =>
-                    addresses
-                        ?.Where(
-                            a =>
-                                a.StartsWith(
-                                    secure ? "https:" : "http:",
-                                    StringComparison.InvariantCultureIgnoreCase
-                                )
+                if (ipAddress == null)
+                    tcs.SetException(
+                        new InvalidOperationException(
+                            "Failed to determine web server's IP address or port"
                         )
-                        .Select(a => new Uri(a))
-                        .Select(uri => uri.ToString())
-                        .FirstOrDefault();
-            });
+                    );
+                else
+                    tcs.SetResult(new ServerURLs(ipAddress, ipAddressSecure, debugPath));
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError($"Failed to get urls for the webserver: {ex}");
+                tcs.TrySetException(ex);
+                throw;
+            }
+
+            static string? GetHttpServerAddress(ICollection<string> addresses, bool secure) =>
+                addresses
+                    ?.Where(
+                        a =>
+                            a.StartsWith(
+                                secure ? "https:" : "http:",
+                                StringComparison.InvariantCultureIgnoreCase
+                            )
+                    )
+                    .Select(a => new Uri(a))
+                    .Select(uri => uri.ToString())
+                    .FirstOrDefault();
+        });
     }
 }

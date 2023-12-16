@@ -118,12 +118,10 @@ namespace ComInterfaceGenerator.Unit.Tests
                 AttributeData iUnknownDerivedAttribute = Assert.Single(
                     userDefinedClass.GetAttributes(),
                     attr =>
-                        SymbolEqualityComparer
-                            .Default
-                            .Equals(
-                                attr.AttributeClass?.OriginalDefinition,
-                                comExposedClassAttribute
-                            )
+                        SymbolEqualityComparer.Default.Equals(
+                            attr.AttributeClass?.OriginalDefinition,
+                            comExposedClassAttribute
+                        )
                 );
 
                 Assert.Collection(

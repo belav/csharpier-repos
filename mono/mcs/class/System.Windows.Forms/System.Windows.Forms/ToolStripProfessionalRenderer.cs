@@ -85,10 +85,9 @@ namespace System.Windows.Forms
             {
                 if (this.ColorTable.UseSystemColors)
                     e.Graphics.FillRectangle(
-                        ThemeEngine
-                            .Current
-                            .ResPool
-                            .GetSolidBrush(this.ColorTable.ButtonCheckedHighlight),
+                        ThemeEngine.Current.ResPool.GetSolidBrush(
+                            this.ColorTable.ButtonCheckedHighlight
+                        ),
                         paint_here
                     );
                 else
@@ -279,10 +278,9 @@ namespace System.Windows.Forms
             if (e.Item.Selected)
             {
                 e.Graphics.FillRectangle(
-                    ThemeEngine
-                        .Current
-                        .ResPool
-                        .GetSolidBrush(this.ColorTable.CheckPressedBackground),
+                    ThemeEngine.Current.ResPool.GetSolidBrush(
+                        this.ColorTable.CheckPressedBackground
+                    ),
                     e.ImageRectangle
                 );
                 e.Graphics.DrawRectangle(
@@ -293,10 +291,9 @@ namespace System.Windows.Forms
             else if (e.Item.Pressed)
             {
                 e.Graphics.FillRectangle(
-                    ThemeEngine
-                        .Current
-                        .ResPool
-                        .GetSolidBrush(this.ColorTable.CheckSelectedBackground),
+                    ThemeEngine.Current.ResPool.GetSolidBrush(
+                        this.ColorTable.CheckSelectedBackground
+                    ),
                     e.ImageRectangle
                 );
                 e.Graphics.DrawRectangle(
@@ -307,10 +304,9 @@ namespace System.Windows.Forms
             else
             {
                 e.Graphics.FillRectangle(
-                    ThemeEngine
-                        .Current
-                        .ResPool
-                        .GetSolidBrush(this.ColorTable.CheckSelectedBackground),
+                    ThemeEngine.Current.ResPool.GetSolidBrush(
+                        this.ColorTable.CheckSelectedBackground
+                    ),
                     e.ImageRectangle
                 );
                 e.Graphics.DrawRectangle(
@@ -355,10 +351,9 @@ namespace System.Windows.Forms
                 if (e.Item.Selected || e.Item.Pressed)
                     if (e.Item.Enabled)
                         e.Graphics.FillRectangle(
-                            ThemeEngine
-                                .Current
-                                .ResPool
-                                .GetSolidBrush(this.ColorTable.MenuItemSelectedGradientEnd),
+                            ThemeEngine.Current.ResPool.GetSolidBrush(
+                                this.ColorTable.MenuItemSelectedGradientEnd
+                            ),
                             paint_here
                         );
 

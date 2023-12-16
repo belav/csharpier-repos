@@ -103,8 +103,7 @@ namespace System.Linq.Parallel.Tests
                 Assert.Equal(
                     Functions.SumRange(0, count),
                     labeled
-                        .Item
-                        .WithDegreeOfParallelism(degree)
+                        .Item.WithDegreeOfParallelism(degree)
                         .Sum(x =>
                         {
                             barrier.SignalAndWait();
@@ -134,8 +133,7 @@ namespace System.Linq.Parallel.Tests
                 int expected = 1 - count;
                 foreach (
                     int result in labeled
-                        .Item
-                        .WithDegreeOfParallelism(degree)
+                        .Item.WithDegreeOfParallelism(degree)
                         .Select(x => -x)
                         .OrderBy(x => x)
                 )
@@ -165,8 +163,7 @@ namespace System.Linq.Parallel.Tests
             {
                 Assert.True(
                     labeled
-                        .Item
-                        .WithDegreeOfParallelism(degree)
+                        .Item.WithDegreeOfParallelism(degree)
                         .Select(x =>
                         {
                             var sw = new SpinWait();

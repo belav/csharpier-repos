@@ -79,15 +79,13 @@ namespace System.ServiceModel.Channels
                 }
 
                 TryConvertAndThrow(ex);
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        HttpChannelUtilities.CreateRequestWebException(
-                            ex,
-                            this.httpWebRequest,
-                            HttpAbortReason.None
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    HttpChannelUtilities.CreateRequestWebException(
+                        ex,
+                        this.httpWebRequest,
+                        HttpAbortReason.None
+                    )
+                );
             }
             finally
             {
@@ -126,15 +124,13 @@ namespace System.ServiceModel.Channels
                 }
 
                 TryConvertAndThrow(ex);
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        HttpChannelUtilities.CreateRequestWebException(
-                            ex,
-                            this.httpWebRequest,
-                            HttpAbortReason.None
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    HttpChannelUtilities.CreateRequestWebException(
+                        ex,
+                        this.httpWebRequest,
+                        HttpAbortReason.None
+                    )
+                );
             }
             finally
             {
@@ -186,15 +182,13 @@ namespace System.ServiceModel.Channels
                 }
 
                 TryConvertAndThrow(ex);
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        HttpChannelUtilities.CreateRequestWebException(
-                            ex,
-                            request,
-                            HttpAbortReason.None
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    HttpChannelUtilities.CreateRequestWebException(
+                        ex,
+                        request,
+                        HttpAbortReason.None
+                    )
+                );
             }
             finally
             {
@@ -227,16 +221,14 @@ namespace System.ServiceModel.Channels
             string actualValue = response.Headers[headerKey];
             if (actualValue == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new CommunicationException(
-                            SR.GetString(SR.WebSocketTransportError),
-                            new WebSocketException(
-                                SR.GetString(SR.WebSocketUpgradeFailedHeaderMissingError, headerKey)
-                            )
+                throw FxTrace.Exception.AsError(
+                    new CommunicationException(
+                        SR.GetString(SR.WebSocketTransportError),
+                        new WebSocketException(
+                            SR.GetString(SR.WebSocketUpgradeFailedHeaderMissingError, headerKey)
                         )
-                    );
+                    )
+                );
             }
 
             StringComparison comparisonType = ignoreCase
@@ -244,21 +236,19 @@ namespace System.ServiceModel.Channels
                 : StringComparison.Ordinal;
             if (!actualValue.Equals(expectedValue, comparisonType))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new CommunicationException(
-                            SR.GetString(SR.WebSocketTransportError),
-                            new WebSocketException(
-                                SR.GetString(
-                                    SR.WebSocketUpgradeFailedWrongHeaderError,
-                                    headerKey,
-                                    actualValue,
-                                    expectedValue
-                                )
+                throw FxTrace.Exception.AsError(
+                    new CommunicationException(
+                        SR.GetString(SR.WebSocketTransportError),
+                        new WebSocketException(
+                            SR.GetString(
+                                SR.WebSocketUpgradeFailedWrongHeaderError,
+                                headerKey,
+                                actualValue,
+                                expectedValue
                             )
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -279,27 +269,23 @@ namespace System.ServiceModel.Channels
                         ];
                         if (!string.IsNullOrWhiteSpace(serverTransferMode))
                         {
-                            throw FxTrace
-                                .Exception
-                                .AsError(
-                                    new CommunicationException(
-                                        SR.GetString(
-                                            SR.WebSocketContentTypeAndTransferModeMismatchFromServer
-                                        ),
-                                        ex
-                                    )
-                                );
+                            throw FxTrace.Exception.AsError(
+                                new CommunicationException(
+                                    SR.GetString(
+                                        SR.WebSocketContentTypeAndTransferModeMismatchFromServer
+                                    ),
+                                    ex
+                                )
+                            );
                         }
                         else
                         {
-                            throw FxTrace
-                                .Exception
-                                .AsError(
-                                    new CommunicationException(
-                                        SR.GetString(SR.WebSocketContentTypeMismatchFromServer),
-                                        ex
-                                    )
-                                );
+                            throw FxTrace.Exception.AsError(
+                                new CommunicationException(
+                                    SR.GetString(SR.WebSocketContentTypeMismatchFromServer),
+                                    ex
+                                )
+                            );
                         }
                     }
                 }
@@ -308,17 +294,12 @@ namespace System.ServiceModel.Channels
                     string serverVersion = webResponse.Headers[WebSocketHelper.SecWebSocketVersion];
                     if (!string.IsNullOrWhiteSpace(serverVersion))
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new CommunicationException(
-                                    SR.GetString(
-                                        SR.WebSocketVersionMismatchFromServer,
-                                        serverVersion
-                                    ),
-                                    ex
-                                )
-                            );
+                        throw FxTrace.Exception.AsError(
+                            new CommunicationException(
+                                SR.GetString(SR.WebSocketVersionMismatchFromServer, serverVersion),
+                                ex
+                            )
+                        );
                     }
 
                     string serverSubProtocol = webResponse.Headers[
@@ -326,17 +307,15 @@ namespace System.ServiceModel.Channels
                     ];
                     if (!string.IsNullOrWhiteSpace(serverSubProtocol))
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new CommunicationException(
-                                    SR.GetString(
-                                        SR.WebSocketSubProtocolMismatchFromServer,
-                                        serverSubProtocol
-                                    ),
-                                    ex
-                                )
-                            );
+                        throw FxTrace.Exception.AsError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.WebSocketSubProtocolMismatchFromServer,
+                                    serverSubProtocol
+                                ),
+                                ex
+                            )
+                        );
                     }
                 }
             }
@@ -583,22 +562,20 @@ namespace System.ServiceModel.Channels
         {
             if (response.StatusCode != HttpStatusCode.SwitchingProtocols)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new CommunicationException(
-                            SR.GetString(SR.WebSocketTransportError),
-                            new WebSocketException(
-                                SR.GetString(
-                                    SR.WebSocketUpgradeFailedError,
-                                    (int)response.StatusCode,
-                                    response.StatusDescription,
-                                    (int)HttpStatusCode.SwitchingProtocols,
-                                    HttpStatusCode.SwitchingProtocols
-                                )
+                throw FxTrace.Exception.AsError(
+                    new CommunicationException(
+                        SR.GetString(SR.WebSocketTransportError),
+                        new WebSocketException(
+                            SR.GetString(
+                                SR.WebSocketUpgradeFailedError,
+                                (int)response.StatusCode,
+                                response.StatusDescription,
+                                (int)HttpStatusCode.SwitchingProtocols,
+                                HttpStatusCode.SwitchingProtocols
                             )
                         )
-                    );
+                    )
+                );
             }
 
             CheckResponseHeader(
@@ -635,19 +612,17 @@ namespace System.ServiceModel.Channels
                 string headerValue = response.Headers[WebSocketHelper.SecWebSocketProtocol];
                 if (!string.IsNullOrWhiteSpace(headerValue))
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new CommunicationException(
-                                SR.GetString(SR.WebSocketTransportError),
-                                new WebSocketException(
-                                    SR.GetString(
-                                        SR.WebSocketUpgradeFailedInvalidProtocolError,
-                                        headerValue
-                                    )
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationException(
+                            SR.GetString(SR.WebSocketTransportError),
+                            new WebSocketException(
+                                SR.GetString(
+                                    SR.WebSocketUpgradeFailedInvalidProtocolError,
+                                    headerValue
                                 )
                             )
-                        );
+                        )
+                    );
                 }
             }
         }
@@ -680,32 +655,28 @@ namespace System.ServiceModel.Channels
                     throw;
                 }
 
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ClientWebSocketFactory_GetWebSocketVersionFailed,
-                                this.connectionFactory.GetType().Name
-                            ),
-                            e
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ClientWebSocketFactory_GetWebSocketVersionFailed,
+                            this.connectionFactory.GetType().Name
+                        ),
+                        e
+                    )
+                );
             }
 
             // The WebSocketVersion is a required http header, to initiate a web-socket connection.
             if (string.IsNullOrWhiteSpace(webSocketVersion))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ClientWebSocketFactory_InvalidWebSocketVersion,
-                                this.connectionFactory.GetType().Name
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ClientWebSocketFactory_InvalidWebSocketVersion,
+                            this.connectionFactory.GetType().Name
                         )
-                    );
+                    )
+                );
             }
 
             try
@@ -714,17 +685,15 @@ namespace System.ServiceModel.Channels
             }
             catch (ArgumentException e)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ClientWebSocketFactory_InvalidWebSocketVersion,
-                                this.connectionFactory.GetType().Name
-                            ),
-                            e
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ClientWebSocketFactory_InvalidWebSocketVersion,
+                            this.connectionFactory.GetType().Name
+                        ),
+                        e
+                    )
+                );
             }
         }
 
@@ -756,46 +725,40 @@ namespace System.ServiceModel.Channels
                     throw;
                 }
 
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ClientWebSocketFactory_CreateWebSocketFailed,
-                                this.connectionFactory.GetType().Name
-                            ),
-                            e
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ClientWebSocketFactory_CreateWebSocketFailed,
+                            this.connectionFactory.GetType().Name
+                        ),
+                        e
+                    )
+                );
             }
 
             // The returned WebSocket should be valid (non-null), in an opened state and with the same SubProtocol that we requested.
             if (ws == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ClientWebSocketFactory_InvalidWebSocket,
-                                this.connectionFactory.GetType().Name
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ClientWebSocketFactory_InvalidWebSocket,
+                            this.connectionFactory.GetType().Name
                         )
-                    );
+                    )
+                );
             }
             else if (ws.State != WebSocketState.Open)
             {
                 ws.Dispose();
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ClientWebSocketFactory_InvalidWebSocket,
-                                this.connectionFactory.GetType().Name
-                            )
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ClientWebSocketFactory_InvalidWebSocket,
+                            this.connectionFactory.GetType().Name
                         )
-                    );
+                    )
+                );
             }
             else
             {
@@ -810,18 +773,16 @@ namespace System.ServiceModel.Channels
                 )
                 {
                     ws.Dispose();
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ClientWebSocketFactory_InvalidSubProtocol,
-                                    this.connectionFactory.GetType().Name,
-                                    obtained,
-                                    requested
-                                )
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ClientWebSocketFactory_InvalidSubProtocol,
+                                this.connectionFactory.GetType().Name,
+                                obtained,
+                                requested
                             )
-                        );
+                        )
+                    );
                 }
             }
 

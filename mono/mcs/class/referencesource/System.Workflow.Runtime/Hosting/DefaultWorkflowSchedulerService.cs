@@ -121,14 +121,12 @@ namespace System.Workflow.Runtime.Hosting
 
         protected internal override void Schedule(WaitCallback callback, Guid workflowInstanceId)
         {
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Scheduling work for instance {0}",
-                    workflowInstanceId
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Scheduling work for instance {0}",
+                workflowInstanceId
+            );
 
             if (callback == null)
                 throw new ArgumentNullException("callback");
@@ -152,16 +150,14 @@ namespace System.Workflow.Runtime.Hosting
             Guid timerId
         )
         {
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Scheduling work for instance {0} on timer ID {1} in {2}",
-                    workflowInstanceId,
-                    timerId,
-                    (whenUtc - DateTime.UtcNow)
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Scheduling work for instance {0} on timer ID {1} in {2}",
+                workflowInstanceId,
+                timerId,
+                (whenUtc - DateTime.UtcNow)
+            );
 
             if (callback == null)
                 throw new ArgumentNullException("callback");
@@ -192,14 +188,12 @@ namespace System.Workflow.Runtime.Hosting
 
         protected internal override void Cancel(Guid timerId)
         {
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Cancelling work with timer ID {0}",
-                    timerId
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Cancelling work with timer ID {0}",
+                timerId
+            );
 
             if (timerId == Guid.Empty)
                 throw new ArgumentException(
@@ -240,9 +234,9 @@ namespace System.Workflow.Runtime.Hosting
             }
             if (queueCounters == null && this.Runtime.PerformanceCounterManager != null)
             {
-                queueCounters = this.Runtime
-                    .PerformanceCounterManager
-                    .CreateCounters(ExecutionStringManager.PerformanceCounterWorkflowsWaitingName);
+                queueCounters = this.Runtime.PerformanceCounterManager.CreateCounters(
+                    ExecutionStringManager.PerformanceCounterWorkflowsWaitingName
+                );
             }
         }
 
@@ -303,14 +297,12 @@ namespace System.Workflow.Runtime.Hosting
                         {
                             if (ci.IsExpired)
                             {
-                                WorkflowTrace
-                                    .Host
-                                    .TraceEvent(
-                                        TraceEventType.Information,
-                                        0,
-                                        "Timeout occured for timer for instance {0}",
-                                        ci.State
-                                    );
+                                WorkflowTrace.Host.TraceEvent(
+                                    TraceEventType.Information,
+                                    0,
+                                    "Timeout occured for timer for instance {0}",
+                                    ci.State
+                                );
                                 timerQueue.Dequeue();
                                 fire = true;
                             }
@@ -328,29 +320,25 @@ namespace System.Workflow.Runtime.Hosting
             catch (WorkflowOwnershipException) { }
             catch (ThreadAbortException e)
             {
-                WorkflowTrace
-                    .Host
-                    .TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "Timeout for instance, {0} threw exception {1}",
-                        ci == null ? null : ci.State,
-                        e.Message
-                    );
+                WorkflowTrace.Host.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    "Timeout for instance, {0} threw exception {1}",
+                    ci == null ? null : ci.State,
+                    e.Message
+                );
                 RaiseServicesExceptionNotHandledEvent(e, (Guid)ci.State);
                 throw;
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Host
-                    .TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "Timeout for instance, {0} threw exception {1}",
-                        ci == null ? null : ci.State,
-                        e.Message
-                    );
+                WorkflowTrace.Host.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    "Timeout for instance, {0} threw exception {1}",
+                    ci == null ? null : ci.State,
+                    e.Message
+                );
                 RaiseServicesExceptionNotHandledEvent(e, (Guid)ci.State);
             }
         }
@@ -437,9 +425,12 @@ namespace System.Workflow.Runtime.Hosting
             {
                 try
                 {
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(TraceEventType.Information, 0, "Running workflow {0}", state);
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Running workflow {0}",
+                        state
+                    );
                     Callback(state);
                 }
                 catch (Exception e)

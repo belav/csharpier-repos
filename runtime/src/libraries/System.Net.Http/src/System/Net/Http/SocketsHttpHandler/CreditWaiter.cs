@@ -58,13 +58,11 @@ namespace System.Net.Http
                 static (s, cancellationToken) =>
                 {
                     // The callback will only fire if cancellation owns the right to complete the instance.
-                    ((CreditWaiter)s!)
-                        ._source
-                        .SetException(
-                            ExceptionDispatchInfo.SetCurrentStackTrace(
-                                new OperationCanceledException(cancellationToken)
-                            )
-                        );
+                    ((CreditWaiter)s!)._source.SetException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new OperationCanceledException(cancellationToken)
+                        )
+                    );
                 },
                 this
             );

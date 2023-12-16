@@ -13,8 +13,7 @@ public class Program
     {
         var webHost = CreateWebHostBuilder(args).Build();
         var applicationName = webHost
-            .Services
-            .GetRequiredService<IHostEnvironment>()
+            .Services.GetRequiredService<IHostEnvironment>()
             .ApplicationName;
         Console.WriteLine(applicationName);
         Console.ReadKey();

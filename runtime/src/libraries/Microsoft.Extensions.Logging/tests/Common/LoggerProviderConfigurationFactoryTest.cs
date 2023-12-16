@@ -29,8 +29,7 @@ namespace Microsoft.Extensions.Logging.Test
                 ILoggerProviderConfiguration<ConsoleLoggerProvider>
             >();
             loggerProviderConfiguration
-                .Configuration
-                .GetReloadToken()
+                .Configuration.GetReloadToken()
                 .RegisterChangeCallback(o => callbackCalled = true, null);
 
             provider.Add("Console:IncludeScopes", "false");

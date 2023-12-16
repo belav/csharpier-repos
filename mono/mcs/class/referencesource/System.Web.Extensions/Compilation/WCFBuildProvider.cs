@@ -221,11 +221,9 @@ namespace System.Web.Compilation
                 HandleProxyGenerationErrors(mapFile.LoadErrors);
 
                 // We always use C# for the generated proxy
-                CodeDomProvider provider = System
-                    .CodeDom
-                    .Compiler
-                    .CodeDomProvider
-                    .CreateProvider("c#");
+                CodeDomProvider provider = System.CodeDom.Compiler.CodeDomProvider.CreateProvider(
+                    "c#"
+                );
 
                 //Note: with the current implementation of the generator, it does all of its
                 //  work in the constructor.  This may change in the future.
@@ -691,15 +689,11 @@ namespace System.Web.Compilation
             }
             fileMap.VirtualDirectories.Add("/", mapping);
 
-            return System
-                .Web
-                .Configuration
-                .WebConfigurationManager
-                .OpenMappedWebConfiguration(
-                    fileMap,
-                    "/",
-                    System.Web.Hosting.HostingEnvironment.SiteName
-                );
+            return System.Web.Configuration.WebConfigurationManager.OpenMappedWebConfiguration(
+                fileMap,
+                "/",
+                System.Web.Hosting.HostingEnvironment.SiteName
+            );
         }
 
         /// <summary>
@@ -745,10 +739,10 @@ namespace System.Web.Compilation
                 foreach (System.Reflection.Assembly assembly in ReferencedAssemblies)
                 {
                     if (
-                        System
-                            .Reflection
-                            .AssemblyName
-                            .ReferenceMatchesDefinition(assemblyToLookFor, assembly.GetName())
+                        System.Reflection.AssemblyName.ReferenceMatchesDefinition(
+                            assemblyToLookFor,
+                            assembly.GetName()
+                        )
                     )
                     {
                         return assembly;

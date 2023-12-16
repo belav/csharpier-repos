@@ -265,9 +265,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return this.entityDescriptors
-                    .Values
-                    .OrderBy(d => d.ChangeOrder)
+                return this.entityDescriptors.Values.OrderBy(d => d.ChangeOrder)
                     .ToList()
                     .AsReadOnly();
             }
@@ -1757,9 +1755,9 @@ namespace System.Data.Services.Client
 
         internal IEnumerable<LinkDescriptor> GetLinks(object source, string sourceProperty)
         {
-            return this.bindings
-                .Values
-                .Where(o => (o.Source == source) && (o.SourceProperty == sourceProperty));
+            return this.bindings.Values.Where(
+                o => (o.Source == source) && (o.SourceProperty == sourceProperty)
+            );
         }
 
         internal Type ResolveTypeFromName(string wireName, Type userType, bool checkAssignable)
@@ -1823,9 +1821,7 @@ namespace System.Data.Services.Client
             if (this.resolveName != null)
             {
                 Type entityType = descriptor.Entity.GetType();
-                var codegenAttr = this.resolveName
-                    .Method
-                    .GetCustomAttributes(false)
+                var codegenAttr = this.resolveName.Method.GetCustomAttributes(false)
                     .OfType<System.CodeDom.Compiler.GeneratedCodeAttribute>()
                     .FirstOrDefault();
                 if (codegenAttr == null || codegenAttr.Tool != Util.CodeGeneratorToolName)
@@ -1935,8 +1931,9 @@ namespace System.Data.Services.Client
             ClientType clientType = ClientType.Create(entity.GetType());
 
             ClientType.ClientProperty[] keys = clientType
-                .Properties
-                .Where<ClientType.ClientProperty>(ClientType.ClientProperty.GetKeyProperty)
+                .Properties.Where<ClientType.ClientProperty>(
+                    ClientType.ClientProperty.GetKeyProperty
+                )
                 .ToArray();
             foreach (ClientType.ClientProperty property in keys)
             {
@@ -3096,9 +3093,9 @@ namespace System.Data.Services.Client
 
                 EpmSourcePathSegment matchedSegment =
                     currentSegment != null
-                        ? currentSegment
-                            .SubProperties
-                            .SingleOrDefault(s => s.PropertyName == property.PropertyName)
+                        ? currentSegment.SubProperties.SingleOrDefault(
+                            s => s.PropertyName == property.PropertyName
+                        )
                         : null;
 
                 if (property.IsKnownType)
@@ -3253,9 +3250,9 @@ namespace System.Data.Services.Client
 
                 this.DetachExistingLink(existing, false);
                 Debug.Assert(
-                    !this.bindings
-                        .Values
-                        .Any(o => (o.Source == source) && (o.SourceProperty == sourceProperty)),
+                    !this.bindings.Values.Any(
+                        o => (o.Source == source) && (o.SourceProperty == sourceProperty)
+                    ),
                     "only expecting one"
                 );
             }
@@ -3391,14 +3388,11 @@ namespace System.Data.Services.Client
         {
             if (null == this.identityToDescriptor)
             {
-                System
-                    .Threading
-                    .Interlocked
-                    .CompareExchange(
-                        ref this.identityToDescriptor,
-                        new Dictionary<String, EntityDescriptor>(EqualityComparer<String>.Default),
-                        null
-                    );
+                System.Threading.Interlocked.CompareExchange(
+                    ref this.identityToDescriptor,
+                    new Dictionary<String, EntityDescriptor>(EqualityComparer<String>.Default),
+                    null
+                );
             }
         }
 
@@ -3846,9 +3840,13 @@ namespace System.Data.Services.Client
                     if (property.MimeTypeProperty != null)
                     {
 #if ASTORIA_OPEN_OBJECT
-                        property
-                            .MimeTypeProperty
-                            .SetValue(this.entity, mimeType, null, ref openProps, false);
+                        property.MimeTypeProperty.SetValue(
+                            this.entity,
+                            mimeType,
+                            null,
+                            ref openProps,
+                            false
+                        );
                         Debug.Assert(openProps == null, "These should not be set in this path");
 #else
                         property.MimeTypeProperty.SetValue(this.entity, mimeType, null, false);
@@ -3938,9 +3936,7 @@ namespace System.Data.Services.Client
                 {
                     #region changed entries
                     this.ChangedEntries = context
-                        .entityDescriptors
-                        .Values
-                        .Cast<Descriptor>()
+                        .entityDescriptors.Values.Cast<Descriptor>()
                         .Union(context.bindings.Values.Cast<Descriptor>())
                         .Where(o => o.IsModified && o.ChangeOrder != UInt32.MaxValue)
                         .OrderBy(o => o.ChangeOrder)
@@ -4006,8 +4002,7 @@ namespace System.Data.Services.Client
             internal DataServiceResponse EndRequest()
             {
                 foreach (
-                    EntityDescriptor box in this.ChangedEntries
-                        .Where(e => e.IsResource)
+                    EntityDescriptor box in this.ChangedEntries.Where(e => e.IsResource)
                         .Cast<EntityDescriptor>()
                 )
                 {
@@ -4200,9 +4195,11 @@ namespace System.Data.Services.Client
                                         int read;
                                         do
                                         {
-                                            read = contentStream
-                                                .Stream
-                                                .Read(buffer, 0, buffer.Length);
+                                            read = contentStream.Stream.Read(
+                                                buffer,
+                                                0,
+                                                buffer.Length
+                                            );
                                             if (read > 0)
                                             {
                                                 stream.Write(buffer, 0, read);
@@ -4339,14 +4336,11 @@ namespace System.Data.Services.Client
                         System.Threading.Interlocked.CompareExchange(ref this.request, null, pereq);
                         if (IsFlagSet(this.options, SaveChangesOptions.Batch))
                         {
-                            System
-                                .Threading
-                                .Interlocked
-                                .CompareExchange(
-                                    ref this.batchResponse,
-                                    pereq.HttpWebResponse,
-                                    null
-                                );
+                            System.Threading.Interlocked.CompareExchange(
+                                ref this.batchResponse,
+                                pereq.HttpWebResponse,
+                                null
+                            );
                             pereq.HttpWebResponse = null;
                         }
 
@@ -4480,9 +4474,9 @@ namespace System.Data.Services.Client
                     }
                     else
                     {
-                        object mimeTypeValue = type.MediaDataMember
-                            .MimeTypeProperty
-                            .GetValue(entityDescriptor.Entity);
+                        object mimeTypeValue = type.MediaDataMember.MimeTypeProperty.GetValue(
+                            entityDescriptor.Entity
+                        );
                         String mimeType = mimeTypeValue != null ? mimeTypeValue.ToString() : null;
 
                         if (String.IsNullOrEmpty(mimeType))

@@ -89,17 +89,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
 
                     // event and worker queues
-                    _documentTracker = _registration
-                        .Workspace
-                        .Services
-                        .GetRequiredService<IDocumentTrackingService>();
+                    _documentTracker =
+                        _registration.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
                     var globalNotificationService = _registration
-                        .Workspace
-                        .Services
-                        .SolutionServices
-                        .ExportProvider
-                        .GetExports<IGlobalOperationNotificationService>()
+                        .Workspace.Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>()
                         .FirstOrDefault()
                         ?.Value;
 
@@ -332,9 +326,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         try
                         {
                             if (
-                                !workItem
-                                    .InvocationReasons
-                                    .Contains(PredefinedInvocationReasons.ActiveDocumentSwitched)
+                                !workItem.InvocationReasons.Contains(
+                                    PredefinedInvocationReasons.ActiveDocumentSwitched
+                                )
                             )
                             {
                                 return false;
@@ -584,28 +578,24 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     )
                     {
                         _incrementalAnalyzerProcessor
-                            ._normalPriorityProcessor
-                            .GetTestAccessor()
+                            ._normalPriorityProcessor.GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
 
                         var projectItems = items.Select(
                             i => i.ToProjectWorkItem(EmptyAsyncToken.Instance)
                         );
                         _incrementalAnalyzerProcessor
-                            ._lowPriorityProcessor
-                            .GetTestAccessor()
+                            ._lowPriorityProcessor.GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
                     }
 
                     internal void WaitUntilCompletion()
                     {
                         _incrementalAnalyzerProcessor
-                            ._normalPriorityProcessor
-                            .GetTestAccessor()
+                            ._normalPriorityProcessor.GetTestAccessor()
                             .WaitUntilCompletion();
                         _incrementalAnalyzerProcessor
-                            ._lowPriorityProcessor
-                            .GetTestAccessor()
+                            ._lowPriorityProcessor.GetTestAccessor()
                             .WaitUntilCompletion();
                     }
                 }

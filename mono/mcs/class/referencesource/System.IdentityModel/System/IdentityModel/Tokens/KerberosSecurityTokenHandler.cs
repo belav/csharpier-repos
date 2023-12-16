@@ -71,12 +71,10 @@ namespace System.IdentityModel.Tokens
             KerberosReceiverSecurityToken kerbToken = token as KerberosReceiverSecurityToken;
             if (kerbToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "token",
-                        SR.GetString(SR.ID0018, typeof(KerberosReceiverSecurityToken))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(KerberosReceiverSecurityToken))
+                );
             }
 
             if (this.Configuration == null)

@@ -50,15 +50,9 @@ namespace System.ServiceModel.ComIntegration
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                System
-                                    .ServiceModel
-                                    .ComIntegration
-                                    .Error
-                                    .CannotAccessDirectory(tempPath)
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(tempPath)
+                        );
                     }
 
                     string manifestDirectory = tempPath + this.info.AppID.ToString();
@@ -100,8 +94,7 @@ namespace System.ServiceModel.ComIntegration
             if (indexOfComma != -1)
             {
                 Guid assemblyGuid = Guid.Empty;
-                string assemblyGuidString = args.Name
-                    .Substring(0, indexOfComma)
+                string assemblyGuidString = args.Name.Substring(0, indexOfComma)
                     .Trim()
                     .ToLowerInvariant();
 
@@ -135,9 +128,9 @@ namespace System.ServiceModel.ComIntegration
                 default:
                     Fx.Assert("Unexpected threading model");
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(Error.UnexpectedThreadingModel());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.UnexpectedThreadingModel()
+                    );
             }
             threadPoolConfig.SetBindingInfo(BindingOption.BindingToPoolThread);
 
@@ -154,9 +147,9 @@ namespace System.ServiceModel.ComIntegration
                 IServiceSxsConfig sxsConfig = serviceConfig as IServiceSxsConfig;
                 if (sxsConfig == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(System.ServiceModel.ComIntegration.Error.QFENotPresent());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        System.ServiceModel.ComIntegration.Error.QFENotPresent()
+                    );
                 }
 
                 lock (manifestLock)
@@ -172,15 +165,9 @@ namespace System.ServiceModel.ComIntegration
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                System
-                                    .ServiceModel
-                                    .ComIntegration
-                                    .Error
-                                    .CannotAccessDirectory(tempPath)
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(tempPath)
+                        );
                     }
 
                     string manifestDirectory = tempPath + this.info.AppID.ToString() + @"\";
@@ -196,15 +183,11 @@ namespace System.ServiceModel.ComIntegration
                             if (Fx.IsFatal(e))
                                 throw;
 
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    System
-                                        .ServiceModel
-                                        .ComIntegration
-                                        .Error
-                                        .CannotAccessDirectory(manifestDirectory)
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(
+                                    manifestDirectory
+                                )
+                            );
                         }
 
                         Guid[] assemblyGuids = this.info.Assemblies;

@@ -27,9 +27,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     [Trait(Traits.Feature, Traits.Features.RemoteHost)]
     public class RemoteHostClientServiceFactoryTests
     {
-        private static readonly TestComposition s_composition = FeaturesTestCompositions
-            .Features
-            .WithTestHostParts(TestHost.OutOfProcess);
+        private static readonly TestComposition s_composition =
+            FeaturesTestCompositions.Features.WithTestHostParts(TestHost.OutOfProcess);
 
         private static AdhocWorkspace CreateWorkspace() => new(s_composition.GetHostServices());
 
@@ -62,10 +61,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var oldText = document.GetTextSynchronously(CancellationToken.None);
             var newText = oldText.WithChanges([new TextChange(new TextSpan(0, 1), "abc")]);
-            var newSolution = document
-                .Project
-                .Solution
-                .WithDocumentText(document.Id, newText, PreservationMode.PreserveIdentity);
+            var newSolution = document.Project.Solution.WithDocumentText(
+                document.Id,
+                newText,
+                PreservationMode.PreserveIdentity
+            );
 
             workspace.TryApplyChanges(newSolution);
 

@@ -63,19 +63,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             }
 
             var document = context.GetRequiredDocument();
-            var completionService = document
-                .Project
-                .Services
-                .GetRequiredService<CompletionService>();
+            var completionService =
+                document.Project.Services.GetRequiredService<CompletionService>();
 
             // Find the matching completion item in the completion list
-            var selectedItem = cacheEntry
-                .CompletionList
-                .ItemsList
-                .FirstOrDefault(
-                    cachedCompletionItem =>
-                        MatchesLSPCompletionItem(completionItem, cachedCompletionItem)
-                );
+            var selectedItem = cacheEntry.CompletionList.ItemsList.FirstOrDefault(
+                cachedCompletionItem =>
+                    MatchesLSPCompletionItem(completionItem, cachedCompletionItem)
+            );
 
             var completionOptions = _globalOptions.GetCompletionOptions(document.Project.Language);
             var symbolDescriptionOptions = _globalOptions.GetSymbolDescriptionOptions(
@@ -84,11 +79,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             if (selectedItem is not null)
             {
-                var creationService = document
-                    .Project
-                    .Solution
-                    .Services
-                    .GetRequiredService<ILspCompletionResultCreationService>();
+                var creationService =
+                    document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>();
                 await creationService
                     .ResolveAsync(
                         completionItem,

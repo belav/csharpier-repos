@@ -43,15 +43,13 @@ namespace System.ServiceModel.PeerResolvers
             {
                 if (!PeerReferralPolicyHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidEnumArgumentException(
-                                "value",
-                                (int)value,
-                                typeof(PeerReferralPolicy)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(PeerReferralPolicy)
+                        )
+                    );
                 }
                 referralPolicy = value;
             }

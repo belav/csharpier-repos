@@ -40,8 +40,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And
-                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
+                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
         }
 
         // Verifies that it works in all supported locations

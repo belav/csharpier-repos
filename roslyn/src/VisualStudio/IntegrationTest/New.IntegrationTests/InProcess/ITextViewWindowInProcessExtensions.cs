@@ -30,15 +30,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await textViewWindow.TestServices.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
-            var broker = await textViewWindow
-                .TestServices
-                .Shell
-                .GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(cancellationToken);
+            var broker =
+                await textViewWindow.TestServices.Shell.GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(
+                    cancellationToken
+                );
             var session = await broker.TriggerQuickInfoAsync(
                 await textViewWindow.TestServices.Editor.GetActiveTextViewAsync(cancellationToken),
                 cancellationToken: cancellationToken
@@ -51,19 +50,17 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await textViewWindow.TestServices.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
-            var view = await textViewWindow
-                .TestServices
-                .Editor
-                .GetActiveTextViewAsync(cancellationToken);
-            var broker = await textViewWindow
-                .TestServices
-                .Shell
-                .GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(cancellationToken);
+            var view = await textViewWindow.TestServices.Editor.GetActiveTextViewAsync(
+                cancellationToken
+            );
+            var broker =
+                await textViewWindow.TestServices.Shell.GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(
+                    cancellationToken
+                );
 
             var session = broker.GetSession(view);
 
@@ -84,15 +81,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await textViewWindow.TestServices.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
-            var shell = await textViewWindow
-                .TestServices
-                .Shell
-                .GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(cancellationToken);
+            var shell = await textViewWindow.TestServices.Shell.GetRequiredGlobalServiceAsync<
+                SVsUIShell,
+                IVsUIShell
+            >(cancellationToken);
             var cmdGroup = typeof(VSConstants.VSStd14CmdID).GUID;
             var cmdExecOpt = OLECMDEXECOPT.OLECMDEXECOPT_DONTPROMPTUSER;
 
@@ -101,10 +97,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             shell.PostExecCommand(cmdGroup, (uint)cmdID, (uint)cmdExecOpt, ref obj);
 
             var view = await textViewWindow.GetActiveTextViewAsync(cancellationToken);
-            var broker = await textViewWindow
-                .TestServices
-                .Shell
-                .GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
+            var broker =
+                await textViewWindow.TestServices.Shell.GetComponentModelServiceAsync<ILightBulbBroker>(
+                    cancellationToken
+                );
             await LightBulbHelper.WaitForLightBulbSessionAsync(
                 textViewWindow.TestServices,
                 broker,
@@ -118,19 +114,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await textViewWindow.TestServices.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
-            await textViewWindow
-                .TestServices
-                .Shell
-                .ExecuteCommandAsync(WellKnownCommands.Edit.ListMembers, cancellationToken);
-            await textViewWindow
-                .TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(FeatureAttribute.CompletionSet, cancellationToken);
+            await textViewWindow.TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.ListMembers,
+                cancellationToken
+            );
+            await textViewWindow.TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.CompletionSet,
+                cancellationToken
+            );
         }
 
         public static async Task<ImmutableArray<Completion>> GetCompletionItemsAsync(
@@ -138,10 +133,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await textViewWindow.TestServices.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             await WaitForCompletionSetAsync(textViewWindow, cancellationToken);
 
@@ -152,10 +146,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             if (view is null)
                 return ImmutableArray<Completion>.Empty;
 
-            var broker = await textViewWindow
-                .TestServices
-                .Shell
-                .GetComponentModelServiceAsync<ICompletionBroker>(cancellationToken);
+            var broker =
+                await textViewWindow.TestServices.Shell.GetComponentModelServiceAsync<ICompletionBroker>(
+                    cancellationToken
+                );
             var sessions = broker.GetSessions(view);
             if (sessions.Count != 1)
             {
@@ -177,10 +171,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
 
             await textViewWindow.InvokeCodeActionListWithoutWaitingAsync(cancellationToken);
 
-            await textViewWindow
-                .TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await textViewWindow.TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public static async Task InvokeCodeActionListWithoutWaitingAsync(
@@ -195,19 +189,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             {
                 // Workaround for extremely unstable async lightbulb (can dismiss itself when SuggestedActionsChanged
                 // fires while expanding the light bulb).
-                await textViewWindow
-                    .TestServices
-                    .Input
-                    .SendAsync(
-                        (VirtualKeyCode.OEM_PERIOD, VirtualKeyCode.CONTROL),
-                        cancellationToken
-                    );
+                await textViewWindow.TestServices.Input.SendAsync(
+                    (VirtualKeyCode.OEM_PERIOD, VirtualKeyCode.CONTROL),
+                    cancellationToken
+                );
                 await Task.Delay(5000, cancellationToken);
 
-                await textViewWindow
-                    .TestServices
-                    .Editor
-                    .DismissLightBulbSessionAsync(cancellationToken);
+                await textViewWindow.TestServices.Editor.DismissLightBulbSessionAsync(
+                    cancellationToken
+                );
                 await Task.Delay(5000, cancellationToken);
             }
 
@@ -219,17 +209,16 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await textViewWindow.TestServices.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             var view = await textViewWindow.GetActiveTextViewAsync(cancellationToken);
 
-            var broker = await textViewWindow
-                .TestServices
-                .Shell
-                .GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
+            var broker =
+                await textViewWindow.TestServices.Shell.GetComponentModelServiceAsync<ILightBulbBroker>(
+                    cancellationToken
+                );
             if (!broker.IsLightBulbSessionActive(view))
             {
                 return false;
@@ -283,17 +272,16 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await textViewWindow.TestServices.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             var view = await textViewWindow.GetActiveTextViewAsync(cancellationToken);
 
-            var dte = await textViewWindow
-                .TestServices
-                .Shell
-                .GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken);
+            var dte = await textViewWindow.TestServices.Shell.GetRequiredGlobalServiceAsync<
+                SDTE,
+                EnvDTE.DTE
+            >(cancellationToken);
             dte.Find.FindWhat = marker;
             dte.Find.MatchCase = true;
             dte.Find.MatchInHiddenText = true;
@@ -389,10 +377,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await textViewWindow.TestServices.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             var view = await textViewWindow.GetActiveTextViewAsync(cancellationToken);
 
@@ -410,10 +397,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(FeatureAttribute.CompletionSet, cancellationToken);
+            await textViewWindow.TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.CompletionSet,
+                cancellationToken
+            );
         }
     }
 }

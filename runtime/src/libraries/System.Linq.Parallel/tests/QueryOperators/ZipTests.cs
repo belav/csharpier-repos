@@ -253,8 +253,7 @@ namespace System.Linq.Parallel.Tests
         {
             _ = leftCount;
             _ = rightCount;
-            ParallelQuery<int> query = left.Item
-                .WithDegreeOfParallelism(degree)
+            ParallelQuery<int> query = left.Item.WithDegreeOfParallelism(degree)
                 .Zip<int, int, int>(
                     right.Item,
                     (a, b) =>

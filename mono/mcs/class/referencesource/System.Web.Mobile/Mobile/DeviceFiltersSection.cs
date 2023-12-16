@@ -344,13 +344,11 @@ namespace System.Web.Mobile
             try
             {
                 return (MobileCapabilities.EvaluateCapabilitiesDelegate)
-                    MobileCapabilities
-                        .EvaluateCapabilitiesDelegate
-                        .CreateDelegate(
-                            typeof(MobileCapabilities.EvaluateCapabilitiesDelegate),
-                            FilterClass,
-                            Method
-                        );
+                    MobileCapabilities.EvaluateCapabilitiesDelegate.CreateDelegate(
+                        typeof(MobileCapabilities.EvaluateCapabilitiesDelegate),
+                        FilterClass,
+                        Method
+                    );
             }
             catch (Exception e)
             {

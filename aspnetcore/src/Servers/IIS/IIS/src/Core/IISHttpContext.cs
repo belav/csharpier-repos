@@ -653,9 +653,10 @@ internal abstract partial class IISHttpContext
                 continue;
             }
 
-            var isKnownHeader = HttpApiTypes
-                .KnownResponseHeaders
-                .TryGetValue(headerPair.Key, out var knownHeaderIndex);
+            var isKnownHeader = HttpApiTypes.KnownResponseHeaders.TryGetValue(
+                headerPair.Key,
+                out var knownHeaderIndex
+            );
             for (var i = 0; i < headerValues.Count; i++)
             {
                 var headerValue = headerValues[i];

@@ -117,8 +117,7 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                     // Search the path to see if we can find it
                     foreach (
                         var path in System
-                            .Environment
-                            .GetEnvironmentVariable("PATH")
+                            .Environment.GetEnvironmentVariable("PATH")
                             .Split(Path.PathSeparator)
                     )
                     {

@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveStaticMembers
     [Trait(Traits.Feature, Traits.Features.CodeActionsMoveStaticMembers)]
     public class CSharpMoveStaticMembersTests
     {
-        private static readonly TestComposition s_testServices = FeaturesTestCompositions
-            .Features
-            .AddParts(typeof(TestMoveStaticMembersService));
+        private static readonly TestComposition s_testServices =
+            FeaturesTestCompositions.Features.AddParts(typeof(TestMoveStaticMembersService));
 
         #region Perform New Type Action From Options
         [Fact]

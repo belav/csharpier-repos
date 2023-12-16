@@ -88,9 +88,7 @@ public class UpgradeTests : LoggedTest
 
                         var buffer = new byte[128];
                         var read = await context
-                            .Request
-                            .Body
-                            .ReadAsync(buffer, 0, 128)
+                            .Request.Body.ReadAsync(buffer, 0, 128)
                             .DefaultTimeout();
                         Assert.Equal(0, read);
 
@@ -285,10 +283,9 @@ public class UpgradeTests : LoggedTest
                         Assert.False(feature.IsUpgradableRequest);
                         Assert.Equal("chunked", context.Request.Headers.TransferEncoding);
 
-                        var length = await context
-                            .Request
-                            .Body
-                            .FillBufferUntilEndAsync(new byte[100]);
+                        var length = await context.Request.Body.FillBufferUntilEndAsync(
+                            new byte[100]
+                        );
                         Assert.Equal(11, length);
                     }
                     else
@@ -488,9 +485,8 @@ public class UpgradeTests : LoggedTest
                     // can wake up and shutdown gracefully. We manually call CancelPendingRead() to simulate this and
                     // ensure the Stream returned by UpgradeAsync doesn't throw in this case.
                     // https://github.com/dotnet/aspnetcore/issues/26482
-                    var connectionTransportFeature = context
-                        .Features
-                        .Get<IConnectionTransportFeature>();
+                    var connectionTransportFeature =
+                        context.Features.Get<IConnectionTransportFeature>();
                     connectionTransportFeature.Transport.Input.CancelPendingRead();
 
                     // Use ReadAsync() instead of CopyToAsync() for this test since IsCanceled is only checked in

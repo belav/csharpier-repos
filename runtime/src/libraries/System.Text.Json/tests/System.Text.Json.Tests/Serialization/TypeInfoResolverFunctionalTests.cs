@@ -15,21 +15,19 @@ namespace System.Text.Json.Serialization.Tests
         public static void AddPrefixToEveryPropertyOfClass()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        foreach (var prop in ti.Properties)
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            foreach (var prop in ti.Properties)
-                            {
-                                prop.Name = "renamed_" + prop.Name;
-                            }
+                            prop.Name = "renamed_" + prop.Name;
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -56,37 +54,35 @@ namespace System.Text.Json.Serialization.Tests
         public static void AppendCharacterWhenSerializingField()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        // Because IncludeFields is false
+                        Assert.Equal(1, ti.Properties.Count);
+                        JsonPropertyInfo field = ti.CreateJsonPropertyInfo(
+                            typeof(string),
+                            "TestField"
+                        );
+                        field.Get = (o) =>
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            // Because IncludeFields is false
-                            Assert.Equal(1, ti.Properties.Count);
-                            JsonPropertyInfo field = ti.CreateJsonPropertyInfo(
-                                typeof(string),
-                                "TestField"
-                            );
-                            field.Get = (o) =>
-                            {
-                                var obj = (TestClass)o;
-                                return obj.TestField + "X";
-                            };
-                            field.Set = (o, val) =>
-                            {
-                                var obj = (TestClass)o;
-                                var value = (string)val;
-                                // We append 'X' on serialization
-                                // therefore on deserialization we remove last character
-                                obj.TestField = value.Substring(0, value.Length - 1);
-                            };
-                            ti.Properties.Add(field);
-                        }
+                            var obj = (TestClass)o;
+                            return obj.TestField + "X";
+                        };
+                        field.Set = (o, val) =>
+                        {
+                            var obj = (TestClass)o;
+                            var value = (string)val;
+                            // We append 'X' on serialization
+                            // therefore on deserialization we remove last character
+                            obj.TestField = value.Substring(0, value.Length - 1);
+                        };
+                        ti.Properties.Add(field);
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.TypeInfoResolver = resolver;
@@ -109,27 +105,25 @@ namespace System.Text.Json.Serialization.Tests
         public static void DoNotSerializeValue42()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        foreach (var prop in ti.Properties)
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            foreach (var prop in ti.Properties)
+                            if (prop.PropertyType == typeof(int))
                             {
-                                if (prop.PropertyType == typeof(int))
+                                prop.ShouldSerialize = (o, val) =>
                                 {
-                                    prop.ShouldSerialize = (o, val) =>
-                                    {
-                                        return (int)val != 42;
-                                    };
-                                }
+                                    return (int)val != 42;
+                                };
                             }
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -157,24 +151,22 @@ namespace System.Text.Json.Serialization.Tests
         public static void DoNotSerializePropertyWithNameButDeserializeIt()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        foreach (var prop in ti.Properties)
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            foreach (var prop in ti.Properties)
+                            if (prop.Name == nameof(TestClass.TestProperty))
                             {
-                                if (prop.Name == nameof(TestClass.TestProperty))
-                                {
-                                    prop.Get = null;
-                                }
+                                prop.Get = null;
                             }
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -200,24 +192,22 @@ namespace System.Text.Json.Serialization.Tests
         public static void DoNotDeserializePropertyWithNameButSerializeIt()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        foreach (var prop in ti.Properties)
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            foreach (var prop in ti.Properties)
+                            if (prop.Name == nameof(TestClass.TestProperty))
                             {
-                                if (prop.Name == nameof(TestClass.TestProperty))
-                                {
-                                    prop.Set = null;
-                                }
+                                prop.Set = null;
                             }
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -241,26 +231,24 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomNumberHandlingForAProperty()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        foreach (var prop in ti.Properties)
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            foreach (var prop in ti.Properties)
+                            if (prop.Name == nameof(TestClass.TestProperty))
                             {
-                                if (prop.Name == nameof(TestClass.TestProperty))
-                                {
-                                    prop.NumberHandling =
-                                        JsonNumberHandling.AllowReadingFromString
-                                        | JsonNumberHandling.WriteAsString;
-                                }
+                                prop.NumberHandling =
+                                    JsonNumberHandling.AllowReadingFromString
+                                    | JsonNumberHandling.WriteAsString;
                             }
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -284,24 +272,22 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomConverterForIntProperty()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        foreach (var prop in ti.Properties)
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            foreach (var prop in ti.Properties)
+                            if (prop.Name == nameof(TestClass.TestProperty))
                             {
-                                if (prop.Name == nameof(TestClass.TestProperty))
-                                {
-                                    prop.CustomConverter = new PlusOneConverter();
-                                }
+                                prop.CustomConverter = new PlusOneConverter();
                             }
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -325,24 +311,22 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomConverterForListProperty()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithLists))
                     {
-                        if (ti.Type == typeof(TestClassWithLists))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        foreach (var prop in ti.Properties)
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            foreach (var prop in ti.Properties)
+                            if (prop.Name == nameof(TestClassWithLists.ListProperty1))
                             {
-                                if (prop.Name == nameof(TestClassWithLists.ListProperty1))
-                                {
-                                    prop.CustomConverter = new AddListEntryConverter();
-                                }
+                                prop.CustomConverter = new AddListEntryConverter();
                             }
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -369,27 +353,22 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomConverterForDictionaryProperty()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClassWithDictionaries))
                     {
-                        if (ti.Type == typeof(TestClassWithDictionaries))
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        foreach (var prop in ti.Properties)
                         {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            foreach (var prop in ti.Properties)
+                            if (prop.Name == nameof(TestClassWithDictionaries.DictionaryProperty1))
                             {
-                                if (
-                                    prop.Name
-                                    == nameof(TestClassWithDictionaries.DictionaryProperty1)
-                                )
-                                {
-                                    prop.CustomConverter = new AddDictionaryEntryConverter();
-                                }
+                                prop.CustomConverter = new AddDictionaryEntryConverter();
                             }
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -419,30 +398,28 @@ namespace System.Text.Json.Serialization.Tests
         public static void CreateObjectWithDefaults(bool useTypedCreateObject)
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
-                        {
-                            Func<TestClass> createObj = () =>
-                                new TestClass() { TestField = "test value", TestProperty = 42, };
+                        Func<TestClass> createObj = () =>
+                            new TestClass() { TestField = "test value", TestProperty = 42, };
 
-                            if (useTypedCreateObject)
-                            {
-                                JsonTypeInfo<TestClass> typedTi = ti as JsonTypeInfo<TestClass>;
-                                Assert.NotNull(typedTi);
-                                typedTi.CreateObject = createObj;
-                            }
-                            else
-                            {
-                                // we want to make sure Func is not a cast to the untyped one
-                                ti.CreateObject = () => createObj();
-                            }
+                        if (useTypedCreateObject)
+                        {
+                            JsonTypeInfo<TestClass> typedTi = ti as JsonTypeInfo<TestClass>;
+                            Assert.NotNull(typedTi);
+                            typedTi.CreateObject = createObj;
+                        }
+                        else
+                        {
+                            // we want to make sure Func is not a cast to the untyped one
+                            ti.CreateObject = () => createObj();
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -478,29 +455,27 @@ namespace System.Text.Json.Serialization.Tests
         public static void CreateObjectForListWithDefaults(bool useTypedCreateObject)
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(List<int>))
                     {
-                        if (ti.Type == typeof(List<int>))
-                        {
-                            Func<List<int>> createObj = () => new List<int> { 99 };
+                        Func<List<int>> createObj = () => new List<int> { 99 };
 
-                            if (useTypedCreateObject)
-                            {
-                                JsonTypeInfo<List<int>> typedTi = ti as JsonTypeInfo<List<int>>;
-                                Assert.NotNull(typedTi);
-                                typedTi.CreateObject = createObj;
-                            }
-                            else
-                            {
-                                // we want to make sure Func is not a cast to the untyped one
-                                ti.CreateObject = () => createObj();
-                            }
+                        if (useTypedCreateObject)
+                        {
+                            JsonTypeInfo<List<int>> typedTi = ti as JsonTypeInfo<List<int>>;
+                            Assert.NotNull(typedTi);
+                            typedTi.CreateObject = createObj;
+                        }
+                        else
+                        {
+                            // we want to make sure Func is not a cast to the untyped one
+                            ti.CreateObject = () => createObj();
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -539,31 +514,29 @@ namespace System.Text.Json.Serialization.Tests
         public static void CreateObjectForDictionaryWithDefaults(bool useTypedCreateObject)
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(Dictionary<string, int>))
                     {
-                        if (ti.Type == typeof(Dictionary<string, int>))
-                        {
-                            Func<Dictionary<string, int>> createObj = () =>
-                                new Dictionary<string, int> { ["*test*"] = -1 };
+                        Func<Dictionary<string, int>> createObj = () =>
+                            new Dictionary<string, int> { ["*test*"] = -1 };
 
-                            if (useTypedCreateObject)
-                            {
-                                JsonTypeInfo<Dictionary<string, int>> typedTi =
-                                    ti as JsonTypeInfo<Dictionary<string, int>>;
-                                Assert.NotNull(typedTi);
-                                typedTi.CreateObject = createObj;
-                            }
-                            else
-                            {
-                                // we want to make sure Func is not a cast to the untyped one
-                                ti.CreateObject = () => createObj();
-                            }
+                        if (useTypedCreateObject)
+                        {
+                            JsonTypeInfo<Dictionary<string, int>> typedTi =
+                                ti as JsonTypeInfo<Dictionary<string, int>>;
+                            Assert.NotNull(typedTi);
+                            typedTi.CreateObject = createObj;
+                        }
+                        else
+                        {
+                            // we want to make sure Func is not a cast to the untyped one
+                            ti.CreateObject = () => createObj();
                         }
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;
@@ -620,20 +593,18 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomNumberHandlingForAType()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
-                .Add(
-                    (ti) =>
+            resolver.Modifiers.Add(
+                (ti) =>
+                {
+                    if (ti.Type == typeof(TestClass))
                     {
-                        if (ti.Type == typeof(TestClass))
-                        {
-                            Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
-                            ti.NumberHandling =
-                                JsonNumberHandling.AllowReadingFromString
-                                | JsonNumberHandling.WriteAsString;
-                        }
+                        Assert.Equal(JsonTypeInfoKind.Object, ti.Kind);
+                        ti.NumberHandling =
+                            JsonNumberHandling.AllowReadingFromString
+                            | JsonNumberHandling.WriteAsString;
                     }
-                );
+                }
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.IncludeFields = true;

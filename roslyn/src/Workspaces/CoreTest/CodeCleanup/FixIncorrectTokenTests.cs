@@ -760,10 +760,8 @@ End Module
 
             try
             {
-                System.Threading.Thread.CurrentThread.CurrentCulture = System
-                    .Globalization
-                    .CultureInfo
-                    .CreateSpecificCulture("zh-CN");
+                System.Threading.Thread.CurrentThread.CurrentCulture =
+                    System.Globalization.CultureInfo.CreateSpecificCulture("zh-CN");
 
                 var code = @"[|‘’ｆｕｌｌｗｉｄｔｈ 1|]";
 

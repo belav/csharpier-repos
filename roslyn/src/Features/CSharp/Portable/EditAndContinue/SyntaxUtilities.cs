@@ -260,10 +260,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             return property.ExpressionBody == null
-                && property
-                    .AccessorList!
-                    .Accessors
-                    .Any(e => e.Body == null && e.ExpressionBody == null);
+                && property.AccessorList!.Accessors.Any(
+                    e => e.Body == null && e.ExpressionBody == null
+                );
         }
 
         /// <summary>

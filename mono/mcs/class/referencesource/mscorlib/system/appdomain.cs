@@ -1314,12 +1314,8 @@ namespace System
             {
                 Contract.Requires(args != null);
 
-                IEnumerable<string> fileNames = System
-                    .Runtime
-                    .InteropServices
-                    .WindowsRuntime
-                    .WindowsRuntimeMetadata
-                    .ResolveNamespace(
+                IEnumerable<string> fileNames =
+                    System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.ResolveNamespace(
                         args.NamespaceName,
                         null, // windowsSdkFilePath ... Use OS installed .winmd files
                         _packageGraphFilePaths
@@ -3290,11 +3286,11 @@ namespace System
                 SecurityElement root = parser.GetTopElement();
                 if (root.Tag.Equals("IPermission") || root.Tag.Equals("Permission"))
                 {
-                    IPermission ip = System
-                        .Security
-                        .Util
-                        .XMLUtil
-                        .CreatePermission(root, PermissionState.None, false);
+                    IPermission ip = System.Security.Util.XMLUtil.CreatePermission(
+                        root,
+                        PermissionState.None,
+                        false
+                    );
 
                     if (ip == null)
                     {
@@ -3688,12 +3684,11 @@ namespace System
             string namespaceName
         )
         {
-            return System
-                .Runtime
-                .InteropServices
-                .WindowsRuntime
-                .WindowsRuntimeMetadata
-                .OnReflectionOnlyNamespaceResolveEvent(this, assembly, namespaceName);
+            return System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.OnReflectionOnlyNamespaceResolveEvent(
+                this,
+                assembly,
+                namespaceName
+            );
         }
 #endif // FEATURE_COMINTEROP
 
@@ -3703,12 +3698,10 @@ namespace System
         // Called by VM - code:CLRPrivTypeCacheWinRT::RaiseDesignerNamespaceResolveEvent
         private string[] OnDesignerNamespaceResolveEvent(string namespaceName)
         {
-            return System
-                .Runtime
-                .InteropServices
-                .WindowsRuntime
-                .WindowsRuntimeMetadata
-                .OnDesignerNamespaceResolveEvent(this, namespaceName);
+            return System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.OnDesignerNamespaceResolveEvent(
+                this,
+                namespaceName
+            );
         }
 #endif // FEATURE_COMINTEROP
 

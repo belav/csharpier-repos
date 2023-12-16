@@ -125,8 +125,9 @@ public class A { }";
         public void VerifyLspClientOptionNames()
         {
             var actualNames = DidChangeConfigurationNotificationHandler
-                .SupportedOptions
-                .Select(DidChangeConfigurationNotificationHandler.GenerateFullNameForOption)
+                .SupportedOptions.Select(
+                    DidChangeConfigurationNotificationHandler.GenerateFullNameForOption
+                )
                 .OrderBy(name => name)
                 .ToArray();
             // These options are persist in the LSP client. Please make sure also modify the LSP client code if these strings are changed.
@@ -183,9 +184,9 @@ public class A { }";
             var optionsAndLanguageToVerify = supportedOptions.SelectManyAsArray(
                 option =>
                     option is IPerLanguageValuedOption
-                        ? DidChangeConfigurationNotificationHandler
-                            .SupportedLanguages
-                            .SelectAsArray(lang => (option, lang))
+                        ? DidChangeConfigurationNotificationHandler.SupportedLanguages.SelectAsArray(
+                            lang => (option, lang)
+                        )
                         : SpecializedCollections.SingletonEnumerable((option, string.Empty))
             );
 
@@ -236,9 +237,9 @@ public class A { }";
                     return;
                 }
 
-                WorkspaceDidChangeConfigurationRegistered = registrationParams
-                    .Registrations
-                    .Any(item => item.Method == Methods.WorkspaceDidChangeConfigurationName);
+                WorkspaceDidChangeConfigurationRegistered = registrationParams.Registrations.Any(
+                    item => item.Method == Methods.WorkspaceDidChangeConfigurationName
+                );
                 return;
             }
 
@@ -252,9 +253,10 @@ public class A { }";
             )
             {
                 ReceivedWorkspaceConfigurationRequest = true;
-                var expectConfigurationItemsNumber = DidChangeConfigurationNotificationHandler
-                    .SupportedOptions
-                    .Sum(option => option is IPerLanguageValuedOption ? 2 : 1);
+                var expectConfigurationItemsNumber =
+                    DidChangeConfigurationNotificationHandler.SupportedOptions.Sum(
+                        option => option is IPerLanguageValuedOption ? 2 : 1
+                    );
                 Assert.Equal(expectConfigurationItemsNumber, configurationParams!.Items.Length);
                 Assert.Equal(expectConfigurationItemsNumber, MockClientSideValues.Count);
 

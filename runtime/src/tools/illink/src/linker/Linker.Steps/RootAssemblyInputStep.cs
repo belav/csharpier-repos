@@ -82,20 +82,18 @@ namespace Mono.Linker.Steps
 
                     // Assembly root mode wins over any enabled optimization which
                     // could conflict with library rooting behaviour
-                    Context
-                        .Optimizations
-                        .Disable(
-                            CodeOptimizations.Sealer
-                                | CodeOptimizations.UnusedTypeChecks
-                                | CodeOptimizations.UnreachableBodies
-                                | CodeOptimizations.UnusedInterfaces
-                                | CodeOptimizations.RemoveDescriptors
-                                | CodeOptimizations.RemoveLinkAttributes
-                                | CodeOptimizations.RemoveSubstitutions
-                                | CodeOptimizations.RemoveDynamicDependencyAttribute
-                                | CodeOptimizations.OptimizeTypeHierarchyAnnotations,
-                            assembly.Name.Name
-                        );
+                    Context.Optimizations.Disable(
+                        CodeOptimizations.Sealer
+                            | CodeOptimizations.UnusedTypeChecks
+                            | CodeOptimizations.UnreachableBodies
+                            | CodeOptimizations.UnusedInterfaces
+                            | CodeOptimizations.RemoveDescriptors
+                            | CodeOptimizations.RemoveLinkAttributes
+                            | CodeOptimizations.RemoveSubstitutions
+                            | CodeOptimizations.RemoveDynamicDependencyAttribute
+                            | CodeOptimizations.OptimizeTypeHierarchyAnnotations,
+                        assembly.Name.Name
+                    );
 
                     // Enable EventSource special handling
                     Context.DisableEventSourceSpecialHandling = false;
@@ -221,15 +219,16 @@ namespace Mono.Linker.Steps
             foreach (CustomAttribute attribute in assembly.CustomAttributes)
             {
                 if (
-                    attribute
-                        .Constructor
-                        .DeclaringType
-                        .IsTypeOf("System.Runtime.CompilerServices", "InternalsVisibleToAttribute")
+                    attribute.Constructor.DeclaringType.IsTypeOf(
+                        "System.Runtime.CompilerServices",
+                        "InternalsVisibleToAttribute"
+                    )
                 )
                 {
-                    Context
-                        .Annotations
-                        .Mark(attribute, new DependencyInfo(DependencyKind.RootAssembly, assembly));
+                    Context.Annotations.Mark(
+                        attribute,
+                        new DependencyInfo(DependencyKind.RootAssembly, assembly)
+                    );
                     return true;
                 }
             }

@@ -43,9 +43,9 @@ namespace System.Data.Tests
             ds.Relations.Add(
                 new DataRelation("Relation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
             );
-            ds.Tables[0]
-                .Constraints
-                .Add(new UniqueConstraint("Constraint", ds.Tables[0].Columns[1]));
+            ds.Tables[0].Constraints.Add(
+                new UniqueConstraint("Constraint", ds.Tables[0].Columns[1])
+            );
 
             // DuplicateNameException - tables
             Assert.Throws<DuplicateNameException>(() =>
@@ -62,9 +62,9 @@ namespace System.Data.Tests
             // DuplicateNameException - Constraints
             Assert.Throws<DuplicateNameException>(() =>
             {
-                ds.Tables[0]
-                    .Constraints
-                    .Add(new UniqueConstraint("Constraint", ds.Tables[0].Columns[2]));
+                ds.Tables[0].Constraints.Add(
+                    new UniqueConstraint("Constraint", ds.Tables[0].Columns[2])
+                );
             });
 
             // DuplicateNameException - Relations

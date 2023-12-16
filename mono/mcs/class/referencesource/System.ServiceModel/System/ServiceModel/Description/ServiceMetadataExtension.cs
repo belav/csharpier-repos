@@ -282,18 +282,16 @@ namespace System.ServiceModel.Description
         void IExtension<ServiceHostBase>.Attach(ServiceHostBase owner)
         {
             if (owner == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("owner"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("owner")
+                );
 
             if (this.owner != null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot2_0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot2_0)
+                    )
+                );
 
             owner.ThrowIfClosedOrOpened();
 
@@ -306,21 +304,17 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("owner");
 
             if (this.owner == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot3_0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot3_0)
+                    )
+                );
 
             if (this.owner != owner)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "owner",
-                        SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot4_0)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "owner",
+                    SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot4_0)
+                );
 
             this.owner.ThrowIfClosedOrOpened();
 
@@ -386,18 +380,16 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentException(
-                                SR.GetString(
-                                    SR.SFxGetChannelDispatcherDoesNotSupportScheme,
-                                    typeof(ChannelDispatcher).Name,
-                                    Uri.UriSchemeHttp,
-                                    Uri.UriSchemeHttps
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.SFxGetChannelDispatcherDoesNotSupportScheme,
+                                typeof(ChannelDispatcher).Name,
+                                Uri.UriSchemeHttp,
+                                Uri.UriSchemeHttps
                             )
-                        );
+                        )
+                    );
                 }
                 channelDispatcher = CreateGetDispatcher(listenUri, binding);
                 owner.ChannelDispatchers.Add(channelDispatcher);
@@ -443,18 +435,16 @@ namespace System.ServiceModel.Description
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(
-                                SR.SFxGetChannelDispatcherDoesNotSupportScheme,
-                                typeof(ChannelDispatcher).Name,
-                                Uri.UriSchemeHttp,
-                                Uri.UriSchemeHttps
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(
+                            SR.SFxGetChannelDispatcherDoesNotSupportScheme,
+                            typeof(ChannelDispatcher).Name,
+                            Uri.UriSchemeHttp,
+                            Uri.UriSchemeHttps
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -466,13 +456,11 @@ namespace System.ServiceModel.Description
 
             //Set up binding parameter collection
             BindingParameterCollection parameters = owner.GetBindingParameters();
-            AspNetEnvironment
-                .Current
-                .AddMetadataBindingParameters(
-                    listenUriBaseAddress,
-                    owner.Description.Behaviors,
-                    parameters
-                );
+            AspNetEnvironment.Current.AddMetadataBindingParameters(
+                listenUriBaseAddress,
+                owner.Description.Behaviors,
+                parameters
+            );
 
             // find listener for HTTP GET
             IChannelListener listener = null;
@@ -486,13 +474,9 @@ namespace System.ServiceModel.Description
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.SFxBindingNotSupportedForMetadataHttpGet)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.SFxBindingNotSupportedForMetadataHttpGet))
+                );
             }
 
             //create dispatchers
@@ -544,10 +528,8 @@ namespace System.ServiceModel.Description
                 channelDispatcher.IncludeExceptionDetailInFaults |=
                     sdb.IncludeExceptionDetailInFaults;
 
-            ServiceBehaviorAttribute sba = owner
-                .Description
-                .Behaviors
-                .Find<ServiceBehaviorAttribute>();
+            ServiceBehaviorAttribute sba =
+                owner.Description.Behaviors.Find<ServiceBehaviorAttribute>();
             if (sba != null)
                 channelDispatcher.IncludeExceptionDetailInFaults |=
                     sba.IncludeExceptionDetailInFaults;
@@ -686,15 +668,13 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperArgument(
-                                "ExternalMetadataLocation",
-                                SR.GetString(
-                                    SR.SFxBadMetadataLocationNoAppropriateBaseAddress,
-                                    this.parent.ExternalMetadataLocation.OriginalString
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "ExternalMetadataLocation",
+                            SR.GetString(
+                                SR.SFxBadMetadataLocationNoAppropriateBaseAddress,
+                                this.parent.ExternalMetadataLocation.OriginalString
+                            )
+                        );
                     }
                 }
 
@@ -742,16 +722,16 @@ namespace System.ServiceModel.Description
 
             public IAsyncResult BeginGet(Message request, AsyncCallback callback, object state)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
 
             public Message EndGet(IAsyncResult result)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
         }
 
@@ -1035,24 +1015,7 @@ namespace System.ServiceModel.Description
                             else
                             {
                                 Fx.Assert("Bad object in HttpGetImpl docFromQuery table");
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new InvalidOperationException(
-                                            String.Format(
-                                                CultureInfo.InvariantCulture,
-                                                "Bad object in HttpGetImpl docFromQuery table"
-                                            )
-                                        )
-                                    );
-                            }
-                        }
-                        else
-                        {
-                            Fx.Assert("Bad object in HttpGetImpl docFromQuery table");
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                                     new InvalidOperationException(
                                         String.Format(
                                             CultureInfo.InvariantCulture,
@@ -1060,6 +1023,19 @@ namespace System.ServiceModel.Description
                                         )
                                     )
                                 );
+                            }
+                        }
+                        else
+                        {
+                            Fx.Assert("Bad object in HttpGetImpl docFromQuery table");
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    String.Format(
+                                        CultureInfo.InvariantCulture,
+                                        "Bad object in HttpGetImpl docFromQuery table"
+                                    )
+                                )
+                            );
                         }
 
                         AddHttpProperty(replyMessage, HttpStatusCode.OK, XmlContentType);

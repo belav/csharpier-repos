@@ -495,9 +495,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     var genericA = (GenericTypeSignature)typeA;
                     var genericB = (GenericTypeSignature)typeB;
                     return MatchesType(genericA.QualifiedName, genericB.QualifiedName)
-                        && genericA
-                            .TypeArguments
-                            .SequenceEqual(genericB.TypeArguments, MatchesType);
+                        && genericA.TypeArguments.SequenceEqual(
+                            genericB.TypeArguments,
+                            MatchesType
+                        );
                 }
                 case TypeSignatureKind.QualifiedType:
                 {

@@ -53,8 +53,7 @@
 
                 var expression = config
                     .Internal()
-                    .ProjectionBuilder
-                    .GetMapExpression<Entity, EntityViewModel>();
+                    .ProjectionBuilder.GetMapExpression<Entity, EntityViewModel>();
 
                 var entity = new Entity
                 {
@@ -87,8 +86,7 @@
 
                 var expression = config
                     .Internal()
-                    .ProjectionBuilder
-                    .GetMapExpression<Entity, EntityDetailledViewModel>();
+                    .ProjectionBuilder.GetMapExpression<Entity, EntityDetailledViewModel>();
 
                 var entity = new Entity
                 {
@@ -105,14 +103,10 @@
 
                 Assert.Equal(viewModel.EntityID, entity.EntityID);
                 Assert.True(
-                    entity
-                        .SubEntities
-                        .All(
-                            subEntity =>
-                                viewModel
-                                    .SubEntities
-                                    .Any(s => s.Description == subEntity.Description)
-                        )
+                    entity.SubEntities.All(
+                        subEntity =>
+                            viewModel.SubEntities.Any(s => s.Description == subEntity.Description)
+                    )
                 );
             }
         }

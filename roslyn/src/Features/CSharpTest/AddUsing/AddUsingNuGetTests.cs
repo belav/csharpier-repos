@@ -41,20 +41,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
             TestParameters parameters
         )
         {
-            workspace
-                .GlobalOptions
-                .SetGlobalOption(
-                    SymbolSearchOptionsStorage.SearchNuGetPackages,
-                    LanguageNames.CSharp,
-                    true
-                );
-            workspace
-                .GlobalOptions
-                .SetGlobalOption(
-                    SymbolSearchOptionsStorage.SearchReferenceAssemblies,
-                    LanguageNames.CSharp,
-                    true
-                );
+            workspace.GlobalOptions.SetGlobalOption(
+                SymbolSearchOptionsStorage.SearchNuGetPackages,
+                LanguageNames.CSharp,
+                true
+            );
+            workspace.GlobalOptions.SetGlobalOption(
+                SymbolSearchOptionsStorage.SearchReferenceAssemblies,
+                LanguageNames.CSharp,
+                true
+            );
         }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(

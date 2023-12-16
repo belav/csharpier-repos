@@ -1562,9 +1562,9 @@ public class ValidationWithRecordIntegrationTests
             },
             options =>
             {
-                options
-                    .ModelMetadataDetailsProviders
-                    .Add(new SuppressChildValidationMetadataProvider(typeof(Address)));
+                options.ModelMetadataDetailsProviders.Add(
+                    new SuppressChildValidationMetadataProvider(typeof(Address))
+                );
             }
         );
 

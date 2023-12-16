@@ -132,12 +132,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                         ImplementTypePropertyGenerationBehavior.PreferThrowingProperties;
                 }
 
-                var setMethod = property
-                    .SetMethod
-                    .RemoveInaccessibleAttributesAndAttributesOfTypes(
-                        State.ClassOrStructType,
-                        attributesToRemove
-                    );
+                var setMethod = property.SetMethod.RemoveInaccessibleAttributesAndAttributesOfTypes(
+                    State.ClassOrStructType,
+                    attributesToRemove
+                );
 
                 return CodeGenerationSymbolFactory.CreateAccessorSymbol(
                     setMethod,
@@ -170,12 +168,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     return null;
                 }
 
-                var getMethod = property
-                    .GetMethod
-                    .RemoveInaccessibleAttributesAndAttributesOfTypes(
-                        State.ClassOrStructType,
-                        attributesToRemove
-                    );
+                var getMethod = property.GetMethod.RemoveInaccessibleAttributesAndAttributesOfTypes(
+                    State.ClassOrStructType,
+                    attributesToRemove
+                );
 
                 return CodeGenerationSymbolFactory.CreateAccessorSymbol(
                     getMethod,

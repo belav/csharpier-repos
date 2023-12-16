@@ -43,9 +43,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 sourceProject.Language == LanguageName
                     ? sourceProject.ParseOptions
                     : sourceProject
-                        .Solution
-                        .Services
-                        .GetLanguageServices(LanguageName)
+                        .Solution.Services.GetLanguageServices(LanguageName)
                         .GetRequiredService<ISyntaxTreeFactoryService>()
                         .GetDefaultParseOptionsWithLatestLanguageVersion();
 

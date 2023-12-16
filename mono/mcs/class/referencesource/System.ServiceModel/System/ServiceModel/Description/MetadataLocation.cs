@@ -35,11 +35,9 @@ namespace System.ServiceModel.Description
                 {
                     Uri uri;
                     if (!Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out uri))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperArgument(
-                                SR.GetString(SR.SFxMetadataReferenceInvalidLocation, value)
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(SR.SFxMetadataReferenceInvalidLocation, value)
+                        );
                 }
 
                 this.location = value;

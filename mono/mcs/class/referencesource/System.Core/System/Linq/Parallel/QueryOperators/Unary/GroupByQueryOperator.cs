@@ -774,9 +774,7 @@ namespace System.Linq.Parallel
                 Contract.Assert(currentValue != null);
 
                 // Call to the base class to yield the current value.
-                currentValue
-                    .m_grouping
-                    .Add(m_elementSelector(sourceElement.First), sourceOrderKey);
+                currentValue.m_grouping.Add(m_elementSelector(sourceElement.First), sourceOrderKey);
             }
 
             // Sort the elements within each group

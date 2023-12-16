@@ -60,14 +60,15 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             var categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary
-                    .Instance
-                    .GetCategoryTitle(CorrelationsCategoryLabelKey)
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
+                    CorrelationsCategoryLabelKey
+                )
             );
             var descriptionAttribute = new DescriptionAttribute(
-                StringResourceDictionary
-                    .Instance
-                    .GetString("messagingCorrelatesWithHint", "Correlation handle")
+                StringResourceDictionary.Instance.GetString(
+                    "messagingCorrelatesWithHint",
+                    "Correlation handle"
+                )
             );
             builder.AddCustomAttributes(
                 sendType,
@@ -93,9 +94,10 @@ namespace System.ServiceModel.Activities.Presentation
                 new TypeConverterAttribute(typeof(ExpandableObjectConverter))
             );
             descriptionAttribute = new DescriptionAttribute(
-                StringResourceDictionary
-                    .Instance
-                    .GetString("messagingEndpointAddressHint", "<Address>")
+                StringResourceDictionary.Instance.GetString(
+                    "messagingEndpointAddressHint",
+                    "<Address>"
+                )
             );
             builder.AddCustomAttributes(
                 sendType,
@@ -110,9 +112,9 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary
-                    .Instance
-                    .GetCategoryTitle(MiscellaneousCategoryLabelKey)
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
+                    MiscellaneousCategoryLabelKey
+                )
             );
             builder.AddCustomAttributes(
                 sendType,
@@ -231,9 +233,9 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 SendMessageContent messageContent =
                     ((Send)this.ModelItem.GetCurrentValue()).Content as SendMessageContent;
-                this.ModelItem
-                    .Properties[DeclaredMessageType]
-                    .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
+                this.ModelItem.Properties[DeclaredMessageType].SetValue(
+                    null == messageContent ? null : messageContent.Message.ArgumentType
+                );
             }
         }
 
@@ -399,9 +401,7 @@ namespace System.ServiceModel.Activities.Presentation
         void OnDefineButtonClicked(object sender, RoutedEventArgs args)
         {
             using (
-                EditingScope scope = this.Context
-                    .Services
-                    .GetRequiredService<ModelTreeManager>()
+                EditingScope scope = this.Context.Services.GetRequiredService<ModelTreeManager>()
                     .CreateEditingScope(
                         StringResourceDictionary.Instance.GetString("editSendContent"),
                         true

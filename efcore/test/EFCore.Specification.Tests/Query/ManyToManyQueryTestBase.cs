@@ -241,10 +241,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from t in ss.Set<EntityCompositeKey>()
                 join s in ss.Set<EntityCompositeKey>()
-                    on t.TwoSkipShared.OrderBy(e => e.Id).FirstOrDefault().Id equals s.ThreeSkipFull
-                        .OrderBy(e => e.Id)
+                    on t.TwoSkipShared.OrderBy(e => e.Id)
                         .FirstOrDefault()
-                        .Id
+                        .Id equals s.ThreeSkipFull.OrderBy(e => e.Id).FirstOrDefault().Id
                     into grouping
                 from s in grouping.DefaultIfEmpty()
                 orderby t.Key1, s.Key1, t.Key2, s.Key2
@@ -252,11 +251,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from t in ss.Set<EntityCompositeKey>()
                 join s in ss.Set<EntityCompositeKey>()
-                    on t.TwoSkipShared
-                        .OrderBy(e => e.Id)
+                    on t.TwoSkipShared.OrderBy(e => e.Id)
                         .FirstOrDefault()
-                        .MaybeScalar(e => e.Id) equals s.ThreeSkipFull
-                        .OrderBy(e => e.Id)
+                        .MaybeScalar(e => e.Id) equals s.ThreeSkipFull.OrderBy(e => e.Id)
                         .FirstOrDefault()
                         .MaybeScalar(e => e.Id)
                     into grouping
@@ -380,8 +377,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from r in ss.Set<EntityThree>()
                 orderby r.Id
-                select r.CompositeKeySkipFull
-                    .OrderBy(e => e.Key1)
+                select r.CompositeKeySkipFull.OrderBy(e => e.Key1)
                     .ThenBy(e => e.Key2)
                     .FirstOrDefault(),
             assertOrder: true
@@ -858,8 +854,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                         )
                 )
             )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
 
@@ -890,8 +885,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                         )
                 )
             )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
 
@@ -1062,8 +1056,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                         )
                 )
             )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
 
@@ -1244,10 +1237,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from t in ss.Set<UnidirectionalEntityCompositeKey>()
                 join s in ss.Set<UnidirectionalEntityCompositeKey>()
-                    on t.TwoSkipShared.OrderBy(e => e.Id).FirstOrDefault().Id equals s.ThreeSkipFull
-                        .OrderBy(e => e.Id)
+                    on t.TwoSkipShared.OrderBy(e => e.Id)
                         .FirstOrDefault()
-                        .Id
+                        .Id equals s.ThreeSkipFull.OrderBy(e => e.Id).FirstOrDefault().Id
                     into grouping
                 from s in grouping.DefaultIfEmpty()
                 orderby t.Key1, s.Key1, t.Key2, s.Key2
@@ -1255,11 +1247,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from t in ss.Set<UnidirectionalEntityCompositeKey>()
                 join s in ss.Set<UnidirectionalEntityCompositeKey>()
-                    on t.TwoSkipShared
-                        .OrderBy(e => e.Id)
+                    on t.TwoSkipShared.OrderBy(e => e.Id)
                         .FirstOrDefault()
-                        .MaybeScalar(e => e.Id) equals s.ThreeSkipFull
-                        .OrderBy(e => e.Id)
+                        .MaybeScalar(e => e.Id) equals s.ThreeSkipFull.OrderBy(e => e.Id)
                         .FirstOrDefault()
                         .MaybeScalar(e => e.Id)
                     into grouping
@@ -1598,8 +1588,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                         )
                 )
             )
-                .Message
-                .Replace("\r", "")
+                .Message.Replace("\r", "")
                 .Replace("\n", "")
         );
 

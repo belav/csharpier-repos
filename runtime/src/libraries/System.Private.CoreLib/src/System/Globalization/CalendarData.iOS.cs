@@ -177,9 +177,11 @@ namespace System.Globalization
         {
             Debug.Assert(localeName != null);
 
-            return Interop
-                .Globalization
-                .GetCalendarInfoNative(localeName, calendarId, calendarDataType);
+            return Interop.Globalization.GetCalendarInfoNative(
+                localeName,
+                calendarId,
+                calendarDataType
+            );
         }
     }
 }

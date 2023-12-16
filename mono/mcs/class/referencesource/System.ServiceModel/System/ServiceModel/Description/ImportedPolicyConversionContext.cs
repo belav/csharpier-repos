@@ -318,9 +318,9 @@ namespace System.ServiceModel.Description
                     bool moveNext = inner.MoveNext();
                     if (++currentItem > maxItems)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new MaxItemsEnumeratorExceededMaxItemsException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MaxItemsEnumeratorExceededMaxItemsException()
+                        );
                     }
                     return moveNext;
                 }
@@ -395,16 +395,14 @@ namespace System.ServiceModel.Description
                         if (!(digits[i].Value.MoveNext()))
                         {
                             Fx.Assert("each set must have at least one item in it");
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new InvalidOperationException(
-                                        String.Format(
-                                            CultureInfo.InvariantCulture,
-                                            "Each set must have at least one item in it"
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    String.Format(
+                                        CultureInfo.InvariantCulture,
+                                        "Each set must have at least one item in it"
                                     )
-                                );
+                                )
+                            );
                         }
                         counterValue[digits[i].Key] = digits[i].Value.Current;
                         i++;

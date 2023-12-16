@@ -25,8 +25,7 @@ namespace System.Web.Http.ApiExplorer
         public string GetDocumentation(HttpParameterDescriptor parameterDescriptor)
         {
             var parameterDocumentation = parameterDescriptor
-                .ActionDescriptor
-                .GetCustomAttributes<ApiParameterDocumentationAttribute>()
+                .ActionDescriptor.GetCustomAttributes<ApiParameterDocumentationAttribute>()
                 .FirstOrDefault(param => param.ParameterName == parameterDescriptor.ParameterName);
             if (parameterDocumentation != null)
             {

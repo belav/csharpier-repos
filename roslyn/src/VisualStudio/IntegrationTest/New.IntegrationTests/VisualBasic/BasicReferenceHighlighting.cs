@@ -59,18 +59,16 @@ End Class";
         )
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
-                .WaitForAllAsyncOperationsAsync(
-                    [
-                        FeatureAttribute.Workspace,
-                        FeatureAttribute.SolutionCrawlerLegacy,
-                        FeatureAttribute.DiagnosticService,
-                        FeatureAttribute.Classification,
-                        FeatureAttribute.ReferenceHighlighting,
-                    ],
-                    cancellationToken
-                );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                    FeatureAttribute.ReferenceHighlighting,
+                ],
+                cancellationToken
+            );
 
             var tags = await TestServices.Editor.GetTagsAsync<ITextMarkerTag>(cancellationToken);
             AssertEx.SetEqual(
@@ -102,18 +100,16 @@ End Class";
         private async Task VerifyNoneAsync(string marker, CancellationToken cancellationToken)
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
-                .WaitForAllAsyncOperationsAsync(
-                    [
-                        FeatureAttribute.Workspace,
-                        FeatureAttribute.SolutionCrawlerLegacy,
-                        FeatureAttribute.DiagnosticService,
-                        FeatureAttribute.Classification,
-                        FeatureAttribute.ReferenceHighlighting,
-                    ],
-                    cancellationToken
-                );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                    FeatureAttribute.ReferenceHighlighting,
+                ],
+                cancellationToken
+            );
 
             var tags = await TestServices.Editor.GetTagsAsync<ITextMarkerTag>(cancellationToken);
             Assert.Empty(tags.Where(tag => tag.Tag.Type == ReferenceHighlightTag.TagId));

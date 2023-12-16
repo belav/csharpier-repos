@@ -37,9 +37,10 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 
             Debug.Assert(
                 !(expr.AsLiteral is CellIdBoolean)
-                    || BoolLiteral
-                        .EqualityComparer
-                        .Equals((CellIdBoolean)expr.AsLiteral, m_originalCell),
+                    || BoolLiteral.EqualityComparer.Equals(
+                        (CellIdBoolean)expr.AsLiteral,
+                        m_originalCell
+                    ),
                 "Cellid boolean for the slot and cell number disagree"
             );
         }

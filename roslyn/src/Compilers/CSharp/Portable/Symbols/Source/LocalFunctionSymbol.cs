@@ -52,12 +52,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             _declarationModifiers =
                 DeclarationModifiers.Private
-                | syntax
-                    .Modifiers
-                    .ToDeclarationModifiers(
-                        isForTypeDeclaration: false,
-                        diagnostics: _declarationDiagnostics
-                    );
+                | syntax.Modifiers.ToDeclarationModifiers(
+                    isForTypeDeclaration: false,
+                    diagnostics: _declarationDiagnostics
+                );
 
             var diagnostics = BindingDiagnosticBag.GetInstance();
             Debug.Assert(diagnostics.DiagnosticBag is { });
@@ -474,9 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            var diagnosticInfo = MessageID
-                .IDS_FeatureLocalFunctionAttributes
-                .GetFeatureAvailabilityDiagnosticInfo(
+            var diagnosticInfo =
+                MessageID.IDS_FeatureLocalFunctionAttributes.GetFeatureAvailabilityDiagnosticInfo(
                     (CSharpParseOptions)syntaxReferenceOpt.SyntaxTree.Options
                 );
             if (diagnosticInfo is object)

@@ -444,8 +444,7 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                 if (refLocation.Document.Project.Language == document.Project.Language)
                 {
                     var reference = refLocation
-                        .Location
-                        .FindNode(cancellationToken)
+                        .Location.FindNode(cancellationToken)
                         .GetRequiredParent();
                     if (
                         reference

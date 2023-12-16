@@ -353,8 +353,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 var elementName = element.IsImplicitlyDeclared ? string.Empty : element.Name;
 
                 var typeParts = element
-                    .Type
-                    .ToMinimalDisplayParts(semanticModel, position)
+                    .Type.ToMinimalDisplayParts(semanticModel, position)
                     .ToList();
                 if (!string.IsNullOrEmpty(elementName))
                 {

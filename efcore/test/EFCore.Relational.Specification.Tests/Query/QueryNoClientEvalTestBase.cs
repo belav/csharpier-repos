@@ -56,12 +56,11 @@ public abstract class QueryNoClientEvalTestBase<TFixture> : IClassFixture<TFixtu
         AssertTranslationFailedWithDetails(
             () =>
                 context
-                    .Customers
-                    .Where(
+                    .Customers.Where(
                         c1 =>
-                            context
-                                .Customers
-                                .Any(c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon)
+                            context.Customers.Any(
+                                c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon
+                            )
                     )
                     .ToList(),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
@@ -85,8 +84,9 @@ public abstract class QueryNoClientEvalTestBase<TFixture> : IClassFixture<TFixtu
         AssertTranslationFailedWithDetails(
             () =>
                 context
-                    .Customers
-                    .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Customers]"))
+                    .Customers.FromSqlRaw(
+                        NormalizeDelimitersInRawString("select * from [Customers]")
+                    )
                     .Where(c => c.IsLondon)
                     .ToList(),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
@@ -98,8 +98,7 @@ public abstract class QueryNoClientEvalTestBase<TFixture> : IClassFixture<TFixtu
     {
         using var context = CreateContext();
         var customers = context
-            .Customers
-            .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Customers]"))
+            .Customers.FromSqlRaw(NormalizeDelimitersInRawString("select * from [Customers]"))
             .ToList();
 
         Assert.Equal(91, customers.Count);
@@ -113,8 +112,7 @@ public abstract class QueryNoClientEvalTestBase<TFixture> : IClassFixture<TFixtu
             () =>
                 (
                     from c1 in context
-                        .Customers
-                        .Where(c => c.IsLondon)
+                        .Customers.Where(c => c.IsLondon)
                         .OrderBy(c => c.CustomerID)
                         .Take(5)
                     select c1

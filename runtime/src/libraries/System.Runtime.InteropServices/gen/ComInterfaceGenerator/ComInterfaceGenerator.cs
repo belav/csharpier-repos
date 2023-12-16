@@ -43,8 +43,7 @@ namespace Microsoft.Interop
         {
             // Get all types with the [GeneratedComInterface] attribute.
             var attributedInterfaces = context
-                .SyntaxProvider
-                .ForAttributeWithMetadataName(
+                .SyntaxProvider.ForAttributeWithMetadataName(
                     TypeNames.GeneratedComInterfaceAttribute,
                     static (node, ct) => node is InterfaceDeclarationSyntax,
                     static (context, ct) =>
@@ -171,8 +170,7 @@ namespace Microsoft.Interop
             context.RegisterDiagnostics(
                 interfaceAndMethodsContexts.SelectMany(
                     (data, ct) =>
-                        data.DeclaredMethods
-                            .SelectMany(m => m.ManagedToUnmanagedStub.Diagnostics)
+                        data.DeclaredMethods.SelectMany(m => m.ManagedToUnmanagedStub.Diagnostics)
                             .Union(
                                 data.DeclaredMethods.SelectMany(
                                     m => m.UnmanagedToManagedStub.Diagnostics
@@ -202,10 +200,9 @@ namespace Microsoft.Interop
                             .WithModifiers(context.ContainingSyntax.Modifiers)
                             .WithTypeParameterList(context.ContainingSyntax.TypeParameters)
                             .WithMembers(List<MemberDeclarationSyntax>(methods));
-                        return data.Interface
-                            .Info
-                            .TypeDefinitionContext
-                            .WrapMemberInContainingSyntaxWithUnsafeModifier(typeDecl);
+                        return data.Interface.Info.TypeDefinitionContext.WrapMemberInContainingSyntaxWithUnsafeModifier(
+                            typeDecl
+                        );
                     }
                 )
                 .WithTrackingName(StepNames.GenerateShadowingMethods)
@@ -304,21 +301,17 @@ namespace Microsoft.Interop
             ComInterfaceInfo context,
             CancellationToken _
         ) =>
-            context
-                .TypeDefinitionContext
-                .WrapMemberInContainingSyntaxWithUnsafeModifier(
-                    TypeDeclaration(
-                            context.ContainingSyntax.TypeKind,
-                            context.ContainingSyntax.Identifier
-                        )
-                        .WithModifiers(context.ContainingSyntax.Modifiers)
-                        .WithTypeParameterList(context.ContainingSyntax.TypeParameters)
-                        .AddAttributeLists(
-                            AttributeList(
-                                SingletonSeparatedList(s_iUnknownDerivedAttributeTemplate)
-                            )
-                        )
-                );
+            context.TypeDefinitionContext.WrapMemberInContainingSyntaxWithUnsafeModifier(
+                TypeDeclaration(
+                        context.ContainingSyntax.TypeKind,
+                        context.ContainingSyntax.Identifier
+                    )
+                    .WithModifiers(context.ContainingSyntax.Modifiers)
+                    .WithTypeParameterList(context.ContainingSyntax.TypeParameters)
+                    .AddAttributeLists(
+                        AttributeList(SingletonSeparatedList(s_iUnknownDerivedAttributeTemplate))
+                    )
+            );
 
         private static bool IsHResultLikeType(ManagedTypeInfo type)
         {
@@ -349,27 +342,30 @@ namespace Microsoft.Interop
             {
                 if (
                     lcidConversionAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(attr.AttributeClass, lcidConversionAttrType)
+                    && SymbolEqualityComparer.Default.Equals(
+                        attr.AttributeClass,
+                        lcidConversionAttrType
+                    )
                 )
                 {
                     lcidConversionAttr = attr;
                 }
                 else if (
                     suppressGCTransitionAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(attr.AttributeClass, suppressGCTransitionAttrType)
+                    && SymbolEqualityComparer.Default.Equals(
+                        attr.AttributeClass,
+                        suppressGCTransitionAttrType
+                    )
                 )
                 {
                     suppressGCTransitionAttribute = attr;
                 }
                 else if (
                     unmanagedCallConvAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(attr.AttributeClass, unmanagedCallConvAttrType)
+                    && SymbolEqualityComparer.Default.Equals(
+                        attr.AttributeClass,
+                        unmanagedCallConvAttrType
+                    )
                 )
                 {
                     unmanagedCallConvAttribute = attr;
@@ -443,9 +439,9 @@ namespace Microsoft.Interop
                                                     or SpecialType.System_Enum
                                             }
                                             or EnumTypeInfo
-                                    && returnSwappedSignatureElements[i]
-                                        .MarshallingAttributeInfo
-                                        .Equals(NoMarshallingInfo.Instance)
+                                    && returnSwappedSignatureElements[
+                                        i
+                                    ].MarshallingAttributeInfo.Equals(NoMarshallingInfo.Instance)
                                 )
                                 || (
                                     IsHResultLikeType(returnSwappedSignatureElements[i].ManagedType)
@@ -497,9 +493,10 @@ namespace Microsoft.Interop
                 // If our method is PreserveSig, we will notify the user if they are returning a type that may be an HRESULT type
                 // that is defined as a structure. These types used to work with built-in COM interop, but they do not work with
                 // source-generated interop as we now use the MemberFunction calling convention, which is more correct.
-                TypePositionInfo? managedReturnInfo = signatureContext
-                    .ElementTypeInformation
-                    .FirstOrDefault(e => e.IsManagedReturnPosition);
+                TypePositionInfo? managedReturnInfo =
+                    signatureContext.ElementTypeInformation.FirstOrDefault(
+                        e => e.IsManagedReturnPosition
+                    );
                 if (
                     managedReturnInfo
                         is {
@@ -513,9 +510,10 @@ namespace Microsoft.Interop
                         DiagnosticInfo.Create(
                             GeneratorDiagnostics.HResultTypeWillBeTreatedAsStruct,
                             symbol.Locations[0],
-                            ImmutableDictionary<string, string>
-                                .Empty
-                                .Add(GeneratorDiagnosticProperties.AddMarshalAsAttribute, "Error"),
+                            ImmutableDictionary<string, string>.Empty.Add(
+                                GeneratorDiagnosticProperties.AddMarshalAsAttribute,
+                                "Error"
+                            ),
                             valueType.DiagnosticFormattedName
                         )
                     );
@@ -664,28 +662,27 @@ namespace Microsoft.Interop
         {
             var definingType = interfaceGroup.Interface.Info.Type;
             var shadowImplementations = interfaceGroup
-                .ShadowingMethods
-                .Select(m => (Method: m, ManagedToUnmanagedStub: m.ManagedToUnmanagedStub))
+                .ShadowingMethods.Select(
+                    m => (Method: m, ManagedToUnmanagedStub: m.ManagedToUnmanagedStub)
+                )
                 .Where(p => p.ManagedToUnmanagedStub is GeneratedStubCodeContext)
                 .Select(
                     ctx =>
-                        ((GeneratedStubCodeContext)ctx.ManagedToUnmanagedStub)
-                            .Stub
-                            .Node
-                            .WithExplicitInterfaceSpecifier(
-                                ExplicitInterfaceSpecifier(ParseName(definingType.FullTypeName))
-                            )
+                        (
+                            (GeneratedStubCodeContext)ctx.ManagedToUnmanagedStub
+                        ).Stub.Node.WithExplicitInterfaceSpecifier(
+                            ExplicitInterfaceSpecifier(ParseName(definingType.FullTypeName))
+                        )
                 );
-            var inheritedStubs = interfaceGroup
-                .ShadowingMethods
-                .Select(m => m.UnreachableExceptionStub);
+            var inheritedStubs = interfaceGroup.ShadowingMethods.Select(
+                m => m.UnreachableExceptionStub
+            );
             return ImplementationInterfaceTemplate
                 .AddBaseListTypes(SimpleBaseType(definingType.Syntax))
                 .WithMembers(
                     List<MemberDeclarationSyntax>(
                         interfaceGroup
-                            .DeclaredMethods
-                            .Select(m => m.ManagedToUnmanagedStub)
+                            .DeclaredMethods.Select(m => m.ManagedToUnmanagedStub)
                             .OfType<GeneratedStubCodeContext>()
                             .Select(ctx => ctx.Stub.Node)
                             .Concat(shadowImplementations)
@@ -711,18 +708,14 @@ namespace Microsoft.Interop
             return ImplementationInterfaceTemplate.WithMembers(
                 List<MemberDeclarationSyntax>(
                     comInterfaceAndMethods
-                        .DeclaredMethods
-                        .Select(m => m.UnmanagedToManagedStub)
+                        .DeclaredMethods.Select(m => m.UnmanagedToManagedStub)
                         .OfType<GeneratedStubCodeContext>()
                         .Where(
                             context =>
-                                context
-                                    .Diagnostics
-                                    .All(
-                                        diag =>
-                                            diag.Descriptor.DefaultSeverity
-                                            != DiagnosticSeverity.Error
-                                    )
+                                context.Diagnostics.All(
+                                    diag =>
+                                        diag.Descriptor.DefaultSeverity != DiagnosticSeverity.Error
+                                )
                         )
                         .Select(context => context.Stub.Node)
                 )
@@ -745,10 +738,9 @@ namespace Microsoft.Interop
         )
         {
             if (
-                !interfaceMethods
-                    .Interface
-                    .Options
-                    .HasFlag(ComInterfaceOptions.ManagedObjectWrapper)
+                !interfaceMethods.Interface.Options.HasFlag(
+                    ComInterfaceOptions.ManagedObjectWrapper
+                )
             )
             {
                 return ImplementationInterfaceTemplate;
@@ -837,13 +829,9 @@ namespace Microsoft.Interop
                         IdentifierName("Copy"),
                         Argument(
                             MethodInvocation(
-                                    TypeSyntaxes
-                                        .StrategyBasedComWrappers
-                                        .Dot(
-                                            IdentifierName(
-                                                "DefaultIUnknownInterfaceDetailsStrategy"
-                                            )
-                                        ),
+                                    TypeSyntaxes.StrategyBasedComWrappers.Dot(
+                                        IdentifierName("DefaultIUnknownInterfaceDetailsStrategy")
+                                    ),
                                     IdentifierName("GetIUnknownDerivedDetails"),
                                     Argument( //baseInterfaceTypeInfo.BaseInterface.FullTypeName)),
                                         TypeOfExpression(
@@ -888,17 +876,12 @@ namespace Microsoft.Interop
             var vtableSlotAssignments =
                 VirtualMethodPointerStubGenerator.GenerateVirtualMethodTableSlotAssignments(
                     interfaceMethods
-                        .DeclaredMethods
-                        .Where(
+                        .DeclaredMethods.Where(
                             context =>
-                                context
-                                    .UnmanagedToManagedStub
-                                    .Diagnostics
-                                    .All(
-                                        diag =>
-                                            diag.Descriptor.DefaultSeverity
-                                            != DiagnosticSeverity.Error
-                                    )
+                                context.UnmanagedToManagedStub.Diagnostics.All(
+                                    diag =>
+                                        diag.Descriptor.DefaultSeverity != DiagnosticSeverity.Error
+                                )
                         )
                         .Select(context => context.GenerationContext),
                     vtableLocalName,

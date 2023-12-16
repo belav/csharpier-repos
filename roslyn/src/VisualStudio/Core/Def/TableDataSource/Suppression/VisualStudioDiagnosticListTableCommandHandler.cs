@@ -91,9 +91,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
                 AddErrorListSetSeverityMenuHandlers(menuCommandService);
 
                 // The Add/Remove suppression(s) have been moved to the VS code analysis layer, so we don't add the commands here.

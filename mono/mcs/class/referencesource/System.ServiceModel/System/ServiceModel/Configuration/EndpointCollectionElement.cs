@@ -62,18 +62,16 @@ namespace System.ServiceModel.Configuration
 
             if (null == collection)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigExtensionCollectionNotFound,
-                                ConfigurationStrings.EndpointExtensions
-                            ),
-                            this.ElementInformation.Source,
-                            this.ElementInformation.LineNumber
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigExtensionCollectionNotFound,
+                            ConfigurationStrings.EndpointExtensions
+                        ),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             for (int i = 0; i < collection.Count; i++)
@@ -82,12 +80,10 @@ namespace System.ServiceModel.Configuration
 
                 // Optimize for assembly qualified names.
                 if (
-                    collectionElement
-                        .Type
-                        .Equals(
-                            extensionSectionType.AssemblyQualifiedName,
-                            StringComparison.Ordinal
-                        )
+                    collectionElement.Type.Equals(
+                        extensionSectionType.AssemblyQualifiedName,
+                        StringComparison.Ordinal
+                    )
                 )
                 {
                     configuredSectionName = collectionElement.Name;
@@ -109,19 +105,17 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(configuredSectionName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigExtensionTypeNotRegisteredInCollection,
-                                extensionSectionType.AssemblyQualifiedName,
-                                ConfigurationStrings.EndpointExtensions
-                            ),
-                            this.ElementInformation.Source,
-                            this.ElementInformation.LineNumber
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigExtensionTypeNotRegisteredInCollection,
+                            extensionSectionType.AssemblyQualifiedName,
+                            ConfigurationStrings.EndpointExtensions
+                        ),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             return configuredSectionName;

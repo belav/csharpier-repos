@@ -46,8 +46,7 @@ internal static class SourceMarkers
     private static IEnumerable<(int, int)> ParseIds(Match match) =>
         from ids in match
             .Groups["Id"]
-            .Value
-            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            .Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
         let parts = ids.Split('.')
         select (int.Parse(parts[0]), (parts.Length > 1) ? int.Parse(parts[1]) : 0);
 

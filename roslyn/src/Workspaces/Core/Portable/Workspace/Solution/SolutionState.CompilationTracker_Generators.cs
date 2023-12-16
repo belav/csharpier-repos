@@ -46,10 +46,7 @@ internal partial class SolutionState
                 // of them.
                 var compilationWithGeneratedFiles = compilationWithoutGeneratedFiles.AddSyntaxTrees(
                     await generatorInfo
-                        .Documents
-                        .States
-                        .Values
-                        .SelectAsArrayAsync(
+                        .Documents.States.Values.SelectAsArrayAsync(
                             static (state, cancellationToken) =>
                                 state.GetSyntaxTreeAsync(cancellationToken),
                             cancellationToken
@@ -133,8 +130,7 @@ internal partial class SolutionState
         )
         {
             var options = solution
-                .Services
-                .GetRequiredService<IWorkspaceConfigurationService>()
+                .Services.GetRequiredService<IWorkspaceConfigurationService>()
                 .Options;
             if (options.RunSourceGeneratorsInSameProcessOnly)
                 return null;
@@ -149,9 +145,7 @@ internal partial class SolutionState
             // single connection, and keep this solution instance alive (and synced) on both sides of the connection
             // throughout the calls.
             var listenerProvider = solution
-                .Services
-                .ExportProvider
-                .GetExports<IAsynchronousOperationListenerProvider>()
+                .Services.ExportProvider.GetExports<IAsynchronousOperationListenerProvider>()
                 .First()
                 .Value;
             using var connection = client.CreateConnection<IRemoteSourceGenerationService>(
@@ -213,10 +207,9 @@ internal partial class SolutionState
                 infos.Length == generatorInfo.Documents.Count
                 && documentsToAddOrUpdate.Count == 0
                 && compilationWithStaleGeneratedTrees != null
-                && generatorInfo
-                    .Documents
-                    .States
-                    .All(kvp => kvp.Value.ParseOptions.Equals(this.ProjectState.ParseOptions))
+                && generatorInfo.Documents.States.All(
+                    kvp => kvp.Value.ParseOptions.Equals(this.ProjectState.ParseOptions)
+                )
             )
             {
                 return (
@@ -312,9 +305,7 @@ internal partial class SolutionState
             );
             var compilationWithGeneratedFiles = compilationWithoutGeneratedFiles.AddSyntaxTrees(
                 await generatedDocuments
-                    .States
-                    .Values
-                    .SelectAsArrayAsync(
+                    .States.Values.SelectAsArrayAsync(
                         static (state, cancellationToken) =>
                             state.GetSyntaxTreeAsync(cancellationToken),
                         cancellationToken
@@ -346,12 +337,11 @@ internal partial class SolutionState
             // create one from scratch
             if (generatorInfo.Driver == null)
             {
-                var additionalTexts = this.ProjectState
-                    .AdditionalDocumentStates
-                    .SelectAsArray(static documentState => documentState.AdditionalText);
-                var compilationFactory = this.ProjectState
-                    .LanguageServices
-                    .GetRequiredService<ICompilationFactoryService>();
+                var additionalTexts = this.ProjectState.AdditionalDocumentStates.SelectAsArray(
+                    static documentState => documentState.AdditionalText
+                );
+                var compilationFactory =
+                    this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>();
 
                 generatorInfo = generatorInfo.WithDriver(
                     compilationFactory.CreateGeneratorDriver(
@@ -374,13 +364,11 @@ internal partial class SolutionState
                         | System.Reflection.BindingFlags.Instance
                 );
                 Contract.ThrowIfNull(stateMember);
-                var additionalTextsMember = stateMember
-                    .FieldType
-                    .GetField(
-                        "AdditionalTexts",
-                        System.Reflection.BindingFlags.NonPublic
-                            | System.Reflection.BindingFlags.Instance
-                    );
+                var additionalTextsMember = stateMember.FieldType.GetField(
+                    "AdditionalTexts",
+                    System.Reflection.BindingFlags.NonPublic
+                        | System.Reflection.BindingFlags.Instance
+                );
                 Contract.ThrowIfNull(additionalTextsMember);
                 var state = stateMember.GetValue(generatorInfo.Driver);
                 var additionalTexts =
@@ -409,8 +397,7 @@ internal partial class SolutionState
                 if (documentState.Value.Attributes.DesignTimeOnly)
                     treesToRemove.Add(
                         await documentState
-                            .Value
-                            .GetSyntaxTreeAsync(cancellationToken)
+                            .Value.GetSyntaxTreeAsync(cancellationToken)
                             .ConfigureAwait(false)
                     );
             }
@@ -427,9 +414,8 @@ internal partial class SolutionState
 
             var runResult = generatorInfo.Driver.GetRunResult();
 
-            var telemetryCollector = solution
-                .Services
-                .GetService<ISourceGeneratorTelemetryCollectorWorkspaceService>();
+            var telemetryCollector =
+                solution.Services.GetService<ISourceGeneratorTelemetryCollectorWorkspaceService>();
             telemetryCollector?.CollectRunResult(
                 runResult,
                 generatorInfo.Driver.GetTimingInfo(),
@@ -443,9 +429,9 @@ internal partial class SolutionState
             // and the prior generated trees are identical.
             if (compilationWithStaleGeneratedTrees != null)
             {
-                var generatedTreeCount = runResult
-                    .Results
-                    .Sum(r => IsGeneratorRunResultToIgnore(r) ? 0 : r.GeneratedSources.Length);
+                var generatedTreeCount = runResult.Results.Sum(
+                    r => IsGeneratorRunResultToIgnore(r) ? 0 : r.GeneratedSources.Length
+                );
 
                 if (generatorInfo.Documents.Count != generatedTreeCount)
                     compilationWithStaleGeneratedTrees = null;
@@ -526,9 +512,7 @@ internal partial class SolutionState
             );
             var compilationWithGeneratedFiles = compilationWithoutGeneratedFiles.AddSyntaxTrees(
                 await generatedDocuments
-                    .States
-                    .Values
-                    .SelectAsArrayAsync(
+                    .States.Values.SelectAsArrayAsync(
                         static (state, cancellationToken) =>
                             state.GetSyntaxTreeAsync(cancellationToken),
                         cancellationToken

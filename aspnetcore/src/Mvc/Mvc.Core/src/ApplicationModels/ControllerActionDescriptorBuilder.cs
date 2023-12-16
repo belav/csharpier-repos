@@ -58,8 +58,7 @@ internal static class ControllerActionDescriptorBuilder
     )
     {
         actionDescriptor.BoundProperties = controller
-            .ControllerProperties
-            .Where(p => p.BindingInfo != null)
+            .ControllerProperties.Where(p => p.BindingInfo != null)
             .Select(CreateParameterDescriptor)
             .ToList();
     }

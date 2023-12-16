@@ -91,11 +91,9 @@ namespace System.ServiceModel.Transactions
             catch (MessageHeaderException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new TransactionException(SR.GetString(SR.OleTxHeaderCorrupt), e)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new TransactionException(SR.GetString(SR.OleTxHeaderCorrupt), e)
+                );
             }
 
             if (index < 0)
@@ -112,11 +110,9 @@ namespace System.ServiceModel.Transactions
                 catch (XmlException xe)
                 {
                     DiagnosticUtility.TraceHandledException(xe, TraceEventType.Error);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new TransactionException(SR.GetString(SR.OleTxHeaderCorrupt), xe)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TransactionException(SR.GetString(SR.OleTxHeaderCorrupt), xe)
+                    );
                 }
             }
 
@@ -151,11 +147,9 @@ namespace System.ServiceModel.Transactions
                     Uri uri;
                     if (!Uri.TryCreate(identifier, UriKind.Absolute, out uri))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo))
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo))
+                        );
                     }
                 }
 
@@ -174,20 +168,16 @@ namespace System.ServiceModel.Transactions
                     catch (FormatException e)
                     {
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo), e)
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo), e)
+                        );
                     }
                     catch (OverflowException e)
                     {
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo), e)
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo), e)
+                        );
                     }
                 }
 
@@ -245,9 +235,9 @@ namespace System.ServiceModel.Transactions
             byte[] propagationToken = reader.ReadContentAsBase64();
             if (propagationToken.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new XmlException(SR.GetString(SR.InvalidPropagationToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.InvalidPropagationToken))
+                );
             }
 
             reader.ReadEndElement();

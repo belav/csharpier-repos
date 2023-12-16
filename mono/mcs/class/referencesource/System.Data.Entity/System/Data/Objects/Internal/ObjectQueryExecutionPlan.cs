@@ -141,10 +141,8 @@ namespace System.Data.Objects.Internal
             }
 
             EntityCommandDefinition entityDefinition = (EntityCommandDefinition)definition;
-            QueryCacheManager cacheManager = context
-                .Perspective
-                .MetadataWorkspace
-                .GetQueryCacheManager();
+            QueryCacheManager cacheManager =
+                context.Perspective.MetadataWorkspace.GetQueryCacheManager();
 
             ShaperFactory shaperFactory = ShaperFactory.Create(
                 elementType,
@@ -171,11 +169,9 @@ namespace System.Data.Objects.Internal
                         if (null != entitySet)
                         {
                             if (
-                                entitySet
-                                    .ElementType
-                                    .IsAssignableFrom(
-                                        ((CollectionType)treeResultType.EdmType).TypeUsage.EdmType
-                                    )
+                                entitySet.ElementType.IsAssignableFrom(
+                                    ((CollectionType)treeResultType.EdmType).TypeUsage.EdmType
+                                )
                             )
                             {
                                 if (singleEntitySet == null)

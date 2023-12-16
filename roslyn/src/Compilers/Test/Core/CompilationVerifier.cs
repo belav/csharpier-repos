@@ -839,8 +839,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             xmlMethod,
                             id =>
                                 _compilation
-                                    .SyntaxTrees
-                                    .Single(tree => tree.FilePath == documentMap[id])
+                                    .SyntaxTrees.Single(tree => tree.FilePath == documentMap[id])
                                     .GetText()
                         )
                         : ILValidation.GetSequencePointMarkers(xmlMethod);
@@ -972,12 +971,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var types = TestData.Module.GetAllSynthesizedMembers();
             Assert.Contains(types.Keys, t => containingTypeName == t.ToString());
             var members = TestData
-                .Module
-                .GetAllSynthesizedMembers()
+                .Module.GetAllSynthesizedMembers()
                 .Where(e => e.Key.ToString() == containingTypeName)
                 .Single()
-                .Value
-                .Where(s => s.Kind == SymbolKind.Field)
+                .Value.Where(s => s.Kind == SymbolKind.Field)
                 .Select(f => $"{((IFieldSymbol)f.GetISymbol()).Type.ToString()} {f.Name}")
                 .ToList();
             AssertEx.SetEqual(expectedFields, members);

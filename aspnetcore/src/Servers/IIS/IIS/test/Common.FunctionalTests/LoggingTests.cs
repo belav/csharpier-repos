@@ -94,17 +94,15 @@ public class LoggingTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
 
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true"));
-        deploymentParameters
-            .WebConfigActionList
-            .Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection(
-                    "stdoutLogFile",
-                    Path.Combine("Q:", "std")
-                )
-            );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true")
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                "stdoutLogFile",
+                Path.Combine("Q:", "std")
+            )
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -367,17 +365,15 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        var aspnetcorev2Log = TestSink
-            .Writes
-            .First(w => w.Message.Contains("Description: IIS ASP.NET Core Module V2. Commit:"));
-        var aspnetcoreHandlerLog = TestSink
-            .Writes
-            .First(
-                w =>
-                    w.Message.Contains(
-                        "Description: IIS ASP.NET Core Module V2 Request Handler. Commit:"
-                    )
-            );
+        var aspnetcorev2Log = TestSink.Writes.First(
+            w => w.Message.Contains("Description: IIS ASP.NET Core Module V2. Commit:")
+        );
+        var aspnetcoreHandlerLog = TestSink.Writes.First(
+            w =>
+                w.Message.Contains(
+                    "Description: IIS ASP.NET Core Module V2 Request Handler. Commit:"
+                )
+        );
 
         var processIdPattern = new Regex("Process Id: (\\d+)\\.", RegexOptions.Singleline);
         var processIdMatch = processIdPattern.Match(aspnetcorev2Log.Message);

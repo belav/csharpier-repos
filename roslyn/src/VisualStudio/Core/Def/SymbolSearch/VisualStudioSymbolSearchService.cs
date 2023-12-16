@@ -82,9 +82,9 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
 
         protected override async Task EnableServiceAsync(CancellationToken cancellationToken)
         {
-            await this.ThreadingContext
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
             _localSettingsDirectory = new ShellSettingsManager(
                 _serviceProvider
             ).GetApplicationDataFolder(ApplicationDataFolder.LocalSettings);

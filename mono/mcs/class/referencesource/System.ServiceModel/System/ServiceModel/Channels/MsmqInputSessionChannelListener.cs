@@ -93,11 +93,9 @@ namespace System.ServiceModel.Channels
             {
                 // In the absence of Receive context, Msmq Sessions can work only with the current transaction,
                 this.Fault();
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
+                );
             }
 
             MsmqInputMessage msmqMessage = this.receiver.TakeMessage();
@@ -132,9 +130,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new TimeoutException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TimeoutException()
+                    );
                 }
             }
             catch (MsmqException ex)
@@ -172,11 +170,9 @@ namespace System.ServiceModel.Channels
             {
                 // In the absence of Receive context, Msmq Sessions can work only with the current transaction,
                 this.Fault();
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
+                );
             }
 
             MsmqInputMessage msmqMessage = this.receiver.TakeMessage();
@@ -229,9 +225,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new TimeoutException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TimeoutException()
+                    );
                 }
             }
             catch (MsmqException ex)

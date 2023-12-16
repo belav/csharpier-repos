@@ -232,9 +232,8 @@ internal class SSRRenderModeBoundary : IComponent
         {
             // Lazy because we don't actually want to require a whole chain of services including Data Protection
             // to be required unless you actually use Server render mode.
-            var serverComponentSerializer = httpContext
-                .RequestServices
-                .GetRequiredService<ServerComponentSerializer>();
+            var serverComponentSerializer =
+                httpContext.RequestServices.GetRequiredService<ServerComponentSerializer>();
 
             var invocationId = EndpointHtmlRenderer.GetOrCreateInvocationId(httpContext);
             serverComponentSerializer.SerializeInvocation(

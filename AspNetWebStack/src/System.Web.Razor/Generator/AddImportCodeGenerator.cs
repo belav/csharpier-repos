@@ -29,9 +29,7 @@ namespace System.Web.Razor.Generator
             }
 
             CodeNamespaceImport import = context
-                .Namespace
-                .Imports
-                .OfType<CodeNamespaceImport>()
+                .Namespace.Imports.OfType<CodeNamespaceImport>()
                 .Where(i => String.Equals(i.Namespace, ns.Trim(), StringComparison.Ordinal))
                 .FirstOrDefault();
 

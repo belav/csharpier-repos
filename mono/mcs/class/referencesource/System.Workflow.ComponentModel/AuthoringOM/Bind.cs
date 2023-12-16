@@ -277,9 +277,8 @@ namespace System.Workflow.ComponentModel
                 WorkflowCompilationContext.Current != null,
                 "Can't have checkTypes set to true without a context in scope"
             );
-            IList<AuthorizedType> authorizedTypes = WorkflowCompilationContext
-                .Current
-                .GetAuthorizedTypes();
+            IList<AuthorizedType> authorizedTypes =
+                WorkflowCompilationContext.Current.GetAuthorizedTypes();
             if (authorizedTypes == null)
             {
                 return new ValidationError(

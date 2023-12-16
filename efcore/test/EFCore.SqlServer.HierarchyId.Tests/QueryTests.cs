@@ -260,8 +260,7 @@ public class QueryTests : IDisposable
             _db.SaveChanges();
             _db.ChangeTracker.Clear();
 
-            var queried = _db.Patriarchy
-                .Where(e => e.Name.StartsWith("Th"))
+            var queried = _db.Patriarchy.Where(e => e.Name.StartsWith("Th"))
                 .OrderBy(e => e.Id)
                 .ToList();
 
@@ -298,8 +297,7 @@ public class QueryTests : IDisposable
             _db.SaveChanges();
             _db.ChangeTracker.Clear();
 
-            var queried = _db.ConvertedPatriarchy
-                .Where(e => e.Name.StartsWith("Th"))
+            var queried = _db.ConvertedPatriarchy.Where(e => e.Name.StartsWith("Th"))
                 .OrderBy(e => e.Id)
                 .ToList();
 
@@ -319,8 +317,7 @@ public class QueryTests : IDisposable
             _db.SaveChanges();
             _db.ChangeTracker.Clear();
 
-            queried = _db.ConvertedPatriarchy
-                .Where(e => e.Name.StartsWith("Th"))
+            queried = _db.ConvertedPatriarchy.Where(e => e.Name.StartsWith("Th"))
                 .OrderBy(e => e.Id)
                 .ToList();
 

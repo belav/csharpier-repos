@@ -319,42 +319,38 @@ namespace Microsoft.Extensions.Caching.Memory
             var callback2Invoked = new ManualResetEvent(false);
 
             var options1 = new MemoryCacheEntryOptions();
-            options1
-                .PostEvictionCallbacks
-                .Add(
-                    new PostEvictionCallbackRegistration()
+            options1.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = (subkey, subValue, reason, state) =>
                     {
-                        EvictionCallback = (subkey, subValue, reason, state) =>
-                        {
-                            Assert.Equal(key, subkey);
-                            Assert.Same(subValue, value1);
-                            Assert.Equal(EvictionReason.Replaced, reason);
-                            var localCallbackInvoked = (ManualResetEvent)state;
-                            localCallbackInvoked.Set();
-                        },
-                        State = callback1Invoked
-                    }
-                );
+                        Assert.Equal(key, subkey);
+                        Assert.Same(subValue, value1);
+                        Assert.Equal(EvictionReason.Replaced, reason);
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callback1Invoked
+                }
+            );
 
             var result = cache.Set(key, value1, options1);
             Assert.Same(value1, result);
 
             var value2 = new object();
             var options2 = new MemoryCacheEntryOptions();
-            options2
-                .PostEvictionCallbacks
-                .Add(
-                    new PostEvictionCallbackRegistration()
+            options2.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = (subkey, subValue, reason, state) =>
                     {
-                        EvictionCallback = (subkey, subValue, reason, state) =>
-                        {
-                            // Shouldn't be invoked.
-                            var localCallbackInvoked = (ManualResetEvent)state;
-                            localCallbackInvoked.Set();
-                        },
-                        State = callback2Invoked
-                    }
-                );
+                        // Shouldn't be invoked.
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callback2Invoked
+                }
+            );
             result = cache.Set(key, value2, options2);
             Assert.Same(value2, result);
             Assert.True(callback1Invoked.WaitOne(TimeSpan.FromSeconds(30)), "Callback1");
@@ -376,20 +372,18 @@ namespace Microsoft.Extensions.Caching.Memory
             EvictionReason actualReason = EvictionReason.None;
 
             var options1 = new MemoryCacheEntryOptions();
-            options1
-                .PostEvictionCallbacks
-                .Add(
-                    new PostEvictionCallbackRegistration()
+            options1.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = (subkey, subValue, reason, state) =>
                     {
-                        EvictionCallback = (subkey, subValue, reason, state) =>
-                        {
-                            actualReason = reason;
-                            var localCallbackInvoked = (ManualResetEvent)state;
-                            localCallbackInvoked.Set();
-                        },
-                        State = callback1Invoked
-                    }
-                );
+                        actualReason = reason;
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callback1Invoked
+                }
+            );
 
             var result = cache.Set(key, value1, options1);
             Assert.Same(value1, result);
@@ -471,22 +465,20 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
-                .Add(
-                    new PostEvictionCallbackRegistration()
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = (subkey, subValue, reason, state) =>
                     {
-                        EvictionCallback = (subkey, subValue, reason, state) =>
-                        {
-                            Assert.Equal(key, subkey);
-                            Assert.Same(value, subValue);
-                            Assert.Equal(EvictionReason.Removed, reason);
-                            var localCallbackInvoked = (ManualResetEvent)state;
-                            localCallbackInvoked.Set();
-                        },
-                        State = callbackInvoked
-                    }
-                );
+                        Assert.Equal(key, subkey);
+                        Assert.Same(value, subValue);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callbackInvoked
+                }
+            );
             var result = cache.Set(key, value, options);
             Assert.Same(value, result);
 
@@ -506,22 +498,20 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
-                .Add(
-                    new PostEvictionCallbackRegistration()
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = (subkey, subValue, reason, state) =>
                     {
-                        EvictionCallback = (subkey, subValue, reason, state) =>
-                        {
-                            Assert.Equal(key, subkey);
-                            Assert.Same(value, subValue);
-                            Assert.Equal(EvictionReason.Removed, reason);
-                            var localCallbackInvoked = (ManualResetEvent)state;
-                            localCallbackInvoked.Set();
-                        },
-                        State = callbackInvoked
-                    }
-                );
+                        Assert.Equal(key, subkey);
+                        Assert.Same(value, subValue);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callbackInvoked
+                }
+            );
             var result = cache.Set(key, value, options);
             Assert.Same(value, result);
 
@@ -543,23 +533,21 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
-                .Add(
-                    new PostEvictionCallbackRegistration()
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = (subkey, subValue, reason, state) =>
                     {
-                        EvictionCallback = (subkey, subValue, reason, state) =>
-                        {
-                            Assert.Equal(key, subkey);
-                            Assert.Same(subValue, value);
-                            Assert.Equal(EvictionReason.Removed, reason);
-                            var localCallbackInvoked = (ManualResetEvent)state;
-                            cache.Set(key, obj2);
-                            localCallbackInvoked.Set();
-                        },
-                        State = callbackInvoked
-                    }
-                );
+                        Assert.Equal(key, subkey);
+                        Assert.Same(subValue, value);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        cache.Set(key, obj2);
+                        localCallbackInvoked.Set();
+                    },
+                    State = callbackInvoked
+                }
+            );
 
             var result = cache.Set(key, value, options);
             Assert.Same(value, result);
@@ -888,20 +876,18 @@ namespace Microsoft.Extensions.Caching.Memory
             ManualResetEvent mre = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
-                .Add(
-                    new PostEvictionCallbackRegistration()
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = (key, value, reason, state) =>
                     {
-                        EvictionCallback = (key, value, reason, state) =>
-                        {
-                            Assert.Equal(cacheKey, key);
-                            Assert.Equal(cacheKey, value);
-                            Assert.Equal(EvictionReason.Removed, reason);
-                            mre.Set();
-                        }
+                        Assert.Equal(cacheKey, key);
+                        Assert.Equal(cacheKey, value);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        mre.Set();
                     }
-                );
+                }
+            );
 
             var value = cache.GetOrCreate<string>(cacheKey, _ => cacheKey, options);
             Assert.Equal(cacheKey, value);
@@ -920,20 +906,18 @@ namespace Microsoft.Extensions.Caching.Memory
             ManualResetEvent mre = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
-                .Add(
-                    new PostEvictionCallbackRegistration()
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = (key, value, reason, state) =>
                     {
-                        EvictionCallback = (key, value, reason, state) =>
-                        {
-                            Assert.Equal(cacheKey, key);
-                            Assert.Equal(cacheKey, value);
-                            Assert.Equal(EvictionReason.Removed, reason);
-                            mre.Set();
-                        }
+                        Assert.Equal(cacheKey, key);
+                        Assert.Equal(cacheKey, value);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        mre.Set();
                     }
-                );
+                }
+            );
 
             var value = await cache.GetOrCreateAsync<string>(
                 cacheKey,

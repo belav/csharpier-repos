@@ -25,17 +25,15 @@ namespace System.IO.Pipes.Tests
             char* userName = stackalloc char[(int)UserNameMaxLength];
 
             if (
-                Interop
-                    .Kernel32
-                    .GetNamedPipeHandleStateW(
-                        handle,
-                        null,
-                        null,
-                        null,
-                        null,
-                        userName,
-                        UserNameMaxLength
-                    )
+                Interop.Kernel32.GetNamedPipeHandleStateW(
+                    handle,
+                    null,
+                    null,
+                    null,
+                    null,
+                    userName,
+                    UserNameMaxLength
+                )
             )
             {
                 impersonationUserName = new string(userName);
@@ -59,9 +57,15 @@ namespace System.IO.Pipes.Tests
             uint serverInstances;
 
             if (
-                Interop
-                    .Kernel32
-                    .GetNamedPipeHandleStateW(handle, null, &serverInstances, null, null, null, 0)
+                Interop.Kernel32.GetNamedPipeHandleStateW(
+                    handle,
+                    null,
+                    &serverInstances,
+                    null,
+                    null,
+                    null,
+                    0
+                )
             )
             {
                 numberOfServerInstances = serverInstances;
@@ -94,26 +98,22 @@ namespace System.IO.Pipes.Tests
                 ) && Environment.Is64BitProcess
             )
             {
-                Interop
-                    .Kernel32
-                    .LoadLibraryEx(
-                        "sspicli.dll",
-                        IntPtr.Zero,
-                        Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
-                    );
+                Interop.Kernel32.LoadLibraryEx(
+                    "sspicli.dll",
+                    IntPtr.Zero,
+                    Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
+                );
 
                 if (
-                    Interop
-                        .Kernel32
-                        .GetNamedPipeHandleStateW(
-                            handle,
-                            null,
-                            null,
-                            null,
-                            null,
-                            userName,
-                            userNameMaxLength
-                        )
+                    Interop.Kernel32.GetNamedPipeHandleStateW(
+                        handle,
+                        null,
+                        null,
+                        null,
+                        null,
+                        userName,
+                        userNameMaxLength
+                    )
                 )
                 {
                     impersonationUserName = new string(userName);

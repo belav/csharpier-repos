@@ -40,9 +40,10 @@ public class EnumIConvertibleToUint16
             UInt16 u1 = i1.ToUInt16(null);
             if (u1 != 0)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("001", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -67,9 +68,10 @@ public class EnumIConvertibleToUint16
             UInt16 l2 = (e2 as IConvertible).ToUInt16(null);
             if (l2 != 1)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("003", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -86,9 +88,9 @@ public class EnumIConvertibleToUint16
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario("PosTest3: Convert an enum of Uint16.maxvalue to uint16");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest3: Convert an enum of Uint16.maxvalue to uint16"
+        );
 
         try
         {
@@ -97,9 +99,10 @@ public class EnumIConvertibleToUint16
             UInt16 u1 = i1.ToUInt16(null);
             if (u1 != UInt16.MaxValue)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("005", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "005",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -116,9 +119,9 @@ public class EnumIConvertibleToUint16
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario("PosTest4: Convert an enum of negative zero to Uint16 ");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest4: Convert an enum of negative zero to Uint16 "
+        );
 
         try
         {
@@ -127,9 +130,10 @@ public class EnumIConvertibleToUint16
             UInt16 u1 = i1.ToUInt16(null);
             if (u1 != 0)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("007", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "007",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -148,18 +152,19 @@ public class EnumIConvertibleToUint16
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario("NegTest1: Convert an enum of negative value to Uint16");
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest1: Convert an enum of negative value to Uint16"
+        );
 
         try
         {
             e_test e1 = e_test.itemA;
             IConvertible i1 = e1 as IConvertible;
             UInt16 u1 = i1.ToUInt16(null);
-            TestLibrary
-                .TestFramework
-                .LogError("101", "The OverflowException was not thrown as expected");
+            TestLibrary.TestFramework.LogError(
+                "101",
+                "The OverflowException was not thrown as expected"
+            );
             retVal = false;
         }
         catch (OverflowException) { }
@@ -176,20 +181,19 @@ public class EnumIConvertibleToUint16
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest2: Convert an enum of the value which is bigger than uint16.maxvalue to Uint16"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest2: Convert an enum of the value which is bigger than uint16.maxvalue to Uint16"
+        );
 
         try
         {
             e_test e1 = e_test.itemB;
             IConvertible i1 = e1 as IConvertible;
             UInt16 u1 = i1.ToUInt16(null);
-            TestLibrary
-                .TestFramework
-                .LogError("103", "The OverflowException was not thrown as expected");
+            TestLibrary.TestFramework.LogError(
+                "103",
+                "The OverflowException was not thrown as expected"
+            );
             retVal = false;
         }
         catch (OverflowException) { }

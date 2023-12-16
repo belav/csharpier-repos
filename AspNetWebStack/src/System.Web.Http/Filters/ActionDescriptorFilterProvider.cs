@@ -38,8 +38,7 @@ namespace System.Web.Http.Filters
             }
 
             IEnumerable<FilterInfo> controllerFilters = actionDescriptor
-                .ControllerDescriptor
-                .GetFilters()
+                .ControllerDescriptor.GetFilters()
                 .Select(instance => new FilterInfo(instance, FilterScope.Controller));
             IEnumerable<FilterInfo> actionFilters = actionDescriptor
                 .GetFilters()

@@ -104,8 +104,7 @@ namespace System.Composition.TypedParts
                     foreach (var export in forKey)
                     {
                         var subsettedConstraints = contract
-                            .MetadataConstraints
-                            .Where(c => export.Metadata.ContainsKey(c.Key))
+                            .MetadataConstraints.Where(c => export.Metadata.ContainsKey(c.Key))
                             .ToDictionary(c => c.Key, c => export.Metadata[c.Key]);
                         if (subsettedConstraints.Count != 0)
                         {

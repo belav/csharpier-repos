@@ -172,14 +172,12 @@ namespace System.ServiceModel.Channels
         public IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "timeout",
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
 
             using (
                 DiagnosticUtility.ShouldUseActivity && this.TraceOpenAndClose
@@ -281,14 +279,12 @@ namespace System.ServiceModel.Channels
         public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "timeout",
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
 
             lock (ThisLock)
             {
@@ -341,14 +337,12 @@ namespace System.ServiceModel.Channels
         public void Close(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "timeout",
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
 
             using (
                 DiagnosticUtility.ShouldUseActivity && this.TraceOpenAndClose
@@ -737,14 +731,12 @@ namespace System.ServiceModel.Channels
         public void Open(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "timeout",
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
 
             using (
                 ServiceModelActivity activity =

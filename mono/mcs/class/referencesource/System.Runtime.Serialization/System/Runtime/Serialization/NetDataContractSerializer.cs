@@ -132,14 +132,12 @@ namespace System.Runtime.Serialization
         {
             this.context = context;
             if (maxItemsInObjectGraph < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "maxItemsInObjectGraph",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "maxItemsInObjectGraph",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             this.maxItemsInObjectGraph = maxItemsInObjectGraph;
             this.ignoreExtensionDataObject = ignoreExtensionDataObject;
             this.surrogateSelector = surrogateSelector;
@@ -225,11 +223,9 @@ namespace System.Runtime.Serialization
             set
             {
                 if (value != FormatterAssemblyStyle.Full && value != FormatterAssemblyStyle.Simple)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentException(SR.GetString(SR.InvalidAssemblyFormat, value))
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.InvalidAssemblyFormat, value))
+                    );
                 assemblyFormat = value;
             }
         }
@@ -331,26 +327,22 @@ namespace System.Runtime.Serialization
         )
         {
             if (MaxItemsInObjectGraph == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
+                    )
+                );
 
             if (IsRootXmlAny(rootName, contract))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(
-                                SR.IsAnyNotSupportedByNetDataContractSerializer,
-                                contract.UnderlyingType
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(
+                            SR.IsAnyNotSupportedByNetDataContractSerializer,
+                            contract.UnderlyingType
                         )
-                    );
+                    )
+                );
             }
             else if (graph == null)
             {
@@ -416,18 +408,16 @@ namespace System.Runtime.Serialization
                         && !IsAssemblyNameForwardingSafe(clrType.Assembly.FullName, clrAssemblyName)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                XmlObjectSerializer.CreateSerializationException(
-                                    SR.GetString(
-                                        SR.TypeCannotBeForwardedFrom,
-                                        DataContract.GetClrTypeFullName(clrType),
-                                        clrType.Assembly.FullName,
-                                        clrAssemblyName
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(
+                                    SR.TypeCannotBeForwardedFrom,
+                                    DataContract.GetClrTypeFullName(clrType),
+                                    clrType.Assembly.FullName,
+                                    clrAssemblyName
                                 )
-                            );
+                            )
+                        );
                     }
                 }
 
@@ -583,25 +573,21 @@ namespace System.Runtime.Serialization
         )
         {
             if (MaxItemsInObjectGraph == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
+                    )
+                );
 
             // verifyObjectName has no effect in SharedType mode
             if (!IsStartElement(xmlReader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
-                            SR.GetString(SR.ExpectingElementAtDeserialize, XmlNodeType.Element),
-                            xmlReader
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
+                        SR.GetString(SR.ExpectingElementAtDeserialize, XmlNodeType.Element),
+                        xmlReader
+                    )
+                );
             }
 
             XmlObjectSerializerReadContext context = XmlObjectSerializerReadContext.CreateContext(

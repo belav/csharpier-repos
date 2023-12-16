@@ -206,9 +206,9 @@ namespace System.Activities.DynamicUpdate
         {
             if (this.IsNoChanges)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new InvalidOperationException(SR.NoChangesMapQueryNotSupported));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.NoChangesMapQueryNotSupported)
+                );
             }
 
             if (this.IsForImplementation)
@@ -325,13 +325,11 @@ namespace System.Activities.DynamicUpdate
 
             if (!ActivityComparer.ListEquals(this.NewArguments, this.OldArguments))
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InstanceUpdateException(
-                            SR.InvalidImplementationAsWorkflowRootForRuntimeStateBecauseArgumentsChanged
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InstanceUpdateException(
+                        SR.InvalidImplementationAsWorkflowRootForRuntimeStateBecauseArgumentsChanged
+                    )
+                );
             }
 
             DynamicUpdateMap result = new DynamicUpdateMap
@@ -373,19 +371,17 @@ namespace System.Activities.DynamicUpdate
 
             if (this.NewDefinitionMemberCount != updatedIdSpace.MemberCount)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InstanceUpdateException(
-                            SR.InvalidUpdateMap(
-                                SR.WrongMemberCount(
-                                    updatedIdSpace.Owner,
-                                    updatedIdSpace.MemberCount,
-                                    this.NewDefinitionMemberCount
-                                )
+                throw FxTrace.Exception.AsError(
+                    new InstanceUpdateException(
+                        SR.InvalidUpdateMap(
+                            SR.WrongMemberCount(
+                                updatedIdSpace.Owner,
+                                updatedIdSpace.MemberCount,
+                                this.NewDefinitionMemberCount
                             )
                         )
-                    );
+                    )
+                );
             }
 
             foreach (DynamicUpdateMapEntry entry in this.Entries)
@@ -395,33 +391,29 @@ namespace System.Activities.DynamicUpdate
                     Activity implementationOwner = updatedIdSpace[entry.NewActivityId];
                     if (implementationOwner == null)
                     {
-                        string expectedId = entry
-                            .NewActivityId
-                            .ToString(CultureInfo.InvariantCulture);
+                        string expectedId = entry.NewActivityId.ToString(
+                            CultureInfo.InvariantCulture
+                        );
                         if (updatedIdSpace.Owner != null)
                         {
                             expectedId = updatedIdSpace.Owner.Id + "." + expectedId;
                         }
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new InstanceUpdateException(
-                                    SR.InvalidUpdateMap(SR.ActivityNotFound(expectedId))
-                                )
-                            );
+                        throw FxTrace.Exception.AsError(
+                            new InstanceUpdateException(
+                                SR.InvalidUpdateMap(SR.ActivityNotFound(expectedId))
+                            )
+                        );
                     }
 
                     if (implementationOwner.ParentOf == null)
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new InstanceUpdateException(
-                                    SR.InvalidUpdateMap(
-                                        SR.ActivityHasNoImplementation(implementationOwner)
-                                    )
+                        throw FxTrace.Exception.AsError(
+                            new InstanceUpdateException(
+                                SR.InvalidUpdateMap(
+                                    SR.ActivityHasNoImplementation(implementationOwner)
                                 )
-                            );
+                            )
+                        );
                     }
 
                     entry.ImplementationUpdateMap.ThrowIfInvalid(implementationOwner.ParentOf);
@@ -492,15 +484,11 @@ namespace System.Activities.DynamicUpdate
                     // UpdateMap should contain entries for all old activities in the IdSpace
                     int[] subIdSegments = new int[i + 1];
                     Array.Copy(oldIdSegments, subIdSegments, subIdSegments.Length);
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new InstanceUpdateException(
-                                SR.InvalidUpdateMap(
-                                    SR.MapEntryNotFound(new QualifiedId(subIdSegments))
-                                )
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new InstanceUpdateException(
+                            SR.InvalidUpdateMap(SR.MapEntryNotFound(new QualifiedId(subIdSegments)))
+                        )
+                    );
                 }
 
                 if (entry.IsIdChange)
@@ -525,13 +513,11 @@ namespace System.Activities.DynamicUpdate
                             currentIdSpace.Owner.Id
                             + "."
                             + entry.NewActivityId.ToString(CultureInfo.InvariantCulture);
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new InstanceUpdateException(
-                                    SR.InvalidUpdateMap(SR.ActivityNotFound(activityId))
-                                )
-                            );
+                        throw FxTrace.Exception.AsError(
+                            new InstanceUpdateException(
+                                SR.InvalidUpdateMap(SR.ActivityNotFound(activityId))
+                            )
+                        );
                     }
                     currentIdSpace = currentActivity.ParentOf;
                 }
@@ -630,18 +616,16 @@ namespace System.Activities.DynamicUpdate
             }
             if (activity.MemberOf.MemberCount != memberCount)
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        parameterName,
-                        SR.InvalidUpdateMap(
-                            SR.WrongMemberCount(
-                                activity.MemberOf.Owner,
-                                activity.MemberOf.MemberCount,
-                                memberCount
-                            )
+                throw FxTrace.Exception.Argument(
+                    parameterName,
+                    SR.InvalidUpdateMap(
+                        SR.WrongMemberCount(
+                            activity.MemberOf.Owner,
+                            activity.MemberOf.MemberCount,
+                            memberCount
                         )
-                    );
+                    )
+                );
             }
         }
 
@@ -665,33 +649,30 @@ namespace System.Activities.DynamicUpdate
             }
             if (activity.ParentOf == null)
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        parameterName,
-                        SR.InvalidUpdateMap(SR.ActivityHasNoImplementation(activity))
-                    );
+                throw FxTrace.Exception.Argument(
+                    parameterName,
+                    SR.InvalidUpdateMap(SR.ActivityHasNoImplementation(activity))
+                );
             }
             if (activity.ParentOf.MemberCount != memberCount)
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(
-                        parameterName,
-                        SR.InvalidUpdateMap(
-                            SR.WrongMemberCount(
-                                activity.ParentOf.Owner,
-                                activity.ParentOf.MemberCount,
-                                memberCount
-                            )
+                throw FxTrace.Exception.Argument(
+                    parameterName,
+                    SR.InvalidUpdateMap(
+                        SR.WrongMemberCount(
+                            activity.ParentOf.Owner,
+                            activity.ParentOf.MemberCount,
+                            memberCount
                         )
-                    );
+                    )
+                );
             }
             if (!CanUseImplementationMapAsRoot(activity))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument(parameterName, SR.InvalidImplementationAsWorkflowRoot);
+                throw FxTrace.Exception.Argument(
+                    parameterName,
+                    SR.InvalidImplementationAsWorkflowRoot
+                );
             }
         }
 

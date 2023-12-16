@@ -15,9 +15,10 @@ internal static class UseCollectionInitializerHelpers
     public const string UseCollectionExpressionName = nameof(UseCollectionExpressionName);
 
     public static readonly ImmutableDictionary<string, string?> UseCollectionExpressionProperties =
-        ImmutableDictionary<string, string?>
-            .Empty
-            .Add(UseCollectionExpressionName, UseCollectionExpressionName);
+        ImmutableDictionary<string, string?>.Empty.Add(
+            UseCollectionExpressionName,
+            UseCollectionExpressionName
+        );
 
     public static ImmutableArray<Location> GetLocationsToFade<TStatementSyntax>(
         ISyntaxFacts syntaxFacts,

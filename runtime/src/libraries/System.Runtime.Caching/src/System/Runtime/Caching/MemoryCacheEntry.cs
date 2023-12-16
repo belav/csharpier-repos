@@ -256,9 +256,11 @@ namespace System.Runtime.Caching
                 // to throw potentially unhandled "disposed" exceptions in this case.
                 // However, RemoveEntry sidesteps 'throwOnDispose' so we don't need to
                 // worry about a try/catch here.
-                _fields
-                    ._cache
-                    .RemoveEntry(this.Key, this, CacheEntryRemovedReason.ChangeMonitorChanged);
+                _fields._cache.RemoveEntry(
+                    this.Key,
+                    this,
+                    CacheEntryRemovedReason.ChangeMonitorChanged
+                );
             }
         }
 

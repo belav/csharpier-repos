@@ -132,9 +132,10 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.filters.ContainsKey(filter))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument("filter", SR.GetString(SR.FilterExists));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "filter",
+                    SR.GetString(SR.FilterExists)
+                );
             }
 
 #pragma warning suppress 56506 // Microsoft, PreSharp generates a false warning here
@@ -161,13 +162,9 @@ namespace System.ServiceModel.Dispatcher
                     ValidateTable(table);
                     if (!table.GetType().Equals(tableType))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.FilterTableTypeMismatch)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FilterTableTypeMismatch))
+                        );
                     }
                     table.Add(filter, data);
                     this.tables.Add(new FilterTableEntry(priority, table));
@@ -273,11 +270,9 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperCritical(
-                    new InvalidOperationException(SR.GetString(SR.FilterTableInvalidForLookup))
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                new InvalidOperationException(SR.GetString(SR.FilterTableInvalidForLookup))
+            );
         }
 
         public bool GetMatchingValue(Message message, out TFilterData data)
@@ -413,9 +408,10 @@ namespace System.ServiceModel.Dispatcher
                 )
                 {
                     // this is an action message, in this case we can pass in the message itself since the filter will only read from the header
-                    result = this.tables[i]
-                        .table
-                        .GetMatchingValue(messageToReadHeaders, out currentData);
+                    result = this.tables[i].table.GetMatchingValue(
+                        messageToReadHeaders,
+                        out currentData
+                    );
                 }
                 else
                 {
@@ -426,15 +422,13 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (dataSet)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MultipleFilterMatchesException(
-                                    SR.GetString(SR.FilterMultipleMatches),
-                                    null,
-                                    null
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                null
+                            )
+                        );
                     }
 
                     data = currentData;
@@ -554,15 +548,13 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> c = new Collection<MessageFilter>();
                         c.Add(filter);
                         c.Add(f);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MultipleFilterMatchesException(
-                                    SR.GetString(SR.FilterMultipleMatches),
-                                    null,
-                                    c
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                c
+                            )
+                        );
                     }
                 }
             }
@@ -651,11 +643,9 @@ namespace System.ServiceModel.Dispatcher
             Type t = this.GetType();
             if (t.IsInstanceOfType(table))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FilterBadTableType))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.FilterBadTableType))
+                );
             }
         }
 

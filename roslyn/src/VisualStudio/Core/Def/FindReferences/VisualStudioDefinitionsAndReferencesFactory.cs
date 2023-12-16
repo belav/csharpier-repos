@@ -49,9 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
             CancellationToken cancellationToken
         )
         {
-            var symbolNavigationService = solution
-                .Services
-                .GetRequiredService<ISymbolNavigationService>();
+            var symbolNavigationService =
+                solution.Services.GetRequiredService<ISymbolNavigationService>();
             var result = await symbolNavigationService
                 .GetExternalNavigationSymbolLocationAsync(definitionItem, cancellationToken)
                 .ConfigureAwait(false);
@@ -150,9 +149,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                     new NavigableLocation(
                         async (options, cancellationToken) =>
                         {
-                            await _threadingContext
-                                .JoinableTaskFactory
-                                .SwitchToMainThreadAsync(cancellationToken);
+                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                cancellationToken
+                            );
                             return TryOpenFile() && TryNavigateToPosition();
                         }
                     )

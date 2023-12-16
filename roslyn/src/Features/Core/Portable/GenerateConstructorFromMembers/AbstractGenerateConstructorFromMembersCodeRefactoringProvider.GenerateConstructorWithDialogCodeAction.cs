@@ -51,11 +51,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             {
                 var service =
                     _service._pickMembersService_forTesting
-                    ?? _document
-                        .Project
-                        .Solution
-                        .Services
-                        .GetRequiredService<IPickMembersService>();
+                    ?? _document.Project.Solution.Services.GetRequiredService<IPickMembersService>();
 
                 return service.PickMembers(
                     FeaturesResources.Pick_members_to_be_used_as_constructor_parameters,
@@ -76,17 +72,14 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
                 }
 
-                var addNullChecksOption = result
-                    .Options
-                    .FirstOrDefault(o => o.Id == AddNullChecksId);
+                var addNullChecksOption = result.Options.FirstOrDefault(
+                    o => o.Id == AddNullChecksId
+                );
                 if (addNullChecksOption != null)
                 {
                     // ILegacyGlobalOptionsWorkspaceService is guaranteed to be not null here because we have checked it before the code action is provided.
-                    var globalOptions = _document
-                        .Project
-                        .Solution
-                        .Services
-                        .GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
+                    var globalOptions =
+                        _document.Project.Solution.Services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
 
                     // If we presented the 'Add null check' option, then persist whatever value
                     // the user chose.  That way we'll keep that as the default for the next time

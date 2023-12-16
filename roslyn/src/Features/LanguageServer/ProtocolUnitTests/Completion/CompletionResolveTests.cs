@@ -223,10 +223,10 @@ class B : A
 
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
 
-            var selectedItem = CodeAnalysis
-                .Completion
-                .CompletionItem
-                .Create(displayText: "M", isComplexTextEdit: true);
+            var selectedItem = CodeAnalysis.Completion.CompletionItem.Create(
+                displayText: "M",
+                isComplexTextEdit: true
+            );
             var (textEdit, _, _) = await AbstractLspCompletionResultCreationService
                 .GenerateComplexTextEditAsync(
                     document,
@@ -518,9 +518,9 @@ link text";
                 Assert.NotNull(vsCompletionList.Data);
             }
 
-            var serverCompletionItem = completionList
-                .Items
-                .FirstOrDefault(item => item.Label == label);
+            var serverCompletionItem = completionList.Items.FirstOrDefault(
+                item => item.Label == label
+            );
             var clientCompletionItem = ConvertToClientCompletionItem((T)serverCompletionItem);
             return clientCompletionItem;
         }

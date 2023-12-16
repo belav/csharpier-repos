@@ -75,13 +75,11 @@ namespace System.ServiceModel.Security
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
+                    )
+                );
             }
 
             try
@@ -173,13 +171,11 @@ namespace System.ServiceModel.Security
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
+                    )
+                );
             }
 
             try
@@ -247,13 +243,11 @@ namespace System.ServiceModel.Security
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
+                    )
+                );
             }
 
             try

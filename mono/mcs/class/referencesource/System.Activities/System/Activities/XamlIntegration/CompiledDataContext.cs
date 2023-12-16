@@ -69,16 +69,18 @@ namespace System.Activities.XamlIntegration
 
             if (lambdaExpression == null)
             {
-                throw FxTrace
-                    .Exception
-                    .Argument("originalExpression", SR.LambdaExpressionTypeRequired);
+                throw FxTrace.Exception.Argument(
+                    "originalExpression",
+                    SR.LambdaExpressionTypeRequired
+                );
             }
 
             if (lambdaExpression.ReturnType == null || lambdaExpression.ReturnType == typeof(void))
             {
-                throw FxTrace
-                    .Exception
-                    .Argument("originalExpression", SR.LambdaExpressionReturnTypeInvalid);
+                throw FxTrace.Exception.Argument(
+                    "originalExpression",
+                    SR.LambdaExpressionReturnTypeInvalid
+                );
             }
 
             return this.visitor.Visit(
@@ -220,13 +222,11 @@ namespace System.Activities.XamlIntegration
 
             if (dataContextInstance == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.CompiledExpressionsNoCompiledRoot(activityContext.Activity.Id)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CompiledExpressionsNoCompiledRoot(activityContext.Activity.Id)
+                    )
+                );
             }
 
             return dataContextInstance;

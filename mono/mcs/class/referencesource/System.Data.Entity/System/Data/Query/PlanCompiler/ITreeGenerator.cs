@@ -336,11 +336,10 @@ namespace System.Data.Query.PlanCompiler
                 if (!ValidateParameterType(paramInfo.Value))
                 {
                     throw EntityUtil.NotSupported(
-                        System
-                            .Data
-                            .Entity
-                            .Strings
-                            .ParameterTypeNotSupported(paramInfo.Key, paramInfo.Value.ToString())
+                        System.Data.Entity.Strings.ParameterTypeNotSupported(
+                            paramInfo.Key,
+                            paramInfo.Value.ToString()
+                        )
                     );
                 }
                 _iqtCommand.CreateParameterVar(paramInfo.Key, paramInfo.Value);
@@ -1197,9 +1196,9 @@ namespace System.Data.Query.PlanCompiler
                 DbLambda lambda;
                 try
                 {
-                    lambda = _iqtCommand
-                        .MetadataWorkspace
-                        .GetGeneratedFunctionDefinition(e.Function);
+                    lambda = _iqtCommand.MetadataWorkspace.GetGeneratedFunctionDefinition(
+                        e.Function
+                    );
                 }
                 catch (Exception exception)
                 {
@@ -2212,9 +2211,9 @@ namespace System.Data.Query.PlanCompiler
                             typeFilter
                         );
                         DbExpressionBinding treatBinding = rewrittenIsOf.Bind();
-                        DbTreatExpression treatProjection = treatBinding
-                            .Variable
-                            .TreatAs(ofTypeExp.OfType);
+                        DbTreatExpression treatProjection = treatBinding.Variable.TreatAs(
+                            ofTypeExp.OfType
+                        );
                         _fakeTreats.Add(treatProjection);
                         result = treatBinding.Project(treatProjection);
                     }

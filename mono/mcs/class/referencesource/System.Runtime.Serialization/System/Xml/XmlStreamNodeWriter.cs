@@ -152,11 +152,9 @@ namespace System.Xml
         {
             if (Interlocked.CompareExchange(ref this.hasPendingWrite, 1, 0) != 0)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(SR.GetString(SR.FlushBufferAlreadyInUse))
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.GetString(SR.FlushBufferAlreadyInUse))
+                );
             }
 
             if (this.offset != 0)
@@ -184,9 +182,9 @@ namespace System.Xml
 
             if (Interlocked.CompareExchange(ref this.hasPendingWrite, 0, 1) != 1)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending))
+                );
             }
 
             return AsyncCompletionResult.Completed;
@@ -207,11 +205,9 @@ namespace System.Xml
                 thisPtr.offset = 0;
                 if (Interlocked.CompareExchange(ref thisPtr.hasPendingWrite, 0, 1) != 1)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending))
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending))
+                    );
                 }
             }
             catch (Exception ex)
@@ -505,15 +501,13 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = writer
-                        .stream
-                        .BeginWrite(
-                            this.byteBuffer,
-                            this.byteOffset,
-                            this.byteCount,
-                            PrepareAsyncCompletion(onHandleWrite),
-                            this
-                        );
+                    result = writer.stream.BeginWrite(
+                        this.byteBuffer,
+                        this.byteOffset,
+                        this.byteCount,
+                        PrepareAsyncCompletion(onHandleWrite),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -824,15 +818,13 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = this.writer
-                        .stream
-                        .BeginWrite(
-                            writer.buffer,
-                            0,
-                            writer.offset,
-                            PrepareAsyncCompletion(onComplete),
-                            this
-                        );
+                    result = this.writer.stream.BeginWrite(
+                        writer.buffer,
+                        0,
+                        writer.offset,
+                        PrepareAsyncCompletion(onComplete),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;

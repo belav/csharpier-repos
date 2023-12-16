@@ -25,8 +25,7 @@ internal class DelegateHandlerDescriptor : HandlerDescriptor
     private protected override IEnumerable<ParameterDescriptor> InitializeParameterDescriptors()
     {
         return _handlerDelegate
-            .Method
-            .GetParameters()
+            .Method.GetParameters()
             .Select(p => new ParameterDescriptor(p, this));
     }
 }

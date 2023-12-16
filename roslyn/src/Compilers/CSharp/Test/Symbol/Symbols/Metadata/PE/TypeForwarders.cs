@@ -68,9 +68,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base1,
                 module1.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module1
-                            .Module
-                            .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)derived1).Handle)
+                        module1.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)derived1).Handle
+                        )
                 ]
             );
             Assert.True(
@@ -138,14 +138,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             // System.Func`1 in both isn't ambiguous because one forwards to the other.
             Assert.Equal(
                 funcType,
-                compilation
-                    .Assembly
-                    .GetTypeByMetadataName(
-                        funcTypeMetadataName,
-                        includeReferences: true,
-                        isWellKnownType: false,
-                        conflicts: out var _
-                    )
+                compilation.Assembly.GetTypeByMetadataName(
+                    funcTypeMetadataName,
+                    includeReferences: true,
+                    isWellKnownType: false,
+                    conflicts: out var _
+                )
             );
         }
 
@@ -852,8 +850,7 @@ class Test : Derived
                 comp3
                     .GetReferencedAssemblySymbol(ref2)
                     .Modules[0]
-                    .ReferencedAssemblySymbols
-                    .OfType<MissingAssemblySymbol>()
+                    .ReferencedAssemblySymbols.OfType<MissingAssemblySymbol>()
                     .First()
                     .GetPublicSymbol()
                     .GetForwardedTypes()
@@ -2025,8 +2022,9 @@ public class CF1
                         // Attributes should not actually be emitted.
                         Assert.Equal(
                             0,
-                            m.ContainingAssembly
-                                .GetAttributes(AttributeDescription.TypeForwardedToAttribute)
+                            m.ContainingAssembly.GetAttributes(
+                                AttributeDescription.TypeForwardedToAttribute
+                            )
                                 .Count()
                         );
                     }
@@ -2098,8 +2096,9 @@ public class CF1
                         // Attributes should not actually be emitted.
                         Assert.Equal(
                             0,
-                            m.ContainingAssembly
-                                .GetAttributes(AttributeDescription.TypeForwardedToAttribute)
+                            m.ContainingAssembly.GetAttributes(
+                                AttributeDescription.TypeForwardedToAttribute
+                            )
                                 .Count()
                         );
                     }

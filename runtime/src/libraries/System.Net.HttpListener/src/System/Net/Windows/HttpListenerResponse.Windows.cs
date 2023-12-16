@@ -312,20 +312,18 @@ namespace System.Net
                         _nativeResponse.pReason = (sbyte*)pStatusDescription;
                         fixed (Interop.HttpApi.HTTP_RESPONSE* pResponse = &_nativeResponse)
                         {
-                            statusCode = Interop
-                                .HttpApi
-                                .HttpSendHttpResponse(
-                                    HttpListenerContext.RequestQueueHandle,
-                                    HttpListenerRequest.RequestId,
-                                    (uint)flags,
-                                    pResponse,
-                                    null,
-                                    &bytesSent,
-                                    null,
-                                    0,
-                                    asyncResult == null ? null : asyncResult._pOverlapped,
-                                    null
-                                );
+                            statusCode = Interop.HttpApi.HttpSendHttpResponse(
+                                HttpListenerContext.RequestQueueHandle,
+                                HttpListenerRequest.RequestId,
+                                (uint)flags,
+                                pResponse,
+                                null,
+                                &bytesSent,
+                                null,
+                                0,
+                                asyncResult == null ? null : asyncResult._pOverlapped,
+                                null
+                            );
 
                             if (
                                 asyncResult != null
@@ -343,20 +341,18 @@ namespace System.Net
                 {
                     fixed (Interop.HttpApi.HTTP_RESPONSE* pResponse = &_nativeResponse)
                     {
-                        statusCode = Interop
-                            .HttpApi
-                            .HttpSendHttpResponse(
-                                HttpListenerContext.RequestQueueHandle,
-                                HttpListenerRequest.RequestId,
-                                (uint)flags,
-                                pResponse,
-                                null,
-                                &bytesSent,
-                                null,
-                                0,
-                                asyncResult == null ? null : asyncResult._pOverlapped,
-                                null
-                            );
+                        statusCode = Interop.HttpApi.HttpSendHttpResponse(
+                            HttpListenerContext.RequestQueueHandle,
+                            HttpListenerRequest.RequestId,
+                            (uint)flags,
+                            pResponse,
+                            null,
+                            &bytesSent,
+                            null,
+                            0,
+                            asyncResult == null ? null : asyncResult._pOverlapped,
+                            null
+                        );
 
                         if (
                             asyncResult != null
@@ -570,10 +566,9 @@ namespace System.Net
                     {
                         headerName = Headers.GetKey(index) as string;
                         headerValue = (Headers.Get(index) as string)!;
-                        lookup = Interop
-                            .HttpApi
-                            .HTTP_RESPONSE_HEADER_ID
-                            .IndexOfKnownHeader(headerName);
+                        lookup = Interop.HttpApi.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
+                            headerName
+                        );
                         if (
                             lookup == (int)HttpResponseHeader.SetCookie
                             || isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection

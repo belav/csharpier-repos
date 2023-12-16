@@ -387,9 +387,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (typeSyntax is RefTypeSyntax refType)
                     {
-                        MessageID
-                            .IDS_FeatureRefForEach
-                            .CheckFeatureAvailability(diagnostics, typeSyntax);
+                        MessageID.IDS_FeatureRefForEach.CheckFeatureAvailability(
+                            diagnostics,
+                            typeSyntax
+                        );
                         typeSyntax = refType.Type;
                     }
 
@@ -753,9 +754,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var location = _syntax.ForEachKeyword.GetLocation();
                 foreach (
-                    var d in createConversionDiagnostics
-                        .DiagnosticBag
-                        .AsEnumerableWithoutResolution()
+                    var d in createConversionDiagnostics.DiagnosticBag.AsEnumerableWithoutResolution()
                 )
                 {
                     diagnostics.Add(d.WithLocation(location));
@@ -819,8 +818,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || (
                         builder.ElementType.IsNullableType()
                         && builder
-                            .ElementType
-                            .GetMemberTypeArgumentsNoUseSiteDiagnostics()
+                            .ElementType.GetMemberTypeArgumentsNoUseSiteDiagnostics()
                             .Single()
                             .IsErrorType()
                         && collectionExpr.Type.IsArray()
@@ -1328,12 +1326,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && (
                         (
                             result is EnumeratorResult.Succeeded
-                            && builder
-                                .ElementTypeWithAnnotations
-                                .Equals(
-                                    elementField.TypeWithAnnotations,
-                                    TypeCompareKind.AllIgnoreOptions
-                                )
+                            && builder.ElementTypeWithAnnotations.Equals(
+                                elementField.TypeWithAnnotations,
+                                TypeCompareKind.AllIgnoreOptions
+                            )
                             && builder.CurrentPropertyGetter?.RefKind
                                 == (
                                     wellKnownSpan == WellKnownType.System_ReadOnlySpan_T
@@ -1413,8 +1409,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || (
                         originalCollectionExpr.Type?.IsNullableType() == true
                         && originalCollectionExpr
-                            .Type
-                            .StrippedType()
+                            .Type.StrippedType()
                             .Equals(collectionExpr.Type, TypeCompareKind.AllIgnoreOptions)
                     )
             );
@@ -1721,9 +1716,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (collectionType.IsGenericType)
             {
                 // If the type is generic, we have to search for the methods
-                builder.ElementTypeWithAnnotations = collectionType
-                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-                    .Single();
+                builder.ElementTypeWithAnnotations =
+                    collectionType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
 
                 MethodSymbol getEnumeratorMethod;
                 if (isAsync)
@@ -1791,13 +1785,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (isAsync)
                     {
                         Debug.Assert(
-                            enumeratorType
-                                .OriginalDefinition
-                                .Equals(
-                                    Compilation.GetWellKnownType(
-                                        WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
-                                    )
+                            enumeratorType.OriginalDefinition.Equals(
+                                Compilation.GetWellKnownType(
+                                    WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
                                 )
+                            )
                         );
 
                         MethodSymbol moveNextAsync = (MethodSymbol)GetWellKnownTypeMember(
@@ -1991,17 +1983,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // For async foreach, we don't do the runtime check in unsealed case
                 if (
                     (!enumeratorType.IsSealed && !isAsync)
-                    || this.Conversions
-                        .ClassifyImplicitConversionFromType(
-                            enumeratorType,
-                            isAsync
-                                ? this.Compilation.GetWellKnownType(
-                                    WellKnownType.System_IAsyncDisposable
-                                )
-                                : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
-                            ref useSiteInfo
-                        )
-                        .IsImplicit
+                    || this.Conversions.ClassifyImplicitConversionFromType(
+                        enumeratorType,
+                        isAsync
+                            ? this.Compilation.GetWellKnownType(
+                                WellKnownType.System_IAsyncDisposable
+                            )
+                            : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
+                        ref useSiteInfo
+                    ).IsImplicit
                 )
                 {
                     builder.NeedsDisposal = true;

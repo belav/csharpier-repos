@@ -340,25 +340,23 @@ namespace System.Net.PeerToPeer
             try
             {
                 using (
-                    RegistryKey installTypeKey = Registry
-                        .LocalMachine
-                        .OpenSubKey(OSInstallTypeRegKey)
+                    RegistryKey installTypeKey = Registry.LocalMachine.OpenSubKey(
+                        OSInstallTypeRegKey
+                    )
                 )
                 {
                     string installType = installTypeKey.GetValue(OSInstallTypeRegName) as string;
 
                     if (string.IsNullOrEmpty(installType))
                     {
-                        Logging
-                            .P2PTraceSource
-                            .TraceEvent(
-                                TraceEventType.Warning,
-                                0,
-                                SR.GetString(
-                                    SR.P2P_empty_osinstalltype,
-                                    OSInstallTypeRegKey + "\\" + OSInstallTypeRegName
-                                )
-                            );
+                        Logging.P2PTraceSource.TraceEvent(
+                            TraceEventType.Warning,
+                            0,
+                            SR.GetString(
+                                SR.P2P_empty_osinstalltype,
+                                OSInstallTypeRegKey + "\\" + OSInstallTypeRegName
+                            )
+                        );
                     }
                     else
                     {
@@ -377,31 +375,27 @@ namespace System.Net.PeerToPeer
             }
             catch (UnauthorizedAccessException e)
             {
-                Logging
-                    .P2PTraceSource
-                    .TraceEvent(
-                        TraceEventType.Warning,
-                        0,
-                        SR.GetString(
-                            SR.P2P_cant_determine_osinstalltype,
-                            OSInstallTypeRegKey,
-                            e.Message
-                        )
-                    );
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Warning,
+                    0,
+                    SR.GetString(
+                        SR.P2P_cant_determine_osinstalltype,
+                        OSInstallTypeRegKey,
+                        e.Message
+                    )
+                );
             }
             catch (SecurityException e)
             {
-                Logging
-                    .P2PTraceSource
-                    .TraceEvent(
-                        TraceEventType.Warning,
-                        0,
-                        SR.GetString(
-                            SR.P2P_cant_determine_osinstalltype,
-                            OSInstallTypeRegKey,
-                            e.Message
-                        )
-                    );
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Warning,
+                    0,
+                    SR.GetString(
+                        SR.P2P_cant_determine_osinstalltype,
+                        OSInstallTypeRegKey,
+                        e.Message
+                    )
+                );
             }
 
             return false;

@@ -163,13 +163,10 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<
         var solution = context.Solution;
         var enableDiagnosticsInSourceGeneratedFiles =
             solution
-                .Services
-                .GetService<ISolutionCrawlerOptionsService>()
+                .Services.GetService<ISolutionCrawlerOptionsService>()
                 ?.EnableDiagnosticsInSourceGeneratedFiles == true;
-        var codeAnalysisService = solution
-            .Workspace
-            .Services
-            .GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
+        var codeAnalysisService =
+            solution.Workspace.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
 
         foreach (var project in GetProjectsInPriorityOrder(solution, context.SupportedLanguages))
             await AddDocumentsAndProjectAsync(project, cancellationToken).ConfigureAwait(false);
@@ -204,8 +201,7 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<
                 return;
 
             var documents = ImmutableArray<TextDocument>
-                .Empty
-                .AddRange(project.Documents)
+                .Empty.AddRange(project.Documents)
                 .AddRange(project.AdditionalDocuments);
 
             // If all features are enabled for source generated documents, then compute todo-comments/diagnostics for them.
@@ -272,9 +268,8 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<
 
         static IEnumerable<Project?> GetProjectsInPriorityOrderWorker(Solution solution)
         {
-            var documentTrackingService = solution
-                .Services
-                .GetRequiredService<IDocumentTrackingService>();
+            var documentTrackingService =
+                solution.Services.GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will
             // prioritize the files from currently active projects, but then also include all other docs in all projects

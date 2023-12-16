@@ -80,9 +80,10 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_parameterizedCreator == null && _parameterizedConstructor != null)
                 {
-                    _parameterizedCreator = JsonTypeReflector
-                        .ReflectionDelegateFactory
-                        .CreateParameterizedConstructor(_parameterizedConstructor);
+                    _parameterizedCreator =
+                        JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
+                            _parameterizedConstructor
+                        );
                 }
 
                 return _parameterizedCreator;
@@ -278,9 +279,10 @@ namespace Newtonsoft.Json.Serialization
                 ConstructorInfo genericWrapperConstructor = _genericWrapperType.GetConstructor(
                     new[] { _genericCollectionDefinitionType! }
                 )!;
-                _genericWrapperCreator = JsonTypeReflector
-                    .ReflectionDelegateFactory
-                    .CreateParameterizedConstructor(genericWrapperConstructor);
+                _genericWrapperCreator =
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
+                        genericWrapperConstructor
+                    );
             }
 
             return (IWrappedDictionary)_genericWrapperCreator(dictionary);
@@ -295,9 +297,10 @@ namespace Newtonsoft.Json.Serialization
                     DictionaryValueType ?? typeof(object)
                 );
 
-                _genericTemporaryDictionaryCreator = JsonTypeReflector
-                    .ReflectionDelegateFactory
-                    .CreateDefaultConstructor<object>(temporaryDictionaryType);
+                _genericTemporaryDictionaryCreator =
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(
+                        temporaryDictionaryType
+                    );
             }
 
             return (IDictionary)_genericTemporaryDictionaryCreator();

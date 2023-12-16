@@ -43,11 +43,9 @@ namespace System.ServiceModel
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidEnumArgumentException("value", (int)value, typeof(TransferMode))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException("value", (int)value, typeof(TransferMode))
+                );
             }
         }
     }

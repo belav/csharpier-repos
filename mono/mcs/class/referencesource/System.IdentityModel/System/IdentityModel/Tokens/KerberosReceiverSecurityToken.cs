@@ -49,13 +49,13 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (request == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("request"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("request")
+                );
             if (id == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("id"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("id")
+                );
 
             this.id = id;
             this.request = request;
@@ -203,13 +203,9 @@ namespace System.IdentityModel.Tokens
                     && policyHelper.ProtectionScenario != ProtectionScenario.TrustedProxy
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.SecurityChannelBindingMissing)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SecurityChannelBindingMissing))
+                    );
                 }
 
                 if (policyHelper.PolicyEnforcement == PolicyEnforcement.WhenSupported)
@@ -262,36 +258,30 @@ namespace System.IdentityModel.Tokens
                 {
                     if (statusCode == (int)SecurityStatus.ContinueNeeded)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new SecurityTokenException(
-                                    SR.GetString(SR.KerberosMultilegsNotSupported),
-                                    new Win32Exception(statusCode)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(SR.KerberosMultilegsNotSupported),
+                                new Win32Exception(statusCode)
+                            )
+                        );
                     }
                     else if (statusCode == (int)SecurityStatus.OutOfMemory)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new SecurityTokenException(
-                                    SR.GetString(SR.KerberosApReqInvalidOrOutOfMemory),
-                                    new Win32Exception(statusCode)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(SR.KerberosApReqInvalidOrOutOfMemory),
+                                new Win32Exception(statusCode)
+                            )
+                        );
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new SecurityTokenException(
-                                    SR.GetString(SR.FailAcceptSecurityContext),
-                                    new Win32Exception(statusCode)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(SR.FailAcceptSecurityContext),
+                                new Win32Exception(statusCode)
+                            )
+                        );
                     }
                 }
 
@@ -316,9 +306,9 @@ namespace System.IdentityModel.Tokens
                 );
                 if (statusCode != (int)SecurityStatus.OK)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new Win32Exception(statusCode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(statusCode)
+                    );
                 }
 
                 WindowsIdentity windowsIdentity = new WindowsIdentity(

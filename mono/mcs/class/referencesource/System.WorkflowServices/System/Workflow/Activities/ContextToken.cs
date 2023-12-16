@@ -65,12 +65,10 @@ namespace System.Workflow.Activities
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "name",
-                        SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "name",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
             this.Name = name;
         }
@@ -166,12 +164,10 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(contextName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "contextToken",
-                        SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "contextToken",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
 
             Activity contextActivity = activity.ContextActivity;
@@ -179,13 +175,11 @@ namespace System.Workflow.Activities
 
             if (contextActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             if (string.IsNullOrEmpty(ownerActivityName))
@@ -217,13 +211,11 @@ namespace System.Workflow.Activities
 
             if (owner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             ReceiveContextCollection collection =
@@ -255,25 +247,21 @@ namespace System.Workflow.Activities
             Activity contextActivity = activity.ContextActivity;
             if (contextActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             Activity owner = contextActivity.RootActivity;
             if (owner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             ReceiveContextCollection collection =
@@ -353,12 +341,10 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(contextName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "contextName",
-                        SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "contextName",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
 
             Activity contextActivity = activity.ContextActivity;
@@ -366,13 +352,11 @@ namespace System.Workflow.Activities
 
             if (contextActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             if (string.IsNullOrEmpty(ownerActivityName))
@@ -404,13 +388,11 @@ namespace System.Workflow.Activities
 
             if (owner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             ReceiveContextCollection collection =
@@ -441,25 +423,21 @@ namespace System.Workflow.Activities
             Activity contextActivity = activity.ContextActivity;
             if (contextActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             Activity owner = contextActivity.RootActivity;
             if (owner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             ReceiveContextCollection collection =

@@ -3441,8 +3441,7 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                             {
                                 c.City,
                                 Orders = c.Orders.Where(o => o.OrderID < 11000),
-                                LastOrder = c.Orders
-                                    .OrderByDescending(o => o.OrderDate)
+                                LastOrder = c.Orders.OrderByDescending(o => o.OrderDate)
                                     .FirstOrDefault()
                             }
                     )
@@ -3954,8 +3953,9 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                                 info.o.OrderID,
                                 info.o.OrderDate,
                                 HasOrderDetails = info.OrderDetails.Any(),
-                                HasMultipleProducts = info.OrderDetails
-                                    .GroupBy(e => e.Product.ProductName)
+                                HasMultipleProducts = info.OrderDetails.GroupBy(
+                                    e => e.Product.ProductName
+                                )
                                     .Count() > 1
                             }
                     )
@@ -3995,8 +3995,9 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                             new
                             {
                                 Key = c.CustomerID,
-                                Subquery = c.Orders
-                                    .Select(o => new { First = o.CustomerID, Second = o.OrderID })
+                                Subquery = c.Orders.Select(
+                                    o => new { First = o.CustomerID, Second = o.OrderID }
+                                )
                                     .GroupBy(x => x.First)
                                     .Select(g => new { Sum = g.Sum(x => x.Second) })
                                     .ToList()
@@ -4022,8 +4023,9 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                             new
                             {
                                 Key = c.CustomerID,
-                                Subquery = c.Orders
-                                    .Select(o => new { First = o.CustomerID, Second = o.OrderID })
+                                Subquery = c.Orders.Select(
+                                    o => new { First = o.CustomerID, Second = o.OrderID }
+                                )
                                     .GroupBy(x => x.First)
                                     .Select(
                                         g =>
@@ -4090,15 +4092,14 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                             new
                             {
                                 Key = c.CustomerID,
-                                Subquery = c.Orders
-                                    .Select(
-                                        o =>
-                                            new
-                                            {
-                                                First = o.OrderID,
-                                                Second = o.Customer.City + o.CustomerID
-                                            }
-                                    )
+                                Subquery = c.Orders.Select(
+                                    o =>
+                                        new
+                                        {
+                                            First = o.OrderID,
+                                            Second = o.Customer.City + o.CustomerID
+                                        }
+                                )
                                     .GroupBy(x => x.Second)
                                     .Select(
                                         g =>

@@ -60,8 +60,7 @@ namespace DbLinq.Data.Linq.Sugar.ExpressionMutator.Implementation
             {
                 int operandsCount = MemberBindingMutatorFactory
                     .GetMutator(memberBinding)
-                    .Operands
-                    .Count();
+                    .Operands.Count();
                 var subOperands = operands.Skip(operandsIndex).Take(operandsCount).ToList();
                 bindings.Add(
                     MemberBindingMutatorFactory.GetMutator(memberBinding).Mutate(subOperands)

@@ -61,13 +61,11 @@ namespace System.Activities.Statements
                 context.GetExtension<CompensationExtension>();
             if (compensationExtension == null)
             {
-                throw FxTrace
-                    .Exception
-                    .AsError(
-                        new InvalidOperationException(
-                            SR.ConfirmWithoutCompensableActivity(this.DisplayName)
-                        )
-                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.ConfirmWithoutCompensableActivity(this.DisplayName)
+                    )
+                );
             }
 
             CompensationToken token = Target.Get(context);

@@ -69,15 +69,13 @@ namespace System.Workflow.Runtime.Hosting
                 if (!_persistenceToDatabaseMap.ContainsKey(serviceId))
                 {
                     _persistenceToDatabaseMap[serviceId] = dbName;
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService({0}): writing to database: {1}",
-                            serviceId.ToString(),
-                            dbName
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService({0}): writing to database: {1}",
+                        serviceId.ToString(),
+                        dbName
+                    );
                 }
             }
         }
@@ -127,33 +125,25 @@ namespace System.Workflow.Runtime.Hosting
             {
                 try
                 {
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService OpenConnection start: "
-                                + DateTime
-                                    .UtcNow
-                                    .ToString(
-                                        "G",
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService OpenConnection start: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     conn = this.dbResourceAllocator.OpenNewConnection();
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService. OpenConnection end: "
-                                + DateTime
-                                    .UtcNow
-                                    .ToString(
-                                        "G",
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService. OpenConnection end: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
 
                     if ((null == conn) || (ConnectionState.Open != conn.State))
                         throw new InvalidOperationException(
@@ -163,24 +153,20 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "SqlWorkflowPersistenceService caught exception from OpenConnection: "
-                                + e.ToString()
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlWorkflowPersistenceService caught exception from OpenConnection: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace
-                            .Host
-                            .TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "SqlWorkflowPersistenceService retrying."
-                            );
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlWorkflowPersistenceService retrying."
+                        );
                         continue;
                     }
                     throw;
@@ -227,34 +213,32 @@ namespace System.Workflow.Runtime.Hosting
             @nextTimer datetime
             */
             DbCommand command = NewStoredProcCommand("InsertInstanceState");
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("@uidInstanceID", item.InstanceId));
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("@state", item.SerializedActivity));
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("@uidInstanceID", item.InstanceId)
+            );
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("@state", item.SerializedActivity)
+            );
             command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("@status", item.Status));
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("@unlocked", item.Unlocked));
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("@blocked", item.Blocked));
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("@unlocked", item.Unlocked)
+            );
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("@blocked", item.Blocked)
+            );
             command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("@info", item.Info));
-            command
-                .Parameters
-                .Add(
-                    this.dbResourceAllocator.NewDbParameter(
-                        "@ownedUntil",
-                        ownedUntil == DateTime.MaxValue ? SqlDateTime.MaxValue : ownedUntil
-                    )
-                );
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId)));
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("@nextTimer", item.NextTimer));
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter(
+                    "@ownedUntil",
+                    ownedUntil == DateTime.MaxValue ? SqlDateTime.MaxValue : ownedUntil
+                )
+            );
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
+            );
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("@nextTimer", item.NextTimer)
+            );
             DbParameter p1 = this.dbResourceAllocator.NewDbParameter();
             p1.ParameterName = "@result";
             p1.DbType = DbType.Int32;
@@ -272,17 +256,15 @@ namespace System.Workflow.Runtime.Hosting
 #if DEBUG
             InsertToDbMap(ownerId, connection.Database);
 #endif
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "SqlWorkflowPersistenceService({0}): inserting instance: {1}, unlocking: {2} database: {3}",
-                    ownerId.ToString(),
-                    item.InstanceId.ToString(),
-                    item.Unlocked.ToString(),
-                    connection.Database
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "SqlWorkflowPersistenceService({0}): inserting instance: {1}, unlocking: {2} database: {3}",
+                ownerId.ToString(),
+                item.InstanceId.ToString(),
+                item.Unlocked.ToString(),
+                connection.Database
+            );
             //
             // Cannot retry locally here as we don't own the tx
             // Rely on external retries at the batch commit or workflow level (for tx scopes)
@@ -297,12 +279,12 @@ namespace System.Workflow.Runtime.Hosting
             @state image
             */
             DbCommand command = NewStoredProcCommand("InsertCompletedScope");
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("instanceID", instanceId));
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("completedScopeID", scopeId));
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("instanceID", instanceId)
+            );
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("completedScopeID", scopeId)
+            );
             command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("state", state));
             //
             // Cannot retry locally here as we don't own the tx
@@ -317,25 +299,23 @@ namespace System.Workflow.Runtime.Hosting
             @ownerID uniqueidentifier,
             */
             DbCommand command = NewStoredProcCommand("UnlockInstanceState");
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("@uidInstanceID", instanceId));
-            command
-                .Parameters
-                .Add(this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId)));
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("@uidInstanceID", instanceId)
+            );
+            command.Parameters.Add(
+                this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
+            );
 #if DEBUG
             InsertToDbMap(ownerId, connection.Database);
 #endif
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "SqlWorkflowPersistenceService({0}): unlocking instance: {1}, database: {2}",
-                    ownerId.ToString(),
-                    instanceId.ToString(),
-                    connection.Database
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "SqlWorkflowPersistenceService({0}): unlocking instance: {1}, database: {2}",
+                ownerId.ToString(),
+                instanceId.ToString(),
+                connection.Database
+            );
             command.ExecuteNonQuery();
         }
 
@@ -354,50 +334,38 @@ namespace System.Workflow.Runtime.Hosting
                         ResetConnection();
 
                     DbCommand command = NewStoredProcCommand("RetrieveNonblockingInstanceStateIds");
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter(
-                                "@ownedUntil",
-                                ownedUntil == DateTime.MaxValue ? SqlDateTime.MaxValue : ownedUntil
-                            )
-                        );
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
-                        );
-                    command
-                        .Parameters
-                        .Add(this.dbResourceAllocator.NewDbParameter("@now", DateTime.UtcNow));
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter(
+                            "@ownedUntil",
+                            ownedUntil == DateTime.MaxValue ? SqlDateTime.MaxValue : ownedUntil
+                        )
+                    );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
+                    );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter("@now", DateTime.UtcNow)
+                    );
 
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService.RetrieveNonblockingInstanceStateIds ExecuteReader start: "
-                                + DateTime
-                                    .UtcNow
-                                    .ToString(
-                                        "G",
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService.RetrieveNonblockingInstanceStateIds ExecuteReader start: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     dr = command.ExecuteReader(CommandBehavior.CloseConnection);
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService.RetrieveNonblockingInstanceStateIds ExecuteReader end: "
-                                + DateTime
-                                    .UtcNow
-                                    .ToString(
-                                        "G",
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService.RetrieveNonblockingInstanceStateIds ExecuteReader end: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
 
                     gs = new List<Guid>();
                     while (dr.Read())
@@ -408,24 +376,20 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "SqlWorkflowPersistenceService.RetrieveNonblockingInstanceStateIds caught exception from ExecuteReader: "
-                                + e.ToString()
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlWorkflowPersistenceService.RetrieveNonblockingInstanceStateIds caught exception from ExecuteReader: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace
-                            .Host
-                            .TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "SqlWorkflowPersistenceService.RetrieveNonblockingInstanceStateIds retrying."
-                            );
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlWorkflowPersistenceService.RetrieveNonblockingInstanceStateIds retrying."
+                        );
                         continue;
                     }
                     throw;
@@ -457,19 +421,15 @@ namespace System.Workflow.Runtime.Hosting
                         ResetConnection();
 
                     DbCommand command = NewStoredProcCommand("RetrieveANonblockingInstanceStateId");
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter(
-                                "@ownedUntil",
-                                ownedUntil == DateTime.MaxValue ? SqlDateTime.MaxValue : ownedUntil
-                            )
-                        );
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
-                        );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter(
+                            "@ownedUntil",
+                            ownedUntil == DateTime.MaxValue ? SqlDateTime.MaxValue : ownedUntil
+                        )
+                    );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
+                    );
                     DbParameter p2 = this.dbResourceAllocator.NewDbParameter();
                     p2.ParameterName = "@uidInstanceID";
                     p2.DbType = DbType.Guid;
@@ -486,33 +446,25 @@ namespace System.Workflow.Runtime.Hosting
 
                     command.Parameters.Add(found);
 
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService.TryRetrieveANonblockingInstanceStateId ExecuteNonQuery start: "
-                                + DateTime
-                                    .UtcNow
-                                    .ToString(
-                                        "G",
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService.TryRetrieveANonblockingInstanceStateId ExecuteNonQuery start: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     command.ExecuteNonQuery();
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService.TryRetrieveANonblockingInstanceStateId ExecuteNonQuery end: "
-                                + DateTime
-                                    .UtcNow
-                                    .ToString(
-                                        "G",
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService.TryRetrieveANonblockingInstanceStateId ExecuteNonQuery end: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
 
                     if ((null != found.Value) && ((bool)found.Value))
                     {
@@ -527,24 +479,20 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "SqlWorkflowPersistenceService.TryRetrieveANonblockingInstanceStateId caught exception from ExecuteNonQuery: "
-                                + e.ToString()
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlWorkflowPersistenceService.TryRetrieveANonblockingInstanceStateId caught exception from ExecuteNonQuery: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace
-                            .Host
-                            .TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "SqlWorkflowPersistenceService.TryRetrieveANonblockingInstanceStateId retrying."
-                            );
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlWorkflowPersistenceService.TryRetrieveANonblockingInstanceStateId retrying."
+                        );
                         continue;
                     }
                     throw;
@@ -568,50 +516,38 @@ namespace System.Workflow.Runtime.Hosting
                         ResetConnection();
 
                     DbCommand command = NewStoredProcCommand("RetrieveExpiredTimerIds");
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter(
-                                "@ownedUntil",
-                                ownedUntil == DateTime.MaxValue ? SqlDateTime.MaxValue : ownedUntil
-                            )
-                        );
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
-                        );
-                    command
-                        .Parameters
-                        .Add(this.dbResourceAllocator.NewDbParameter("@now", DateTime.UtcNow));
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter(
+                            "@ownedUntil",
+                            ownedUntil == DateTime.MaxValue ? SqlDateTime.MaxValue : ownedUntil
+                        )
+                    );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
+                    );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter("@now", DateTime.UtcNow)
+                    );
 
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService.RetrieveExpiredTimerIds ExecuteReader start: "
-                                + DateTime
-                                    .UtcNow
-                                    .ToString(
-                                        "G",
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService.RetrieveExpiredTimerIds ExecuteReader start: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     dr = command.ExecuteReader(CommandBehavior.CloseConnection);
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService.RetrieveExpiredTimerIds ExecuteReader end: "
-                                + DateTime
-                                    .UtcNow
-                                    .ToString(
-                                        "G",
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    )
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService.RetrieveExpiredTimerIds ExecuteReader end: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
 
                     gs = new List<Guid>();
                     while (dr.Read())
@@ -622,24 +558,20 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "SqlWorkflowPersistenceService.RetrieveExpiredTimerIds caught exception from ExecuteReader: "
-                                + e.ToString()
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlWorkflowPersistenceService.RetrieveExpiredTimerIds caught exception from ExecuteReader: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace
-                            .Host
-                            .TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "SqlWorkflowPersistenceService.RetrieveExpiredTimerIds retrying."
-                            );
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlWorkflowPersistenceService.RetrieveExpiredTimerIds retrying."
+                        );
                         continue;
                     }
                     throw;
@@ -668,27 +600,18 @@ namespace System.Workflow.Runtime.Hosting
                         ResetConnection();
 
                     DbCommand command = NewStoredProcCommand("RetrieveInstanceState");
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter(
-                                "@uidInstanceID",
-                                instanceStateId
-                            )
-                        );
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
-                        );
-                    command
-                        .Parameters
-                        .Add(
-                            this.dbResourceAllocator.NewDbParameter(
-                                "@ownedUntil",
-                                timeout == DateTime.MaxValue ? SqlDateTime.MaxValue : timeout
-                            )
-                        );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter("@uidInstanceID", instanceStateId)
+                    );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter("@ownerID", DbOwnerId(ownerId))
+                    );
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter(
+                            "@ownedUntil",
+                            timeout == DateTime.MaxValue ? SqlDateTime.MaxValue : timeout
+                        )
+                    );
                     DbParameter p1 = this.dbResourceAllocator.NewDbParameter();
                     p1.ParameterName = "@result";
                     p1.DbType = DbType.Int32;
@@ -706,40 +629,34 @@ namespace System.Workflow.Runtime.Hosting
 #if DEBUG
                     InsertToDbMap(ownerId, connection.Database);
 #endif
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService({0}): retreiving instance: {1}, database: {2}",
-                            ownerId.ToString(),
-                            instanceStateId.ToString(),
-                            connection.Database
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService({0}): retreiving instance: {1}, database: {2}",
+                        ownerId.ToString(),
+                        instanceStateId.ToString(),
+                        connection.Database
+                    );
                     state = RetrieveStateFromDB(command, true, instanceStateId);
 
                     break;
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "SqlWorkflowPersistenceService.RetrieveInstanceState caught exception: "
-                                + e.ToString()
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlWorkflowPersistenceService.RetrieveInstanceState caught exception: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace
-                            .Host
-                            .TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "SqlWorkflowPersistenceService.RetrieveInstanceState retrying."
-                            );
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlWorkflowPersistenceService.RetrieveInstanceState retrying."
+                        );
                         continue;
                     }
                     else if (e is RetryReadException) // ### hardcoded retry to work around sql ADM64 read bug ###
@@ -784,9 +701,9 @@ namespace System.Workflow.Runtime.Hosting
                         ResetConnection();
 
                     DbCommand command = NewStoredProcCommand("RetrieveCompletedScope");
-                    command
-                        .Parameters
-                        .Add(this.dbResourceAllocator.NewDbParameter("@completedScopeID", scopeId));
+                    command.Parameters.Add(
+                        this.dbResourceAllocator.NewDbParameter("@completedScopeID", scopeId)
+                    );
                     DbParameter p1 = this.dbResourceAllocator.NewDbParameter();
                     p1.ParameterName = "@result";
                     p1.DbType = DbType.Int32;
@@ -804,24 +721,20 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "SqlWorkflowPersistenceService.RetrieveCompletedScope caught exception: "
-                                + e.ToString()
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlWorkflowPersistenceService.RetrieveCompletedScope caught exception: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace
-                            .Host
-                            .TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "SqlWorkflowPersistenceService.RetrieveCompletedScope retrying."
-                            );
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlWorkflowPersistenceService.RetrieveCompletedScope retrying."
+                        );
                         continue;
                     }
                     else if (e is RetryReadException) // ### hardcoded retry to work around sql ADM64 read bug ###
@@ -905,16 +818,14 @@ namespace System.Workflow.Runtime.Hosting
                         currentOwnerId = (Guid)command.Parameters["@currentOwnerID"].Value;
                     Guid myId = (Guid)command.Parameters["@ownerID"].Value;
                     Guid instId = (Guid)command.Parameters["@uidInstanceID"].Value;
-                    WorkflowTrace
-                        .Host
-                        .TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SqlWorkflowPersistenceService({0}): owership violation with {1} on instance {2}",
-                            myId.ToString(),
-                            currentOwnerId.ToString(),
-                            instId
-                        );
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlWorkflowPersistenceService({0}): owership violation with {1} on instance {2}",
+                        myId.ToString(),
+                        currentOwnerId.ToString(),
+                        instId
+                    );
                 }
                 DbParameter instanceId = command.Parameters["@uidInstanceID"];
                 throw new WorkflowOwnershipException((Guid)instanceId.Value);
@@ -941,29 +852,21 @@ namespace System.Workflow.Runtime.Hosting
 
             try
             {
-                WorkflowTrace
-                    .Host
-                    .TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "SqlWorkflowPersistenceService.RetrieveStateFromDB {0} ExecuteReader start: {1}",
-                        instanceId,
-                        DateTime
-                            .UtcNow
-                            .ToString("G", System.Globalization.CultureInfo.InvariantCulture)
-                    );
+                WorkflowTrace.Host.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "SqlWorkflowPersistenceService.RetrieveStateFromDB {0} ExecuteReader start: {1}",
+                    instanceId,
+                    DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture)
+                );
                 dr = command.ExecuteReader();
-                WorkflowTrace
-                    .Host
-                    .TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "SqlWorkflowPersistenceService.RetrieveStateFromDB {0} ExecuteReader end: {1}",
-                        instanceId,
-                        DateTime
-                            .UtcNow
-                            .ToString("G", System.Globalization.CultureInfo.InvariantCulture)
-                    );
+                WorkflowTrace.Host.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "SqlWorkflowPersistenceService.RetrieveStateFromDB {0} ExecuteReader end: {1}",
+                    instanceId,
+                    DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture)
+                );
 
                 if (dr.Read())
                 {
@@ -974,26 +877,22 @@ namespace System.Workflow.Runtime.Hosting
                     DbParameter resultParam = command.Parameters["@result"];
                     if (resultParam == null || resultParam.Value == null)
                     {
-                        WorkflowTrace
-                            .Host
-                            .TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "SqlWorkflowPersistenceService.RetrieveStateFromDB Failed to read results {0}",
-                                instanceId
-                            );
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlWorkflowPersistenceService.RetrieveStateFromDB Failed to read results {0}",
+                            instanceId
+                        );
                     }
                     else if ((int)resultParam.Value > 0) // found results but failed to read - sql bug - retry the query
                     {
-                        WorkflowTrace
-                            .Host
-                            .TraceEvent(
-                                TraceEventType.Error,
-                                0,
-                                "SqlWorkflowPersistenceService.RetrieveStateFromDB Failed to read results {1}, @result == {0}",
-                                (int)resultParam.Value,
-                                instanceId
-                            );
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "SqlWorkflowPersistenceService.RetrieveStateFromDB Failed to read results {1}, @result == {0}",
+                            (int)resultParam.Value,
+                            instanceId
+                        );
                         throw new RetryReadException();
                     }
                 }
@@ -1254,15 +1153,13 @@ namespace System.Workflow.Runtime.Hosting
 
         override protected internal void Start()
         {
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "SqlWorkflowPersistenceService({1}): Starting, LoadInternalSeconds={0}",
-                    loadingInterval.TotalSeconds,
-                    _serviceInstanceId.ToString()
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "SqlWorkflowPersistenceService({1}): Starting, LoadInternalSeconds={0}",
+                loadingInterval.TotalSeconds,
+                _serviceInstanceId.ToString()
+            );
 
             _dbResourceAllocator = new DbResourceAllocator(
                 this.Runtime,
@@ -1324,14 +1221,12 @@ namespace System.Workflow.Runtime.Hosting
 
         protected internal override void Stop()
         {
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "SqlWorkflowPersistenceService({0}): Stopping",
-                    _serviceInstanceId.ToString()
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "SqlWorkflowPersistenceService({0}): Stopping",
+                _serviceInstanceId.ToString()
+            );
             lock (timerLock)
             {
                 base.Stop();
@@ -1430,15 +1325,13 @@ namespace System.Workflow.Runtime.Hosting
                     {
                         foreach (Guid id in ids)
                         {
-                            WorkflowTrace
-                                .Host
-                                .TraceEvent(
-                                    TraceEventType.Information,
-                                    0,
-                                    "SqlWorkflowPersistenceService({1}): Loading instance with expired timers {0}",
-                                    id,
-                                    _serviceInstanceId.ToString()
-                                );
+                            WorkflowTrace.Host.TraceEvent(
+                                TraceEventType.Information,
+                                0,
+                                "SqlWorkflowPersistenceService({1}): Loading instance with expired timers {0}",
+                                id,
+                                _serviceInstanceId.ToString()
+                            );
                             try
                             {
                                 Runtime.GetWorkflow(id).Load();
@@ -1511,18 +1404,16 @@ namespace System.Workflow.Runtime.Hosting
             if (item.Info == null)
                 item.Info = "";
 
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "SqlWorkflowPersistenceService({4}):Committing instance {0}, Blocked={1}, Unlocked={2}, NextTimer={3}",
-                    contextGuid.ToString(),
-                    item.Blocked,
-                    item.Unlocked,
-                    item.NextTimer.Value.ToLocalTime(),
-                    _serviceInstanceId.ToString()
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "SqlWorkflowPersistenceService({4}):Committing instance {0}, Blocked={1}, Unlocked={2}, NextTimer={3}",
+                contextGuid.ToString(),
+                item.Blocked,
+                item.Unlocked,
+                item.NextTimer.Value.ToLocalTime(),
+                _serviceInstanceId.ToString()
+            );
 
             WorkflowEnvironment.WorkBatch.Add(this, item);
         }
@@ -1533,15 +1424,13 @@ namespace System.Workflow.Runtime.Hosting
             item.Type = PendingWorkItem.ItemType.ActivationComplete;
             item.InstanceId = WorkflowEnvironment.WorkflowInstanceId;
             WorkflowEnvironment.WorkBatch.Add(this, item);
-            WorkflowTrace
-                .Host
-                .TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "SqlWorkflowPersistenceService({0}):Unlocking instance {1}",
-                    _serviceInstanceId.ToString(),
-                    item.InstanceId.ToString()
-                );
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "SqlWorkflowPersistenceService({0}):Unlocking instance {1}",
+                _serviceInstanceId.ToString(),
+                item.InstanceId.ToString()
+            );
         }
 
         protected internal override Activity LoadWorkflowInstanceState(Guid id)
@@ -1553,15 +1442,13 @@ namespace System.Workflow.Runtime.Hosting
                 )
             )
             {
-                WorkflowTrace
-                    .Host
-                    .TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "SqlWorkflowPersistenceService({0}):Loading instance {1}",
-                        _serviceInstanceId.ToString(),
-                        id.ToString()
-                    );
+                WorkflowTrace.Host.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "SqlWorkflowPersistenceService({0}):Loading instance {1}",
+                    _serviceInstanceId.ToString(),
+                    id.ToString()
+                );
                 byte[] state = persistenceDBAccessor.RetrieveInstanceState(
                     id,
                     _serviceInstanceId,
@@ -1732,18 +1619,19 @@ namespace System.Workflow.Runtime.Hosting
             }
             catch (SqlException se)
             {
-                WorkflowTrace
-                    .Runtime
-                    .TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "SqlWorkflowPersistenceService({1})Exception thrown while persisting instance: {0}",
-                        se.Message,
-                        _serviceInstanceId.ToString()
-                    );
-                WorkflowTrace
-                    .Runtime
-                    .TraceEvent(TraceEventType.Error, 0, "stacktrace : {0}", se.StackTrace);
+                WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    "SqlWorkflowPersistenceService({1})Exception thrown while persisting instance: {0}",
+                    se.Message,
+                    _serviceInstanceId.ToString()
+                );
+                WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    "stacktrace : {0}",
+                    se.StackTrace
+                );
 
                 if (se.Number == _deadlock)
                 {
@@ -1757,18 +1645,19 @@ namespace System.Workflow.Runtime.Hosting
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Runtime
-                    .TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "SqlWorkflowPersistenceService({1}): Exception thrown while persisting instance: {0}",
-                        e.Message,
-                        _serviceInstanceId.ToString()
-                    );
-                WorkflowTrace
-                    .Runtime
-                    .TraceEvent(TraceEventType.Error, 0, "stacktrace : {0}", e.StackTrace);
+                WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    "SqlWorkflowPersistenceService({1}): Exception thrown while persisting instance: {0}",
+                    e.Message,
+                    _serviceInstanceId.ToString()
+                );
+                WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    "stacktrace : {0}",
+                    e.StackTrace
+                );
                 throw e;
             }
             finally

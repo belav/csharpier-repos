@@ -418,11 +418,9 @@ namespace System.Net.Http.Functional.Tests
 
                     // Send a response in the JSON format that the client expects
                     string username = context.User.Identity.Name;
-                    byte[] bytes = System
-                        .Text
-                        .Encoding
-                        .UTF8
-                        .GetBytes($"{{\"authenticated\": \"true\", \"user\": \"{username}\" }}");
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(
+                        $"{{\"authenticated\": \"true\", \"user\": \"{username}\" }}"
+                    );
                     await context.Response.OutputStream.WriteAsync(bytes);
 
                     context.Response.Close();

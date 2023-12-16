@@ -87,10 +87,11 @@ internal sealed class OletxResourceManager
                         {
                             Guid rmGuid = ResourceManagerIdentifier;
 
-                            OletxTransactionManager
-                                .DtcTransactionManager
-                                .ProxyShimFactory
-                                .CreateResourceManager(rmGuid, this, out localResourceManagerShim);
+                            OletxTransactionManager.DtcTransactionManager.ProxyShimFactory.CreateResourceManager(
+                                rmGuid,
+                                this,
+                                out localResourceManagerShim
+                            );
                         }
                         catch (COMException ex)
                         {
@@ -319,10 +320,10 @@ internal sealed class OletxResourceManager
 
                     if ((enlistmentOptions & EnlistmentOptions.EnlistDuringPrepareRequired) != 0)
                     {
-                        oletxTransaction
-                            .RealTransaction
-                            .TransactionShim
-                            .Phase0Enlist(enlistment, out phase0Shim);
+                        oletxTransaction.RealTransaction.TransactionShim.Phase0Enlist(
+                            enlistment,
+                            out phase0Shim
+                        );
                         enlistment.Phase0EnlistmentShim = phase0Shim;
                     }
 
@@ -756,9 +757,9 @@ internal sealed class OletxResourceManager
                                             );
                                         }
 
-                                        localEnlistment
-                                            .EnlistmentNotification!
-                                            .Commit(localEnlistment);
+                                        localEnlistment.EnlistmentNotification!.Commit(
+                                            localEnlistment
+                                        );
                                     }
                                     else if (localOutcome == OletxTransactionOutcome.Aborted)
                                     {
@@ -775,9 +776,9 @@ internal sealed class OletxResourceManager
                                             );
                                         }
 
-                                        localEnlistment
-                                            .EnlistmentNotification!
-                                            .Rollback(localEnlistment);
+                                        localEnlistment.EnlistmentNotification!.Rollback(
+                                            localEnlistment
+                                        );
                                     }
                                     else
                                     {

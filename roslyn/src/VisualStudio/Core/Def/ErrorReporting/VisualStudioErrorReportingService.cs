@@ -96,28 +96,24 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 
         private void LogGlobalErrorToActivityLog(string message, string? detailedError)
         {
-            _ = _threadingContext
-                .JoinableTaskFactory
-                .RunAsync(async () =>
-                {
-                    using var _ = _listener.BeginAsyncOperation(
-                        nameof(LogGlobalErrorToActivityLog)
-                    );
+            _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+            {
+                using var _ = _listener.BeginAsyncOperation(nameof(LogGlobalErrorToActivityLog));
 
-                    await _threadingContext
-                        .JoinableTaskFactory
-                        .SwitchToMainThreadAsync(_threadingContext.DisposalToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    _threadingContext.DisposalToken
+                );
 
-                    var activityLog = await _activityLog
-                        .GetValueAsync(_threadingContext.DisposalToken)
-                        .ConfigureAwait(true);
+                var activityLog = await _activityLog
+                    .GetValueAsync(_threadingContext.DisposalToken)
+                    .ConfigureAwait(true);
 
-                    activityLog.LogEntry(
-                        (uint)__ACTIVITYLOG_ENTRYTYPE.ALE_ERROR,
-                        nameof(VisualStudioErrorReportingService),
-                        string.Join(Environment.NewLine, message, detailedError)
-                    );
-                });
+                activityLog.LogEntry(
+                    (uint)__ACTIVITYLOG_ENTRYTYPE.ALE_ERROR,
+                    nameof(VisualStudioErrorReportingService),
+                    string.Join(Environment.NewLine, message, detailedError)
+                );
+            });
         }
     }
 }

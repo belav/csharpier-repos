@@ -48,9 +48,8 @@ namespace System.ServiceModel.Channels
                 context.ListenUriRelativeAddress
             );
 
-            SecurityCredentialsManager credentialProvider = context
-                .BindingParameters
-                .Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialProvider =
+                context.BindingParameters.Find<SecurityCredentialsManager>();
             if (credentialProvider == null)
             {
                 if (isClient)
@@ -232,22 +231,18 @@ namespace System.ServiceModel.Channels
                 }
                 catch (AuthenticationException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityNegotiationException(exception.Message, exception)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityNegotiationException(exception.Message, exception)
+                    );
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityNegotiationException(
-                                SR.GetString(SR.NegotiationFailedIO, ioException.Message),
-                                ioException
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.NegotiationFailedIO, ioException.Message),
+                            ioException
+                        )
+                    );
                 }
 
                 remoteSecurity = CreateClientSecurity(
@@ -550,22 +545,18 @@ namespace System.ServiceModel.Channels
                 }
                 catch (AuthenticationException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityNegotiationException(exception.Message, exception)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityNegotiationException(exception.Message, exception)
+                    );
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityNegotiationException(
-                                SR.GetString(SR.NegotiationFailedIO, ioException.Message),
-                                ioException
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.NegotiationFailedIO, ioException.Message),
+                            ioException
+                        )
+                    );
                 }
 
                 remoteSecurity = CreateServerSecurity(negotiateStream);
@@ -587,9 +578,11 @@ namespace System.ServiceModel.Channels
                 identity = null;
 
                 if (
-                    parent
-                        .IdentityVerifier
-                        .TryGetIdentity(this.RemoteAddress, this.Via, out identity)
+                    parent.IdentityVerifier.TryGetIdentity(
+                        this.RemoteAddress,
+                        this.Via,
+                        out identity
+                    )
                 )
                 {
                     targetName = SecurityUtils.GetSpnFromIdentity(identity, this.RemoteAddress);
@@ -612,39 +605,33 @@ namespace System.ServiceModel.Channels
                     if (expectedIdentity != null)
                     {
                         if (
-                            !parent
-                                .IdentityVerifier
-                                .CheckAccess(
-                                    expectedIdentity,
-                                    remoteSecurity.ServiceSecurityContext.AuthorizationContext
-                                )
+                            !parent.IdentityVerifier.CheckAccess(
+                                expectedIdentity,
+                                remoteSecurity.ServiceSecurityContext.AuthorizationContext
+                            )
                         )
                         {
                             string primaryIdentity = SecurityUtils.GetIdentityNamesFromContext(
                                 remoteSecurity.ServiceSecurityContext.AuthorizationContext
                             );
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new SecurityNegotiationException(
-                                        SR.GetString(
-                                            SR.RemoteIdentityFailedVerification,
-                                            primaryIdentity
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new SecurityNegotiationException(
+                                    SR.GetString(
+                                        SR.RemoteIdentityFailedVerification,
+                                        primaryIdentity
                                     )
-                                );
+                                )
+                            );
                         }
                     }
                 }
                 else if (!allowNtlm)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityNegotiationException(
-                                SR.GetString(SR.StreamMutualAuthNotSatisfied)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.StreamMutualAuthNotSatisfied)
+                        )
+                    );
                 }
             }
 

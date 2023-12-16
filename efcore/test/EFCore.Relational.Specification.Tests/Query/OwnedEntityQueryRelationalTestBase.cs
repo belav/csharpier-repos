@@ -317,8 +317,7 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
 
         using var context = contextFactory.CreateContext();
         var query = context
-            .RotRutCases
-            .AsNoTracking()
+            .RotRutCases.AsNoTracking()
             .OrderBy(e => e.Id)
             .Select(
                 e =>
@@ -357,8 +356,7 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
 
         using var context = contextFactory.CreateContext();
         var query = context
-            .RotRutCases
-            .AsNoTracking()
+            .RotRutCases.AsNoTracking()
             .OrderBy(e => e.Id)
             .Select(
                 e =>

@@ -527,9 +527,10 @@ public class RequestResponseTests
     [ConditionalFact]
     public async Task TestReadOffsetWorks()
     {
-        var result = await _fixture
-            .Client
-            .PostAsync($"/TestReadOffsetWorks", new StringContent("Hello World"));
+        var result = await _fixture.Client.PostAsync(
+            $"/TestReadOffsetWorks",
+            new StringContent("Hello World")
+        );
         Assert.Equal("Hello World", await result.Content.ReadAsStringAsync());
     }
 
@@ -559,9 +560,10 @@ public class RequestResponseTests
     [InlineData("/InvalidCountZeroReadPost")]
     public async Task TestValidReadOperationsPost(string operation)
     {
-        var result = await _fixture
-            .Client
-            .PostAsync($"/TestValidReadOperations{operation}", new StringContent("hello"));
+        var result = await _fixture.Client.PostAsync(
+            $"/TestValidReadOperations{operation}",
+            new StringContent("hello")
+        );
         Assert.Equal("Success", await result.Content.ReadAsStringAsync());
     }
 
@@ -573,9 +575,9 @@ public class RequestResponseTests
     [InlineData("/InvalidCountWithOffset")]
     public async Task TestInvalidWriteOperations(string operation)
     {
-        var result = await _fixture
-            .Client
-            .GetStringAsync($"/TestInvalidWriteOperations{operation}");
+        var result = await _fixture.Client.GetStringAsync(
+            $"/TestInvalidWriteOperations{operation}"
+        );
         Assert.Equal("Success", result);
     }
 
@@ -589,9 +591,10 @@ public class RequestResponseTests
     [ConditionalFact]
     public async Task TestValidWriteOperationsPost()
     {
-        var result = await _fixture
-            .Client
-            .PostAsync($"/TestValidWriteOperations/NullBufferPost", new StringContent("hello"));
+        var result = await _fixture.Client.PostAsync(
+            $"/TestValidWriteOperations/NullBufferPost",
+            new StringContent("hello")
+        );
         Assert.Equal("Success", await result.Content.ReadAsStringAsync());
     }
 
@@ -616,10 +619,10 @@ public class RequestResponseTests
         Assert.Equal("test123=foo", headerValues.First());
 
         Assert.True(
-            response
-                .Content
-                .Headers
-                .TryGetValues(Net.Http.Headers.HeaderNames.ContentType, out headerValues)
+            response.Content.Headers.TryGetValues(
+                Net.Http.Headers.HeaderNames.ContentType,
+                out headerValues
+            )
         );
         Assert.Equal("text/plain", headerValues.First());
 
@@ -657,11 +660,9 @@ public class RequestResponseTests
         string body
     )
     {
-        var response = await _fixture
-            .Client
-            .GetAsync(
-                $"SetCustomErorCode?code={code}&reason={reason}&writeBody={body != null}&body={body}"
-            );
+        var response = await _fixture.Client.GetAsync(
+            $"SetCustomErorCode?code={code}&reason={reason}&writeBody={body != null}&body={body}"
+        );
         Assert.Equal((HttpStatusCode)code, response.StatusCode);
         Assert.Equal(expectedReason, response.ReasonPhrase);
 
@@ -834,20 +835,16 @@ public class RequestResponseTests
                 ""
             );
 
-            await _fixture
-                .Client
-                .RetryRequestAsync(
-                    "/WaitingRequestCount",
-                    async message => await message.Content.ReadAsStringAsync() == "1"
-                );
+            await _fixture.Client.RetryRequestAsync(
+                "/WaitingRequestCount",
+                async message => await message.Content.ReadAsStringAsync() == "1"
+            );
         }
 
-        await _fixture
-            .Client
-            .RetryRequestAsync(
-                "/WaitingRequestCount",
-                async message => await message.Content.ReadAsStringAsync() == "0"
-            );
+        await _fixture.Client.RetryRequestAsync(
+            "/WaitingRequestCount",
+            async message => await message.Content.ReadAsStringAsync() == "0"
+        );
     }
 
     [ConditionalFact]

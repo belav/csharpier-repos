@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 context.AddItems(
                     await context
-                        .Document
-                        .GetUnionItemsFromDocumentAndLinkedDocumentsAsync(
+                        .Document.GetUnionItemsFromDocumentAndLinkedDocumentsAsync(
                             s_comparer,
                             d => RecommendCompletionItemsAsync(d, context, cancellationToken)
                         )

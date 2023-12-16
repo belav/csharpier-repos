@@ -139,17 +139,15 @@ namespace System.ServiceModel.Channels
             CustomBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidBindingConfigurationName,
-                                configurationName,
-                                ConfigurationStrings.CustomBindingCollectionElementName
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.CustomBindingCollectionElementName
                         )
-                    );
+                    )
+                );
             }
             else
             {

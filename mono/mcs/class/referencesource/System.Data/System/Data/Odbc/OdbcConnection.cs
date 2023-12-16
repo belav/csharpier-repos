@@ -440,9 +440,11 @@ namespace System.Data.Odbc
                     || (ODBC32.RetCode.SUCCESS_WITH_INFO == retcode)
                 )
                 {
-                    value = Encoding
-                        .Unicode
-                        .GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
+                    value = Encoding.Unicode.GetString(
+                        buffer,
+                        0,
+                        Math.Min(cbActual, buffer.Length)
+                    );
                 }
                 else if (retcode == ODBC32.RetCode.ERROR)
                 {
@@ -555,9 +557,11 @@ namespace System.Data.Odbc
                     || retcode == ODBC32.RetCode.SUCCESS_WITH_INFO
                 )
                 {
-                    value = Encoding
-                        .Unicode
-                        .GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
+                    value = Encoding.Unicode.GetString(
+                        buffer,
+                        0,
+                        Math.Min(cbActual, buffer.Length)
+                    );
                 }
                 else if (handleError)
                 {

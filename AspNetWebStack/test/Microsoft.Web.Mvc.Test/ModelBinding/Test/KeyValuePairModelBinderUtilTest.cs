@@ -40,13 +40,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(int),
-                    mockIntBinder.Object,
-                    true /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
             // Act
             int model;
@@ -94,13 +92,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(int),
-                    mockIntBinder.Object,
-                    true /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
             // Act
             int model;

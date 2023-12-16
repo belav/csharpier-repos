@@ -170,8 +170,7 @@ namespace System.Web.Http.Tracing
             {
                 httpResponseException = aggregateException
                     .Flatten()
-                    .InnerExceptions
-                    .Select(ExtractHttpResponseException)
+                    .InnerExceptions.Select(ExtractHttpResponseException)
                     .Where(ex => ex != null && ex.Response != null)
                     .OrderByDescending(ex => ex.Response.StatusCode)
                     .FirstOrDefault();

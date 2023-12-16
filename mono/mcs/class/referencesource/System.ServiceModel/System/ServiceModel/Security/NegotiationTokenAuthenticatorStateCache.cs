@@ -36,13 +36,11 @@ namespace System.ServiceModel.Security
             bool wasStateAdded = base.TryAddItem(context, state, expirationTime, false);
             if (!wasStateAdded)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperWarning(
-                        new SecurityNegotiationException(
-                            SR.GetString(SR.NegotiationStateAlreadyPresent, context)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.NegotiationStateAlreadyPresent, context)
+                    )
+                );
             }
             if (TD.NegotiateTokenAuthenticatorStateCacheRatioIsEnabled())
             {
@@ -72,13 +70,11 @@ namespace System.ServiceModel.Security
                     SR.GetString(SR.CachedNegotiationStateQuotaReached, this.Capacity)
                 );
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new QuotaExceededException(
-                        SR.GetString(SR.CachedNegotiationStateQuotaReached, this.Capacity)
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new QuotaExceededException(
+                    SR.GetString(SR.CachedNegotiationStateQuotaReached, this.Capacity)
+                )
+            );
         }
 
         protected override void OnRemove(object item)

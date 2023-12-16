@@ -279,9 +279,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     if (
                         document is null
                         && project
-                            .Solution
-                            .Services
-                            .GetService<ISolutionCrawlerOptionsService>()
+                            .Solution.Services.GetService<ISolutionCrawlerOptionsService>()
                             ?.EnableDiagnosticsInSourceGeneratedFiles == true
                     )
                     {

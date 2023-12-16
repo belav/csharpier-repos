@@ -53,20 +53,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, bool>>,
-                            IQueryable<TSource>
-                        >(Where).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, bool>>,
+                        IQueryable<TSource>
+                    >(Where).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("Where`1", typeof(Enumerable))]
@@ -78,20 +76,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, int, bool>>,
-                            IQueryable<TSource>
-                        >(Where).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, int, bool>>,
+                        IQueryable<TSource>
+                    >(Where).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("OfType`1", typeof(Enumerable))]
@@ -99,15 +95,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable, IQueryable<TResult>>(OfType<TResult>).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable, IQueryable<TResult>>(OfType<TResult>).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Cast`1", typeof(Enumerable))]
@@ -115,15 +109,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable, IQueryable<TResult>>(Cast<TResult>).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable, IQueryable<TResult>>(Cast<TResult>).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Select`2", typeof(Enumerable))]
@@ -135,20 +127,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TResult>>,
-                            IQueryable<TResult>
-                        >(Select).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TResult>>,
+                        IQueryable<TResult>
+                    >(Select).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Select`2", typeof(Enumerable))]
@@ -160,20 +150,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, int, TResult>>,
-                            IQueryable<TResult>
-                        >(Select).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, int, TResult>>,
+                        IQueryable<TResult>
+                    >(Select).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("SelectMany`2", typeof(Enumerable))]
@@ -185,20 +173,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, IEnumerable<TResult>>>,
-                            IQueryable<TResult>
-                        >(SelectMany).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, IEnumerable<TResult>>>,
+                        IQueryable<TResult>
+                    >(SelectMany).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("SelectMany`2", typeof(Enumerable))]
@@ -210,20 +196,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, int, IEnumerable<TResult>>>,
-                            IQueryable<TResult>
-                        >(SelectMany).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, int, IEnumerable<TResult>>>,
+                        IQueryable<TResult>
+                    >(SelectMany).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("SelectMany`3", typeof(Enumerable))]
@@ -237,22 +221,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(collectionSelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, int, IEnumerable<TCollection>>>,
-                            Expression<Func<TSource, TCollection, TResult>>,
-                            IQueryable<TResult>
-                        >(SelectMany).Method,
-                        source.Expression,
-                        Expression.Quote(collectionSelector),
-                        Expression.Quote(resultSelector)
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, int, IEnumerable<TCollection>>>,
+                        Expression<Func<TSource, TCollection, TResult>>,
+                        IQueryable<TResult>
+                    >(SelectMany).Method,
+                    source.Expression,
+                    Expression.Quote(collectionSelector),
+                    Expression.Quote(resultSelector)
+                )
+            );
         }
 
         [DynamicDependency("SelectMany`3", typeof(Enumerable))]
@@ -266,22 +248,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(collectionSelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, IEnumerable<TCollection>>>,
-                            Expression<Func<TSource, TCollection, TResult>>,
-                            IQueryable<TResult>
-                        >(SelectMany).Method,
-                        source.Expression,
-                        Expression.Quote(collectionSelector),
-                        Expression.Quote(resultSelector)
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, IEnumerable<TCollection>>>,
+                        Expression<Func<TSource, TCollection, TResult>>,
+                        IQueryable<TResult>
+                    >(SelectMany).Method,
+                    source.Expression,
+                    Expression.Quote(collectionSelector),
+                    Expression.Quote(resultSelector)
+                )
+            );
         }
 
         private static Expression GetSourceExpression<TSource>(IEnumerable<TSource> source)
@@ -307,26 +287,24 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(innerKeySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return outer
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TOuter>,
-                            IEnumerable<TInner>,
-                            Expression<Func<TOuter, TKey>>,
-                            Expression<Func<TInner, TKey>>,
-                            Expression<Func<TOuter, TInner, TResult>>,
-                            IQueryable<TResult>
-                        >(Join).Method,
-                        outer.Expression,
-                        GetSourceExpression(inner),
-                        Expression.Quote(outerKeySelector),
-                        Expression.Quote(innerKeySelector),
-                        Expression.Quote(resultSelector)
-                    )
-                );
+            return outer.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TOuter>,
+                        IEnumerable<TInner>,
+                        Expression<Func<TOuter, TKey>>,
+                        Expression<Func<TInner, TKey>>,
+                        Expression<Func<TOuter, TInner, TResult>>,
+                        IQueryable<TResult>
+                    >(Join).Method,
+                    outer.Expression,
+                    GetSourceExpression(inner),
+                    Expression.Quote(outerKeySelector),
+                    Expression.Quote(innerKeySelector),
+                    Expression.Quote(resultSelector)
+                )
+            );
         }
 
         [DynamicDependency("Join`4", typeof(Enumerable))]
@@ -345,28 +323,26 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(innerKeySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return outer
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TOuter>,
-                            IEnumerable<TInner>,
-                            Expression<Func<TOuter, TKey>>,
-                            Expression<Func<TInner, TKey>>,
-                            Expression<Func<TOuter, TInner, TResult>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<TResult>
-                        >(Join).Method,
-                        outer.Expression,
-                        GetSourceExpression(inner),
-                        Expression.Quote(outerKeySelector),
-                        Expression.Quote(innerKeySelector),
-                        Expression.Quote(resultSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return outer.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TOuter>,
+                        IEnumerable<TInner>,
+                        Expression<Func<TOuter, TKey>>,
+                        Expression<Func<TInner, TKey>>,
+                        Expression<Func<TOuter, TInner, TResult>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<TResult>
+                    >(Join).Method,
+                    outer.Expression,
+                    GetSourceExpression(inner),
+                    Expression.Quote(outerKeySelector),
+                    Expression.Quote(innerKeySelector),
+                    Expression.Quote(resultSelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("GroupJoin`4", typeof(Enumerable))]
@@ -384,26 +360,24 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(innerKeySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return outer
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TOuter>,
-                            IEnumerable<TInner>,
-                            Expression<Func<TOuter, TKey>>,
-                            Expression<Func<TInner, TKey>>,
-                            Expression<Func<TOuter, IEnumerable<TInner>, TResult>>,
-                            IQueryable<TResult>
-                        >(GroupJoin).Method,
-                        outer.Expression,
-                        GetSourceExpression(inner),
-                        Expression.Quote(outerKeySelector),
-                        Expression.Quote(innerKeySelector),
-                        Expression.Quote(resultSelector)
-                    )
-                );
+            return outer.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TOuter>,
+                        IEnumerable<TInner>,
+                        Expression<Func<TOuter, TKey>>,
+                        Expression<Func<TInner, TKey>>,
+                        Expression<Func<TOuter, IEnumerable<TInner>, TResult>>,
+                        IQueryable<TResult>
+                    >(GroupJoin).Method,
+                    outer.Expression,
+                    GetSourceExpression(inner),
+                    Expression.Quote(outerKeySelector),
+                    Expression.Quote(innerKeySelector),
+                    Expression.Quote(resultSelector)
+                )
+            );
         }
 
         [DynamicDependency("GroupJoin`4", typeof(Enumerable))]
@@ -422,28 +396,26 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(innerKeySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return outer
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TOuter>,
-                            IEnumerable<TInner>,
-                            Expression<Func<TOuter, TKey>>,
-                            Expression<Func<TInner, TKey>>,
-                            Expression<Func<TOuter, IEnumerable<TInner>, TResult>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<TResult>
-                        >(GroupJoin).Method,
-                        outer.Expression,
-                        GetSourceExpression(inner),
-                        Expression.Quote(outerKeySelector),
-                        Expression.Quote(innerKeySelector),
-                        Expression.Quote(resultSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return outer.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TOuter>,
+                        IEnumerable<TInner>,
+                        Expression<Func<TOuter, TKey>>,
+                        Expression<Func<TInner, TKey>>,
+                        Expression<Func<TOuter, IEnumerable<TInner>, TResult>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<TResult>
+                    >(GroupJoin).Method,
+                    outer.Expression,
+                    GetSourceExpression(inner),
+                    Expression.Quote(outerKeySelector),
+                    Expression.Quote(innerKeySelector),
+                    Expression.Quote(resultSelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         /// <summary>
@@ -476,15 +448,13 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             return (IOrderedQueryable<T>)
-                source
-                    .Provider
-                    .CreateQuery<T>(
-                        Expression.Call(
-                            null,
-                            new Func<IQueryable<T>, IOrderedQueryable<T>>(Order).Method,
-                            source.Expression
-                        )
-                    );
+                source.Provider.CreateQuery<T>(
+                    Expression.Call(
+                        null,
+                        new Func<IQueryable<T>, IOrderedQueryable<T>>(Order).Method,
+                        source.Expression
+                    )
+                );
         }
 
         /// <summary>
@@ -521,18 +491,14 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             return (IOrderedQueryable<T>)
-                source
-                    .Provider
-                    .CreateQuery<T>(
-                        Expression.Call(
-                            null,
-                            new Func<IQueryable<T>, IComparer<T>, IOrderedQueryable<T>>(
-                                Order
-                            ).Method,
-                            source.Expression,
-                            Expression.Constant(comparer, typeof(IComparer<T>))
-                        )
-                    );
+                source.Provider.CreateQuery<T>(
+                    Expression.Call(
+                        null,
+                        new Func<IQueryable<T>, IComparer<T>, IOrderedQueryable<T>>(Order).Method,
+                        source.Expression,
+                        Expression.Constant(comparer, typeof(IComparer<T>))
+                    )
+                );
         }
 
         [DynamicDependency("OrderBy`2", typeof(Enumerable))]
@@ -545,20 +511,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            new Func<
-                                IQueryable<TSource>,
-                                Expression<Func<TSource, TKey>>,
-                                IOrderedQueryable<TSource>
-                            >(OrderBy).Method,
-                            source.Expression,
-                            Expression.Quote(keySelector)
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        new Func<
+                            IQueryable<TSource>,
+                            Expression<Func<TSource, TKey>>,
+                            IOrderedQueryable<TSource>
+                        >(OrderBy).Method,
+                        source.Expression,
+                        Expression.Quote(keySelector)
+                    )
+                );
         }
 
         [DynamicDependency("OrderBy`2", typeof(Enumerable))]
@@ -572,22 +536,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            new Func<
-                                IQueryable<TSource>,
-                                Expression<Func<TSource, TKey>>,
-                                IComparer<TKey>,
-                                IOrderedQueryable<TSource>
-                            >(OrderBy).Method,
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IComparer<TKey>))
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        new Func<
+                            IQueryable<TSource>,
+                            Expression<Func<TSource, TKey>>,
+                            IComparer<TKey>,
+                            IOrderedQueryable<TSource>
+                        >(OrderBy).Method,
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IComparer<TKey>))
+                    )
+                );
         }
 
         /// <summary>
@@ -620,15 +582,13 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             return (IOrderedQueryable<T>)
-                source
-                    .Provider
-                    .CreateQuery<T>(
-                        Expression.Call(
-                            null,
-                            new Func<IQueryable<T>, IOrderedQueryable<T>>(OrderDescending).Method,
-                            source.Expression
-                        )
-                    );
+                source.Provider.CreateQuery<T>(
+                    Expression.Call(
+                        null,
+                        new Func<IQueryable<T>, IOrderedQueryable<T>>(OrderDescending).Method,
+                        source.Expression
+                    )
+                );
         }
 
         /// <summary>
@@ -665,18 +625,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             return (IOrderedQueryable<T>)
-                source
-                    .Provider
-                    .CreateQuery<T>(
-                        Expression.Call(
-                            null,
-                            new Func<IQueryable<T>, IComparer<T>, IOrderedQueryable<T>>(
-                                OrderDescending
-                            ).Method,
-                            source.Expression,
-                            Expression.Constant(comparer, typeof(IComparer<T>))
-                        )
-                    );
+                source.Provider.CreateQuery<T>(
+                    Expression.Call(
+                        null,
+                        new Func<IQueryable<T>, IComparer<T>, IOrderedQueryable<T>>(
+                            OrderDescending
+                        ).Method,
+                        source.Expression,
+                        Expression.Constant(comparer, typeof(IComparer<T>))
+                    )
+                );
         }
 
         [DynamicDependency("OrderByDescending`2", typeof(Enumerable))]
@@ -689,20 +647,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            new Func<
-                                IQueryable<TSource>,
-                                Expression<Func<TSource, TKey>>,
-                                IOrderedQueryable<TSource>
-                            >(OrderByDescending).Method,
-                            source.Expression,
-                            Expression.Quote(keySelector)
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        new Func<
+                            IQueryable<TSource>,
+                            Expression<Func<TSource, TKey>>,
+                            IOrderedQueryable<TSource>
+                        >(OrderByDescending).Method,
+                        source.Expression,
+                        Expression.Quote(keySelector)
+                    )
+                );
         }
 
         [DynamicDependency("OrderByDescending`2", typeof(Enumerable))]
@@ -716,22 +672,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            new Func<
-                                IQueryable<TSource>,
-                                Expression<Func<TSource, TKey>>,
-                                IComparer<TKey>,
-                                IOrderedQueryable<TSource>
-                            >(OrderByDescending).Method,
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IComparer<TKey>))
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        new Func<
+                            IQueryable<TSource>,
+                            Expression<Func<TSource, TKey>>,
+                            IComparer<TKey>,
+                            IOrderedQueryable<TSource>
+                        >(OrderByDescending).Method,
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IComparer<TKey>))
+                    )
+                );
         }
 
         [DynamicDependency("ThenBy`2", typeof(Enumerable))]
@@ -744,20 +698,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            new Func<
-                                IOrderedQueryable<TSource>,
-                                Expression<Func<TSource, TKey>>,
-                                IOrderedQueryable<TSource>
-                            >(ThenBy).Method,
-                            source.Expression,
-                            Expression.Quote(keySelector)
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        new Func<
+                            IOrderedQueryable<TSource>,
+                            Expression<Func<TSource, TKey>>,
+                            IOrderedQueryable<TSource>
+                        >(ThenBy).Method,
+                        source.Expression,
+                        Expression.Quote(keySelector)
+                    )
+                );
         }
 
         [DynamicDependency("ThenBy`2", typeof(Enumerable))]
@@ -771,22 +723,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            new Func<
-                                IOrderedQueryable<TSource>,
-                                Expression<Func<TSource, TKey>>,
-                                IComparer<TKey>,
-                                IOrderedQueryable<TSource>
-                            >(ThenBy).Method,
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IComparer<TKey>))
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        new Func<
+                            IOrderedQueryable<TSource>,
+                            Expression<Func<TSource, TKey>>,
+                            IComparer<TKey>,
+                            IOrderedQueryable<TSource>
+                        >(ThenBy).Method,
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IComparer<TKey>))
+                    )
+                );
         }
 
         [DynamicDependency("ThenByDescending`2", typeof(Enumerable))]
@@ -799,20 +749,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            new Func<
-                                IOrderedQueryable<TSource>,
-                                Expression<Func<TSource, TKey>>,
-                                IOrderedQueryable<TSource>
-                            >(ThenByDescending).Method,
-                            source.Expression,
-                            Expression.Quote(keySelector)
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        new Func<
+                            IOrderedQueryable<TSource>,
+                            Expression<Func<TSource, TKey>>,
+                            IOrderedQueryable<TSource>
+                        >(ThenByDescending).Method,
+                        source.Expression,
+                        Expression.Quote(keySelector)
+                    )
+                );
         }
 
         [DynamicDependency("ThenByDescending`2", typeof(Enumerable))]
@@ -826,22 +774,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
-                    .CreateQuery<TSource>(
-                        Expression.Call(
-                            null,
-                            new Func<
-                                IOrderedQueryable<TSource>,
-                                Expression<Func<TSource, TKey>>,
-                                IComparer<TKey>,
-                                IOrderedQueryable<TSource>
-                            >(ThenByDescending).Method,
-                            source.Expression,
-                            Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IComparer<TKey>))
-                        )
-                    );
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        new Func<
+                            IOrderedQueryable<TSource>,
+                            Expression<Func<TSource, TKey>>,
+                            IComparer<TKey>,
+                            IOrderedQueryable<TSource>
+                        >(ThenByDescending).Method,
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IComparer<TKey>))
+                    )
+                );
         }
 
         [DynamicDependency("Take`1", typeof(Enumerable))]
@@ -849,16 +795,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, int, IQueryable<TSource>>(Take).Method,
-                        source.Expression,
-                        Expression.Constant(count)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, int, IQueryable<TSource>>(Take).Method,
+                    source.Expression,
+                    Expression.Constant(count)
+                )
+            );
         }
 
         /// <summary>Returns a specified range of contiguous elements from a sequence.</summary>
@@ -875,16 +819,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Range, IQueryable<TSource>>(Take).Method,
-                        source.Expression,
-                        Expression.Constant(range)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Range, IQueryable<TSource>>(Take).Method,
+                    source.Expression,
+                    Expression.Constant(range)
+                )
+            );
         }
 
         [DynamicDependency("TakeWhile`1", typeof(Enumerable))]
@@ -896,20 +838,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, bool>>,
-                            IQueryable<TSource>
-                        >(TakeWhile).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, bool>>,
+                        IQueryable<TSource>
+                    >(TakeWhile).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("TakeWhile`1", typeof(Enumerable))]
@@ -921,20 +861,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, int, bool>>,
-                            IQueryable<TSource>
-                        >(TakeWhile).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, int, bool>>,
+                        IQueryable<TSource>
+                    >(TakeWhile).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("Skip`1", typeof(Enumerable))]
@@ -942,16 +880,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, int, IQueryable<TSource>>(Skip).Method,
-                        source.Expression,
-                        Expression.Constant(count)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, int, IQueryable<TSource>>(Skip).Method,
+                    source.Expression,
+                    Expression.Constant(count)
+                )
+            );
         }
 
         [DynamicDependency("SkipWhile`1", typeof(Enumerable))]
@@ -963,20 +899,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, bool>>,
-                            IQueryable<TSource>
-                        >(SkipWhile).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, bool>>,
+                        IQueryable<TSource>
+                    >(SkipWhile).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("SkipWhile`1", typeof(Enumerable))]
@@ -988,20 +922,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, int, bool>>,
-                            IQueryable<TSource>
-                        >(SkipWhile).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, int, bool>>,
+                        IQueryable<TSource>
+                    >(SkipWhile).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("GroupBy`2", typeof(Enumerable))]
@@ -1013,20 +945,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .CreateQuery<IGrouping<TKey, TSource>>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IQueryable<IGrouping<TKey, TSource>>
-                        >(GroupBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector)
-                    )
-                );
+            return source.Provider.CreateQuery<IGrouping<TKey, TSource>>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IQueryable<IGrouping<TKey, TSource>>
+                    >(GroupBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector)
+                )
+            );
         }
 
         [DynamicDependency("GroupBy`3", typeof(Enumerable))]
@@ -1040,22 +970,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(elementSelector);
 
-            return source
-                .Provider
-                .CreateQuery<IGrouping<TKey, TElement>>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            Expression<Func<TSource, TElement>>,
-                            IQueryable<IGrouping<TKey, TElement>>
-                        >(GroupBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Quote(elementSelector)
-                    )
-                );
+            return source.Provider.CreateQuery<IGrouping<TKey, TElement>>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        Expression<Func<TSource, TElement>>,
+                        IQueryable<IGrouping<TKey, TElement>>
+                    >(GroupBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Quote(elementSelector)
+                )
+            );
         }
 
         [DynamicDependency("GroupBy`2", typeof(Enumerable))]
@@ -1068,22 +996,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .CreateQuery<IGrouping<TKey, TSource>>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<IGrouping<TKey, TSource>>
-                        >(GroupBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source.Provider.CreateQuery<IGrouping<TKey, TSource>>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<IGrouping<TKey, TSource>>
+                    >(GroupBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("GroupBy`3", typeof(Enumerable))]
@@ -1098,24 +1024,22 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(elementSelector);
 
-            return source
-                .Provider
-                .CreateQuery<IGrouping<TKey, TElement>>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            Expression<Func<TSource, TElement>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<IGrouping<TKey, TElement>>
-                        >(GroupBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Quote(elementSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source.Provider.CreateQuery<IGrouping<TKey, TElement>>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        Expression<Func<TSource, TElement>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<IGrouping<TKey, TElement>>
+                    >(GroupBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Quote(elementSelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("GroupBy`4", typeof(Enumerable))]
@@ -1131,24 +1055,22 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(elementSelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            Expression<Func<TSource, TElement>>,
-                            Expression<Func<TKey, IEnumerable<TElement>, TResult>>,
-                            IQueryable<TResult>
-                        >(GroupBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Quote(elementSelector),
-                        Expression.Quote(resultSelector)
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        Expression<Func<TSource, TElement>>,
+                        Expression<Func<TKey, IEnumerable<TElement>, TResult>>,
+                        IQueryable<TResult>
+                    >(GroupBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Quote(elementSelector),
+                    Expression.Quote(resultSelector)
+                )
+            );
         }
 
         [DynamicDependency("GroupBy`3", typeof(Enumerable))]
@@ -1162,22 +1084,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            Expression<Func<TKey, IEnumerable<TSource>, TResult>>,
-                            IQueryable<TResult>
-                        >(GroupBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Quote(resultSelector)
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        Expression<Func<TKey, IEnumerable<TSource>, TResult>>,
+                        IQueryable<TResult>
+                    >(GroupBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Quote(resultSelector)
+                )
+            );
         }
 
         [DynamicDependency("GroupBy`3", typeof(Enumerable))]
@@ -1192,24 +1112,22 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            Expression<Func<TKey, IEnumerable<TSource>, TResult>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<TResult>
-                        >(GroupBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Quote(resultSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        Expression<Func<TKey, IEnumerable<TSource>, TResult>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<TResult>
+                    >(GroupBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Quote(resultSelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("GroupBy`4", typeof(Enumerable))]
@@ -1226,26 +1144,24 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(elementSelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            Expression<Func<TSource, TElement>>,
-                            Expression<Func<TKey, IEnumerable<TElement>, TResult>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<TResult>
-                        >(GroupBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Quote(elementSelector),
-                        Expression.Quote(resultSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        Expression<Func<TSource, TElement>>,
+                        Expression<Func<TKey, IEnumerable<TElement>, TResult>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<TResult>
+                    >(GroupBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Quote(elementSelector),
+                    Expression.Quote(resultSelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("Distinct`1", typeof(Enumerable))]
@@ -1253,15 +1169,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IQueryable<TSource>>(Distinct).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IQueryable<TSource>>(Distinct).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Distinct`1", typeof(Enumerable))]
@@ -1272,20 +1186,16 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEqualityComparer<TSource>,
-                            IQueryable<TSource>
-                        >(Distinct).Method,
-                        source.Expression,
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IEqualityComparer<TSource>, IQueryable<TSource>>(
+                        Distinct
+                    ).Method,
+                    source.Expression,
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                )
+            );
         }
 
         /// <summary>Returns distinct elements from a sequence according to a specified key selector function.</summary>
@@ -1304,20 +1214,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IQueryable<TSource>
-                        >(DistinctBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IQueryable<TSource>
+                    >(DistinctBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector)
+                )
+            );
         }
 
         /// <summary>Returns distinct elements from a sequence according to a specified key selector function.</summary>
@@ -1338,22 +1246,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<TSource>
-                        >(DistinctBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<TSource>
+                    >(DistinctBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         /// <summary>Split the elements of a sequence into chunks of size at most <paramref name="size"/>.</summary>
@@ -1375,16 +1281,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource[]>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, int, IQueryable<TSource[]>>(Chunk).Method,
-                        source.Expression,
-                        Expression.Constant(size)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource[]>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, int, IQueryable<TSource[]>>(Chunk).Method,
+                    source.Expression,
+                    Expression.Constant(size)
+                )
+            );
         }
 
         [DynamicDependency("Concat`1", typeof(Enumerable))]
@@ -1396,18 +1300,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IEnumerable<TSource>, IQueryable<TSource>>(
-                            Concat
-                        ).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2)
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IEnumerable<TSource>, IQueryable<TSource>>(
+                        Concat
+                    ).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2)
+                )
+            );
         }
 
         [DynamicDependency("Zip`2", typeof(Enumerable))]
@@ -1419,20 +1321,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .CreateQuery<(TFirst, TSecond)>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TFirst>,
-                            IEnumerable<TSecond>,
-                            IQueryable<(TFirst, TSecond)>
-                        >(Zip).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2)
-                    )
-                );
+            return source1.Provider.CreateQuery<(TFirst, TSecond)>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TFirst>,
+                        IEnumerable<TSecond>,
+                        IQueryable<(TFirst, TSecond)>
+                    >(Zip).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2)
+                )
+            );
         }
 
         [DynamicDependency("Zip`3", typeof(Enumerable))]
@@ -1446,22 +1346,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source1
-                .Provider
-                .CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TFirst>,
-                            IEnumerable<TSecond>,
-                            Expression<Func<TFirst, TSecond, TResult>>,
-                            IQueryable<TResult>
-                        >(Zip).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Quote(resultSelector)
-                    )
-                );
+            return source1.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TFirst>,
+                        IEnumerable<TSecond>,
+                        Expression<Func<TFirst, TSecond, TResult>>,
+                        IQueryable<TResult>
+                    >(Zip).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Quote(resultSelector)
+                )
+            );
         }
 
         /// <summary>
@@ -1489,22 +1387,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(source3);
 
-            return source1
-                .Provider
-                .CreateQuery<(TFirst, TSecond, TThird)>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TFirst>,
-                            IEnumerable<TSecond>,
-                            IEnumerable<TThird>,
-                            IQueryable<(TFirst, TSecond, TThird)>
-                        >(Zip).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        GetSourceExpression(source3)
-                    )
-                );
+            return source1.Provider.CreateQuery<(TFirst, TSecond, TThird)>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TFirst>,
+                        IEnumerable<TSecond>,
+                        IEnumerable<TThird>,
+                        IQueryable<(TFirst, TSecond, TThird)>
+                    >(Zip).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    GetSourceExpression(source3)
+                )
+            );
         }
 
         [DynamicDependency("Union`1", typeof(Enumerable))]
@@ -1516,18 +1412,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IEnumerable<TSource>, IQueryable<TSource>>(
-                            Union
-                        ).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2)
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IEnumerable<TSource>, IQueryable<TSource>>(
+                        Union
+                    ).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2)
+                )
+            );
         }
 
         [DynamicDependency("Union`1", typeof(Enumerable))]
@@ -1540,22 +1434,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TSource>,
-                            IEqualityComparer<TSource>,
-                            IQueryable<TSource>
-                        >(Union).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TSource>,
+                        IEqualityComparer<TSource>,
+                        IQueryable<TSource>
+                    >(Union).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                )
+            );
         }
 
         /// <summary>Produces the set union of two sequences according to a specified key selector function.</summary>
@@ -1577,22 +1469,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IQueryable<TSource>
-                        >(UnionBy).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Quote(keySelector)
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IQueryable<TSource>
+                    >(UnionBy).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Quote(keySelector)
+                )
+            );
         }
 
         /// <summary>Produces the set union of two sequences according to a specified key selector function.</summary>
@@ -1616,24 +1506,22 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<TSource>
-                        >(UnionBy).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<TSource>
+                    >(UnionBy).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Quote(keySelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("Intersect`1", typeof(Enumerable))]
@@ -1645,18 +1533,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IEnumerable<TSource>, IQueryable<TSource>>(
-                            Intersect
-                        ).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2)
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IEnumerable<TSource>, IQueryable<TSource>>(
+                        Intersect
+                    ).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2)
+                )
+            );
         }
 
         [DynamicDependency("Intersect`1", typeof(Enumerable))]
@@ -1669,22 +1555,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TSource>,
-                            IEqualityComparer<TSource>,
-                            IQueryable<TSource>
-                        >(Intersect).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TSource>,
+                        IEqualityComparer<TSource>,
+                        IQueryable<TSource>
+                    >(Intersect).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                )
+            );
         }
 
         /// <summary>Produces the set intersection of two sequences according to a specified key selector function.</summary>
@@ -1706,22 +1590,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TKey>,
-                            Expression<Func<TSource, TKey>>,
-                            IQueryable<TSource>
-                        >(IntersectBy).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Quote(keySelector)
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TKey>,
+                        Expression<Func<TSource, TKey>>,
+                        IQueryable<TSource>
+                    >(IntersectBy).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Quote(keySelector)
+                )
+            );
         }
 
         /// <summary>Produces the set intersection of two sequences according to a specified key selector function.</summary>
@@ -1745,24 +1627,22 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TKey>,
-                            Expression<Func<TSource, TKey>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<TSource>
-                        >(IntersectBy).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TKey>,
+                        Expression<Func<TSource, TKey>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<TSource>
+                    >(IntersectBy).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Quote(keySelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("Except`1", typeof(Enumerable))]
@@ -1774,18 +1654,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IEnumerable<TSource>, IQueryable<TSource>>(
-                            Except
-                        ).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2)
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IEnumerable<TSource>, IQueryable<TSource>>(
+                        Except
+                    ).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2)
+                )
+            );
         }
 
         [DynamicDependency("Except`1", typeof(Enumerable))]
@@ -1798,22 +1676,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TSource>,
-                            IEqualityComparer<TSource>,
-                            IQueryable<TSource>
-                        >(Except).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TSource>,
+                        IEqualityComparer<TSource>,
+                        IQueryable<TSource>
+                    >(Except).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                )
+            );
         }
 
         /// <summary>
@@ -1836,22 +1712,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TKey>,
-                            Expression<Func<TSource, TKey>>,
-                            IQueryable<TSource>
-                        >(ExceptBy).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Quote(keySelector)
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TKey>,
+                        Expression<Func<TSource, TKey>>,
+                        IQueryable<TSource>
+                    >(ExceptBy).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Quote(keySelector)
+                )
+            );
         }
 
         /// <summary>
@@ -1876,24 +1750,22 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TKey>,
-                            Expression<Func<TSource, TKey>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<TSource>
-                        >(ExceptBy).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source1.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TKey>,
+                        Expression<Func<TSource, TKey>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<TSource>
+                    >(ExceptBy).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Quote(keySelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("First`1", typeof(Enumerable))]
@@ -1901,15 +1773,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource>(First).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource>(First).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("First`1", typeof(Enumerable))]
@@ -1921,18 +1791,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource>(
-                            First
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource>(
+                        First
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("FirstOrDefault`1", typeof(Enumerable))]
@@ -1940,15 +1808,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource?>(FirstOrDefault).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource?>(FirstOrDefault).Method,
+                    source.Expression
+                )
+            );
         }
 
         /// <summary>Returns the first element of a sequence, or a default value if the sequence contains no elements.</summary>
@@ -1965,16 +1831,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource, TSource>(FirstOrDefault).Method,
-                        source.Expression,
-                        Expression.Constant(defaultValue, typeof(TSource))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource, TSource>(FirstOrDefault).Method,
+                    source.Expression,
+                    Expression.Constant(defaultValue, typeof(TSource))
+                )
+            );
         }
 
         [DynamicDependency("FirstOrDefault`1", typeof(Enumerable))]
@@ -1986,18 +1850,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource?>(
-                            FirstOrDefault
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource?>(
+                        FirstOrDefault
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         /// <summary>Returns the first element of the sequence that satisfies a condition or a default value if no such element is found.</summary>
@@ -2017,22 +1879,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, bool>>,
-                            TSource,
-                            TSource
-                        >(FirstOrDefault).Method,
-                        source.Expression,
-                        Expression.Quote(predicate),
-                        Expression.Constant(defaultValue, typeof(TSource))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, bool>>,
+                        TSource,
+                        TSource
+                    >(FirstOrDefault).Method,
+                    source.Expression,
+                    Expression.Quote(predicate),
+                    Expression.Constant(defaultValue, typeof(TSource))
+                )
+            );
         }
 
         [DynamicDependency("Last`1", typeof(Enumerable))]
@@ -2040,15 +1900,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource>(Last).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource>(Last).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Last`1", typeof(Enumerable))]
@@ -2060,18 +1918,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource>(
-                            Last
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource>(
+                        Last
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("LastOrDefault`1", typeof(Enumerable))]
@@ -2079,15 +1935,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource?>(LastOrDefault).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource?>(LastOrDefault).Method,
+                    source.Expression
+                )
+            );
         }
 
         /// <summary>Returns the last element of a sequence, or a default value if the sequence contains no elements.</summary>
@@ -2104,16 +1958,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource, TSource>(LastOrDefault).Method,
-                        source.Expression,
-                        Expression.Constant(defaultValue, typeof(TSource))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource, TSource>(LastOrDefault).Method,
+                    source.Expression,
+                    Expression.Constant(defaultValue, typeof(TSource))
+                )
+            );
         }
 
         [DynamicDependency("LastOrDefault`1", typeof(Enumerable))]
@@ -2125,18 +1977,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource?>(
-                            LastOrDefault
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource?>(
+                        LastOrDefault
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         /// <summary>Returns the last element of a sequence that satisfies a condition or a default value if no such element is found.</summary>
@@ -2156,22 +2006,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, bool>>,
-                            TSource,
-                            TSource
-                        >(LastOrDefault).Method,
-                        source.Expression,
-                        Expression.Quote(predicate),
-                        Expression.Constant(defaultValue, typeof(TSource))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, bool>>,
+                        TSource,
+                        TSource
+                    >(LastOrDefault).Method,
+                    source.Expression,
+                    Expression.Quote(predicate),
+                    Expression.Constant(defaultValue, typeof(TSource))
+                )
+            );
         }
 
         [DynamicDependency("Single`1", typeof(Enumerable))]
@@ -2179,15 +2027,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource>(Single).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource>(Single).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Single`1", typeof(Enumerable))]
@@ -2199,18 +2045,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource>(
-                            Single
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource>(
+                        Single
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("SingleOrDefault`1", typeof(Enumerable))]
@@ -2218,15 +2062,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource?>(SingleOrDefault).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource?>(SingleOrDefault).Method,
+                    source.Expression
+                )
+            );
         }
 
         /// <summary>Returns the only element of a sequence, or a default value if the sequence is empty; this method throws an exception if there is more than one element in the sequence.</summary>
@@ -2244,16 +2086,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource, TSource>(SingleOrDefault).Method,
-                        source.Expression,
-                        Expression.Constant(defaultValue, typeof(TSource))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource, TSource>(SingleOrDefault).Method,
+                    source.Expression,
+                    Expression.Constant(defaultValue, typeof(TSource))
+                )
+            );
         }
 
         [DynamicDependency("SingleOrDefault`1", typeof(Enumerable))]
@@ -2265,18 +2105,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource?>(
-                            SingleOrDefault
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, TSource?>(
+                        SingleOrDefault
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         /// <summary>Returns the only element of a sequence that satisfies a specified condition or a default value if no such element exists; this method throws an exception if more than one element satisfies the condition.</summary>
@@ -2297,22 +2135,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, bool>>,
-                            TSource,
-                            TSource
-                        >(SingleOrDefault).Method,
-                        source.Expression,
-                        Expression.Quote(predicate),
-                        Expression.Constant(defaultValue, typeof(TSource))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, bool>>,
+                        TSource,
+                        TSource
+                    >(SingleOrDefault).Method,
+                    source.Expression,
+                    Expression.Quote(predicate),
+                    Expression.Constant(defaultValue, typeof(TSource))
+                )
+            );
         }
 
         [DynamicDependency("ElementAt`1", typeof(Enumerable))]
@@ -2323,16 +2159,14 @@ namespace System.Linq
             if (index < 0)
                 throw Error.ArgumentOutOfRange(nameof(index));
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, int, TSource>(ElementAt).Method,
-                        source.Expression,
-                        Expression.Constant(index)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, int, TSource>(ElementAt).Method,
+                    source.Expression,
+                    Expression.Constant(index)
+                )
+            );
         }
 
         /// <summary>Returns the element at a specified index in a sequence.</summary>
@@ -2350,16 +2184,14 @@ namespace System.Linq
             if (index.IsFromEnd && index.Value == 0)
                 throw Error.ArgumentOutOfRange(nameof(index));
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Index, TSource>(ElementAt).Method,
-                        source.Expression,
-                        Expression.Constant(index)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Index, TSource>(ElementAt).Method,
+                    source.Expression,
+                    Expression.Constant(index)
+                )
+            );
         }
 
         [DynamicDependency("ElementAtOrDefault`1", typeof(Enumerable))]
@@ -2370,16 +2202,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, int, TSource?>(ElementAtOrDefault).Method,
-                        source.Expression,
-                        Expression.Constant(index)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, int, TSource?>(ElementAtOrDefault).Method,
+                    source.Expression,
+                    Expression.Constant(index)
+                )
+            );
         }
 
         /// <summary>Returns the element at a specified index in a sequence or a default value if the index is out of range.</summary>
@@ -2396,16 +2226,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Index, TSource?>(ElementAtOrDefault).Method,
-                        source.Expression,
-                        Expression.Constant(index)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Index, TSource?>(ElementAtOrDefault).Method,
+                    source.Expression,
+                    Expression.Constant(index)
+                )
+            );
         }
 
         [DynamicDependency("DefaultIfEmpty`1", typeof(Enumerable))]
@@ -2413,15 +2241,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IQueryable<TSource?>>(DefaultIfEmpty).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IQueryable<TSource?>>(DefaultIfEmpty).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("DefaultIfEmpty`1", typeof(Enumerable))]
@@ -2432,18 +2258,16 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource, IQueryable<TSource?>>(
-                            DefaultIfEmpty
-                        ).Method,
-                        source.Expression,
-                        Expression.Constant(defaultValue, typeof(TSource))
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource, IQueryable<TSource?>>(
+                        DefaultIfEmpty
+                    ).Method,
+                    source.Expression,
+                    Expression.Constant(defaultValue, typeof(TSource))
+                )
+            );
         }
 
         [DynamicDependency("Contains`1", typeof(Enumerable))]
@@ -2451,16 +2275,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource, bool>(Contains).Method,
-                        source.Expression,
-                        Expression.Constant(item, typeof(TSource))
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource, bool>(Contains).Method,
+                    source.Expression,
+                    Expression.Constant(item, typeof(TSource))
+                )
+            );
         }
 
         [DynamicDependency("Contains`1", typeof(Enumerable))]
@@ -2472,19 +2294,17 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource, IEqualityComparer<TSource>, bool>(
-                            Contains
-                        ).Method,
-                        source.Expression,
-                        Expression.Constant(item, typeof(TSource)),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource, IEqualityComparer<TSource>, bool>(
+                        Contains
+                    ).Method,
+                    source.Expression,
+                    Expression.Constant(item, typeof(TSource)),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                )
+            );
         }
 
         [DynamicDependency("Reverse`1", typeof(Enumerable))]
@@ -2492,15 +2312,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IQueryable<TSource>>(Reverse).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IQueryable<TSource>>(Reverse).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("SequenceEqual`1", typeof(Enumerable))]
@@ -2512,18 +2330,14 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IEnumerable<TSource>, bool>(
-                            SequenceEqual
-                        ).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2)
-                    )
-                );
+            return source1.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IEnumerable<TSource>, bool>(SequenceEqual).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2)
+                )
+            );
         }
 
         [DynamicDependency("SequenceEqual`1", typeof(Enumerable))]
@@ -2536,22 +2350,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            IEnumerable<TSource>,
-                            IEqualityComparer<TSource>,
-                            bool
-                        >(SequenceEqual).Method,
-                        source1.Expression,
-                        GetSourceExpression(source2),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
-                    )
-                );
+            return source1.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        IEnumerable<TSource>,
+                        IEqualityComparer<TSource>,
+                        bool
+                    >(SequenceEqual).Method,
+                    source1.Expression,
+                    GetSourceExpression(source2),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                )
+            );
         }
 
         [DynamicDependency("Any`1", typeof(Enumerable))]
@@ -2559,15 +2371,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, bool>(Any).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, bool>(Any).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Any`1", typeof(Enumerable))]
@@ -2579,18 +2389,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, bool>(
-                            Any
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, bool>(
+                        Any
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("All`1", typeof(Enumerable))]
@@ -2602,18 +2410,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<bool>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, bool>(
-                            All
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<bool>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, bool>(
+                        All
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("Count`1", typeof(Enumerable))]
@@ -2621,15 +2427,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<int>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, int>(Count).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<int>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, int>(Count).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Count`1", typeof(Enumerable))]
@@ -2641,18 +2445,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<int>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, int>(
-                            Count
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<int>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, int>(
+                        Count
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         /// <summary>Returns the count of each element from a sequence according to a specified key selector function.</summary>
@@ -2674,22 +2476,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .CreateQuery<KeyValuePair<TKey, int>>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<KeyValuePair<TKey, int>>
-                        >(CountBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source.Provider.CreateQuery<KeyValuePair<TKey, int>>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<KeyValuePair<TKey, int>>
+                    >(CountBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("LongCount`1", typeof(Enumerable))]
@@ -2697,15 +2497,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<long>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, long>(LongCount).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, long>(LongCount).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("LongCount`1", typeof(Enumerable))]
@@ -2717,18 +2515,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
-                .Execute<long>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, long>(
-                            LongCount
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(predicate)
-                    )
-                );
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, bool>>, long>(
+                        LongCount
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(predicate)
+                )
+            );
         }
 
         [DynamicDependency("Min`1", typeof(Enumerable))]
@@ -2736,15 +2532,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource?>(Min).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource?>(Min).Method,
+                    source.Expression
+                )
+            );
         }
 
         /// <summary>Returns the minimum value in a generic <see cref="System.Linq.IQueryable{T}" />.</summary>
@@ -2762,16 +2556,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IComparer<TSource>, TSource?>(Min).Method,
-                        source.Expression,
-                        Expression.Constant(comparer, typeof(IComparer<TSource>))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IComparer<TSource>, TSource?>(Min).Method,
+                    source.Expression,
+                    Expression.Constant(comparer, typeof(IComparer<TSource>))
+                )
+            );
         }
 
         [DynamicDependency("Min`2", typeof(Enumerable))]
@@ -2783,18 +2575,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, TResult>>, TResult?>(
-                            Min
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, TResult>>, TResult?>(
+                        Min
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         /// <summary>Returns the minimum value in a generic <see cref="IQueryable{T}"/> according to a specified key selector function.</summary>
@@ -2814,18 +2604,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, TKey>>, TSource?>(
-                            MinBy
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, TKey>>, TSource?>(
+                        MinBy
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector)
+                )
+            );
         }
 
         /// <summary>Returns the minimum value in a generic <see cref="IQueryable{T}"/> according to a specified key selector function.</summary>
@@ -2847,22 +2635,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IComparer<TSource>,
-                            TSource?
-                        >(MinBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IComparer<TSource>))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IComparer<TSource>,
+                        TSource?
+                    >(MinBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Constant(comparer, typeof(IComparer<TSource>))
+                )
+            );
         }
 
         [DynamicDependency("Max`1", typeof(Enumerable))]
@@ -2870,15 +2656,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource?>(Max).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource?>(Max).Method,
+                    source.Expression
+                )
+            );
         }
 
         /// <summary>Returns the maximum value in a generic <see cref="System.Linq.IQueryable{T}" />.</summary>
@@ -2895,16 +2679,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, IComparer<TSource>, TSource?>(Max).Method,
-                        source.Expression,
-                        Expression.Constant(comparer, typeof(IComparer<TSource>))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, IComparer<TSource>, TSource?>(Max).Method,
+                    source.Expression,
+                    Expression.Constant(comparer, typeof(IComparer<TSource>))
+                )
+            );
         }
 
         [DynamicDependency("Max`2", typeof(Enumerable))]
@@ -2916,18 +2698,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, TResult>>, TResult?>(
-                            Max
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, TResult>>, TResult?>(
+                        Max
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         /// <summary>Returns the maximum value in a generic <see cref="IQueryable{T}"/> according to a specified key selector function.</summary>
@@ -2947,18 +2727,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, TKey>>, TSource?>(
-                            MaxBy
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, TKey>>, TSource?>(
+                        MaxBy
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector)
+                )
+            );
         }
 
         /// <summary>Returns the maximum value in a generic <see cref="IQueryable{T}"/> according to a specified key selector function.</summary>
@@ -2980,22 +2758,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            IComparer<TSource>,
-                            TSource?
-                        >(MaxBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IComparer<TSource>))
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        IComparer<TSource>,
+                        TSource?
+                    >(MaxBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Constant(comparer, typeof(IComparer<TSource>))
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3003,15 +2779,9 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<int>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<int>, int>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<int>(
+                Expression.Call(null, new Func<IQueryable<int>, int>(Sum).Method, source.Expression)
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3019,15 +2789,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<int?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<int?>, int?>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<int?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<int?>, int?>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3035,15 +2803,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<long>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<long>, long>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<long>, long>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3051,15 +2817,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<long?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<long?>, long?>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<long?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<long?>, long?>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3067,15 +2831,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<float>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<float>, float>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<float>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<float>, float>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3083,15 +2845,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<float?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<float?>, float?>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<float?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<float?>, float?>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3099,15 +2859,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<double>, double>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<double>, double>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3115,15 +2873,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<double?>, double?>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<double?>, double?>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3131,15 +2887,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<decimal>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<decimal>, decimal>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<decimal>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<decimal>, decimal>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum", typeof(Enumerable))]
@@ -3147,15 +2901,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<decimal?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<decimal?>, decimal?>(Sum).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<decimal?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<decimal?>, decimal?>(Sum).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3167,18 +2919,14 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<int>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, int>>, int>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<int>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, int>>, int>(Sum).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3190,18 +2938,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<int?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, int?>>, int?>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<int?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, int?>>, int?>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3213,18 +2959,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<long>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, long>>, long>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, long>>, long>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3236,18 +2980,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<long?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, long?>>, long?>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<long?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, long?>>, long?>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3259,18 +3001,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<float>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, float>>, float>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<float>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, float>>, float>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3282,18 +3022,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<float?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, float?>>, float?>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<float?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, float?>>, float?>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3305,18 +3043,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, double>>, double>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, double>>, double>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3328,18 +3064,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, double?>>, double?>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, double?>>, double?>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3351,18 +3085,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<decimal>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, decimal>>, decimal>(
-                            Sum
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<decimal>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, decimal>>, decimal>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Sum`1", typeof(Enumerable))]
@@ -3374,20 +3106,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<decimal?>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, decimal?>>,
-                            decimal?
-                        >(Sum).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<decimal?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, decimal?>>, decimal?>(
+                        Sum
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3395,15 +3123,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<int>, double>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<int>, double>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3411,15 +3137,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<int?>, double?>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<int?>, double?>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3427,15 +3151,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<long>, double>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<long>, double>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3443,15 +3165,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<long?>, double?>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<long?>, double?>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3459,15 +3179,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<float>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<float>, float>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<float>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<float>, float>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3475,15 +3193,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<float?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<float?>, float?>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<float?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<float?>, float?>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3491,15 +3207,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<double>, double>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<double>, double>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3507,15 +3221,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<double?>, double?>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<double?>, double?>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3523,15 +3235,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<decimal>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<decimal>, decimal>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<decimal>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<decimal>, decimal>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average", typeof(Enumerable))]
@@ -3539,15 +3249,13 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .Execute<decimal?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<decimal?>, decimal?>(Average).Method,
-                        source.Expression
-                    )
-                );
+            return source.Provider.Execute<decimal?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<decimal?>, decimal?>(Average).Method,
+                    source.Expression
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3559,18 +3267,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, int>>, double>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, int>>, double>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3582,18 +3288,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, int?>>, double?>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, int?>>, double?>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3605,18 +3309,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<float>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, float>>, float>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<float>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, float>>, float>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3628,18 +3330,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<float?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, float?>>, float?>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<float?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, float?>>, float?>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3651,18 +3351,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, long>>, double>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, long>>, double>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3674,18 +3372,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, long?>>, double?>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, long?>>, double?>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3697,18 +3393,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<double>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, double>>, double>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<double>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, double>>, double>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3720,18 +3414,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<double?>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, double?>>, double?>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<double?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, double?>>, double?>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3743,18 +3435,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<decimal>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, Expression<Func<TSource, decimal>>, decimal>(
-                            Average
-                        ).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<decimal>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, decimal>>, decimal>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Average`1", typeof(Enumerable))]
@@ -3766,20 +3456,16 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<decimal?>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, decimal?>>,
-                            decimal?
-                        >(Average).Method,
-                        source.Expression,
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<decimal?>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, Expression<Func<TSource, decimal?>>, decimal?>(
+                        Average
+                    ).Method,
+                    source.Expression,
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("Aggregate`1", typeof(Enumerable))]
@@ -3791,20 +3477,18 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(func);
 
-            return source
-                .Provider
-                .Execute<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TSource, TSource>>,
-                            TSource
-                        >(Aggregate).Method,
-                        source.Expression,
-                        Expression.Quote(func)
-                    )
-                );
+            return source.Provider.Execute<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TSource, TSource>>,
+                        TSource
+                    >(Aggregate).Method,
+                    source.Expression,
+                    Expression.Quote(func)
+                )
+            );
         }
 
         [DynamicDependency("Aggregate`2", typeof(Enumerable))]
@@ -3817,22 +3501,20 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(func);
 
-            return source
-                .Provider
-                .Execute<TAccumulate>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            TAccumulate,
-                            Expression<Func<TAccumulate, TSource, TAccumulate>>,
-                            TAccumulate
-                        >(Aggregate).Method,
-                        source.Expression,
-                        Expression.Constant(seed),
-                        Expression.Quote(func)
-                    )
-                );
+            return source.Provider.Execute<TAccumulate>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        TAccumulate,
+                        Expression<Func<TAccumulate, TSource, TAccumulate>>,
+                        TAccumulate
+                    >(Aggregate).Method,
+                    source.Expression,
+                    Expression.Constant(seed),
+                    Expression.Quote(func)
+                )
+            );
         }
 
         [DynamicDependency("Aggregate`3", typeof(Enumerable))]
@@ -3847,24 +3529,22 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(func);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
-                .Execute<TResult>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            TAccumulate,
-                            Expression<Func<TAccumulate, TSource, TAccumulate>>,
-                            Expression<Func<TAccumulate, TResult>>,
-                            TResult
-                        >(Aggregate).Method,
-                        source.Expression,
-                        Expression.Constant(seed),
-                        Expression.Quote(func),
-                        Expression.Quote(selector)
-                    )
-                );
+            return source.Provider.Execute<TResult>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        TAccumulate,
+                        Expression<Func<TAccumulate, TSource, TAccumulate>>,
+                        Expression<Func<TAccumulate, TResult>>,
+                        TResult
+                    >(Aggregate).Method,
+                    source.Expression,
+                    Expression.Constant(seed),
+                    Expression.Quote(func),
+                    Expression.Quote(selector)
+                )
+            );
         }
 
         [DynamicDependency("AggregateBy`3", typeof(Enumerable))]
@@ -3885,26 +3565,24 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(func);
 
-            return source
-                .Provider
-                .CreateQuery<KeyValuePair<TKey, TAccumulate>>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            TAccumulate,
-                            Expression<Func<TAccumulate, TSource, TAccumulate>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<KeyValuePair<TKey, TAccumulate>>
-                        >(AggregateBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Constant(seed),
-                        Expression.Quote(func),
-                        Expression.Constant(keyComparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source.Provider.CreateQuery<KeyValuePair<TKey, TAccumulate>>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        TAccumulate,
+                        Expression<Func<TAccumulate, TSource, TAccumulate>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<KeyValuePair<TKey, TAccumulate>>
+                    >(AggregateBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Constant(seed),
+                    Expression.Quote(func),
+                    Expression.Constant(keyComparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("AggregateBy`3", typeof(Enumerable))]
@@ -3926,26 +3604,24 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(seedSelector);
             ArgumentNullException.ThrowIfNull(func);
 
-            return source
-                .Provider
-                .CreateQuery<KeyValuePair<TKey, TAccumulate>>(
-                    Expression.Call(
-                        null,
-                        new Func<
-                            IQueryable<TSource>,
-                            Expression<Func<TSource, TKey>>,
-                            Expression<Func<TKey, TAccumulate>>,
-                            Expression<Func<TAccumulate, TSource, TAccumulate>>,
-                            IEqualityComparer<TKey>,
-                            IQueryable<KeyValuePair<TKey, TAccumulate>>
-                        >(AggregateBy).Method,
-                        source.Expression,
-                        Expression.Quote(keySelector),
-                        Expression.Quote(seedSelector),
-                        Expression.Quote(func),
-                        Expression.Constant(keyComparer, typeof(IEqualityComparer<TKey>))
-                    )
-                );
+            return source.Provider.CreateQuery<KeyValuePair<TKey, TAccumulate>>(
+                Expression.Call(
+                    null,
+                    new Func<
+                        IQueryable<TSource>,
+                        Expression<Func<TSource, TKey>>,
+                        Expression<Func<TKey, TAccumulate>>,
+                        Expression<Func<TAccumulate, TSource, TAccumulate>>,
+                        IEqualityComparer<TKey>,
+                        IQueryable<KeyValuePair<TKey, TAccumulate>>
+                    >(AggregateBy).Method,
+                    source.Expression,
+                    Expression.Quote(keySelector),
+                    Expression.Quote(seedSelector),
+                    Expression.Quote(func),
+                    Expression.Constant(keyComparer, typeof(IEqualityComparer<TKey>))
+                )
+            );
         }
 
         [DynamicDependency("SkipLast`1", typeof(Enumerable))]
@@ -3956,16 +3632,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, int, IQueryable<TSource>>(SkipLast).Method,
-                        source.Expression,
-                        Expression.Constant(count)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, int, IQueryable<TSource>>(SkipLast).Method,
+                    source.Expression,
+                    Expression.Constant(count)
+                )
+            );
         }
 
         [DynamicDependency("TakeLast`1", typeof(Enumerable))]
@@ -3976,16 +3650,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, int, IQueryable<TSource>>(TakeLast).Method,
-                        source.Expression,
-                        Expression.Constant(count)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, int, IQueryable<TSource>>(TakeLast).Method,
+                    source.Expression,
+                    Expression.Constant(count)
+                )
+            );
         }
 
         [DynamicDependency("Append`1", typeof(Enumerable))]
@@ -3996,16 +3668,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource, IQueryable<TSource>>(Append).Method,
-                        source.Expression,
-                        Expression.Constant(element)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource, IQueryable<TSource>>(Append).Method,
+                    source.Expression,
+                    Expression.Constant(element)
+                )
+            );
         }
 
         [DynamicDependency("Prepend`1", typeof(Enumerable))]
@@ -4016,16 +3686,14 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
-                .CreateQuery<TSource>(
-                    Expression.Call(
-                        null,
-                        new Func<IQueryable<TSource>, TSource, IQueryable<TSource>>(Prepend).Method,
-                        source.Expression,
-                        Expression.Constant(element)
-                    )
-                );
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    new Func<IQueryable<TSource>, TSource, IQueryable<TSource>>(Prepend).Method,
+                    source.Expression,
+                    Expression.Constant(element)
+                )
+            );
         }
     }
 }

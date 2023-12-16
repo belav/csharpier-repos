@@ -117,9 +117,10 @@ public class DocumentSource
             {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                 // #16707
-                var dependentEntry = ((InternalEntityEntry)entry)
-                    .StateManager
-                    .TryGetEntry(embeddedValue, fk.DeclaringEntityType)!;
+                var dependentEntry = ((InternalEntityEntry)entry).StateManager.TryGetEntry(
+                    embeddedValue,
+                    fk.DeclaringEntityType
+                )!;
                 document[embeddedPropertyName] = _database
                     .GetDocumentSource(dependentEntry.EntityType)
                     .CreateDocument(dependentEntry);
@@ -231,9 +232,10 @@ public class DocumentSource
             {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                 // #16707
-                var embeddedEntry = ((InternalEntityEntry)entry)
-                    .StateManager
-                    .TryGetEntry(embeddedValue, fk.DeclaringEntityType)!;
+                var embeddedEntry = ((InternalEntityEntry)entry).StateManager.TryGetEntry(
+                    embeddedValue,
+                    fk.DeclaringEntityType
+                )!;
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
                 var embeddedDocument = embeddedDocumentSource.GetCurrentDocument(embeddedEntry);
@@ -353,8 +355,9 @@ public class DocumentSource
     private static IProperty? FindOrdinalKeyProperty(IEntityType entityType) =>
         entityType
             .FindPrimaryKey()!
-            .Properties
-            .FirstOrDefault(p => p.GetJsonPropertyName().Length == 0 && p.IsOrdinalKeyProperty());
+            .Properties.FirstOrDefault(
+                p => p.GetJsonPropertyName().Length == 0 && p.IsOrdinalKeyProperty()
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

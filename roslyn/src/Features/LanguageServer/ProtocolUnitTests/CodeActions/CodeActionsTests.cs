@@ -129,13 +129,11 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper)
             FeaturesResources.Introduce_constant
             + '|'
             + string.Format(FeaturesResources.Introduce_constant_for_0, "1");
-        var introduceConstant = topLevelAction
-            .Children
-            .FirstOrDefault(
-                r =>
-                    ((JObject)r.Data!).ToObject<CodeActionResolveData>()!.UniqueIdentifier
-                    == expectedChildActionTitle
-            );
+        var introduceConstant = topLevelAction.Children.FirstOrDefault(
+            r =>
+                ((JObject)r.Data!).ToObject<CodeActionResolveData>()!.UniqueIdentifier
+                == expectedChildActionTitle
+        );
 
         AssertJsonEquals(expected, introduceConstant);
     }

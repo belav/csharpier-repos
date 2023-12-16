@@ -165,9 +165,8 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                                 reader
                             );
                             string typeName = typeForwarder.Name.GetString(reader);
-                            RuntimeAssemblyName redirectedAssemblyName = typeForwarder
-                                .Scope
-                                .ToRuntimeAssemblyName(reader);
+                            RuntimeAssemblyName redirectedAssemblyName =
+                                typeForwarder.Scope.ToRuntimeAssemblyName(reader);
 
                             yield return new TypeForwardInfo(
                                 redirectedAssemblyName,
@@ -182,9 +181,10 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
 
         public sealed override ManifestResourceInfo GetManifestResourceInfo(string resourceName)
         {
-            return ReflectionCoreExecution
-                .ExecutionEnvironment
-                .GetManifestResourceInfo(this, resourceName);
+            return ReflectionCoreExecution.ExecutionEnvironment.GetManifestResourceInfo(
+                this,
+                resourceName
+            );
         }
 
         public sealed override string[] GetManifestResourceNames()
@@ -194,9 +194,10 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
 
         public sealed override Stream GetManifestResourceStream(string name)
         {
-            return ReflectionCoreExecution
-                .ExecutionEnvironment
-                .GetManifestResourceStream(this, name);
+            return ReflectionCoreExecution.ExecutionEnvironment.GetManifestResourceStream(
+                this,
+                name
+            );
         }
 
         public sealed override string ImageRuntimeVersion

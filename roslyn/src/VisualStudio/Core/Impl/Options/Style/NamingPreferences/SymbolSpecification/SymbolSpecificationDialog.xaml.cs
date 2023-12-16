@@ -99,25 +99,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void HandleSymbolKindsPreviewKeyDown(object sender, KeyEventArgs e) =>
             HandlePreviewKeyDown(
                 e,
-                symbolKindsListView
-                    .SelectedItems
-                    .OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
+                symbolKindsListView.SelectedItems.OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
             );
 
         private void HandleAccessibilitiesPreviewKeyDown(object sender, KeyEventArgs e) =>
             HandlePreviewKeyDown(
                 e,
-                accessibilitiesListView
-                    .SelectedItems
-                    .OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
+                accessibilitiesListView.SelectedItems.OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
             );
 
         private void HandleModifiersPreviewKeyDown(object sender, KeyEventArgs e) =>
             HandlePreviewKeyDown(
                 e,
-                modifiersListView
-                    .SelectedItems
-                    .OfType<SymbolSpecificationViewModel.ModifierViewModel>()
+                modifiersListView.SelectedItems.OfType<SymbolSpecificationViewModel.ModifierViewModel>()
             );
 
         private static void HandlePreviewKeyDown<T>(KeyEventArgs e, IEnumerable<T> selectedItems)
@@ -138,9 +132,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void SelectAllSymbolKinds(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in symbolKindsListView
-                    .Items
-                    .OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
+                var item in symbolKindsListView.Items.OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
             )
             {
                 item.IsChecked = true;
@@ -150,9 +142,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void DeselectAllSymbolKinds(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in symbolKindsListView
-                    .Items
-                    .OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
+                var item in symbolKindsListView.Items.OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
             )
             {
                 item.IsChecked = false;
@@ -162,9 +152,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void SelectAllAccessibilities(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in accessibilitiesListView
-                    .Items
-                    .OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
+                var item in accessibilitiesListView.Items.OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
             )
             {
                 item.IsChecked = true;
@@ -174,9 +162,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void DeselectAllAccessibilities(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in accessibilitiesListView
-                    .Items
-                    .OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
+                var item in accessibilitiesListView.Items.OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
             )
             {
                 item.IsChecked = false;
@@ -186,9 +172,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void SelectAllModifiers(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in modifiersListView
-                    .Items
-                    .OfType<SymbolSpecificationViewModel.ModifierViewModel>()
+                var item in modifiersListView.Items.OfType<SymbolSpecificationViewModel.ModifierViewModel>()
             )
             {
                 item.IsChecked = true;
@@ -198,9 +182,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void DeselectAllModifiers(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in modifiersListView
-                    .Items
-                    .OfType<SymbolSpecificationViewModel.ModifierViewModel>()
+                var item in modifiersListView.Items.OfType<SymbolSpecificationViewModel.ModifierViewModel>()
             )
             {
                 item.IsChecked = false;

@@ -622,8 +622,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             async context =>
             {
                 var query = await context
-                    .JsonEntitiesInheritance
-                    .OfType<JsonEntityInheritanceDerived>()
+                    .JsonEntitiesInheritance.OfType<JsonEntityInheritanceDerived>()
                     .ToListAsync();
                 var entity = query.Single();
 
@@ -647,8 +646,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             async context =>
             {
                 var result = await context
-                    .JsonEntitiesInheritance
-                    .OfType<JsonEntityInheritanceDerived>()
+                    .JsonEntitiesInheritance.OfType<JsonEntityInheritanceDerived>()
                     .SingleAsync();
                 var updatedCollection = result.CollectionOnDerived;
 
@@ -738,18 +736,15 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var query = await context.JsonEntitiesBasic.ToListAsync();
                 var entity = query.Single();
                 entity.OwnedReferenceRoot.OwnedCollectionBranch[0].Fraction = 4321.3m;
-                entity
-                    .OwnedReferenceRoot
-                    .OwnedCollectionBranch
-                    .Add(
-                        new JsonOwnedBranch
-                        {
-                            Date = new DateTime(2222, 11, 11),
-                            Enum = JsonEnum.Three,
-                            Fraction = 45.32m,
-                            OwnedReferenceLeaf = new JsonOwnedLeaf { SomethingSomething = "cc" },
-                        }
-                    );
+                entity.OwnedReferenceRoot.OwnedCollectionBranch.Add(
+                    new JsonOwnedBranch
+                    {
+                        Date = new DateTime(2222, 11, 11),
+                        Enum = JsonEnum.Three,
+                        Fraction = 45.32m,
+                        OwnedReferenceLeaf = new JsonOwnedLeaf { SomethingSomething = "cc" },
+                    }
+                );
 
                 ClearLog();
                 await context.SaveChangesAsync();
@@ -2064,8 +2059,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 entity.Reference.TestDateTimeCollection.Add(DateTime.Parse("01/01/3000 12:34:56"));
                 entity
                     .Collection[0]
-                    .TestDateTimeCollection
-                    .Add(DateTime.Parse("01/01/3000 12:34:56"));
+                    .TestDateTimeCollection.Add(DateTime.Parse("01/01/3000 12:34:56"));
 
                 ClearLog();
                 await context.SaveChangesAsync();
@@ -3618,8 +3612,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 await context.SaveChangesAsync();
 
                 var saved = context
-                    .Database
-                    .SqlQueryRaw<string>(
+                    .Database.SqlQueryRaw<string>(
                         "select OwnedCollectionRoot from JsonEntitiesBasic where Id = 2"
                     )
                     .ToList();
@@ -3688,10 +3681,9 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                     else
                     {
                         Assert.Empty(newEntity.OwnedReferenceRoot.OwnedCollectionBranch!);
-                        newEntity
-                            .OwnedReferenceRoot
-                            .OwnedCollectionBranch
-                            .Add(new JsonOwnedBranch());
+                        newEntity.OwnedReferenceRoot.OwnedCollectionBranch.Add(
+                            new JsonOwnedBranch()
+                        );
                     }
                 }
                 else
@@ -3704,8 +3696,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                     context
                         .Entry(newEntity)
                         .Reference(e => e.OwnedReferenceRoot)
-                        .TargetEntry!
-                        .State = EntityState.Modified;
+                        .TargetEntry!.State = EntityState.Modified;
                 }
                 await context.SaveChangesAsync();
             },

@@ -3891,8 +3891,7 @@ namespace System.Text.RegularExpressions.Tests
                     string ExpectedValue
                 )>
             )[] otherTests = RegexHelpers
-                .AvailableEngines
-                .Where(e => e != RegexEngine.Interpreter)
+                .AvailableEngines.Where(e => e != RegexEngine.Interpreter)
                 .Select(e => (e, Match_MemberData_Cases(e).ToHashSet()))
                 .ToArray();
 
@@ -4396,12 +4395,10 @@ namespace System.Text.RegularExpressions.Tests
                 .Invoke(
                     async engineString =>
                     {
-                        AppDomain
-                            .CurrentDomain
-                            .SetData(
-                                RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
-                                TimeSpan.FromMilliseconds(100)
-                            );
+                        AppDomain.CurrentDomain.SetData(
+                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                            TimeSpan.FromMilliseconds(100)
+                        );
 
                         RegexEngine engine = (RegexEngine)
                             int.Parse(engineString, CultureInfo.InvariantCulture);
@@ -4431,12 +4428,10 @@ namespace System.Text.RegularExpressions.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    AppDomain
-                        .CurrentDomain
-                        .SetData(
-                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
-                            TimeSpan.FromMilliseconds(100)
-                        );
+                    AppDomain.CurrentDomain.SetData(
+                        RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                        TimeSpan.FromMilliseconds(100)
+                    );
 
                     Regex r = Match_InstanceMethods_DefaultTimeout_SourceGenerated_ThrowsImpl();
                     string input = new string('a', 50) + "@a.a";
@@ -4470,12 +4465,10 @@ namespace System.Text.RegularExpressions.Tests
                             @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$";
                         string input = new string('a', 50) + "@a.a";
 
-                        AppDomain
-                            .CurrentDomain
-                            .SetData(
-                                RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
-                                TimeSpan.FromMilliseconds(100)
-                            );
+                        AppDomain.CurrentDomain.SetData(
+                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                            TimeSpan.FromMilliseconds(100)
+                        );
 
                         if (options == RegexOptions.None)
                         {

@@ -485,12 +485,10 @@ namespace Microsoft.Win32
 
                                     if ((i + 1 == length) || (ch[i] == '\n'))
                                     {
-                                        string value = entry
-                                            .MetaInfo
-                                            .Substring(
-                                                start,
-                                                (ch[i - 1] == '\r' ? (i - 1) : (i + 1)) - start
-                                            );
+                                        string value = entry.MetaInfo.Substring(
+                                            start,
+                                            (ch[i - 1] == '\r' ? (i - 1) : (i + 1)) - start
+                                        );
 
                                         if (value.Length == 0 && cacheEntry.EntryMetadata == null)
                                         {

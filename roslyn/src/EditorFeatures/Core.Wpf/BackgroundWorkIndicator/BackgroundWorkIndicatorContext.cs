@@ -100,18 +100,16 @@ internal partial class WpfBackgroundWorkIndicatorFactory
 
             // Create a tool-tip at the requested position.  Turn off all default behavior for it.  We'll be
             // controlling everything ourselves.
-            _toolTipPresenter = factory
-                ._toolTipPresenterFactory
-                .Create(
-                    textView,
-                    new ToolTipParameters(
-                        trackMouse: false,
-                        ignoreBufferChange: true,
-                        keepOpenFunc: null,
-                        ignoreCaretPositionChange: true,
-                        dismissWhenOffscreen: false
-                    )
-                );
+            _toolTipPresenter = factory._toolTipPresenterFactory.Create(
+                textView,
+                new ToolTipParameters(
+                    trackMouse: false,
+                    ignoreBufferChange: true,
+                    keepOpenFunc: null,
+                    ignoreCaretPositionChange: true,
+                    dismissWhenOffscreen: false
+                )
+            );
 
             _trackingSpan = applicableToSpan.CreateTrackingSpan(SpanTrackingMode.EdgeInclusive);
 
@@ -216,9 +214,9 @@ internal partial class WpfBackgroundWorkIndicatorFactory
 
             async ValueTask DismissUIAsync()
             {
-                await this.ThreadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(cancellationToken);
+                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 // Ensure we only dismiss once.
                 if (_dismissed)
@@ -247,9 +245,9 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                 // tool-tip with it.
                 var data = this.BuildData();
 
-                await this.ThreadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(cancellationToken);
+                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 // If we've been dismissed already, then no point in continuing.
                 if (_dismissed)

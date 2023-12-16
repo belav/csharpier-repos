@@ -139,9 +139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 return AdjustSpacesOperationZeroOrOne(
-                    _options
-                        .Spacing
-                        .HasFlag(SpacePlacement.BetweenEmptyMethodDeclarationParentheses)
+                    _options.Spacing.HasFlag(
+                        SpacePlacement.BetweenEmptyMethodDeclarationParentheses
+                    )
                 );
             }
 
@@ -590,10 +590,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     case BinaryOperatorSpacingOptions.Ignore:
                         return CreateAdjustSpacesOperation(0, AdjustSpacesOption.PreserveSpaces);
                     default:
-                        System
-                            .Diagnostics
-                            .Debug
-                            .Assert(false, "Invalid BinaryOperatorSpacingOptions");
+                        System.Diagnostics.Debug.Assert(
+                            false,
+                            "Invalid BinaryOperatorSpacingOptions"
+                        );
                         break;
                 }
             }

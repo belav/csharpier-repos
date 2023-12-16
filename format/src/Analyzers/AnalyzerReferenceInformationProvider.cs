@@ -28,12 +28,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             ILogger logger
         )
         {
-            return solution
-                .Projects
-                .ToImmutableDictionary(
-                    project => project.Id,
-                    project => GetAnalyzersAndFixers(workspace, project)
-                );
+            return solution.Projects.ToImmutableDictionary(
+                project => project.Id,
+                project => GetAnalyzersAndFixers(workspace, project)
+            );
         }
 
         private static AnalyzersAndFixers GetAnalyzersAndFixers(
@@ -42,14 +40,16 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
         )
         {
             var analyzerAssemblies = project
-                .AnalyzerReferences
-                .Select(reference => TryLoadAssemblyFrom(workspace, reference.FullPath, reference))
+                .AnalyzerReferences.Select(
+                    reference => TryLoadAssemblyFrom(workspace, reference.FullPath, reference)
+                )
                 .OfType<Assembly>()
                 .ToImmutableArray();
 
             var analyzers = project
-                .AnalyzerReferences
-                .SelectMany(reference => reference.GetAnalyzers(project.Language))
+                .AnalyzerReferences.SelectMany(
+                    reference => reference.GetAnalyzers(project.Language)
+                )
                 .ToImmutableArray();
             return new AnalyzersAndFixers(
                 analyzers,

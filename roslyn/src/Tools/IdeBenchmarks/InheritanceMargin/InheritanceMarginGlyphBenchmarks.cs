@@ -132,11 +132,10 @@ namespace IdeBenchmarks.InheritanceMargin
                 .GenerateInheritanceMarginItemsAsync(workspace.CurrentSolution, cancellationToken)
                 .ConfigureAwait(false);
 
-            using var _ = Microsoft
-                .CodeAnalysis
-                .PooledObjects
-                .ArrayBuilder<InheritanceMarginTag>
-                .GetInstance(out var builder);
+            using var _ =
+                Microsoft.CodeAnalysis.PooledObjects.ArrayBuilder<InheritanceMarginTag>.GetInstance(
+                    out var builder
+                );
             foreach (var grouping in items.GroupBy(i => i.LineNumber))
             {
                 builder.Add(new InheritanceMarginTag(grouping.Key, grouping.ToImmutableArray()));
@@ -162,13 +161,11 @@ namespace IdeBenchmarks.InheritanceMargin
         private void RunOnUIThread(Action action)
         {
 #pragma warning disable VSTHRD001 // Only used for Benchmark purpose
-            _wpfApp
-                .Dispatcher
-                .Invoke(() =>
+            _wpfApp.Dispatcher.Invoke(() =>
 #pragma warning restore VSTHRD001
-                {
-                    action?.Invoke();
-                });
+            {
+                action?.Invoke();
+            });
         }
 
         private Task SetupWpfApplicaitonAsync()

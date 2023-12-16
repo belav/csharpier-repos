@@ -92,14 +92,12 @@ namespace System.ServiceModel
             {
                 if (value > int.MaxValue)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value.MaxReceivedMessageSize",
-                                SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value.MaxReceivedMessageSize",
+                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                        )
+                    );
                 }
                 httpTransport.MaxReceivedMessageSize = value;
                 httpsTransport.MaxReceivedMessageSize = value;
@@ -145,9 +143,9 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.reliableSession.CopySettings(value);
             }

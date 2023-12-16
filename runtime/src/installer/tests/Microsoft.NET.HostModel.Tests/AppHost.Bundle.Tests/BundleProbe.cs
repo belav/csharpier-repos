@@ -32,8 +32,7 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("host_runtime_contract.bundle_probe is not set");
+                .And.HaveStdOutContaining("host_runtime_contract.bundle_probe is not set");
         }
 
         [Fact]

@@ -257,8 +257,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             // invoked below, which does tracking based off a ConditionalWeakTable,
             // tracks the nodes for the entire duration of this method.
             var ifStatements = editor
-                .OriginalRoot
-                .DescendantNodes()
+                .OriginalRoot.DescendantNodes()
                 .OfType<TIfStatementSyntax>()
                 .ToArray();
 

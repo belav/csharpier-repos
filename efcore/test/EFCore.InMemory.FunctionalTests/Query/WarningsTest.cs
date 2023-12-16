@@ -143,15 +143,13 @@ public class WarningsTest
 
         Assert.Null(entity.Nav);
 
-        var log = loggerFactory
-            .Log
-            .Single(
-                l =>
-                    l.Message
-                    == CoreResources
-                        .LogLazyLoadOnDisposedContext(new TestLogger<InMemoryLoggingDefinitions>())
-                        .GenerateMessage("WarningAsErrorEntity", "Nav")
-            );
+        var log = loggerFactory.Log.Single(
+            l =>
+                l.Message
+                == CoreResources
+                    .LogLazyLoadOnDisposedContext(new TestLogger<InMemoryLoggingDefinitions>())
+                    .GenerateMessage("WarningAsErrorEntity", "Nav")
+        );
 
         Assert.Equal(LogLevel.Warning, log.Level);
     }
@@ -193,15 +191,13 @@ public class WarningsTest
 
         Assert.Null(entity.Nav);
 
-        var log = loggerFactory
-            .Log
-            .Single(
-                l =>
-                    l.Message
-                    == CoreResources
-                        .LogLazyLoadOnDisposedContext(new TestLogger<InMemoryLoggingDefinitions>())
-                        .GenerateMessage("WarningAsErrorEntity", "Nav")
-            );
+        var log = loggerFactory.Log.Single(
+            l =>
+                l.Message
+                == CoreResources
+                    .LogLazyLoadOnDisposedContext(new TestLogger<InMemoryLoggingDefinitions>())
+                    .GenerateMessage("WarningAsErrorEntity", "Nav")
+        );
 
         Assert.Equal(LogLevel.Debug, log.Level);
     }

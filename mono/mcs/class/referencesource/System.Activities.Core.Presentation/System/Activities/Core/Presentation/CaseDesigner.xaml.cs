@@ -77,9 +77,8 @@ namespace System.Activities.Core.Presentation
 
         void AttachDisplayName()
         {
-            AttachedPropertiesService attachedPropertiesService = this.Context
-                .Services
-                .GetService<AttachedPropertiesService>();
+            AttachedPropertiesService attachedPropertiesService =
+                this.Context.Services.GetService<AttachedPropertiesService>();
             Fx.Assert(
                 attachedPropertiesService != null,
                 "AttachedPropertiesService is not available."

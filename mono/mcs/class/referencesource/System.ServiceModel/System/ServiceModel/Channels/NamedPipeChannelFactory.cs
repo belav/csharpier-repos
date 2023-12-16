@@ -41,10 +41,7 @@ namespace System.ServiceModel.Channels
         static string GetConnectionGroupName(NamedPipeTransportBindingElement bindingElement)
         {
             return bindingElement.ConnectionPoolSettings.GroupName
-                + bindingElement
-                    .PipeSettings
-                    .ApplicationContainerSettings
-                    .GetConnectionGroupSuffix();
+                + bindingElement.PipeSettings.ApplicationContainerSettings.GetConnectionGroupSuffix();
         }
 
         internal override IConnectionInitiator GetConnectionInitiator()

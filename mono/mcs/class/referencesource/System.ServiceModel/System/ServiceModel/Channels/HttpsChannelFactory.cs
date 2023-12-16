@@ -39,10 +39,8 @@ namespace System.ServiceModel.Channels
                 && credentials.ServiceCertificate.SslCertificateAuthentication != null
             )
             {
-                this.sslCertificateValidator = credentials
-                    .ServiceCertificate
-                    .SslCertificateAuthentication
-                    .GetCertificateValidator();
+                this.sslCertificateValidator =
+                    credentials.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator();
                 this.remoteCertificateValidationCallback = new RemoteCertificateValidationCallback(
                     RemoteCertificateValidationCallback
                 );
@@ -85,9 +83,8 @@ namespace System.ServiceModel.Channels
             {
                 X509Certificate2 certificateEx = new X509Certificate2(certificate);
                 SecurityToken token = new X509SecurityToken(certificateEx, false);
-                ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = SecurityUtils
-                    .NonValidatingX509Authenticator
-                    .ValidateToken(token);
+                ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                    SecurityUtils.NonValidatingX509Authenticator.ValidateToken(token);
                 result = new SecurityMessageProperty();
                 result.TransportToken = new SecurityTokenSpecification(
                     token,
@@ -115,12 +112,10 @@ namespace System.ServiceModel.Channels
                 {
                     if (certificateIdentity.Certificates.Count > 1)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperArgument(
-                                "remoteAddress",
-                                SR.GetString(SR.HttpsIdentityMultipleCerts, remoteAddress.Uri)
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "remoteAddress",
+                            SR.GetString(SR.HttpsIdentityMultipleCerts, remoteAddress.Uri)
+                        );
                     }
                 }
 
@@ -136,12 +131,10 @@ namespace System.ServiceModel.Channels
                     && !validIdentity
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "remoteAddress",
-                            SR.GetString(SR.HttpsExplicitIdentity)
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "remoteAddress",
+                        SR.GetString(SR.HttpsExplicitIdentity)
+                    );
                 }
             }
             base.ValidateCreateChannelParameters(remoteAddress, via);
@@ -664,12 +657,10 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         thisPtr.request = thisPtr.httpsChannel.EndBaseGetWebRequest(result);
-                        thisPtr
-                            .factory
-                            .AddServerCertMappingOrSetRemoteCertificateValidationCallback(
-                                thisPtr.request,
-                                thisPtr.to
-                            );
+                        thisPtr.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(
+                            thisPtr.request,
+                            thisPtr.to
+                        );
                     }
 #pragma warning suppress 56500 // Microsoft, transferring exception to another thread
                     catch (Exception e)

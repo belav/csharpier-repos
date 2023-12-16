@@ -141,11 +141,9 @@ namespace MonoTests.System
         [ExpectedException(typeof(ArgumentNullException))]
         public void ResolveMethodTokenInvalidHandle()
         {
-            ModuleHandle
-                .EmptyHandle
-                .ResolveMethodHandle(
-                    typeof(ModuleHandleTest).GetMethod("ResolveMethodToken").MetadataToken
-                );
+            ModuleHandle.EmptyHandle.ResolveMethodHandle(
+                typeof(ModuleHandleTest).GetMethod("ResolveMethodToken").MetadataToken
+            );
         }
 
         [Test]

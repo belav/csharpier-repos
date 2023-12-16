@@ -77,9 +77,10 @@ namespace System.ServiceModel.Routing
             }
             else
             {
-                throw FxTrace
-                    .Exception
-                    .Argument("addressing", SR2.AddressingVersionInvalid(addressing.ToString()));
+                throw FxTrace.Exception.Argument(
+                    "addressing",
+                    SR2.AddressingVersionInvalid(addressing.ToString())
+                );
             }
             return ns;
         }

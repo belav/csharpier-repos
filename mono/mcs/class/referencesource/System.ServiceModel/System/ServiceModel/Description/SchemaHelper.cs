@@ -33,19 +33,17 @@ namespace System.ServiceModel.Description
                     && element.SchemaTypeName == existingElement.SchemaTypeName
                 )
                     return;
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxConflictingGlobalElement,
-                                element.Name,
-                                schema.TargetNamespace,
-                                GetTypeName(element),
-                                GetTypeName(existingElement)
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxConflictingGlobalElement,
+                            element.Name,
+                            schema.TargetNamespace,
+                            GetTypeName(element),
+                            GetTypeName(existingElement)
                         )
-                    );
+                    )
+                );
             }
 
             schema.Items.Add(element);
@@ -92,17 +90,11 @@ namespace System.ServiceModel.Description
                 if (existingType == type)
                     return;
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxConflictingGlobalType,
-                                type.Name,
-                                schema.TargetNamespace
-                            )
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxConflictingGlobalType, type.Name, schema.TargetNamespace)
+                    )
+                );
             }
 
             schema.Items.Add(type);

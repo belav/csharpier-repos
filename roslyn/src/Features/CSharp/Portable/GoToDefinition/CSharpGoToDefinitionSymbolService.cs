@@ -93,8 +93,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
                     Debug.Assert(gotoOperation is { BranchKind: BranchKind.GoTo });
                     var target = gotoOperation.Target;
                     return target
-                        .DeclaringSyntaxReferences
-                        .FirstOrDefault()
+                        .DeclaringSyntaxReferences.FirstOrDefault()
                         ?.GetSyntax()
                         ?.SpanStart;
                 }

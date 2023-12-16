@@ -1596,9 +1596,9 @@ class C
                 capabilities.HasVisualStudioLspCapability()
             );
 
-            var expectedNames = ClassificationTypeNames
-                .AllTypeNames
-                .Where(s => !ClassificationTypeNames.AdditiveTypeNames.Contains(s));
+            var expectedNames = ClassificationTypeNames.AllTypeNames.Where(
+                s => !ClassificationTypeNames.AdditiveTypeNames.Contains(s)
+            );
             foreach (var expectedClassificationName in expectedNames)
             {
                 // Assert that the classification type name exists and is mapped to a semantic token name.

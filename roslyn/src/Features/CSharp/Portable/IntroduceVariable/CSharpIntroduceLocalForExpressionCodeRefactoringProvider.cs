@@ -140,31 +140,26 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 
             // Generate the names for the locals.  For Tuples that have user provided names, keep that name.
             // Otherwise, generate a reasonable local name for the type of the field, using our helpers.
-            var localTypesAndDesignations = tupleType
-                .TupleElements
-                .SelectAsArray(
-                    (field, index, _) =>
-                    {
-                        var name = field.Name.ToCamelCase();
-                        if (field.Name == tupleUnderlyingType.TupleElements[index].Name)
-                            name = field.Type.GetLocalName(fallback: null) ?? name;
+            var localTypesAndDesignations = tupleType.TupleElements.SelectAsArray(
+                (field, index, _) =>
+                {
+                    var name = field.Name.ToCamelCase();
+                    if (field.Name == tupleUnderlyingType.TupleElements[index].Name)
+                        name = field.Type.GetLocalName(fallback: null) ?? name;
 
-                        var uniqueName = semanticFacts.GenerateUniqueLocalName(
-                            semanticModel,
-                            expression,
-                            container: null,
-                            name,
-                            cancellationToken
-                        );
-                        var designation = SingleVariableDesignation(uniqueName);
-                        return (
-                            type: field.Type,
-                            designation: (VariableDesignationSyntax)designation
-                        );
-                    },
-                    arg: /*unused*/
-                    false
-                );
+                    var uniqueName = semanticFacts.GenerateUniqueLocalName(
+                        semanticModel,
+                        expression,
+                        container: null,
+                        name,
+                        cancellationToken
+                    );
+                    var designation = SingleVariableDesignation(uniqueName);
+                    return (type: field.Type, designation: (VariableDesignationSyntax)designation);
+                },
+                arg: /*unused*/
+                false
+            );
 
             return ExpressionStatement(
                 AssignmentExpression(
@@ -212,9 +207,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                     var varPreference = simplifierOptions.GetUseVarPreference();
 
                     // If the user likes 'var' for intrinsics, and all the elements would be intrinsic.  Then use
-                    var isIntrinsic = tupleType
-                        .TupleElements
-                        .All(f => f.Type?.SpecialType != SpecialType.None);
+                    var isIntrinsic = tupleType.TupleElements.All(
+                        f => f.Type?.SpecialType != SpecialType.None
+                    );
                     if (isIntrinsic)
                         return varPreference.HasFlag(UseVarPreference.ForBuiltInTypes);
 

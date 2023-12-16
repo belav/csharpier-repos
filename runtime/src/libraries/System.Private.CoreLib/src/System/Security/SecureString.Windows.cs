@@ -25,13 +25,11 @@ namespace System.Security
             if (
                 _decryptedLength != 0
                 && !_encrypted
-                && !Interop
-                    .Crypt32
-                    .CryptProtectMemory(
-                        _buffer,
-                        (uint)_buffer.ByteLength,
-                        Interop.Crypt32.CRYPTPROTECTMEMORY_SAME_PROCESS
-                    )
+                && !Interop.Crypt32.CryptProtectMemory(
+                    _buffer,
+                    (uint)_buffer.ByteLength,
+                    Interop.Crypt32.CRYPTPROTECTMEMORY_SAME_PROCESS
+                )
             )
             {
                 throw new CryptographicException(Marshal.GetLastPInvokeError());
@@ -48,13 +46,11 @@ namespace System.Security
             if (
                 _decryptedLength != 0
                 && _encrypted
-                && !Interop
-                    .Crypt32
-                    .CryptUnprotectMemory(
-                        _buffer,
-                        (uint)_buffer.ByteLength,
-                        Interop.Crypt32.CRYPTPROTECTMEMORY_SAME_PROCESS
-                    )
+                && !Interop.Crypt32.CryptUnprotectMemory(
+                    _buffer,
+                    (uint)_buffer.ByteLength,
+                    Interop.Crypt32.CRYPTPROTECTMEMORY_SAME_PROCESS
+                )
             )
             {
                 throw new CryptographicException(Marshal.GetLastPInvokeError());

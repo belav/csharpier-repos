@@ -29,17 +29,15 @@ namespace System.ServiceModel.ComIntegration
             if (ssl != null && ssl.RequireCancellation == false)
                 cookie = true;
             if (cookie)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.RequireNonCookieMode,
-                                endpoint.Binding.Name,
-                                endpoint.Binding.Namespace
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.RequireNonCookieMode,
+                            endpoint.Binding.Name,
+                            endpoint.Binding.Namespace
                         )
-                    );
+                    )
+                );
         }
 
         void IServiceBehavior.AddBindingParameters(
@@ -70,9 +68,8 @@ namespace System.ServiceModel.ComIntegration
 
             foreach (ServiceEndpoint endpoint in service.Endpoints)
             {
-                ICollection<BindingElement> bindingElements = endpoint
-                    .Binding
-                    .CreateBindingElements();
+                ICollection<BindingElement> bindingElements =
+                    endpoint.Binding.CreateBindingElements();
                 foreach (BindingElement element in bindingElements)
                 {
                     SymmetricSecurityBindingElement sbe = (

@@ -144,13 +144,11 @@ namespace ILCompiler.DependencyAnalysis
                 DependencyList dependencyList = new DependencyList();
 
 #if !SUPPORT_JIT
-                factory
-                    .MetadataManager
-                    .GetDependenciesDueToVirtualMethodReflectability(
-                        ref dependencyList,
-                        factory,
-                        targetMethod
-                    );
+                factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
+                    ref dependencyList,
+                    factory,
+                    targetMethod
+                );
 
                 if (!factory.VTable(targetMethod.OwningType).HasFixedSlots)
                 {
@@ -173,13 +171,11 @@ namespace ILCompiler.DependencyAnalysis
                     MethodDesc targetMethod = info.TargetMethod;
 
 #if !SUPPORT_JIT
-                    factory
-                        .MetadataManager
-                        .GetDependenciesDueToVirtualMethodReflectability(
-                            ref dependencyList,
-                            factory,
-                            targetMethod
-                        );
+                    factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
+                        ref dependencyList,
+                        factory,
+                        targetMethod
+                    );
 
                     if (!factory.VTable(info.TargetMethod.OwningType).HasFixedSlots)
                     {
@@ -192,13 +188,11 @@ namespace ILCompiler.DependencyAnalysis
 #endif
                 }
 
-                factory
-                    .MetadataManager
-                    .GetDependenciesDueToDelegateCreation(
-                        ref dependencyList,
-                        factory,
-                        info.PossiblyUnresolvedTargetMethod
-                    );
+                factory.MetadataManager.GetDependenciesDueToDelegateCreation(
+                    ref dependencyList,
+                    factory,
+                    info.PossiblyUnresolvedTargetMethod
+                );
 
                 return dependencyList;
             }

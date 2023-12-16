@@ -88,18 +88,16 @@ namespace System.Runtime.Serialization.Json
                                 )
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new InvalidDataContractException(
-                                            SR.GetString(
-                                                SR.GetOnlyCollectionMustHaveAddMethod,
-                                                DataContract.GetClrTypeFullName(
-                                                    this.TraditionalDataContract.UnderlyingType
-                                                )
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new InvalidDataContractException(
+                                        SR.GetString(
+                                            SR.GetOnlyCollectionMustHaveAddMethod,
+                                            DataContract.GetClrTypeFullName(
+                                                this.TraditionalDataContract.UnderlyingType
                                             )
                                         )
-                                    );
+                                    )
+                                );
                             }
                             if (TraditionalCollectionDataContract.IsReadOnlyContract)
                             {

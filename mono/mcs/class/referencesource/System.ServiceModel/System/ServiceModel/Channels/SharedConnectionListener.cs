@@ -123,13 +123,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (!this.reconnectEvent.WaitOne(timeoutHelper.RemainingTime()))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new TimeoutException(
-                                    SR.GetString(SR.TimeoutOnClose, timeoutHelper.OriginalTimeout)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new TimeoutException(
+                                SR.GetString(SR.TimeoutOnClose, timeoutHelper.OriginalTimeout)
+                            )
+                        );
                     }
                 }
                 success = true;
@@ -398,13 +396,11 @@ namespace System.ServiceModel.Channels
                 this.listenerEndPoint = HandleServiceStart(isReconnecting);
                 if (string.IsNullOrEmpty(listenerEndPoint))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new CommunicationException(
-                                SR.GetString(SR.Sharing_EmptyListenerEndpoint, this.serviceName)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(SR.Sharing_EmptyListenerEndpoint, this.serviceName)
+                        )
+                    );
                 }
 
                 // Check it again after possible backoff
@@ -445,17 +441,15 @@ namespace System.ServiceModel.Channels
                         );
                         if (!createdNew)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new CommunicationException(
-                                        SR.GetString(
-                                            SR.SharedManagerBase,
-                                            serviceName,
-                                            SR.GetString(SR.SharedManagerServiceSecurityFailed)
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString(SR.SharedManagerServiceSecurityFailed)
                                     )
-                                );
+                                )
+                            );
                         }
 
                         Register();
@@ -463,17 +457,15 @@ namespace System.ServiceModel.Channels
                         bool signalled = securityEvent.WaitOne(0, false);
                         if (!signalled)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new CommunicationException(
-                                        SR.GetString(
-                                            SR.SharedManagerBase,
-                                            serviceName,
-                                            SR.GetString(SR.SharedManagerServiceSecurityFailed)
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString(SR.SharedManagerServiceSecurityFailed)
                                     )
-                                );
+                                )
+                            );
                         }
 
                         if (DiagnosticUtility.ShouldTraceInformation)
@@ -648,21 +640,19 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new CommunicationException(
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
                                     SR.GetString(
-                                        SR.SharedManagerBase,
-                                        serviceName,
-                                        SR.GetString(
-                                            SR.SharedManagerServiceSidLookupFailure,
-                                            exception.NativeErrorCode
-                                        )
-                                    ),
-                                    exception
-                                )
-                            );
+                                        SR.SharedManagerServiceSidLookupFailure,
+                                        exception.NativeErrorCode
+                                    )
+                                ),
+                                exception
+                            )
+                        );
                     }
                 }
                 else
@@ -677,21 +667,19 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new CommunicationException(
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
                                     SR.GetString(
-                                        SR.SharedManagerBase,
-                                        serviceName,
-                                        SR.GetString(
-                                            SR.SharedManagerServiceLookupFailure,
-                                            exception.NativeErrorCode
-                                        )
-                                    ),
-                                    exception
-                                )
-                            );
+                                        SR.SharedManagerServiceLookupFailure,
+                                        exception.NativeErrorCode
+                                    )
+                                ),
+                                exception
+                            )
+                        );
                     }
                     try
                     {
@@ -703,21 +691,19 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new CommunicationException(
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
                                     SR.GetString(
-                                        SR.SharedManagerBase,
-                                        serviceName,
-                                        SR.GetString(
-                                            SR.SharedManagerUserSidLookupFailure,
-                                            exception.NativeErrorCode
-                                        )
-                                    ),
-                                    exception
-                                )
-                            );
+                                        SR.SharedManagerUserSidLookupFailure,
+                                        exception.NativeErrorCode
+                                    )
+                                ),
+                                exception
+                            )
+                        );
                     }
                     try
                     {
@@ -725,21 +711,19 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new CommunicationException(
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
                                     SR.GetString(
-                                        SR.SharedManagerBase,
-                                        serviceName,
-                                        SR.GetString(
-                                            SR.SharedManagerLogonSidLookupFailure,
-                                            exception.NativeErrorCode
-                                        )
-                                    ),
-                                    exception
-                                )
-                            );
+                                        SR.SharedManagerLogonSidLookupFailure,
+                                        exception.NativeErrorCode
+                                    )
+                                ),
+                                exception
+                            )
+                        );
                     }
                 }
 
@@ -767,10 +751,9 @@ namespace System.ServiceModel.Channels
                         epa
                     );
 
-                registerChannelFactory
-                    .Endpoint
-                    .Behaviors
-                    .Add(new SharedListenerProxyBehavior(this));
+                registerChannelFactory.Endpoint.Behaviors.Add(
+                    new SharedListenerProxyBehavior(this)
+                );
 
                 IConnectionRegister connectionRegister = registerChannelFactory.CreateChannel();
                 this.channelFactory = registerChannelFactory;
@@ -817,41 +800,35 @@ namespace System.ServiceModel.Channels
                     switch (status)
                     {
                         case ListenerExceptionStatus.ConflictingRegistration:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new AddressAlreadyInUseException(
-                                        SR.GetString(
-                                            SR.SharedManagerBase,
-                                            serviceName,
-                                            SR.GetString(SR.SharedManagerConflictingRegistration)
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new AddressAlreadyInUseException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString(SR.SharedManagerConflictingRegistration)
                                     )
-                                );
+                                )
+                            );
                         case ListenerExceptionStatus.FailedToListen:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new AddressAlreadyInUseException(
-                                        SR.GetString(
-                                            SR.SharedManagerBase,
-                                            serviceName,
-                                            SR.GetString(SR.SharedManagerFailedToListen)
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new AddressAlreadyInUseException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString(SR.SharedManagerFailedToListen)
                                     )
-                                );
+                                )
+                            );
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new CommunicationException(
-                                        SR.GetString(
-                                            SR.SharedManagerBase,
-                                            serviceName,
-                                            SR.GetString("SharedManager" + status)
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString("SharedManager" + status)
                                     )
-                                );
+                                )
+                            );
                     }
                 }
                 else
@@ -887,21 +864,19 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Win32Exception exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new CommunicationException(
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SharedManagerBase,
+                                serviceName,
                                 SR.GetString(
-                                    SR.SharedManagerBase,
-                                    serviceName,
-                                    SR.GetString(
-                                        SR.SharedManagerCurrentUserSidLookupFailure,
-                                        exception.NativeErrorCode
-                                    )
-                                ),
-                                exception
-                            )
-                        );
+                                    SR.SharedManagerCurrentUserSidLookupFailure,
+                                    exception.NativeErrorCode
+                                )
+                            ),
+                            exception
+                        )
+                    );
                 }
 
                 Debug.Print(
@@ -927,21 +902,19 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Win32Exception exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new CommunicationException(
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SharedManagerBase,
+                                serviceName,
                                 SR.GetString(
-                                    SR.SharedManagerBase,
-                                    serviceName,
-                                    SR.GetString(
-                                        SR.SharedManagerAllowDupHandleFailed,
-                                        listenerUniqueSid.Value
-                                    )
-                                ),
-                                exception
-                            )
-                        );
+                                    SR.SharedManagerAllowDupHandleFailed,
+                                    listenerUniqueSid.Value
+                                )
+                            ),
+                            exception
+                        )
+                    );
                 }
 
                 if (DiagnosticUtility.ShouldTraceInformation)
@@ -1178,9 +1151,11 @@ namespace System.ServiceModel.Channels
                     }
 
                     if (
-                        this.proxy
-                            .validateUriCallThrottle
-                            .EnterAsync(TimeSpan.MaxValue, onEnterThrottle, this)
+                        this.proxy.validateUriCallThrottle.EnterAsync(
+                            TimeSpan.MaxValue,
+                            onEnterThrottle,
+                            this
+                        )
                     )
                     {
                         this.enteredThrottle = true;
@@ -1455,9 +1430,9 @@ namespace System.ServiceModel.Channels
                 catch (Win32Exception exception)
                 {
                     // Wrap unexpected Win32Exception.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(WrapEndpointReadingException(exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        WrapEndpointReadingException(exception)
+                    );
                 }
             }
 
@@ -1583,60 +1558,54 @@ namespace System.ServiceModel.Channels
                                     )
                                     {
                                         // service is disabled in the SCM, be specific
-                                        throw DiagnosticUtility
-                                            .ExceptionUtility
-                                            .ThrowHelperError(
-                                                new CommunicationException(
+                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                            new CommunicationException(
+                                                SR.GetString(
+                                                    SR.SharedManagerBase,
+                                                    serviceName,
                                                     SR.GetString(
-                                                        SR.SharedManagerBase,
-                                                        serviceName,
-                                                        SR.GetString(
-                                                            SR.SharedManagerServiceStartFailureDisabled,
-                                                            serviceName
-                                                        )
-                                                    ),
-                                                    exception
-                                                )
-                                            );
+                                                        SR.SharedManagerServiceStartFailureDisabled,
+                                                        serviceName
+                                                    )
+                                                ),
+                                                exception
+                                            )
+                                        );
                                     }
                                     else if (
                                         win32Exception.NativeErrorCode
                                         != UnsafeNativeMethods.ERROR_SERVICE_ALREADY_RUNNING
                                     )
                                     {
-                                        throw DiagnosticUtility
-                                            .ExceptionUtility
-                                            .ThrowHelperError(
-                                                new CommunicationException(
-                                                    SR.GetString(
-                                                        SR.SharedManagerBase,
-                                                        serviceName,
-                                                        SR.GetString(
-                                                            SR.SharedManagerServiceStartFailure,
-                                                            win32Exception.NativeErrorCode
-                                                        )
-                                                    ),
-                                                    exception
-                                                )
-                                            );
-                                    }
-                                }
-                                else
-                                {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
-                                        .ThrowHelperError(
+                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                                             new CommunicationException(
                                                 SR.GetString(
                                                     SR.SharedManagerBase,
                                                     serviceName,
                                                     SR.GetString(
-                                                        SR.SharedManagerServiceStartFailureNoError
+                                                        SR.SharedManagerServiceStartFailure,
+                                                        win32Exception.NativeErrorCode
                                                     )
                                                 ),
                                                 exception
                                             )
                                         );
+                                    }
+                                }
+                                else
+                                {
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new CommunicationException(
+                                            SR.GetString(
+                                                SR.SharedManagerBase,
+                                                serviceName,
+                                                SR.GetString(
+                                                    SR.SharedManagerServiceStartFailureNoError
+                                                )
+                                            ),
+                                            exception
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -1679,17 +1648,15 @@ namespace System.ServiceModel.Channels
                     );
                     if (serviceStatus != ServiceControllerStatus.Running)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new CommunicationException(
-                                    SR.GetString(
-                                        SR.SharedManagerBase,
-                                        serviceName,
-                                        SR.GetString(SR.SharedManagerServiceStartFailureNoError)
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
+                                    SR.GetString(SR.SharedManagerServiceStartFailureNoError)
                                 )
-                            );
+                            )
+                        );
                     }
                 }
                 finally
@@ -1709,9 +1676,9 @@ namespace System.ServiceModel.Channels
                             + " exception: "
                             + exception
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(WrapEndpointReadingException(exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        WrapEndpointReadingException(exception)
+                    );
                 }
             }
 
@@ -2057,11 +2024,10 @@ namespace System.ServiceModel.Channels
                     ListenerUnsafeNativeMethods.ICorRuntimeHost corRuntimeHost;
 
                     corRuntimeHost = (ListenerUnsafeNativeMethods.ICorRuntimeHost)
-                        System
-                            .Runtime
-                            .InteropServices
-                            .RuntimeEnvironment
-                            .GetRuntimeInterfaceAsObject(rclsid, riid);
+                        System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeInterfaceAsObject(
+                            rclsid,
+                            riid
+                        );
 
                     object defaultDomainAsObject;
                     corRuntimeHost.GetDefaultDomain(out defaultDomainAsObject);

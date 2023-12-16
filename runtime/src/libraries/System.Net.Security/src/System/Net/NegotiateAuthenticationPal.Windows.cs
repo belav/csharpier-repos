@@ -623,9 +623,11 @@ namespace System.Net
                     };
 
                     uint qop = requestEncryption ? 0 : Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
-                    int errorCode = GlobalSSPI
-                        .SSPIAuth
-                        .EncryptMessage(_securityContext, ref sdcInOut, qop);
+                    int errorCode = GlobalSSPI.SSPIAuth.EncryptMessage(
+                        _securityContext,
+                        ref sdcInOut,
+                        qop
+                    );
 
                     if (errorCode != 0)
                     {
@@ -727,9 +729,11 @@ namespace System.Net
                     };
 
                     uint qop;
-                    int errorCode = GlobalSSPI
-                        .SSPIAuth
-                        .DecryptMessage(_securityContext, ref sdcInOut, out qop);
+                    int errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(
+                        _securityContext,
+                        ref sdcInOut,
+                        out qop
+                    );
                     if (errorCode != 0)
                     {
                         unwrappedOffset = 0;
@@ -808,9 +812,12 @@ namespace System.Net
                         };
 
                         uint qop = IsEncrypted ? 0 : Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
-                        int errorCode = Interop
-                            .SspiCli
-                            .MakeSignature(ref _securityContext._handle, qop, ref sdcInOut, 0);
+                        int errorCode = Interop.SspiCli.MakeSignature(
+                            ref _securityContext._handle,
+                            qop,
+                            ref sdcInOut,
+                            0
+                        );
 
                         if (errorCode != 0)
                         {
@@ -865,9 +872,12 @@ namespace System.Net
                         };
 
                         uint qop;
-                        int errorCode = Interop
-                            .SspiCli
-                            .VerifySignature(ref _securityContext._handle, in sdcIn, 0, &qop);
+                        int errorCode = Interop.SspiCli.VerifySignature(
+                            ref _securityContext._handle,
+                            in sdcIn,
+                            0,
+                            &qop
+                        );
 
                         if (errorCode != 0)
                         {
@@ -920,9 +930,8 @@ namespace System.Net
                 SafeSspiAuthDataHandle? authData = null;
                 try
                 {
-                    Interop.SECURITY_STATUS result = Interop
-                        .SspiCli
-                        .SspiEncodeStringsAsAuthIdentity(
+                    Interop.SECURITY_STATUS result =
+                        Interop.SspiCli.SspiEncodeStringsAsAuthIdentity(
                             credential.UserName,
                             credential.Domain,
                             credential.Password,

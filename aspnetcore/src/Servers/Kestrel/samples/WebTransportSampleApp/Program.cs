@@ -9,24 +9,22 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
-builder
-    .WebHost
-    .ConfigureKestrel(
-        (context, options) =>
-        {
-            // Port configured for WebTransport
-            options.Listen(
-                IPAddress.Any,
-                5007,
-                listenOptions =>
-                {
-                    listenOptions.UseHttps(GenerateManualCertificate());
-                    listenOptions.UseConnectionLogging();
-                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-                }
-            );
-        }
-    );
+builder.WebHost.ConfigureKestrel(
+    (context, options) =>
+    {
+        // Port configured for WebTransport
+        options.Listen(
+            IPAddress.Any,
+            5007,
+            listenOptions =>
+            {
+                listenOptions.UseHttps(GenerateManualCertificate());
+                listenOptions.UseConnectionLogging();
+                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+            }
+        );
+    }
+);
 var host = builder.Build();
 
 host.Run(
@@ -45,9 +43,7 @@ host.Run(
         //// READ FROM A STREAM:
         var memory = new Memory<byte>(new byte[4096]);
         var test = await stream
-            .Transport
-            .Input
-            .AsStream()
+            .Transport.Input.AsStream()
             .ReadAsync(memory, CancellationToken.None);
         Console.WriteLine(System.Text.Encoding.Default.GetString(memory.Span));
     }

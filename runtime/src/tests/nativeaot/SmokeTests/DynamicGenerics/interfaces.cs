@@ -147,8 +147,7 @@ public class InterfacesTests
             Type recursiveOfMy = TypeOf.IT_Recursive.MakeGenericType(TypeOf.CommonType1);
             TypeInfo intf = recursiveOfMy
                 .GetTypeInfo()
-                .ImplementedInterfaces
-                .Single()
+                .ImplementedInterfaces.Single()
                 .GetTypeInfo();
             Assert.AreEqual(recursiveOfMy, intf.GenericTypeArguments[0]);
             Assert.AreEqual(recursiveOfMy.TypeHandle, intf.GenericTypeArguments[0].TypeHandle);
@@ -158,8 +157,7 @@ public class InterfacesTests
             Type dbRecursiveOfMy = TypeOf.IT_DoublyRecursive.MakeGenericType(TypeOf.CommonType1);
             TypeInfo intf = dbRecursiveOfMy
                 .GetTypeInfo()
-                .ImplementedInterfaces
-                .Single()
+                .ImplementedInterfaces.Single()
                 .GetTypeInfo();
             Type recursiveOfMy = TypeOf.IT_Recursive.MakeGenericType(TypeOf.CommonType1);
             Assert.AreEqual(recursiveOfMy, intf.GenericTypeArguments[0]);
@@ -168,8 +166,7 @@ public class InterfacesTests
 
         {
             TypeInfo genOfMy = TypeOf
-                .IT_WithInterfaceOverArrayType
-                .MakeGenericType(TypeOf.CommonType1)
+                .IT_WithInterfaceOverArrayType.MakeGenericType(TypeOf.CommonType1)
                 .GetTypeInfo();
             TypeInfo intf = genOfMy.ImplementedInterfaces.Single().GetTypeInfo();
             Assert.IsTrue(intf.GenericTypeArguments[0].IsArray);
@@ -195,8 +192,7 @@ public class InterfacesTests
         {
             Type frobberOfMy = TypeOf.IT_Frobber.MakeGenericType(TypeOf.CommonType1);
             TypeInfo iFrobberOfMy = TypeOf
-                .IT_IFrobber
-                .MakeGenericType(TypeOf.CommonType1)
+                .IT_IFrobber.MakeGenericType(TypeOf.CommonType1)
                 .GetTypeInfo();
             object o = Activator.CreateInstance(frobberOfMy);
             string result = (string)iFrobberOfMy.GetDeclaredMethod("Frob").Invoke(o, null);
@@ -205,8 +201,7 @@ public class InterfacesTests
 
         {
             TypeInfo frobberOfMy = TypeOf
-                .IT_Frobber
-                .MakeGenericType(TypeOf.CommonType1)
+                .IT_Frobber.MakeGenericType(TypeOf.CommonType1)
                 .GetTypeInfo();
             string result = (string)
                 frobberOfMy.GetDeclaredMethod("FrobStatically").Invoke(null, null);
@@ -220,9 +215,10 @@ public class InterfacesTests
         {
             // Direct call case
             {
-                Type useFrobberType = TypeOf
-                    .IT_UseFrobber
-                    .MakeGenericType(TypeOf.IT_FrobtasticFrobberStruct, TypeOf.CommonType1);
+                Type useFrobberType = TypeOf.IT_UseFrobber.MakeGenericType(
+                    TypeOf.IT_FrobtasticFrobberStruct,
+                    TypeOf.CommonType1
+                );
                 UseFrobberBase useFrobber = (UseFrobberBase)
                     Activator.CreateInstance(useFrobberType);
 
@@ -232,9 +228,10 @@ public class InterfacesTests
 #if UNIVERSAL_GENERICS
             // LoadVirtualFunction case (used by USG callers)
             {
-                Type useFrobberType = TypeOf
-                    .IT_UseFrobber
-                    .MakeGenericType(TypeOf.IT_AnotherFrobtasticFrobberStruct, TypeOf.CommonType1);
+                Type useFrobberType = TypeOf.IT_UseFrobber.MakeGenericType(
+                    TypeOf.IT_AnotherFrobtasticFrobberStruct,
+                    TypeOf.CommonType1
+                );
                 UseFrobberBase useFrobber = (UseFrobberBase)
                     Activator.CreateInstance(useFrobberType);
 

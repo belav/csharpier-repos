@@ -126,12 +126,10 @@ public partial class NavigationExpandingExpressionVisitor
             {
                 if (
                     navigation is INavigation concreteNavigation
-                    && _entityReference
-                        .ForeignKeyExpansionMap
-                        .TryGetValue(
-                            (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent),
-                            out var expansion
-                        )
+                    && _entityReference.ForeignKeyExpansionMap.TryGetValue(
+                        (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent),
+                        out var expansion
+                    )
                 )
                 {
                     // Value known to be non-null
@@ -139,16 +137,13 @@ public partial class NavigationExpandingExpressionVisitor
                 }
                 else if (
                     navigation is ISkipNavigation skipNavigation
-                    && _entityReference
-                        .ForeignKeyExpansionMap
-                        .TryGetValue(
-                            (skipNavigation.ForeignKey, skipNavigation.IsOnDependent),
-                            out var firstExpansion
-                        )
+                    && _entityReference.ForeignKeyExpansionMap.TryGetValue(
+                        (skipNavigation.ForeignKey, skipNavigation.IsOnDependent),
+                        out var firstExpansion
+                    )
                     // Value known to be non-null
                     && UnwrapEntityReference(firstExpansion)!
-                        .ForeignKeyExpansionMap
-                        .TryGetValue(
+                        .ForeignKeyExpansionMap.TryGetValue(
                             (
                                 skipNavigation.Inverse.ForeignKey,
                                 !skipNavigation.Inverse.IsOnDependent
@@ -356,9 +351,9 @@ public partial class NavigationExpandingExpressionVisitor
             Type = source.Type;
             GroupingEnumerable = new NavigationExpansionExpression(
                 Call(
-                    QueryableMethods
-                        .AsQueryable
-                        .MakeGenericMethod(CurrentParameter.Type.GetGenericArguments()[1]),
+                    QueryableMethods.AsQueryable.MakeGenericMethod(
+                        CurrentParameter.Type.GetGenericArguments()[1]
+                    ),
                     CurrentParameter
                 ),
                 currentTree,

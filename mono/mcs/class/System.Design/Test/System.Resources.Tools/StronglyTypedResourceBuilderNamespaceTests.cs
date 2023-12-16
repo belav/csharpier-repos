@@ -373,9 +373,7 @@ namespace MonoTests.System.Resources.Tools
             output = (
                 (CodePrimitiveExpression)
                     ((CodeObjectCreateExpression)cvds.InitExpression).Parameters[0]
-            )
-                .Value
-                .ToString();
+            ).Value.ToString();
 
             Assert.AreEqual(expected, output);
         }
@@ -417,9 +415,7 @@ namespace MonoTests.System.Resources.Tools
             output = (
                 (CodePrimitiveExpression)
                     ((CodeObjectCreateExpression)cvds.InitExpression).Parameters[0]
-            )
-                .Value
-                .ToString();
+            ).Value.ToString();
 
             Assert.AreEqual(expected, output);
         }
@@ -459,9 +455,7 @@ namespace MonoTests.System.Resources.Tools
                 output = (
                     (CodePrimitiveExpression)
                         ((CodeObjectCreateExpression)cvds.InitExpression).Parameters[0]
-                )
-                    .Value
-                    .ToString();
+                ).Value.ToString();
 
                 Assert.AreEqual(expected, output);
             }
@@ -506,9 +500,7 @@ namespace MonoTests.System.Resources.Tools
                 output = (
                     (CodePrimitiveExpression)
                         ((CodeObjectCreateExpression)cvds.InitExpression).Parameters[0]
-                )
-                    .Value
-                    .ToString();
+                ).Value.ToString();
 
                 Assert.AreEqual(expected, output);
             }

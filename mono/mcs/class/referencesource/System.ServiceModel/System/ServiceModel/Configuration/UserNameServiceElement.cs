@@ -112,11 +112,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -153,16 +151,14 @@ namespace System.ServiceModel.Configuration
                     this.MembershipProviderName
                 );
                 if (userName.MembershipProvider == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.InvalidMembershipProviderSpecifiedInConfig,
-                                    this.MembershipProviderName
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.InvalidMembershipProviderSpecifiedInConfig,
+                                this.MembershipProviderName
                             )
-                        );
+                        )
+                    );
             }
             else if (
                 userName.UserNamePasswordValidationMode
@@ -173,22 +169,21 @@ namespace System.ServiceModel.Configuration
             }
             if (!string.IsNullOrEmpty(this.CustomUserNamePasswordValidatorType))
             {
-                Type validatorType = System
-                    .Type
-                    .GetType(this.CustomUserNamePasswordValidatorType, true);
+                Type validatorType = System.Type.GetType(
+                    this.CustomUserNamePasswordValidatorType,
+                    true
+                );
                 if (!typeof(UserNamePasswordValidator).IsAssignableFrom(validatorType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigInvalidUserNamePasswordValidatorType,
-                                    this.CustomUserNamePasswordValidatorType,
-                                    typeof(UserNamePasswordValidator).ToString()
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidUserNamePasswordValidatorType,
+                                this.CustomUserNamePasswordValidatorType,
+                                typeof(UserNamePasswordValidator).ToString()
                             )
-                        );
+                        )
+                    );
                 }
                 userName.CustomUserNamePasswordValidator = (UserNamePasswordValidator)
                     Activator.CreateInstance(validatorType);

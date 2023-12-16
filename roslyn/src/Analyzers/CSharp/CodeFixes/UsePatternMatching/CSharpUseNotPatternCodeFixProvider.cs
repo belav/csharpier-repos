@@ -75,14 +75,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 notExpressionLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
             var parenthesizedExpression = (ParenthesizedExpressionSyntax)notExpression.Operand;
 
-            var negated = editor
-                .Generator
-                .Negate(
-                    CSharpSyntaxGeneratorInternal.Instance,
-                    parenthesizedExpression.Expression,
-                    semanticModel,
-                    cancellationToken
-                );
+            var negated = editor.Generator.Negate(
+                CSharpSyntaxGeneratorInternal.Instance,
+                parenthesizedExpression.Expression,
+                semanticModel,
+                cancellationToken
+            );
 
             editor.ReplaceNode(
                 notExpression,

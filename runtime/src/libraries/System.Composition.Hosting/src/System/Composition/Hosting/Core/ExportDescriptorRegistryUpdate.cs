@@ -52,8 +52,7 @@ namespace System.Composition.Hosting.Core
             {
                 var resultContract = result.Key;
                 var descriptors = result
-                    .Value
-                    .GetResults()
+                    .Value.GetResults()
                     .Select(cb => cb.GetDescriptor())
                     .ToArray();
                 _partDefinitions.Add(resultContract, descriptors);

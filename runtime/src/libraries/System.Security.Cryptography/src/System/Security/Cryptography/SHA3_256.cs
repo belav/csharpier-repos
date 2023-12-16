@@ -146,9 +146,11 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser
-                .OneShotHashProvider
-                .HashData(HashAlgorithmNames.SHA3_256, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(
+                HashAlgorithmNames.SHA3_256,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;

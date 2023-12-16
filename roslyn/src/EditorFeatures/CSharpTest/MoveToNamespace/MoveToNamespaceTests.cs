@@ -29,8 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
     {
         private static readonly TestComposition s_compositionWithoutOptions =
             FeaturesTestCompositions
-                .Features
-                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
+                .Features.AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(
                     typeof(MockDiagnosticUpdateSourceRegistrationService),
                     typeof(TestSymbolRenamedCodeActionOperationFactoryWorkspaceService)
@@ -1300,14 +1299,12 @@ namespace A
             using var testState = new TestState(workspace);
             Assert.Null(testState.TestMoveToNamespaceOptionsService);
 
-            var actions = await testState
-                .MoveToNamespaceService
-                .GetCodeActionsAsync(
-                    testState.InvocationDocument,
-                    testState.TestInvocationDocument.SelectedSpans.Single(),
-                    CodeActionOptions.DefaultProvider,
-                    CancellationToken.None
-                );
+            var actions = await testState.MoveToNamespaceService.GetCodeActionsAsync(
+                testState.InvocationDocument,
+                testState.TestInvocationDocument.SelectedSpans.Single(),
+                CodeActionOptions.DefaultProvider,
+                CancellationToken.None
+            );
 
             Assert.Empty(actions);
         }

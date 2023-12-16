@@ -369,17 +369,15 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     catch (FileNotFoundException e)
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new LoggableException(
-                                    SR.ExceptionThrownInExtension(
-                                        extension.ToString(),
-                                        e.GetType().ToString(),
-                                        SR.AssemblyNotFound(ResolveAssemblyHelper.FileNotFound)
-                                    )
+                        throw FxTrace.Exception.AsError(
+                            new LoggableException(
+                                SR.ExceptionThrownInExtension(
+                                    extension.ToString(),
+                                    e.GetType().ToString(),
+                                    SR.AssemblyNotFound(ResolveAssemblyHelper.FileNotFound)
                                 )
-                            );
+                            )
+                        );
                     }
                     catch (Exception e)
                     {
@@ -387,17 +385,15 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             throw;
                         }
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new LoggableException(
-                                    SR.ExceptionThrownInExtension(
-                                        extension.ToString(),
-                                        e.GetType().ToString(),
-                                        e.Message
-                                    )
+                        throw FxTrace.Exception.AsError(
+                            new LoggableException(
+                                SR.ExceptionThrownInExtension(
+                                    extension.ToString(),
+                                    e.GetType().ToString(),
+                                    e.Message
                                 )
-                            );
+                            )
+                        );
                     }
                 }
                 if (!this.BuildLogger.HasLoggedErrors && extensionExecutedSuccessfully)

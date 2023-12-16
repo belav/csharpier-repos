@@ -54,9 +54,10 @@ public class ForeignKeyAttributeConvention
         var unconfiguredNavigations = new List<PropertyInfo>();
         var inverses = new List<string>();
         foreach (
-            var candidatePair in Dependencies
-                .MemberClassifier
-                .GetNavigationCandidates(entityType, useAttributes: true)
+            var candidatePair in Dependencies.MemberClassifier.GetNavigationCandidates(
+                entityType,
+                useAttributes: true
+            )
         )
         {
             var (targetType, shouldBeOwned) = candidatePair.Value;
@@ -197,14 +198,12 @@ public class ForeignKeyAttributeConvention
 
         if (fkPropertyOnDependent != null && fkPropertyOnPrincipal != null)
         {
-            Dependencies
-                .Logger
-                .ForeignKeyAttributesOnBothPropertiesWarning(
-                    foreignKey.PrincipalToDependent!,
-                    foreignKey.DependentToPrincipal!,
-                    fkPropertyOnPrincipal,
-                    fkPropertyOnDependent
-                );
+            Dependencies.Logger.ForeignKeyAttributesOnBothPropertiesWarning(
+                foreignKey.PrincipalToDependent!,
+                foreignKey.DependentToPrincipal!,
+                fkPropertyOnPrincipal,
+                fkPropertyOnDependent
+            );
 
             var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
             if (newBuilder is null)
@@ -232,12 +231,10 @@ public class ForeignKeyAttributeConvention
             && fkPropertiesOnPrincipalToDependent != null
         )
         {
-            Dependencies
-                .Logger
-                .ForeignKeyAttributesOnBothNavigationsWarning(
-                    relationshipBuilder.Metadata.DependentToPrincipal!,
-                    relationshipBuilder.Metadata.PrincipalToDependent!
-                );
+            Dependencies.Logger.ForeignKeyAttributesOnBothNavigationsWarning(
+                relationshipBuilder.Metadata.DependentToPrincipal!,
+                relationshipBuilder.Metadata.PrincipalToDependent!
+            );
 
             var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
             if (newBuilder is null)
@@ -309,14 +306,12 @@ public class ForeignKeyAttributeConvention
                     || !Equals(fkPropertiesOnNavigation.First(), fkProperty!.GetSimpleMemberName())
                 )
                 {
-                    Dependencies
-                        .Logger
-                        .ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
-                            fkPropertiesOnDependentToPrincipal != null
-                                ? relationshipBuilder.Metadata.DependentToPrincipal!
-                                : relationshipBuilder.Metadata.PrincipalToDependent!,
-                            fkProperty!
-                        );
+                    Dependencies.Logger.ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
+                        fkPropertiesOnDependentToPrincipal != null
+                            ? relationshipBuilder.Metadata.DependentToPrincipal!
+                            : relationshipBuilder.Metadata.PrincipalToDependent!,
+                        fkProperty!
+                    );
 
                     var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
                     if (newBuilder is null)
@@ -374,14 +369,13 @@ public class ForeignKeyAttributeConvention
         }
         else
         {
-            var existingProperties = foreignKey
-                .DeclaringEntityType
-                .FindProperties(fkPropertiesToSet);
+            var existingProperties = foreignKey.DeclaringEntityType.FindProperties(
+                fkPropertiesToSet
+            );
             if (existingProperties != null)
             {
                 var conflictingFk = foreignKey
-                    .DeclaringEntityType
-                    .FindForeignKeys(existingProperties)
+                    .DeclaringEntityType.FindForeignKeys(existingProperties)
                     .FirstOrDefault(
                         fk =>
                             fk != foreignKey
@@ -438,15 +432,12 @@ public class ForeignKeyAttributeConvention
             )
                 is null
             ? null
-            : foreignKey
-                .PrincipalEntityType
-                .Builder
-                .HasRelationship(
-                    foreignKey.DeclaringEntityType,
-                    principalToDependentNavigationName,
-                    null,
-                    fromDataAnnotation: true
-                ) == null
+            : foreignKey.PrincipalEntityType.Builder.HasRelationship(
+                foreignKey.DeclaringEntityType,
+                principalToDependentNavigationName,
+                null,
+                fromDataAnnotation: true
+            ) == null
                 ? null
                 : relationshipBuilder;
     }
@@ -483,8 +474,7 @@ public class ForeignKeyAttributeConvention
         foreach (
             var memberInfo in entityType
                 .GetRuntimeProperties()
-                .Values
-                .Cast<MemberInfo>()
+                .Values.Cast<MemberInfo>()
                 .Concat(entityType.GetRuntimeFields().Values)
         )
         {
@@ -544,8 +534,7 @@ public class ForeignKeyAttributeConvention
         IConventionEntityType entityType
     ) =>
         Dependencies
-            .MemberClassifier
-            .GetNavigationCandidates(entityType, useAttributes: true)
+            .MemberClassifier.GetNavigationCandidates(entityType, useAttributes: true)
             .TryGetValue(propertyInfo, out _);
 
     private static IReadOnlyList<string>? FindCandidateDependentPropertiesThroughNavigation(
@@ -577,15 +566,12 @@ public class ForeignKeyAttributeConvention
         }
 
         var navigationPropertyTargetType = navigation!
-            .DeclaringEntityType
-            .GetRuntimeProperties()[navigation.Name]
+            .DeclaringEntityType.GetRuntimeProperties()[navigation.Name]
             .PropertyType;
 
         var otherNavigations = navigation
-            .DeclaringEntityType
-            .GetRuntimeProperties()
-            .Values
-            .Where(
+            .DeclaringEntityType.GetRuntimeProperties()
+            .Values.Where(
                 p =>
                     p.PropertyType == navigationPropertyTargetType
                     && p.GetSimpleMemberName() != navigation.Name

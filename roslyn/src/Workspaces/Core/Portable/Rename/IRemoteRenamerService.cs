@@ -176,8 +176,7 @@ namespace Microsoft.CodeAnalysis.Rename
             Contract.ThrowIfNull(serializableLocations);
 
             var locations = await serializableLocations
-                .Locations
-                .SelectAsArrayAsync(
+                .Locations.SelectAsArrayAsync(
                     static (loc, solution, cancellationToken) =>
                         loc.RehydrateAsync(solution, cancellationToken),
                     solution,
@@ -186,8 +185,7 @@ namespace Microsoft.CodeAnalysis.Rename
                 .ConfigureAwait(false);
 
             var implicitLocations = await serializableLocations
-                .ImplicitLocations
-                .SelectAsArrayAsync(
+                .ImplicitLocations.SelectAsArrayAsync(
                     static (loc, solution, cancellationToken) =>
                         loc.RehydrateAsync(solution, cancellationToken),
                     solution,
@@ -196,8 +194,7 @@ namespace Microsoft.CodeAnalysis.Rename
                 .ConfigureAwait(false);
 
             var referencedSymbols = await serializableLocations
-                .ReferencedSymbols
-                .SelectAsArrayAsync(
+                .ReferencedSymbols.SelectAsArrayAsync(
                     static (sym, solution, cancellationToken) =>
                         sym.TryRehydrateAsync(solution, cancellationToken),
                     solution,

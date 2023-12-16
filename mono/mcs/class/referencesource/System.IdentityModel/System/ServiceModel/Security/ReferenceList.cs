@@ -41,9 +41,9 @@ namespace System.ServiceModel.Security
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
         }
 
@@ -51,9 +51,9 @@ namespace System.ServiceModel.Security
         {
             if (id == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("id"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("id")
+                );
             }
             this.referredIds.Add(id);
         }
@@ -62,9 +62,9 @@ namespace System.ServiceModel.Security
         {
             if (id == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("id"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("id")
+                );
             }
             return this.referredIds.Contains(id);
         }
@@ -82,26 +82,22 @@ namespace System.ServiceModel.Security
                 string id = DataReference.ReadFrom(reader);
                 if (this.referredIds.Contains(id))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityMessageSerializationException(
-                                SR.GetString(SR.InvalidDataReferenceInReferenceList, "#" + id)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityMessageSerializationException(
+                            SR.GetString(SR.InvalidDataReferenceInReferenceList, "#" + id)
+                        )
+                    );
                 }
                 this.referredIds.Add(id);
             }
             reader.ReadEndElement(); // ReferenceList
             if (this.DataReferenceCount == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SecurityMessageSerializationException(
-                            SR.GetString(SR.ReferenceListCannotBeEmpty)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityMessageSerializationException(
+                        SR.GetString(SR.ReferenceListCannotBeEmpty)
+                    )
+                );
             }
         }
 
@@ -109,9 +105,9 @@ namespace System.ServiceModel.Security
         {
             if (id == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("id"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("id")
+                );
             }
             return this.referredIds.Remove(id);
         }
@@ -120,11 +116,9 @@ namespace System.ServiceModel.Security
         {
             if (this.DataReferenceCount == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ReferenceListCannotBeEmpty))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ReferenceListCannotBeEmpty))
+                );
             }
             writer.WriteStartElement(NamespacePrefix, ElementName, NamespaceUri);
             for (int i = 0; i < this.DataReferenceCount; i++)
@@ -152,13 +146,11 @@ namespace System.ServiceModel.Security
                 );
                 if (uri.Length < 2 || uri[0] != '#')
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new SecurityMessageSerializationException(
-                                SR.GetString(SR.InvalidDataReferenceInReferenceList, uri)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityMessageSerializationException(
+                            SR.GetString(SR.InvalidDataReferenceInReferenceList, uri)
+                        )
+                    );
                 }
                 return uri.Substring(1);
             }

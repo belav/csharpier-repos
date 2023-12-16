@@ -45,15 +45,13 @@ internal sealed class MvcViewOptionsSetup : IConfigureOptions<MvcViewOptions>
     {
         // Set up client validators
         options.ClientModelValidatorProviders.Add(new DefaultClientModelValidatorProvider());
-        options
-            .ClientModelValidatorProviders
-            .Add(
-                new DataAnnotationsClientModelValidatorProvider(
-                    _validationAttributeAdapterProvider,
-                    _dataAnnotationsLocalizationOptions,
-                    _stringLocalizerFactory
-                )
-            );
+        options.ClientModelValidatorProviders.Add(
+            new DataAnnotationsClientModelValidatorProvider(
+                _validationAttributeAdapterProvider,
+                _dataAnnotationsLocalizationOptions,
+                _stringLocalizerFactory
+            )
+        );
         options.ClientModelValidatorProviders.Add(new NumericClientModelValidatorProvider());
     }
 }

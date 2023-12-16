@@ -30,9 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             out int pfBlockAvailable
         )
         {
-            var snapshot = this.EditorAdaptersFactoryService
-                .GetDataBuffer(pTextLines)
-                .CurrentSnapshot;
+            var snapshot = this.EditorAdaptersFactoryService.GetDataBuffer(
+                pTextLines
+            ).CurrentSnapshot;
             var position = snapshot?.TryGetPosition(iCurrentLine, iCurrentChar);
             if (position == null)
             {
@@ -43,9 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             (string description, TextSpan span)? foundBlock = null;
 
-            var uiThreadOperationExecutor = this.Package
-                .ComponentModel
-                .GetService<IUIThreadOperationExecutor>();
+            var uiThreadOperationExecutor =
+                this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>();
             uiThreadOperationExecutor.Execute(
                 ServicesVSResources.Current_block,
                 ServicesVSResources.Determining_current_block,

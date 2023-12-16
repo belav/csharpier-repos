@@ -1271,9 +1271,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions
-                    .Default
-                    .WithLanguageVersion(LanguageVersion.CSharp6)
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp6
+                )
             );
         }
 
@@ -1313,9 +1313,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions
-                    .Default
-                    .WithLanguageVersion(LanguageVersion.CSharp8)
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
             );
         }
 
@@ -1355,9 +1355,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions
-                    .Default
-                    .WithLanguageVersion(LanguageVersion.CSharp9)
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
             );
         }
 
@@ -1400,9 +1400,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions
-                    .Default
-                    .WithLanguageVersion(LanguageVersion.CSharp8)
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
             );
         }
 
@@ -1442,9 +1442,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions
-                    .Default
-                    .WithLanguageVersion(LanguageVersion.CSharp9)
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
             );
         }
 

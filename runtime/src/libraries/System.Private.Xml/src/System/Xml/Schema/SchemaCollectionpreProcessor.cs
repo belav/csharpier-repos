@@ -811,26 +811,26 @@ namespace System.Xml.Schema
 
             foreach (DictionaryEntry entry in redefine.Groups)
             {
-                redefine
-                    .Schema!
-                    .Groups
-                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.Groups.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
 
             foreach (DictionaryEntry entry in redefine.AttributeGroups)
             {
-                redefine
-                    .Schema!
-                    .AttributeGroups
-                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.AttributeGroups.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
 
             foreach (DictionaryEntry entry in redefine.SchemaTypes)
             {
-                redefine
-                    .Schema!
-                    .SchemaTypes
-                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.SchemaTypes.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
         }
 

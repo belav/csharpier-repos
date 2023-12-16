@@ -100,9 +100,10 @@ namespace System.IdentityModel.Protocols.WSTrust
             // Validate the RequestSecurityToken required parameters.
             if (
                 (
-                    StringComparer
-                        .Ordinal
-                        .Equals(requestSecurityToken.RequestType, RequestTypes.Issue)
+                    StringComparer.Ordinal.Equals(
+                        requestSecurityToken.RequestType,
+                        RequestTypes.Issue
+                    )
                     || requestSecurityToken.RequestType == null
                 )
                 && StringComparer.Ordinal.Equals(requestSecurityToken.KeyType, KeyTypes.Asymmetric)
@@ -115,9 +116,9 @@ namespace System.IdentityModel.Protocols.WSTrust
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3091)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID3091))
+                );
             }
         }
 
@@ -138,11 +139,9 @@ namespace System.IdentityModel.Protocols.WSTrust
             WSTrustSerializationContext context
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID2072, reader.LocalName))
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.ID2072, reader.LocalName))
+            );
         }
     }
 }

@@ -93,8 +93,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructorFromMembers
                 return null;
 
             var getAccessor = propertyDeclaration
-                .AccessorList
-                ?.Accessors
+                .AccessorList?.Accessors
                 .FirstOrDefault(a => a.Kind() == SyntaxKind.GetAccessorDeclaration);
             var body =
                 propertyDeclaration.ExpressionBody

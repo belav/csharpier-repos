@@ -245,9 +245,9 @@ public class ResponseHeaderTests : LoggedTest
                     var response = httpContext.Response;
                     var responseHeaders = response.Headers;
                     responseHeaders["Transfer-Encoding"] = new string[] { "chunked" };
-                    var responseBytes = Encoding
-                        .ASCII
-                        .GetBytes("10\r\nManually Chunked\r\n0\r\n\r\n");
+                    var responseBytes = Encoding.ASCII.GetBytes(
+                        "10\r\nManually Chunked\r\n0\r\n\r\n"
+                    );
                     return response.Body.WriteAsync(responseBytes, 0, responseBytes.Length);
                 },
                 LoggerFactory

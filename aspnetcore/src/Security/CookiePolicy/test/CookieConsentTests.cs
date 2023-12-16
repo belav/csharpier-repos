@@ -71,10 +71,11 @@ public class CookieConsentTests
                 Assert.True(feature.IsConsentNeeded);
                 Assert.False(feature.HasConsent);
                 Assert.False(feature.CanTrack);
-                context
-                    .Response
-                    .Cookies
-                    .Append("Test", "Value", new CookieOptions() { IsEssential = false });
+                context.Response.Cookies.Append(
+                    "Test",
+                    "Value",
+                    new CookieOptions() { IsEssential = false }
+                );
                 return Task.CompletedTask;
             }
         );
@@ -103,10 +104,11 @@ public class CookieConsentTests
                 Assert.True(feature.IsConsentNeeded);
                 Assert.False(feature.HasConsent);
                 Assert.False(feature.CanTrack);
-                context
-                    .Response
-                    .Cookies
-                    .Append("Test", "Value", new CookieOptions() { IsEssential = false });
+                context.Response.Cookies.Append(
+                    "Test",
+                    "Value",
+                    new CookieOptions() { IsEssential = false }
+                );
                 return Task.CompletedTask;
             }
         );
@@ -128,10 +130,11 @@ public class CookieConsentTests
                 Assert.True(feature.IsConsentNeeded);
                 Assert.False(feature.HasConsent);
                 Assert.False(feature.CanTrack);
-                context
-                    .Response
-                    .Cookies
-                    .Append("Test", "Value", new CookieOptions() { IsEssential = true });
+                context.Response.Cookies.Append(
+                    "Test",
+                    "Value",
+                    new CookieOptions() { IsEssential = true }
+                );
                 return Task.CompletedTask;
             }
         );
@@ -163,10 +166,11 @@ public class CookieConsentTests
                 Assert.True(feature.IsConsentNeeded);
                 Assert.True(feature.HasConsent);
                 Assert.True(feature.CanTrack);
-                context
-                    .Response
-                    .Cookies
-                    .Append("Test", "Value", new CookieOptions() { IsEssential = true });
+                context.Response.Cookies.Append(
+                    "Test",
+                    "Value",
+                    new CookieOptions() { IsEssential = true }
+                );
                 return Task.CompletedTask;
             }
         );

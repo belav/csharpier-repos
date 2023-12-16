@@ -557,8 +557,7 @@ public class Class1
                 "Microsoft.CodeAnalysis",
                 analyzerWithFakeCompilerDependencyDirectory,
                 publicKeyOpt: typeof(SyntaxNode)
-                    .Assembly
-                    .GetName()
+                    .Assembly.GetName()
                     .GetPublicKey()
                     ?.ToImmutableArray() ?? default,
                 csSource: @"
@@ -601,8 +600,7 @@ public class Analyzer : DiagnosticAnalyzer
                 "Microsoft.CodeAnalysis",
                 analyzerWithLaterFakeCompileDirectory,
                 publicKeyOpt: typeof(SyntaxNode)
-                    .Assembly
-                    .GetName()
+                    .Assembly.GetName()
                     .GetPublicKey()
                     ?.ToImmutableArray() ?? default,
                 csSource: @"

@@ -32,13 +32,12 @@ End Class",
                 HangMitigatingCancellationToken
             );
             // Send a space to convert virtual whitespace into real whitespace
-            await TestServices
-                .Input
-                .SendAsync([VirtualKeyCode.RETURN, " "], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.Input.SendAsync(
+                [VirtualKeyCode.RETURN, " "],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 Class Program
     Sub Main()
         If True Then
@@ -46,9 +45,9 @@ Class Program
         End If
     End Sub
 End Class",
-                    assertCaretPosition: true,
-                    HangMitigatingCancellationToken
-                );
+                assertCaretPosition: true,
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -64,16 +63,12 @@ End Class",
                 HangMitigatingCancellationToken
             );
             // Send a space to convert virtual whitespace into real whitespace
-            await TestServices
-                .Input
-                .SendAsync(
-                    ["While True", VirtualKeyCode.RETURN, " "],
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.Input.SendAsync(
+                ["While True", VirtualKeyCode.RETURN, " "],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 Class Program
     Sub Main()
         While True
@@ -81,9 +76,9 @@ Class Program
         End While
     End Sub
 End Class",
-                    assertCaretPosition: true,
-                    HangMitigatingCancellationToken
-                );
+                assertCaretPosition: true,
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -96,23 +91,20 @@ End Interface",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
-                .SendAsync(
-                    (VirtualKeyCode.BACK, VirtualKeyCode.CONTROL),
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendAsync(["Class", VirtualKeyCode.TAB], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.Input.SendAsync(
+                (VirtualKeyCode.BACK, VirtualKeyCode.CONTROL),
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendAsync(
+                ["Class", VirtualKeyCode.TAB],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 Class C
 End Class",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -127,25 +119,22 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
-                .SendAsync(
-                    (VirtualKeyCode.BACK, VirtualKeyCode.CONTROL),
-                    HangMitigatingCancellationToken
-                );
-            await TestServices
-                .Input
-                .SendAsync(["fu", VirtualKeyCode.TAB], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .TextContainsAsync(
-                    @"
+            await TestServices.Input.SendAsync(
+                (VirtualKeyCode.BACK, VirtualKeyCode.CONTROL),
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendAsync(
+                ["fu", VirtualKeyCode.TAB],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 Class C
     Public Function Goo()
     End Function
 End Class",
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

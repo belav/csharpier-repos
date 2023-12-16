@@ -530,8 +530,9 @@ public class TagHelperOutputExtensionsTest
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
         var attributes = tagHelperOutput
-            .Attributes
-            .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase))
+            .Attributes.Where(
+                item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+            )
             .ToList();
 
         // Act
@@ -558,9 +559,9 @@ public class TagHelperOutputExtensionsTest
         );
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
-        var attributes = tagHelperOutput
-            .Attributes
-            .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase));
+        var attributes = tagHelperOutput.Attributes.Where(
+            item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+        );
 
         // Act
         tagHelperOutput.RemoveRange(attributes);
@@ -587,9 +588,9 @@ public class TagHelperOutputExtensionsTest
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
-        var attributes = tagHelperOutput
-            .Attributes
-            .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase));
+        var attributes = tagHelperOutput.Attributes.Where(
+            item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+        );
 
         // Act
         tagHelperOutput.RemoveRange(attributes);
@@ -1046,9 +1047,10 @@ public class TagHelperOutputExtensionsTest
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
-        tagHelperOutput
-            .Attributes
-            .SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn]]"));
+        tagHelperOutput.Attributes.SetAttribute(
+            "class",
+            new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn]]")
+        );
 
         // Act
         tagHelperOutput.RemoveClass("btn", htmlEncoder);
@@ -1072,12 +1074,10 @@ public class TagHelperOutputExtensionsTest
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
-        tagHelperOutput
-            .Attributes
-            .SetAttribute(
-                "class",
-                new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]] HtmlEncode[[btn]]")
-            );
+        tagHelperOutput.Attributes.SetAttribute(
+            "class",
+            new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]] HtmlEncode[[btn]]")
+        );
 
         // Act
         tagHelperOutput.RemoveClass("btn", htmlEncoder);
@@ -1126,9 +1126,10 @@ public class TagHelperOutputExtensionsTest
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
-        tagHelperOutput
-            .Attributes
-            .SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]]"));
+        tagHelperOutput.Attributes.SetAttribute(
+            "class",
+            new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]]")
+        );
 
         // Act
         tagHelperOutput.RemoveClass("btn-primary", htmlEncoder);

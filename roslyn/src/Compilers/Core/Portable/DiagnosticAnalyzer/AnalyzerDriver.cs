@@ -533,9 +533,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 SyntaxTree,
                                 ImmutableHashSet<DiagnosticAnalyzer>
                             >();
-                        _lazyGeneratedCodeAttribute = analyzerExecutor
-                            .Compilation
-                            ?.GetTypeByMetadataName(
+                        _lazyGeneratedCodeAttribute =
+                            analyzerExecutor.Compilation?.GetTypeByMetadataName(
                                 "System.CodeDom.Compiler.GeneratedCodeAttribute"
                             );
 
@@ -1342,18 +1341,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     return ImmutableHashSet.Create(defaultSeverity);
 
                 if (
-                    compilation
-                        .Options
-                        .SpecificDiagnosticOptions
-                        .TryGetValue(descriptor.Id, out var severity)
-                    || compilation
-                        .Options
-                        .SyntaxTreeOptionsProvider
-                        ?.TryGetGlobalDiagnosticValue(
-                            descriptor.Id,
-                            cancellationToken,
-                            out severity
-                        ) == true
+                    compilation.Options.SpecificDiagnosticOptions.TryGetValue(
+                        descriptor.Id,
+                        out var severity
+                    )
+                    || compilation.Options.SyntaxTreeOptionsProvider?.TryGetGlobalDiagnosticValue(
+                        descriptor.Id,
+                        cancellationToken,
+                        out severity
+                    ) == true
                 )
                 {
                     if (severity != ReportDiagnostic.Default)
@@ -1828,8 +1824,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     var model = compilation.GetSemanticModel(location.SourceTree);
                     for (
                         var node = location
-                            .SourceTree
-                            .GetRoot(cancellationToken)
+                            .SourceTree.GetRoot(cancellationToken)
                             .FindNode(location.SourceSpan, getInnermostNodeForTie: true);
                         node != null;
                         node = node.Parent
@@ -2114,9 +2109,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 DiagnosticAnalyzer,
                 ImmutableArray<ImmutableArray<SymbolAnalyzerAction>>
             )>.GetInstance();
-            var actionsByAnalyzers = analyzerActions
-                .SymbolActions
-                .GroupBy(action => action.Analyzer);
+            var actionsByAnalyzers = analyzerActions.SymbolActions.GroupBy(
+                action => action.Analyzer
+            );
             var actionsByKindBuilder = ArrayBuilder<
                 ArrayBuilder<SymbolAnalyzerAction>
             >.GetInstance();
@@ -2965,9 +2960,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            var filteredDiagnostic = compilation
-                .Options
-                .FilterDiagnostic(diagnostic, cancellationToken);
+            var filteredDiagnostic = compilation.Options.FilterDiagnostic(
+                diagnostic,
+                cancellationToken
+            );
             filteredDiagnostic = applyFurtherFiltering(filteredDiagnostic);
 
             // Track diagnostics suppressed through compilation options or syntax tree options.
@@ -3268,12 +3264,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         {
                             // Don't inherit the symbol start and symbol end actions.
                             var containerAnalyzerActions = containerActions.AnalyzerActions;
-                            var actions = AnalyzerActions
-                                .Empty
-                                .Append(
-                                    in containerAnalyzerActions,
-                                    appendSymbolStartAndSymbolEndActions: false
-                                );
+                            var actions = AnalyzerActions.Empty.Append(
+                                in containerAnalyzerActions,
+                                appendSymbolStartAndSymbolEndActions: false
+                            );
                             return CreateGroupedActions(analyzer, actions);
                         }
                     }
@@ -3303,8 +3297,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 return await driver
-                    .AnalyzerManager
-                    .GetPerSymbolAnalyzerActionsAsync(
+                    .AnalyzerManager.GetPerSymbolAnalyzerActionsAsync(
                         symbol,
                         isGeneratedCodeSymbol,
                         filterTree,
@@ -3456,10 +3449,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // Check for explicit user configuration for generated code from options.
                 //     generated_code = true | false
                 // If there is no explicit user configuration, fallback to our generated code heuristic.
-                var options = AnalyzerExecutor
-                    .AnalyzerOptions
-                    .AnalyzerConfigOptionsProvider
-                    .GetOptions(tree);
+                var options =
+                    AnalyzerExecutor.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(tree);
                 return GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(options)
                     ?? _isGeneratedCode(tree, cancellationToken);
             }

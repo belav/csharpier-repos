@@ -94,8 +94,7 @@ public class When_mapping_to_an_array_as_ICollection_with_MapAtRuntime : AutoMap
     public void Should_map_ok()
     {
         _destination
-            .Items
-            .Select(i => i.Value)
+            .Items.Select(i => i.Value)
             .SequenceEqual(_sourceItems.Select(i => i.Value))
             .ShouldBeTrue();
     }

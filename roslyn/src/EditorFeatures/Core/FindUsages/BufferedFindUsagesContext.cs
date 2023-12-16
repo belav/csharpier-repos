@@ -115,12 +115,10 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         // Push all values we've buffered into the new presenter context.
 
         await presenterContext
-            .ProgressTracker
-            .AddItemsAsync(_state.TotalItemCount, cancellationToken)
+            .ProgressTracker.AddItemsAsync(_state.TotalItemCount, cancellationToken)
             .ConfigureAwait(false);
         await presenterContext
-            .ProgressTracker
-            .ItemsCompletedAsync(_state.ItemsCompleted, cancellationToken)
+            .ProgressTracker.ItemsCompletedAsync(_state.ItemsCompleted, cancellationToken)
             .ConfigureAwait(false);
 
         if (_state.SearchTitle != null)
@@ -161,8 +159,7 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         if (IsSwapped)
         {
             await _streamingPresenterContext
-                .ProgressTracker
-                .AddItemsAsync(count, cancellationToken)
+                .ProgressTracker.AddItemsAsync(count, cancellationToken)
                 .ConfigureAwait(false);
         }
         else
@@ -180,8 +177,7 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         if (IsSwapped)
         {
             await _streamingPresenterContext
-                .ProgressTracker
-                .ItemsCompletedAsync(count, cancellationToken)
+                .ProgressTracker.ItemsCompletedAsync(count, cancellationToken)
                 .ConfigureAwait(false);
         }
         else

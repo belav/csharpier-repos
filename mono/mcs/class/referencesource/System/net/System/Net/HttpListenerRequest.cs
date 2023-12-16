@@ -120,17 +120,15 @@ namespace System.Net
                     asyncResult.Reset(numBytes + pClientCertInfo->CertEncodedSize);
 
                     uint bytesReceived = 0;
-                    errorCode = UnsafeNclNativeMethods
-                        .HttpApi
-                        .HttpReceiveClientCertificate(
-                            httpListenerRequest.HttpListenerContext.RequestQueueHandle,
-                            httpListenerRequest.m_ConnectionId,
-                            (uint)UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS.NONE,
-                            asyncResult.m_MemoryBlob,
-                            asyncResult.m_Size,
-                            &bytesReceived,
-                            asyncResult.m_pOverlapped
-                        );
+                    errorCode = UnsafeNclNativeMethods.HttpApi.HttpReceiveClientCertificate(
+                        httpListenerRequest.HttpListenerContext.RequestQueueHandle,
+                        httpListenerRequest.m_ConnectionId,
+                        (uint)UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS.NONE,
+                        asyncResult.m_MemoryBlob,
+                        asyncResult.m_Size,
+                        &bytesReceived,
+                        asyncResult.m_pOverlapped
+                    );
 
                     if (
                         errorCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
@@ -549,12 +547,10 @@ namespace System.Net
                 if (m_BoundaryType == BoundaryType.None)
                 {
                     if (
-                        HttpWebRequest
-                            .ChunkedHeader
-                            .Equals(
-                                GetKnownHeader(HttpRequestHeader.TransferEncoding),
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                        HttpWebRequest.ChunkedHeader.Equals(
+                            GetKnownHeader(HttpRequestHeader.TransferEncoding),
+                            StringComparison.OrdinalIgnoreCase
+                        )
                     )
                     {
                         m_BoundaryType = BoundaryType.Chunked;
@@ -606,9 +602,10 @@ namespace System.Net
             {
                 if (m_WebHeaders == null)
                 {
-                    m_WebHeaders = UnsafeNclNativeMethods
-                        .HttpApi
-                        .GetHeaders(RequestBuffer, OriginalBlobAddress);
+                    m_WebHeaders = UnsafeNclNativeMethods.HttpApi.GetHeaders(
+                        RequestBuffer,
+                        OriginalBlobAddress
+                    );
                 }
                 GlobalLog.Print(
                     "HttpListenerRequest#"
@@ -627,9 +624,10 @@ namespace System.Net
             {
                 if (m_HttpMethod == null)
                 {
-                    m_HttpMethod = UnsafeNclNativeMethods
-                        .HttpApi
-                        .GetVerb(RequestBuffer, OriginalBlobAddress);
+                    m_HttpMethod = UnsafeNclNativeMethods.HttpApi.GetVerb(
+                        RequestBuffer,
+                        OriginalBlobAddress
+                    );
                 }
                 GlobalLog.Print(
                     "HttpListenerRequest#"
@@ -946,9 +944,11 @@ namespace System.Net
         [HostProtection(ExternalThreading = true)]
         public Task<X509Certificate2> GetClientCertificateAsync()
         {
-            return Task<X509Certificate2>
-                .Factory
-                .FromAsync(BeginGetClientCertificate, EndGetClientCertificate, null);
+            return Task<X509Certificate2>.Factory.FromAsync(
+                BeginGetClientCertificate,
+                EndGetClientCertificate,
+                null
+            );
         }
 
         public TransportContext TransportContext
@@ -1091,9 +1091,10 @@ namespace System.Net
             {
                 if (m_RemoteEndPoint == null)
                 {
-                    m_RemoteEndPoint = UnsafeNclNativeMethods
-                        .HttpApi
-                        .GetRemoteEndPoint(RequestBuffer, OriginalBlobAddress);
+                    m_RemoteEndPoint = UnsafeNclNativeMethods.HttpApi.GetRemoteEndPoint(
+                        RequestBuffer,
+                        OriginalBlobAddress
+                    );
                 }
                 GlobalLog.Print(
                     "HttpListenerRequest#"
@@ -1112,9 +1113,10 @@ namespace System.Net
             {
                 if (m_LocalEndPoint == null)
                 {
-                    m_LocalEndPoint = UnsafeNclNativeMethods
-                        .HttpApi
-                        .GetLocalEndPoint(RequestBuffer, OriginalBlobAddress);
+                    m_LocalEndPoint = UnsafeNclNativeMethods.HttpApi.GetLocalEndPoint(
+                        RequestBuffer,
+                        OriginalBlobAddress
+                    );
                 }
                 GlobalLog.Print(
                     "HttpListenerRequest#"
@@ -1207,9 +1209,8 @@ namespace System.Net
                         );
                         uint bytesReceived = 0;
 
-                        uint statusCode = UnsafeNclNativeMethods
-                            .HttpApi
-                            .HttpReceiveClientCertificate(
+                        uint statusCode =
+                            UnsafeNclNativeMethods.HttpApi.HttpReceiveClientCertificate(
                                 HttpListenerContext.RequestQueueHandle,
                                 m_ConnectionId,
                                 (uint)UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS.NONE,
@@ -1340,9 +1341,8 @@ namespace System.Net
                         );
                         uint bytesReceived = 0;
 
-                        uint statusCode = UnsafeNclNativeMethods
-                            .HttpApi
-                            .HttpReceiveClientCertificate(
+                        uint statusCode =
+                            UnsafeNclNativeMethods.HttpApi.HttpReceiveClientCertificate(
                                 HttpListenerContext.RequestQueueHandle,
                                 m_ConnectionId,
                                 (uint)UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS.NONE,
@@ -1488,9 +1488,11 @@ namespace System.Net
 
         private string GetKnownHeader(HttpRequestHeader header)
         {
-            return UnsafeNclNativeMethods
-                .HttpApi
-                .GetKnownHeader(RequestBuffer, OriginalBlobAddress, (int)header);
+            return UnsafeNclNativeMethods.HttpApi.GetKnownHeader(
+                RequestBuffer,
+                OriginalBlobAddress,
+                (int)header
+            );
         }
 
         internal ChannelBinding GetChannelBinding()
@@ -1546,9 +1548,10 @@ namespace System.Net
 
             m_TokenBindings = new List<TokenBinding>();
             UnsafeNclNativeMethods.HttpApi.HTTP_REQUEST_TOKEN_BINDING_INFO* pTokenBindingInfo =
-                UnsafeNclNativeMethods
-                    .HttpApi
-                    .GetTlsTokenBindingRequestInfo(RequestBuffer, OriginalBlobAddress);
+                UnsafeNclNativeMethods.HttpApi.GetTlsTokenBindingRequestInfo(
+                    RequestBuffer,
+                    OriginalBlobAddress
+                );
             UnsafeNclNativeMethods.HttpApi.HTTP_REQUEST_TOKEN_BINDING_INFO_V1* pTokenBindingInfo_V1 =
                 null;
             bool useV1TokenBinding = false;
@@ -1556,9 +1559,11 @@ namespace System.Net
             // Only try to collect the old binding information if there is no V2 binding information available
             if (pTokenBindingInfo == null)
             {
-                pTokenBindingInfo_V1 = UnsafeNclNativeMethods
-                    .HttpApi
-                    .GetTlsTokenBindingRequestInfo_V1(RequestBuffer, OriginalBlobAddress);
+                pTokenBindingInfo_V1 =
+                    UnsafeNclNativeMethods.HttpApi.GetTlsTokenBindingRequestInfo_V1(
+                        RequestBuffer,
+                        OriginalBlobAddress
+                    );
                 useV1TokenBinding = true;
             }
 
@@ -1581,9 +1586,8 @@ namespace System.Net
                 if (useV1TokenBinding && pTokenBindingInfo_V1 != null)
                 {
                     // Old V1 Token Binding protocol is still being used, so we need to verify the binding message using the old API
-                    m_TokenBindingVerifyMessageStatus = UnsafeNclNativeMethods
-                        .HttpApi
-                        .TokenBindingVerifyMessage_V1(
+                    m_TokenBindingVerifyMessageStatus =
+                        UnsafeNclNativeMethods.HttpApi.TokenBindingVerifyMessage_V1(
                             pTokenBindingInfo_V1->TokenBinding + fixup,
                             pTokenBindingInfo_V1->TokenBindingSize,
                             (IntPtr)((byte*)(pTokenBindingInfo_V1->KeyType) + fixup),
@@ -1595,9 +1599,8 @@ namespace System.Net
                 else
                 {
                     // Use the V2 token binding behavior
-                    m_TokenBindingVerifyMessageStatus = UnsafeNclNativeMethods
-                        .HttpApi
-                        .TokenBindingVerifyMessage(
+                    m_TokenBindingVerifyMessageStatus =
+                        UnsafeNclNativeMethods.HttpApi.TokenBindingVerifyMessage(
                             pTokenBindingInfo->TokenBinding + fixup,
                             pTokenBindingInfo->TokenBindingSize,
                             pTokenBindingInfo->KeyType,
@@ -1765,10 +1768,12 @@ namespace System.Net
 
                 while (i < l)
                 {
-                    i = CultureInfo
-                        .InvariantCulture
-                        .CompareInfo
-                        .IndexOf(headerValue, attrName, i, CompareOptions.IgnoreCase);
+                    i = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                        headerValue,
+                        attrName,
+                        i,
+                        CompareOptions.IgnoreCase
+                    );
                     if (i < 0)
                         break;
                     if (i + k >= l)

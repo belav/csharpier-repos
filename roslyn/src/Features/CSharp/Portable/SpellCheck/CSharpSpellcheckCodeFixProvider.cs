@@ -40,8 +40,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SpellCheck
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             AddImportDiagnosticIds
-                .FixableDiagnosticIds
-                .Concat(GenerateMethodDiagnosticIds.FixableDiagnosticIds)
+                .FixableDiagnosticIds.Concat(GenerateMethodDiagnosticIds.FixableDiagnosticIds)
                 .Concat(ImmutableArray.Create(CS0426, CS1520));
 
         protected override bool ShouldSpellCheck(SimpleNameSyntax name) => !name.IsVar;

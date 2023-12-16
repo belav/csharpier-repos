@@ -40,8 +40,7 @@ public class IdentityMap<TKey> : IIdentityMap<TKey>
 
         if (key.IsPrimaryKey())
         {
-            _foreignKeys = key.DeclaringEntityType
-                .GetDerivedTypesInclusive()
+            _foreignKeys = key.DeclaringEntityType.GetDerivedTypesInclusive()
                 .SelectMany(t => t.GetDeclaredForeignKeys())
                 .ToArray();
         }

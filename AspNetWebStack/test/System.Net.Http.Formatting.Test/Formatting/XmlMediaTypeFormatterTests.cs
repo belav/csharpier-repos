@@ -102,18 +102,16 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void MaxDepthReturnsCorrectValue()
         {
-            Assert
-                .Reflection
-                .IntegerProperty(
-                    new XmlMediaTypeFormatter(),
-                    f => f.MaxDepth,
-                    expectedDefaultValue: 256,
-                    minLegalValue: 1,
-                    illegalLowerValue: 0,
-                    maxLegalValue: null,
-                    illegalUpperValue: null,
-                    roundTripTestValue: 10
-                );
+            Assert.Reflection.IntegerProperty(
+                new XmlMediaTypeFormatter(),
+                f => f.MaxDepth,
+                expectedDefaultValue: 256,
+                minLegalValue: 1,
+                illegalLowerValue: 0,
+                maxLegalValue: null,
+                illegalUpperValue: null,
+                roundTripTestValue: 10
+            );
         }
 
 #if !Testing_NetStandard1_3 // Cannot read or write w/ DCS in netstandard1.3.
@@ -140,25 +138,21 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Indent_RoundTrips()
         {
-            Assert
-                .Reflection
-                .BooleanProperty(
-                    new XmlMediaTypeFormatter(),
-                    c => c.Indent,
-                    expectedDefaultValue: false
-                );
+            Assert.Reflection.BooleanProperty(
+                new XmlMediaTypeFormatter(),
+                c => c.Indent,
+                expectedDefaultValue: false
+            );
         }
 
         [Fact]
         public void UseXmlSerializer_RoundTrips()
         {
-            Assert
-                .Reflection
-                .BooleanProperty(
-                    new XmlMediaTypeFormatter(),
-                    c => c.UseXmlSerializer,
-                    expectedDefaultValue: false
-                );
+            Assert.Reflection.BooleanProperty(
+                new XmlMediaTypeFormatter(),
+                c => c.UseXmlSerializer,
+                expectedDefaultValue: false
+            );
         }
 
 #if !Testing_NetStandard1_3 // Cannot read or write w/ DCS in netstandard1.3.
@@ -173,17 +167,15 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
-                .SucceedsAsync(
-                    xmlFormatter.WriteToStreamAsync(
-                        type,
-                        null,
-                        memoryStream,
-                        content,
-                        transportContext: null
-                    )
-                );
+            await Assert.Task.SucceedsAsync(
+                xmlFormatter.WriteToStreamAsync(
+                    type,
+                    null,
+                    memoryStream,
+                    content,
+                    transportContext: null
+                )
+            );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.True(
@@ -205,17 +197,15 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
-                .SucceedsAsync(
-                    xmlFormatter.WriteToStreamAsync(
-                        typeof(SampleType),
-                        new SampleType(),
-                        memoryStream,
-                        content,
-                        transportContext: null
-                    )
-                );
+            await Assert.Task.SucceedsAsync(
+                xmlFormatter.WriteToStreamAsync(
+                    typeof(SampleType),
+                    new SampleType(),
+                    memoryStream,
+                    content,
+                    transportContext: null
+                )
+            );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.True(
@@ -242,17 +232,15 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
-                .SucceedsAsync(
-                    xmlFormatter.WriteToStreamAsync(
-                        typeof(SampleType),
-                        new SampleType(),
-                        memoryStream,
-                        content,
-                        transportContext: null
-                    )
-                );
+            await Assert.Task.SucceedsAsync(
+                xmlFormatter.WriteToStreamAsync(
+                    typeof(SampleType),
+                    new SampleType(),
+                    memoryStream,
+                    content,
+                    transportContext: null
+                )
+            );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.True(
@@ -874,9 +862,12 @@ namespace System.Net.Http.Formatting
             formatter.Setup(f => f.GetDeserializer(type, null)).Returns(serializer.Object);
             formatter.Setup(f => f.CreateXmlReader(stream, null)).Returns(reader.Object);
 
-            await formatter
-                .Object
-                .ReadFromStreamAsync(type, stream, content: null, formatterLogger: null);
+            await formatter.Object.ReadFromStreamAsync(
+                type,
+                stream,
+                content: null,
+                formatterLogger: null
+            );
 
             serializer.Verify(s => s.ReadObject(reader.Object));
         }
@@ -892,14 +883,12 @@ namespace System.Net.Http.Formatting
 
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    formatter
-                        .Object
-                        .ReadFromStreamAsync(
-                            type,
-                            new MemoryStream(Encoding.UTF8.GetBytes(xml)),
-                            content: null,
-                            formatterLogger: null
-                        ),
+                    formatter.Object.ReadFromStreamAsync(
+                        type,
+                        new MemoryStream(Encoding.UTF8.GetBytes(xml)),
+                        content: null,
+                        formatterLogger: null
+                    ),
                 "The object returned by GetDeserializer must not be a null value."
             );
         }
@@ -915,14 +904,12 @@ namespace System.Net.Http.Formatting
 
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    formatter
-                        .Object
-                        .ReadFromStreamAsync(
-                            type,
-                            new MemoryStream(Encoding.UTF8.GetBytes(xml)),
-                            content: null,
-                            formatterLogger: null
-                        ),
+                    formatter.Object.ReadFromStreamAsync(
+                        type,
+                        new MemoryStream(Encoding.UTF8.GetBytes(xml)),
+                        content: null,
+                        formatterLogger: null
+                    ),
                 "The object of type 'JsonSerializer' returned by GetDeserializer must be an instance of either XmlObjectSerializer or XmlSerializer."
             );
         }
@@ -966,9 +953,13 @@ namespace System.Net.Http.Formatting
             formatter.Setup(f => f.GetSerializer(type, value, null)).Returns(serializer.Object);
             formatter.Setup(f => f.CreateXmlWriter(stream, null)).Returns(writer.Object);
 
-            await formatter
-                .Object
-                .WriteToStreamAsync(type, value, stream, content: null, transportContext: null);
+            await formatter.Object.WriteToStreamAsync(
+                type,
+                value,
+                stream,
+                content: null,
+                transportContext: null
+            );
 
             serializer.Verify(s => s.WriteObject(writer.Object, value));
         }
@@ -983,15 +974,13 @@ namespace System.Net.Http.Formatting
 
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    formatter
-                        .Object
-                        .WriteToStreamAsync(
-                            type,
-                            value,
-                            new MemoryStream(),
-                            content: null,
-                            transportContext: null
-                        ),
+                    formatter.Object.WriteToStreamAsync(
+                        type,
+                        value,
+                        new MemoryStream(),
+                        content: null,
+                        transportContext: null
+                    ),
                 "The object returned by GetSerializer must not be a null value."
             );
         }
@@ -1006,15 +995,13 @@ namespace System.Net.Http.Formatting
 
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    formatter
-                        .Object
-                        .WriteToStreamAsync(
-                            type,
-                            value,
-                            new MemoryStream(),
-                            content: null,
-                            transportContext: null
-                        ),
+                    formatter.Object.WriteToStreamAsync(
+                        type,
+                        value,
+                        new MemoryStream(),
+                        content: null,
+                        transportContext: null
+                    ),
                 "The object of type 'JsonSerializer' returned by GetSerializer must be an instance of either XmlObjectSerializer or XmlSerializer."
             );
         }

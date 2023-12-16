@@ -872,11 +872,9 @@ namespace System.Data.ProviderBase
                                     if (onlyOneCheckConnection)
                                     {
                                         if (
-                                            _waitHandles
-                                                .CreationSemaphore
-                                                .WaitOne(
-                                                    unchecked((int)waitForMultipleObjectsTimeout)
-                                                )
+                                            _waitHandles.CreationSemaphore.WaitOne(
+                                                unchecked((int)waitForMultipleObjectsTimeout)
+                                            )
                                         )
                                         {
                                             try

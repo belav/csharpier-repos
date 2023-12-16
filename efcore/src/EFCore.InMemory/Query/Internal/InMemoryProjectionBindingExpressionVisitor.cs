@@ -154,10 +154,7 @@ public class InMemoryProjectionBindingExpressionVisitor : ExpressionVisitor
                             ),
                             subquery.ShaperExpression,
                             materializeCollectionNavigationExpression.Navigation,
-                            materializeCollectionNavigationExpression
-                                .Navigation
-                                .ClrType
-                                .GetSequenceType()
+                            materializeCollectionNavigationExpression.Navigation.ClrType.GetSequenceType()
                         );
                     }
 
@@ -169,8 +166,7 @@ public class InMemoryProjectionBindingExpressionVisitor : ExpressionVisitor
                             && methodCallExpression.Arguments.Count == 1
                             && methodCallExpression
                                 .Arguments[0]
-                                .Type
-                                .TryGetElementType(typeof(IQueryable<>)) != null
+                                .Type.TryGetElementType(typeof(IQueryable<>)) != null
                         )
                         {
                             var subquery =

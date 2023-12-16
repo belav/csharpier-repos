@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         {
             Workspace = workspace;
             _listener = workspace
-                .Services
-                .GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>()
+                .Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>()
                 .GetListener();
             EditorconfigPath = editorconfigPath;
         }
@@ -87,8 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         {
             var solution = Workspace.CurrentSolution;
             var analyzerConfigDocument = solution
-                .Projects
-                .SelectMany(p => p.AnalyzerConfigDocuments)
+                .Projects.SelectMany(p => p.AnalyzerConfigDocuments)
                 .FirstOrDefault(d => d.FilePath == EditorconfigPath);
             var newText = await GetChangedEditorConfigAsync(analyzerConfigDocument, token)
                 .ConfigureAwait(false);

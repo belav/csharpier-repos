@@ -26,13 +26,11 @@ namespace Microsoft.CodeAnalysis.GoToBase
             if (baseType is null)
                 return null;
 
-            return baseType
-                .InstanceConstructors
-                .FirstOrDefault(
-                    baseConstructor =>
-                        baseConstructor.IsAccessibleWithin(constructor.ContainingType)
-                        && baseConstructor.Parameters.All(p => p.IsOptional || p.IsParams)
-                );
+            return baseType.InstanceConstructors.FirstOrDefault(
+                baseConstructor =>
+                    baseConstructor.IsAccessibleWithin(constructor.ContainingType)
+                    && baseConstructor.Parameters.All(p => p.IsOptional || p.IsParams)
+            );
         }
 
         public async Task FindBasesAsync(

@@ -32,9 +32,10 @@ namespace System.ServiceModel.Description
         {
             if (name == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("name", SR.GetString(SR.SFxParameterNameCannotBeNull));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "name",
+                    SR.GetString(SR.SFxParameterNameCannotBeNull)
+                );
             }
 
             this.name = new XmlName(
@@ -122,9 +123,9 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }

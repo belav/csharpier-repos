@@ -11,9 +11,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class SqlServerValueGenerationScenariosTestBase
 {
-    protected static readonly GeometryFactory GeometryFactory = NtsGeometryServices
-        .Instance
-        .CreateGeometryFactory(srid: 4326);
+    protected static readonly GeometryFactory GeometryFactory =
+        NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
 
     protected abstract string DatabaseName { get; }
 
@@ -380,8 +379,7 @@ public abstract class SqlServerValueGenerationScenariosTestBase
                 .Entity<Blog>()
                 .Property(e => e.Id)
                 .HasDefaultValueSql("next value for MySequence")
-                .Metadata
-                .SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
         }
     }
 
@@ -1219,13 +1217,11 @@ public abstract class SqlServerValueGenerationScenariosTestBase
             )
         )
         {
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    @"CREATE FUNCTION
+            context.Database.ExecuteSqlRaw(
+                @"CREATE FUNCTION
 [dbo].[GetFullName](@First NVARCHAR(MAX), @Second NVARCHAR(MAX))
 RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
-                );
+            );
 
             context.GetService<IRelationalDatabaseCreator>().CreateTables();
         }
@@ -1332,23 +1328,19 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
 
             context.Database.ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
 
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
+            context.Database.ExecuteSqlRaw(
+                @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
 RETURNS nvarchar(max) WITH SCHEMABINDING AS
 BEGIN
     DECLARE @FullName nvarchar(max);
     SELECT @FullName = [FirstName] + [LastName] FROM [dbo].[FullNameBlogs] WHERE [Id] = @Id;
     RETURN @FullName
 END"
-                );
+            );
 
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
-                );
+            context.Database.ExecuteSqlRaw(
+                "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
+            );
         }
 
         try
@@ -1471,23 +1463,19 @@ END"
 
             context.Database.ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
 
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
+            context.Database.ExecuteSqlRaw(
+                @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
 RETURNS nvarchar(max) WITH SCHEMABINDING AS
 BEGIN
     DECLARE @FullName nvarchar(max);
     SELECT @FullName = [FirstName] + [LastName] FROM [dbo].[FullNameBlogs] WHERE [Id] = @Id;
     RETURN @FullName
 END"
-                );
+            );
 
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
-                );
+            context.Database.ExecuteSqlRaw(
+                "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
+            );
         }
 
         try
@@ -1549,17 +1537,15 @@ END"
         {
             context.GetService<IRelationalDatabaseCreator>().CreateTables();
 
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    @"CREATE OR ALTER TRIGGER [FullNameBlogs_Trigger]
+            context.Database.ExecuteSqlRaw(
+                @"CREATE OR ALTER TRIGGER [FullNameBlogs_Trigger]
 ON [FullNameBlogs]
 FOR INSERT, UPDATE, DELETE AS
 BEGIN
 	IF @@ROWCOUNT = 0
 		return
 END"
-                );
+            );
         }
 
         try
@@ -1841,8 +1827,7 @@ END"
         // SqlException : Cannot insert explicit value for identity column in table
         // 'Blog' when IDENTITY_INSERT is set to OFF.
         context
-            .Database
-            .CreateExecutionStrategy()
+            .Database.CreateExecutionStrategy()
             .Execute(context, c => Assert.Throws<DbUpdateException>(() => c.SaveChanges()));
     }
 

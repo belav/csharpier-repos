@@ -55,10 +55,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
         public async ValueTask<bool> IsFullyLoadedAsync(CancellationToken cancellationToken)
         {
-            var workspaceService = _solution
-                .Workspace
-                .Services
-                .GetService<IWorkspaceNavigateToSearcherHostService>();
+            var workspaceService =
+                _solution.Workspace.Services.GetService<IWorkspaceNavigateToSearcherHostService>();
             if (workspaceService != null)
                 return await workspaceService
                     .IsFullyLoadedAsync(cancellationToken)
@@ -103,9 +101,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 {
                     // If there are no projects in this solution that use OOP, then there's nothing we need to do.
                     if (
-                        _solution
-                            .Projects
-                            .All(p => !RemoteSupportedLanguages.IsSupported(p.Language))
+                        _solution.Projects.All(
+                            p => !RemoteSupportedLanguages.IsSupported(p.Language)
+                        )
                     )
                     {
                         s_remoteHostHydrateTask = Task.CompletedTask;

@@ -547,31 +547,30 @@ namespace Tests.System
 
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    TimeProvider
-                        .System
-                        .CreateTimer(null, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan)
+                    TimeProvider.System.CreateTimer(
+                        null,
+                        null,
+                        Timeout.InfiniteTimeSpan,
+                        Timeout.InfiniteTimeSpan
+                    )
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
-                    TimeProvider
-                        .System
-                        .CreateTimer(
-                            obj => { },
-                            null,
-                            TimeSpan.FromMilliseconds(-2),
-                            Timeout.InfiniteTimeSpan
-                        )
+                    TimeProvider.System.CreateTimer(
+                        obj => { },
+                        null,
+                        TimeSpan.FromMilliseconds(-2),
+                        Timeout.InfiniteTimeSpan
+                    )
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
-                    TimeProvider
-                        .System
-                        .CreateTimer(
-                            obj => { },
-                            null,
-                            Timeout.InfiniteTimeSpan,
-                            TimeSpan.FromMilliseconds(-2)
-                        )
+                    TimeProvider.System.CreateTimer(
+                        obj => { },
+                        null,
+                        Timeout.InfiniteTimeSpan,
+                        TimeSpan.FromMilliseconds(-2)
+                    )
             );
 
 #if !NETFRAMEWORK

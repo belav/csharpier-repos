@@ -88,12 +88,10 @@ public class MembersToExpandExpressions : AutoMapperSpecBase, IAsyncLifetime
             ProjectTo<Dto>(context.Sources, null, _ => _.Name, _ => _.Desc);
             ProjectTo<Dto>(context.Sources, null, _ => _.InnerDescFlattened)
                 .First()
-                .InnerDescFlattened
-                .ShouldBe(_source.Inner.Desc);
+                .InnerDescFlattened.ShouldBe(_source.Inner.Desc);
             ProjectTo<Dto>(context.Sources, null, _ => _.DeepFlattened)
                 .First()
-                .DeepFlattened
-                .ShouldBe(_source.Inner.Deep.Desc);
+                .DeepFlattened.ShouldBe(_source.Inner.Deep.Desc);
         }
     }
 

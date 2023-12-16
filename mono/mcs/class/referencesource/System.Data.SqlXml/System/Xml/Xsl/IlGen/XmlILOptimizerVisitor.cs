@@ -5009,8 +5009,7 @@ namespace System.Xml.Xsl.IlGen
                 {
                     XmlILConstructInfo
                         .Write(local1)
-                        .CallersInfo
-                        .Add(XmlILConstructInfo.Write(local0));
+                        .CallersInfo.Add(XmlILConstructInfo.Write(local0));
                 }
             }
             if (this[XmlILOptimization.AnnotateInvoke])

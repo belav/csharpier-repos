@@ -81,9 +81,9 @@ namespace System.ServiceModel.Description
         {
             if (endpointConfigurationName == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("endpointConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointConfigurationName"
+                );
             }
             this.factory = new ChannelFactory<IMetadataExchange>(endpointConfigurationName);
             this.maxMessageSize = GetMaxMessageSize(this.factory.Endpoint.Binding);
@@ -127,28 +127,24 @@ namespace System.ServiceModel.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.SFxTimeoutOutOfRange0)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                value,
-                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.resolveTimeout = value;
@@ -161,14 +157,12 @@ namespace System.ServiceModel.Description
             {
                 if (value < 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(SR.SFxMaximumResolvedReferencesOutOfRange, value)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxMaximumResolvedReferencesOutOfRange, value)
+                        )
+                    );
                 }
                 this.maximumResolvedReferences = value;
             }
@@ -198,10 +192,8 @@ namespace System.ServiceModel.Description
                 {
                     if (this.factory != null)
                     {
-                        BindingElementCollection bindingElementCollection = this.factory
-                            .Endpoint
-                            .Binding
-                            .CreateBindingElements();
+                        BindingElementCollection bindingElementCollection =
+                            this.factory.Endpoint.Binding.CreateBindingElements();
                         if (bindingElementCollection != null)
                         {
                             MessageEncodingBindingElement bindingElement =
@@ -263,15 +255,13 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "scheme",
-                            SR.GetString(
-                                SR.SFxMetadataExchangeClientCouldNotCreateChannelFactoryBadScheme,
-                                scheme
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "scheme",
+                        SR.GetString(
+                            SR.SFxMetadataExchangeClientCouldNotCreateChannelFactoryBadScheme,
+                            scheme
+                        )
+                    );
                 }
             }
             this.maxMessageSize = GetMaxMessageSize(this.factory.Endpoint.Binding);
@@ -286,22 +276,18 @@ namespace System.ServiceModel.Description
 
             if (!address.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "address",
-                        SR.GetString(SR.SFxCannotGetMetadataFromRelativeAddress, address)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "address",
+                    SR.GetString(SR.SFxCannotGetMetadataFromRelativeAddress, address)
+                );
             }
 
             if (mode == MetadataExchangeClientMode.HttpGet && !IsHttpOrHttps(address))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "address",
-                        SR.GetString(SR.SFxCannotHttpGetMetadataFromAddress, address)
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "address",
+                    SR.GetString(SR.SFxCannotHttpGetMetadataFromAddress, address)
+                );
             }
 
             MetadataExchangeClientModeHelper.Validate(mode);
@@ -319,13 +305,11 @@ namespace System.ServiceModel.Description
             if (ctorEndpointAddress != null)
                 return BeginGetMetadata(ctorEndpointAddress, callback, asyncState);
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
+                    )
+                );
         }
 
         public IAsyncResult BeginGetMetadata(
@@ -400,13 +384,11 @@ namespace System.ServiceModel.Description
             if (ctorEndpointAddress != null)
                 return GetMetadataAsync(ctorEndpointAddress);
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
+                    )
+                );
         }
 
         public Task<MetadataSet> GetMetadataAsync(Uri address, MetadataExchangeClientMode mode)
@@ -469,13 +451,11 @@ namespace System.ServiceModel.Description
             if (ctorEndpointAddress != null)
                 return GetMetadata(ctorEndpointAddress);
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
+                    )
+                );
         }
 
         public MetadataSet GetMetadata(Uri address, MetadataExchangeClientMode mode)
@@ -553,13 +533,11 @@ namespace System.ServiceModel.Description
                 {
                     if (resolveCallState.ResolvedMaxResolvedReferences)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.SFxResolvedMaxResolvedReferences)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxResolvedMaxResolvedReferences)
+                            )
+                        );
                     }
 
                     resolveCallState.LogUse(retriever);
@@ -587,13 +565,11 @@ namespace System.ServiceModel.Description
                 bindingElementCollection.Find<TransportBindingElement>();
             if (bindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxBindingDoesNotHaveATransportBindingElement)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxBindingDoesNotHaveATransportBindingElement)
+                    )
+                );
             }
             return bindingElement.MaxReceivedMessageSize;
         }
@@ -884,14 +860,12 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
-                                e
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
             }
 
@@ -994,12 +968,10 @@ namespace System.ServiceModel.Description
 
                 if (location.Scheme != Uri.UriSchemeHttp && location.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgument(
-                            "location",
-                            SR.GetString(SR.SFxCannotGetMetadataFromLocation, location.ToString())
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "location",
+                        SR.GetString(SR.SFxCannotGetMetadataFromLocation, location.ToString())
+                    );
                 }
             }
 
@@ -1032,19 +1004,17 @@ namespace System.ServiceModel.Description
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxMetadataExchangeClientCouldNotCreateWebRequest,
-                                    this.location,
-                                    this.dialect,
-                                    this.identifier
-                                ),
-                                e
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxMetadataExchangeClientCouldNotCreateWebRequest,
+                                this.location,
+                                this.dialect,
+                                this.identifier
+                            ),
+                            e
+                        )
+                    );
                 }
 
                 TraceSendRequest(this.location);
@@ -1102,19 +1072,17 @@ namespace System.ServiceModel.Description
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxMetadataExchangeClientCouldNotCreateWebRequest,
-                                        this.location,
-                                        this.dialect,
-                                        this.identifier
-                                    ),
-                                    e
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxMetadataExchangeClientCouldNotCreateWebRequest,
+                                    this.location,
+                                    this.dialect,
+                                    this.identifier
+                                ),
+                                e
+                            )
+                        );
                     }
 
                     TraceSendRequest(this.location);
@@ -1132,14 +1100,12 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
-                                e
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
                 return result;
             }
@@ -1155,14 +1121,12 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
-                                e
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
             }
 
@@ -1345,19 +1309,17 @@ namespace System.ServiceModel.Description
                         {
                             if (Fx.IsFatal(e))
                                 throw;
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(
-                                            SR.SFxMetadataExchangeClientCouldNotCreateChannelFactory,
-                                            this.address,
-                                            this.dialect,
-                                            this.identifier
-                                        ),
-                                        e
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxMetadataExchangeClientCouldNotCreateChannelFactory,
+                                        this.address,
+                                        this.dialect,
+                                        this.identifier
+                                    ),
+                                    e
+                                )
+                            );
                         }
                         metadataClient = CreateChannel(channelFactory);
                         messageVersion = channelFactory.Endpoint.Binding.MessageVersion;
@@ -1376,14 +1338,12 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
-                                e
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
             }
 
@@ -1425,19 +1385,17 @@ namespace System.ServiceModel.Description
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxMetadataExchangeClientCouldNotCreateChannelFactory,
-                                        this.address,
-                                        this.dialect,
-                                        this.identifier
-                                    ),
-                                    e
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxMetadataExchangeClientCouldNotCreateChannelFactory,
+                                    this.address,
+                                    this.dialect,
+                                    this.identifier
+                                ),
+                                e
+                            )
+                        );
                     }
 
                     metadataClient = CreateChannel(channelFactory);
@@ -1470,9 +1428,9 @@ namespace System.ServiceModel.Description
                     XmlWriter xmlWriter = XmlWriter.Create(stringWriter);
                     fault.WriteTo(xmlWriter, response.Version.Envelope);
                     xmlWriter.Flush();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(new InvalidOperationException(stringWriter.ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(stringWriter.ToString())
+                    );
                 }
 
                 return response.GetReaderAtBodyContents();
@@ -1489,14 +1447,12 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
-                                e
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
             }
 
@@ -1578,19 +1534,16 @@ namespace System.ServiceModel.Description
                     {
                         if (response.IsFault)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(
-                                            SR.SFxBadMetadataReference,
-                                            ((IClientChannel)metadataClient)
-                                                .RemoteAddress
-                                                .Uri
-                                                .ToString()
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxBadMetadataReference,
+                                        (
+                                            (IClientChannel)metadataClient
+                                        ).RemoteAddress.Uri.ToString()
                                     )
-                                );
+                                )
+                            );
                         }
                         else
                         {
@@ -1620,9 +1573,9 @@ namespace System.ServiceModel.Description
             {
                 if (resolveCallState == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperArgumentNull("resolveCallState");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "resolveCallState"
+                    );
                 }
 
                 this.resolveCallState = resolveCallState;
@@ -1663,13 +1616,11 @@ namespace System.ServiceModel.Description
                     {
                         if (resolveCallState.ResolvedMaxResolvedReferences)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(SR.SFxResolvedMaxResolvedReferences)
-                                    )
-                                );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.SFxResolvedMaxResolvedReferences)
+                                )
+                            );
                         }
                         else
                         {
@@ -1819,15 +1770,13 @@ namespace System.ServiceModel.Description
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidEnumArgumentException(
-                            "value",
-                            (int)value,
-                            typeof(MetadataExchangeClientMode)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(MetadataExchangeClientMode)
+                    )
+                );
             }
         }
     }

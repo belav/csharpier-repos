@@ -93,14 +93,12 @@ namespace System.IO.Strategies
             }
 
             CheckFileCall(
-                Interop
-                    .Sys
-                    .LockFileRegion(
-                        handle,
-                        position,
-                        length,
-                        canWrite ? Interop.Sys.LockType.F_WRLCK : Interop.Sys.LockType.F_RDLCK
-                    ),
+                Interop.Sys.LockFileRegion(
+                    handle,
+                    position,
+                    length,
+                    canWrite ? Interop.Sys.LockType.F_WRLCK : Interop.Sys.LockType.F_RDLCK
+                ),
                 handle.Path
             );
         }

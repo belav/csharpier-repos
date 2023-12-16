@@ -79,16 +79,14 @@ namespace Roslyn.Test.Utilities
         {
             if (language == LanguageNames.CSharp)
             {
-                return CS.SyntaxFactory
-                    .ParseTokens(text)
+                return CS.SyntaxFactory.ParseTokens(text)
                     .Select(t => (SyntaxToken)t)
                     .Where(t => !SkipCSharpToken(t))
                     .ToList();
             }
             else
             {
-                return VB.SyntaxFactory
-                    .ParseTokens(text)
+                return VB.SyntaxFactory.ParseTokens(text)
                     .Select(t => (SyntaxToken)t)
                     .Where(t => !SkipVisualBasicToken(t))
                     .ToList();

@@ -142,21 +142,23 @@ namespace System
                     {
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
                         if (GlobalizationMode.Hybrid)
-                            return Interop
-                                .Globalization
-                                .GetTimeZoneDisplayNameNative(
-                                    locale,
-                                    locale.Length,
-                                    id,
-                                    id.Length,
-                                    type,
-                                    bufferPtr,
-                                    buffer.Length
-                                );
+                            return Interop.Globalization.GetTimeZoneDisplayNameNative(
+                                locale,
+                                locale.Length,
+                                id,
+                                id.Length,
+                                type,
+                                bufferPtr,
+                                buffer.Length
+                            );
 #endif
-                        return Interop
-                            .Globalization
-                            .GetTimeZoneDisplayName(locale, id, type, bufferPtr, buffer.Length);
+                        return Interop.Globalization.GetTimeZoneDisplayName(
+                            locale,
+                            id,
+                            type,
+                            bufferPtr,
+                            buffer.Length
+                        );
                     }
                 },
                 uiCulture,
@@ -175,21 +177,23 @@ namespace System
                         {
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
                             if (GlobalizationMode.Hybrid)
-                                return Interop
-                                    .Globalization
-                                    .GetTimeZoneDisplayNameNative(
-                                        locale,
-                                        locale.Length,
-                                        id,
-                                        id.Length,
-                                        type,
-                                        bufferPtr,
-                                        buffer.Length
-                                    );
+                                return Interop.Globalization.GetTimeZoneDisplayNameNative(
+                                    locale,
+                                    locale.Length,
+                                    id,
+                                    id.Length,
+                                    type,
+                                    bufferPtr,
+                                    buffer.Length
+                                );
 #endif
-                            return Interop
-                                .Globalization
-                                .GetTimeZoneDisplayName(locale, id, type, bufferPtr, buffer.Length);
+                            return Interop.Globalization.GetTimeZoneDisplayName(
+                                locale,
+                                id,
+                                type,
+                                bufferPtr,
+                                buffer.Length
+                            );
                         }
                     },
                     FallbackCultureName,
@@ -330,13 +334,11 @@ namespace System
             // See if we should include the exemplar city name.
             string exemplarCityName = GetExemplarCityName(timeZoneId, uiCulture.Name);
             if (
-                uiCulture
-                    .CompareInfo
-                    .IndexOf(
-                        genericName,
-                        exemplarCityName,
-                        CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace
-                    ) >= 0
+                uiCulture.CompareInfo.IndexOf(
+                    genericName,
+                    exemplarCityName,
+                    CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace
+                ) >= 0
                 && genericLocationName != null
             )
             {

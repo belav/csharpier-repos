@@ -212,8 +212,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 public override ImmutableArray<TaskListTableItem> GetItems()
                 {
                     return _source
-                        ._taskProvider
-                        .GetTaskListItems(_workspace, _documentId, CancellationToken.None)
+                        ._taskProvider.GetTaskListItems(
+                            _workspace,
+                            _documentId,
+                            CancellationToken.None
+                        )
                         .Select(data => TaskListTableItem.Create(_workspace, data))
                         .ToImmutableArray();
                 }

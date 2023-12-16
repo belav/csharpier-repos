@@ -126,9 +126,7 @@ internal class SemanticTokensRefreshQueue : IOnInitialized, ILspService, IDispos
             // Determine the checksum for this project cone.  Note: this should be fast in practice because this is
             // the same project-cone-checksum we used to even call into OOP above when we computed semantic tokens.
             var projectChecksum = await project
-                .Solution
-                .State
-                .GetChecksumAsync(project.Id, cancellationToken)
+                .Solution.State.GetChecksumAsync(project.Id, cancellationToken)
                 .ConfigureAwait(false);
 
             lock (_gate)

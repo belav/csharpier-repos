@@ -220,10 +220,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
 
             if (propertyDeclaration.AccessorList != null)
             {
-                var accessors = propertyDeclaration
-                    .AccessorList
-                    .Accessors
-                    .Select(RemoveThrowNotImplemented);
+                var accessors = propertyDeclaration.AccessorList.Accessors.Select(
+                    RemoveThrowNotImplemented
+                );
                 return propertyDeclaration.WithAccessorList(
                     propertyDeclaration.AccessorList.WithAccessors(SyntaxFactory.List(accessors))
                 );

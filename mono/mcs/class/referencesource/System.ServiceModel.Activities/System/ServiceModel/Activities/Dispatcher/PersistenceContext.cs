@@ -369,9 +369,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                             {
                                 WorkflowHostingResponseContext responseContext =
                                     new WorkflowHostingResponseContext();
-                                WorkflowCreationContext creationContext = parameters
-                                    .WorkflowHostingEndpoint
-                                    .OnGetCreationContext(
+                                WorkflowCreationContext creationContext =
+                                    parameters.WorkflowHostingEndpoint.OnGetCreationContext(
                                         parameters.Inputs,
                                         parameters.OperationContext,
                                         InstanceId,
@@ -379,11 +378,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                                     );
                                 if (creationContext == null)
                                 {
-                                    throw FxTrace
-                                        .Exception
-                                        .AsError(
-                                            WorkflowHostingEndpoint.CreateDispatchFaultException()
-                                        );
+                                    throw FxTrace.Exception.AsError(
+                                        WorkflowHostingEndpoint.CreateDispatchFaultException()
+                                    );
                                 }
                                 result = this.directory.InitializeInstance(
                                     InstanceId,
@@ -548,14 +545,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (exception is OperationCanceledException)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new CommunicationObjectAbortedException(
-                                SR.HandleFreedInDirectory,
-                                exception
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 else if (exception is TimeoutException)
                 {
@@ -619,26 +614,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (instanceValue.Value == null)
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new InstancePersistenceException(
-                                    SRCore.NullAssignedToValueType(typeof(T))
-                                )
-                            );
+                        throw FxTrace.Exception.AsError(
+                            new InstancePersistenceException(
+                                SRCore.NullAssignedToValueType(typeof(T))
+                            )
+                        );
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
-                            .AsError(
-                                new InstancePersistenceException(
-                                    SRCore.IncorrectValueType(
-                                        typeof(T),
-                                        instanceValue.Value.GetType()
-                                    )
-                                )
-                            );
+                        throw FxTrace.Exception.AsError(
+                            new InstancePersistenceException(
+                                SRCore.IncorrectValueType(typeof(T), instanceValue.Value.GetType())
+                            )
+                        );
                     }
                 }
             }
@@ -875,21 +863,20 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.workflowInstance.DefinitionIdentity != null)
                 {
-                    saveCommand
-                        .InstanceMetadataChanges
-                        .Add(
-                            Workflow45Namespace.DefinitionIdentity,
-                            new InstanceValue(
-                                this.workflowInstance.DefinitionIdentity,
-                                InstanceValueOptions.None
-                            )
-                        );
+                    saveCommand.InstanceMetadataChanges.Add(
+                        Workflow45Namespace.DefinitionIdentity,
+                        new InstanceValue(
+                            this.workflowInstance.DefinitionIdentity,
+                            InstanceValueOptions.None
+                        )
+                    );
                 }
                 else
                 {
-                    saveCommand
-                        .InstanceMetadataChanges
-                        .Add(Workflow45Namespace.DefinitionIdentity, InstanceValue.DeletedValue);
+                    saveCommand.InstanceMetadataChanges.Add(
+                        Workflow45Namespace.DefinitionIdentity,
+                        InstanceValue.DeletedValue
+                    );
                 }
             }
         }
@@ -1009,27 +996,21 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.persistenceContext.PopulateActivationMetadata(saveCommand);
                         if (this.persistenceContext.IsSuspended)
                         {
-                            saveCommand
-                                .InstanceMetadataChanges
-                                .Add(
-                                    WorkflowServiceNamespace.SuspendReason,
-                                    new InstanceValue(this.persistenceContext.SuspendedReason)
-                                );
+                            saveCommand.InstanceMetadataChanges.Add(
+                                WorkflowServiceNamespace.SuspendReason,
+                                new InstanceValue(this.persistenceContext.SuspendedReason)
+                            );
                         }
                         else
                         {
-                            saveCommand
-                                .InstanceMetadataChanges
-                                .Add(
-                                    WorkflowServiceNamespace.SuspendReason,
-                                    InstanceValue.DeletedValue
-                                );
-                            saveCommand
-                                .InstanceMetadataChanges
-                                .Add(
-                                    WorkflowServiceNamespace.SuspendException,
-                                    InstanceValue.DeletedValue
-                                );
+                            saveCommand.InstanceMetadataChanges.Add(
+                                WorkflowServiceNamespace.SuspendReason,
+                                InstanceValue.DeletedValue
+                            );
+                            saveCommand.InstanceMetadataChanges.Add(
+                                WorkflowServiceNamespace.SuspendException,
+                                InstanceValue.DeletedValue
+                            );
                         }
                         foreach (InstanceKey key in this.persistenceContext.keysToAssociate)
                         {
@@ -1052,15 +1033,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                             saveCommand.UnlockInstance = this.saveStatus == SaveStatus.Unlocked;
                         }
 
-                        IAsyncResult result = this.persistenceContext
-                            .store
-                            .BeginExecute(
-                                this.persistenceContext.handle,
-                                saveCommand,
-                                this.timeoutHelper.RemainingTime(),
-                                PrepareAsyncCompletion(SaveAsyncResult.handleEndExecute),
-                                this
-                            );
+                        IAsyncResult result = this.persistenceContext.store.BeginExecute(
+                            this.persistenceContext.handle,
+                            saveCommand,
+                            this.timeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(SaveAsyncResult.handleEndExecute),
+                            this
+                        );
                         if (SyncContinue(result))
                         {
                             Complete(true);
@@ -1087,14 +1066,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new CommunicationObjectAbortedException(
-                                SR.HandleFreedInDirectory,
-                                exception
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 catch (TimeoutException)
                 {
@@ -1238,15 +1215,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 UnlockInstance = true
                             };
                             this.persistenceContext.PopulateActivationMetadata(saveCommand);
-                            IAsyncResult result = this.persistenceContext
-                                .store
-                                .BeginExecute(
-                                    this.persistenceContext.handle,
-                                    saveCommand,
-                                    this.timeoutHelper.RemainingTime(),
-                                    PrepareAsyncCompletion(ReleaseAsyncResult.handleEndExecute),
-                                    this
-                                );
+                            IAsyncResult result = this.persistenceContext.store.BeginExecute(
+                                this.persistenceContext.handle,
+                                saveCommand,
+                                this.timeoutHelper.RemainingTime(),
+                                PrepareAsyncCompletion(ReleaseAsyncResult.handleEndExecute),
+                                this
+                            );
                             if (SyncContinue(result))
                             {
                                 Complete(true);
@@ -1273,14 +1248,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new CommunicationObjectAbortedException(
-                                SR.HandleFreedInDirectory,
-                                exception
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 catch (TimeoutException)
                 {
@@ -1439,14 +1412,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new CommunicationObjectAbortedException(
-                                SR.HandleFreedInDirectory,
-                                exception
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 catch (TimeoutException)
                 {
@@ -1492,17 +1463,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                 bool returnValue = false;
 
                 if (
-                    !thisPtr
-                        .persistenceContext
-                        .directory
-                        .TryAddAssociations(
-                            thisPtr.persistenceContext,
-                            thisPtr.keysToAssociate,
-                            thisPtr.persistenceContext.keysToAssociate,
-                            thisPtr.applicationKeys
-                                ? thisPtr.persistenceContext.keysToDisassociate
-                                : null
-                        )
+                    !thisPtr.persistenceContext.directory.TryAddAssociations(
+                        thisPtr.persistenceContext,
+                        thisPtr.keysToAssociate,
+                        thisPtr.persistenceContext.keysToAssociate,
+                        thisPtr.applicationKeys
+                            ? thisPtr.persistenceContext.keysToDisassociate
+                            : null
+                    )
                 )
                 {
                     lock (thisPtr.persistenceContext.ThisLock)
@@ -1549,18 +1517,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                             IAsyncResult beginExecuteResult = null;
                             using (thisPtr.PrepareTransactionalCall(thisPtr.transaction))
                             {
-                                beginExecuteResult = thisPtr
-                                    .persistenceContext
-                                    .store
-                                    .BeginExecute(
-                                        thisPtr.persistenceContext.handle,
-                                        saveCommand,
-                                        thisPtr.timeoutHelper.RemainingTime(),
-                                        thisPtr.PrepareAsyncCompletion(
-                                            AssociateKeysAsyncResult.handleEndExecute
-                                        ),
-                                        thisPtr
-                                    );
+                                beginExecuteResult = thisPtr.persistenceContext.store.BeginExecute(
+                                    thisPtr.persistenceContext.handle,
+                                    saveCommand,
+                                    thisPtr.timeoutHelper.RemainingTime(),
+                                    thisPtr.PrepareAsyncCompletion(
+                                        AssociateKeysAsyncResult.handleEndExecute
+                                    ),
+                                    thisPtr
+                                );
                             }
                             returnValue = thisPtr.SyncContinue(beginExecuteResult);
                         }
@@ -1665,15 +1630,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                         );
                         saveCommand.UnlockInstance = true;
 
-                        IAsyncResult result = this.persistenceContext
-                            .store
-                            .BeginExecute(
-                                this.persistenceContext.handle,
-                                saveCommand,
-                                this.timeoutHelper.RemainingTime(),
-                                PrepareAsyncCompletion(handleEndExecute),
-                                this
-                            );
+                        IAsyncResult result = this.persistenceContext.store.BeginExecute(
+                            this.persistenceContext.handle,
+                            saveCommand,
+                            this.timeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(handleEndExecute),
+                            this
+                        );
                         if (SyncContinue(result))
                         {
                             Complete(true);
@@ -1687,14 +1650,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace
-                        .Exception
-                        .AsError(
-                            new CommunicationObjectAbortedException(
-                                SR.HandleFreedInDirectory,
-                                exception
-                            )
-                        );
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 catch (TimeoutException)
                 {

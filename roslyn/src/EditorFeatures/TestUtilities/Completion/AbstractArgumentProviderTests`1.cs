@@ -25,9 +25,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Completion
     public abstract class AbstractArgumentProviderTests<TWorkspaceFixture> : TestBase
         where TWorkspaceFixture : TestWorkspaceFixture, new()
     {
-        private static readonly TestComposition s_baseComposition = EditorTestCompositions
-            .EditorFeatures
-            .AddExcludedPartTypes(typeof(ArgumentProvider));
+        private static readonly TestComposition s_baseComposition =
+            EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(typeof(ArgumentProvider));
 
         private readonly TestFixtureHelper<TWorkspaceFixture> _fixtureHelper = new();
 
@@ -129,8 +128,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Completion
             var parameters = symbol.GetParameters();
 
             var syntaxFacts = workspace
-                .Services
-                .GetLanguageServices(root.Language)
+                .Services.GetLanguageServices(root.Language)
                 .GetRequiredService<ISyntaxFactsService>();
             Contract.ThrowIfTrue(
                 arguments.Any(argument => syntaxFacts.IsNamedArgument(argument)),

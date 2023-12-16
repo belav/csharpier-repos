@@ -657,8 +657,7 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                 ss.Set<PrimitiveCollectionsEntity>()
                     .Where(
                         c =>
-                            c.Ints
-                                .Join(ints, i => i, j => j, (i, j) => new { I = i, J = j })
+                            c.Ints.Join(ints, i => i, j => j, (i, j) => new { I = i, J = j })
                                 .Count() == 2
                     )
         );
@@ -861,8 +860,7 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                         p =>
                             ints.Skip(1)
                                 .Union(
-                                    p.Ints
-                                        .OrderBy(x => x)
+                                    p.Ints.OrderBy(x => x)
                                         .Skip(1)
                                         .Distinct()
                                         .OrderByDescending(x => x)
@@ -1078,8 +1076,9 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                                 Ints = x.Ints.ToList(),
                                 OrderedInts = x.Ints.OrderByDescending(xx => xx).ToList(),
                                 FilteredDateTimes = x.DateTimes.Where(xx => xx.Day != 1).ToList(),
-                                FilteredDateTimes2 = x.DateTimes
-                                    .Where(xx => xx > new DateTime(2000, 1, 1))
+                                FilteredDateTimes2 = x.DateTimes.Where(
+                                    xx => xx > new DateTime(2000, 1, 1)
+                                )
                                     .ToList()
                             }
                     ),

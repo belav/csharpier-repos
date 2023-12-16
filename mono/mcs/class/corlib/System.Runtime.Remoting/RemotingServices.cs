@@ -193,8 +193,7 @@ namespace System.Runtime.Remoting
                 }
 
                 var latestCallContext = Thread
-                    .CurrentThread
-                    .GetMutableExecutionContext()
+                    .CurrentThread.GetMutableExecutionContext()
                     .LogicalCallContext;
                 result = new ReturnMessage(rval, returnArgs, n, latestCallContext, reqMsg);
             }
@@ -397,8 +396,7 @@ namespace System.Runtime.Remoting
             if (IsTransparentProxy(Obj))
                 oref = RemotingServices
                     .GetRealProxy(Obj)
-                    .ObjectIdentity
-                    .CreateObjRef(RequestedType);
+                    .ObjectIdentity.CreateObjRef(RequestedType);
             else
                 oref = Obj.CreateObjRef(RequestedType);
 

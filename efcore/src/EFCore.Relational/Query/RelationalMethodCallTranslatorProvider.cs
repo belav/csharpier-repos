@@ -64,13 +64,9 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
         {
             if (dbFunction.Translation != null)
             {
-                var translation = dbFunction
-                    .Translation
-                    .Invoke(
-                        arguments
-                            .Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e))
-                            .ToList()
-                    );
+                var translation = dbFunction.Translation.Invoke(
+                    arguments.Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e)).ToList()
+                );
 
                 if (translation.Type.IsNullableValueType())
                 {
@@ -85,9 +81,9 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
                 return translation;
             }
 
-            var argumentsPropagateNullability = dbFunction
-                .Parameters
-                .Select(p => p.PropagatesNullability);
+            var argumentsPropagateNullability = dbFunction.Parameters.Select(
+                p => p.PropagatesNullability
+            );
 
             return dbFunction.IsBuiltIn
                 ? _sqlExpressionFactory.Function(

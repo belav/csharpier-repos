@@ -29,9 +29,10 @@ public static class SignalRDependencyInjectionExtensions
     {
         ArgumentNullException.ThrowIfNull(signalrBuilder);
 
-        signalrBuilder
-            .Services
-            .AddSingleton<IConfigureOptions<HubOptions<THub>>, HubOptionsSetup<THub>>();
+        signalrBuilder.Services.AddSingleton<
+            IConfigureOptions<HubOptions<THub>>,
+            HubOptionsSetup<THub>
+        >();
         signalrBuilder.Services.Configure(configure);
         return signalrBuilder;
     }

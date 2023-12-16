@@ -140,9 +140,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
 
                         unnecessarySpans.AddRange(
                             invocation
-                                .Syntax
-                                .Span
-                                .Subtract(
+                                .Syntax.Span.Subtract(
                                     GetPreservedInterpolationExpressionSyntax(instance).FullSpan
                                 )
                                 .Subtract(
@@ -173,10 +171,9 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     formatString = "";
 
                     unnecessarySpans.AddRange(
-                        invocation
-                            .Syntax
-                            .Span
-                            .Subtract(GetPreservedInterpolationExpressionSyntax(instance).FullSpan)
+                        invocation.Syntax.Span.Subtract(
+                            GetPreservedInterpolationExpressionSyntax(instance).FullSpan
+                        )
                     );
                     return;
                 }
@@ -311,9 +308,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
 
                                 unnecessarySpans.AddRange(
                                     invocation
-                                        .Syntax
-                                        .Span
-                                        .Subtract(
+                                        .Syntax.Span.Subtract(
                                             GetPreservedInterpolationExpressionSyntax(
                                                 instance
                                             ).FullSpan

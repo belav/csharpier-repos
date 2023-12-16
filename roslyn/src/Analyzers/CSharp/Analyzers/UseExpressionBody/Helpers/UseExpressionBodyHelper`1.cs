@@ -327,8 +327,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 );
 
                 var trailingTrivia = semicolonToken
-                    .TrailingTrivia
-                    .Where(t => t.Kind() != SyntaxKind.EndOfLineTrivia)
+                    .TrailingTrivia.Where(t => t.Kind() != SyntaxKind.EndOfLineTrivia)
                     .Concat(declaration.GetTrailingTrivia());
                 semicolonToken = semicolonToken.WithTrailingTrivia(trailingTrivia);
 

@@ -14,8 +14,7 @@ public class ConventionalControllerWithMetadata : Controller
         return Ok(
             HttpContext
                 .GetEndpoint()
-                .Metadata
-                .GetOrderedMetadata<MetadataAttribute>()
+                .Metadata.GetOrderedMetadata<MetadataAttribute>()
                 .Select(m => m.Value)
         );
     }

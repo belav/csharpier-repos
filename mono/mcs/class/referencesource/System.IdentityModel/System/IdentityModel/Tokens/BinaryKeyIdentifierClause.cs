@@ -29,20 +29,18 @@ namespace System.IdentityModel.Tokens
         {
             if (identificationData == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("identificationData"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("identificationData")
+                );
             }
             if (identificationData.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "identificationData",
-                            SR.GetString(SR.LengthMustBeGreaterThanZero)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "identificationData",
+                        SR.GetString(SR.LengthMustBeGreaterThanZero)
+                    )
+                );
             }
 
             if (cloneBuffer)
@@ -84,14 +82,12 @@ namespace System.IdentityModel.Tokens
         {
             if (offset < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "offset",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
             return SecurityUtils.MatchesBuffer(this.identificationData, 0, data, offset);
         }

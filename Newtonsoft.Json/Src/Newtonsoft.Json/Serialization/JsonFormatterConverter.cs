@@ -78,9 +78,11 @@ namespace Newtonsoft.Json.Serialization
 
             object? resolvedValue = (value is JValue v) ? v.Value : value;
 
-            return System
-                .Convert
-                .ChangeType(resolvedValue, typeCode, CultureInfo.InvariantCulture)!;
+            return System.Convert.ChangeType(
+                resolvedValue,
+                typeCode,
+                CultureInfo.InvariantCulture
+            )!;
         }
 
         public bool ToBoolean(object value)

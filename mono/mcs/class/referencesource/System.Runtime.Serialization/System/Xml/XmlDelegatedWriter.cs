@@ -19,12 +19,9 @@ namespace System.Xml
         public XmlDelegatedWriter(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw System
-                    .Runtime
-                    .Serialization
-                    .DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException("writer"));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
 
             this.writer = writer;
         }

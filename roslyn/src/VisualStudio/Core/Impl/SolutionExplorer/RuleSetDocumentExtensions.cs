@@ -37,8 +37,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
 
             var allMatchingRules = ruleSet
-                .Root
-                .Descendants("Rule")
+                .Root.Descendants("Rule")
                 .Where(r => r.Attribute("Id").Value.Equals(ruleId))
                 .ToList();
 
@@ -105,8 +104,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         )
         {
             var rulesElement = ruleSetDocument
-                .Root
-                .Elements("Rules")
+                .Root.Elements("Rules")
                 .FirstOrDefault(r => r.Attribute("AnalyzerId").Value.Equals(analyzerID));
 
             if (rulesElement == null)

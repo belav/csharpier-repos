@@ -863,9 +863,10 @@ namespace System.Runtime.Loader
             )
                 return null;
 
-            string parentAssemblyName = assemblyName
-                .Name
-                .Substring(0, assemblyName.Name.Length - SatelliteSuffix.Length);
+            string parentAssemblyName = assemblyName.Name.Substring(
+                0,
+                assemblyName.Name.Length - SatelliteSuffix.Length
+            );
 
             Assembly parentAssembly = LoadFromAssemblyName(new AssemblyName(parentAssemblyName));
 

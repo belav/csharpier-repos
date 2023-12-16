@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         )
         {
             var hostServices = FeaturesTestCompositions
-                .RemoteHost
-                .AddParts(additionalRemoteParts)
+                .RemoteHost.AddParts(additionalRemoteParts)
                 .AddExcludedPartTypes(excludedRemoteParts)
                 .GetHostServices();
 
@@ -103,9 +102,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         {
             _services = services;
 
-            var testSerializerServiceFactory = services
-                .ExportProvider
-                .GetExportedValue<TestSerializerService.Factory>();
+            var testSerializerServiceFactory =
+                services.ExportProvider.GetExportedValue<TestSerializerService.Factory>();
 
             _lazyManager = new Lazy<WorkspaceManager>(
                 () =>

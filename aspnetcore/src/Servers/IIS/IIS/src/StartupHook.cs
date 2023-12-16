@@ -52,9 +52,9 @@ internal sealed class StartupHook
 
             // Get the content root from IIS.
             var iisConfigData = NativeMethods.HttpGetApplicationProperties();
-            var contentRoot = iisConfigData
-                .pwzFullApplicationPath
-                .TrimEnd(Path.DirectorySeparatorChar);
+            var contentRoot = iisConfigData.pwzFullApplicationPath.TrimEnd(
+                Path.DirectorySeparatorChar
+            );
 
             var model = ErrorPageModelBuilder.CreateErrorPageModel(
                 new PhysicalFileProvider(contentRoot),

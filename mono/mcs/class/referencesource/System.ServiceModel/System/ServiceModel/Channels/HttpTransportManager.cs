@@ -257,13 +257,11 @@ namespace System.ServiceModel.Channels
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ListenerFactoryNotRegistered, channelListener.Uri)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ListenerFactoryNotRegistered, channelListener.Uri)
+                    )
+                );
             }
 
             HostNameComparisonMode registeredMode = channelListener.InheritBaseAddressSettings

@@ -476,8 +476,7 @@ namespace Microsoft.CodeAnalysis.Rename
                 )
                 {
                     var syntaxFactsLanguageService = solution
-                        .Services
-                        .GetLanguageServices(documentsGroupedByLanguage.Key)
+                        .Services.GetLanguageServices(documentsGroupedByLanguage.Key)
                         .GetService<ISyntaxFactsService>();
 
                     if (syntaxFactsLanguageService != null)

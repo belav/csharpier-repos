@@ -272,9 +272,11 @@ namespace System
                 string? cursorAddressFormat = TerminalFormatStringsInstance.CursorAddress;
                 if (!string.IsNullOrEmpty(cursorAddressFormat))
                 {
-                    string ansiStr = TermInfo
-                        .ParameterizedStrings
-                        .Evaluate(cursorAddressFormat, top, left);
+                    string ansiStr = TermInfo.ParameterizedStrings.Evaluate(
+                        cursorAddressFormat,
+                        top,
+                        left
+                    );
                     WriteTerminalAnsiString(ansiStr);
                 }
 
@@ -518,12 +520,10 @@ namespace System
                 // involved in reading/writing, such as when accessing a remote system. We also extend
                 // the timeout on the very first request to 15 seconds, to account for potential latency
                 // before we know if we will receive a response.
-                Interop
-                    .Sys
-                    .InitializeConsoleBeforeRead(
-                        minChars: (byte)(s_everReceivedCursorPositionResponse ? 1 : 0),
-                        decisecondsTimeout: (byte)(s_firstCursorPositionRequest ? 100 : 10)
-                    );
+                Interop.Sys.InitializeConsoleBeforeRead(
+                    minChars: (byte)(s_everReceivedCursorPositionResponse ? 1 : 0),
+                    decisecondsTimeout: (byte)(s_firstCursorPositionRequest ? 100 : 10)
+                );
                 try
                 {
                     // Write out the cursor position report request.
@@ -929,9 +929,10 @@ namespace System
                     ];
 
                     int ansiCode = consoleColorToAnsiCode[ccValue] % maxColors;
-                    evaluatedString = TermInfo
-                        .ParameterizedStrings
-                        .Evaluate(formatString, ansiCode);
+                    evaluatedString = TermInfo.ParameterizedStrings.Evaluate(
+                        formatString,
+                        ansiCode
+                    );
 
                     WriteTerminalAnsiString(evaluatedString);
 
@@ -1025,14 +1026,12 @@ namespace System
                                 Interop.Sys.ControlCharacterNames.VEOF
                             };
                         byte* controlCharacterValues = stackalloc byte[NumControlCharacterNames];
-                        Interop
-                            .Sys
-                            .GetControlCharacters(
-                                controlCharacterNames,
-                                controlCharacterValues,
-                                NumControlCharacterNames,
-                                out s_posixDisableValue
-                            );
+                        Interop.Sys.GetControlCharacters(
+                            controlCharacterNames,
+                            controlCharacterValues,
+                            NumControlCharacterNames,
+                            out s_posixDisableValue
+                        );
                         s_veraseCharacter = controlCharacterValues[0];
                         s_veolCharacter = controlCharacterValues[1];
                         s_veol2Character = controlCharacterValues[2];
@@ -1123,14 +1122,12 @@ namespace System
                             // only the blocking behavior, and thus ignore any poll errors
                             // and loop around to do another write (which may correctly fail
                             // if something else has gone wrong).
-                            Interop
-                                .Sys
-                                .Poll(
-                                    fd,
-                                    Interop.PollEvents.POLLOUT,
-                                    Timeout.Infinite,
-                                    out Interop.PollEvents triggered
-                                );
+                            Interop.Sys.Poll(
+                                fd,
+                                Interop.PollEvents.POLLOUT,
+                                Timeout.Infinite,
+                                out Interop.PollEvents triggered
+                            );
                             continue;
                         }
                         else

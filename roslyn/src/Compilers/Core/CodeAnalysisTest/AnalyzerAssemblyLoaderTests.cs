@@ -175,9 +175,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string methodName
         )
         {
-            var type = typeof(AnalyzerAssemblyLoaderTests)
-                .Assembly
-                .GetType(typeName, throwOnError: false)!;
+            var type = typeof(AnalyzerAssemblyLoaderTests).Assembly.GetType(
+                typeName,
+                throwOnError: false
+            )!;
             var member = type.GetMethod(
                 methodName,
                 BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance
@@ -519,8 +520,7 @@ Delta: Gamma: Beta: Test B
             // The assemblies in the LoadFrom context are the assemblies loaded from
             // analyzer dependencies.
             loadedAssemblies = AppDomain
-                .CurrentDomain
-                .GetAssemblies()
+                .CurrentDomain.GetAssemblies()
                 .Where(x => isInLoadFromContext(loader, x));
 
             static bool isInLoadFromContext(AnalyzerAssemblyLoader loader, Assembly assembly)
@@ -1518,8 +1518,7 @@ Delta.2: Test D2
                     var copiedAssembly = loader.LoadFromPath(destFile);
                     Assert.Single(
                         AppDomain
-                            .CurrentDomain
-                            .GetAssemblies()
+                            .CurrentDomain.GetAssemblies()
                             .Where(x => x.FullName == assembly.FullName)
                     );
                     Assert.Same(copiedAssembly, assembly);

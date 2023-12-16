@@ -976,16 +976,14 @@ namespace System.ServiceModel.Channels
             {
                 if (response.IsFault)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            WsrmUtilities.CreateCSFaultException(
-                                this.Settings.MessageVersion,
-                                this.Settings.ReliableMessagingVersion,
-                                response,
-                                this.binder.Channel
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        WsrmUtilities.CreateCSFaultException(
+                            this.Settings.MessageVersion,
+                            this.Settings.ReliableMessagingVersion,
+                            response,
+                            this.binder.Channel
+                        )
+                    );
                 }
                 else
                 {
@@ -999,14 +997,12 @@ namespace System.ServiceModel.Channels
                     );
 
                     if (info.ParsingException != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new ProtocolException(
-                                    SR.GetString(SR.UnparsableCSResponse),
-                                    info.ParsingException
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(SR.UnparsableCSResponse),
+                                info.ParsingException
+                            )
+                        );
 
                     // this throws and sends a fault if something is wrong with the info
                     this.ProcessInfo(info, null, true);
@@ -1086,9 +1082,9 @@ namespace System.ServiceModel.Channels
                     }
 
                     if (exceptionReason != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(new ProtocolException(exceptionReason));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(exceptionReason)
+                        );
                 }
             }
 
@@ -1257,9 +1253,11 @@ namespace System.ServiceModel.Channels
                 this.session = session;
                 this.start = DateTime.UtcNow;
 
-                IAsyncResult result = this.session
-                    .requestor
-                    .BeginRequest(timeout, onRequestComplete, this);
+                IAsyncResult result = this.session.requestor.BeginRequest(
+                    timeout,
+                    onRequestComplete,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     this.CompleteRequest(result);

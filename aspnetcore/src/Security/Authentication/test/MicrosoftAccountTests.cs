@@ -252,22 +252,20 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
                 OnCreatingTicket = context =>
                 {
                     var refreshToken = context.RefreshToken;
-                    context
-                        .Principal
-                        .AddIdentity(
-                            new ClaimsIdentity(
-                                new Claim[]
-                                {
-                                    new Claim(
-                                        "RefreshToken",
-                                        refreshToken,
-                                        ClaimValueTypes.String,
-                                        "Microsoft"
-                                    )
-                                },
-                                "Microsoft"
-                            )
-                        );
+                    context.Principal.AddIdentity(
+                        new ClaimsIdentity(
+                            new Claim[]
+                            {
+                                new Claim(
+                                    "RefreshToken",
+                                    refreshToken,
+                                    ClaimValueTypes.String,
+                                    "Microsoft"
+                                )
+                            },
+                            "Microsoft"
+                        )
+                    );
                     return Task.FromResult<object>(null);
                 }
             };

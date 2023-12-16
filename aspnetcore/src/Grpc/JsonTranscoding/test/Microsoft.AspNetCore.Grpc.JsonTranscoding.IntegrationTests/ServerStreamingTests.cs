@@ -29,12 +29,10 @@ public class ServerStreamingTests : IntegrationTestBase
         {
             await writer.WriteAsync(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
-            .AddServerStreamingMethod<HelloRequest, HelloReply>(
-                ServerStreamingMethod,
-                Greeter.Descriptor.FindMethodByName("SayHello")
-            );
+        var method = Fixture.DynamicGrpc.AddServerStreamingMethod<HelloRequest, HelloReply>(
+            ServerStreamingMethod,
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -62,12 +60,10 @@ public class ServerStreamingTests : IntegrationTestBase
             await tcs.Task;
             await writer.WriteAsync(new HelloReply { Message = $"Hello {request.Name} 2!" });
         }
-        var method = Fixture
-            .DynamicGrpc
-            .AddServerStreamingMethod<HelloRequest, HelloReply>(
-                ServerStreamingMethod,
-                Greeter.Descriptor.FindMethodByName("SayHello")
-            );
+        var method = Fixture.DynamicGrpc.AddServerStreamingMethod<HelloRequest, HelloReply>(
+            ServerStreamingMethod,
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -111,12 +107,10 @@ public class ServerStreamingTests : IntegrationTestBase
                 new CancellationToken(canceled: true)
             );
         }
-        var method = Fixture
-            .DynamicGrpc
-            .AddServerStreamingMethod<HelloRequest, HelloReply>(
-                ServerStreamingMethod,
-                Greeter.Descriptor.FindMethodByName("SayHello")
-            );
+        var method = Fixture.DynamicGrpc.AddServerStreamingMethod<HelloRequest, HelloReply>(
+            ServerStreamingMethod,
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 

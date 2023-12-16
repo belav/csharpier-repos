@@ -4590,9 +4590,9 @@ public struct S
 
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .DebugDll
-                        .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
+                    options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                        ReportStructInitializationWarnings
+                    ),
                     parseOptions: TestOptions.Regular11
                 )
                 .VerifyDiagnostics(
@@ -4605,12 +4605,10 @@ public struct S
 
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .DebugDll
-                        .WithSpecificDiagnosticOptions(
-                            GetIdForErrorCode(ErrorCode.WRN_UnassignedThisSupportedVersion),
-                            ReportDiagnostic.Error
-                        ),
+                    options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                        GetIdForErrorCode(ErrorCode.WRN_UnassignedThisSupportedVersion),
+                        ReportDiagnostic.Error
+                    ),
                     parseOptions: TestOptions.Regular11
                 )
                 .VerifyDiagnostics(
@@ -4727,9 +4725,9 @@ public struct S
 
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .DebugDll
-                        .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
+                    options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                        ReportStructInitializationWarnings
+                    ),
                     parseOptions: TestOptions.Regular11
                 )
                 .VerifyDiagnostics(
@@ -4775,9 +4773,9 @@ public struct S
 
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                ),
                 parseOptions: TestOptions.Regular11
             );
             verifier.VerifyDiagnostics(
@@ -4836,9 +4834,9 @@ public struct S
 
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                ),
                 parseOptions: TestOptions.Regular11
             );
             verifier.VerifyDiagnostics(
@@ -5007,9 +5005,9 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics();
 
@@ -5055,9 +5053,9 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics();
 
@@ -5097,9 +5095,9 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics();
 
@@ -5141,9 +5139,9 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics(
                 // (11,12): warning CS9022: Control is returned to caller before field 'S2.S1' is explicitly assigned, causing a preceding implicit assignment of 'default'.
@@ -5193,9 +5191,9 @@ public struct S
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics(
                 // (6,12): warning CS9022: Control is returned to caller before field 'S.X' is explicitly assigned, causing a preceding implicit assignment of 'default'.
@@ -5255,9 +5253,9 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics(
                 // (11,12): warning CS9022: Control is returned to caller before field 'S2.S1' is explicitly assigned, causing a preceding implicit assignment of 'default'.
@@ -5311,9 +5309,9 @@ public struct S
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics(
                 // (6,12): warning CS9022: Control is returned to caller before field 'S.X' is explicitly assigned, causing a preceding implicit assignment of 'default'.
@@ -5368,9 +5366,9 @@ public struct S
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics(
                 // (6,12): warning CS9022: Control is returned to caller before field 'S.X' is explicitly assigned, causing a preceding implicit assignment of 'default'.
@@ -5423,9 +5421,9 @@ public struct S
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             comp.VerifyDiagnostics(
                 // (6,12): warning CS9022: Control is returned to caller before field 'S.X' is explicitly assigned, causing a preceding implicit assignment of 'default'.
@@ -5454,9 +5452,9 @@ public struct S
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             comp.VerifyDiagnostics();
 
@@ -5502,9 +5500,9 @@ public struct S<T>
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
-                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
+                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
+                    ReportStructInitializationWarnings
+                )
             );
             verifier.VerifyDiagnostics(
                 // (21,12): warning CS8618: Non-nullable field 'TField' must contain a non-null value when exiting constructor. Consider declaring the field as nullable.

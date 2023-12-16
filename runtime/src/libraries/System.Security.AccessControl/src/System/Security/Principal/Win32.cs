@@ -27,9 +27,12 @@ namespace System.Security.Principal
                 openAsSelf = false;
 
             if (
-                !Interop
-                    .Advapi32
-                    .OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken)
+                !Interop.Advapi32.OpenThreadToken(
+                    (IntPtr)(-2),
+                    dwDesiredAccess,
+                    openAsSelf,
+                    out phThreadToken
+                )
             )
             {
                 if (dwOpenAs == WinSecurityContext.Both)
@@ -38,14 +41,12 @@ namespace System.Security.Principal
                     hr = 0;
                     phThreadToken.Dispose();
                     if (
-                        !Interop
-                            .Advapi32
-                            .OpenThreadToken(
-                                (IntPtr)(-2),
-                                dwDesiredAccess,
-                                openAsSelf,
-                                out phThreadToken
-                            )
+                        !Interop.Advapi32.OpenThreadToken(
+                            (IntPtr)(-2),
+                            dwDesiredAccess,
+                            openAsSelf,
+                            out phThreadToken
+                        )
                     )
                         hr = Marshal.GetHRForLastWin32Error();
                 }

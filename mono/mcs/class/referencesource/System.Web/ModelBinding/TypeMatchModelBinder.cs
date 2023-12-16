@@ -27,12 +27,10 @@
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult vpResult = bindingContext
-                .UnvalidatedValueProvider
-                .GetValue(
-                    bindingContext.ModelName,
-                    skipValidation: !bindingContext.ValidateRequest
-                );
+            ValueProviderResult vpResult = bindingContext.UnvalidatedValueProvider.GetValue(
+                bindingContext.ModelName,
+                skipValidation: !bindingContext.ValidateRequest
+            );
             if (vpResult == null)
             {
                 return null; // the value doesn't exist

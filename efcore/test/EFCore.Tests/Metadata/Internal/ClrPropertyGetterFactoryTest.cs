@@ -171,12 +171,10 @@ public class ClrPropertyGetterFactoryTest
         modelBuilder.Entity<IndexedClass>().Property(e => e.Id);
         var propertyA = modelBuilder
             .Entity<IndexedClass>()
-            .Metadata
-            .AddIndexerProperty("PropertyA", typeof(string));
+            .Metadata.AddIndexerProperty("PropertyA", typeof(string));
         var propertyB = modelBuilder
             .Entity<IndexedClass>()
-            .Metadata
-            .AddIndexerProperty("PropertyB", typeof(int));
+            .Metadata.AddIndexerProperty("PropertyB", typeof(int));
         modelBuilder.FinalizeModel();
 
         Assert.Equal(
@@ -208,8 +206,7 @@ public class ClrPropertyGetterFactoryTest
         var volumeProperty = model
             .FindEntityType(typeof(Customer))!
             .FindComplexProperty(nameof(Customer.Fuel))!
-            .ComplexType
-            .FindProperty(nameof(Fuel.Volume))!;
+            .ComplexType.FindProperty(nameof(Fuel.Volume))!;
 
         Assert.Equal(
             10.0,

@@ -35,9 +35,7 @@ public class Startup
                 for (int i = 0; i < numChunks; i++)
                 {
                     await context
-                        .Response
-                        .Body
-                        .WriteAsync(_chunk, 0, _chunkSize)
+                        .Response.Body.WriteAsync(_chunk, 0, _chunkSize)
                         .ConfigureAwait(false);
                 }
             }

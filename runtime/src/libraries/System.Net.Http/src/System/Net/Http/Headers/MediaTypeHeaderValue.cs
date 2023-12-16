@@ -172,9 +172,12 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                MediaTypeHeaderParser
-                    .SingleValueParser
-                    .TryParseValue(input, null, ref index, out object? output)
+                MediaTypeHeaderParser.SingleValueParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
             )
             {
                 parsedValue = (MediaTypeHeaderValue)output!;

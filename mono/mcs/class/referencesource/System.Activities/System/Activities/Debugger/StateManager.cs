@@ -777,15 +777,13 @@ namespace System.Activities.Debugger
                     new Object[] { }
                 );
 
-                assemblyBuilder = AppDomain
-                    .CurrentDomain
-                    .DefineDynamicAssembly(
-                        assemblyName,
-                        AssemblyBuilderAccess.Run,
-                        null,
-                        true,
-                        new CustomAttributeBuilder[] { transparent }
-                    );
+                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    assemblyName,
+                    AssemblyBuilderAccess.Run,
+                    null,
+                    true,
+                    new CustomAttributeBuilder[] { transparent }
+                );
 
                 // Mark generated code as debuggable.
                 // See http://blogs.msdn.com/rmbyers/archive/2005/06/26/432922.aspx for explanation.

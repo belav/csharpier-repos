@@ -232,9 +232,8 @@ public class AuthorizationMiddleware
             context,
             resource
         );
-        var authorizationMiddlewareResultHandler = context
-            .RequestServices
-            .GetRequiredService<IAuthorizationMiddlewareResultHandler>();
+        var authorizationMiddlewareResultHandler =
+            context.RequestServices.GetRequiredService<IAuthorizationMiddlewareResultHandler>();
         await authorizationMiddlewareResultHandler.HandleAsync(
             _next,
             context,

@@ -730,9 +730,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         F.ExpressionStatement(
                             F.Call(
                                 F.Field(F.This(), _asyncMethodBuilderField),
-                                _asyncMethodBuilderMemberCollection
-                                    .AwaitOnCompleted
-                                    .Construct(notifyCompletionTemp.Type, F.This().Type),
+                                _asyncMethodBuilderMemberCollection.AwaitOnCompleted.Construct(
+                                    notifyCompletionTemp.Type,
+                                    F.This().Type
+                                ),
                                 F.Local(notifyCompletionTemp),
                                 F.This(thisTemp)
                             )
@@ -746,9 +747,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         F.ExpressionStatement(
                             F.Call(
                                 F.Field(F.This(), _asyncMethodBuilderField),
-                                _asyncMethodBuilderMemberCollection
-                                    .AwaitUnsafeOnCompleted
-                                    .Construct(criticalNotifyCompletedTemp.Type, F.This().Type),
+                                _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted.Construct(
+                                    criticalNotifyCompletedTemp.Type,
+                                    F.This().Type
+                                ),
                                 F.Local(criticalNotifyCompletedTemp),
                                 F.This(thisTemp)
                             )
@@ -785,16 +787,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     : null;
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            var useUnsafeOnCompleted = F.Compilation
-                .Conversions
-                .ClassifyImplicitConversionFromType(
-                    loweredAwaiterType,
-                    F.Compilation.GetWellKnownType(
-                        WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
-                    ),
-                    ref discardedUseSiteInfo
-                )
-                .IsImplicit;
+            var useUnsafeOnCompleted = F.Compilation.Conversions.ClassifyImplicitConversionFromType(
+                loweredAwaiterType,
+                F.Compilation.GetWellKnownType(
+                    WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
+                ),
+                ref discardedUseSiteInfo
+            ).IsImplicit;
 
             var onCompleted = (
                 useUnsafeOnCompleted

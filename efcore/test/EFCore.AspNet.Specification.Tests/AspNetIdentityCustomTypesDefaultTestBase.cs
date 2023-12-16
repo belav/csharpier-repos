@@ -137,8 +137,7 @@ public abstract class AspNetIdentityCustomTypesDefaultTestBase<TFixture>
             async context =>
             {
                 var userClaim = await context
-                    .UserClaims
-                    .OrderBy(e => e.ClaimType)
+                    .UserClaims.OrderBy(e => e.ClaimType)
                     .ThenBy(e => e.ClaimValue)
                     .FirstAsync();
                 Assert.NotNull(userClaim.User);

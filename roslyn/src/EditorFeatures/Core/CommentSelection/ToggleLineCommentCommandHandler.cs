@@ -119,9 +119,9 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             Operation operation;
             // If any of the lines are uncommented, add comments.
             if (
-                linesInSelections
-                    .Values
-                    .Any(lines => SelectionHasUncommentedLines(lines, commentInfo))
+                linesInSelections.Values.Any(
+                    lines => SelectionHasUncommentedLines(lines, commentInfo)
+                )
             )
             {
                 foreach (var selection in linesInSelections)

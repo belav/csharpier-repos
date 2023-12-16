@@ -26,9 +26,10 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options
         )
         {
-            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver
-                .MemberAccessor
-                .CreateParameterizedConstructor<T>(ConstructorInfo!);
+            jsonTypeInfo.CreateObjectWithArgs =
+                DefaultJsonTypeInfoResolver.MemberAccessor.CreateParameterizedConstructor<T>(
+                    ConstructorInfo!
+                );
         }
     }
 }

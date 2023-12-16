@@ -101,9 +101,12 @@ public class UrlHelperExtensionsTest
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper
-            .Object
-            .Page("/TestPage", pageHandler: null, values: new { id = 13 }, protocol: "https");
+        urlHelper.Object.Page(
+            "/TestPage",
+            pageHandler: null,
+            values: new { id = 13 },
+            protocol: "https"
+        );
 
         // Assert
         urlHelper.Verify();
@@ -138,15 +141,13 @@ public class UrlHelperExtensionsTest
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper
-            .Object
-            .Page(
-                "/TestPage",
-                pageHandler: null,
-                values: new { id = 13 },
-                protocol: "https",
-                host: "mytesthost"
-            );
+        urlHelper.Object.Page(
+            "/TestPage",
+            pageHandler: null,
+            values: new { id = 13 },
+            protocol: "https",
+            host: "mytesthost"
+        );
 
         // Assert
         urlHelper.Verify();
@@ -181,9 +182,14 @@ public class UrlHelperExtensionsTest
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper
-            .Object
-            .Page("/TestPage", "test-handler", new { id = 13 }, "https", "mytesthost", "#toc");
+        urlHelper.Object.Page(
+            "/TestPage",
+            "test-handler",
+            new { id = 13 },
+            "https",
+            "mytesthost",
+            "#toc"
+        );
 
         // Assert
         urlHelper.Verify();
@@ -401,9 +407,11 @@ public class UrlHelperExtensionsTest
 
         // Act
         string page = null;
-        urlHelper
-            .Object
-            .Page(page, pageHandler: null, values: new { handler = "route-value-handler" });
+        urlHelper.Object.Page(
+            page,
+            pageHandler: null,
+            values: new { handler = "route-value-handler" }
+        );
 
         // Assert
         urlHelper.Verify();

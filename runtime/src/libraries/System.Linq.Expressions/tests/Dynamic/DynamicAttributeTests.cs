@@ -59,8 +59,7 @@ namespace System.Runtime.CompilerServices.Tests
                 (DynamicAttribute)
                     GetType()
                         .GetMethod(nameof(ParamsAndReturns))
-                        .ReturnParameter
-                        .GetCustomAttribute(typeof(DynamicAttribute))
+                        .ReturnParameter.GetCustomAttribute(typeof(DynamicAttribute))
             ).TransformFlags;
             Assert.Equal(1, flags.Count);
             Assert.True(flags[0]);

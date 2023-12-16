@@ -142,9 +142,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             var options = project
-                .Solution
-                .Services
-                .GetRequiredService<IWorkspaceConfigurationService>()
+                .Solution.Services.GetRequiredService<IWorkspaceConfigurationService>()
                 .Options;
             if (!options.RunSourceGeneratorsInSameProcessOnly)
             {
@@ -173,8 +171,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         return ImmutableArray<Diagnostic>.Empty;
 
                     return await result
-                        .Value
-                        .ToDiagnosticsAsync(project, cancellationToken)
+                        .Value.ToDiagnosticsAsync(project, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -274,8 +271,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var forSpanAnalysis = documentAnalysisScope?.Span.HasValue ?? false;
 
                 var performanceInfo = analysisResult
-                    .AnalyzerTelemetryInfo
-                    .ToAnalyzerPerformanceInfo(AnalyzerInfoCache)
+                    .AnalyzerTelemetryInfo.ToAnalyzerPerformanceInfo(AnalyzerInfoCache)
                     .ToImmutableArray();
 
                 _ = await client
@@ -323,13 +319,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var analyzers =
                 documentAnalysisScope?.Analyzers
-                ?? compilationWithAnalyzers
-                    .Analyzers
-                    .Where(
-                        a =>
-                            forceExecuteAllAnalyzers
-                            || !a.IsOpenFileOnly(ideOptions.CleanupOptions?.SimplifierOptions)
-                    );
+                ?? compilationWithAnalyzers.Analyzers.Where(
+                    a =>
+                        forceExecuteAllAnalyzers
+                        || !a.IsOpenFileOnly(ideOptions.CleanupOptions?.SimplifierOptions)
+                );
 
             analyzerMap.AppendAnalyzerMap(analyzers);
 
@@ -389,29 +383,23 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     : null;
 
             return new DiagnosticAnalysisResultMap<DiagnosticAnalyzer, DiagnosticAnalysisResult>(
-                result
-                    .Value
-                    .Diagnostics
-                    .ToImmutableDictionary(
-                        entry => analyzerMap[entry.analyzerId],
-                        entry =>
-                            DiagnosticAnalysisResult.Create(
-                                project,
-                                version,
-                                syntaxLocalMap: Hydrate(entry.diagnosticMap.Syntax, project),
-                                semanticLocalMap: Hydrate(entry.diagnosticMap.Semantic, project),
-                                nonLocalMap: Hydrate(entry.diagnosticMap.NonLocal, project),
-                                others: entry.diagnosticMap.Other,
-                                documentIds
-                            )
-                    ),
-                result
-                    .Value
-                    .Telemetry
-                    .ToImmutableDictionary(
-                        entry => analyzerMap[entry.analyzerId],
-                        entry => entry.telemetry
-                    )
+                result.Value.Diagnostics.ToImmutableDictionary(
+                    entry => analyzerMap[entry.analyzerId],
+                    entry =>
+                        DiagnosticAnalysisResult.Create(
+                            project,
+                            version,
+                            syntaxLocalMap: Hydrate(entry.diagnosticMap.Syntax, project),
+                            semanticLocalMap: Hydrate(entry.diagnosticMap.Semantic, project),
+                            nonLocalMap: Hydrate(entry.diagnosticMap.NonLocal, project),
+                            others: entry.diagnosticMap.Other,
+                            documentIds
+                        )
+                ),
+                result.Value.Telemetry.ToImmutableDictionary(
+                    entry => analyzerMap[entry.analyzerId],
+                    entry => entry.telemetry
+                )
             );
         }
 

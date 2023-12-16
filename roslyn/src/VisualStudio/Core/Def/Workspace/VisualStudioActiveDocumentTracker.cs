@@ -62,9 +62,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
             ThreadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
             {
-                await ThreadingContext
-                    .JoinableTaskFactory
-                    .SwitchToMainThreadAsync(cancellationToken);
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 var monitorSelectionService = (IVsMonitorSelection?)
                     await asyncServiceProvider
@@ -264,13 +264,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     && (int)frameType == (int)__WindowFrameTypeFlags.WINDOWFRAMETYPE_Document
                 )
                 {
-                    var runningDocumentTable = ThreadingContext
-                        .JoinableTaskFactory
-                        .Run(
-                            () =>
-                                GetRunningDocumentTableAsync(ThreadingContext.DisposalToken)
-                                    .AsTask()
-                        );
+                    var runningDocumentTable = ThreadingContext.JoinableTaskFactory.Run(
+                        () => GetRunningDocumentTableAsync(ThreadingContext.DisposalToken).AsTask()
+                    );
                     TrackNewActiveWindowFrame(frame, runningDocumentTable);
                 }
             }
@@ -318,9 +314,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 object sender,
                 TextContentChangedEventArgs e
             ) =>
-                _documentTracker
-                    .NonRoslynBufferTextChanged
-                    ?.Invoke(_documentTracker, EventArgs.Empty);
+                _documentTracker.NonRoslynBufferTextChanged?.Invoke(
+                    _documentTracker,
+                    EventArgs.Empty
+                );
 
             /// <summary>
             /// Returns the current DocumentId for this window frame. Care must be made with this value, since "current" could change asynchronously as the document
@@ -351,9 +348,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         {
                             // The current TextBuffer was initialized in the OnShow instead of being initialized in the
                             // constructor. For consumers, treat this the same way as when the active document changes.
-                            _documentTracker
-                                .DocumentsChanged
-                                ?.Invoke(_documentTracker, EventArgs.Empty);
+                            _documentTracker.DocumentsChanged?.Invoke(
+                                _documentTracker,
+                                EventArgs.Empty
+                            );
                         }
 
                         return VSConstants.S_OK;
@@ -418,9 +416,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     if (docData is IVsTextBuffer bufferAdapter)
                     {
-                        TextBuffer = _documentTracker
-                            ._editorAdaptersFactoryService
-                            .GetDocumentBuffer(bufferAdapter);
+                        TextBuffer =
+                            _documentTracker._editorAdaptersFactoryService.GetDocumentBuffer(
+                                bufferAdapter
+                            );
 
                         if (
                             TextBuffer != null

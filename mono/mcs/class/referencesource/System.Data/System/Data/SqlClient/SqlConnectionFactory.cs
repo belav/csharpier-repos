@@ -296,9 +296,7 @@ namespace System.Data.SqlClient
             if (XMLStream == null)
             {
                 XMLStream = System
-                    .Reflection
-                    .Assembly
-                    .GetExecutingAssembly()
+                    .Reflection.Assembly.GetExecutingAssembly()
                     .GetManifestResourceStream("System.Data.SqlClient.SqlMetaData.xml");
                 cacheMetaDataFactory = true;
             }

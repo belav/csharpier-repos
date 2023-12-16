@@ -38,19 +38,17 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CodeActionAsync(
-                    "Generate constructor...",
-                    applyFix: true,
-                    blockUntilComplete: false,
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate constructor...",
+                applyFix: true,
+                blockUntilComplete: false,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.PickMembersDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.PickMembersDialog.ClickCancelAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
-                .GetTextAsync(HangMitigatingCancellationToken);
+            var actualText = await TestServices.Editor.GetTextAsync(
+                HangMitigatingCancellationToken
+            );
             Assert.Contains(
                 @"
 Class C
@@ -80,25 +78,21 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CodeActionAsync(
-                    "Generate constructor...",
-                    applyFix: true,
-                    blockUntilComplete: false,
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate constructor...",
+                applyFix: true,
+                blockUntilComplete: false,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.PickMembersDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.PickMembersDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(
-                    FeatureAttribute.LightBulb,
-                    HangMitigatingCancellationToken
-                );
-            var actualText = await TestServices
-                .Editor
-                .GetTextAsync(HangMitigatingCancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                HangMitigatingCancellationToken
+            );
+            var actualText = await TestServices.Editor.GetTextAsync(
+                HangMitigatingCancellationToken
+            );
             Assert.Contains(
                 @"
 Class C
@@ -132,32 +126,30 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CodeActionAsync(
-                    "Generate constructor...",
-                    applyFix: true,
-                    blockUntilComplete: false,
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate constructor...",
+                applyFix: true,
+                blockUntilComplete: false,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.PickMembersDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                VirtualKeyCode.TAB,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                VirtualKeyCode.TAB,
+                HangMitigatingCancellationToken
+            );
             await TestServices.PickMembersDialog.ClickDownAsync(HangMitigatingCancellationToken);
             await TestServices.PickMembersDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(
-                    FeatureAttribute.LightBulb,
-                    HangMitigatingCancellationToken
-                );
-            var actualText = await TestServices
-                .Editor
-                .GetTextAsync(HangMitigatingCancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                HangMitigatingCancellationToken
+            );
+            var actualText = await TestServices.Editor.GetTextAsync(
+                HangMitigatingCancellationToken
+            );
             Assert.Contains(
                 @"
 Class C
@@ -191,34 +183,33 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
-                .CodeActionAsync(
-                    "Generate constructor...",
-                    applyFix: true,
-                    blockUntilComplete: false,
-                    cancellationToken: HangMitigatingCancellationToken
-                );
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate constructor...",
+                applyFix: true,
+                blockUntilComplete: false,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.PickMembersDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
-            await TestServices
-                .Input
-                .SendWithoutActivateAsync(VirtualKeyCode.SPACE, HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                VirtualKeyCode.TAB,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                VirtualKeyCode.TAB,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendWithoutActivateAsync(
+                VirtualKeyCode.SPACE,
+                HangMitigatingCancellationToken
+            );
             await TestServices.PickMembersDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(
-                    FeatureAttribute.LightBulb,
-                    HangMitigatingCancellationToken
-                );
-            var actualText = await TestServices
-                .Editor
-                .GetTextAsync(HangMitigatingCancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                HangMitigatingCancellationToken
+            );
+            var actualText = await TestServices.Editor.GetTextAsync(
+                HangMitigatingCancellationToken
+            );
             Assert.Contains(
                 @"
 Class C

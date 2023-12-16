@@ -571,9 +571,11 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
             {
                 if (bytesEmitted++ % 12 == 0)
                 {
-                    outputUtf8Writer
-                        .BaseStream
-                        .Write(NewLineAndIndentation, 0, NewLineAndIndentation.Length);
+                    outputUtf8Writer.BaseStream.Write(
+                        NewLineAndIndentation,
+                        0,
+                        NewLineAndIndentation.Length
+                    );
                 }
 
                 var byteValue = buf[i];

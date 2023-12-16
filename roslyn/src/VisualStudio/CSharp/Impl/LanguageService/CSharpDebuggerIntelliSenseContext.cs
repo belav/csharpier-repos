@@ -102,12 +102,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             Document document
         )
         {
-            var previousTrackingSpan = ContextBuffer
-                .CurrentSnapshot
-                .CreateTrackingSpan(
-                    Span.FromBounds(0, contextPoint),
-                    SpanTrackingMode.EdgeNegative
-                );
+            var previousTrackingSpan = ContextBuffer.CurrentSnapshot.CreateTrackingSpan(
+                Span.FromBounds(0, contextPoint),
+                SpanTrackingMode.EdgeNegative
+            );
 
             // terminate the previous expression/statement
             var buffer = ProjectionBufferFactoryService.CreateProjectionBuffer(
@@ -117,13 +115,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 contentType: this.ContentType
             );
 
-            return buffer
-                .CurrentSnapshot
-                .CreateTrackingSpan(
-                    0,
-                    buffer.CurrentSnapshot.Length,
-                    SpanTrackingMode.EdgeNegative
-                );
+            return buffer.CurrentSnapshot.CreateTrackingSpan(
+                0,
+                buffer.CurrentSnapshot.Length,
+                SpanTrackingMode.EdgeNegative
+            );
         }
 
         public override bool CompletionStartsOnQuestionMark

@@ -34,11 +34,8 @@ namespace System.ServiceModel.Diagnostics
         )
         {
             EventLogger logger = new EventLogger();
-            logger.innerEventLogger = System
-                .Runtime
-                .Diagnostics
-                .EventLogger
-                .UnsafeCreateEventLogger(
+            logger.innerEventLogger =
+                System.Runtime.Diagnostics.EventLogger.UnsafeCreateEventLogger(
                     eventLogSourceName,
                     (System.Runtime.Diagnostics.DiagnosticTraceBase)diagnosticTrace
                 );

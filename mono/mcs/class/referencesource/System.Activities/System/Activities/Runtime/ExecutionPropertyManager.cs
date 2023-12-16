@@ -606,9 +606,10 @@ namespace System.Activities.Runtime
             {
                 if (this.properties.ContainsKey(name))
                 {
-                    throw FxTrace
-                        .Exception
-                        .Argument("name", SR.ExecutionPropertyAlreadyDefined(name));
+                    throw FxTrace.Exception.Argument(
+                        "name",
+                        SR.ExecutionPropertyAlreadyDefined(name)
+                    );
                 }
             }
         }

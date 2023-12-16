@@ -30,7 +30,6 @@ public class InMemoryFixture
         IServiceCollection providerServices = null
     ) =>
         InMemoryTestStoreFactory
-            .Instance
-            .AddProviderServices(providerServices ?? new ServiceCollection())
+            .Instance.AddProviderServices(providerServices ?? new ServiceCollection())
             .BuildServiceProvider(validateScopes: true);
 }

@@ -71,9 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return;
             }
 
-            var backgroundWorkIndicatorFactory = workspace
-                .Services
-                .GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var backgroundWorkIndicatorFactory =
+                workspace.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var context = backgroundWorkIndicatorFactory.Create(
                 args.TextView,
                 args.TextView.GetTextElementSpan(caretPoint.Value),
@@ -86,9 +85,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 // Is the caret within any of the rename fields in this buffer?
                 // If so, focus the dashboard
                 if (
-                    _renameService
-                        .ActiveSession
-                        .TryGetContainingEditableSpan(caretPoint.Value, out _)
+                    _renameService.ActiveSession.TryGetContainingEditableSpan(
+                        caretPoint.Value,
+                        out _
+                    )
                 )
                 {
                     SetFocusToAdornment(args.TextView);
@@ -103,10 +103,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             var cancellationToken = context.UserCancellationToken;
 
-            var document = await args.SubjectBuffer
-                .CurrentSnapshot
-                .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(context)
-                .ConfigureAwait(false);
+            var document =
+                await args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
+                    context
+                )
+                    .ConfigureAwait(false);
 
             if (document == null)
             {
@@ -118,9 +119,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return;
             }
 
-            var selectedSpans = args.TextView
-                .Selection
-                .GetSnapshotSpansOnBuffer(args.SubjectBuffer);
+            var selectedSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(
+                args.SubjectBuffer
+            );
 
             // Now make sure the entire selection is contained within that token.
             // There can be zero selectedSpans in projection scenarios.

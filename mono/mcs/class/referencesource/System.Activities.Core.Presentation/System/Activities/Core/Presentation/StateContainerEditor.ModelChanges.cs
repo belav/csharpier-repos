@@ -94,10 +94,9 @@ namespace System.Activities.Core.Presentation
                 "Should only delete states with StateMachine."
             );
 
-            this.ModelItem
-                .Properties[StateMachineDesigner.StatesPropertyName]
-                .Collection
-                .Remove(stateModelItem);
+            this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection.Remove(
+                stateModelItem
+            );
             if (
                 clearInitialState
                 && this.ModelItem.ItemType == typeof(StateMachine)
@@ -107,9 +106,9 @@ namespace System.Activities.Core.Presentation
                         .Value
             )
             {
-                this.ModelItem
-                    .Properties[StateMachineDesigner.InitialStatePropertyName]
-                    .SetValue(null);
+                this.ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName].SetValue(
+                    null
+                );
                 this.ViewStateService.StoreViewStateWithUndo(
                     this.ModelItem,
                     ConnectorLocationViewStateKey,
@@ -177,8 +176,7 @@ namespace System.Activities.Core.Presentation
                     .SetValue(destModelItem);
                 srcModelItem
                     .Properties[StateDesigner.TransitionsPropertyName]
-                    .Collection
-                    .Add(transitionModelItem);
+                    .Collection.Add(transitionModelItem);
             }
             // We are creating a new connector.
             else
@@ -200,8 +198,7 @@ namespace System.Activities.Core.Presentation
                 }
                 transitionModelItem = srcModelItem
                     .Properties[StateDesigner.TransitionsPropertyName]
-                    .Collection
-                    .Add(newTransition);
+                    .Collection.Add(newTransition);
             }
             if (transitionModelItem != null)
             {
@@ -304,9 +301,9 @@ namespace System.Activities.Core.Presentation
                                 this.ModelItem.BeginEdit(SR.SetInitialState)
                         )
                         {
-                            this.StateMachineModelItem
-                                .Properties[StateMachineDesigner.InitialStatePropertyName]
-                                .SetValue(stateModelItem);
+                            this.StateMachineModelItem.Properties[
+                                StateMachineDesigner.InitialStatePropertyName
+                            ].SetValue(stateModelItem);
                             PointCollection connectorViewState = new PointCollection(
                                 ConnectorRouter.Route(
                                     this.panel,
@@ -480,10 +477,9 @@ namespace System.Activities.Core.Presentation
             )
             {
                 StoreShapeSizeWithUndoRecursively(this.ModelItem);
-                droppedModelItem = this.ModelItem
-                    .Properties[StateMachineDesigner.StatesPropertyName]
-                    .Collection
-                    .Add(droppedObject);
+                droppedModelItem = this.ModelItem.Properties[
+                    StateMachineDesigner.StatesPropertyName
+                ].Collection.Add(droppedObject);
                 es.Complete();
             }
             return droppedModelItem;

@@ -218,9 +218,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var name = syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression);
                 var identifier = syntaxFacts.GetIdentifierOfSimpleName(name);
                 if (
-                    !syntaxFacts
-                        .StringComparer
-                        .Equals(identifier.ValueText, nameof(Task.ConfigureAwait))
+                    !syntaxFacts.StringComparer.Equals(
+                        identifier.ValueText,
+                        nameof(Task.ConfigureAwait)
+                    )
                 )
                     return false;
 

@@ -1197,10 +1197,9 @@ namespace ILLink.Shared.TrimAnalysis
                                 genericArgumentType,
                                 new GenericParameterValue(
                                     gp,
-                                    _context
-                                        .Annotations
-                                        .FlowAnnotations
-                                        .GetGenericParameterAnnotation(gp)
+                                    _context.Annotations.FlowAnnotations.GetGenericParameterAnnotation(
+                                        gp
+                                    )
                                 )
                             );
 

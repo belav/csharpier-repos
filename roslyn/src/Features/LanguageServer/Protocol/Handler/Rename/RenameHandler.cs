@@ -113,9 +113,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 )
                 .Select(group => group.First());
 
-            var textDiffService = renamedSolution
-                .Services
-                .GetRequiredService<IDocumentTextDifferencingService>();
+            var textDiffService =
+                renamedSolution.Services.GetRequiredService<IDocumentTextDifferencingService>();
 
             var documentEdits = await ProtocolConversions
                 .ChangedDocumentsToTextDocumentEditsAsync(

@@ -232,13 +232,11 @@ namespace System.IdentityModel.Metadata
                 return KeyType.Signing;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new MetadataSerializationException(
-                        SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Use, keyType)
-                    )
-                );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new MetadataSerializationException(
+                    SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Use, keyType)
+                )
+            );
         }
 
         /// <summary>
@@ -342,13 +340,11 @@ namespace System.IdentityModel.Metadata
             person.Type = GetContactPersonType(contactType, out foundKey);
             if (!foundKey)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3201, typeof(ContactType), contactType)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3201, typeof(ContactType), contactType)
+                    )
+                );
             }
 
             ReadCustomAttributes<ContactPerson>(reader, person);
@@ -518,17 +514,15 @@ namespace System.IdentityModel.Metadata
             );
             if (!UriUtil.CanCreateValidUri(claimType, UriKind.Absolute))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3202,
-                                WSAuthorizationConstants.Elements.ClaimType,
-                                claimType
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            WSAuthorizationConstants.Elements.ClaimType,
+                            claimType
                         )
-                    );
+                    )
+                );
             }
             DisplayClaim claim = new DisplayClaim(claimType);
 
@@ -544,17 +538,15 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    WSFederationMetadataConstants.Attributes.Optional,
-                                    optionalString
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                WSFederationMetadataConstants.Attributes.Optional,
+                                optionalString
                             )
-                        );
+                        )
+                    );
                 }
             }
             claim.Optional = isOptional;
@@ -656,9 +648,9 @@ namespace System.IdentityModel.Metadata
                         )
                     )
                     {
-                        resultEntityGroup
-                            .ChildEntities
-                            .Add(ReadEntityDescriptor(envelopeReader, tokenResolver));
+                        resultEntityGroup.ChildEntities.Add(
+                            ReadEntityDescriptor(envelopeReader, tokenResolver)
+                        );
                     }
                     else if (
                         envelopeReader.IsStartElement(
@@ -667,9 +659,9 @@ namespace System.IdentityModel.Metadata
                         )
                     )
                     {
-                        resultEntityGroup
-                            .ChildEntityGroups
-                            .Add(ReadEntitiesDescriptor(envelopeReader, tokenResolver));
+                        resultEntityGroup.ChildEntityGroups.Add(
+                            ReadEntitiesDescriptor(envelopeReader, tokenResolver)
+                        );
                     }
                     else if (envelopeReader.TryReadSignature())
                     {
@@ -701,16 +693,11 @@ namespace System.IdentityModel.Metadata
                 && resultEntityGroup.ChildEntities.Count == 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3200,
-                                Saml2MetadataConstants.Elements.EntityDescriptor
-                            )
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3200, Saml2MetadataConstants.Elements.EntityDescriptor)
+                    )
+                );
             }
             foreach (EntityDescriptor entity in resultEntityGroup.ChildEntities)
             {
@@ -718,17 +705,15 @@ namespace System.IdentityModel.Metadata
                 {
                     if (!StringComparer.Ordinal.Equals(entity.FederationId, resultEntityGroup.Name))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MetadataSerializationException(
-                                    SR.GetString(
-                                        SR.ID3202,
-                                        WSFederationMetadataConstants.Attributes.FederationId,
-                                        entity.FederationId
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(
+                                    SR.ID3202,
+                                    WSFederationMetadataConstants.Attributes.FederationId,
+                                    entity.FederationId
                                 )
-                            );
+                            )
+                        );
                     }
                 }
             }
@@ -772,9 +757,9 @@ namespace System.IdentityModel.Metadata
         {
             if (signingCredentials == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("signingCredentials");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "signingCredentials"
+                );
             }
 
             if (CertificateValidationMode != X509CertificateValidationMode.Custom)
@@ -790,9 +775,9 @@ namespace System.IdentityModel.Metadata
                 && CertificateValidator == null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4280)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4280))
+                );
             }
 
             X509Certificate2 certificate = GetMetadataSigningCertificate(
@@ -834,9 +819,9 @@ namespace System.IdentityModel.Metadata
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID8029)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID8029))
+                );
             }
         }
 
@@ -904,9 +889,9 @@ namespace System.IdentityModel.Metadata
                         )
                     )
                     {
-                        resultEntity
-                            .RoleDescriptors
-                            .Add(ReadServiceProviderSingleSignOnDescriptor(reader));
+                        resultEntity.RoleDescriptors.Add(
+                            ReadServiceProviderSingleSignOnDescriptor(reader)
+                        );
                     }
                     else if (
                         reader.IsStartElement(
@@ -915,9 +900,9 @@ namespace System.IdentityModel.Metadata
                         )
                     )
                     {
-                        resultEntity
-                            .RoleDescriptors
-                            .Add(ReadIdentityProviderSingleSignOnDescriptor(reader));
+                        resultEntity.RoleDescriptors.Add(
+                            ReadIdentityProviderSingleSignOnDescriptor(reader)
+                        );
                     }
                     else if (
                         reader.IsStartElement(
@@ -933,103 +918,92 @@ namespace System.IdentityModel.Metadata
                             int index = xsiType.IndexOf(":", 0, StringComparison.Ordinal);
                             if (index < 0)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new MetadataSerializationException(
-                                            SR.GetString(
-                                                SR.ID3207,
-                                                "xsi:type",
-                                                Saml2MetadataConstants.Elements.RoleDescriptor,
-                                                xsiType
-                                            )
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MetadataSerializationException(
+                                        SR.GetString(
+                                            SR.ID3207,
+                                            "xsi:type",
+                                            Saml2MetadataConstants.Elements.RoleDescriptor,
+                                            xsiType
                                         )
-                                    );
+                                    )
+                                );
                             }
                             string prefix = xsiType.Substring(0, index);
                             string ns = reader.LookupNamespace(prefix);
 
                             if (String.IsNullOrEmpty(ns))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new MetadataSerializationException(
-                                            SR.GetString(SR.ID3202, prefix, ns)
-                                        )
-                                    );
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MetadataSerializationException(
+                                        SR.GetString(SR.ID3202, prefix, ns)
+                                    )
+                                );
                             }
                             else if (
-                                !StringComparer
-                                    .Ordinal
-                                    .Equals(ns, FederationMetadataConstants.Namespace)
+                                !StringComparer.Ordinal.Equals(
+                                    ns,
+                                    FederationMetadataConstants.Namespace
+                                )
                             )
                             {
                                 ReadCustomRoleDescriptor(xsiType, reader, resultEntity);
                             }
                             else if (
-                                StringComparer
-                                    .Ordinal
-                                    .Equals(
-                                        xsiType,
-                                        prefix
-                                            + ":"
-                                            + FederationMetadataConstants
-                                                .Elements
-                                                .ApplicationServiceType
-                                    )
+                                StringComparer.Ordinal.Equals(
+                                    xsiType,
+                                    prefix
+                                        + ":"
+                                        + FederationMetadataConstants
+                                            .Elements
+                                            .ApplicationServiceType
+                                )
                             )
                             {
-                                resultEntity
-                                    .RoleDescriptors
-                                    .Add(ReadApplicationServiceDescriptor(reader));
+                                resultEntity.RoleDescriptors.Add(
+                                    ReadApplicationServiceDescriptor(reader)
+                                );
                             }
                             else if (
-                                StringComparer
-                                    .Ordinal
-                                    .Equals(
-                                        xsiType,
-                                        prefix
-                                            + ":"
-                                            + FederationMetadataConstants
-                                                .Elements
-                                                .SecurityTokenServiceType
-                                    )
+                                StringComparer.Ordinal.Equals(
+                                    xsiType,
+                                    prefix
+                                        + ":"
+                                        + FederationMetadataConstants
+                                            .Elements
+                                            .SecurityTokenServiceType
+                                )
                             )
                             {
-                                resultEntity
-                                    .RoleDescriptors
-                                    .Add(ReadSecurityTokenServiceDescriptor(reader));
+                                resultEntity.RoleDescriptors.Add(
+                                    ReadSecurityTokenServiceDescriptor(reader)
+                                );
                             }
                             else
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new MetadataSerializationException(
-                                            SR.GetString(
-                                                SR.ID3207,
-                                                "xsi:type",
-                                                Saml2MetadataConstants.Elements.RoleDescriptor,
-                                                xsiType
-                                            )
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MetadataSerializationException(
+                                        SR.GetString(
+                                            SR.ID3207,
+                                            "xsi:type",
+                                            Saml2MetadataConstants.Elements.RoleDescriptor,
+                                            xsiType
                                         )
-                                    );
+                                    )
+                                );
                             }
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
-                                .ThrowHelperError(
-                                    new MetadataSerializationException(
-                                        SR.GetString(
-                                            SR.ID0001,
-                                            "xsi:type",
-                                            Saml2MetadataConstants.Elements.RoleDescriptor
-                                        )
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MetadataSerializationException(
+                                    SR.GetString(
+                                        SR.ID0001,
+                                        "xsi:type",
+                                        Saml2MetadataConstants.Elements.RoleDescriptor
                                     )
-                                );
+                                )
+                            );
                         }
                     }
                     else if (
@@ -1110,19 +1084,15 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    Saml2MetadataConstants
-                                        .Attributes
-                                        .WantAuthenticationRequestsSigned,
-                                    wantAuthnRequestSignedAttribute
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.WantAuthenticationRequestsSigned,
+                                wantAuthnRequestSignedAttribute
                             )
-                        );
+                        )
+                    );
                 }
             }
 
@@ -1197,17 +1167,11 @@ namespace System.IdentityModel.Metadata
             Uri bindingUri;
             if (!UriUtil.TryCreateValidUri(binding, UriKind.RelativeOrAbsolute, out bindingUri))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3202,
-                                Saml2MetadataConstants.Attributes.Binding,
-                                binding
-                            )
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Binding, binding)
+                    )
+                );
             }
             endpoint.Binding = bindingUri;
 
@@ -1215,17 +1179,15 @@ namespace System.IdentityModel.Metadata
             Uri locationUri;
             if (!UriUtil.TryCreateValidUri(location, UriKind.RelativeOrAbsolute, out locationUri))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3202,
-                                Saml2MetadataConstants.Attributes.Location,
-                                location
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            Saml2MetadataConstants.Attributes.Location,
+                            location
                         )
-                    );
+                    )
+                );
             }
             endpoint.Location = locationUri;
 
@@ -1236,17 +1198,15 @@ namespace System.IdentityModel.Metadata
             int index;
             if (!Int32.TryParse(indexStr, out index))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3202,
-                                Saml2MetadataConstants.Attributes.EndpointIndex,
-                                indexStr
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            Saml2MetadataConstants.Attributes.EndpointIndex,
+                            indexStr
                         )
-                    );
+                    )
+                );
             }
             endpoint.Index = index;
 
@@ -1266,17 +1226,15 @@ namespace System.IdentityModel.Metadata
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    Saml2MetadataConstants.Attributes.ResponseLocation,
-                                    responseLocation
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.ResponseLocation,
+                                responseLocation
                             )
-                        );
+                        )
+                    );
                 }
                 endpoint.ResponseLocation = responseUri;
             }
@@ -1294,17 +1252,15 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    Saml2MetadataConstants.Attributes.EndpointIsDefault,
-                                    isDefaultString
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.EndpointIsDefault,
+                                isDefaultString
                             )
-                        );
+                        )
+                    );
                 }
             }
 
@@ -1387,9 +1343,9 @@ namespace System.IdentityModel.Metadata
                             && UriUtil.CanCreateValidUri(algorithm, UriKind.Absolute)
                         )
                         {
-                            resultKey
-                                .EncryptionMethods
-                                .Add(new EncryptionMethod(new Uri(algorithm)));
+                            resultKey.EncryptionMethods.Add(
+                                new EncryptionMethod(new Uri(algorithm))
+                            );
                         }
 
                         isEmpty = reader.IsEmptyElement;
@@ -1427,13 +1383,11 @@ namespace System.IdentityModel.Metadata
 
             if (resultKey.KeyInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3200, XmlSignatureConstants.Elements.KeyInfo)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3200, XmlSignatureConstants.Elements.KeyInfo)
+                    )
+                );
             }
             return resultKey;
         }
@@ -1460,23 +1414,19 @@ namespace System.IdentityModel.Metadata
             }
             catch (ArgumentNullException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3202, LanguageLocalName, "null")
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, LanguageLocalName, "null")
+                    )
+                );
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3202, LanguageLocalName, lang)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, LanguageLocalName, lang)
+                    )
+                );
             }
 
             ReadCustomAttributes<LocalizedName>(reader, resultName);
@@ -1504,11 +1454,9 @@ namespace System.IdentityModel.Metadata
 
             if (String.IsNullOrEmpty(resultName.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(SR.GetString(SR.ID3200, elementName))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3200, elementName))
+                );
             }
             return resultName;
         }
@@ -1535,23 +1483,19 @@ namespace System.IdentityModel.Metadata
             }
             catch (ArgumentNullException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3202, LanguageLocalName, "null")
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, LanguageLocalName, "null")
+                    )
+                );
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3202, LanguageLocalName, lang)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, LanguageLocalName, lang)
+                    )
+                );
             }
 
             ReadCustomAttributes<LocalizedUri>(reader, resultUri);
@@ -1565,13 +1509,11 @@ namespace System.IdentityModel.Metadata
                 Uri uri;
                 if (!UriUtil.TryCreateValidUri(uriContent, UriKind.RelativeOrAbsolute, out uri))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(SR.ID3202, elementName, uriContent)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(SR.ID3202, elementName, uriContent)
+                        )
+                    );
                 }
                 resultUri.Uri = uri;
                 while (reader.IsStartElement())
@@ -1590,11 +1532,9 @@ namespace System.IdentityModel.Metadata
 
             if (resultUri.Uri == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(SR.GetString(SR.ID3200, elementName))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3200, elementName))
+                );
             }
             return resultUri;
         }
@@ -1697,9 +1637,9 @@ namespace System.IdentityModel.Metadata
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3260)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3260))
+                );
             }
 
             return metadataBase;
@@ -1793,17 +1733,11 @@ namespace System.IdentityModel.Metadata
             Uri bindingUri;
             if (!UriUtil.TryCreateValidUri(binding, UriKind.RelativeOrAbsolute, out bindingUri))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3202,
-                                Saml2MetadataConstants.Attributes.Binding,
-                                binding
-                            )
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Binding, binding)
+                    )
+                );
             }
             endpoint.Binding = bindingUri;
 
@@ -1811,17 +1745,15 @@ namespace System.IdentityModel.Metadata
             Uri locationUri;
             if (!UriUtil.TryCreateValidUri(location, UriKind.RelativeOrAbsolute, out locationUri))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3202,
-                                Saml2MetadataConstants.Attributes.Location,
-                                location
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            Saml2MetadataConstants.Attributes.Location,
+                            location
                         )
-                    );
+                    )
+                );
             }
             endpoint.Location = locationUri;
 
@@ -1840,17 +1772,15 @@ namespace System.IdentityModel.Metadata
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    Saml2MetadataConstants.Attributes.ResponseLocation,
-                                    responseLocation
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.ResponseLocation,
+                                responseLocation
                             )
-                        );
+                        )
+                    );
                 }
                 endpoint.ResponseLocation = responseUri;
             }
@@ -1896,9 +1826,9 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.ProtocolsSupported == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.ProtocolsSupported");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.ProtocolsSupported"
+                );
             }
 
             // Optional
@@ -1911,17 +1841,15 @@ namespace System.IdentityModel.Metadata
                 DateTime validUntil;
                 if (!DateTime.TryParse(validUntilString, out validUntil))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    Saml2MetadataConstants.Attributes.ValidUntil,
-                                    validUntilString
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.ValidUntil,
+                                validUntilString
                             )
-                        );
+                        )
+                    );
                 }
                 roleDescriptor.ValidUntil = validUntil;
             }
@@ -1942,17 +1870,15 @@ namespace System.IdentityModel.Metadata
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    Saml2MetadataConstants.Attributes.ErrorUrl,
-                                    errorUrlString
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.ErrorUrl,
+                                errorUrlString
                             )
-                        );
+                        )
+                    );
                 }
                 roleDescriptor.ErrorUrl = errorUrl;
             }
@@ -1964,17 +1890,15 @@ namespace System.IdentityModel.Metadata
             );
             if (String.IsNullOrEmpty(protocols))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3202,
-                                Saml2MetadataConstants.Attributes.ProtocolsSupported,
-                                protocols
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            Saml2MetadataConstants.Attributes.ProtocolsSupported,
+                            protocols
                         )
-                    );
+                    )
+                );
             }
             foreach (string protocol in protocols.Split(' '))
             {
@@ -2009,15 +1933,15 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.Contacts");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.Contacts"
+                );
             }
             if (roleDescriptor.Keys == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.Keys");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.Keys"
+                );
             }
 
             if (
@@ -2099,9 +2023,9 @@ namespace System.IdentityModel.Metadata
                         if (!isEmpty && reader.IsStartElement())
                         {
                             EndpointReference address = EndpointReference.ReadFrom(reader);
-                            securityTokenServiceDescriptor
-                                .SecurityTokenServiceEndpoints
-                                .Add(address);
+                            securityTokenServiceDescriptor.SecurityTokenServiceEndpoints.Add(
+                                address
+                            );
                             reader.ReadEndElement();
                         }
                     }
@@ -2183,17 +2107,15 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    Saml2MetadataConstants.Attributes.AuthenticationRequestsSigned,
-                                    authnRequestsSignedAttribute
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.AuthenticationRequestsSigned,
+                                authnRequestsSignedAttribute
                             )
-                        );
+                        )
+                    );
                 }
             }
 
@@ -2210,17 +2132,15 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3202,
-                                    Saml2MetadataConstants.Attributes.WantAssertionsSigned,
-                                    wantAssertionsSignedAttribute
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.WantAssertionsSigned,
+                                wantAssertionsSignedAttribute
                             )
-                        );
+                        )
+                    );
                 }
             }
 
@@ -2345,16 +2265,11 @@ namespace System.IdentityModel.Metadata
                 );
                 if (!UriUtil.CanCreateValidUri(nameId, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID0014,
-                                    Saml2MetadataConstants.Elements.NameIDFormat
-                                )
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(SR.ID0014, Saml2MetadataConstants.Elements.NameIDFormat)
+                        )
+                    );
                 }
                 singleSignOnDescriptor.NameIdentifierFormats.Add(new Uri(nameId));
                 return true;
@@ -2430,21 +2345,21 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.TargetScopes == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.TargetScopes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.TargetScopes"
+                );
             }
             if (roleDescriptor.ClaimTypesOffered == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.TargetScopes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.TargetScopes"
+                );
             }
             if (roleDescriptor.TokenTypesOffered == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.TokenTypesOffered");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.TokenTypesOffered"
+                );
             }
 
             if (ReadRoleDescriptorElement(reader, roleDescriptor))
@@ -2577,17 +2492,15 @@ namespace System.IdentityModel.Metadata
                                 )
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
-                                    .ThrowHelperError(
-                                        new MetadataSerializationException(
-                                            SR.GetString(
-                                                SR.ID3202,
-                                                WSFederationMetadataConstants.Elements.TokenType,
-                                                tokenType
-                                            )
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MetadataSerializationException(
+                                        SR.GetString(
+                                            SR.ID3202,
+                                            WSFederationMetadataConstants.Elements.TokenType,
+                                            tokenType
                                         )
-                                    );
+                                    )
+                                );
                             }
 
                             roleDescriptor.TokenTypesOffered.Add(tokenTypeUri);
@@ -2649,16 +2562,16 @@ namespace System.IdentityModel.Metadata
 
             if (appService.Endpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("appService.Endpoints");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "appService.Endpoints"
+                );
             }
 
             if (appService.PassiveRequestorEndpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("appService.PassiveRequestorEndpoints");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "appService.PassiveRequestorEndpoints"
+                );
             }
 
             writer.WriteStartElement(
@@ -2733,16 +2646,16 @@ namespace System.IdentityModel.Metadata
 
             if (contactPerson.EmailAddresses == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("contactPerson.EmailAddresses");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "contactPerson.EmailAddresses"
+                );
             }
 
             if (contactPerson.TelephoneNumbers == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("contactPerson.TelephoneNumbers");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "contactPerson.TelephoneNumbers"
+                );
             }
 
             writer.WriteStartElement(
@@ -2751,13 +2664,11 @@ namespace System.IdentityModel.Metadata
             );
             if (contactPerson.Type == ContactType.Unspecified)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.ContactType)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.ContactType)
+                    )
+                );
             }
 
             writer.WriteAttributeString(
@@ -2871,13 +2782,11 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)
+                    )
+                );
             }
 
             writer.WriteAttributeString(
@@ -2892,13 +2801,11 @@ namespace System.IdentityModel.Metadata
 
             if (endpoint.Location == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)
+                    )
+                );
             }
 
             writer.WriteAttributeString(
@@ -2947,22 +2854,18 @@ namespace System.IdentityModel.Metadata
             // ClaimType is mandatory
             if (String.IsNullOrEmpty(claim.ClaimType))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, WSAuthorizationConstants.Elements.ClaimType)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, WSAuthorizationConstants.Elements.ClaimType)
+                    )
+                );
             }
 
             if (!UriUtil.CanCreateValidUri(claim.ClaimType, UriKind.Absolute))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(SR.GetString(SR.ID0014, claim.ClaimType))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID0014, claim.ClaimType))
+                );
             }
 
             writer.WriteAttributeString(
@@ -3020,23 +2923,23 @@ namespace System.IdentityModel.Metadata
 
             if (entitiesDescriptor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("entitiesDescriptor");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entitiesDescriptor"
+                );
             }
 
             if (entitiesDescriptor.ChildEntities == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("entitiesDescriptor.ChildEntities");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entitiesDescriptor.ChildEntities"
+                );
             }
 
             if (entitiesDescriptor.ChildEntityGroups == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("entitiesDescriptor.ChildEntityGroups");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entitiesDescriptor.ChildEntityGroups"
+                );
             }
 
             string entityReference = "_" + Guid.NewGuid().ToString();
@@ -3068,16 +2971,11 @@ namespace System.IdentityModel.Metadata
                 && entitiesDescriptor.ChildEntityGroups.Count == 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3203,
-                                Saml2MetadataConstants.Elements.EntitiesDescriptor
-                            )
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.EntitiesDescriptor)
+                    )
+                );
             }
 
             // Ensure FederationID in all children are valid.
@@ -3089,16 +2987,14 @@ namespace System.IdentityModel.Metadata
                         !StringComparer.Ordinal.Equals(entity.FederationId, entitiesDescriptor.Name)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MetadataSerializationException(
-                                    SR.GetString(
-                                        SR.ID3203,
-                                        WSFederationMetadataConstants.Attributes.FederationId
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(
+                                    SR.ID3203,
+                                    WSFederationMetadataConstants.Attributes.FederationId
                                 )
-                            );
+                            )
+                        );
                     }
                 }
             }
@@ -3155,23 +3051,23 @@ namespace System.IdentityModel.Metadata
 
             if (entityDescriptor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("entityDescriptor");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entityDescriptor"
+                );
             }
 
             if (entityDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("entityDescriptor.Contacts");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entityDescriptor.Contacts"
+                );
             }
 
             if (entityDescriptor.RoleDescriptors == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("entityDescriptor.RoleDescriptors");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entityDescriptor.RoleDescriptors"
+                );
             }
 
             string entityReference = "_" + Guid.NewGuid().ToString();
@@ -3200,13 +3096,11 @@ namespace System.IdentityModel.Metadata
 
             if (entityDescriptor.EntityId == null || entityDescriptor.EntityId.Id == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EntityId)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EntityId)
+                    )
+                );
             }
 
             writer.WriteAttributeString(
@@ -3234,13 +3128,11 @@ namespace System.IdentityModel.Metadata
 
             if (entityDescriptor.RoleDescriptors.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.RoleDescriptor)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.RoleDescriptor)
+                    )
+                );
             }
 
             foreach (RoleDescriptor roleDescriptor in entityDescriptor.RoleDescriptors)
@@ -3308,23 +3200,23 @@ namespace System.IdentityModel.Metadata
 
             if (identityProviderSingleSignOnDescriptor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("idpssoDescriptor");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "idpssoDescriptor"
+                );
             }
 
             if (identityProviderSingleSignOnDescriptor.SupportedAttributes == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("idpssoDescriptor.SupportedAttributes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "idpssoDescriptor.SupportedAttributes"
+                );
             }
 
             if (identityProviderSingleSignOnDescriptor.SingleSignOnServices == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("idpssoDescriptor.SingleSignOnServices");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "idpssoDescriptor.SingleSignOnServices"
+                );
             }
 
             writer.WriteStartElement(
@@ -3353,16 +3245,11 @@ namespace System.IdentityModel.Metadata
             // Mandatory SingleSignonServiceEndpoint
             if (identityProviderSingleSignOnDescriptor.SingleSignOnServices.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3203,
-                                Saml2MetadataConstants.Elements.SingleSignOnService
-                            )
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.SingleSignOnService)
+                    )
+                );
             }
 
             foreach (
@@ -3371,16 +3258,14 @@ namespace System.IdentityModel.Metadata
             {
                 if (endpoint.ResponseLocation != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3249,
-                                    Saml2MetadataConstants.Attributes.ResponseLocation
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3249,
+                                Saml2MetadataConstants.Attributes.ResponseLocation
                             )
-                        );
+                        )
+                    );
                 }
 
                 XmlQualifiedName element = new XmlQualifiedName(
@@ -3437,13 +3322,11 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (indexedEP.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)
+                    )
+                );
             }
 
             writer.WriteAttributeString(
@@ -3458,13 +3341,11 @@ namespace System.IdentityModel.Metadata
 
             if (indexedEP.Location == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)
+                    )
+                );
             }
 
             writer.WriteAttributeString(
@@ -3479,13 +3360,11 @@ namespace System.IdentityModel.Metadata
 
             if (indexedEP.Index < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EndpointIndex)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EndpointIndex)
+                    )
+                );
             }
 
             writer.WriteAttributeString(
@@ -3556,13 +3435,11 @@ namespace System.IdentityModel.Metadata
 
             if (keyDescriptor.KeyInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, XmlSignatureConstants.Elements.KeyInfo)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, XmlSignatureConstants.Elements.KeyInfo)
+                    )
+                );
             }
 
             SecurityTokenSerializer.WriteKeyIdentifier(writer, keyDescriptor.KeyInfo);
@@ -3577,30 +3454,20 @@ namespace System.IdentityModel.Metadata
                 {
                     if (encryptionMethod.Algorithm == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MetadataSerializationException(
-                                    SR.GetString(
-                                        SR.ID3203,
-                                        Saml2MetadataConstants.Attributes.Algorithm
-                                    )
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Algorithm)
+                            )
+                        );
                     }
 
                     if (!encryptionMethod.Algorithm.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MetadataSerializationException(
-                                    SR.GetString(
-                                        SR.ID0014,
-                                        Saml2MetadataConstants.Attributes.Algorithm
-                                    )
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(SR.ID0014, Saml2MetadataConstants.Attributes.Algorithm)
+                            )
+                        );
                     }
 
                     writer.WriteStartElement(
@@ -3656,13 +3523,9 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (name.Language == null || String.IsNullOrEmpty(name.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, LanguageLocalName)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3203, LanguageLocalName))
+                );
             }
 
             writer.WriteAttributeString(
@@ -3708,13 +3571,9 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (uri.Language == null || uri.Uri == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, LanguageLocalName)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3203, LanguageLocalName))
+                );
             }
 
             writer.WriteAttributeString(
@@ -3808,16 +3667,14 @@ namespace System.IdentityModel.Metadata
                 EntityDescriptor entityDescriptor = metadataBase as EntityDescriptor;
                 if (entityDescriptor == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new MetadataSerializationException(
-                                SR.GetString(
-                                    SR.ID3203,
-                                    Saml2MetadataConstants.Elements.EntitiesDescriptor
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3203,
+                                Saml2MetadataConstants.Elements.EntitiesDescriptor
                             )
-                        );
+                        )
+                    );
                 }
 
                 WriteEntityDescriptor(writer, entityDescriptor);
@@ -3844,23 +3701,23 @@ namespace System.IdentityModel.Metadata
 
             if (organization.DisplayNames == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("organization.DisplayNames");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "organization.DisplayNames"
+                );
             }
 
             if (organization.Names == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("organization.Names");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "organization.Names"
+                );
             }
 
             if (organization.Urls == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("organization.Urls");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "organization.Urls"
+                );
             }
 
             writer.WriteStartElement(
@@ -3870,16 +3727,11 @@ namespace System.IdentityModel.Metadata
 
             if (organization.Names.Count < 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3203,
-                                Saml2MetadataConstants.Elements.OrganizationName
-                            )
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationName)
+                    )
+                );
             }
 
             foreach (LocalizedName name in organization.Names)
@@ -3893,16 +3745,14 @@ namespace System.IdentityModel.Metadata
 
             if (organization.DisplayNames.Count < 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3203,
-                                Saml2MetadataConstants.Elements.OrganizationDisplayName
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3203,
+                            Saml2MetadataConstants.Elements.OrganizationDisplayName
                         )
-                    );
+                    )
+                );
             }
 
             foreach (LocalizedName displayName in organization.DisplayNames)
@@ -3916,13 +3766,11 @@ namespace System.IdentityModel.Metadata
 
             if (organization.Urls.Count < 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationUrl)
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationUrl)
+                    )
+                );
             }
 
             foreach (LocalizedUri uri in organization.Urls)
@@ -3962,9 +3810,9 @@ namespace System.IdentityModel.Metadata
 
             if (roleDescriptor.ProtocolsSupported == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.ProtocolsSupported");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.ProtocolsSupported"
+                );
             }
 
             // Optional
@@ -3995,16 +3843,14 @@ namespace System.IdentityModel.Metadata
             // Mandatory
             if (roleDescriptor.ProtocolsSupported.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3203,
-                                Saml2MetadataConstants.Attributes.ProtocolsSupported
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3203,
+                            Saml2MetadataConstants.Attributes.ProtocolsSupported
                         )
-                    );
+                    )
+                );
             }
 
             StringBuilder sb = new StringBuilder();
@@ -4049,16 +3895,16 @@ namespace System.IdentityModel.Metadata
 
             if (roleDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.Contacts");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.Contacts"
+                );
             }
 
             if (roleDescriptor.Keys == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("roleDescriptor.Keys");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.Keys"
+                );
             }
 
             // Optional
@@ -4101,25 +3947,23 @@ namespace System.IdentityModel.Metadata
 
             if (securityTokenServiceDescriptor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("securityTokenServiceDescriptor");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenServiceDescriptor"
+                );
             }
 
             if (securityTokenServiceDescriptor.SecurityTokenServiceEndpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("securityTokenServiceDescriptor.Endpoints");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenServiceDescriptor.Endpoints"
+                );
             }
 
             if (securityTokenServiceDescriptor.PassiveRequestorEndpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull(
-                        "securityTokenServiceDescriptor.PassiveRequestorEndpoints"
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenServiceDescriptor.PassiveRequestorEndpoints"
+                );
             }
 
             writer.WriteStartElement(
@@ -4152,16 +3996,14 @@ namespace System.IdentityModel.Metadata
 
             if (securityTokenServiceDescriptor.SecurityTokenServiceEndpoints.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3203,
-                                FederationMetadataConstants.Elements.SecurityTokenServiceEndpoint
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3203,
+                            FederationMetadataConstants.Elements.SecurityTokenServiceEndpoint
                         )
-                    );
+                    )
+                );
             }
 
             foreach (
@@ -4219,9 +4061,9 @@ namespace System.IdentityModel.Metadata
 
             if (serviceProviderSingleSignOnDescriptor.AssertionConsumerServices == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("spssoDescriptor.AssertionConsumerService");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "spssoDescriptor.AssertionConsumerService"
+                );
             }
 
             writer.WriteStartElement(
@@ -4257,16 +4099,14 @@ namespace System.IdentityModel.Metadata
             WriteSingleSignOnDescriptorElements(writer, serviceProviderSingleSignOnDescriptor);
             if (serviceProviderSingleSignOnDescriptor.AssertionConsumerServices.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new MetadataSerializationException(
-                            SR.GetString(
-                                SR.ID3203,
-                                Saml2MetadataConstants.Elements.AssertionConsumerService
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3203,
+                            Saml2MetadataConstants.Elements.AssertionConsumerService
                         )
-                    );
+                    )
+                );
             }
 
             foreach (
@@ -4339,16 +4179,14 @@ namespace System.IdentityModel.Metadata
                 {
                     if (ep.ResponseLocation != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MetadataSerializationException(
-                                    SR.GetString(
-                                        SR.ID3249,
-                                        Saml2MetadataConstants.Attributes.ResponseLocation
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(
+                                    SR.ID3249,
+                                    Saml2MetadataConstants.Attributes.ResponseLocation
                                 )
-                            );
+                            )
+                        );
                     }
 
                     XmlQualifiedName element = new XmlQualifiedName(
@@ -4385,16 +4223,14 @@ namespace System.IdentityModel.Metadata
                 {
                     if (!nameId.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MetadataSerializationException(
-                                    SR.GetString(
-                                        SR.ID0014,
-                                        Saml2MetadataConstants.Elements.NameIDFormat
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(
+                                    SR.ID0014,
+                                    Saml2MetadataConstants.Elements.NameIDFormat
                                 )
-                            );
+                            )
+                        );
                     }
 
                     writer.WriteStartElement(
@@ -4476,23 +4312,23 @@ namespace System.IdentityModel.Metadata
 
             if (wsDescriptor.TargetScopes == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("wsDescriptor.TargetScopes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wsDescriptor.TargetScopes"
+                );
             }
 
             if (wsDescriptor.ClaimTypesOffered == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("wsDescriptor.ClaimTypesOffered");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wsDescriptor.ClaimTypesOffered"
+                );
             }
 
             if (wsDescriptor.TokenTypesOffered == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgumentNull("wsDescriptor.TokenTypesOffered");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wsDescriptor.TokenTypesOffered"
+                );
             }
 
             WriteRoleDescriptorElements(writer, wsDescriptor);
@@ -4511,16 +4347,11 @@ namespace System.IdentityModel.Metadata
                     );
                     if (!tokenType.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new MetadataSerializationException(
-                                    SR.GetString(
-                                        SR.ID3203,
-                                        WSAuthorizationConstants.Elements.ClaimType
-                                    )
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(SR.ID3203, WSAuthorizationConstants.Elements.ClaimType)
+                            )
+                        );
                     }
 
                     writer.WriteAttributeString(

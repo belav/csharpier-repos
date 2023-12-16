@@ -1119,9 +1119,9 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
 
         var requestProcessingTask = _http1Connection.ProcessRequestsAsync(httpApplication);
 
-        var data = Encoding
-            .ASCII
-            .GetBytes("POST / HTTP/1.1\r\nHost:\r\nConnection: close\r\ncontent-length: 1\r\n\r\n");
+        var data = Encoding.ASCII.GetBytes(
+            "POST / HTTP/1.1\r\nHost:\r\nConnection: close\r\ncontent-length: 1\r\n\r\n"
+        );
         await _application.Output.WriteAsync(data);
         await requestProcessingTask.DefaultTimeout();
 

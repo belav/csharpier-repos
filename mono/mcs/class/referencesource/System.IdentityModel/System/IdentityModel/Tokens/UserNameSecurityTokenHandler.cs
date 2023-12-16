@@ -91,19 +91,17 @@ namespace System.IdentityModel.Tokens
 
             if (!CanReadToken(reader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ID4065,
-                                WSSecurity10Constants.Elements.Username,
-                                WSSecurity10Constants.Namespace,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.ID4065,
+                            WSSecurity10Constants.Elements.Username,
+                            WSSecurity10Constants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
                         )
-                    );
+                    )
+                );
             }
 
             string id = null;
@@ -141,22 +139,21 @@ namespace System.IdentityModel.Tokens
                     string type = reader.GetAttribute(WSSecurity10Constants.Attributes.Type, null);
                     if (
                         !string.IsNullOrEmpty(type)
-                        && !StringComparer
-                            .Ordinal
-                            .Equals(type, WSSecurity10Constants.UPTokenPasswordTextValue)
+                        && !StringComparer.Ordinal.Equals(
+                            type,
+                            WSSecurity10Constants.UPTokenPasswordTextValue
+                        )
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                new NotSupportedException(
-                                    SR.GetString(
-                                        SR.ID4059,
-                                        type,
-                                        WSSecurity10Constants.UPTokenPasswordTextValue
-                                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.ID4059,
+                                    type,
+                                    WSSecurity10Constants.UPTokenPasswordTextValue
                                 )
-                            );
+                            )
+                        );
                     }
 
                     password = reader.ReadElementString();
@@ -183,19 +180,17 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(
-                                    SR.ID4060,
-                                    reader.LocalName,
-                                    reader.NamespaceURI,
-                                    WSSecurity10Constants.Elements.UsernameToken,
-                                    WSSecurity10Constants.Namespace
-                                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.ID4060,
+                                reader.LocalName,
+                                reader.NamespaceURI,
+                                WSSecurity10Constants.Elements.UsernameToken,
+                                WSSecurity10Constants.Namespace
                             )
-                        );
+                        )
+                    );
                 }
             }
             reader.ReadEndElement();
@@ -233,12 +228,10 @@ namespace System.IdentityModel.Tokens
 
             if (usernameSecurityToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperArgument(
-                        "token",
-                        SR.GetString(SR.ID0018, typeof(UserNameSecurityToken))
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(UserNameSecurityToken))
+                );
             }
 
             // <wsse:UsernameToken

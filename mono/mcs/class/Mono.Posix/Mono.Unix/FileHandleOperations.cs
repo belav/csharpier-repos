@@ -45,9 +45,12 @@ namespace Mono.Unix
             long len
         )
         {
-            int r = Native
-                .Syscall
-                .posix_fadvise(fd, offset, len, (Native.PosixFadviseAdvice)pattern);
+            int r = Native.Syscall.posix_fadvise(
+                fd,
+                offset,
+                len,
+                (Native.PosixFadviseAdvice)pattern
+            );
             UnixMarshal.ThrowExceptionForLastErrorIf(r);
         }
 
@@ -65,14 +68,12 @@ namespace Mono.Unix
         {
             if (file == null)
                 throw new ArgumentNullException("file");
-            int r = Native
-                .Syscall
-                .posix_fadvise(
-                    file.Handle.ToInt32(),
-                    offset,
-                    len,
-                    (Native.PosixFadviseAdvice)pattern
-                );
+            int r = Native.Syscall.posix_fadvise(
+                file.Handle.ToInt32(),
+                offset,
+                len,
+                (Native.PosixFadviseAdvice)pattern
+            );
             UnixMarshal.ThrowExceptionForLastErrorIf(r);
         }
 
@@ -90,9 +91,12 @@ namespace Mono.Unix
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
-            int r = Native
-                .Syscall
-                .posix_fadvise(stream.Handle, offset, len, (Native.PosixFadviseAdvice)pattern);
+            int r = Native.Syscall.posix_fadvise(
+                stream.Handle,
+                offset,
+                len,
+                (Native.PosixFadviseAdvice)pattern
+            );
             UnixMarshal.ThrowExceptionForLastErrorIf(r);
         }
 
